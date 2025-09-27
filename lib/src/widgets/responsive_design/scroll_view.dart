@@ -28,6 +28,9 @@ class EzScrollView extends StatefulWidget {
   /// [Scrollbar.scrollbarOrientation] passthrough
   final ScrollbarOrientation? scrollbarOrientation;
 
+  /// If true, when there is scrollable content, a halo of [ColorScheme.secondary] will be shown
+  final bool showScrollHint;
+
   /// [SingleChildScrollView.scrollDirection] passthrough
   final Axis scrollDirection;
 
@@ -94,16 +97,16 @@ class EzScrollView extends StatefulWidget {
   const EzScrollView({
     super.key,
 
-    // Scrollbar parameters //
+    // Scrollbar
     this.controller,
     this.thumbVisibility,
     this.thickness,
     this.radius,
     this.notificationPredicate,
     this.scrollbarOrientation,
+    this.showScrollHint = false,
 
-    // SingleChildScrollView parameters //
-
+    // SingleChildScrollView
     this.scrollDirection = Axis.vertical,
     this.reverseHands = false,
     this.reverse = false,
@@ -116,8 +119,7 @@ class EzScrollView extends StatefulWidget {
     this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
 
-    // EzRow/Column parameters //
-
+    // EzRow/Column parameters
     this.mainAxisSize = MainAxisSize.max,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
@@ -136,9 +138,18 @@ class EzScrollView extends StatefulWidget {
 }
 
 class _EzScrollViewState extends State<EzScrollView> {
+  // Gather the fixed theme data //
+
+  final double margin = EzConfig.get(marginKey);
+
   // Define the build data //
 
   late final ScrollController controller;
+  late final bool hideScroll =
+      EzConfig.get(hideScrollKey) || (widget.thumbVisibility == false);
+
+  bool canScrollUp = false;
+  bool canScrollDown = false;
 
   // Init //
 
@@ -161,8 +172,33 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool hideScroll =
-        EzConfig.get(hideScrollKey) || (widget.thumbVisibility == false);
+    late final Color hover = Theme.of(context)
+        .colorScheme
+        .secondary
+        .withValues(alpha: selectionOpacity);
+
+    final Widget core = (widget.child != null)
+        ? widget.child!
+        : (widget.scrollDirection == Axis.vertical)
+            ? Column(
+                mainAxisSize: widget.mainAxisSize,
+                mainAxisAlignment: widget.mainAxisAlignment,
+                crossAxisAlignment: widget.crossAxisAlignment,
+                textDirection: widget.textDirection,
+                verticalDirection: widget.verticalDirection,
+                textBaseline: widget.textBaseline,
+                children: widget.children!,
+              )
+            : EzRow(
+                mainAxisSize: widget.mainAxisSize,
+                mainAxisAlignment: widget.mainAxisAlignment,
+                crossAxisAlignment: widget.crossAxisAlignment,
+                textDirection: widget.textDirection,
+                verticalDirection: widget.verticalDirection,
+                textBaseline: widget.textBaseline,
+                reverseHands: widget.reverseHands,
+                children: widget.children!,
+              );
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
@@ -183,40 +219,72 @@ class _EzScrollViewState extends State<EzScrollView> {
         radius: hideScroll ? Radius.zero : widget.radius,
         notificationPredicate: widget.notificationPredicate,
         scrollbarOrientation: widget.scrollbarOrientation,
-        child: SingleChildScrollView(
-          scrollDirection: widget.scrollDirection,
-          reverse: widget.reverse,
-          padding: widget.padding,
-          primary: widget.primary,
-          physics: widget.physics,
-          controller: controller,
-          dragStartBehavior: widget.dragStartBehavior,
-          clipBehavior: widget.clipBehavior,
-          restorationId: widget.restorationId,
-          keyboardDismissBehavior: widget.keyboardDismissBehavior,
-          child: (widget.child != null)
-              ? widget.child
-              : (widget.scrollDirection == Axis.vertical)
-                  ? Column(
-                      mainAxisSize: widget.mainAxisSize,
-                      mainAxisAlignment: widget.mainAxisAlignment,
-                      crossAxisAlignment: widget.crossAxisAlignment,
-                      textDirection: widget.textDirection,
-                      verticalDirection: widget.verticalDirection,
-                      textBaseline: widget.textBaseline,
-                      children: widget.children!,
-                    )
-                  : EzRow(
-                      mainAxisSize: widget.mainAxisSize,
-                      mainAxisAlignment: widget.mainAxisAlignment,
-                      crossAxisAlignment: widget.crossAxisAlignment,
-                      textDirection: widget.textDirection,
-                      verticalDirection: widget.verticalDirection,
-                      textBaseline: widget.textBaseline,
-                      reverseHands: widget.reverseHands,
-                      children: widget.children!,
-                    ),
-        ),
+        child: widget.showScrollHint
+            ? NotificationListener<ScrollNotification>(
+                onNotification: (ScrollNotification notif) {
+                  final ScrollMetrics metrics = notif.metrics;
+                  final bool up = metrics.extentBefore > 0;
+                  final bool down = metrics.extentAfter > 0;
+
+                  if (up != canScrollUp || down != canScrollDown) {
+                    setState(() {
+                      canScrollUp = up;
+                      canScrollDown = down;
+                    });
+                  }
+                  return false;
+                },
+                child: SingleChildScrollView(
+                  scrollDirection: widget.scrollDirection,
+                  reverse: widget.reverse,
+                  padding: widget.padding,
+                  primary: widget.primary,
+                  physics: widget.physics,
+                  controller: controller,
+                  dragStartBehavior: widget.dragStartBehavior,
+                  clipBehavior: widget.clipBehavior,
+                  restorationId: widget.restorationId,
+                  keyboardDismissBehavior: widget.keyboardDismissBehavior,
+                  child: Stack(
+                    children: <Widget>[
+                      core,
+
+                      // Up/left
+                      if (canScrollUp)
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          height: margin,
+                          child: Container(color: hover),
+                        ),
+
+                      // Down/right
+                      if (canScrollDown)
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          height: margin,
+                          child: Container(color: hover),
+                        )
+                    ],
+                  ),
+                ),
+              )
+            : SingleChildScrollView(
+                scrollDirection: widget.scrollDirection,
+                reverse: widget.reverse,
+                padding: widget.padding,
+                primary: widget.primary,
+                physics: widget.physics,
+                controller: controller,
+                dragStartBehavior: widget.dragStartBehavior,
+                clipBehavior: widget.clipBehavior,
+                restorationId: widget.restorationId,
+                keyboardDismissBehavior: widget.keyboardDismissBehavior,
+                child: core,
+              ),
       ),
     );
   }
