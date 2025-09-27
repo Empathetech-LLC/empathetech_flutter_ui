@@ -709,6 +709,9 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 /// $titleCaseAppName
 const String appName = '$titleCaseAppName';
 
+/// ${config.domainName}.${config.appName}
+const String androidPackage = '${config.domainName}.${config.appName}';
+
 /// Default [EzConfig] values
 const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
 """);
@@ -754,7 +757,6 @@ class CountFAB extends StatelessWidget {
 import '../screens/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -847,7 +849,8 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey);
     final EFUILang l10n = ezL10n(context);
 
-    final double toolbarHeight = ezToolbarHeight(context, appName);
+    final double toolbarHeight =
+        ezToolbarHeight(context: context, title: appName);
 
     // Define custom widgets //
 
@@ -967,8 +970,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
     return ${classCaseAppName}Scaffold(
       body: EzScreen(
-        useImageDecoration: false,
-        child: Center(
+        Center(
           child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -993,6 +995,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             ],
           ),
         ),
+        useImageDecoration: false,
       ),
     );
   }
@@ -1045,7 +1048,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ${classCaseAppName}Scaffold(
       title: appName,
       body: EzScreen(
-        child: Center(
+        Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -1098,13 +1101,14 @@ class SettingsHomeScreen extends StatelessWidget {
 }
 """);
 
-    // color_settings_screen.dart?
+    // color_settings.dart?
     if (config.colorSettings) {
       final File colorSettings = File(
         '$dir/lib/screens/settings/color_settings.dart',
       );
       await colorSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1119,19 +1123,25 @@ class ColorSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).csPageTitle,
         showSettings: false,
-        body: EzColorSettings(target: target),
+        body: EzScreen(EzColorSettings(target: target)),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
     }
 
-    // design_settings_screen.dart?
+    // design_settings.dart?
     if (config.designSettings) {
       final File designSettings = File(
         '$dir/lib/screens/settings/design_settings.dart',
       );
       await designSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1142,21 +1152,27 @@ class DesignSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).isPageTitle,
+        title: ezL10n(context).dsPageTitle,
         showSettings: false,
-        body: const EzDesignSettings(),
+        body: const EzScreen(EzDesignSettings()),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
     }
 
-    // layout_settings_screen.dart?
+    // layout_settings.dart?
     if (config.layoutSettings) {
       final File layoutSettings = File(
         '$dir/lib/screens/settings/layout_settings.dart',
       );
       await layoutSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1169,19 +1185,25 @@ class LayoutSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
-        body: const EzLayoutSettings(),
+        body: const EzScreen(EzLayoutSettings()),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
     }
 
-    // text_settings_screen.dart?
+    // text_settings.dart?
     if (config.textSettings) {
       final File textSettings = File(
         '$dir/lib/screens/settings/text_settings.dart',
       );
       await textSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1196,7 +1218,12 @@ class TextSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
-        body: EzTextSettings(target: target),
+        body: EzScreen(EzTextSettings(target: target)),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
