@@ -273,18 +273,22 @@ class _EzScrollViewState extends State<EzScrollView> {
                             left: 0,
                             right: 0,
                             top: 0,
-                            child: EzIcon(
-                              PlatformIcons(context).upArrow,
-                              color: hover,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).upArrow,
+                                color: hover,
+                              ),
                             ),
                           )
                         : Positioned(
                             left: 0,
                             top: 0,
                             bottom: 0,
-                            child: EzIcon(
-                              PlatformIcons(context).leftChevron,
-                              color: hover,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).leftChevron,
+                                color: hover,
+                              ),
                             ),
                           ),
 
@@ -295,18 +299,22 @@ class _EzScrollViewState extends State<EzScrollView> {
                             left: 0,
                             right: 0,
                             bottom: 0,
-                            child: EzIcon(
-                              PlatformIcons(context).downArrow,
-                              color: hover,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).downArrow,
+                                color: hover,
+                              ),
                             ),
                           )
                         : Positioned(
                             right: 0,
                             top: 0,
                             bottom: 0,
-                            child: EzIcon(
-                              PlatformIcons(context).rightChevron,
-                              color: hover,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).rightChevron,
+                                color: hover,
+                              ),
                             ),
                           )
                 ],
