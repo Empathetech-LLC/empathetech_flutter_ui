@@ -306,8 +306,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
-  late final EdgeInsets wrapPadding = EzInsets.wrap(padding);
+  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
 
   late final EFUILang l10n = widget.l10n;
 
@@ -370,17 +371,24 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
       final Color liveColor = getLiveColor(context, configKey);
 
       return Container(
-        padding: EzInsets.col(padding),
+        padding: EzInsets.col(spacing),
         child: EzElevatedIconButton(
           key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
           onPressed: () {
-            currList.add(configKey);
-            currList.sort(
-              (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
-            );
+            final int newColorIndex = fullList.indexOf(configKey);
+
+            int insertAt = currList.length;
+            for (int i = 0; i < currList.length; i++) {
+              if (fullList.indexOf(currList[i]) > newColorIndex) {
+                insertAt = i;
+                break;
+              }
+            }
+            currList.insert(insertAt, configKey);
+
             setState(() {});
             setModalState(() {});
           },
@@ -452,7 +460,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         EzSwapWidget(
           expanded: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: widthOf(context) * 0.667,
+              maxWidth: widthOf(context) * 0.75,
             ),
             child: Wrap(
               alignment: WrapAlignment.center,
