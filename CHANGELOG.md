@@ -2,9 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
-## [10.0.1] - 2025-09-26
-### Updated
-- Stuff
+## [10.1.0] - 2025-09-26
+### Added
+- Supplemental onHover passthrough for EzLink
+- EzMenuLink
+- EzFABLink
+- showScrollHint option to EzScrollView
+- (Restored) EzNewLine
+- More comments
+- EzUpdaterFAB
+- Platform aware && web safe ezFullscreenToggle helper function
+
+## Removed
+- Redundant menuButtonStyle overrides
+- (More) Redundant ?? fallbacks for EzConfig.get calls
+
+## Updated
+- EzBackAction and EzBackFAB to use maybePop
+- Material alert dialog title padding
+- EzVideoPlayer
+  - Better state management, subtitles, scroll hints, and more!
+- Router config to use ezGoTransition/animationDurationKey
+- EzSettingsHome build
+  - The settings paths can now be URLs, wrapping the EzElevatedButtons in a Link Widget
+- animationDurationKey to int (from double)
+
+## Fixed
+- Bug when updating text background opacity via a new background image
+- Design settings live theme updates
+- Advanced text settings live theme updates
+- Advanced color settings bug
+  - Auto-closing the "Add a color" modal on theme update; a live redraw is not feasible/worth the effort
 
 ## [10.0.0] - 2025-09-07
 ### Updated
