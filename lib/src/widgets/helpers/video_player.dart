@@ -637,6 +637,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             },
                             child: EzScrollView(
                               scrollDirection: Axis.horizontal,
+                              showScrollHint: true,
                               children: <Widget>[
                                 const EzSpacer(vertical: false),
 

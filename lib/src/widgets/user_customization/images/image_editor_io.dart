@@ -180,6 +180,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
             mainAxisSize: MainAxisSize.min,
             scrollDirection: Axis.horizontal,
             startCentered: true,
+            showScrollHint: true,
             children: <Widget>[
               // Drag
               keyIcon(
