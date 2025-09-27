@@ -1079,6 +1079,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await settingsHome.writeAsString("""$copyright
 
 import '../../screens/export.dart';
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1091,11 +1092,16 @@ class SettingsHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).ssPageTitle,
         showSettings: false,
-        body: const EzSettingsHome(
+        body: const EzScreen(EzSettingsHome(
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
           designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
+        )),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
         ),
       );
 }
