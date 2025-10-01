@@ -47,8 +47,6 @@ class _ColorSettingState extends State<EzColorSetting> {
   final double padding = EzConfig.get(paddingKey);
   final double iconRadius = EzConfig.get(iconSizeKey) / 2;
 
-  static const EzSpacer spacer = EzSpacer();
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define button functions //
@@ -201,7 +199,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           contents: <Widget>[
             Text(l10n.csCurrVal, textAlign: TextAlign.center),
-            EzMargin(),
+            ezMargin,
             EzTextIconButton(
               onPressed: () => Clipboard.setData(
                 ClipboardData(text: currColorLabel),
@@ -242,7 +240,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                   icon: EzIcon(PlatformIcons(context).delete),
                   label: l10n.gRemove,
                 ),
-                spacer,
+                ezSpacer,
 
                 // Reset to default
                 EzElevatedIconButton(

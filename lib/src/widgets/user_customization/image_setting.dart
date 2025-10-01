@@ -78,10 +78,6 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather the fixed theme data //
 
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
-  static const EzSeparator separator = EzSeparator();
-
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -506,7 +502,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
               RadioGroup<BoxFit>(
                 groupValue: selectedFit,
                 onChanged: (BoxFit? value) {
@@ -518,7 +514,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   primary: false,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.contain,
@@ -527,7 +523,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.cover,
@@ -536,7 +532,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fill,
@@ -545,7 +541,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fitWidth,
@@ -554,7 +550,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fitHeight,
@@ -563,7 +559,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.none,
@@ -572,7 +568,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.scaleDown,
@@ -581,23 +577,23 @@ class _ImageSettingState extends State<EzImageSetting> {
                       modalState: fitState,
                       theme: theme,
                     ),
-                    rowSpacer,
+                    ezRowSpacer,
                   ],
                 ),
               ),
-              separator,
+              ezSeparator,
               EzRow(
                 mainAxisAlignment:
                     isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
                 children: <Widget>[
-                  rowSpacer,
+                  ezRowSpacer,
                   EzTextButton(
                     onPressed: () => Navigator.of(fitContext).pop(null),
                     text: l10n.gCancel,
                     textStyle: theme.textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
-                  rowSpacer,
+                  ezRowSpacer,
                   EzTextButton(
                     onPressed: () async {
                       if (selectedFit != null) {
@@ -617,10 +613,10 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  rowSpacer,
+                  ezRowSpacer,
                 ],
               ),
-              spacer,
+              ezSpacer,
             ],
           );
         },

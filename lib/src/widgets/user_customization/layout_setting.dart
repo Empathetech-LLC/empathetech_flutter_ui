@@ -87,8 +87,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   late final String label = ezLstName(context, widget.type);
 
-  static const EzSpacer spacer = EzSpacer();
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define build functions //
@@ -110,7 +108,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 
         return <Widget>[
-          spacer,
+          ezSpacer,
           EzTextBackground(
             Text(
               valString,
@@ -141,13 +139,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               margin: EdgeInsets.all(currValue * 0.25),
             ),
           ),
-          spacer,
+          ezSpacer,
         ];
 
       // Padding
       case EzLayoutSettingType.padding:
         return <Widget>[
-          spacer,
+          ezSpacer,
 
           // Live label && preview
           EzScrollView(
@@ -174,7 +172,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             ],
           ),
 
-          spacer,
+          ezSpacer,
         ];
 
       // Spacing
@@ -265,7 +263,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               value.toStringAsFixed(widget.decimals),
         ),
       ),
-      spacer,
+      ezSpacer,
 
       // Reset button
       EzElevatedIconButton(
@@ -279,7 +277,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         label:
             '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
       ),
-      spacer,
+      ezSpacer,
     ];
   }
 
