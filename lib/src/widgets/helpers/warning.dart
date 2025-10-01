@@ -38,10 +38,6 @@ class EzWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the fixed theme data //
-
-    final EzSpacer margin = EzMargin(vertical: false);
-
     // Gather the dynamic theme data //
 
     final ThemeData theme = Theme.of(context);
@@ -51,7 +47,7 @@ class EzWarning extends StatelessWidget {
     final TextStyle? tStyle = titleStyle ?? theme.textTheme.titleLarge;
     final TextStyle? bStyle = bodyStyle ?? theme.textTheme.bodyLarge;
 
-    // Return the build
+    // Return the build //
 
     final String warning = title ?? ezL10n(context).gAttention;
 
@@ -77,14 +73,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    margin,
+                    ezRowMargin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    margin,
+                    ezRowMargin,
 
                     // Thing 2
                     Icon(
@@ -94,7 +90,7 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                const EzSpacer(),
+                ezSpacer,
 
                 // Body
                 Text(body, style: bStyle, textAlign: TextAlign.center),
