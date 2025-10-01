@@ -122,7 +122,7 @@ class OpenUIScaffold extends StatelessWidget {
               ? updater
               : Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[updater, const EzSpacer(), fab!],
+                  children: <Widget>[updater, ezSpacer, fab!],
                 ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat

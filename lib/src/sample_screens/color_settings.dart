@@ -45,7 +45,7 @@ class EzColorSettings extends StatefulWidget {
     // Shared
     super.key,
     this.target,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = ezSeparator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
 
@@ -79,13 +79,9 @@ class EzColorSettings extends StatefulWidget {
 }
 
 class _EzColorSettingsState extends State<EzColorSettings> {
-  // Gather the fixed theme data //
-
-  static const EzSeparator separator = EzSeparator();
+  // Define the build data //
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Define the build data //
 
   late EzCSType currentTab = widget.target ??
       (EzConfig.get(advancedColorsKey) == true
@@ -103,15 +99,11 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     ezWindowNamer(context, l10n.csPageTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
 
     final bool isDark = isDarkTheme(context);
-
-    // Return the build //
 
     final List<String> defaultList =
         isDark ? widget.darkStarterSet : widget.lightStarterSet;
@@ -121,6 +113,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     List<String> currList =
         EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
+    // Return the build //
+
     return EzScrollView(
       children: <Widget>[
         // Current theme reminder
@@ -129,7 +123,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           style: Theme.of(context).textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
-        EzMargin(),
+        ezMargin,
 
         // Mode switch
         SegmentedButton<EzCSType>(
@@ -159,7 +153,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             setState(() {});
           },
         ),
-        separator,
+        ezSeparator,
 
         // Core settings
         if (currentTab == EzCSType.quick)
@@ -203,7 +197,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   setState(() => currList = List<String>.from(defaultList));
                 },
               ),
-        separator,
+        ezSeparator,
       ],
     );
   }
@@ -225,16 +219,8 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-
-  // Define custom widgets  //
-
   late final String fromImageLabel = widget.l10n.csSchemeBase;
   late final String fromImageHint = widget.l10n.csFromImage;
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +241,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
           // MonoChrome
           const EzMonoChromeColorsSetting(),
-          spacer,
+          ezSpacer,
 
           // From image
           Semantics(
@@ -479,7 +465,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
           ),
         ),
-        const EzSeparator(),
+        ezSeparator,
 
         // Add a color button
         EzTextIconButton(
