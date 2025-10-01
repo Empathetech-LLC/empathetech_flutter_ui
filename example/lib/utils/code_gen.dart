@@ -946,12 +946,6 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  // Gather the fixed theme data //
-
-  static const EzSeparator separator = EzSeparator();
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Set the page title //
 
   @override
@@ -960,13 +954,13 @@ class _ErrorScreenState extends State<ErrorScreen> {
     ezWindowNamer(context, '404 \${l10n.gError}');
   }
 
+  // Return the build //
+
+  late final EFUILang l10n = ezL10n(context);
+
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
-
     final TextTheme textTheme = Theme.of(context).textTheme;
-
-    // Return the build //
 
     return ${classCaseAppName}Scaffold(
       body: EzScreen(
@@ -979,19 +973,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
               Text(
                 l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
               Text(
                 l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
             ],
           ),
         ),
