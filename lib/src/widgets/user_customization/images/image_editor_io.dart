@@ -54,8 +54,6 @@ class EzImageEditor extends StatefulWidget {
 class _EzImageEditorState extends State<EzImageEditor> {
   // Gather the fixed theme data //
 
-  static const EzSpacer spacer = EzSpacer(vertical: false);
-
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
   final double iconSize = EzConfig.get(iconSizeKey);
@@ -95,7 +93,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               EzIcon(icon, color: color),
-              EzMargin(),
+              ezMargin,
               EzText(
                 name,
                 textAlign: TextAlign.center,
@@ -138,7 +136,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final Widget divider = SizedBox(
+    final Widget vertDiv = SizedBox(
       height: iconSize + padding,
       child: VerticalDivider(
         width: spacing * 2,
@@ -189,7 +187,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: l10n.dsDrag,
                 tooltip: l10n.dsDragHint,
               ),
-              spacer,
+              ezRowSpacer,
 
               // Swipe
               keyIcon(
@@ -198,7 +196,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: l10n.dsSwipe,
                 tooltip: l10n.dsSwipeHint,
               ),
-              spacer,
+              ezRowSpacer,
 
               // Scroll
               keyIcon(
@@ -207,7 +205,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: l10n.dsScroll,
                 tooltip: l10n.dsScrollHint,
               ),
-              spacer,
+              ezRowSpacer,
 
               // Pinch
               keyIcon(
@@ -216,7 +214,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: l10n.dsPinch,
                 tooltip: l10n.dsPinchHint,
               ),
-              divider,
+              vertDiv,
 
               // Rotate left
               EzIconButton(
@@ -233,7 +231,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.rotate_left),
               ),
-              spacer,
+              ezRowSpacer,
 
               // Rotate right
               EzIconButton(
@@ -250,7 +248,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.rotate_right),
               ),
-              spacer,
+              ezRowSpacer,
 
               // Undo
               EzIconButton(
@@ -262,7 +260,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.undo),
               ),
-              spacer,
+              ezRowSpacer,
 
               // Redo
               EzIconButton(
@@ -274,7 +272,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.redo),
               ),
-              spacer,
+              ezRowSpacer,
 
               // Reset
               EzIconButton(
@@ -286,7 +284,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(PlatformIcons(context).refresh),
               ),
-              divider,
+              vertDiv,
 
               // Done
               EzIconButton(
@@ -378,7 +376,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     ? const CircularProgressIndicator()
                     : EzIcon(Icons.check),
               ),
-              spacer,
+              ezRowSpacer,
 
               // Cancel
               EzIconButton(

@@ -30,7 +30,7 @@ class EzLayoutSettings extends StatefulWidget {
     super.key,
     this.beforeLayout,
     this.afterLayout,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = ezSeparator,
     this.resetKeys,
   });
 
@@ -40,9 +40,6 @@ class EzLayoutSettings extends StatefulWidget {
 
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -83,7 +80,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           steps: 6,
           decimals: 1,
         ),
-        spacer,
+        ezSpacer,
 
         // Padding
         EzLayoutSetting(
@@ -95,7 +92,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           steps: 12,
           decimals: 1,
         ),
-        spacer,
+        ezSpacer,
 
         // Spacing
         EzLayoutSetting(
@@ -107,7 +104,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           steps: 13,
           decimals: 0,
         ),
-        separator,
+        ezSeparator,
 
         // Hide scroll
         EzSwitchPair(
@@ -131,7 +128,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             setState(() => redraw = Random().nextInt(rMax));
           },
         ),
-        separator,
+        ezSeparator,
       ],
     );
   }

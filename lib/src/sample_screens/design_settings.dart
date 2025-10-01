@@ -61,7 +61,7 @@ class EzDesignSettings extends StatefulWidget {
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
     this.additionalThemedSettings,
-    this.resetSpacer = const EzDivider(),
+    this.resetSpacer = ezDivider,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
   });
@@ -73,11 +73,6 @@ class EzDesignSettings extends StatefulWidget {
 class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
   // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
-  final EzSpacer marginer = EzMargin();
-  final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
@@ -177,7 +172,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               ),
             ),
           ),
-          spacer,
+          ezSpacer,
         ],
 
         // Icon size
@@ -211,7 +206,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         color: colorScheme.outline,
                       ),
                     ),
-              pMSpacer,
+              ezRowMargin,
 
               // Preview
               GestureDetector(
@@ -226,7 +221,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   color: colorScheme.onSurface,
                 ),
               ),
-              pMSpacer,
+              ezRowMargin,
 
               // Plus
               (iconSize < maxIconSize)
@@ -254,7 +249,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ),
           borderRadius: ezPillShape,
         ),
-        spacer,
+        ezSpacer,
 
         // Hide scroll
         EzSwitchPair(
@@ -265,14 +260,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ),
 
         // Global/themed divider, w/ theme reminder
-        separator,
+        ezSeparator,
         EzDivider(height: margin),
         EzText(
           l10n.gEditingTheme(themeProfile),
           style: textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
-        separator,
+        ezSeparator,
 
         // Button opacity
         Card(
@@ -318,7 +313,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     ),
                   ),
                 ),
-                spacer,
+                ezSpacer,
 
                 // Button outline
                 Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
@@ -360,7 +355,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Background
         if (widget.includeBackgroundImage) ...<Widget>[
-          spacer,
+          ezSpacer,
           EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
@@ -455,7 +450,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             drawState();
           },
         ),
-        separator,
+        ezSeparator,
       ],
     );
   }
