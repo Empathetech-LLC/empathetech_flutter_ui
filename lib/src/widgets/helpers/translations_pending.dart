@@ -31,7 +31,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
     this.style,
     this.textAlign = TextAlign.center,
     this.defaultLocale = english,
-    this.footer = const EzSeparator(),
+    this.footer = ezSeparator,
   });
 
   @override

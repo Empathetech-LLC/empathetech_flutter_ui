@@ -85,16 +85,16 @@ class EzSettingsHome extends StatefulWidget {
     this.skipLocales,
     this.protest = false,
     this.inDistress = const <String>{'US'},
-    this.localeSpacer = const EzDivider(),
+    this.localeSpacer = ezDivider,
     this.additionalSettings,
     required this.colorSettingsPath,
     required this.designSettingsPath,
     required this.layoutSettingsPath,
     required this.textSettingsPath,
     this.additionalRoutes,
-    this.quickConfigSpacer = const EzDivider(),
-    this.randomSpacer = const EzSpacer(),
-    this.resetSpacer = const EzSpacer(),
+    this.quickConfigSpacer = ezDivider,
+    this.randomSpacer = ezSpacer,
+    this.resetSpacer = ezSpacer,
     this.skipKeys,
     this.footer,
   });
@@ -105,9 +105,6 @@ class EzSettingsHome extends StatefulWidget {
 
 class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
 
   late final double spacing = EzConfig.get(spacingKey);
 
@@ -145,7 +142,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.designSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
+      if (buttons.isNotEmpty) buttons.add(ezSpacer);
 
       ezUrlCheck(widget.designSettingsPath!)
           ? buttons.add(Link(
@@ -164,7 +161,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.layoutSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
+      if (buttons.isNotEmpty) buttons.add(ezSpacer);
 
       ezUrlCheck(widget.layoutSettingsPath!)
           ? buttons.add(Link(
@@ -183,7 +180,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.textSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
+      if (buttons.isNotEmpty) buttons.add(ezSpacer);
 
       ezUrlCheck(widget.textSettingsPath!)
           ? buttons.add(Link(
@@ -217,15 +214,15 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         // Restart disclaimer
         EzWarning(
             '${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}${widget.notFun ? '' : '\n\n${l10n.ssHaveFun}'}'),
-        separator,
+        ezSeparator,
 
         // Right/left
         const EzDominantHandSwitch(),
-        spacer,
+        ezSpacer,
 
         // Theme mode
         const EzThemeModeSwitch(),
-        spacer,
+        ezSpacer,
 
         // Language
         EzLocaleSetting(
@@ -259,7 +256,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
         // Footer
         if (widget.footer != null) ...widget.footer!,
-        separator,
+        ezSeparator,
       ],
     );
   }
