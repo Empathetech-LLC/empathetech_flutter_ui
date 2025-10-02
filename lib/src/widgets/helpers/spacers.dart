@@ -133,7 +133,7 @@ class EzDivider extends StatelessWidget {
     super.key,
 
     // Constraints
-    this.constraints = const BoxConstraints(maxWidth: 200),
+    this.constraints = const BoxConstraints(maxWidth: 175),
 
     // Divider
     this.height,
