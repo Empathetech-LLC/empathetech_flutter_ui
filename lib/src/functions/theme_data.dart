@@ -9,6 +9,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:feedback/feedback.dart';
 
+/// Shadow opacity should be "faster" than surface
+/// 1:1 looks... well, foggy
+const double shadowMod = 0.75;
+
+/// Crucial opacity threshold - some things are too important to be broken by user settings
+const double crucialOT = 0.5;
+
 /// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness) {
   //* Gather values from EzConfig *//
@@ -87,7 +94,7 @@ ThemeData ezThemeData(Brightness brightness) {
   final Color buttonShadow = calcButton
       ? clearButton
           ? Colors.transparent
-          : colorScheme.shadow.withValues(alpha: buttonOpacity)
+          : colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod)
       : colorScheme.shadow;
 
   final Color buttonContainer = calcOutline
@@ -109,7 +116,7 @@ ThemeData ezThemeData(Brightness brightness) {
   // Misc //
 
   final double crucialOpacity =
-      <double>[buttonOpacity, textOpacity, 0.50].reduce(max);
+      <double>[buttonOpacity, textOpacity, crucialOT].reduce(max);
 
   final bool calcCrucial = crucialOpacity < 1.0;
 
