@@ -194,16 +194,32 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       },
                       tooltip:
                           '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
-                      iconSize: iconSize,
                       icon: Icon(PlatformIcons(context).remove),
+                      iconSize: iconSize,
+                      style: IconButton.styleFrom(
+                        backgroundColor: colorScheme.surface
+                            .withValues(alpha: buttonOpacity),
+                        side: BorderSide(
+                          color: colorScheme.primaryContainer
+                              .withValues(alpha: outlineOpacity),
+                        ),
+                      ),
                     )
                   : EzIconButton(
                       enabled: false,
                       tooltip: l10n.gMinimum,
-                      iconSize: iconSize,
                       icon: Icon(
                         PlatformIcons(context).remove,
                         color: colorScheme.outline,
+                      ),
+                      iconSize: iconSize,
+                      style: IconButton.styleFrom(
+                        backgroundColor: colorScheme.surface
+                            .withValues(alpha: buttonOpacity),
+                        side: BorderSide(
+                          color: colorScheme.outlineVariant
+                              .withValues(alpha: outlineOpacity),
+                        ),
                       ),
                     ),
               ezRowMargin,
@@ -233,16 +249,32 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       },
                       tooltip:
                           '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
-                      iconSize: iconSize,
                       icon: Icon(PlatformIcons(context).add),
+                      iconSize: iconSize,
+                      style: IconButton.styleFrom(
+                        backgroundColor: colorScheme.surface
+                            .withValues(alpha: buttonOpacity),
+                        side: BorderSide(
+                          color: colorScheme.primaryContainer
+                              .withValues(alpha: outlineOpacity),
+                        ),
+                      ),
                     )
                   : EzIconButton(
                       enabled: false,
                       tooltip: l10n.gMaximum,
-                      iconSize: iconSize,
                       icon: Icon(
                         PlatformIcons(context).add,
                         color: colorScheme.outline,
+                      ),
+                      iconSize: iconSize,
+                      style: IconButton.styleFrom(
+                        backgroundColor: colorScheme.surface
+                            .withValues(alpha: buttonOpacity),
+                        side: BorderSide(
+                          color: colorScheme.outlineVariant
+                              .withValues(alpha: outlineOpacity),
+                        ),
                       ),
                     ),
             ],
@@ -254,9 +286,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Hide scroll
         EzSwitchPair(
           key: ValueKey<String>('scroll_$redraw'),
+          valueKey: hideScrollKey,
           scale: iconSize / defaultIconSize,
           text: l10n.lsScroll,
-          valueKey: hideScrollKey,
         ),
 
         // Global/themed divider, w/ theme reminder
@@ -270,87 +302,74 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ezSeparator,
 
         // Button opacity
-        Card(
-          key: ValueKey<String>('opacity_$redraw'),
-          color: colorScheme.surface.withValues(alpha: buttonOpacity),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-                color: colorScheme.outline.withValues(alpha: outlineOpacity)),
-            borderRadius: ezRoundEdge,
-          ),
-          shadowColor: colorScheme.shadow.withValues(alpha: buttonOpacity),
-          child: Padding(
-            padding: EdgeInsets.all(margin),
-            child: Column(
-              children: <Widget>[
-                Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-                  child: SliderTheme(
-                    data: SliderThemeData(
-                      thumbShape: RoundSliderThumbShape(
-                        enabledThumbRadius: iconSize / 2,
-                        disabledThumbRadius: iconSize / 2,
-                      ),
-                    ),
-                    child: Slider(
-                      // Slider values
-                      value: buttonOpacity,
-                      min: minOpacity,
-                      max: maxOpacity,
-                      divisions: 20,
-                      label: buttonOpacity.toStringAsFixed(2),
-
-                      // Slider functions
-                      onChanged: (double value) =>
-                          setState(() => buttonOpacity = value),
-                      onChangeEnd: (double value) async {
-                        await EzConfig.setDouble(
-                          isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-                          value,
-                        );
-                      },
-                    ),
+        Column(
+          children: <Widget>[
+            Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+              child: SliderTheme(
+                data: SliderThemeData(
+                  thumbShape: RoundSliderThumbShape(
+                    enabledThumbRadius: iconSize / 2,
+                    disabledThumbRadius: iconSize / 2,
                   ),
                 ),
-                ezSpacer,
+                child: Slider(
+                  // Slider values
+                  value: buttonOpacity,
+                  min: minOpacity,
+                  max: maxOpacity,
+                  divisions: 20,
+                  label: buttonOpacity.toStringAsFixed(2),
 
-                // Button outline
-                Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-                  child: SliderTheme(
-                    data: SliderThemeData(
-                      thumbShape: RoundSliderThumbShape(
-                        enabledThumbRadius: iconSize / 2,
-                        disabledThumbRadius: iconSize / 2,
-                      ),
-                    ),
-                    child: Slider(
-                      // Slider values
-                      value: outlineOpacity,
-                      min: minOpacity,
-                      max: maxOpacity,
-                      divisions: 20,
-                      label: outlineOpacity.toStringAsFixed(2),
-
-                      // Slider functions
-                      onChanged: (double value) =>
-                          setState(() => outlineOpacity = value),
-                      onChangeEnd: (double value) async {
-                        await EzConfig.setDouble(
-                          isDark
-                              ? darkButtonOutlineOpacityKey
-                              : lightButtonOutlineOpacityKey,
-                          value,
-                        );
-                      },
-                    ),
-                  ),
+                  // Slider functions
+                  onChanged: (double value) =>
+                      setState(() => buttonOpacity = value),
+                  onChangeEnd: (double value) async {
+                    await EzConfig.setDouble(
+                      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+                      value,
+                    );
+                  },
                 ),
-              ],
+              ),
             ),
-          ),
+            ezSpacer,
+
+            // Button outline
+            Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+              child: SliderTheme(
+                data: SliderThemeData(
+                  thumbShape: RoundSliderThumbShape(
+                    enabledThumbRadius: iconSize / 2,
+                    disabledThumbRadius: iconSize / 2,
+                  ),
+                ),
+                child: Slider(
+                  // Slider values
+                  value: outlineOpacity,
+                  min: minOpacity,
+                  max: maxOpacity,
+                  divisions: 20,
+                  label: outlineOpacity.toStringAsFixed(2),
+
+                  // Slider functions
+                  onChanged: (double value) =>
+                      setState(() => outlineOpacity = value),
+                  onChangeEnd: (double value) async {
+                    await EzConfig.setDouble(
+                      isDark
+                          ? darkButtonOutlineOpacityKey
+                          : lightButtonOutlineOpacityKey,
+                      value,
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
 
         // Background
