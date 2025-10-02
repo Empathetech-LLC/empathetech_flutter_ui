@@ -288,6 +288,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           key: ValueKey<String>('scroll_$redraw'),
           valueKey: hideScrollKey,
           scale: iconSize / defaultIconSize,
+          activeTrackColor: colorScheme.surface
+              .withValues(alpha: max(crucialOT, buttonOpacity)),
+          inactiveTrackColor: colorScheme.surface
+              .withValues(alpha: max(crucialOT, buttonOpacity)),
+          trackOutlineColor: WidgetStateProperty.all(
+              colorScheme.primaryContainer.withValues(alpha: outlineOpacity)),
           text: l10n.lsScroll,
         ),
 
@@ -385,8 +391,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           colorScheme.surface.withValues(alpha: buttonOpacity),
-                      shadowColor:
-                          colorScheme.shadow.withValues(alpha: buttonOpacity),
+                      shadowColor: colorScheme.shadow
+                          .withValues(alpha: buttonOpacity * shadowMod),
                       side: BorderSide(
                           color: colorScheme.primaryContainer
                               .withValues(alpha: outlineOpacity)),
@@ -402,8 +408,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           colorScheme.surface.withValues(alpha: buttonOpacity),
-                      shadowColor:
-                          colorScheme.shadow.withValues(alpha: buttonOpacity),
+                      shadowColor: colorScheme.shadow
+                          .withValues(alpha: buttonOpacity * shadowMod),
                       side: BorderSide(
                           color: colorScheme.primaryContainer
                               .withValues(alpha: outlineOpacity)),
@@ -428,7 +434,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           style: ElevatedButton.styleFrom(
             backgroundColor:
                 colorScheme.surface.withValues(alpha: buttonOpacity),
-            shadowColor: colorScheme.shadow.withValues(alpha: buttonOpacity),
+            shadowColor:
+                colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod),
             side: BorderSide(
                 color: colorScheme.primaryContainer
                     .withValues(alpha: outlineOpacity)),
