@@ -110,6 +110,12 @@ class EzSwitchPair extends StatefulWidget {
   /// [Switch.inactiveTrackColor] passthrough
   final Color? inactiveTrackColor;
 
+  /// [Switch.trackOutlineColor] passthrough
+  final WidgetStateProperty<Color?>? trackOutlineColor;
+
+  /// [Switch.trackOutlineWidth] passthrough
+  final WidgetStateProperty<double?>? trackOutlineWidth;
+
   /// [Switch.activeThumbImage] passthrough
   final ImageProvider<Object>? activeThumbImage;
 
@@ -192,6 +198,8 @@ class EzSwitchPair extends StatefulWidget {
     this.activeTrackColor,
     this.inactiveThumbColor,
     this.inactiveTrackColor,
+    this.trackOutlineColor,
+    this.trackOutlineWidth,
     this.activeThumbImage,
     this.onActiveThumbImageError,
     this.inactiveThumbImage,
@@ -283,6 +291,8 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
             activeTrackColor: widget.activeTrackColor,
             inactiveThumbColor: widget.inactiveThumbColor,
             inactiveTrackColor: widget.inactiveTrackColor,
+            trackOutlineColor: widget.trackOutlineColor,
+            trackOutlineWidth: widget.trackOutlineWidth,
             activeThumbImage: widget.activeThumbImage,
             onActiveThumbImageError: widget.onActiveThumbImageError,
             inactiveThumbImage: widget.inactiveThumbImage,
