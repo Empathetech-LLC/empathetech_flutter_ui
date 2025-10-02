@@ -53,7 +53,7 @@ String? l10nClassName(EAGConfig config) {
   return 'AppLocalizations';
 }
 
-/// '[l10nClassName].localizationsDelegates'
+/// [l10nClassName].localizationsDelegates
 String? l10nDelegates(EAGConfig config) {
   final String? name = l10nClassName(config);
   if (name == null) return null;
@@ -61,7 +61,7 @@ String? l10nDelegates(EAGConfig config) {
   return '$name.localizationsDelegates';
 }
 
-/// '\n...[l10nDelegates],\n'
+/// \n...[l10nDelegates],\n
 String l10nDelegateHandler(EAGConfig config) {
   final String? delegate = l10nDelegates(config);
 
@@ -1246,19 +1246,19 @@ ${config.textSettings ? "export 'settings/text_settings.dart';" : ''}
 
 // Route names //
 
-/// 'settings-home'
+/// settings-home
 const String settingsHomePath = 'settings-home';
 
-${config.colorSettings ? """/// 'color-settings'
+${config.colorSettings ? """/// color-settings
 const String colorSettingsPath = 'color-settings';""" : ''}
 
-${config.designSettings ? """/// 'design-settings'
+${config.designSettings ? """/// design-settings
 const String designSettingsPath = 'design-settings';""" : ''}
 
-${config.layoutSettings ? """/// 'layout-settings'
+${config.layoutSettings ? """/// layout-settings
 const String layoutSettingsPath = 'layout-settings';""" : ''}
 
-${config.textSettings ? """/// 'text-settings'
+${config.textSettings ? """/// text-settings
 const String textSettingsPath = 'text-settings';""" : ''}
 """);
   } catch (e) {

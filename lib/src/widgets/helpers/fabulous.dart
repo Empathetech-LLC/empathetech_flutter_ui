@@ -29,10 +29,10 @@ class EzBackFAB extends FloatingActionButton {
 }
 
 class EzConfigFAB extends StatelessWidget {
-  /// 'App Name'
+  /// App Name
   final String appName;
 
-  /// 'com.example.app'
+  /// com.example.app
   final String? androidPackage;
 
   /// [allKeys] included by default
