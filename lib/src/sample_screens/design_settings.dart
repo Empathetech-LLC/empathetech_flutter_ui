@@ -11,13 +11,26 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzDesignSettings extends StatefulWidget {
-  /// Whether to disable animation control
-  final bool noAnimation;
+  /// Optional additional global design settings, before the main group
+  /// BYO tailing spacer, leading spacer is a custom [EzSpacer]
+  final List<Widget>? globalSettingsPrepend;
 
-  /// Optional additional global design settings
-  /// Will appear after the default global design settings
-  /// BYO leading spacer, trailing will be a custom [EzDivider]
-  final List<Widget>? additionalGlobalSettings;
+  /// Whether to include animation duration control
+  final bool includeAnimation;
+
+  /// Whether to include icon size controls
+  final bool includeIconSize;
+
+  /// Whether to include the scrollbar visibility toggle
+  final bool includeScroll;
+
+  /// Optional additional global design settings, after the main group
+  /// BYO leading spacer, trailing spacer is a custom [EzDivider]
+  final List<Widget>? globalSettingsPostpend;
+
+  /// Optional additional themed design settings, before the main group
+  /// BYO trailing spacer, leading is a custom [EzDivider]
+  final List<Widget>? themedSettingsPrepend;
 
   /// Whether to include the background image setting
   /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
@@ -31,10 +44,9 @@ class EzDesignSettings extends StatefulWidget {
   /// Moot if [includeBackgroundImage] is false
   final String? lightBackgroundCredits;
 
-  /// Optional additional theme design settings
-  /// Will appear after the default themed design settings
-  /// BYO leading spacer, trailing will be [resetSpacer]
-  final List<Widget>? additionalThemedSettings;
+  /// Optional additional themed design settings, after the main group
+  /// BYO leading spacer, trailing is [resetSpacer]
+  final List<Widget>? themedSettingsPostpend;
 
   /// Spacer before the [EzResetButton]
   final Widget resetSpacer;
@@ -55,12 +67,16 @@ class EzDesignSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
-    this.noAnimation = false,
-    this.additionalGlobalSettings,
+    this.globalSettingsPrepend,
+    this.includeAnimation = true,
+    this.includeIconSize = true,
+    this.includeScroll = true,
+    this.globalSettingsPostpend,
+    this.themedSettingsPrepend,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.additionalThemedSettings,
+    this.themedSettingsPostpend,
     this.resetSpacer = ezDivider,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
@@ -147,8 +163,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       children: <Widget>[
         if (spacing > margin) EzSpacer(space: spacing - margin),
 
+        if (widget.globalSettingsPrepend != null)
+          ...widget.globalSettingsPrepend!,
+
         // Animation duration
-        if (!widget.noAnimation) ...<Widget>[
+        if (widget.includeAnimation) ...<Widget>[
           EzText(l10n.dsAnimDuration, style: textTheme.bodyLarge),
           ConstrainedBox(
             constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -176,126 +195,133 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ],
 
         // Icon size
-        Tooltip(
-          message: l10n.gCenterReset,
-          child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
-        ),
-        EzTextBackground(
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Minus
-              (iconSize > minIconSize)
-                  ? EzIconButton(
-                      onPressed: () async {
-                        iconSize -= iconDelta;
-                        await EzConfig.setDouble(iconSizeKey, iconSize);
-                        drawState();
-                      },
-                      tooltip:
-                          '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
-                      icon: Icon(PlatformIcons(context).remove),
-                      iconSize: iconSize,
-                      style: IconButton.styleFrom(
-                        backgroundColor: colorScheme.surface
-                            .withValues(alpha: buttonOpacity),
-                        side: BorderSide(
-                          color: colorScheme.primaryContainer
-                              .withValues(alpha: outlineOpacity),
-                        ),
-                      ),
-                    )
-                  : EzIconButton(
-                      enabled: false,
-                      tooltip: l10n.gMinimum,
-                      icon: Icon(
-                        PlatformIcons(context).remove,
-                        color: colorScheme.outline,
-                      ),
-                      iconSize: iconSize,
-                      style: IconButton.styleFrom(
-                        backgroundColor: colorScheme.surface
-                            .withValues(alpha: buttonOpacity),
-                        side: BorderSide(
-                          color: colorScheme.outlineVariant
-                              .withValues(alpha: outlineOpacity),
-                        ),
-                      ),
-                    ),
-              ezRowMargin,
-
-              // Preview
-              GestureDetector(
-                onLongPress: () async {
-                  iconSize = defaultIconSize;
-                  await EzConfig.setDouble(iconSizeKey, defaultIconSize);
-                  drawState();
-                },
-                child: Icon(
-                  Icons.sync_alt,
-                  size: iconSize,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-              ezRowMargin,
-
-              // Plus
-              (iconSize < maxIconSize)
-                  ? EzIconButton(
-                      onPressed: () async {
-                        iconSize += iconDelta;
-                        await EzConfig.setDouble(iconSizeKey, iconSize);
-                        drawState();
-                      },
-                      tooltip:
-                          '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
-                      icon: Icon(PlatformIcons(context).add),
-                      iconSize: iconSize,
-                      style: IconButton.styleFrom(
-                        backgroundColor: colorScheme.surface
-                            .withValues(alpha: buttonOpacity),
-                        side: BorderSide(
-                          color: colorScheme.primaryContainer
-                              .withValues(alpha: outlineOpacity),
-                        ),
-                      ),
-                    )
-                  : EzIconButton(
-                      enabled: false,
-                      tooltip: l10n.gMaximum,
-                      icon: Icon(
-                        PlatformIcons(context).add,
-                        color: colorScheme.outline,
-                      ),
-                      iconSize: iconSize,
-                      style: IconButton.styleFrom(
-                        backgroundColor: colorScheme.surface
-                            .withValues(alpha: buttonOpacity),
-                        side: BorderSide(
-                          color: colorScheme.outlineVariant
-                              .withValues(alpha: outlineOpacity),
-                        ),
-                      ),
-                    ),
-            ],
+        if (widget.includeIconSize) ...<Widget>[
+          Tooltip(
+            message: l10n.gCenterReset,
+            child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
           ),
-          borderRadius: ezPillShape,
-        ),
-        ezSpacer,
+          EzTextBackground(
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                // Minus
+                (iconSize > minIconSize)
+                    ? EzIconButton(
+                        onPressed: () async {
+                          iconSize -= iconDelta;
+                          await EzConfig.setDouble(iconSizeKey, iconSize);
+                          drawState();
+                        },
+                        tooltip:
+                            '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
+                        icon: Icon(PlatformIcons(context).remove),
+                        iconSize: iconSize,
+                        style: IconButton.styleFrom(
+                          backgroundColor: colorScheme.surface
+                              .withValues(alpha: buttonOpacity),
+                          side: BorderSide(
+                            color: colorScheme.primaryContainer
+                                .withValues(alpha: outlineOpacity),
+                          ),
+                        ),
+                      )
+                    : EzIconButton(
+                        enabled: false,
+                        tooltip: l10n.gMinimum,
+                        icon: Icon(
+                          PlatformIcons(context).remove,
+                          color: colorScheme.outline,
+                        ),
+                        iconSize: iconSize,
+                        style: IconButton.styleFrom(
+                          backgroundColor: colorScheme.surface
+                              .withValues(alpha: buttonOpacity),
+                          side: BorderSide(
+                            color: colorScheme.outlineVariant
+                                .withValues(alpha: outlineOpacity),
+                          ),
+                        ),
+                      ),
+                ezRowMargin,
 
-        // Hide scroll
-        EzSwitchPair(
-          key: ValueKey<String>('scroll_$redraw'),
-          valueKey: hideScrollKey,
-          scale: iconSize / defaultIconSize,
-          activeTrackColor: colorScheme.surface
-              .withValues(alpha: max(crucialOT, buttonOpacity)),
-          inactiveTrackColor: colorScheme.surface
-              .withValues(alpha: max(crucialOT, buttonOpacity)),
-          trackOutlineColor: WidgetStateProperty.all(
-              colorScheme.primaryContainer.withValues(alpha: outlineOpacity)),
-          text: l10n.lsScroll,
-        ),
+                // Preview
+                GestureDetector(
+                  onLongPress: () async {
+                    iconSize = defaultIconSize;
+                    await EzConfig.setDouble(iconSizeKey, defaultIconSize);
+                    drawState();
+                  },
+                  child: Icon(
+                    Icons.sync_alt,
+                    size: iconSize,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+                ezRowMargin,
+
+                // Plus
+                (iconSize < maxIconSize)
+                    ? EzIconButton(
+                        onPressed: () async {
+                          iconSize += iconDelta;
+                          await EzConfig.setDouble(iconSizeKey, iconSize);
+                          drawState();
+                        },
+                        tooltip:
+                            '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
+                        icon: Icon(PlatformIcons(context).add),
+                        iconSize: iconSize,
+                        style: IconButton.styleFrom(
+                          backgroundColor: colorScheme.surface
+                              .withValues(alpha: buttonOpacity),
+                          side: BorderSide(
+                            color: colorScheme.primaryContainer
+                                .withValues(alpha: outlineOpacity),
+                          ),
+                        ),
+                      )
+                    : EzIconButton(
+                        enabled: false,
+                        tooltip: l10n.gMaximum,
+                        icon: Icon(
+                          PlatformIcons(context).add,
+                          color: colorScheme.outline,
+                        ),
+                        iconSize: iconSize,
+                        style: IconButton.styleFrom(
+                          backgroundColor: colorScheme.surface
+                              .withValues(alpha: buttonOpacity),
+                          side: BorderSide(
+                            color: colorScheme.outlineVariant
+                                .withValues(alpha: outlineOpacity),
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+            borderRadius: ezPillShape,
+          ),
+          ezSpacer,
+        ],
+
+        // Scrollbar toggle
+        if (widget.includeScroll) ...<Widget>[
+          EzSwitchPair(
+            key: ValueKey<String>('scroll_$redraw'),
+            valueKey: hideScrollKey,
+            scale: iconSize / defaultIconSize,
+            activeTrackColor: colorScheme.surface
+                .withValues(alpha: max(crucialOT, buttonOpacity)),
+            inactiveTrackColor: colorScheme.surface
+                .withValues(alpha: max(crucialOT, buttonOpacity)),
+            trackOutlineColor: WidgetStateProperty.all(
+                colorScheme.primaryContainer.withValues(alpha: outlineOpacity)),
+            text: l10n.lsScroll,
+          ),
+        ],
+
+        if (widget.globalSettingsPostpend != null)
+          ...widget.globalSettingsPostpend!,
 
         // Global/themed divider, w/ theme reminder
         ezSeparator,
@@ -306,6 +332,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           textAlign: TextAlign.center,
         ),
         ezSeparator,
+
+        if (widget.themedSettingsPrepend != null)
+          ...widget.themedSettingsPrepend!,
 
         // Button opacity
         Column(
@@ -378,7 +407,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ],
         ),
 
-        // Background
+        // Background image
         if (widget.includeBackgroundImage) ...<Widget>[
           ezSpacer,
           EzScrollView(
@@ -424,8 +453,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ],
 
         // After background
-        if (widget.additionalThemedSettings != null)
-          ...widget.additionalThemedSettings!,
+        if (widget.themedSettingsPostpend != null)
+          ...widget.themedSettingsPostpend!,
 
         // Reset button
         widget.resetSpacer,
