@@ -191,11 +191,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               ),
             ),
           ),
-          ezSpacer,
         ],
 
         // Icon size
         if (widget.includeIconSize) ...<Widget>[
+          ezSpacer,
           Tooltip(
             message: l10n.gCenterReset,
             child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
@@ -301,11 +301,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             ),
             borderRadius: ezPillShape,
           ),
-          ezSpacer,
         ],
 
         // Scrollbar toggle
         if (widget.includeScroll) ...<Widget>[
+          ezSpacer,
           EzSwitchPair(
             key: ValueKey<String>('scroll_$redraw'),
             valueKey: hideScrollKey,
