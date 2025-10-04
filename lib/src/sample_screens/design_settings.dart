@@ -69,6 +69,9 @@ class EzDesignSettings extends StatefulWidget {
   /// Include [lightColorKeys] if desired
   final Set<String>? lightThemeResetKeys;
 
+  /// Optional callback for when a local reset is confirmed
+  final void Function()? onReset;
+
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
@@ -88,6 +91,7 @@ class EzDesignSettings extends StatefulWidget {
     this.resetSpacer = ezDivider,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
+    this.onReset,
   });
 
   @override
@@ -153,17 +157,47 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         : EzConfig.get(lightButtonOutlineOpacityKey);
 
     drawState();
+    widget.onButtonOpacityChanged?.call(buttonOpacity);
+    widget.onButtonOutlineOpacityChanged?.call(outlineOpacity);
   }
 
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
 
-    final bool isDark = isDarkTheme(context);
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
 
+    final bool isDark = isDarkTheme(context);
     final String themeProfile = isDark ? darkString : lightString;
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    final Color buttonSurface =
+        colorScheme.surface.withValues(alpha: buttonOpacity);
+    final Color buttonOutline =
+        colorScheme.primaryContainer.withValues(alpha: outlineOpacity);
+
+    final ButtonStyle iconStyle = IconButton.styleFrom(
+      backgroundColor: buttonSurface,
+      side: BorderSide(color: buttonOutline),
+    );
+    final ButtonStyle iconVariantStyle = IconButton.styleFrom(
+      backgroundColor: buttonSurface,
+      side: BorderSide(
+          color: colorScheme.outlineVariant.withValues(alpha: outlineOpacity)),
+    );
+
+    final Color switchSurface =
+        colorScheme.surface.withValues(alpha: max(crucialOT, buttonOpacity));
+    final WidgetStatePropertyAll<Color> switchOutline =
+        WidgetStatePropertyAll<Color>(buttonOutline);
+
+    final ButtonStyle ebStyle = ElevatedButton.styleFrom(
+      backgroundColor: buttonSurface,
+      shadowColor:
+          colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod),
+      side: BorderSide(color: buttonOutline),
+    );
 
     // Return the build //
 
@@ -224,14 +258,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(PlatformIcons(context).remove),
                         iconSize: iconSize,
-                        style: IconButton.styleFrom(
-                          backgroundColor: colorScheme.surface
-                              .withValues(alpha: buttonOpacity),
-                          side: BorderSide(
-                            color: colorScheme.primaryContainer
-                                .withValues(alpha: outlineOpacity),
-                          ),
-                        ),
+                        style: iconStyle,
                       )
                     : EzIconButton(
                         enabled: false,
@@ -241,14 +268,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           color: colorScheme.outline,
                         ),
                         iconSize: iconSize,
-                        style: IconButton.styleFrom(
-                          backgroundColor: colorScheme.surface
-                              .withValues(alpha: buttonOpacity),
-                          side: BorderSide(
-                            color: colorScheme.outlineVariant
-                                .withValues(alpha: outlineOpacity),
-                          ),
-                        ),
+                        style: iconVariantStyle,
                       ),
                 ezRowMargin,
 
@@ -279,14 +299,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(PlatformIcons(context).add),
                         iconSize: iconSize,
-                        style: IconButton.styleFrom(
-                          backgroundColor: colorScheme.surface
-                              .withValues(alpha: buttonOpacity),
-                          side: BorderSide(
-                            color: colorScheme.primaryContainer
-                                .withValues(alpha: outlineOpacity),
-                          ),
-                        ),
+                        style: iconStyle,
                       )
                     : EzIconButton(
                         enabled: false,
@@ -296,14 +309,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           color: colorScheme.outline,
                         ),
                         iconSize: iconSize,
-                        style: IconButton.styleFrom(
-                          backgroundColor: colorScheme.surface
-                              .withValues(alpha: buttonOpacity),
-                          side: BorderSide(
-                            color: colorScheme.outlineVariant
-                                .withValues(alpha: outlineOpacity),
-                          ),
-                        ),
+                        style: iconVariantStyle,
                       ),
               ],
             ),
@@ -318,12 +324,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             key: ValueKey<String>('scroll_$redraw'),
             valueKey: hideScrollKey,
             scale: iconSize / defaultIconSize,
-            activeTrackColor: colorScheme.surface
-                .withValues(alpha: max(crucialOT, buttonOpacity)),
-            inactiveTrackColor: colorScheme.surface
-                .withValues(alpha: max(crucialOT, buttonOpacity)),
-            trackOutlineColor: WidgetStateProperty.all(
-                colorScheme.primaryContainer.withValues(alpha: outlineOpacity)),
+            activeTrackColor: switchSurface,
+            inactiveTrackColor: switchSurface,
+            trackOutlineColor: switchOutline,
             text: l10n.lsScroll,
           ),
         ],
@@ -429,15 +432,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             child: isDark
                 ? EzImageSetting(
                     key: UniqueKey(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          colorScheme.surface.withValues(alpha: buttonOpacity),
-                      shadowColor: colorScheme.shadow
-                          .withValues(alpha: buttonOpacity * shadowMod),
-                      side: BorderSide(
-                          color: colorScheme.primaryContainer
-                              .withValues(alpha: outlineOpacity)),
-                      padding: EdgeInsets.all(padding * 0.75),
+                    style: ebStyle.copyWith(
+                      padding: WidgetStatePropertyAll<EdgeInsets>(
+                          EdgeInsets.all(padding * 0.75)),
                     ),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
@@ -446,15 +443,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   )
                 : EzImageSetting(
                     key: UniqueKey(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          colorScheme.surface.withValues(alpha: buttonOpacity),
-                      shadowColor: colorScheme.shadow
-                          .withValues(alpha: buttonOpacity * shadowMod),
-                      side: BorderSide(
-                          color: colorScheme.primaryContainer
-                              .withValues(alpha: outlineOpacity)),
-                      padding: EdgeInsets.all(padding * 0.75),
+                    style: ebStyle.copyWith(
+                      padding: WidgetStatePropertyAll<EdgeInsets>(
+                          EdgeInsets.all(padding * 0.75)),
                     ),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
@@ -472,15 +463,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         widget.resetSpacer,
         EzResetButton(
           key: ValueKey<String>('reset_$redraw'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor:
-                colorScheme.surface.withValues(alpha: buttonOpacity),
-            shadowColor:
-                colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod),
-            side: BorderSide(
-                color: colorScheme.primaryContainer
-                    .withValues(alpha: outlineOpacity)),
-          ),
+          style: ebStyle,
           dialogTitle: l10n.dsResetAll(themeProfile),
           onConfirm: () async {
             await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
@@ -515,6 +498,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             iconSize = defaultIconSize;
 
             drawState();
+            widget.onReset?.call();
           },
         ),
         ezSeparator,
