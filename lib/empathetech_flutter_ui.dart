@@ -85,8 +85,7 @@ export 'src/widgets/platform_availability/app_provider.dart';
 export 'src/widgets/platform_availability/back_action.dart';
 
 // Responsive design
-export 'src/widgets/responsive_design/adaptive_scaffold.dart';
-export 'src/widgets/responsive_design/adaptive_widget.dart';
+export 'src/widgets/responsive_design/adaptive_widgets.dart';
 export 'src/widgets/responsive_design/row_col.dart';
 export 'src/widgets/responsive_design/row.dart';
 export 'src/widgets/responsive_design/screen.dart';

@@ -873,7 +873,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
     // Return the build //
 
-    return EzAdaptiveScaffold(
+    return EzAdaptiveParent(
       small: SelectionArea(
         child: Scaffold(
           // AppBar
