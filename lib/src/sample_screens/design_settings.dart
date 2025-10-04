@@ -32,6 +32,12 @@ class EzDesignSettings extends StatefulWidget {
   /// BYO trailing spacer, leading is a custom [EzDivider]
   final List<Widget>? themedSettingsPrepend;
 
+  /// Optional callback for button opacity changes
+  final void Function(double opacity)? onButtonOpacityChanged;
+
+  /// Optional callback for button outline opacity changes
+  final void Function(double opacity)? onButtonOutlineOpacityChanged;
+
   /// Whether to include the background image setting
   /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
   final bool includeBackgroundImage;
@@ -73,6 +79,8 @@ class EzDesignSettings extends StatefulWidget {
     this.includeScroll = true,
     this.globalSettingsPostpend,
     this.themedSettingsPrepend,
+    this.onButtonOpacityChanged,
+    this.onButtonOutlineOpacityChanged,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
@@ -358,8 +366,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   label: buttonOpacity.toStringAsFixed(2),
 
                   // Slider functions
-                  onChanged: (double value) =>
-                      setState(() => buttonOpacity = value),
+                  onChanged: (double value) {
+                    setState(() => buttonOpacity = value);
+                    widget.onButtonOpacityChanged?.call(value);
+                  },
                   onChangeEnd: (double value) async {
                     await EzConfig.setDouble(
                       isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
@@ -391,8 +401,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   label: outlineOpacity.toStringAsFixed(2),
 
                   // Slider functions
-                  onChanged: (double value) =>
-                      setState(() => outlineOpacity = value),
+                  onChanged: (double value) {
+                    setState(() => outlineOpacity = value);
+                    widget.onButtonOutlineOpacityChanged?.call(value);
+                  },
                   onChangeEnd: (double value) async {
                     await EzConfig.setDouble(
                       isDark
