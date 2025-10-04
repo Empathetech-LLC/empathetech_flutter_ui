@@ -83,7 +83,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   final double spacing = EzConfig.get(spacingKey);
   final double iconSize = EzConfig.get(iconSizeKey);
 
-  late final EdgeInsets colInsets = EzInsets.col(spacing);
+  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
 
   final bool isLefty = EzConfig.get(isLeftyKey);
 
@@ -142,6 +142,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<void> activateSetting(ThemeData theme) async {
     String? newPath = await showModalBottomSheet<String?>(
       context: context,
+      constraints: const BoxConstraints(minWidth: double.infinity),
       builder: (BuildContext modalContext) => StatefulBuilder(
         builder: (_, StateSetter modalState) => EzScrollView(
           mainAxisSize: MainAxisSize.min,
@@ -263,7 +264,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Only works on mobile
     if (!kIsWeb && isMobile()) {
       options.add(Padding(
-        padding: colInsets,
+        padding: wrapPadding,
         child: EzElevatedIconButton(
           onPressed: () async {
             final String? picked = await ezImagePicker(
@@ -284,7 +285,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Doesn't work on Web
     if (!kIsWeb) {
       options.add(Padding(
-        padding: colInsets,
+        padding: wrapPadding,
         child: EzElevatedIconButton(
           onPressed: () async {
             final String? picked = await ezImagePicker(
@@ -304,7 +305,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // From network
     // Works everywhere
     options.add(Padding(
-      padding: colInsets,
+      padding: wrapPadding,
       child: EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
@@ -408,7 +409,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Reset
     if (defaultPath != null && defaultPath != noImageValue) {
       options.add(Padding(
-        padding: colInsets,
+        padding: wrapPadding,
         child: EzElevatedIconButton(
           onPressed: () async {
             await fileCleanup();
@@ -427,7 +428,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Clear (optional)
     if (widget.allowClear) {
       options.add(Padding(
-        padding: colInsets,
+        padding: wrapPadding,
         child: EzElevatedIconButton(
           onPressed: () async {
             await fileCleanup();
@@ -443,24 +444,30 @@ class _ImageSettingState extends State<EzImageSetting> {
       ));
     }
 
-    // Update theme (optional)
-    if (widget.updateTheme != null && widget.updateThemeOption) {
-      options.add(Padding(
-        padding: EzInsets.wrap(spacing),
-        child: EzSwitchPair(
-          key: ValueKey<bool>(updateTheme),
-          text: l10n.dsUseForColors,
-          value: updateTheme,
-          onChanged: (bool? choice) {
-            updateTheme = (choice == null) ? false : choice;
-            modalState(() {});
-            setState(() {});
-          },
+    // Return the options, with the conditional update theme switch
+    return <Widget>[
+      Wrap(
+        alignment: WrapAlignment.center,
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: options,
+      ),
+      if (widget.updateTheme != null && widget.updateThemeOption)
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: spacing / 2),
+          child: EzSwitchPair(
+            key: ValueKey<bool>(updateTheme),
+            text: l10n.dsUseForColors,
+            value: updateTheme,
+            onChanged: (bool? choice) {
+              updateTheme = (choice == null) ? false : choice;
+              modalState(() {});
+              setState(() {});
+            },
+          ),
         ),
-      ));
-    }
-
-    return options;
+      ezSpacer,
+    ];
   }
 
   /// Opens [EzImageEditor] and overrides the image as necessary
