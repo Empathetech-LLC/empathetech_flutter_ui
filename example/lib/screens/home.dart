@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../models/export.dart';
 import '../screens/export.dart';
 import '../utils/export.dart';
 import '../widgets/export.dart';
