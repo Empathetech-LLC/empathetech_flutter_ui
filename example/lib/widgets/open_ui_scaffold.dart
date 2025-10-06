@@ -26,8 +26,9 @@ class OpenUIScaffold extends StatelessWidget {
   /// [Scaffold.body] passthrough
   final Widget body;
 
-  /// [FloatingActionButton]
-  final Widget? fab;
+  /// [FloatingActionButton]s to add on top of the [EzUpdaterFAB]
+  /// BYO spacing widgets
+  final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const OpenUIScaffold({
@@ -37,7 +38,7 @@ class OpenUIScaffold extends StatelessWidget {
     this.showSettings = true,
     this.onUpload,
     required this.body,
-    this.fab,
+    this.fabs,
   });
 
   @override
@@ -118,12 +119,10 @@ class OpenUIScaffold extends StatelessWidget {
           body: body,
 
           // FAB
-          floatingActionButton: fab == null
-              ? updater
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[updater, ezSpacer, fab!],
-                ),
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[updater, if (fabs != null) ...fabs!],
+          ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,

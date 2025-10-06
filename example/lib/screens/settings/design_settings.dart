@@ -17,10 +17,15 @@ class DesignSettingsScreen extends StatelessWidget {
         title: ezL10n(context).dsPageTitle,
         showSettings: false,
         body: const EzScreen(EzDesignSettings()),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          EzBackFAB(context),
+        ],
       );
 }

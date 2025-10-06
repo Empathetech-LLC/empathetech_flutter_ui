@@ -911,53 +911,56 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         alignment: Alignment.topLeft,
       ),
-      fab: ResetFAB(
-        clearForms: () => setState(() {
-          nameController.clear();
-          namePreview = l10n.csNamePreview;
-          validName = false;
+      fabs: <Widget>[
+        ezSpacer,
+        ResetFAB(
+          clearForms: () => setState(() {
+            nameController.clear();
+            namePreview = l10n.csNamePreview;
+            validName = false;
 
-          pubController.clear();
-          pubPreview = l10n.csPubPreview;
+            pubController.clear();
+            pubPreview = l10n.csPubPreview;
 
-          descriptionController.clear();
+            descriptionController.clear();
 
-          domainController.clear();
-          exampleDomain = false;
+            domainController.clear();
+            exampleDomain = false;
 
-          supportEmailController.clear();
+            supportEmailController.clear();
 
-          colorSettings = true;
-          designSettings = true;
-          layoutSettings = true;
-          textSettings = true;
+            colorSettings = true;
+            designSettings = true;
+            layoutSettings = true;
+            textSettings = true;
 
-          flutterPathControl.clear();
+            flutterPathControl.clear();
 
-          showAdvanced = false;
+            showAdvanced = false;
 
-          workPathControl.text = docsPath;
+            workPathControl.text = docsPath;
 
-          showCopyright = false;
-          removeCopyright = false;
-          copyrightController.text = copyrightDefault;
+            showCopyright = false;
+            removeCopyright = false;
+            copyrightController.text = copyrightDefault;
 
-          showLicense = false;
-          license = gnuKey;
+            showLicense = false;
+            license = gnuKey;
 
-          showL10n = false;
-          removeL10n = false;
-          l10nController.text = l10nDefault;
+            showL10n = false;
+            removeL10n = false;
+            l10nController.text = l10nDefault;
 
-          showAnalysis = false;
-          removeAnalysis = false;
-          analysisController.text = analysisDefault;
+            showAnalysis = false;
+            removeAnalysis = false;
+            analysisController.text = analysisDefault;
 
-          showVSC = false;
-          removeVSC = false;
-          vscController.text = vscDefault;
-        }),
-      ),
+            showVSC = false;
+            removeVSC = false;
+            vscController.text = vscDefault;
+          }),
+        ),
+      ],
     );
   }
 
