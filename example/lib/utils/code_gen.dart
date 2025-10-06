@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../models/export.dart';
+import '../utils/export.dart';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -830,8 +830,9 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   /// [Scaffold.body] passthrough
   final Widget body;
 
-  /// [FloatingActionButton]
-  final Widget? fab;
+  /// [FloatingActionButton]s to add on top of the [EzUpdaterFAB]
+  /// BYO spacing widgets
+  final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ${classCaseAppName}Scaffold({
@@ -839,7 +840,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     this.title = appName,
     this.showSettings = true,
     required this.body,
-    this.fab,
+    this.fabs,
   });
 
   @override
@@ -871,6 +872,17 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
       ],
     );
 
+    // TODO: Complete link placeholders (_PH)
+    const Widget updater = EzUpdaterFAB(
+      appVersion: '1.0.0', // TODO (recommended): include a check for this in your release scripts
+      versionSource:
+          'https://raw.githubusercontent.com/USER_PH/REPO_PH/refs/heads/main/APP_VERSION',
+      gPlay:
+          'https://play.google.com/store/apps/details?id=${config.domainName}.${config.appName}',
+      appStore: 'https://apps.apple.com/us/app/${config.appName.replaceAll('_', '-')}/APP_ID_PH',
+      github: 'https://github.com/USER_PH/REPO_PH/releases',
+    );
+
     // Return the build //
 
     return EzAdaptiveParent(
@@ -900,8 +912,11 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
           // Body
           body: body,
 
-          // FAB
-          floatingActionButton: fab,
+          // FABs
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[updater, if (fabs != null) ...fabs!],
+          ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
@@ -1060,7 +1075,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      fab: CountFAB(() => setState(() => count += 1)),
+      fabs: <Widget>[ezSpacer, CountFAB(() => setState(() => count += 1))],
     );
   }
 }
@@ -1092,11 +1107,16 @@ class SettingsHomeScreen extends StatelessWidget {
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
         )),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          EzBackFAB(context, showHome: true),
+        ],
       );
 }
 """);
@@ -1124,11 +1144,16 @@ class ColorSettingsScreen extends StatelessWidget {
         title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzScreen(EzColorSettings(target: target)),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          EzBackFAB(context),
+        ],
       );
 }
 """);
@@ -1155,11 +1180,16 @@ class DesignSettingsScreen extends StatelessWidget {
         title: ezL10n(context).dsPageTitle,
         showSettings: false,
         body: const EzScreen(EzDesignSettings()),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          EzBackFAB(context),
+        ],
       );
 }
 """);
@@ -1186,11 +1216,16 @@ class LayoutSettingsScreen extends StatelessWidget {
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzScreen(EzLayoutSettings()),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          EzBackFAB(context),
+        ],
       );
 }
 """);
@@ -1219,11 +1254,16 @@ class TextSettingsScreen extends StatelessWidget {
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzScreen(EzTextSettings(target: target)),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          EzBackFAB(context),
+        ],
       );
 }
 """);
