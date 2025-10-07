@@ -195,3 +195,12 @@ class EzNewLine extends StatelessWidget {
     );
   }
 }
+
+/// [TextTheme.bodyLarge] line with [TextAlign.start]
+const Widget ezStartLine = EzNewLine();
+
+/// [TextTheme.bodyLarge] line with [TextAlign.center]
+const Widget ezCenterLine = EzNewLine(textAlign: TextAlign.center);
+
+/// [TextTheme.bodyLarge] line with [TextAlign.end]
+const Widget ezEndLine = EzNewLine(textAlign: TextAlign.end);
