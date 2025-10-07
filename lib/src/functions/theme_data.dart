@@ -186,6 +186,9 @@ ThemeData ezThemeData(Brightness brightness) {
       color: calcCrucial
           ? colorScheme.surfaceDim.withValues(alpha: crucialOpacity)
           : colorScheme.surfaceDim,
+      shadowColor: calcCrucial
+          ? colorScheme.shadow.withValues(alpha: crucialOpacity * shadowMod)
+          : colorScheme.shadow,
       margin: EdgeInsets.zero,
     ),
 
@@ -265,7 +268,9 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.primary.withValues(alpha: crucialOpacity),
+      backgroundColor: calcCrucial
+          ? colorScheme.primary.withValues(alpha: crucialOpacity)
+          : colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
       hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,
