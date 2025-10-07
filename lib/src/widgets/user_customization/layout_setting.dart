@@ -92,7 +92,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   // Define build functions //
 
   /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
-  List<Widget> _buildPreview(BuildContext context, ThemeData theme) {
+  List<Widget> buildPreview(BuildContext context, ThemeData theme) {
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
@@ -203,102 +203,86 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     }
   }
 
-  /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [EzElevatedIconButton]
-  List<Widget> buildModal({
-    required BuildContext context,
-    required ThemeData theme,
-    required StateSetter setModalState,
-  }) {
-    return <Widget>[
-      // Preview
-      Semantics(
-        button: false,
-        readOnly: true,
-        label: l10n.gSetToValue(
-          label,
-          currValue.toStringAsFixed(widget.decimals),
-        ),
-        child: ExcludeSemantics(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Title
-              Text(
-                label,
-                style: widget.titleStyle ?? theme.textTheme.titleLarge,
-                textAlign: TextAlign.center,
-              ),
-
-              // Preview
-              ..._buildPreview(context, theme),
-            ],
-          ),
-        ),
-      ),
-
-      // Slider
-      ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-        child: Slider(
-          // Slider values
-          value: currValue,
-          min: widget.min,
-          max: widget.max,
-          divisions: widget.steps,
-
-          // Slider functions
-          onChanged: (double value) {
-            // Just update the on screen value while sliding around
-            setModalState(() {
-              currValue = value;
-            });
-          },
-          onChangeEnd: (double value) async {
-            await EzConfig.setDouble(widget.configKey, value);
-          },
-
-          // Slider semantics
-          semanticFormatterCallback: (double value) =>
-              value.toStringAsFixed(widget.decimals),
-        ),
-      ),
-      ezSpacer,
-
-      // Reset button
-      EzElevatedIconButton(
-        onPressed: () async {
-          await EzConfig.remove(widget.configKey);
-          setModalState(() {
-            currValue = defaultValue;
-          });
-        },
-        icon: EzIcon(PlatformIcons(context).refresh),
-        label:
-            '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
-      ),
-      ezSpacer,
-    ];
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return EzElevatedIconButton(
       onPressed: () => showModalBottomSheet(
         context: context,
         useSafeArea: true,
         isScrollControlled: true,
+        constraints: const BoxConstraints(minWidth: double.infinity),
         builder: (_) => StatefulBuilder(
-          builder: (_, StateSetter setModalState) {
+          builder: (_, StateSetter setModal) {
             return EzScrollView(
               mainAxisSize: MainAxisSize.min,
-              children: buildModal(
-                context: context,
-                theme: Theme.of(context),
-                setModalState: setModalState,
-              ),
+              children: <Widget>[
+                // Preview
+                Semantics(
+                  button: false,
+                  readOnly: true,
+                  label: l10n.gSetToValue(
+                    label,
+                    currValue.toStringAsFixed(widget.decimals),
+                  ),
+                  child: ExcludeSemantics(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // Title
+                        Text(
+                          label,
+                          style:
+                              widget.titleStyle ?? theme.textTheme.titleLarge,
+                          textAlign: TextAlign.center,
+                        ),
+
+                        // Preview
+                        ...buildPreview(context, theme),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Slider
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+                  child: Slider(
+                    // Slider values
+                    value: currValue,
+                    min: widget.min,
+                    max: widget.max,
+                    divisions: widget.steps,
+
+                    // Slider functions
+                    onChanged: (double value) =>
+                        setModal(() => currValue = value),
+                    onChangeEnd: (double value) =>
+                        EzConfig.setDouble(widget.configKey, value),
+
+                    // Slider semantics
+                    semanticFormatterCallback: (double value) =>
+                        value.toStringAsFixed(widget.decimals),
+                  ),
+                ),
+                ezSpacer,
+
+                // Reset button
+                EzElevatedIconButton(
+                  onPressed: () async {
+                    await EzConfig.remove(widget.configKey);
+                    setModal(() => currValue = defaultValue);
+                  },
+                  icon: EzIcon(PlatformIcons(context).refresh),
+                  label:
+                      '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
+                ),
+                EzSpacer(space: EzConfig.get(spacingKey) * 1.5),
+              ],
             );
           },
         ),
