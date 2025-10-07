@@ -58,8 +58,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
   final double spacing = EzConfig.get(spacingKey);
   final double iconSize = EzConfig.get(iconSizeKey);
 
-  final int rotateDuration =
-      ((EzConfig.get(animationDurationKey) as int) / 2).toInt();
+  final Duration rotateDuration = ezAnimDuration(half: true);
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -144,8 +143,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
       ),
     );
 
-    return EzScreen(
-      Column(children: <Widget>[
+    return SafeArea(
+      child: Column(children: <Widget>[
         // Preview
         Expanded(
           child: ExtendedImage.file(
@@ -224,8 +223,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   _editorController.rotate(
                     degree: -90.0,
                     rotateCropRect: false,
-                    animation: rotateDuration > 0 ? true : false,
-                    duration: Duration(milliseconds: rotateDuration),
+                    animation: rotateDuration.inMilliseconds > 0 ? true : false,
+                    duration: rotateDuration,
                   );
                   setState(() {});
                 },
@@ -241,8 +240,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   _editorController.rotate(
                     degree: 90.0,
                     rotateCropRect: false,
-                    animation: rotateDuration > 0 ? true : false,
-                    duration: Duration(milliseconds: rotateDuration),
+                    animation: rotateDuration.inMilliseconds > 0 ? true : false,
+                    duration: rotateDuration,
                   );
                   setState(() {});
                 },
@@ -388,8 +387,6 @@ class _EzImageEditorState extends State<EzImageEditor> {
           ),
         )
       ]),
-      margin: EdgeInsets.zero,
-      useImageDecoration: false,
     );
   }
 
