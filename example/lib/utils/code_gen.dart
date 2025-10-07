@@ -555,7 +555,7 @@ class $classCaseAppName extends StatelessWidget {
   Widget build(BuildContext context) {
     // Prep the router //
 
-    final int animDuration = EzConfig.get(animationDurationKey);
+    final int animDuration = kIsWeb ? 0 : EzConfig.get(animationDurationKey);
     final TargetPlatform currPlatform = getBasePlatform();
 
     GoTransition.defaultCurve = Curves.easeInOut;
