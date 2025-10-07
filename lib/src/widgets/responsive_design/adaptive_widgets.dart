@@ -143,31 +143,20 @@ class EzAdaptiveWidget extends StatelessWidget {
   }
 }
 
-class EzAdaptiveValue<T> {
-  /// Returned when the context's [ScreenSize] <= [ScreenSize.small]
-  final T small;
+dynamic ezAdaptiveValue<T>(
+  BuildContext context, {
+  required T small,
+  T? medium,
+  T? large,
+}) {
+  final int? order = EzScreenSize.of(context)?.screenSize.order;
 
-  /// Returned when the context's [ScreenSize] <= [ScreenSize.medium]
-  final T? medium;
-
-  /// Returned when the context's [ScreenSize] > [ScreenSize.large]
-  final T? large;
-
-  /// Create an adaptive value. `small` is required and used as the default/fallback.
-  const EzAdaptiveValue({required this.small, this.medium, this.large});
-
-  /// Return a different value [T] for each [ScreenSize]
-  /// Always [small] if [EzScreenSize] is not in the Widget tree
-  T of(BuildContext context) {
-    final int? order = EzScreenSize.of(context)?.screenSize.order;
-
-    switch (order) {
-      case 1:
-        return medium ?? small;
-      case 2:
-        return large ?? medium ?? small;
-      default:
-        return small;
-    }
+  switch (order) {
+    case 1:
+      return medium ?? small;
+    case 2:
+      return large ?? medium ?? small;
+    default:
+      return small;
   }
 }
