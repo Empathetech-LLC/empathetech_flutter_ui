@@ -142,6 +142,8 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<void> activateSetting(ThemeData theme) async {
     String? newPath = await showModalBottomSheet<String?>(
       context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
       constraints: const BoxConstraints(minWidth: double.infinity),
       builder: (BuildContext modalContext) => StatefulBuilder(
         builder: (_, StateSetter modalState) => EzScrollView(
@@ -474,16 +476,16 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<String?> editImage(String path, ThemeData theme) async {
     final String? editResult = await showModalBottomSheet<String?>(
       context: context,
+      enableDrag: false,
+      useSafeArea: false,
+      isDismissible: false,
+      showDragHandle: false,
+      isScrollControlled: true,
       builder: (_) => EzImageEditor(path),
       constraints: const BoxConstraints(
         minWidth: double.infinity,
         minHeight: double.infinity,
       ),
-      isScrollControlled: true,
-      isDismissible: false,
-      enableDrag: false,
-      showDragHandle: false,
-      useSafeArea: false,
     );
 
     return (editResult != null && editResult.isNotEmpty) ? editResult : null;
@@ -497,8 +499,8 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showModalBottomSheet<bool?>(
       context: context,
       useSafeArea: true,
-      constraints: const BoxConstraints(minWidth: double.infinity),
       isScrollControlled: true,
+      constraints: const BoxConstraints(minWidth: double.infinity),
       builder: (_) => StatefulBuilder(
         builder: (BuildContext fitContext, StateSetter fitState) {
           return EzScrollView(
