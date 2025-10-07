@@ -11,10 +11,10 @@ import 'package:feedback/feedback.dart';
 
 /// Shadow opacity should be "faster" than surface
 /// 1:1 looks... well, foggy
-const double shadowMod = 0.75;
+const double shadowMod = 0.667;
 
 /// Crucial opacity threshold - some things are too important to be broken by user settings
-const double crucialOT = 0.5;
+const double crucialOT = 0.25;
 
 /// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness) {
@@ -265,7 +265,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: primaryButtonBackground,
+      backgroundColor: crucialSurface,
       foregroundColor: colorScheme.onPrimary,
       hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,
