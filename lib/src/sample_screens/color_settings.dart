@@ -351,13 +351,13 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     final Set<String> currSet = currList.toSet();
     final List<String> fullList = isDark ? darkColorOrder : lightColorOrder;
 
-    final List<Widget> untrackedColors = fullList
+    return fullList
         .where((String element) => !currSet.contains(element))
         .map<Widget>((String configKey) {
       final Color liveColor = getLiveColor(context, configKey);
 
-      return Container(
-        padding: EzInsets.col(spacing),
+      return Padding(
+        padding: wrapPadding,
         child: EzElevatedIconButton(
           key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
@@ -396,20 +396,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         ),
       );
     }).toList();
-
-    untrackedColors.insert(
-      0,
-      EzLink(
-        l10n.gHowThisWorks,
-        style: Theme.of(context).textTheme.labelLarge!,
-        textAlign: TextAlign.center,
-        url: Uri.parse('https://m3.material.io/styles/color/roles'),
-        hint: l10n.gHowThisWorksHint,
-        tooltip: 'https://m3.material.io/styles/color/roles',
-      ),
-    );
-
-    return untrackedColors;
   }
 
   // Init //
@@ -470,31 +456,44 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         // Add a color button
         EzTextIconButton(
           onPressed: () async {
+            // Show modal
             modalOpen = true;
-
-            // Show available color configKeys
             await showModalBottomSheet(
               context: context,
+              useSafeArea: true,
+              isScrollControlled: true,
+              constraints: const BoxConstraints(minWidth: double.infinity),
               builder: (_) => StatefulBuilder(
-                builder: (_, StateSetter setModalState) {
-                  return EzScrollView(
-                    scrollDirection: Axis.horizontal,
-                    startCentered: true,
-                    mainAxisSize: MainAxisSize.min,
-                    child: EzScrollView(
-                      mainAxisSize: MainAxisSize.min,
+                builder: (_, StateSetter setModalState) => EzScrollView(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    // Tutorial link
+                    EzLink(
+                      l10n.gHowThisWorks,
+                      style: Theme.of(context).textTheme.labelLarge!,
+                      textAlign: TextAlign.center,
+                      url: Uri.parse(
+                          'https://m3.material.io/styles/color/roles'),
+                      hint: l10n.gHowThisWorksHint,
+                      tooltip: 'https://m3.material.io/styles/color/roles',
+                    ),
+
+                    // Color options
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: getUntrackedColors(setModalState, isDark),
                     ),
-                  );
-                },
+                    ezSpacer,
+                  ],
+                ),
               ),
             );
             modalOpen = false;
 
-            // Save the user's changes
-            if (currList != defaultList) {
-              await EzConfig.setStringList(userColorsKey, currList);
-            }
+            // Save changes
+            await EzConfig.setStringList(userColorsKey, currList);
           },
           style: TextButton.styleFrom(padding: EzInsets.wrap(margin)),
           icon: EzIcon(PlatformIcons(context).addCircledOutline),
