@@ -483,7 +483,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       isDismissible: false,
       enableDrag: false,
       showDragHandle: false,
-      useSafeArea: true,
+      useSafeArea: false,
     );
 
     return (editResult != null && editResult.isNotEmpty) ? editResult : null;
@@ -509,7 +509,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              ezMargin,
               RadioGroup<BoxFit>(
                 groupValue: selectedFit,
                 onChanged: (BoxFit? value) {
@@ -588,7 +588,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ],
                 ),
               ),
-              ezSeparator,
+              ezSpacer,
               EzRow(
                 mainAxisAlignment:
                     isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
@@ -623,7 +623,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ezRowSpacer,
                 ],
               ),
-              ezSpacer,
+              EzSpacer(space: spacing * 1.5),
             ],
           );
         },
@@ -652,6 +652,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         scaleMargin;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         GestureDetector(
           onTap: () {
