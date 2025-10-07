@@ -163,19 +163,10 @@ class EzAdaptiveValue<T> {
 
     switch (order) {
       case 1:
-        debugPrint('CAW! - EzAdaptiveValue: medium');
-        debugPrint('CAW! - order: $order');
-
         return medium ?? small;
       case 2:
-        debugPrint('CAW! - EzAdaptiveValue: large');
-        debugPrint('CAW! - order: $order');
-
         return large ?? medium ?? small;
       default:
-        debugPrint('CAW! - EzAdaptiveValue: small');
-        debugPrint('CAW! - order: $order');
-
         return small;
     }
   }
