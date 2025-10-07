@@ -44,15 +44,16 @@ class OpenUIScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final bool isLefty = EzConfig.get(isLeftyKey);
-    final EFUILang l10n = ezL10n(context);
-
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);
 
+    final bool isLefty = EzConfig.get(isLeftyKey);
+
+    final EFUILang l10n = ezL10n(context);
+
     // Define custom widgets //
 
-    final MenuAnchor options = MenuAnchor(
+    final Widget options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
