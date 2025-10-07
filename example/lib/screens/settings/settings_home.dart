@@ -30,8 +30,6 @@ class SettingsHomeScreen extends StatelessWidget {
             appName: appName,
             androidPackage: androidPackage,
           ),
-          ezSpacer,
-          EzBackFAB(context, showHome: true),
         ],
       );
 }
