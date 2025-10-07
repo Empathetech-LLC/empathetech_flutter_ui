@@ -345,7 +345,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: (heightOf(context) / 3),
           width: double.infinity,
-          child: EmpathetechLoadingAnimation(semantics: el10n.gLoadingAnim),
+          child: EmpathyLoading(semantics: el10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return SizedBox(
