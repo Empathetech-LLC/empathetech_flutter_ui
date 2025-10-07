@@ -76,8 +76,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         : CountryFlag.fromCountryCode(
             lang.countryCode!,
             theme: ImageTheme(
-              shape: const Circle(),
+              height: iconSize + padding,
               width: iconSize + padding,
+              shape: const Circle(),
             ),
           );
 
