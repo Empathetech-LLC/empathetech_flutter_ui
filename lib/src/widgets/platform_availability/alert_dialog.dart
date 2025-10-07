@@ -93,25 +93,19 @@ class EzAlertDialog extends PlatformAlertDialog {
             title: title,
             titlePadding: title == null
                 ? null
-                : dialogContent == null
-                    ? EdgeInsets.zero
-                    : EdgeInsets.only(
-                        right: margin,
-                        left: margin,
-                        top: margin,
-                        bottom: spacing / 2,
-                      ),
+                : EdgeInsets.symmetric(
+                    horizontal: margin,
+                    vertical: spacing / 2,
+                  ),
 
             // Content
             content: dialogContent,
             contentPadding: dialogContent == null
                 ? null
-                : title == null
-                    ? EdgeInsets.zero
-                    : EdgeInsets.symmetric(
-                        horizontal: margin,
-                        vertical: spacing / 2,
-                      ),
+                : EdgeInsets.symmetric(
+                    horizontal: margin,
+                    vertical: spacing / 2,
+                  ),
 
             // Actions
             actions: buildMActions(mActions),
@@ -122,10 +116,10 @@ class EzAlertDialog extends PlatformAlertDialog {
                     : MainAxisAlignment.end,
 
             // General
-            actionsPadding: EzInsets.wrap(spacing),
-            buttonPadding: EdgeInsets.zero,
             iconPadding: EdgeInsets.zero,
+            buttonPadding: EdgeInsets.zero,
             insetPadding: EdgeInsets.all(margin),
+            actionsPadding: EzInsets.wrap(spacing),
           );
         },
         cupertino: (BuildContext dialogContext, _) {
@@ -158,10 +152,7 @@ class EzAlertDialog extends PlatformAlertDialog {
                 : Padding(
                     padding: title == null
                         ? EdgeInsets.zero
-                        : EdgeInsets.symmetric(
-                            horizontal: margin,
-                            vertical: spacing / 2,
-                          ),
+                        : EdgeInsets.symmetric(vertical: spacing / 2),
                     child: dialogContent,
                   ),
 
