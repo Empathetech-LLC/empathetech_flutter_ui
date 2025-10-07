@@ -265,7 +265,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: crucialSurface,
+      backgroundColor: colorScheme.primary.withValues(alpha: crucialOpacity),
       foregroundColor: colorScheme.onPrimary,
       hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,
