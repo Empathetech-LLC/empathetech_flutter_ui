@@ -32,12 +32,6 @@ class EzDesignSettings extends StatefulWidget {
   /// BYO trailing spacer, leading is a custom [EzDivider]
   final List<Widget>? themedSettingsPrepend;
 
-  /// Optional callback for button opacity changes
-  final void Function(double opacity)? onButtonOpacityChanged;
-
-  /// Optional callback for button outline opacity changes
-  final void Function(double opacity)? onButtonOutlineOpacityChanged;
-
   /// Whether to include the background image setting
   /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
   final bool includeBackgroundImage;
@@ -82,8 +76,6 @@ class EzDesignSettings extends StatefulWidget {
     this.includeScroll = true,
     this.globalSettingsPostpend,
     this.themedSettingsPrepend,
-    this.onButtonOpacityChanged,
-    this.onButtonOutlineOpacityChanged,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
@@ -103,8 +95,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   // Gather the fixed theme data //
 
   final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
+
+  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
 
   late final EFUILang l10n = ezL10n(context);
   late final String darkString = l10n.gDark.toLowerCase();
@@ -113,18 +106,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   // Define the build data //
 
   final bool strictMobile = !kIsWeb && isMobile();
-
-  double animDuration = (EzConfig.get(animationDurationKey) as int).toDouble();
-  double iconSize = EzConfig.get(iconSizeKey);
-
-  late double buttonOpacity = isDarkTheme(context)
-      ? EzConfig.get(darkButtonOpacityKey)
-      : EzConfig.get(lightButtonOpacityKey);
-  late double outlineOpacity = isDarkTheme(context)
-      ? EzConfig.get(darkButtonOutlineOpacityKey)
-      : EzConfig.get(lightButtonOutlineOpacityKey);
-
   int redraw = 0;
+
+  double iconSize = EzConfig.get(iconSizeKey);
 
   // Define custom functions //
 
@@ -147,57 +131,18 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    final bool dark = isDarkTheme(context);
-
-    buttonOpacity = dark
-        ? EzConfig.get(darkButtonOpacityKey)
-        : EzConfig.get(lightButtonOpacityKey);
-    outlineOpacity = dark
-        ? EzConfig.get(darkButtonOutlineOpacityKey)
-        : EzConfig.get(lightButtonOutlineOpacityKey);
-
     drawState();
-    widget.onButtonOpacityChanged?.call(buttonOpacity);
-    widget.onButtonOutlineOpacityChanged?.call(outlineOpacity);
   }
 
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
 
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
     final bool isDark = isDarkTheme(context);
     final String themeProfile = isDark ? darkString : lightString;
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    final Color buttonSurface =
-        colorScheme.surface.withValues(alpha: buttonOpacity);
-    final Color buttonOutline =
-        colorScheme.primaryContainer.withValues(alpha: outlineOpacity);
-
-    final ButtonStyle iconStyle = IconButton.styleFrom(
-      backgroundColor: buttonSurface,
-      side: BorderSide(color: buttonOutline),
-    );
-    final ButtonStyle iconVariantStyle = IconButton.styleFrom(
-      backgroundColor: buttonSurface,
-      side: BorderSide(
-          color: colorScheme.outlineVariant.withValues(alpha: outlineOpacity)),
-    );
-
-    final Color switchSurface =
-        colorScheme.surface.withValues(alpha: max(crucialOT, buttonOpacity));
-    final WidgetStatePropertyAll<Color> switchOutline =
-        WidgetStatePropertyAll<Color>(buttonOutline);
-
-    final ButtonStyle ebStyle = ElevatedButton.styleFrom(
-      backgroundColor: buttonSurface,
-      shadowColor:
-          colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod),
-      side: BorderSide(color: buttonOutline),
-    );
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
     // Return the build //
 
@@ -209,38 +154,61 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ...widget.globalSettingsPrepend!,
 
         // Animation duration
-        if (widget.includeAnimation) ...<Widget>[
-          EzText(l10n.dsAnimDuration, style: textTheme.bodyLarge),
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-            child: SliderTheme(
-              data: SliderThemeData(
-                thumbShape: RoundSliderThumbShape(
-                  enabledThumbRadius: iconSize / 2,
-                  disabledThumbRadius: iconSize / 2,
-                ),
-              ),
-              child: Slider(
-                value: animDuration,
-                min: minAnimationDuration.toDouble(),
-                max: maxAnimationDuration.toDouble(),
-                divisions: 20,
-                label: animDuration.toStringAsFixed(0),
-                onChanged: (double value) =>
-                    setState(() => animDuration = value),
-                onChangeEnd: (double value) =>
-                    EzConfig.setInt(animationDurationKey, value.toInt()),
-              ),
+        if (widget.includeAnimation)
+          EzElevatedIconButton(
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              useSafeArea: true,
+              isScrollControlled: true,
+              constraints: const BoxConstraints(minWidth: double.infinity),
+              builder: (_) {
+                double animDuration =
+                    (EzConfig.get(animationDurationKey) as int).toDouble();
+
+                return StatefulBuilder(
+                  builder: (_, StateSetter modalState) => EzScrollView(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ezSpacer,
+                      ConstrainedBox(
+                        constraints:
+                            BoxConstraints(maxWidth: ScreenSize.small.size),
+                        child: Slider(
+                          value: animDuration,
+                          min: minAnimationDuration.toDouble(),
+                          max: maxAnimationDuration.toDouble(),
+                          divisions: 20,
+                          label: animDuration.toStringAsFixed(0),
+                          onChanged: (double value) =>
+                              modalState(() => animDuration = value),
+                          onChangeEnd: (double value) => EzConfig.setInt(
+                              animationDurationKey, value.toInt()),
+                        ),
+                      ),
+                      EzSpacer(space: spacing * 1.5),
+                    ],
+                  ),
+                );
+              },
             ),
+            label: l10n.dsAnimDuration,
+            icon: Icon(PlatformIcons(context).time),
+            style: ElevatedButton.styleFrom(iconSize: iconSize),
           ),
-        ],
 
         // Icon size
         if (widget.includeIconSize) ...<Widget>[
           ezSpacer,
           Tooltip(
             message: l10n.gCenterReset,
-            child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
+            child: GestureDetector(
+              onLongPress: () async {
+                iconSize = defaultIconSize;
+                await EzConfig.setDouble(iconSizeKey, defaultIconSize);
+                drawState();
+              },
+              child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
+            ),
           ),
           EzTextBackground(
             Row(
@@ -258,7 +226,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(PlatformIcons(context).remove),
                         iconSize: iconSize,
-                        style: iconStyle,
                       )
                     : EzIconButton(
                         enabled: false,
@@ -268,7 +235,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           color: colorScheme.outline,
                         ),
                         iconSize: iconSize,
-                        style: iconVariantStyle,
                       ),
                 ezRowMargin,
 
@@ -299,7 +265,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(PlatformIcons(context).add),
                         iconSize: iconSize,
-                        style: iconStyle,
                       )
                     : EzIconButton(
                         enabled: false,
@@ -309,7 +274,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           color: colorScheme.outline,
                         ),
                         iconSize: iconSize,
-                        style: iconVariantStyle,
                       ),
               ],
             ),
@@ -324,9 +288,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             key: ValueKey<String>('scroll_$redraw'),
             valueKey: hideScrollKey,
             scale: iconSize / defaultIconSize,
-            activeTrackColor: switchSurface,
-            inactiveTrackColor: switchSurface,
-            trackOutlineColor: switchOutline,
             text: l10n.lsScroll,
           ),
         ],
@@ -348,78 +309,154 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ...widget.themedSettingsPrepend!,
 
         // Button opacity
-        Column(
-          children: <Widget>[
-            Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-              child: SliderTheme(
-                data: SliderThemeData(
-                  thumbShape: RoundSliderThumbShape(
-                    enabledThumbRadius: iconSize / 2,
-                    disabledThumbRadius: iconSize / 2,
-                  ),
-                ),
-                child: Slider(
-                  // Slider values
-                  value: buttonOpacity,
-                  min: minOpacity,
-                  max: maxOpacity,
-                  divisions: 20,
-                  label: buttonOpacity.toStringAsFixed(2),
+        EzElevatedIconButton(
+          onPressed: () => showModalBottomSheet(
+            context: context,
+            useSafeArea: true,
+            isScrollControlled: true,
+            constraints: const BoxConstraints(minWidth: double.infinity),
+            builder: (_) {
+              double buttonOpacity = isDarkTheme(context)
+                  ? EzConfig.get(darkButtonOpacityKey)
+                  : EzConfig.get(lightButtonOpacityKey);
+              double outlineOpacity = isDarkTheme(context)
+                  ? EzConfig.get(darkButtonOutlineOpacityKey)
+                  : EzConfig.get(lightButtonOutlineOpacityKey);
 
-                  // Slider functions
-                  onChanged: (double value) {
-                    setState(() => buttonOpacity = value);
-                    widget.onButtonOpacityChanged?.call(value);
-                  },
-                  onChangeEnd: (double value) async {
-                    await EzConfig.setDouble(
-                      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-                      value,
-                    );
-                  },
-                ),
-              ),
-            ),
-            ezSpacer,
+              bool dummyBool = true;
 
-            // Button outline
-            Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-              child: SliderTheme(
-                data: SliderThemeData(
-                  thumbShape: RoundSliderThumbShape(
-                    enabledThumbRadius: iconSize / 2,
-                    disabledThumbRadius: iconSize / 2,
-                  ),
-                ),
-                child: Slider(
-                  // Slider values
-                  value: outlineOpacity,
-                  min: minOpacity,
-                  max: maxOpacity,
-                  divisions: 20,
-                  label: outlineOpacity.toStringAsFixed(2),
+              return StatefulBuilder(
+                builder: (_, StateSetter modalState) {
+                  final Color buttonBackground =
+                      colorScheme.surface.withValues(alpha: buttonOpacity);
+                  final Color buttonShadow = colorScheme.shadow
+                      .withValues(alpha: buttonOpacity * shadowMod);
+                  final Color buttonOutline = colorScheme.primaryContainer
+                      .withValues(alpha: outlineOpacity);
 
-                  // Slider functions
-                  onChanged: (double value) {
-                    setState(() => outlineOpacity = value);
-                    widget.onButtonOutlineOpacityChanged?.call(value);
-                  },
-                  onChangeEnd: (double value) async {
-                    await EzConfig.setDouble(
-                      isDark
-                          ? darkButtonOutlineOpacityKey
-                          : lightButtonOutlineOpacityKey,
-                      value,
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
+                  final Color trackColor = colorScheme.surface
+                      .withValues(alpha: max(crucialOT, buttonOpacity));
+                  final WidgetStatePropertyAll<Color> trackOutline =
+                      WidgetStatePropertyAll<Color>(buttonOutline);
+
+                  return EzScrollView(
+                    children: <Widget>[
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        runAlignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: wrapPadding,
+                            child: EzElevatedButton(
+                              text: 'Preview', // TODO: l10n
+                              onPressed: doNothing,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: buttonBackground,
+                                shadowColor: buttonShadow,
+                                side: BorderSide(color: buttonOutline),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: wrapPadding,
+                            child: Transform.scale(
+                              scale: max(
+                                  1.0,
+                                  max(
+                                      iconSize /
+                                          EzConfig.getDefault(iconSizeKey),
+                                      EzConfig.get(paddingKey) /
+                                          EzConfig.getDefault(paddingKey))),
+                              child: Switch(
+                                value: dummyBool,
+                                onChanged: (bool v) =>
+                                    modalState(() => dummyBool = v),
+                                activeTrackColor: trackColor,
+                                inactiveTrackColor: trackColor,
+                                trackOutlineColor: trackOutline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      ezSpacer,
+
+                      Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
+                      ConstrainedBox(
+                        constraints:
+                            BoxConstraints(maxWidth: ScreenSize.small.size),
+                        child: SliderTheme(
+                          data: SliderThemeData(
+                            thumbShape: RoundSliderThumbShape(
+                              enabledThumbRadius: iconSize / 2,
+                              disabledThumbRadius: iconSize / 2,
+                            ),
+                          ),
+                          child: Slider(
+                            // Slider values
+                            value: buttonOpacity,
+                            min: minOpacity,
+                            max: maxOpacity,
+                            divisions: 20,
+                            label: buttonOpacity.toStringAsFixed(2),
+
+                            // Slider functions
+                            onChanged: (double value) =>
+                                modalState(() => buttonOpacity = value),
+                            onChangeEnd: (double value) => EzConfig.setDouble(
+                              isDark
+                                  ? darkButtonOpacityKey
+                                  : lightButtonOpacityKey,
+                              value,
+                            ),
+                          ),
+                        ),
+                      ),
+                      ezSpacer,
+
+                      // Button outline
+                      Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
+                      ConstrainedBox(
+                        constraints:
+                            BoxConstraints(maxWidth: ScreenSize.small.size),
+                        child: SliderTheme(
+                          data: SliderThemeData(
+                            thumbShape: RoundSliderThumbShape(
+                              enabledThumbRadius: iconSize / 2,
+                              disabledThumbRadius: iconSize / 2,
+                            ),
+                          ),
+                          child: Slider(
+                            // Slider values
+                            value: outlineOpacity,
+                            min: minOpacity,
+                            max: maxOpacity,
+                            divisions: 20,
+                            label: outlineOpacity.toStringAsFixed(2),
+
+                            // Slider functions
+                            onChanged: (double value) =>
+                                modalState(() => outlineOpacity = value),
+                            onChangeEnd: (double value) => EzConfig.setDouble(
+                              isDark
+                                  ? darkButtonOutlineOpacityKey
+                                  : lightButtonOutlineOpacityKey,
+                              value,
+                            ),
+                          ),
+                        ),
+                      ),
+                      EzSpacer(space: spacing * 1.5),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+          label: 'Button opacity', // TODO: l10n
+          icon: const Icon(Icons.opacity),
+          style: ElevatedButton.styleFrom(iconSize: iconSize),
         ),
 
         // Background image
@@ -432,10 +469,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             child: isDark
                 ? EzImageSetting(
                     key: UniqueKey(),
-                    style: ebStyle.copyWith(
-                      padding: WidgetStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.all(padding * 0.75)),
-                    ),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
                     label: l10n.dsBackgroundImg.replaceAll(' ', '\n'),
@@ -443,10 +476,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   )
                 : EzImageSetting(
                     key: UniqueKey(),
-                    style: ebStyle.copyWith(
-                      padding: WidgetStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.all(padding * 0.75)),
-                    ),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
                     label: l10n.dsBackgroundImg.replaceAll(' ', '\n'),
@@ -463,7 +492,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         widget.resetSpacer,
         EzResetButton(
           key: ValueKey<String>('reset_$redraw'),
-          style: ebStyle,
           dialogTitle: l10n.dsResetAll(themeProfile),
           onConfirm: () async {
             await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
@@ -477,9 +505,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               if (widget.darkThemeResetKeys != null) {
                 await EzConfig.removeKeys(widget.darkThemeResetKeys!);
               }
-
-              buttonOpacity = EzConfig.getDefault(darkButtonOpacityKey);
-              outlineOpacity = EzConfig.getDefault(darkButtonOutlineOpacityKey);
             } else {
               await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
               await EzConfig.remove(lightColorSchemeImageKey);
@@ -487,14 +512,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               if (widget.lightThemeResetKeys != null) {
                 await EzConfig.removeKeys(widget.lightThemeResetKeys!);
               }
-
-              buttonOpacity = EzConfig.getDefault(lightButtonOpacityKey);
-              outlineOpacity =
-                  EzConfig.getDefault(lightButtonOutlineOpacityKey);
             }
 
-            animDuration =
-                (EzConfig.getDefault(animationDurationKey) as int).toDouble();
             iconSize = defaultIconSize;
 
             drawState();
