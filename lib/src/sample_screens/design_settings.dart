@@ -170,6 +170,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       ezSpacer,
+                      Text('Milliseconds',
+                          style: textTheme
+                              .bodyLarge), // TODO: l10n... built in maybe?
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
