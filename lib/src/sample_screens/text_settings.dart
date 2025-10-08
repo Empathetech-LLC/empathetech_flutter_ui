@@ -533,14 +533,21 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         // Icon size
         Tooltip(
           message: l10n.gCenterReset,
-          child: EzTextBackground(
-            Text(
-              l10n.tsIconSize,
-              style: widget.labelProvider.value,
-              textAlign: TextAlign.center,
+          child: GestureDetector(
+            onLongPress: () async {
+              iconSize = defaultIconSize;
+              await EzConfig.setDouble(iconSizeKey, defaultIconSize);
+              setState(() {});
+            },
+            child: EzTextBackground(
+              Text(
+                l10n.tsIconSize,
+                style: widget.labelProvider.value,
+                textAlign: TextAlign.center,
+              ),
+              backgroundColor: backgroundColor,
+              margin: colMargin,
             ),
-            backgroundColor: backgroundColor,
-            margin: colMargin,
           ),
         ),
         EzTextBackground(
