@@ -166,23 +166,31 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     (EzConfig.get(animationDurationKey) as int).toDouble();
 
                 return StatefulBuilder(
-                  builder: (_, StateSetter modalState) => EzScrollView(
+                  builder: (_, StateSetter setModal) => EzScrollView(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       ezSpacer,
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
-                        child: Slider(
-                          value: animDuration,
-                          min: minAnimationDuration.toDouble(),
-                          max: maxAnimationDuration.toDouble(),
-                          divisions: 20,
-                          label: animDuration.toStringAsFixed(0),
-                          onChanged: (double value) =>
-                              modalState(() => animDuration = value),
-                          onChangeEnd: (double value) => EzConfig.setInt(
-                              animationDurationKey, value.toInt()),
+                        child: SliderTheme(
+                          data: SliderThemeData(
+                            thumbShape: RoundSliderThumbShape(
+                              enabledThumbRadius: iconSize / 2,
+                              disabledThumbRadius: iconSize / 2,
+                            ),
+                          ),
+                          child: Slider(
+                            value: animDuration,
+                            min: minAnimationDuration.toDouble(),
+                            max: maxAnimationDuration.toDouble(),
+                            divisions: 20,
+                            label: animDuration.toStringAsFixed(0),
+                            onChanged: (double value) =>
+                                setModal(() => animDuration = value),
+                            onChangeEnd: (double value) => EzConfig.setInt(
+                                animationDurationKey, value.toInt()),
+                          ),
                         ),
                       ),
                       EzSpacer(space: spacing * 1.5),
@@ -316,27 +324,29 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             isScrollControlled: true,
             constraints: const BoxConstraints(minWidth: double.infinity),
             builder: (_) {
-              double buttonOpacity = isDarkTheme(context)
-                  ? EzConfig.get(darkButtonOpacityKey)
-                  : EzConfig.get(lightButtonOpacityKey);
-              double outlineOpacity = isDarkTheme(context)
-                  ? EzConfig.get(darkButtonOutlineOpacityKey)
-                  : EzConfig.get(lightButtonOutlineOpacityKey);
+              final String buttonOpacityKey =
+                  isDark ? darkButtonOpacityKey : lightButtonOpacityKey;
+              final String buttonOutlineOpacityKey = isDark
+                  ? darkButtonOutlineOpacityKey
+                  : lightButtonOutlineOpacityKey;
+
+              double buttonOpacity = EzConfig.get(buttonOpacityKey);
+              double outlineOpacity = EzConfig.get(buttonOutlineOpacityKey);
 
               bool dummyBool = true;
 
               return StatefulBuilder(
-                builder: (_, StateSetter modalState) {
-                  final Color buttonBackground =
+                builder: (_, StateSetter setModal) {
+                  Color buttonBackground =
                       colorScheme.surface.withValues(alpha: buttonOpacity);
-                  final Color buttonShadow = colorScheme.shadow
+                  Color buttonShadow = colorScheme.shadow
                       .withValues(alpha: buttonOpacity * shadowMod);
-                  final Color buttonOutline = colorScheme.primaryContainer
+                  Color buttonOutline = colorScheme.primaryContainer
                       .withValues(alpha: outlineOpacity);
 
-                  final Color trackColor = colorScheme.surface
+                  Color trackColor = colorScheme.surface
                       .withValues(alpha: max(crucialOT, buttonOpacity));
-                  final WidgetStatePropertyAll<Color> trackOutline =
+                  WidgetStatePropertyAll<Color> trackOutline =
                       WidgetStatePropertyAll<Color>(buttonOutline);
 
                   return EzScrollView(
@@ -371,7 +381,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                               child: Switch(
                                 value: dummyBool,
                                 onChanged: (bool v) =>
-                                    modalState(() => dummyBool = v),
+                                    setModal(() => dummyBool = v),
                                 activeTrackColor: trackColor,
                                 inactiveTrackColor: trackColor,
                                 trackOutlineColor: trackOutline,
@@ -403,7 +413,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                             // Slider functions
                             onChanged: (double value) =>
-                                modalState(() => buttonOpacity = value),
+                                setModal(() => buttonOpacity = value),
                             onChangeEnd: (double value) => EzConfig.setDouble(
                               isDark
                                   ? darkButtonOpacityKey
@@ -437,7 +447,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                             // Slider functions
                             onChanged: (double value) =>
-                                modalState(() => outlineOpacity = value),
+                                setModal(() => outlineOpacity = value),
                             onChangeEnd: (double value) => EzConfig.setDouble(
                               isDark
                                   ? darkButtonOutlineOpacityKey
@@ -446,6 +456,36 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             ),
                           ),
                         ),
+                      ),
+                      ezSpacer,
+
+                      // Reset button
+                      EzElevatedIconButton(
+                        onPressed: () async {
+                          await EzConfig.remove(buttonOpacityKey);
+                          await EzConfig.remove(buttonOutlineOpacityKey);
+
+                          setModal(() {
+                            buttonOpacity =
+                                EzConfig.getDefault(buttonOpacityKey);
+                            outlineOpacity =
+                                EzConfig.getDefault(buttonOutlineOpacityKey);
+
+                            buttonBackground = colorScheme.surface
+                                .withValues(alpha: buttonOpacity);
+                            buttonShadow = colorScheme.shadow
+                                .withValues(alpha: buttonOpacity * shadowMod);
+                            buttonOutline = colorScheme.primaryContainer
+                                .withValues(alpha: outlineOpacity);
+
+                            trackColor = colorScheme.surface.withValues(
+                                alpha: max(crucialOT, buttonOpacity));
+                            trackOutline =
+                                WidgetStatePropertyAll<Color>(buttonOutline);
+                          });
+                        },
+                        icon: EzIcon(PlatformIcons(context).refresh),
+                        label: l10n.gReset,
                       ),
                       EzSpacer(space: spacing * 1.5),
                     ],
