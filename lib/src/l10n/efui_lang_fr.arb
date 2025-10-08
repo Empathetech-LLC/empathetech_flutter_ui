@@ -163,7 +163,7 @@
 
   "dsPageTitle": "Paramètres de conception",
 
-  "dsAnimDuration": "Durée de l'animation (ms)",
+  "dsAnimDuration": "Durée de l'animation",
 
   "dsButtonBackground": "Opacité de l'arrière-plan du bouton",
   "dsButtonOutline": "Opacité du contour du bouton",

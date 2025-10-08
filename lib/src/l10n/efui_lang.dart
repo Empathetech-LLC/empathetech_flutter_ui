@@ -816,7 +816,7 @@ abstract class EFUILang {
   /// No description provided for @dsAnimDuration.
   ///
   /// In en, this message translates to:
-  /// **'Animation duration (ms)'**
+  /// **'Animation duration'**
   String get dsAnimDuration;
 
   /// No description provided for @dsButtonBackground.

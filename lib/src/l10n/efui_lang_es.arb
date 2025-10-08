@@ -163,7 +163,7 @@
 
   "dsPageTitle": "Configuración de diseño",
 
-  "dsAnimDuration": "Duración de la animación (ms)",
+  "dsAnimDuration": "Duración de la animación",
 
   "dsButtonBackground": "Opacidad del fondo del botón",
   "dsButtonOutline": "Opacidad del contorno del botón",

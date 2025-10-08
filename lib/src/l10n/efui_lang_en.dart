@@ -392,7 +392,7 @@ class EFUILangEn extends EFUILang {
   String get dsPageTitle => 'Design settings';
 
   @override
-  String get dsAnimDuration => 'Animation duration (ms)';
+  String get dsAnimDuration => 'Animation duration';
 
   @override
   String get dsButtonBackground => 'Button background opacity';
@@ -999,7 +999,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPageTitle => 'Design settings';
 
   @override
-  String get dsAnimDuration => 'Animation duration (ms)';
+  String get dsAnimDuration => 'Animation duration';
 
   @override
   String get dsButtonBackground => 'Button background opacity';

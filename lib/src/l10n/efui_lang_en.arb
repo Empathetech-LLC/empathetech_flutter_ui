@@ -163,7 +163,7 @@
 
   "dsPageTitle": "Design settings",
 
-  "dsAnimDuration": "Animation duration (ms)",
+  "dsAnimDuration": "Animation duration",
 
   "dsButtonBackground": "Button background opacity",
   "dsButtonOutline": "Button outline opacity",
