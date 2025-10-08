@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [10.2.0] - 2025-10-XX
+### Added
+
+
 ## [10.1.0] - 2025-09-26
 ### Added
 - Supplemental onHover passthrough for EzLink
