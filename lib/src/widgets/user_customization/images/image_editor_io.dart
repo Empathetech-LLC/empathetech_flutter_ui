@@ -58,7 +58,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
   final double spacing = EzConfig.get(spacingKey);
   final double iconSize = EzConfig.get(iconSizeKey);
 
-  final Duration rotateDuration = ezAnimDuration(half: true);
+  final Duration rotateDuration = ezAnimDuration(mod: 0.5);
 
   late final EFUILang l10n = ezL10n(context);
 
