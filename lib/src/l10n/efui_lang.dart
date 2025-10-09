@@ -819,17 +819,35 @@ abstract class EFUILang {
   /// **'Animation duration'**
   String get dsAnimDuration;
 
-  /// No description provided for @dsButtonBackground.
+  /// No description provided for @dsMilliseconds.
   ///
   /// In en, this message translates to:
-  /// **'Button background opacity'**
-  String get dsButtonBackground;
+  /// **'Milliseconds'**
+  String get dsMilliseconds;
 
-  /// No description provided for @dsButtonOutline.
+  /// No description provided for @dsPreview.
   ///
   /// In en, this message translates to:
-  /// **'Button outline opacity'**
-  String get dsButtonOutline;
+  /// **'Preview'**
+  String get dsPreview;
+
+  /// No description provided for @dsButtonOpacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Button opacity'**
+  String get dsButtonOpacity;
+
+  /// No description provided for @dsBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Background opacity'**
+  String get dsBackground;
+
+  /// No description provided for @dsOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline opacity'**
+  String get dsOutline;
 
   /// No description provided for @dsBackgroundImg.
   ///

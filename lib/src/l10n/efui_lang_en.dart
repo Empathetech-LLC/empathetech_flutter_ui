@@ -395,10 +395,19 @@ class EFUILangEn extends EFUILang {
   String get dsAnimDuration => 'Animation duration';
 
   @override
-  String get dsButtonBackground => 'Button background opacity';
+  String get dsMilliseconds => 'Milliseconds';
 
   @override
-  String get dsButtonOutline => 'Button outline opacity';
+  String get dsPreview => 'Preview';
+
+  @override
+  String get dsButtonOpacity => 'Button opacity';
+
+  @override
+  String get dsBackground => 'Background opacity';
+
+  @override
+  String get dsOutline => 'Outline opacity';
 
   @override
   String get dsBackgroundImg => 'Background image';
@@ -1002,10 +1011,19 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsAnimDuration => 'Animation duration';
 
   @override
-  String get dsButtonBackground => 'Button background opacity';
+  String get dsMilliseconds => 'Milliseconds';
 
   @override
-  String get dsButtonOutline => 'Button outline opacity';
+  String get dsPreview => 'Preview';
+
+  @override
+  String get dsButtonOpacity => 'Button opacity';
+
+  @override
+  String get dsBackground => 'Background opacity';
+
+  @override
+  String get dsOutline => 'Outline opacity';
 
   @override
   String get dsBackgroundImg => 'Background image';
