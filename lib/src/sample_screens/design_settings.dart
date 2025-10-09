@@ -180,8 +180,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ezSpacer,
 
                       // Slider
-                      Text('Milliseconds',
-                          style: textTheme.bodyLarge), // TODO: l10n
+                      Text(l10n.dsMilliseconds, style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -385,7 +384,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           Padding(
                             padding: wrapPadding,
                             child: EzElevatedButton(
-                              text: 'Preview', // TODO: l10n
+                              text: l10n.dsPreview,
                               onPressed: doNothing,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: buttonBackground,
@@ -419,7 +418,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ezSpacer,
 
                       // Background slider
-                      Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
+                      Text(l10n.dsBackground, style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -453,7 +452,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ezSpacer,
 
                       // Outline slider
-                      Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
+                      Text(l10n.dsOutline, style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -521,7 +520,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               );
             },
           ),
-          label: 'Button opacity', // TODO: l10n
+          label: l10n.dsButtonOpacity,
           icon: const Icon(Icons.opacity),
           style: ElevatedButton.styleFrom(iconSize: iconSize),
         ),
