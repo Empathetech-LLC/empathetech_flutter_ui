@@ -169,10 +169,19 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   builder: (_, StateSetter setModal) => EzScrollView(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
+                      // Preview
+                      SizedBox(
+                        height: iconSize * 3,
+                        child: _AnimationPreview(
+                          duration: animDuration.toInt(),
+                          iconSize: iconSize,
+                        ),
+                      ),
                       ezSpacer,
+
+                      // Slider
                       Text('Milliseconds',
-                          style: textTheme
-                              .bodyLarge), // TODO: l10n... built in maybe?
+                          style: textTheme.bodyLarge), // TODO: l10n
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -195,6 +204,19 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                 animationDurationKey, value.toInt()),
                           ),
                         ),
+                      ),
+                      ezSpacer,
+
+                      // Reset button
+                      EzElevatedIconButton(
+                        onPressed: () async {
+                          await EzConfig.remove(animationDurationKey);
+                          setModal(() => animDuration =
+                              (EzConfig.getDefault(animationDurationKey) as int)
+                                  .toDouble());
+                        },
+                        icon: EzIcon(PlatformIcons(context).refresh),
+                        label: l10n.gReset,
                       ),
                       EzSpacer(space: spacing * 1.5),
                     ],
@@ -354,6 +376,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                   return EzScrollView(
                     children: <Widget>[
+                      // Preview
                       Wrap(
                         alignment: WrapAlignment.center,
                         runAlignment: WrapAlignment.center,
@@ -395,6 +418,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ),
                       ezSpacer,
 
+                      // Background slider
                       Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
@@ -428,7 +452,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ),
                       ezSpacer,
 
-                      // Button outline
+                      // Outline slider
                       Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
@@ -571,6 +595,96 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+}
+
+class _AnimationPreview extends StatefulWidget {
+  final int duration;
+  final double iconSize;
+
+  const _AnimationPreview({required this.duration, required this.iconSize});
+
+  @override
+  State<_AnimationPreview> createState() => _AnimationPreviewState();
+}
+
+class _AnimationPreviewState extends State<_AnimationPreview>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(milliseconds: widget.duration),
+      vsync: this,
+    );
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.linear),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant _AnimationPreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.duration != oldWidget.duration) {
+      _controller.duration = Duration(milliseconds: widget.duration);
+    }
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (_, BoxConstraints constraints) {
+        final double width = constraints.maxWidth;
+        final double direction =
+            Directionality.of(context) == TextDirection.ltr ? 1.0 : -1.0;
+
+        return AnimatedBuilder(
+          animation: _animation,
+          builder: (_, Widget? child) {
+            double xOffset;
+            final double value = _animation.value;
+            final double halfWidth = width / 2;
+
+            if (value < 0.5) {
+              // Center to edge
+              final double progress = value * 2;
+              xOffset = progress * halfWidth;
+            } else {
+              // Opposite edge to center
+              final double progress = (value - 0.5) * 2;
+              xOffset = -halfWidth + (progress * halfWidth);
+            }
+
+            return Transform.translate(
+              offset: Offset(xOffset * direction, 0),
+              child: child,
+            );
+          },
+          child: Center(
+            child: EzIconButton(
+              onPressed: () => _controller.isAnimating
+                  ? _controller.stop()
+                  : _controller.forward(from: 0.0),
+              icon: EzIcon(PlatformIcons(context).playArrow),
+              iconSize: widget.iconSize,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
     super.dispose();
   }
 }
