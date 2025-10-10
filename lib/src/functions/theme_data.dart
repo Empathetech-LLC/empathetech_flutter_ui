@@ -220,7 +220,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: spacing * 4,
+      space: spacing * 3,
     ),
 
     // Drawer
