@@ -230,7 +230,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Icon size
         if (widget.includeIconSize) ...<Widget>[
-          ezSpacer,
+          if (widget.includeAnimation) ezSpacer,
           Tooltip(
             message: l10n.gCenterReset,
             child: GestureDetector(
@@ -315,7 +315,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Scrollbar toggle
         if (widget.includeScroll) ...<Widget>[
-          ezSpacer,
+          if (widget.includeAnimation || widget.includeIconSize) ezSpacer,
           EzSwitchPair(
             key: ValueKey<String>('scroll_$redraw'),
             valueKey: hideScrollKey,
