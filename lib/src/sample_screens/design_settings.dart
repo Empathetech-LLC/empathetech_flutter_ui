@@ -328,14 +328,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ...widget.globalSettingsPostpend!,
 
         // Global/themed divider, w/ theme reminder
-        ezSeparator,
+        EzSpacer(space: spacing * 1.25),
         EzDivider(height: margin),
         EzText(
           l10n.gEditingTheme(themeProfile),
           style: textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
-        ezSeparator,
+        EzSpacer(space: spacing * 1.25),
 
         if (widget.themedSettingsPrepend != null)
           ...widget.themedSettingsPrepend!,
