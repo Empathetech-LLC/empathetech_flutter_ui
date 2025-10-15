@@ -42,7 +42,7 @@ class FailureHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const Spacer(),
+          ezSpacer,
 
           // Error message
           message != null

@@ -160,7 +160,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                 ),
                 text: l10n.gCurrently,
               ),
-              const EzSpacer(vertical: false),
+              ezRowSpacer,
               EzElevatedButton(
                 enabled: false,
                 style: ElevatedButton.styleFrom(
