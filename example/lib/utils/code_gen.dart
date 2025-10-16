@@ -1115,7 +1115,7 @@ class SettingsHomeScreen extends StatelessWidget {
             androidPackage: androidPackage,
           ),
           ezSpacer,
-          EzBackFAB(context, showHome: true),
+          const EzBackFAB(showHome: true),
         ],
       );
 }
@@ -1152,7 +1152,7 @@ class ColorSettingsScreen extends StatelessWidget {
             androidPackage: androidPackage,
           ),
           ezSpacer,
-          EzBackFAB(context),
+          const EzBackFAB(),
         ],
       );
 }
@@ -1188,7 +1188,7 @@ class DesignSettingsScreen extends StatelessWidget {
             androidPackage: androidPackage,
           ),
           ezSpacer,
-          EzBackFAB(context),
+          const EzBackFAB(),
         ],
       );
 }
@@ -1224,7 +1224,7 @@ class LayoutSettingsScreen extends StatelessWidget {
             androidPackage: androidPackage,
           ),
           ezSpacer,
-          EzBackFAB(context),
+          const EzBackFAB(),
         ],
       );
 }
@@ -1262,7 +1262,7 @@ class TextSettingsScreen extends StatelessWidget {
             androidPackage: androidPackage,
           ),
           ezSpacer,
-          EzBackFAB(context),
+          const EzBackFAB(),
         ],
       );
 }
