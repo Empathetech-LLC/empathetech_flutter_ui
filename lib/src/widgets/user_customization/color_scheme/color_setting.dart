@@ -254,7 +254,6 @@ class _ColorSettingState extends State<EzColorSetting> {
                 label: l10n.gReset,
               ),
             ],
-            needsClose: true,
           ),
         );
 
