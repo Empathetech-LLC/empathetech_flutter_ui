@@ -38,18 +38,20 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Gather the fixed theme data //
 
+  final double padding = EzConfig.get(paddingKey);
+  final double iconRadius = EzConfig.get(iconSizeKey) / 2;
+
+  late final EFUILang l10n = ezL10n(context);
+
+  // Define the build data //
+
   late final int? _prefsValue = EzConfig.get(widget.configKey);
 
   late Color currColor = (_prefsValue == null)
       ? getLiveColor(context, widget.configKey)
       : Color(_prefsValue);
 
-  final double padding = EzConfig.get(paddingKey);
-  final double iconRadius = EzConfig.get(iconSizeKey) / 2;
-
-  late final EFUILang l10n = ezL10n(context);
-
-  // Define button functions //
+  // Define custom functions //
 
   /// Opens an [ezColorPicker] for updating [currColor]
   /// Returns the [Color] of what was chosen (null otherwise)
@@ -217,49 +219,44 @@ class _ColorSettingState extends State<EzColorSetting> {
   }
 
   /// Opens an [EzAlertDialog] with the all optional actions
-  /// Remove from list, reset to default, and set to transparent
-  Future<dynamic> options(BuildContext context) {
-    if (widget.onRemove == null) {
-      return reset(context);
-    } else {
-      return showPlatformDialog(
+  /// Currently: remove from list and reset to default
+  Future<dynamic> options(BuildContext context) => (widget.onRemove == null)
+      ? reset(context)
+      : showPlatformDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
-            return EzAlertDialog(
-              title: Text(
-                l10n.gOptions,
-                textAlign: TextAlign.center,
+          builder: (BuildContext dialogContext) => EzAlertDialog(
+            title: Text(
+              l10n.gOptions,
+              textAlign: TextAlign.center,
+            ),
+            contents: <Widget>[
+              // Remove from list
+              EzElevatedIconButton(
+                onPressed: () {
+                  widget.onRemove!();
+                  Navigator.of(dialogContext).pop();
+                },
+                icon: EzIcon(PlatformIcons(context).delete),
+                label: l10n.gRemove,
               ),
-              contents: <Widget>[
-                // Remove from list
-                EzElevatedIconButton(
-                  onPressed: () {
-                    widget.onRemove!();
-                    Navigator.of(dialogContext).pop();
-                  },
-                  icon: EzIcon(PlatformIcons(context).delete),
-                  label: l10n.gRemove,
-                ),
-                ezSpacer,
+              ezSpacer,
 
-                // Reset to default
-                EzElevatedIconButton(
-                  onPressed: () async {
-                    final dynamic resetResponse = await reset(context);
+              // Reset to default
+              EzElevatedIconButton(
+                onPressed: () async {
+                  final dynamic resetResponse = await reset(context);
 
-                    if (dialogContext.mounted) {
-                      Navigator.of(dialogContext).pop(resetResponse);
-                    }
-                  },
-                  icon: EzIcon(PlatformIcons(context).refresh),
-                  label: l10n.gReset,
-                ),
-              ],
-              needsClose: true,
-            );
-          });
-    }
-  }
+                  if (dialogContext.mounted) {
+                    Navigator.of(dialogContext).pop(resetResponse);
+                  }
+                },
+                icon: EzIcon(PlatformIcons(context).refresh),
+                label: l10n.gReset,
+              ),
+            ],
+            needsClose: true,
+          ),
+        );
 
   // Return the build //
 
