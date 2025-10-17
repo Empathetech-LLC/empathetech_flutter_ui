@@ -97,13 +97,18 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Just open a color picker if the value is already what's recommended
       if (recommended == currColor.toARGB32()) return openColorPicker(context);
 
-      // Define action button parameters
-      final String denyMsg = l10n.csUseCustom;
-
       return showPlatformDialog(
         context: context,
         builder: (BuildContext dialogContext) {
           void onConfirm() async {
+            final dynamic chosen = await openColorPicker(context);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(chosen);
+            }
+          }
+
+          void onDeny() async {
             // Update the user's configKey
             currColor = Color(recommended);
             await EzConfig.setInt(widget.configKey, recommended);
@@ -115,22 +120,16 @@ class _ColorSettingState extends State<EzColorSetting> {
             }
           }
 
-          void onDeny() async {
-            final dynamic chosen = await openColorPicker(context);
-
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(chosen);
-            }
-          }
-
           late final List<Widget> materialActions;
           late final List<Widget> cupertinoActions;
 
           (materialActions, cupertinoActions) = ezActionPairs(
             context: context,
+            confirmMsg: l10n.csUseCustom,
             onConfirm: onConfirm,
             confirmIsDestructive: true,
-            denyMsg: denyMsg,
+            denyMsg: l10n.gYes,
+            denyIsDefault: true,
             onDeny: onDeny,
           );
 
