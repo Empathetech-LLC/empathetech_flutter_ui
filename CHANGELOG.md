@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Shared consts for default spacers (eSpacer, ezMargin, ezSeparator...)
   - ez[Start|Center|End]Line too
 - ezUpdater to code gen
+- ezModal
 
 ### Updated
 - Comment style (fewer '')
