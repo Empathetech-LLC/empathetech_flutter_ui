@@ -142,21 +142,3 @@ class EzAdaptiveWidget extends StatelessWidget {
     }
   }
 }
-
-dynamic ezAdaptiveValue<T>(
-  BuildContext context, {
-  required T small,
-  T? medium,
-  T? large,
-}) {
-  final int? order = EzScreenSize.of(context)?.screenSize.order;
-
-  switch (order) {
-    case 1:
-      return medium ?? small;
-    case 2:
-      return large ?? medium ?? small;
-    default:
-      return small;
-  }
-}
