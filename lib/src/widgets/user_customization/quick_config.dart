@@ -58,11 +58,8 @@ class EzQuickConfig extends StatelessWidget {
     final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
-      onPressed: () => showModalBottomSheet(
+      onPressed: () => ezModal(
         context: context,
-        useSafeArea: true,
-        isScrollControlled: true,
-        constraints: const BoxConstraints(minWidth: double.infinity),
         builder: (BuildContext modalContext) {
           void onComplete(String configName) {
             Navigator.pop(modalContext);

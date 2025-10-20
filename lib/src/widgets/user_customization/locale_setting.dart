@@ -129,11 +129,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       hint: l10n.ssLangHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
-          onPressed: () => showModalBottomSheet(
+          onPressed: () => ezModal(
             context: context,
-            useSafeArea: true,
-            isScrollControlled: true,
-            constraints: const BoxConstraints(minWidth: double.infinity),
             builder: (BuildContext modalContext) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[

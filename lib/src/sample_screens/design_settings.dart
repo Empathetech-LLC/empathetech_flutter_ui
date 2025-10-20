@@ -156,11 +156,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Animation duration
         if (widget.includeAnimation)
           EzElevatedIconButton(
-            onPressed: () => showModalBottomSheet(
+            onPressed: () => ezModal(
               context: context,
-              useSafeArea: true,
-              isScrollControlled: true,
-              constraints: const BoxConstraints(minWidth: double.infinity),
               builder: (_) {
                 double animDuration =
                     (EzConfig.get(animationDurationKey) as int).toDouble();
@@ -344,9 +341,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         EzElevatedIconButton(
           onPressed: () => showModalBottomSheet(
             context: context,
-            useSafeArea: true,
-            isScrollControlled: true,
-            constraints: const BoxConstraints(minWidth: double.infinity),
             builder: (_) {
               final String buttonOpacityKey =
                   isDark ? darkButtonOpacityKey : lightButtonOpacityKey;

@@ -140,11 +140,8 @@ class _ImageSettingState extends State<EzImageSetting> {
   /// First-layer [ElevatedButton.onPressed]
   /// Opens an options modal and updates the state accordingly
   Future<void> activateSetting(ThemeData theme) async {
-    String? newPath = await showModalBottomSheet<String?>(
+    String? newPath = await ezModal<String?>(
       context: context,
-      useSafeArea: true,
-      isScrollControlled: true,
-      constraints: const BoxConstraints(minWidth: double.infinity),
       builder: (BuildContext modalContext) => StatefulBuilder(
         builder: (_, StateSetter modalState) => EzScrollView(
           mainAxisSize: MainAxisSize.min,
@@ -496,11 +493,8 @@ class _ImageSettingState extends State<EzImageSetting> {
     final double width = widthOf(context) * 0.25;
     final double height = heightOf(context) * 0.25;
 
-    return showModalBottomSheet<bool?>(
+    return ezModal<bool?>(
       context: context,
-      useSafeArea: true,
-      isScrollControlled: true,
-      constraints: const BoxConstraints(minWidth: double.infinity),
       builder: (_) => StatefulBuilder(
         builder: (BuildContext fitContext, StateSetter fitState) {
           return EzScrollView(

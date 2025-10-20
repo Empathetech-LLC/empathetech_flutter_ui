@@ -210,11 +210,8 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     final ThemeData theme = Theme.of(context);
 
     return EzElevatedIconButton(
-      onPressed: () => showModalBottomSheet(
+      onPressed: () => ezModal(
         context: context,
-        useSafeArea: true,
-        isScrollControlled: true,
-        constraints: const BoxConstraints(minWidth: double.infinity),
         builder: (_) => StatefulBuilder(
           builder: (_, StateSetter setModal) {
             return EzScrollView(

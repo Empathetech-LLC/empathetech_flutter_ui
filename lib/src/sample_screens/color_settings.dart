@@ -458,11 +458,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
           onPressed: () async {
             // Show modal
             modalOpen = true;
-            await showModalBottomSheet(
+            await ezModal(
               context: context,
-              useSafeArea: true,
-              isScrollControlled: true,
-              constraints: const BoxConstraints(minWidth: double.infinity),
               builder: (_) => StatefulBuilder(
                 builder: (_, StateSetter setModalState) => EzScrollView(
                   mainAxisSize: MainAxisSize.min,
