@@ -9,8 +9,6 @@ All notable changes to this project will be documented in this file.
 - ezUpdater to code gen
 - ezModal
   - Custom defaults and auto-consumes ezAnimDuration
-- ezDrawer
-  - Ditto
 
 ### Updated
 - Comment style (fewer '')
