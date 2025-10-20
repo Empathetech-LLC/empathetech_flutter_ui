@@ -73,7 +73,7 @@ class OpenUIScaffold extends StatelessWidget {
     );
 
     const Widget updater = EzUpdaterFAB(
-      appVersion: '2.3.1',
+      appVersion: '2.3.2',
       versionSource:
           'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
       gPlay:
