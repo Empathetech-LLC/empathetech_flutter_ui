@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
   - ez[Start|Center|End]Line too
 - ezUpdater to code gen
 - ezModal
+  - Custom defaults and auto-consumes ezAnimDuration
+- ezDrawer
+  - Ditto
 
 ### Updated
 - Comment style (fewer '')
