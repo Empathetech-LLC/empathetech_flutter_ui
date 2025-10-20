@@ -44,8 +44,6 @@ class EzInlineLink extends WidgetSpan {
 
   /// [WidgetSpan] extension with an [EzLink] for a child
   /// The [EzLink] has zero padding and custom [Semantics] for [EzRichText]; [richLabel]
-  /// If the link [text] is too short, spacing will be off due to the min [MaterialTapTargetSize]
-  /// 6+ characters usually does the trick
   EzInlineLink(
     // EzLink
     this.text, {
