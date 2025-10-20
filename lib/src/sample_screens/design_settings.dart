@@ -339,7 +339,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Button opacity
         EzElevatedIconButton(
-          onPressed: () => showModalBottomSheet(
+          onPressed: () => ezModal(
             context: context,
             builder: (_) {
               final String buttonOpacityKey =

@@ -471,13 +471,12 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Opens [EzImageEditor] and overrides the image as necessary
   Future<String?> editImage(String path, ThemeData theme) async {
-    final String? editResult = await showModalBottomSheet<String?>(
+    final String? editResult = await ezModal<String?>(
       context: context,
       enableDrag: false,
       useSafeArea: false,
       isDismissible: false,
       showDragHandle: false,
-      isScrollControlled: true,
       builder: (_) => EzImageEditor(path),
       constraints: const BoxConstraints(
         minWidth: double.infinity,
