@@ -188,31 +188,49 @@ class EzUpdaterFAB extends StatefulWidget {
   /// Remote app version (truth)
   final String versionSource;
 
+  /// Whether this is a web app
+  /// If true, [gPlay], [appStore], and [github] are ignored
+  /// An [EzAlertDialog] will appear telling the user to hard refresh
+  final bool isWeb;
+
   /// Google Play Store URL
-  final String gPlay;
+  /// Fallback to GitHub if null
+  final String? gPlay;
 
   /// Apple App Store URL
-  final String appStore;
+  /// Fallback to GitHub if null
+  final String? appStore;
 
   /// GitHub Releases URL
-  final String github;
+  /// Cannot be null when [isWeb] is false
+  final String? github;
 
   /// [Visibility] wrapped [FloatingActionButton] that links to the latest version if/when there is a mismatch
   const EzUpdaterFAB({
     super.key,
     required this.appVersion,
     required this.versionSource,
-    required this.gPlay,
-    required this.appStore,
+    this.isWeb = false,
+    this.gPlay,
+    this.appStore,
     required this.github,
-  });
+  }) : assert(
+          isWeb || github != null,
+          'GitHub URL must be provided when isWeb is false',
+        );
 
   @override
   State<EzUpdaterFAB> createState() => _EzUpdaterState();
 }
 
 class _EzUpdaterState extends State<EzUpdaterFAB> {
+  // Gather that static theme data //
+
+  late final EFUILang l10n = ezL10n(context);
+
   // Define the build data //
+
+  late final TargetPlatform _platform = getBasePlatform();
 
   String? latestVersion;
   String? url;
@@ -251,6 +269,19 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
     }
   }
 
+  /// Platform aware instructions
+  String hardRefresh() {
+    switch (_platform) {
+      case TargetPlatform.android:
+      case TargetPlatform.iOS:
+        return 'Please refresh the page in your browser menu.\nIf this message persists, try clearing your browser cache.';
+      case TargetPlatform.macOS:
+        return 'Please hard refresh the page...\nCommand + Shift + R';
+      default:
+        return 'Please hard refresh the page...\nCtrl + Shift + R';
+    }
+  }
+
   // Init //
 
   @override
@@ -258,12 +289,11 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
     super.initState();
     checkVersion();
 
-    final TargetPlatform platform = getBasePlatform();
-    switch (platform) {
+    switch (_platform) {
       case TargetPlatform.android:
-        url = widget.gPlay;
+        url = widget.gPlay ?? widget.github;
       case TargetPlatform.iOS:
-        url = widget.appStore;
+        url = widget.appStore ?? widget.github;
       default:
         url = widget.github;
     }
@@ -277,14 +307,29 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 
     return Visibility(
       visible: !isLatest,
-      child: FloatingActionButton(
-        heroTag: 'updater_fab',
-        onPressed: () => launchUrl(Uri.parse(url ?? widget.github)),
-        tooltip: ezL10n(context).gUpdates,
-        backgroundColor: colorScheme.secondary,
-        foregroundColor: colorScheme.onSecondary,
-        child: EzIcon(Icons.update),
-      ),
+      child: widget.isWeb // Trinary here, if in onPressed iOS web breaks
+          ? FloatingActionButton(
+              heroTag: 'updater_fab',
+              onPressed: () => showPlatformDialog(
+                context: context,
+                builder: (_) => EzAlertDialog(
+                  title: Text(l10n.gUpdates, textAlign: TextAlign.center),
+                  content: Text(hardRefresh(), textAlign: TextAlign.center),
+                ),
+              ),
+              tooltip: ezL10n(context).gUpdates,
+              backgroundColor: colorScheme.secondary,
+              foregroundColor: colorScheme.onSecondary,
+              child: EzIcon(Icons.update),
+            )
+          : FloatingActionButton(
+              heroTag: 'updater_fab',
+              onPressed: () => launchUrl(Uri.parse(url ?? widget.github!)),
+              tooltip: l10n.gUpdates,
+              backgroundColor: colorScheme.secondary,
+              foregroundColor: colorScheme.onSecondary,
+              child: EzIcon(Icons.update),
+            ),
     );
   }
 }
