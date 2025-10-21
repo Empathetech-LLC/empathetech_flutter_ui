@@ -370,7 +370,7 @@ const Map<String, Type> allColorKeys = <String, Type>{
 
 //* Color settings' values *//
 
-/// 'On'
+/// On
 const String textColorPrefix = 'On';
 
 const String csPrimary = 'Primary';
@@ -495,28 +495,28 @@ const Map<String, Type> allDesignKeys = <String, Type>{
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';
 
-/// 'Fit'
+/// Fit
 const String boxFitSuffix = 'Fit';
 
-/// 'contain'
+/// contain
 const String contain = 'contain';
 
-/// 'cover'
+/// cover
 const String cover = 'cover';
 
-/// 'fill'
+/// fill
 const String fill = 'fill';
 
-/// 'fitWidth'
+/// fitWidth
 const String fitWidth = 'fitWidth';
 
-/// 'fitHeight'
+/// fitHeight
 const String fitHeight = 'fitHeight';
 
-/// 'none'
+/// none
 const String none = 'none';
 
-/// 'scaleDown'
+/// scaleDown
 const String scaleDown = 'scaleDown';
 
 //* Layout settings' keys *//
@@ -675,7 +675,7 @@ const String italic = 'italic';
 /// underlined
 const String underlined = 'underlined';
 
-/// '-55.55'
+/// -55.55
 const String sampleString = '55.55';
 
 //* Global trackers *//

@@ -3,13 +3,13 @@
  * See LICENSE for distribution and usage details.
  */
 
-import './models/export.dart';
 import './screens/export.dart';
 import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,7 +55,7 @@ class OpenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     // Prep the router //
 
-    final int animDuration = EzConfig.get(animationDurationKey);
+    final int animDuration = kIsWeb ? 0 : EzConfig.get(animationDurationKey);
     final TargetPlatform currPlatform = getBasePlatform();
 
     GoTransition.defaultCurve = Curves.easeInOut;

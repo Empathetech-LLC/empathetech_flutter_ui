@@ -4,7 +4,6 @@
  */
 
 import './export.dart';
-import '../models/export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
@@ -26,8 +25,9 @@ class OpenUIScaffold extends StatelessWidget {
   /// [Scaffold.body] passthrough
   final Widget body;
 
-  /// [FloatingActionButton]
-  final Widget? fab;
+  /// [FloatingActionButton]s to add on top of the [EzUpdaterFAB]
+  /// BYO spacing widgets
+  final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const OpenUIScaffold({
@@ -37,22 +37,23 @@ class OpenUIScaffold extends StatelessWidget {
     this.showSettings = true,
     this.onUpload,
     required this.body,
-    this.fab,
+    this.fabs,
   });
 
   @override
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final bool isLefty = EzConfig.get(isLeftyKey);
-    final EFUILang l10n = ezL10n(context);
-
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);
 
+    final bool isLefty = EzConfig.get(isLeftyKey);
+
+    final EFUILang l10n = ezL10n(context);
+
     // Define custom widgets //
 
-    final MenuAnchor options = MenuAnchor(
+    final Widget options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
@@ -72,7 +73,7 @@ class OpenUIScaffold extends StatelessWidget {
     );
 
     const Widget updater = EzUpdaterFAB(
-      appVersion: '2.3.1',
+      appVersion: '2.3.2',
       versionSource:
           'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
       gPlay:
@@ -84,7 +85,7 @@ class OpenUIScaffold extends StatelessWidget {
 
     // Return the build //
 
-    return EzAdaptiveScaffold(
+    return EzAdaptiveParent(
       small: SelectionArea(
         child: Scaffold(
           // AppBar
@@ -118,12 +119,10 @@ class OpenUIScaffold extends StatelessWidget {
           body: body,
 
           // FAB
-          floatingActionButton: fab == null
-              ? updater
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[updater, const EzSpacer(), fab!],
-                ),
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[updater, if (fabs != null) ...fabs!],
+          ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,

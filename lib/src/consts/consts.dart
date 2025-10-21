@@ -3,10 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
-/// '/'
+/// /
 const String homePath = '/';
 
-/// 'SUCCESS'
+/// SUCCESS
 const String success = 'SUCCESS';
 
 /// example.com/image.jpg

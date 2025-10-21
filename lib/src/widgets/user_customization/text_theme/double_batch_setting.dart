@@ -85,8 +85,6 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
 
-    final EzSpacer pMSpacer = EzMargin(vertical: false);
-
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // Return the build //
@@ -135,7 +133,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).remove),
                 ),
-          pMSpacer,
+          ezRowMargin,
 
           // Core
           GestureDetector(
@@ -153,7 +151,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
               color: colorScheme.onSurface,
             ),
           ),
-          pMSpacer,
+          ezRowMargin,
 
           // Plus icon
           atMax

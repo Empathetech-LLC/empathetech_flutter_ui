@@ -76,8 +76,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         : CountryFlag.fromCountryCode(
             lang.countryCode!,
             theme: ImageTheme(
-              shape: const Circle(),
+              height: iconSize + padding,
               width: iconSize + padding,
+              shape: const Circle(),
             ),
           );
 
@@ -128,51 +129,59 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       hint: l10n.ssLangHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
-          onPressed: () => showModalBottomSheet(
+          onPressed: () => ezModal(
             context: context,
             builder: (BuildContext modalContext) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
-              children: locales
-                  .map(
-                    (Locale locale) => Padding(
-                      padding: EzInsets.col(spacing),
-                      child: EzElevatedIconButton(
-                        onPressed: () async {
-                          // Gather data
-                          final List<String> localeData = <String>[
-                            locale.languageCode,
-                          ];
-                          if (locale.countryCode != null) {
-                            localeData.add(locale.countryCode!);
-                          }
+              children: <Widget>[
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: locales
+                      .map(
+                        (Locale locale) => Padding(
+                          padding: EzInsets.wrap(spacing),
+                          child: EzElevatedIconButton(
+                            onPressed: () async {
+                              // Gather data
+                              final List<String> localeData = <String>[
+                                locale.languageCode,
+                              ];
+                              if (locale.countryCode != null) {
+                                localeData.add(locale.countryCode!);
+                              }
 
-                          // Set data
-                          await EzConfig.setStringList(
-                            appLocaleKey,
-                            localeData,
-                          );
-                          currLocale = locale;
+                              // Set data
+                              await EzConfig.setStringList(
+                                appLocaleKey,
+                                localeData,
+                              );
+                              currLocale = locale;
 
-                          try {
-                            l10n = await EFUILang.delegate.load(locale);
-                          } catch (_) {
-                            l10n = EzConfig.l10nFallback;
-                          }
+                              try {
+                                l10n = await EFUILang.delegate.load(locale);
+                              } catch (_) {
+                                l10n = EzConfig.l10nFallback;
+                              }
 
-                          setState(() {});
+                              setState(() {});
 
-                          // Close modal
-                          if (modalContext.mounted) {
-                            Navigator.of(modalContext).pop(locale);
-                          }
-                        },
-                        icon: flag(locale),
-                        label: localeName(locale),
-                        labelPadding: false,
-                      ),
-                    ),
-                  )
-                  .toList(),
+                              // Close modal
+                              if (modalContext.mounted) {
+                                Navigator.of(modalContext).pop(locale);
+                              }
+                            },
+                            icon: flag(locale),
+                            label: localeName(locale),
+                            labelPadding: false,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+                ezSpacer,
+              ],
             ),
           ),
           icon: flag(currLocale),

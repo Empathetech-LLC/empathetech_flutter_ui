@@ -15,24 +15,57 @@ import 'package:file_picker/file_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzBackFAB extends FloatingActionButton {
+class EzBackFAB extends StatelessWidget {
+  final bool showHome;
+  final bool hold4Feedback;
+  final String? supportEmail;
+  final String? appName;
+
   /// [FloatingActionButton] that goes back; [Navigator.pop]
-  EzBackFAB(BuildContext context, {super.key, bool showHome = false})
-      : super(
+  const EzBackFAB({
+    super.key,
+    this.showHome = false,
+    this.hold4Feedback = false,
+    this.supportEmail,
+    this.appName,
+  }) : assert(
+          !hold4Feedback || (supportEmail != null && appName != null),
+          'supportEmail and appName must be provided when hold4Feedback is true',
+        );
+
+  @override
+  Widget build(BuildContext context) => hold4Feedback
+      ? GestureDetector(
+          onLongPress: () => ezFeedback(
+            parentContext: context,
+            l10n: ezL10n(context),
+            supportEmail: supportEmail ?? 'null',
+            appName: appName ?? 'null',
+          ),
+          child: FloatingActionButton(
+            heroTag: 'back_fab',
+            tooltip: null,
+            onPressed: () => Navigator.of(context).maybePop(),
+            child: EzIcon(showHome
+                ? PlatformIcons(context).home
+                : PlatformIcons(context).back),
+          ),
+        )
+      : FloatingActionButton(
           heroTag: 'back_fab',
+          tooltip: ezL10n(context).gBack,
+          onPressed: () => Navigator.of(context).maybePop(),
           child: EzIcon(showHome
               ? PlatformIcons(context).home
               : PlatformIcons(context).back),
-          onPressed: () => Navigator.of(context).maybePop(),
-          tooltip: ezL10n(context).gBack,
         );
 }
 
 class EzConfigFAB extends StatelessWidget {
-  /// 'App Name'
+  /// App Name
   final String appName;
 
-  /// 'com.example.app'
+  /// com.example.app
   final String? androidPackage;
 
   /// [allKeys] included by default

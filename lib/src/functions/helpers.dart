@@ -100,10 +100,9 @@ Duration ezReadingTime(String passage) {
 }
 
 /// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
-Duration ezAnimDuration({bool half = false}) {
-  final int duration = EzConfig.get(animationDurationKey);
-  return Duration(milliseconds: half ? (duration / 2).toInt() : duration);
-}
+/// Provide [mod] to adjust the duration, relative to the base value
+Duration ezAnimDuration({double mod = 1.0}) => Duration(
+    milliseconds: ((EzConfig.get(animationDurationKey) as int) * mod).toInt());
 
 /// A [GoTransition] based on the current platform and [EzConfig] setup
 Page<dynamic> ezGoTransition(

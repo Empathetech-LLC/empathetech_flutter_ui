@@ -148,8 +148,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   late final bool onMobile = isMobile();
 
-  final EzSpacer pmSpacer = EzMargin(vertical: false);
-
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -627,7 +625,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               ),
                             ),
                           ),
-                          EzMargin(),
+                          ezMargin,
 
                           // Buttons
                           NotificationListener<ScrollNotification>(
@@ -639,7 +637,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               scrollDirection: Axis.horizontal,
                               showScrollHint: true,
                               children: <Widget>[
-                                const EzSpacer(vertical: false),
+                                ezRowSpacer,
 
                                 // Play/pause
                                 Visibility(
@@ -757,7 +755,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                           icon: Icon(
                                               PlatformIcons(context).remove),
                                         ),
-                                        pmSpacer,
+                                        ezRowMargin,
                                         Tooltip(
                                           message: l10n.gPlaybackSpeed,
                                           child: Column(
@@ -780,7 +778,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             ],
                                           ),
                                         ),
-                                        pmSpacer,
+                                        ezRowMargin,
                                         EzIconButton(
                                           enabled: currSpeed < 2.0,
                                           onPressed: () async {

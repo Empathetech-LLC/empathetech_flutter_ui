@@ -54,11 +54,11 @@ class EzQuickConfig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsets modalPadding = EzInsets.col(EzConfig.get(spacingKey));
+    final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.get(spacingKey));
     final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
-      onPressed: () => showModalBottomSheet(
+      onPressed: () => ezModal(
         context: context,
         builder: (BuildContext modalContext) {
           void onComplete(String configName) {
@@ -74,45 +74,53 @@ class EzQuickConfig extends StatelessWidget {
           return EzScrollView(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              // Big buttons
-              if (bigButtons)
-                Padding(
-                  padding: modalPadding,
-                  child: EzBigButtonsConfig(
-                      onComplete: () => onComplete(l10n.ssBigButtons)),
-                ),
+              Wrap(
+                alignment: WrapAlignment.center,
+                runAlignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  // Big buttons
+                  if (bigButtons)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzBigButtonsConfig(
+                          onComplete: () => onComplete(l10n.ssBigButtons)),
+                    ),
 
-              // High visibility
-              if (highVisibility)
-                Padding(
-                  padding: modalPadding,
-                  child: EzHighVisibilityConfig(
-                      onComplete: () => onComplete(l10n.ssHighVisibility)),
-                ),
+                  // High visibility
+                  if (highVisibility)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzHighVisibilityConfig(
+                          onComplete: () => onComplete(l10n.ssHighVisibility)),
+                    ),
 
-              // Video game
-              if (videoGame)
-                Padding(
-                  padding: modalPadding,
-                  child: EzVideoGameConfig(
-                      onComplete: () => onComplete(l10n.ssVideoGame)),
-                ),
+                  // Video game
+                  if (videoGame)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzVideoGameConfig(
+                          onComplete: () => onComplete(l10n.ssVideoGame)),
+                    ),
 
-              // Chalkboard
-              if (chalkboard)
-                Padding(
-                  padding: modalPadding,
-                  child: EzChalkboardConfig(
-                      onComplete: () => onComplete(l10n.ssChalkboard)),
-                ),
+                  // Chalkboard
+                  if (chalkboard)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzChalkboardConfig(
+                          onComplete: () => onComplete(l10n.ssChalkboard)),
+                    ),
 
-              // Fancy pants
-              if (fancyPants)
-                Padding(
-                  padding: modalPadding,
-                  child: EzFancyPantsConfig(
-                      onComplete: () => onComplete(l10n.ssFancyPants)),
-                ),
+                  // Fancy pants
+                  if (fancyPants)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzFancyPantsConfig(
+                          onComplete: () => onComplete(l10n.ssFancyPants)),
+                    ),
+                ],
+              ),
+              ezSpacer,
             ],
           );
         },

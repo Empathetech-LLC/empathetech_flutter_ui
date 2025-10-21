@@ -56,10 +56,6 @@ class EzTutorial extends StatelessWidget {
 
     // Return the build //
 
-    final List<Widget> actions = <Widget>[
-      EzMaterialAction(text: acceptMessage, onPressed: onAccept)
-    ];
-
     return Positioned(
       top: top,
       bottom: bottom,
@@ -69,7 +65,10 @@ class EzTutorial extends StatelessWidget {
         child: AlertDialog(
           // Title
           title: Text(title, textAlign: TextAlign.center),
-          titlePadding: EdgeInsets.symmetric(vertical: spacing / 2),
+          titlePadding: EdgeInsets.symmetric(
+            horizontal: margin,
+            vertical: spacing / 2,
+          ),
 
           // Content
           content: Text(content, textAlign: TextAlign.center),
@@ -79,15 +78,17 @@ class EzTutorial extends StatelessWidget {
           ),
 
           // Actions
-          actions: actions,
+          actions: <Widget>[
+            EzMaterialAction(text: acceptMessage, onPressed: onAccept)
+          ],
           actionsAlignment:
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
           // General
-          actionsPadding: EzInsets.wrap(spacing),
-          buttonPadding: EdgeInsets.zero,
           iconPadding: EdgeInsets.zero,
+          buttonPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.all(margin),
+          actionsPadding: EzInsets.wrap(spacing),
         ),
       ),
     );

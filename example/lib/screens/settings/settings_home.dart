@@ -23,10 +23,13 @@ class SettingsHomeScreen extends StatelessWidget {
           layoutSettingsPath: layoutSettingsPath,
           textSettingsPath: textSettingsPath,
         )),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+        ],
       );
 }

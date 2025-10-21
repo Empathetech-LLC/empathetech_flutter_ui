@@ -19,10 +19,13 @@ class TextSettingsScreen extends StatelessWidget {
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzScreen(EzTextSettings(target: target)),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+        ],
       );
 }

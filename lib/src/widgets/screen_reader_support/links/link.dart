@@ -95,6 +95,9 @@ class _EzLinkState extends State<EzLink> {
 
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       padding: widget.padding,
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      visualDensity: VisualDensity.compact,
+      minimumSize: Size.zero,
       overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
       backgroundColor: widget.backgroundColor,
     );

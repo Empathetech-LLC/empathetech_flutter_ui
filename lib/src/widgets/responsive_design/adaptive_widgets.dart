@@ -7,6 +7,8 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+// Enum declaration //
+
 /// small: 700.0
 /// medium: 1000.0
 /// large: 1300.0
@@ -36,6 +38,8 @@ extension ScreenSizeConfig on ScreenSize {
   }
 }
 
+// BTS class //
+
 class EzScreenSize extends InheritedWidget {
   final ScreenSize screenSize;
 
@@ -55,7 +59,9 @@ class EzScreenSize extends InheritedWidget {
       screenSize != oldWidget.screenSize;
 }
 
-class EzAdaptiveScaffold extends StatelessWidget {
+// Parent Widget/Scaffold wrapper //
+
+class EzAdaptiveParent extends StatelessWidget {
   /// Think phone thoughts
   final Widget small;
 
@@ -69,8 +75,9 @@ class EzAdaptiveScaffold extends StatelessWidget {
   final double offset;
 
   /// Enables real-time responses to screen space changes
-  /// If a Widget is not provided, the next smaller size will be used
-  const EzAdaptiveScaffold({
+  /// Recommended to wrap around your [Scaffold]s
+  /// If a [Widget] is not provided, the next smaller size will be used
+  const EzAdaptiveParent({
     super.key,
     required this.small,
     this.medium,
@@ -97,5 +104,41 @@ class EzAdaptiveScaffold extends StatelessWidget {
     }
 
     return EzScreenSize(screenSize: size, child: child);
+  }
+}
+
+// Child Widgets && Values //
+
+class EzAdaptiveWidget extends StatelessWidget {
+  /// Displayed when the context's [ScreenSize] <= [ScreenSize.small]
+  final Widget small;
+
+  /// Displayed when the context's [ScreenSize] <= [ScreenSize.medium]
+  final Widget? medium;
+
+  /// Displayed when the context's [ScreenSize] > [ScreenSize.medium]
+  final Widget? large;
+
+  /// Display a different [Widget] for each [ScreenSize]
+  /// Always [small] if [EzScreenSize] is not in the Widget tree
+  const EzAdaptiveWidget({
+    super.key,
+    required this.small,
+    required this.medium,
+    required this.large,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final int? order = EzScreenSize.of(context)?.screenSize.order;
+
+    switch (order) {
+      case 1:
+        return medium ?? small;
+      case 2:
+        return large ?? medium ?? small;
+      default:
+        return small;
+    }
   }
 }

@@ -71,8 +71,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final double padding = EzConfig.get(paddingKey);
 
-  final EzSpacer pMSpacer = EzMargin(vertical: false);
-
   late final Size sizeLimit = ezTextSize(
     widget.sizingString,
     style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
@@ -142,7 +140,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           color: colorScheme.outline,
                         ),
                       ),
-                pMSpacer,
+                ezRowMargin,
               ],
 
               // Text field
@@ -200,7 +198,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               ),
 
               if (widget.plusMinus) ...<Widget>[
-                pMSpacer,
+                ezRowMargin,
 
                 // Plus icon
                 (currValue < widget.max)

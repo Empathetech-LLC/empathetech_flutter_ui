@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../models/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -24,9 +23,6 @@ class GenerateScreen extends StatefulWidget {
 
 class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-  static const Widget divider = EzDivider();
 
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
@@ -349,7 +345,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: (heightOf(context) / 3),
           width: double.infinity,
-          child: EmpathetechLoadingAnimation(semantics: el10n.gLoadingAnim),
+          child: EmpathyLoading(semantics: el10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return SizedBox(
@@ -364,7 +360,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   message:
                       '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
                 ),
-                const EzSeparator(),
+                ezSeparator,
                 RunOption(
                   projDir: projDir,
                   style: subTitle,
@@ -405,7 +401,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   richMessage: richFailureMessage,
                 ),
                 if (showDelete == true) ...<Widget>[
-                  spacer,
+                  ezSpacer,
                   DeleteOption(
                     appName: widget.config.appName,
                     platform: platform,
@@ -414,7 +410,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   ),
                 ],
                 if (showDelete == null) ...<Widget>[
-                  spacer,
+                  ezSpacer,
                   LinkOption(subTitle),
                 ],
               ],
@@ -444,7 +440,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       running: genState == GeneratorState.running,
       body: EzScreen(EzScrollView(children: <Widget>[
         header(textTheme, subTitle),
-        divider,
+        ezDivider,
 
         // Console output //
 
@@ -466,7 +462,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ],
         ),
-        EzMargin(),
+        ezMargin,
 
         // Readout
         Visibility(
@@ -495,7 +491,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ),
         ),
-        const EzSeparator(),
+        ezSeparator,
       ])),
     );
   }

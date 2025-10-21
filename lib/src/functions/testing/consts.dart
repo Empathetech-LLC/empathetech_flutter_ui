@@ -5,32 +5,32 @@
 
 import 'package:flutter/material.dart';
 
-/// 'ar'
+/// ar
 const Locale arabic = Locale('ar');
 
-/// 'ar_EG'
+/// ar_EG
 const Locale egyptianArabic = Locale('ar', 'EG');
 
-/// 'en'
+/// en
 const Locale english = Locale('en');
 
-/// 'en_US'
+/// en_US
 const Locale americanEnglish = Locale('en', 'US');
 
-/// 'es'
+/// es
 const Locale spanish = Locale('es');
 
-/// 'fil'
+/// fil
 const Locale filipino = Locale('fil');
 
-/// 'fr'
+/// fr
 const Locale french = Locale('fr');
 
-/// 'ht'
+/// ht
 const Locale creole = Locale('ht');
 
-/// 'zh'
+/// zh
 const Locale chinese = Locale('zh');
 
-/// 'zh_CN'
+/// zh_CN
 const Locale simplifiedChinese = Locale('zh', 'CN');

@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [10.2.0] - 2025-10-20
+### Added
+- Shared consts for default spacers (eSpacer, ezMargin, ezSeparator...)
+  - ez[Start|Center|End]Line too
+- ezUpdater to code gen
+- ezModal
+  - Custom defaults and auto-consumes ezAnimDuration
+
+### Updated
+- Comment style (fewer '')
+- ezAnimDuration half param to mod(ifier)
+- ezDivider default from 4x spacing to 3x
+- EzLink padding; no longer adheres to kMinInteractiveDimension
+- EzAdaptiveScaffold -> EzAdaptiveParent
+- Modal styling
+- Design settings
+  - Put all the previews inside a modal, similar to layout settings
+- More EzBackFAB options
+- Material alert dialog padding
+  - && EzTutorial to match
+
+### Fixed
+- i(Pad)OS share plus bug
+- Option order for "on" EzColorSetting Widgets
+
 ## [10.1.0] - 2025-09-26
 ### Added
 - Supplemental onHover passthrough for EzLink

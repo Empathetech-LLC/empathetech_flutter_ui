@@ -42,7 +42,7 @@ class FailureHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const Spacer(),
+          ezSpacer,
 
           // Error message
           message != null
@@ -84,8 +84,6 @@ class DeleteOption extends StatelessWidget {
     this.readout,
   });
 
-  static const EzSpacer spacer = EzSpacer();
-
   @override
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
@@ -96,7 +94,7 @@ class DeleteOption extends StatelessWidget {
             style: style,
             textAlign: TextAlign.center,
           ),
-          spacer,
+          ezSpacer,
           EzElevatedIconButton(
             onPressed: () => ezCmd(
               platform == TargetPlatform.windows
@@ -124,7 +122,7 @@ class DeleteOption extends StatelessWidget {
             icon: EzIcon(PlatformIcons(context).delete),
             label: Lang.of(context)!.rsWipe,
           ),
-          spacer,
+          ezSpacer,
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: EzIcon(PlatformIcons(context).back),
@@ -157,7 +155,7 @@ class LinkOption extends StatelessWidget {
           style: style,
           textAlign: TextAlign.center,
         ),
-        const EzSpacer(),
+        ezSpacer,
         EzElevatedIconLink(
           url: Uri.parse(installFlutter),
           tooltip: installFlutter,

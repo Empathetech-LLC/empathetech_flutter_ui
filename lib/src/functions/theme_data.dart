@@ -9,6 +9,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:feedback/feedback.dart';
 
+/// 0.667
+/// Shadow opacity should be "faster" than surface
+/// 1:1 looks... well, foggy
+const double shadowMod = 0.667;
+
+/// Crucial opacity threshold - some things are too important to be broken by user settings
+const double crucialOT = 0.25;
+
 /// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness) {
   //* Gather values from EzConfig *//
@@ -87,7 +95,7 @@ ThemeData ezThemeData(Brightness brightness) {
   final Color buttonShadow = calcButton
       ? clearButton
           ? Colors.transparent
-          : colorScheme.shadow.withValues(alpha: buttonOpacity)
+          : colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod)
       : colorScheme.shadow;
 
   final Color buttonContainer = calcOutline
@@ -109,7 +117,7 @@ ThemeData ezThemeData(Brightness brightness) {
   // Misc //
 
   final double crucialOpacity =
-      <double>[buttonOpacity, textOpacity, 0.50].reduce(max);
+      <double>[buttonOpacity, textOpacity, crucialOT].reduce(max);
 
   final bool calcCrucial = crucialOpacity < 1.0;
 
@@ -179,6 +187,9 @@ ThemeData ezThemeData(Brightness brightness) {
       color: calcCrucial
           ? colorScheme.surfaceDim.withValues(alpha: crucialOpacity)
           : colorScheme.surfaceDim,
+      shadowColor: calcCrucial
+          ? colorScheme.shadow.withValues(alpha: crucialOpacity * shadowMod)
+          : colorScheme.shadow,
       margin: EdgeInsets.zero,
     ),
 
@@ -209,7 +220,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: spacing * 4,
+      space: spacing * 3,
     ),
 
     // Drawer
@@ -258,7 +269,9 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: primaryButtonBackground,
+      backgroundColor: calcCrucial
+          ? colorScheme.primary.withValues(alpha: crucialOpacity)
+          : colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
       hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,

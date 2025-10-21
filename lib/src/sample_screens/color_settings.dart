@@ -45,7 +45,7 @@ class EzColorSettings extends StatefulWidget {
     // Shared
     super.key,
     this.target,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = ezSeparator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
 
@@ -79,13 +79,9 @@ class EzColorSettings extends StatefulWidget {
 }
 
 class _EzColorSettingsState extends State<EzColorSettings> {
-  // Gather the fixed theme data //
-
-  static const EzSeparator separator = EzSeparator();
+  // Define the build data //
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Define the build data //
 
   late EzCSType currentTab = widget.target ??
       (EzConfig.get(advancedColorsKey) == true
@@ -103,15 +99,11 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     ezWindowNamer(context, l10n.csPageTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
 
     final bool isDark = isDarkTheme(context);
-
-    // Return the build //
 
     final List<String> defaultList =
         isDark ? widget.darkStarterSet : widget.lightStarterSet;
@@ -121,6 +113,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     List<String> currList =
         EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
+    // Return the build //
+
     return EzScrollView(
       children: <Widget>[
         // Current theme reminder
@@ -129,7 +123,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           style: Theme.of(context).textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
-        EzMargin(),
+        ezMargin,
 
         // Mode switch
         SegmentedButton<EzCSType>(
@@ -159,7 +153,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             setState(() {});
           },
         ),
-        separator,
+        ezSeparator,
 
         // Core settings
         if (currentTab == EzCSType.quick)
@@ -203,7 +197,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   setState(() => currList = List<String>.from(defaultList));
                 },
               ),
-        separator,
+        ezSeparator,
       ],
     );
   }
@@ -225,16 +219,8 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-
-  // Define custom widgets  //
-
   late final String fromImageLabel = widget.l10n.csSchemeBase;
   late final String fromImageHint = widget.l10n.csFromImage;
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +241,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
           // MonoChrome
           const EzMonoChromeColorsSetting(),
-          spacer,
+          ezSpacer,
 
           // From image
           Semantics(
@@ -365,13 +351,13 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     final Set<String> currSet = currList.toSet();
     final List<String> fullList = isDark ? darkColorOrder : lightColorOrder;
 
-    final List<Widget> untrackedColors = fullList
+    return fullList
         .where((String element) => !currSet.contains(element))
         .map<Widget>((String configKey) {
       final Color liveColor = getLiveColor(context, configKey);
 
-      return Container(
-        padding: EzInsets.col(spacing),
+      return Padding(
+        padding: wrapPadding,
         child: EzElevatedIconButton(
           key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
@@ -410,20 +396,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         ),
       );
     }).toList();
-
-    untrackedColors.insert(
-      0,
-      EzLink(
-        l10n.gHowThisWorks,
-        style: Theme.of(context).textTheme.labelLarge!,
-        textAlign: TextAlign.center,
-        url: Uri.parse('https://m3.material.io/styles/color/roles'),
-        hint: l10n.gHowThisWorksHint,
-        tooltip: 'https://m3.material.io/styles/color/roles',
-      ),
-    );
-
-    return untrackedColors;
   }
 
   // Init //
@@ -479,36 +451,46 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
           ),
         ),
-        const EzSeparator(),
+        ezSeparator,
 
         // Add a color button
         EzTextIconButton(
           onPressed: () async {
+            // Show modal
             modalOpen = true;
-
-            // Show available color configKeys
-            await showModalBottomSheet(
+            await ezModal(
               context: context,
               builder: (_) => StatefulBuilder(
-                builder: (_, StateSetter setModalState) {
-                  return EzScrollView(
-                    scrollDirection: Axis.horizontal,
-                    startCentered: true,
-                    mainAxisSize: MainAxisSize.min,
-                    child: EzScrollView(
-                      mainAxisSize: MainAxisSize.min,
+                builder: (_, StateSetter setModalState) => EzScrollView(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    // Tutorial link
+                    EzLink(
+                      l10n.gHowThisWorks,
+                      style: Theme.of(context).textTheme.labelLarge!,
+                      textAlign: TextAlign.center,
+                      url: Uri.parse(
+                          'https://m3.material.io/styles/color/roles'),
+                      hint: l10n.gHowThisWorksHint,
+                      tooltip: 'https://m3.material.io/styles/color/roles',
+                    ),
+
+                    // Color options
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: getUntrackedColors(setModalState, isDark),
                     ),
-                  );
-                },
+                    ezSpacer,
+                  ],
+                ),
               ),
             );
             modalOpen = false;
 
-            // Save the user's changes
-            if (currList != defaultList) {
-              await EzConfig.setStringList(userColorsKey, currList);
-            }
+            // Save changes
+            await EzConfig.setStringList(userColorsKey, currList);
           },
           style: TextButton.styleFrom(padding: EzInsets.wrap(margin)),
           icon: EzIcon(PlatformIcons(context).addCircledOutline),

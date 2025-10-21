@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../models/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -74,7 +73,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EmpathetechLoadingAnimation(semantics: el10n.gLoadingAnim),
+          child: EmpathyLoading(semantics: el10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return Center(

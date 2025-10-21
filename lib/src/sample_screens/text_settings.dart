@@ -56,14 +56,14 @@ class EzTextSettings extends StatelessWidget {
     // Shared
     super.key,
     this.target,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = ezSeparator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
 
     // Quick
     this.showOnSurface = true,
     this.moreQuickHeaderSettings,
-    this.textBlockSpacer = const EzDivider(),
+    this.textBlockSpacer = ezDivider,
     this.showOpacity = true,
     this.moreQuickFooterSettings,
 
@@ -331,9 +331,6 @@ class _QuickTextSettings extends StatefulWidget {
 class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the fixed theme data //
 
-  static const EzSpacer spacer = EzSpacer();
-  final EzSpacer pMSpacer = EzMargin(vertical: false);
-
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
@@ -440,7 +437,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        spacer,
+        ezSpacer,
 
         // Headline preview
         EzTextBackground(
@@ -452,7 +449,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        spacer,
+        ezSpacer,
 
         // Title preview
         EzTextBackground(
@@ -464,7 +461,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        spacer,
+        ezSpacer,
 
         // Body preview
         EzTextBackground(
@@ -476,7 +473,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        spacer,
+        ezSpacer,
 
         // Label preview
         EzTextBackground(
@@ -530,20 +527,27 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   value.toStringAsFixed(2),
             ),
           ),
-          spacer,
+          ezSpacer,
         ],
 
         // Icon size
         Tooltip(
           message: l10n.gCenterReset,
-          child: EzTextBackground(
-            Text(
-              l10n.tsIconSize,
-              style: widget.labelProvider.value,
-              textAlign: TextAlign.center,
+          child: GestureDetector(
+            onLongPress: () async {
+              iconSize = defaultIconSize;
+              await EzConfig.setDouble(iconSizeKey, defaultIconSize);
+              setState(() {});
+            },
+            child: EzTextBackground(
+              Text(
+                l10n.tsIconSize,
+                style: widget.labelProvider.value,
+                textAlign: TextAlign.center,
+              ),
+              backgroundColor: backgroundColor,
+              margin: colMargin,
             ),
-            backgroundColor: backgroundColor,
-            margin: colMargin,
           ),
         ),
         EzTextBackground(
@@ -572,7 +576,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         color: colorScheme.outline,
                       ),
                     ),
-              pMSpacer,
+              ezRowMargin,
 
               // Preview
               GestureDetector(
@@ -587,7 +591,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   color: colorScheme.onSurface,
                 ),
               ),
-              pMSpacer,
+              ezRowMargin,
 
               // Plus
               (iconSize < maxIconSize)
@@ -658,7 +662,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             setState(() {});
           },
         ),
-        const EzSeparator(),
+        ezSeparator,
       ],
     );
   }
@@ -697,14 +701,7 @@ class _AdvancedTextSettings extends StatefulWidget {
 class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   // Gather the fixed theme data //
 
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
-  static const EzSwapSpacer swapSpacer =
-      EzSwapSpacer(breakpoint: ScreenSize.medium);
-  static const EzSeparator separator = EzSeparator();
-
   final double margin = EzConfig.get(marginKey);
-
   late final EdgeInsets colMargin = EzInsets.col(margin);
 
   late final EFUILang l10n = ezL10n(context);
@@ -1204,7 +1201,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        spacer,
+        ezSpacer,
 
         // Style selector
         EzScrollView(
@@ -1217,7 +1214,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               style: widget.labelProvider.value,
               textAlign: TextAlign.center,
             ),
-            EzMargin(),
+            ezMargin,
             EzDropdownMenu<EzTextSettingType>(
               widthEntries: styleChoices
                   .map(
@@ -1233,7 +1230,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
           ],
         ),
-        spacer,
+        ezSpacer,
 
         // Controls
         EzRowCol.sym(
@@ -1243,11 +1240,11 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           children: <Widget>[
             // Font family
             familyControllers[editing]!,
-            swapSpacer,
+            ezMedSwapSpacer,
 
             // Font size
             sizeControllers[editing]!,
-            swapSpacer,
+            ezMedSwapSpacer,
 
             // Font weight, style, and decoration
             EzScrollView(
@@ -1256,32 +1253,32 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 boldControllers[editing]!,
-                rowSpacer,
+                ezRowSpacer,
                 italicsControllers[editing]!,
-                rowSpacer,
+                ezRowSpacer,
                 underlineControllers[editing]!,
               ],
             ),
 
             // Letter, word, and line spacing
             if (widget.showSpacing) ...<Widget>[
-              swapSpacer,
+              ezMedSwapSpacer,
               EzScrollView(
                 scrollDirection: Axis.horizontal,
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   letterSpacingControllers[editing]!,
-                  rowSpacer,
+                  ezRowSpacer,
                   wordSpacingControllers[editing]!,
-                  rowSpacer,
+                  ezRowSpacer,
                   lineHeightControllers[editing]!,
                 ],
               ),
             ],
           ],
         ),
-        separator,
+        ezSeparator,
 
         // Display preview
         EzTextBackground(
@@ -1307,7 +1304,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        spacer,
+        ezSpacer,
 
         // Headline preview
         EzTextBackground(
@@ -1333,7 +1330,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        spacer,
+        ezSpacer,
 
         // Title preview
         EzTextBackground(
@@ -1357,7 +1354,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        spacer,
+        ezSpacer,
 
         // Body preview
         EzTextBackground(
@@ -1382,7 +1379,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        spacer,
+        ezSpacer,
 
         // Label preview
         EzTextBackground(
@@ -1443,7 +1440,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             setState(() {});
           },
         ),
-        separator,
+        ezSeparator,
       ],
     );
   }

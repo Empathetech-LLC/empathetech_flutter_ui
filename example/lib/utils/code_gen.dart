@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../models/export.dart';
+import '../utils/export.dart';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -53,7 +53,7 @@ String? l10nClassName(EAGConfig config) {
   return 'AppLocalizations';
 }
 
-/// '[l10nClassName].localizationsDelegates'
+/// [l10nClassName].localizationsDelegates
 String? l10nDelegates(EAGConfig config) {
   final String? name = l10nClassName(config);
   if (name == null) return null;
@@ -61,7 +61,7 @@ String? l10nDelegates(EAGConfig config) {
   return '$name.localizationsDelegates';
 }
 
-/// '\n...[l10nDelegates],\n'
+/// \n...[l10nDelegates],\n
 String l10nDelegateHandler(EAGConfig config) {
   final String? delegate = l10nDelegates(config);
 
@@ -491,6 +491,7 @@ import './utils/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 ${config.supportEmail != null ? "import 'package:feedback/feedback.dart';" : ''}
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -555,7 +556,7 @@ class $classCaseAppName extends StatelessWidget {
   Widget build(BuildContext context) {
     // Prep the router //
 
-    final int animDuration = EzConfig.get(animationDurationKey);
+    final int animDuration = kIsWeb ? 0 : EzConfig.get(animationDurationKey);
     final TargetPlatform currPlatform = getBasePlatform();
 
     GoTransition.defaultCurve = Curves.easeInOut;
@@ -830,8 +831,9 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   /// [Scaffold.body] passthrough
   final Widget body;
 
-  /// [FloatingActionButton]
-  final Widget? fab;
+  /// [FloatingActionButton]s to add on top of the [EzUpdaterFAB]
+  /// BYO spacing widgets
+  final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ${classCaseAppName}Scaffold({
@@ -839,7 +841,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     this.title = appName,
     this.showSettings = true,
     required this.body,
-    this.fab,
+    this.fabs,
   });
 
   @override
@@ -871,9 +873,20 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
       ],
     );
 
+    // TODO: Complete link placeholders (_PH)
+    const Widget updater = EzUpdaterFAB(
+      appVersion: '1.0.0', // TODO (recommended): include a check for this in your release scripts
+      versionSource:
+          'https://raw.githubusercontent.com/USER_PH/REPO_PH/refs/heads/main/APP_VERSION',
+      gPlay:
+          'https://play.google.com/store/apps/details?id=${config.domainName}.${config.appName}',
+      appStore: 'https://apps.apple.com/us/app/${config.appName.replaceAll('_', '-')}/APP_ID_PH',
+      github: 'https://github.com/USER_PH/REPO_PH/releases',
+    );
+
     // Return the build //
 
-    return EzAdaptiveScaffold(
+    return EzAdaptiveParent(
       small: SelectionArea(
         child: Scaffold(
           // AppBar
@@ -900,8 +913,11 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
           // Body
           body: body,
 
-          // FAB
-          floatingActionButton: fab,
+          // FABs
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[updater, if (fabs != null) ...fabs!],
+          ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
@@ -946,12 +962,6 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  // Gather the fixed theme data //
-
-  static const EzSeparator separator = EzSeparator();
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Set the page title //
 
   @override
@@ -960,13 +970,13 @@ class _ErrorScreenState extends State<ErrorScreen> {
     ezWindowNamer(context, '404 \${l10n.gError}');
   }
 
+  // Return the build //
+
+  late final EFUILang l10n = ezL10n(context);
+
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
-
     final TextTheme textTheme = Theme.of(context).textTheme;
-
-    // Return the build //
 
     return ${classCaseAppName}Scaffold(
       body: EzScreen(
@@ -979,19 +989,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
               Text(
                 l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
               Text(
                 l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-              separator,
+              ezSeparator,
             ],
           ),
         ),
@@ -1066,7 +1076,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      fab: CountFAB(() => setState(() => count += 1)),
+      fabs: <Widget>[ezSpacer, CountFAB(() => setState(() => count += 1))],
     );
   }
 }
@@ -1098,11 +1108,16 @@ class SettingsHomeScreen extends StatelessWidget {
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
         )),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          const EzBackFAB(showHome: true),
+        ],
       );
 }
 """);
@@ -1130,11 +1145,16 @@ class ColorSettingsScreen extends StatelessWidget {
         title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzScreen(EzColorSettings(target: target)),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          const EzBackFAB(),
+        ],
       );
 }
 """);
@@ -1161,11 +1181,16 @@ class DesignSettingsScreen extends StatelessWidget {
         title: ezL10n(context).dsPageTitle,
         showSettings: false,
         body: const EzScreen(EzDesignSettings()),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          const EzBackFAB(),
+        ],
       );
 }
 """);
@@ -1192,11 +1217,16 @@ class LayoutSettingsScreen extends StatelessWidget {
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzScreen(EzLayoutSettings()),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          const EzBackFAB(),
+        ],
       );
 }
 """);
@@ -1225,11 +1255,16 @@ class TextSettingsScreen extends StatelessWidget {
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzScreen(EzTextSettings(target: target)),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+          ezSpacer,
+          const EzBackFAB(),
+        ],
       );
 }
 """);
@@ -1252,19 +1287,19 @@ ${config.textSettings ? "export 'settings/text_settings.dart';" : ''}
 
 // Route names //
 
-/// 'settings-home'
+/// settings-home
 const String settingsHomePath = 'settings-home';
 
-${config.colorSettings ? """/// 'color-settings'
+${config.colorSettings ? """/// color-settings
 const String colorSettingsPath = 'color-settings';""" : ''}
 
-${config.designSettings ? """/// 'design-settings'
+${config.designSettings ? """/// design-settings
 const String designSettingsPath = 'design-settings';""" : ''}
 
-${config.layoutSettings ? """/// 'layout-settings'
+${config.layoutSettings ? """/// layout-settings
 const String layoutSettingsPath = 'layout-settings';""" : ''}
 
-${config.textSettings ? """/// 'text-settings'
+${config.textSettings ? """/// text-settings
 const String textSettingsPath = 'text-settings';""" : ''}
 """);
   } catch (e) {

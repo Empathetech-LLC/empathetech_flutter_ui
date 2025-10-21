@@ -394,13 +394,22 @@ class EFUILangFr extends EFUILang {
   String get dsPageTitle => 'Paramètres de conception';
 
   @override
-  String get dsAnimDuration => 'Durée de l\'animation (ms)';
+  String get dsAnimDuration => 'Durée de l\'animation';
 
   @override
-  String get dsButtonBackground => 'Opacité de l\'arrière-plan du bouton';
+  String get dsMilliseconds => 'Millisecondes';
 
   @override
-  String get dsButtonOutline => 'Opacité du contour du bouton';
+  String get dsPreview => 'Aperçu';
+
+  @override
+  String get dsButtonOpacity => 'Opacité du bouton';
+
+  @override
+  String get dsBackground => 'L\'arrière-plan du bouton';
+
+  @override
+  String get dsOutline => 'Contour du bouton';
 
   @override
   String get dsBackgroundImg => 'Arrière-plan de l\'image';

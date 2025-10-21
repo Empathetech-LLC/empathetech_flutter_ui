@@ -37,6 +37,8 @@ Future<void> ezFeedback({
     BetterFeedback.of(parentContext).show(
       (UserFeedback feedback) async {
         if (strictMobile) {
+          final RenderBox? box = parentContext.findRenderObject() as RenderBox?;
+
           await SharePlus.instance.share(ShareParams(
             text: feedback.text,
             files: <XFile>[
@@ -46,6 +48,7 @@ Future<void> ezFeedback({
                 mimeType: 'image/png',
               )
             ],
+            sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
           ));
         } else {
           await FileSaver.instance.saveFile(

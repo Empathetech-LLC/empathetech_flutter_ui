@@ -19,10 +19,13 @@ class ColorSettingsScreen extends StatelessWidget {
         title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzScreen(EzColorSettings(target: target)),
-        fab: EzConfigFAB(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-        ),
+        fabs: <Widget>[
+          ezSpacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+        ],
       );
 }

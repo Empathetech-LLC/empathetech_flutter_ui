@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../models/export.dart';
 import '../screens/export.dart';
 import '../utils/export.dart';
 import '../widgets/export.dart';
@@ -26,13 +25,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the fixed theme data //
-
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
-  static const Widget divider = EzDivider();
-
-  final EzMargin margin = EzMargin();
-  late final EzSpacer rowMargin = EzMargin(vertical: false);
 
   final bool isLefty = EzConfig.get(isLeftyKey);
 
@@ -280,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               hintText: l10n.csNamePreview,
             ),
-            spacer,
+            ezSpacer,
 
             // Publisher name
             _BasicField(
@@ -301,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               hintText: l10n.csPubPreview,
             ),
-            spacer,
+            ezSpacer,
 
             // Description
             _BasicField(
@@ -311,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   (value == null || value.isEmpty) ? el10n.gRequired : null,
               hintText: l10n.csDescPreview,
             ),
-            spacer,
+            ezSpacer,
 
             // Domain name
             Row(
@@ -363,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            spacer,
+            ezSpacer,
 
             // Support email
             _BasicField(
@@ -379,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               hintText: '${el10n.gOptional}@example.com',
             ),
-            separator,
+            ezSeparator,
 
             // Settings selection //
 
@@ -404,7 +396,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  margin,
+                  ezMargin,
                   EzCheckboxPair(
                     text: el10n.csPageTitle,
                     value: colorSettings,
@@ -413,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => colorSettings = value);
                     },
                   ),
-                  margin,
+                  ezMargin,
                   EzCheckboxPair(
                     text: el10n.dsPageTitle,
                     value: designSettings,
@@ -422,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => designSettings = value);
                     },
                   ),
-                  margin,
+                  ezMargin,
                   EzCheckboxPair(
                     text: el10n.lsPageTitle,
                     value: layoutSettings,
@@ -431,7 +423,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => layoutSettings = value);
                     },
                   ),
-                  margin,
+                  ezMargin,
                   EzCheckboxPair(
                     text: el10n.tsPageTitle,
                     value: textSettings,
@@ -443,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            divider,
+            ezDivider,
 
             // Default app config //
 
@@ -475,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: subTitle,
               textAlign: TextAlign.start,
             ),
-            divider,
+            ezDivider,
 
             // Flutter path picker
             Visibility(
@@ -524,7 +516,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : 'example_path/flutter/bin'),
                         ),
                       ),
-                      rowMargin,
+                      ezRowMargin,
 
                       // Browse
                       EzIconButton(
@@ -547,7 +539,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  spacer,
+                  ezSpacer,
 
                   EzScrollView(
                     mainAxisSize: MainAxisSize.min,
@@ -557,7 +549,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         l10n.csNotInstalled,
                         textAlign: TextAlign.start,
                       ),
-                      spacer,
+                      ezSpacer,
                       EzElevatedIconLink(
                         url: Uri.parse(installFlutter),
                         tooltip: installFlutter,
@@ -570,7 +562,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            if (isMac) divider,
+            if (isMac) ezDivider,
 
             // Advanced settings //
 
@@ -584,7 +576,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                rowMargin,
+                ezRowMargin,
                 Semantics(
                   hint: showAdvanced ? el10n.gClose : el10n.gOpen,
                   button: true,
@@ -611,7 +603,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  if (isDesktop) spacer,
+                  if (isDesktop) ezSpacer,
 
                   // Work path picker
                   Visibility(
@@ -650,7 +642,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 autovalidateMode: AutovalidateMode.onUnfocus,
                               ),
                             ),
-                            rowMargin,
+                            ezRowMargin,
 
                             // Browse
                             EzIconButton(
@@ -676,7 +668,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  spacer,
+                  ezSpacer,
 
                   // Copyright config
                   _AdvancedSettingsField(
@@ -690,7 +682,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRemove: () => setState(() => removeCopyright = true),
                     onRestore: () => setState(() => removeCopyright = false),
                   ),
-                  spacer,
+                  ezSpacer,
 
                   // LICENSE config
                   _LicensePicker(
@@ -701,7 +693,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (picked != null) setState(() => license = picked);
                     },
                   ),
-                  spacer,
+                  ezSpacer,
 
                   // l10n config
                   _AdvancedSettingsField(
@@ -714,7 +706,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRemove: () => setState(() => removeL10n = true),
                     onRestore: () => setState(() => removeL10n = false),
                   ),
-                  spacer,
+                  ezSpacer,
 
                   // Analysis options config
                   _AdvancedSettingsField(
@@ -727,7 +719,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRemove: () => setState(() => removeAnalysis = true),
                     onRestore: () => setState(() => removeAnalysis = false),
                   ),
-                  spacer,
+                  ezSpacer,
 
                   // VS Code launch config
                   _AdvancedSettingsField(
@@ -743,7 +735,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            showAdvanced ? divider : separator,
+            showAdvanced ? ezDivider : ezSeparator,
 
             // Make it so //
 
@@ -832,7 +824,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 // Generate app
                 if (isDesktop) ...<Widget>[
-                  spacer,
+                  ezSpacer,
                   EzElevatedIconButton(
                     enabled: canGen,
                     onPressed: () async {
@@ -913,58 +905,61 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ],
             ),
-            separator,
+            ezSeparator,
           ],
         ),
         alignment: Alignment.topLeft,
       ),
-      fab: ResetFAB(
-        clearForms: () => setState(() {
-          nameController.clear();
-          namePreview = l10n.csNamePreview;
-          validName = false;
+      fabs: <Widget>[
+        ezSpacer,
+        ResetFAB(
+          clearForms: () => setState(() {
+            nameController.clear();
+            namePreview = l10n.csNamePreview;
+            validName = false;
 
-          pubController.clear();
-          pubPreview = l10n.csPubPreview;
+            pubController.clear();
+            pubPreview = l10n.csPubPreview;
 
-          descriptionController.clear();
+            descriptionController.clear();
 
-          domainController.clear();
-          exampleDomain = false;
+            domainController.clear();
+            exampleDomain = false;
 
-          supportEmailController.clear();
+            supportEmailController.clear();
 
-          colorSettings = true;
-          designSettings = true;
-          layoutSettings = true;
-          textSettings = true;
+            colorSettings = true;
+            designSettings = true;
+            layoutSettings = true;
+            textSettings = true;
 
-          flutterPathControl.clear();
+            flutterPathControl.clear();
 
-          showAdvanced = false;
+            showAdvanced = false;
 
-          workPathControl.text = docsPath;
+            workPathControl.text = docsPath;
 
-          showCopyright = false;
-          removeCopyright = false;
-          copyrightController.text = copyrightDefault;
+            showCopyright = false;
+            removeCopyright = false;
+            copyrightController.text = copyrightDefault;
 
-          showLicense = false;
-          license = gnuKey;
+            showLicense = false;
+            license = gnuKey;
 
-          showL10n = false;
-          removeL10n = false;
-          l10nController.text = l10nDefault;
+            showL10n = false;
+            removeL10n = false;
+            l10nController.text = l10nDefault;
 
-          showAnalysis = false;
-          removeAnalysis = false;
-          analysisController.text = analysisDefault;
+            showAnalysis = false;
+            removeAnalysis = false;
+            analysisController.text = analysisDefault;
 
-          showVSC = false;
-          removeVSC = false;
-          vscController.text = vscDefault;
-        }),
-      ),
+            showVSC = false;
+            removeVSC = false;
+            vscController.text = vscDefault;
+          }),
+        ),
+      ],
     );
   }
 
@@ -1148,7 +1143,6 @@ class _AdvancedSettingsField extends StatelessWidget {
     late final EFUILang el10n = ezL10n(context);
     late final Lang l10n = Lang.of(context)!;
 
-    late final EzSpacer rowMargin = EzMargin(vertical: false);
     late final bool isLefty = EzConfig.get(isLeftyKey);
 
     late final Widget titleText = EzText(title, textAlign: TextAlign.start);
@@ -1200,27 +1194,27 @@ class _AdvancedSettingsField extends StatelessWidget {
                 children: isLefty
                     ? <Widget>[
                         hideButton,
-                        rowMargin,
+                        ezRowMargin,
                         titleText,
                         if (onRemove != null) ...<Widget>[
-                          rowMargin,
+                          ezRowMargin,
                           removeButton,
                         ],
                         if (tip != null) ...<Widget>[
-                          rowMargin,
+                          ezRowMargin,
                           tooltip,
                         ],
                       ]
                     : <Widget>[
                         titleText,
-                        rowMargin,
+                        ezRowMargin,
                         hideButton,
                         if (onRemove != null) ...<Widget>[
-                          rowMargin,
+                          ezRowMargin,
                           removeButton,
                         ],
                         if (tip != null) ...<Widget>[
-                          rowMargin,
+                          ezRowMargin,
                           tooltip,
                         ],
                       ],
@@ -1233,7 +1227,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    EzMargin(),
+                    ezMargin,
                     ConstrainedBox(
                       constraints: ezTextFieldConstraints(context),
                       child: TextFormField(
@@ -1264,15 +1258,10 @@ class _LicensePicker extends StatelessWidget {
     required this.onChanged,
   });
 
-  static const EzSpacer spacer = EzSpacer(vertical: false);
-
   @override
   Widget build(BuildContext context) {
     final EFUILang el10n = ezL10n(context);
     final Lang l10n = Lang.of(context)!;
-
-    final EzMargin margin = EzMargin();
-    final EzMargin rowMargin = EzMargin(vertical: false);
 
     final bool isLefty = EzConfig.get(isLeftyKey);
 
@@ -1330,15 +1319,15 @@ class _LicensePicker extends StatelessWidget {
           children: isLefty
               ? <Widget>[
                   hideButton,
-                  rowMargin,
+                  ezRowMargin,
                   title,
                   tip,
                 ]
               : <Widget>[
                   title,
-                  rowMargin,
+                  ezRowMargin,
                   hideButton,
-                  rowMargin,
+                  ezRowMargin,
                   tip,
                 ],
         ),
@@ -1355,42 +1344,42 @@ class _LicensePicker extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 thumbVisibility: false,
                 children: <Widget>[
-                  margin,
+                  ezRowMargin,
                   radio(
                     title: 'GNU GPLv3',
                     value: gnuKey,
                   ),
-                  spacer,
+                  ezRowSpacer,
                   radio(
                     title: 'MIT',
                     value: mitKey,
                   ),
-                  spacer,
+                  ezRowSpacer,
                   radio(
                     title: 'ISC',
                     value: iscKey,
                   ),
-                  spacer,
+                  ezRowSpacer,
                   radio(
                     title: 'Apache 2.0',
                     value: apacheKey,
                   ),
-                  spacer,
+                  ezRowSpacer,
                   radio(
                     title: 'Mozilla 2.0',
                     value: mozillaKey,
                   ),
-                  spacer,
+                  ezRowSpacer,
                   radio(
                     title: 'Unlicense',
                     value: unlicenseKey,
                   ),
-                  spacer,
+                  ezRowSpacer,
                   radio(
                     title: 'DWTFYW',
                     value: dwtfywKey,
                   ),
-                  margin,
+                  ezRowMargin,
                 ],
               ),
             ),

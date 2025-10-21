@@ -19,23 +19,23 @@ export 'settings/text_settings.dart';
 
 // Route names //
 
-/// 'app-generator'
+/// app-generator
 const String generateScreenPath = 'app-generator';
 
-/// 'config-archiver'
+/// config-archiver
 const String archiveScreenPath = 'config-archiver';
 
-/// 'settings-home'
+/// settings-home
 const String settingsHomePath = 'settings-home';
 
-/// 'color-settings'
+/// color-settings
 const String colorSettingsPath = 'color-settings';
 
-/// 'design-settings'
+/// design-settings
 const String designSettingsPath = 'design-settings';
 
-/// 'layout-settings'
+/// layout-settings
 const String layoutSettingsPath = 'layout-settings';
 
-/// 'text-settings'
+/// text-settings
 const String textSettingsPath = 'text-settings';
