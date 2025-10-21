@@ -491,6 +491,7 @@ import './utils/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 ${config.supportEmail != null ? "import 'package:feedback/feedback.dart';" : ''}
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
