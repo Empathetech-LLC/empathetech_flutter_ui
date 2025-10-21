@@ -213,7 +213,7 @@ class EzUpdaterFAB extends StatefulWidget {
     this.isWeb = false,
     this.gPlay,
     this.appStore,
-    required this.github,
+    this.github,
   }) : assert(
           isWeb || github != null,
           'GitHub URL must be provided when isWeb is false',
