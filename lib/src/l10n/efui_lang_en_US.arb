@@ -64,6 +64,9 @@
   "gTranslationsPending": "Translations pending human review",
 
   "gUpdates": "Updates available",
+  "gHardRefresh": "Please hard refresh the page...\nCtrl + Shift + R",
+  "gHardRefreshMac": "Please hard refresh the page...\nCommand + Shift + R",
+  "gHardRefreshMobile": "Please refresh the page in the browser menu.",
 
   "gEnterURL": "Enter URL",
   "gValidURL": "Please enter a valid URL",

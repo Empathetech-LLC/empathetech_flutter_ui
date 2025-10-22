@@ -160,6 +160,18 @@ class EFUILangEs extends EFUILang {
   String get gUpdates => 'Actualizaciones disponibles';
 
   @override
+  String get gHardRefresh =>
+      'Por favor, actualice la página...\nCtrl + Shift + R';
+
+  @override
+  String get gHardRefreshMac =>
+      'Por favor, actualice la página...\nCommand + Shift + R';
+
+  @override
+  String get gHardRefreshMobile =>
+      'Actualice la página en el menú del navegador.';
+
+  @override
   String get gEnterURL => 'Inserta el link';
 
   @override

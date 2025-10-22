@@ -159,6 +159,18 @@ class EFUILangEn extends EFUILang {
   String get gUpdates => 'Updates available';
 
   @override
+  String get gHardRefresh =>
+      'Please hard refresh the page...\nCtrl + Shift + R';
+
+  @override
+  String get gHardRefreshMac =>
+      'Please hard refresh the page...\nCommand + Shift + R';
+
+  @override
+  String get gHardRefreshMobile =>
+      'Please refresh the page in the browser menu.';
+
+  @override
   String get gEnterURL => 'Enter URL';
 
   @override
@@ -773,6 +785,18 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gUpdates => 'Updates available';
+
+  @override
+  String get gHardRefresh =>
+      'Please hard refresh the page...\nCtrl + Shift + R';
+
+  @override
+  String get gHardRefreshMac =>
+      'Please hard refresh the page...\nCommand + Shift + R';
+
+  @override
+  String get gHardRefreshMobile =>
+      'Please refresh the page in the browser menu.';
 
   @override
   String get gEnterURL => 'Enter URL';

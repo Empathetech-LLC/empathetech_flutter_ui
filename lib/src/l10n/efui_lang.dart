@@ -393,6 +393,24 @@ abstract class EFUILang {
   /// **'Updates available'**
   String get gUpdates;
 
+  /// No description provided for @gHardRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Please hard refresh the page...\nCtrl + Shift + R'**
+  String get gHardRefresh;
+
+  /// No description provided for @gHardRefreshMac.
+  ///
+  /// In en, this message translates to:
+  /// **'Please hard refresh the page...\nCommand + Shift + R'**
+  String get gHardRefreshMac;
+
+  /// No description provided for @gHardRefreshMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Please refresh the page in the browser menu.'**
+  String get gHardRefreshMobile;
+
   /// No description provided for @gEnterURL.
   ///
   /// In en, this message translates to:
