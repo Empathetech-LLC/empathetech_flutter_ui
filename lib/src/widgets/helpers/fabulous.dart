@@ -274,11 +274,11 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
     switch (_platform) {
       case TargetPlatform.android:
       case TargetPlatform.iOS:
-        return 'Please refresh the page in your browser menu.\nIf this message persists, try clearing your browser cache.';
+        return l10n.gHardRefreshMobile;
       case TargetPlatform.macOS:
-        return 'Please hard refresh the page...\nCommand + Shift + R';
+        return l10n.gHardRefreshMac;
       default:
-        return 'Please hard refresh the page...\nCtrl + Shift + R';
+        return l10n.gHardRefresh;
     }
   }
 
