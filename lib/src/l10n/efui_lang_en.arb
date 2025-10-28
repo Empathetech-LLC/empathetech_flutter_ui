@@ -96,7 +96,7 @@
   "gResetValue": "Reset {name}?",
   "gResetValueTo": "Reset {name} to {value}",
   "gResetAll": "Reset all",
-  "gUndoWarn": "Cannot be undone",
+  "gUndoWarn": "Cannot be undone.",
 
   "gCreditTo": "Credit to:",
   "gCreator": "Creator of",

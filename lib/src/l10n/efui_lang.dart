@@ -552,7 +552,7 @@ abstract class EFUILang {
   /// No description provided for @gUndoWarn.
   ///
   /// In en, this message translates to:
-  /// **'Cannot be undone'**
+  /// **'Cannot be undone.'**
   String get gUndoWarn;
 
   /// No description provided for @gCreditTo.
