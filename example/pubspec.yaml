@@ -24,7 +24,7 @@ dependencies:
   file_saver: ^0.2.14
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^9.0.0
-  go_transitions: ^0.8.2
+  go_transitions: ^0.8.3
   line_icons: ^2.0.3
   xml: ^6.6.1
 
