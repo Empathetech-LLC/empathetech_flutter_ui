@@ -278,10 +278,10 @@ ThemeData ezThemeData(Brightness brightness) {
       shape: const CircleBorder(),
       iconSize: iconSize,
       sizeConstraints: BoxConstraints(
-        minWidth: (iconSize / 2) + (padding * 2),
-        maxWidth: (iconSize / 2) + (padding * 2),
-        minHeight: (iconSize / 2) + (padding * 2),
-        maxHeight: (iconSize / 2) + (padding * 2),
+        minWidth: (iconSize * 1.25) + padding,
+        maxWidth: (iconSize * 1.25) + padding,
+        minHeight: (iconSize * 1.25) + padding,
+        maxHeight: (iconSize * 1.25) + padding,
       ),
     ),
 
