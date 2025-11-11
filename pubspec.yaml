@@ -23,14 +23,14 @@ dependencies:
   path_provider: ^2.1.5
   shared_preferences: ^2.5.3
   url_launcher: ^6.3.2
-  video_player: ^2.10.0
+  video_player: ^2.10.1
   web: ^1.1.1
   
   # Community
   country_flags: ^4.1.0
   extended_image: ^10.0.1
   feedback: ^3.2.0
-  file_picker: ^10.3.3
+  file_picker: ^10.3.6
   file_saver: ^0.2.14
   flex_color_picker: ^3.7.2
   flutter_localized_locales: ^2.0.5
