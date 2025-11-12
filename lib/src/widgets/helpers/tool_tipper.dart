@@ -71,11 +71,14 @@ class EzToolTipper extends StatelessWidget {
               }
             }
 
-            SemanticsService.announce(
-              message,
-              TextDirection.ltr,
-              assertiveness: Assertiveness.assertive,
-            );
+            if (context.mounted) {
+              SemanticsService.sendAnnouncement(
+                View.of(context),
+                message,
+                TextDirection.ltr,
+                assertiveness: Assertiveness.assertive,
+              );
+            }
           }
           isTooltipVisible = !isTooltipVisible;
         },
