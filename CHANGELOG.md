@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [10.2.1] - 2025-11-??
+### Updated
+- Minor breaking changes && deprecations from Flutter 3.38.0
+
 ## [10.2.0] - 2025-10-20
 ### Added
 - Shared consts for default spacers (eSpacer, ezMargin, ezSeparator...)

@@ -1,6 +1,6 @@
 name: example
 description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, checkout https://github.com/Empathetech-LLC/empathetech_flutter_ui"
-version: 2.3.2+34
+version: 2.3.3+35
 publish_to: 'none'
 
 environment:
