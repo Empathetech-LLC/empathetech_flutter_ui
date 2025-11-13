@@ -20,6 +20,8 @@
   "gRequired": "Requerido",
 
   "gBack": "Atrás",
+  "gUndo": "Deshacer",
+  "gRedo": "Rehacer",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
   "gDisabled": "Deshabilitado",
@@ -202,8 +204,6 @@
   "dsScrollHint": "Desplaza para acercar/alejar la imagen",
   "dsRotateLeft": "Girar a la izquierda",
   "dsRotateRight": "Girar a la derecha",
-  "dsUndo": "Deshacer",
-  "dsRedo": "Rehacer",
 
   "dsResetAll": "¿Restablecer todas las configuraciones de diseño globales y de {themeType}?",
 

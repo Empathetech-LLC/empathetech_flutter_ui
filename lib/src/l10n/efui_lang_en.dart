@@ -500,10 +500,10 @@ class EFUILangEn extends EFUILang {
   String get dsRotateRight => 'Rotate right';
 
   @override
-  String get dsUndo => 'Undo';
+  String get gUndo => 'Undo';
 
   @override
-  String get dsRedo => 'Redo';
+  String get gRedo => 'Redo';
 
   @override
   String dsResetAll(Object themeType) {
@@ -1128,10 +1128,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsRotateRight => 'Rotate right';
 
   @override
-  String get dsUndo => 'Undo';
+  String get gUndo => 'Undo';
 
   @override
-  String get dsRedo => 'Redo';
+  String get gRedo => 'Redo';
 
   @override
   String dsResetAll(Object themeType) {

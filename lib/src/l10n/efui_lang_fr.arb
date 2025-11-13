@@ -20,6 +20,8 @@
   "gRequired": "Requis",
 
   "gBack": "Retour",
+  "gUndo": "Annuler",
+  "gRedo": "Rétablir",
   "gCancel": "Annuler",
   "gClose": "Fermer",
   "gDisabled": "Désactivé",
@@ -202,8 +204,6 @@
   "dsScrollHint": "Faites défiler pour zoomer/dézoomer",
   "dsRotateLeft": "Tourner à gauche",
   "dsRotateRight": "Tourner à droite",
-  "dsUndo": "Annuler",
-  "dsRedo": "Rétablir",
 
   "dsResetAll": "Réinitialiser tous les paramètres de conception globaux et du thème {themeType} ?",
 

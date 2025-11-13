@@ -503,10 +503,10 @@ class EFUILangEs extends EFUILang {
   String get dsRotateRight => 'Girar a la derecha';
 
   @override
-  String get dsUndo => 'Deshacer';
+  String get gUndo => 'Deshacer';
 
   @override
-  String get dsRedo => 'Rehacer';
+  String get gRedo => 'Rehacer';
 
   @override
   String dsResetAll(Object themeType) {

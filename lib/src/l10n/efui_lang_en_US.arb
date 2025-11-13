@@ -20,6 +20,8 @@
   "gRequired": "Required",
 
   "gBack": "Back",
+  "gUndo": "Undo",
+  "gRedo": "Redo",
   "gCancel": "Cancel",
   "gClose": "Close",
   "gDisabled": "Disabled",
@@ -202,8 +204,6 @@
   "dsScrollHint": "Scroll to zoom in/out",
   "dsRotateLeft": "Rotate left",
   "dsRotateRight": "Rotate right",
-  "dsUndo": "Undo",
-  "dsRedo": "Redo",
 
   "dsResetAll": "Reset all global and {themeType} theme design settings?",
 

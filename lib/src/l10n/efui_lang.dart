@@ -1017,17 +1017,17 @@ abstract class EFUILang {
   /// **'Rotate right'**
   String get dsRotateRight;
 
-  /// No description provided for @dsUndo.
+  /// No description provided for @gUndo.
   ///
   /// In en, this message translates to:
   /// **'Undo'**
-  String get dsUndo;
+  String get gUndo;
 
-  /// No description provided for @dsRedo.
+  /// No description provided for @gRedo.
   ///
   /// In en, this message translates to:
   /// **'Redo'**
-  String get dsRedo;
+  String get gRedo;
 
   /// No description provided for @dsResetAll.
   ///
