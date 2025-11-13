@@ -251,7 +251,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
               // Undo
               EzIconButton(
-                tooltip: l10n.dsUndo,
+                tooltip: l10n.gUndo,
                 enabled: !processing && _editorController.canUndo,
                 onPressed: () {
                   _editorController.undo();
@@ -263,7 +263,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
               // Redo
               EzIconButton(
-                tooltip: l10n.dsRedo,
+                tooltip: l10n.gRedo,
                 enabled: !processing && _editorController.canRedo,
                 onPressed: () {
                   _editorController.redo();
