@@ -59,6 +59,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   Clip clipBehavior = Clip.hardEdge,
   required BuildContext context,
   required String message,
+  Future<void> Function()? undo,
   double? margin,
   Duration? duration,
 }) {
@@ -92,9 +93,28 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       content: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          // Text
           Flexible(child: Text(message, textAlign: TextAlign.center)),
+
+          // Undo (conditional)
+          if (undo != null) ...<Widget>[
+            EzSpacer(space: toastMargin, vertical: false),
+            EzElevatedButton(
+              text: ezL10n(context).gUndo,
+              onPressed: () async {
+                await undo();
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                }
+              },
+            ),
+          ],
+
+          // Timer
           EzSpacer(space: toastMargin, vertical: false),
           EzCountdownTimer(duration: toastLength),
+
+          // Close (inherited, above)
         ],
       ),
       duration: toastLength,
