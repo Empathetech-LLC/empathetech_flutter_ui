@@ -63,8 +63,15 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   double? margin,
   Duration? duration,
 }) {
-  final Duration toastLength = duration ?? ezReadingTime(message);
+  late final Duration readingTime = (undo == null)
+      ? ezReadingTime(message)
+      : ezReadingTime(message) + const Duration(seconds: 1);
+  late final Duration toastLength = duration ?? readingTime;
+
   final double toastMargin = margin ?? EzConfig.get(marginKey);
+
+  late final TextStyle? bodyStyle = Theme.of(context).textTheme.bodyLarge;
+  late final Color primary = Theme.of(context).colorScheme.primary;
 
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -99,8 +106,9 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
           // Undo (conditional)
           if (undo != null) ...<Widget>[
             EzSpacer(space: toastMargin, vertical: false),
-            EzElevatedButton(
+            EzTextButton(
               text: ezL10n(context).gUndo,
+              textStyle: bodyStyle?.copyWith(color: primary),
               onPressed: () async {
                 await undo();
                 if (context.mounted) {
