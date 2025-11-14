@@ -18,7 +18,7 @@ const double shadowMod = 0.667;
 const double crucialOT = 0.25;
 
 /// Creates a [ThemeData] from [EzConfig] values
-ThemeData ezThemeData(Brightness brightness) {
+ThemeData ezThemeData(Brightness brightness, bool ltr) {
   //* Gather values from EzConfig *//
 
   // Shared //
@@ -265,6 +265,19 @@ ThemeData ezThemeData(Brightness brightness) {
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
       ),
+    ),
+
+    // Expansion tile
+    expansionTileTheme: ExpansionTileThemeData(
+      backgroundColor: colorScheme.surface,
+      collapsedBackgroundColor: colorScheme.surfaceContainer,
+      iconColor: colorScheme.primary,
+      collapsedIconColor: colorScheme.primary,
+      tilePadding: EzInsets.col(spacing),
+      childrenPadding: ltr
+          ? EdgeInsets.only(left: spacing, right: margin, bottom: margin)
+          : EdgeInsets.only(left: margin, right: spacing, bottom: margin),
+      expandedAlignment: ltr ? Alignment.centerLeft : Alignment.centerRight,
     ),
 
     // Floating action button
