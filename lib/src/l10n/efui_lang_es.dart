@@ -54,6 +54,12 @@ class EFUILangEs extends EFUILang {
   String get gBack => 'Atrás';
 
   @override
+  String get gUndo => 'Deshacer';
+
+  @override
+  String get gRedo => 'Rehacer';
+
+  @override
   String get gCancel => 'Cancelar';
 
   @override
@@ -501,12 +507,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get dsRotateRight => 'Girar a la derecha';
-
-  @override
-  String get gUndo => 'Deshacer';
-
-  @override
-  String get gRedo => 'Rehacer';
 
   @override
   String dsResetAll(Object themeType) {

@@ -54,6 +54,12 @@ class EFUILangFr extends EFUILang {
   String get gBack => 'Retour';
 
   @override
+  String get gUndo => 'Annuler';
+
+  @override
+  String get gRedo => 'Rétablir';
+
+  @override
   String get gCancel => 'Annuler';
 
   @override
@@ -501,12 +507,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get dsRotateRight => 'Tourner à droite';
-
-  @override
-  String get gUndo => 'Annuler';
-
-  @override
-  String get gRedo => 'Rétablir';
 
   @override
   String dsResetAll(Object themeType) {

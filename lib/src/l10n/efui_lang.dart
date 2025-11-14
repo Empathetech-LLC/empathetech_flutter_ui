@@ -189,6 +189,18 @@ abstract class EFUILang {
   /// **'Back'**
   String get gBack;
 
+  /// No description provided for @gUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get gUndo;
+
+  /// No description provided for @gRedo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get gRedo;
+
   /// No description provided for @gCancel.
   ///
   /// In en, this message translates to:
@@ -1016,18 +1028,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Rotate right'**
   String get dsRotateRight;
-
-  /// No description provided for @gUndo.
-  ///
-  /// In en, this message translates to:
-  /// **'Undo'**
-  String get gUndo;
-
-  /// No description provided for @gRedo.
-  ///
-  /// In en, this message translates to:
-  /// **'Redo'**
-  String get gRedo;
 
   /// No description provided for @dsResetAll.
   ///
