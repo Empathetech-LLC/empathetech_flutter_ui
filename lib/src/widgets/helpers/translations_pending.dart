@@ -14,8 +14,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
   /// Defaults to [TextTheme.labelLarge]
   final TextStyle? style;
 
-  /// Shout-out: [TextAlign.start] >> [TextAlign.left] for LTR
-  /// (&& >> [TextAlign.right] for RTL)
+  /// Shout-out: [TextAlign.start] >> [TextAlign.left] || [TextAlign.right]
   final TextAlign textAlign;
 
   /// Won't appear for this locale
