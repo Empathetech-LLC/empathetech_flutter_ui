@@ -268,17 +268,43 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     ),
 
     // Expansion tile
-    expansionTileTheme: ExpansionTileThemeData(
-      backgroundColor: colorScheme.surface,
-      collapsedBackgroundColor: colorScheme.surfaceContainer,
-      iconColor: colorScheme.primary,
-      collapsedIconColor: colorScheme.primary,
-      tilePadding: EzInsets.col(spacing),
-      childrenPadding: ltr
-          ? EdgeInsets.only(left: spacing, right: margin, bottom: margin)
-          : EdgeInsets.only(left: margin, right: spacing, bottom: margin),
-      expandedAlignment: ltr ? Alignment.centerLeft : Alignment.centerRight,
-    ),
+    expansionTileTheme: ltr
+        ? ExpansionTileThemeData(
+            backgroundColor: colorScheme.surface,
+            collapsedBackgroundColor: colorScheme.surfaceContainer,
+            iconColor: colorScheme.primary,
+            collapsedIconColor: colorScheme.primary,
+            tilePadding: EdgeInsets.only(
+              left: margin,
+              right: spacing,
+              top: margin,
+              bottom: margin,
+            ),
+            childrenPadding: EdgeInsets.only(
+              left: margin * 2,
+              right: spacing,
+              bottom: margin,
+            ),
+            expandedAlignment: Alignment.centerLeft,
+          )
+        : ExpansionTileThemeData(
+            backgroundColor: colorScheme.surface,
+            collapsedBackgroundColor: colorScheme.surfaceContainer,
+            iconColor: colorScheme.primary,
+            collapsedIconColor: colorScheme.primary,
+            tilePadding: EdgeInsets.only(
+              left: spacing,
+              right: margin,
+              top: margin,
+              bottom: margin,
+            ),
+            childrenPadding: EdgeInsets.only(
+              left: spacing,
+              right: margin * 2,
+              bottom: margin,
+            ),
+            expandedAlignment: Alignment.centerRight,
+          ),
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
