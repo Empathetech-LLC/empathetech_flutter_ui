@@ -51,15 +51,16 @@ class EzAppProvider extends StatelessWidget {
           ? ThemeMode.dark
           : ThemeMode.light;
 
-  late final ThemeData _materialDark =
-      darkTheme ?? ezThemeData(Brightness.dark);
-  late final ThemeData _materialLight =
-      lightTheme ?? ezThemeData(Brightness.light);
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final bool ltr = Directionality.of(context) == TextDirection.ltr;
+    final ThemeData materialDark =
+        darkTheme ?? ezThemeData(Brightness.dark, ltr);
+    final ThemeData materialLight =
+        lightTheme ?? ezThemeData(Brightness.light, ltr);
+
     return PlatformProvider(
       builder: (_) => PlatformTheme(
         builder: (_) => ScaffoldMessenger(
@@ -67,17 +68,17 @@ class EzAppProvider extends StatelessWidget {
           child: app,
         ),
         themeMode: _initialTheme,
-        materialLightTheme: _materialLight,
-        materialDarkTheme: _materialDark,
+        materialLightTheme: materialLight,
+        materialDarkTheme: materialDark,
         cupertinoLightTheme: MaterialBasedCupertinoThemeData(
-          materialTheme: _materialLight,
+          materialTheme: materialLight,
         ).copyWith(
-          primaryColor: _materialLight.colorScheme.secondary,
+          primaryColor: materialLight.colorScheme.secondary,
         ),
         cupertinoDarkTheme: MaterialBasedCupertinoThemeData(
-          materialTheme: _materialDark,
+          materialTheme: materialDark,
         ).copyWith(
-          primaryColor: _materialDark.colorScheme.secondary,
+          primaryColor: materialDark.colorScheme.secondary,
         ),
         matchCupertinoSystemChromeBrightness: true,
       ),
