@@ -20,6 +20,9 @@ class EzTranslationsPendingNotice extends StatelessWidget {
   /// Won't appear for this locale
   final Locale defaultLocale;
 
+  /// Spacing widget to place above the message
+  final Widget header;
+
   /// Spacing widget to place below the message
   final Widget footer;
 
@@ -30,6 +33,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
     this.style,
     this.textAlign = TextAlign.center,
     this.defaultLocale = english,
+    this.header = const SizedBox.shrink(),
     this.footer = ezSeparator,
   });
 
@@ -42,6 +46,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              header,
               Text(
                 message ?? ezL10n(context).gTranslationsPending,
                 style: style ?? Theme.of(context).textTheme.labelLarge,
