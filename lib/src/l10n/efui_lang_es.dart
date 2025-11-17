@@ -21,6 +21,9 @@ class EFUILangEs extends EFUILang {
   String get gOpen => 'Abrir';
 
   @override
+  String get gOpenLink => 'Abrir enlace';
+
+  @override
   String get gSuccess => 'Éxito';
 
   @override

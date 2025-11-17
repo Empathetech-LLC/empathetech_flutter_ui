@@ -21,6 +21,9 @@ class EFUILangEn extends EFUILang {
   String get gOpen => 'Open';
 
   @override
+  String get gOpenLink => 'Open link';
+
+  @override
   String get gSuccess => 'Success';
 
   @override
@@ -647,6 +650,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gOpen => 'Open';
+
+  @override
+  String get gOpenLink => 'Open link';
 
   @override
   String get gSuccess => 'Success';

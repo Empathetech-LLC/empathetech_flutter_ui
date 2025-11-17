@@ -123,6 +123,12 @@ abstract class EFUILang {
   /// **'Open'**
   String get gOpen;
 
+  /// No description provided for @gOpenLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Open link'**
+  String get gOpenLink;
+
   /// No description provided for @gSuccess.
   ///
   /// In en, this message translates to:
