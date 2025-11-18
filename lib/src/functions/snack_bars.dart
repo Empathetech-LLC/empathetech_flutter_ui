@@ -60,6 +60,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   required BuildContext context,
   required String message,
   Future<void> Function()? undo,
+  String? undoMessage,
   double? margin,
   Duration? duration,
 }) {
@@ -107,7 +108,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
           if (undo != null) ...<Widget>[
             EzSpacer(space: toastMargin, vertical: false),
             EzTextButton(
-              text: ezL10n(context).gUndo,
+              text: undoMessage ?? ezL10n(context).gUndo,
               textStyle: bodyStyle?.copyWith(color: primary),
               onPressed: () async {
                 await undo();
