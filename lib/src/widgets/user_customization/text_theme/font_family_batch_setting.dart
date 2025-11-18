@@ -82,9 +82,9 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   Future<bool> confirmBatchOverride() async {
     return await showPlatformDialog(
       context: context,
-      builder: (BuildContext dialogContext) {
-        void onConfirm() => Navigator.of(dialogContext).pop(true);
-        void onDeny() => Navigator.of(dialogContext).pop(false);
+      builder: (BuildContext dContext) {
+        void onConfirm() => Navigator.of(dContext).pop(true);
+        void onDeny() => Navigator.of(dContext).pop(false);
 
         late final List<Widget> materialActions;
         late final List<Widget> cupertinoActions;

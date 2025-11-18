@@ -47,18 +47,18 @@ Future<dynamic> ezColorPicker(
 }) {
   return showPlatformDialog(
     context: context,
-    builder: (BuildContext dialogContext) {
+    builder: (BuildContext dContext) {
       final double padding = EzConfig.get(paddingKey);
       final double spacing = EzConfig.get(spacingKey);
 
       void confirm() {
         onConfirm();
-        Navigator.of(dialogContext).pop();
+        Navigator.of(dContext).pop();
       }
 
       void deny() {
         onDeny();
-        Navigator.of(dialogContext).pop();
+        Navigator.of(dContext).pop();
       }
 
       late final List<Widget> materialActions;

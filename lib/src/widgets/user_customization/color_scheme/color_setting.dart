@@ -99,12 +99,12 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       return showPlatformDialog(
         context: context,
-        builder: (BuildContext dialogContext) {
+        builder: (BuildContext dContext) {
           void onConfirm() async {
             final dynamic chosen = await openColorPicker(context);
 
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(chosen);
+            if (dContext.mounted) {
+              Navigator.of(dContext).pop(chosen);
             }
           }
 
@@ -115,8 +115,8 @@ class _ColorSettingState extends State<EzColorSetting> {
             setState(() {});
             widget.onUpdate?.call(currColor);
 
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(recommended);
+            if (dContext.mounted) {
+              Navigator.of(dContext).pop(recommended);
             }
           }
 
@@ -165,7 +165,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   Future<dynamic> reset(BuildContext context) async {
     return showPlatformDialog(
       context: context,
-      builder: (BuildContext dialogContext) {
+      builder: (BuildContext dContext) {
         final int? resetValue = EzConfig.getDefault(widget.configKey);
         final String currColorLabel =
             currColor.toARGB32().toRadixString(16).toUpperCase().substring(2);
@@ -176,10 +176,10 @@ class _ColorSettingState extends State<EzColorSetting> {
           if (resetValue != null) currColor = Color(resetValue);
           setState(() {});
 
-          if (dialogContext.mounted) Navigator.of(dialogContext).pop();
+          if (dContext.mounted) Navigator.of(dContext).pop();
         }
 
-        void onDeny() => Navigator.of(dialogContext).pop();
+        void onDeny() => Navigator.of(dContext).pop();
 
         late final List<Widget> materialActions;
         late final List<Widget> cupertinoActions;
@@ -223,7 +223,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? reset(context)
       : showPlatformDialog(
           context: context,
-          builder: (BuildContext dialogContext) => EzAlertDialog(
+          builder: (BuildContext dContext) => EzAlertDialog(
             title: Text(
               l10n.gOptions,
               textAlign: TextAlign.center,
@@ -233,7 +233,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               EzElevatedIconButton(
                 onPressed: () {
                   widget.onRemove!();
-                  Navigator.of(dialogContext).pop();
+                  Navigator.of(dContext).pop();
                 },
                 icon: EzIcon(PlatformIcons(context).delete),
                 label: l10n.gRemove,
@@ -245,8 +245,8 @@ class _ColorSettingState extends State<EzColorSetting> {
                 onPressed: () async {
                   final dynamic resetResponse = await reset(context);
 
-                  if (dialogContext.mounted) {
-                    Navigator.of(dialogContext).pop(resetResponse);
+                  if (dContext.mounted) {
+                    Navigator.of(dContext).pop(resetResponse);
                   }
                 },
                 icon: EzIcon(PlatformIcons(context).refresh),

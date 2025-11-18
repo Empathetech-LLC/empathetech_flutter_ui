@@ -75,9 +75,9 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     return SelectionArea(
       child: PlatformAlertDialog(
-        material: (BuildContext dialogContext, _) {
+        material: (BuildContext dContext, _) {
           late final Widget closeAction = EzTextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
+            onPressed: () => Navigator.of(dContext).pop(),
             text: ezL10n(context).gClose,
           );
 
@@ -124,9 +124,9 @@ class EzAlertDialog extends PlatformAlertDialog {
             actionsPadding: EzInsets.wrap(spacing),
           );
         },
-        cupertino: (BuildContext dialogContext, _) {
+        cupertino: (BuildContext dContext, _) {
           late final Widget closeAction = EzCupertinoAction(
-            onPressed: () => Navigator.of(dialogContext).pop(),
+            onPressed: () => Navigator.of(dContext).pop(),
             text: ezL10n(context).gClose,
           );
 

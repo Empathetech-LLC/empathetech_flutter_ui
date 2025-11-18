@@ -49,7 +49,7 @@ class EzConfigRandomizer extends StatelessWidget {
     return EzElevatedIconButton(
       onPressed: () => showPlatformDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
+          builder: (BuildContext dContext) {
             final void Function() confirm =
                 onConfirm ?? () => EzConfig.randomize(isDark);
             final void Function() deny = onDeny ?? doNothing;
@@ -61,12 +61,12 @@ class EzConfigRandomizer extends StatelessWidget {
               context: context,
               onConfirm: () {
                 confirm();
-                Navigator.of(dialogContext).pop();
+                Navigator.of(dContext).pop();
               },
               confirmIsDestructive: true,
               onDeny: () {
                 deny();
-                Navigator.of(dialogContext).pop();
+                Navigator.of(dContext).pop();
               },
             );
 

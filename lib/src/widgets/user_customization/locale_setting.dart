@@ -131,7 +131,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         child: EzElevatedIconButton(
           onPressed: () => ezModal(
             context: context,
-            builder: (BuildContext modalContext) => EzScrollView(
+            builder: (BuildContext mContext) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Wrap(
@@ -168,8 +168,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                               setState(() {});
 
                               // Close modal
-                              if (modalContext.mounted) {
-                                Navigator.of(modalContext).pop(locale);
+                              if (mContext.mounted) {
+                                Navigator.of(mContext).pop(locale);
                               }
                             },
                             icon: flag(locale),

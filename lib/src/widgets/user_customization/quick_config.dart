@@ -60,9 +60,9 @@ class EzQuickConfig extends StatelessWidget {
     return EzElevatedIconButton(
       onPressed: () => ezModal(
         context: context,
-        builder: (BuildContext modalContext) {
+        builder: (BuildContext mContext) {
           void onComplete(String configName) {
-            Navigator.pop(modalContext);
+            Navigator.pop(mContext);
 
             ezSnackBar(
               context: context,
@@ -349,9 +349,9 @@ class EzVideoGameConfig extends StatelessWidget {
     if (!isDarkTheme(context)) {
       final bool doIt = await showPlatformDialog(
         context: context,
-        builder: (BuildContext dialogContext) {
-          void onConfirm() => Navigator.of(dialogContext).pop(true);
-          void onDeny() => Navigator.of(dialogContext).pop(false);
+        builder: (BuildContext dContext) {
+          void onConfirm() => Navigator.of(dContext).pop(true);
+          void onDeny() => Navigator.of(dContext).pop(false);
 
           late final List<Widget> materialActions;
           late final List<Widget> cupertinoActions;
@@ -504,9 +504,9 @@ class EzChalkboardConfig extends StatelessWidget {
     if (!isDarkTheme(context)) {
       final bool doIt = await showPlatformDialog(
         context: context,
-        builder: (BuildContext dialogContext) {
-          void onConfirm() => Navigator.of(dialogContext).pop(true);
-          void onDeny() => Navigator.of(dialogContext).pop(false);
+        builder: (BuildContext dContext) {
+          void onConfirm() => Navigator.of(dContext).pop(true);
+          void onDeny() => Navigator.of(dContext).pop(false);
 
           late final List<Widget> materialActions;
           late final List<Widget> cupertinoActions;

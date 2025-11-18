@@ -33,7 +33,7 @@ class ResetFAB extends StatelessWidget {
           child: FloatingActionButton(
             onPressed: () => showPlatformDialog(
               context: context,
-              builder: (BuildContext alertContext) {
+              builder: (BuildContext dContext) {
                 return EzAlertDialog(
                   title:
                       Text('${el10n.gReset}...', textAlign: TextAlign.center),
@@ -41,8 +41,8 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
+                        if (dContext.mounted) {
+                          Navigator.of(dContext).pop();
                         }
                       },
                       text: l10n.csResetBuilder,
@@ -51,8 +51,8 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
+                        if (dContext.mounted) {
+                          Navigator.of(dContext).pop();
                         }
                       },
                       text: l10n.csResetApp,
@@ -62,15 +62,15 @@ class ResetFAB extends StatelessWidget {
                       onPressed: () async {
                         clearForms();
                         await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
+                        if (dContext.mounted) {
+                          Navigator.of(dContext).pop();
                         }
                       },
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,
                     ),
                     EzMaterialAction(
-                      onPressed: () => Navigator.of(alertContext).pop(),
+                      onPressed: () => Navigator.of(dContext).pop(),
                       text: l10n.csResetNothing,
                     ),
                   ],
@@ -78,8 +78,8 @@ class ResetFAB extends StatelessWidget {
                     EzCupertinoAction(
                       onPressed: () async {
                         clearForms();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
+                        if (dContext.mounted) {
+                          Navigator.of(dContext).pop();
                         }
                       },
                       text: l10n.csResetBuilder,
@@ -88,8 +88,8 @@ class ResetFAB extends StatelessWidget {
                     EzCupertinoAction(
                       onPressed: () async {
                         await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
+                        if (dContext.mounted) {
+                          Navigator.of(dContext).pop();
                         }
                       },
                       text: l10n.csResetApp,
@@ -99,15 +99,15 @@ class ResetFAB extends StatelessWidget {
                       onPressed: () async {
                         clearForms();
                         await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
+                        if (dContext.mounted) {
+                          Navigator.of(dContext).pop();
                         }
                       },
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,
                     ),
                     EzCupertinoAction(
-                      onPressed: () => Navigator.of(alertContext).pop(),
+                      onPressed: () => Navigator.of(dContext).pop(),
                       text: l10n.csResetNothing,
                     ),
                   ],
@@ -134,7 +134,7 @@ class MacStoreFAB extends StatelessWidget {
         tooltip: 'EoL',
         onPressed: () => showPlatformDialog(
           context: context,
-          builder: (BuildContext alertContext) {
+          builder: (BuildContext dContext) {
             return EzAlertDialog(contents: <Widget>[
               const Text(
                 '''Good news: Open UI is now an app generator!

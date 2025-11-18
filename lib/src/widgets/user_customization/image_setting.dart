@@ -142,11 +142,11 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<void> activateSetting(ThemeData theme) async {
     String? newPath = await ezModal<String?>(
       context: context,
-      builder: (BuildContext modalContext) => StatefulBuilder(
+      builder: (BuildContext mContext) => StatefulBuilder(
         builder: (_, StateSetter modalState) => EzScrollView(
           mainAxisSize: MainAxisSize.min,
           children: sourceOptions(
-            modalContext: modalContext,
+            mContext: mContext,
             modalState: modalState,
           ),
         ),
@@ -163,12 +163,10 @@ class _ImageSettingState extends State<EzImageSetting> {
         final Future<dynamic> Function(String path, ThemeData theme) toDo =
             await showPlatformDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
-            void useFull() =>
-                Navigator.of(dialogContext).pop((_, __) async => true);
-            void crop() => Navigator.of(dialogContext).pop(editImage);
-            void cancel() =>
-                Navigator.of(dialogContext).pop((_, __) async => null);
+          builder: (BuildContext dContext) {
+            void useFull() => Navigator.of(dContext).pop((_, __) async => true);
+            void crop() => Navigator.of(dContext).pop(editImage);
+            void cancel() => Navigator.of(dContext).pop((_, __) async => null);
 
             return EzAlertDialog(
               title: Text(l10n.dsUseFull, textAlign: TextAlign.center),
@@ -253,7 +251,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Build the list of [ImageSource] options
   List<Widget> sourceOptions({
-    required BuildContext modalContext,
+    required BuildContext mContext,
     required StateSetter modalState,
   }) {
     final List<Widget> options = <Widget>[];
@@ -272,7 +270,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
 
             fromLocal = true;
-            if (modalContext.mounted) Navigator.of(modalContext).pop(picked);
+            if (mContext.mounted) Navigator.of(mContext).pop(picked);
           },
           icon: EzIcon(PlatformIcons(context).photoCamera),
           label: l10n.dsFromCamera,
@@ -293,7 +291,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
 
             fromLocal = true;
-            if (modalContext.mounted) Navigator.of(modalContext).pop(picked);
+            if (mContext.mounted) Navigator.of(mContext).pop(picked);
           },
           icon: EzIcon(PlatformIcons(context).folder),
           label: l10n.dsFromFile,
@@ -308,9 +306,9 @@ class _ImageSettingState extends State<EzImageSetting> {
       child: EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
+          builder: (BuildContext dContext) {
             void onConfirm() async {
-              closeKeyboard(dialogContext);
+              closeKeyboard(dContext);
 
               // Validate the URL
               final String url = urlController.text.trim();
@@ -338,11 +336,11 @@ class _ImageSettingState extends State<EzImageSetting> {
                 stream.addListener(listener);
                 await completer.future;
               } catch (e) {
-                if (dialogContext.mounted) {
-                  Navigator.of(dialogContext).pop(null);
+                if (dContext.mounted) {
+                  Navigator.of(dContext).pop(null);
                 }
-                if (modalContext.mounted) {
-                  Navigator.of(modalContext).pop(null);
+                if (mContext.mounted) {
+                  Navigator.of(mContext).pop(null);
                 }
 
                 if (mounted) {
@@ -356,16 +354,16 @@ class _ImageSettingState extends State<EzImageSetting> {
               }
 
               // Pop dialogs
-              if (dialogContext.mounted) {
-                Navigator.of(dialogContext).pop(url);
+              if (dContext.mounted) {
+                Navigator.of(dContext).pop(url);
               }
 
-              if (modalContext.mounted) {
-                Navigator.of(modalContext).pop(url);
+              if (mContext.mounted) {
+                Navigator.of(mContext).pop(url);
               }
             }
 
-            void onDeny() => Navigator.of(dialogContext).pop(null);
+            void onDeny() => Navigator.of(dContext).pop(null);
 
             late final List<Widget> materialActions;
             late final List<Widget> cupertinoActions;
@@ -414,8 +412,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             await fileCleanup();
             await EzConfig.remove(widget.configKey);
 
-            if (modalContext.mounted) {
-              Navigator.of(modalContext).pop(defaultPath);
+            if (mContext.mounted) {
+              Navigator.of(mContext).pop(defaultPath);
             }
           },
           icon: EzIcon(PlatformIcons(context).refresh),
@@ -433,8 +431,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             await fileCleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
 
-            if (modalContext.mounted) {
-              Navigator.of(modalContext).pop(noImageValue);
+            if (mContext.mounted) {
+              Navigator.of(mContext).pop(noImageValue);
             }
           },
           icon: EzIcon(PlatformIcons(context).clear),

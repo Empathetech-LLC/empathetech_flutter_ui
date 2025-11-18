@@ -82,7 +82,7 @@ class EzResetButton extends StatelessWidget {
           : style,
       onPressed: () => showPlatformDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
+          builder: (BuildContext dContext) {
             late final List<Widget> materialActions;
             late final List<Widget> cupertinoActions;
 
@@ -97,12 +97,12 @@ class EzResetButton extends StatelessWidget {
               context: context,
               onConfirm: () {
                 confirm();
-                Navigator.of(dialogContext).pop();
+                Navigator.of(dContext).pop();
               },
               confirmIsDestructive: true,
               onDeny: () {
                 deny();
-                Navigator.of(dialogContext).pop();
+                Navigator.of(dContext).pop();
               },
             );
 
