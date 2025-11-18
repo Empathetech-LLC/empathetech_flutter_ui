@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzTranslationsPendingNotice extends StatelessWidget {
-  /// Defaults to [EFUILang.gTranslationsPending]
+  /// Defaults to [EFUILang.gMachineTranslated]
   final String? message;
 
   /// Defaults to [TextTheme.labelLarge]
@@ -48,7 +48,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
             children: <Widget>[
               header,
               Text(
-                message ?? ezL10n(context).gTranslationsPending,
+                message ?? ezL10n(context).gMachineTranslated,
                 style: style ?? Theme.of(context).textTheme.labelLarge,
                 textAlign: textAlign,
               ),

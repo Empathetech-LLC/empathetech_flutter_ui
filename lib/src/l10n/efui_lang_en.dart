@@ -162,7 +162,7 @@ class EFUILangEn extends EFUILang {
   String get gHowThisWorksHint => 'Open helpful documentation';
 
   @override
-  String get gTranslationsPending => 'Translations pending human review';
+  String get gMachineTranslated => 'Machine translated';
 
   @override
   String get gUpdates => 'Updates available';
@@ -793,7 +793,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get gHowThisWorksHint => 'Open helpful documentation';
 
   @override
-  String get gTranslationsPending => 'Translations pending human review';
+  String get gMachineTranslated => 'Machine translated';
 
   @override
   String get gUpdates => 'Updates available';

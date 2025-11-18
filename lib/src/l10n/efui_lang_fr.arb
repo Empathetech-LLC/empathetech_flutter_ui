@@ -64,7 +64,7 @@
   "gHowThisWorks": "Comment ça marche",
   "gHowThisWorksHint": "Ouvre la documentation utile",
 
-  "gTranslationsPending": "Traductions en attente de révision humaine",
+  "gMachineTranslated": "Traduction automatique",
 
   "gUpdates": "Mises à jour disponibles",
   "gHardRefresh": "Veuillez rafraîchir la page...\nCtrl + Shift + R",

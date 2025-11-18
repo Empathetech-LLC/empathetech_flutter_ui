@@ -162,8 +162,7 @@ class EFUILangEs extends EFUILang {
   String get gHowThisWorksHint => 'Abrir documentación útil';
 
   @override
-  String get gTranslationsPending =>
-      'Traducciones pendientes de revisión humana';
+  String get gMachineTranslated => 'Traducción automática';
 
   @override
   String get gUpdates => 'Actualizaciones disponibles';

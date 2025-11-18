@@ -64,7 +64,7 @@
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
 
-  "gTranslationsPending": "Translations pending human review",
+  "gMachineTranslated": "Machine translated",
 
   "gUpdates": "Updates available",
   "gHardRefresh": "Please hard refresh the page...\nCtrl + Shift + R",

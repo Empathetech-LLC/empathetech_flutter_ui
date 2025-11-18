@@ -399,11 +399,11 @@ abstract class EFUILang {
   /// **'Open helpful documentation'**
   String get gHowThisWorksHint;
 
-  /// No description provided for @gTranslationsPending.
+  /// No description provided for @gMachineTranslated.
   ///
   /// In en, this message translates to:
-  /// **'Translations pending human review'**
-  String get gTranslationsPending;
+  /// **'Machine translated'**
+  String get gMachineTranslated;
 
   /// No description provided for @gUpdates.
   ///
