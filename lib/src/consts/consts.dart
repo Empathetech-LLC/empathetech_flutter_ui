@@ -23,3 +23,12 @@ const double focusOpacity = 0.12;
 
 /// 0.25
 const double selectionOpacity = 0.25;
+
+/// Non-conclusive set containing...
+/// ar, fa, he, ur
+const Set<String> rtlLanguageCodes = <String>{
+  'ar', // Arabic
+  'fa', // Persian (Farsi)
+  'he', // Hebrew
+  'ur', // Urdu
+};
