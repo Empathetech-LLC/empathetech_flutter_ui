@@ -99,6 +99,17 @@ Duration ezReadingTime(String passage) {
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
+/// Returns the [Directionality] of the current [BuildContext]
+/// Falls back to [rtlLanguageCodes] on context errors
+bool isLTR(BuildContext context) {
+  try {
+    return Directionality.of(context) == TextDirection.ltr;
+  } catch (_) {
+    final Locale locale = WidgetsBinding.instance.platformDispatcher.locale;
+    return !rtlLanguageCodes.contains(locale.languageCode);
+  }
+}
+
 /// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
 /// Provide [mod] to adjust the duration, relative to the base value
 Duration ezAnimDuration({double mod = 1.0}) => Duration(
