@@ -55,7 +55,7 @@ class EzAppProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool ltr = Directionality.of(context) == TextDirection.ltr;
+    final bool ltr = isLTR(context);
     final ThemeData materialDark =
         darkTheme ?? ezThemeData(Brightness.dark, ltr);
     final ThemeData materialLight =
