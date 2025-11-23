@@ -143,11 +143,11 @@ class _ImageSettingState extends State<EzImageSetting> {
     String? newPath = await ezModal<String?>(
       context: context,
       builder: (BuildContext mContext) => StatefulBuilder(
-        builder: (_, StateSetter modalState) => EzScrollView(
+        builder: (_, StateSetter setModal) => EzScrollView(
           mainAxisSize: MainAxisSize.min,
           children: sourceOptions(
             mContext: mContext,
-            modalState: modalState,
+            setModal: setModal,
           ),
         ),
       ),
@@ -252,7 +252,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   /// Build the list of [ImageSource] options
   List<Widget> sourceOptions({
     required BuildContext mContext,
-    required StateSetter modalState,
+    required StateSetter setModal,
   }) {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
@@ -458,7 +458,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             value: updateTheme,
             onChanged: (bool? choice) {
               updateTheme = (choice == null) ? false : choice;
-              modalState(() {});
+              setModal(() {});
               setState(() {});
             },
           ),
@@ -520,7 +520,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.contain,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -529,7 +529,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.cover,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -538,7 +538,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.fill,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -547,7 +547,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.fitWidth,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -556,7 +556,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.fitHeight,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -565,7 +565,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.none,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -574,7 +574,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.scaleDown,
                       width: width,
                       height: height,
-                      modalState: fitState,
+                      setModal: fitState,
                       theme: theme,
                     ),
                     ezRowSpacer,
@@ -630,7 +630,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     required BoxFit fit,
     required double width,
     required double height,
-    required StateSetter modalState,
+    required StateSetter setModal,
     required ThemeData theme,
   }) {
     final double scaleMargin = margin * 0.25;
@@ -650,7 +650,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         GestureDetector(
           onTap: () {
             selectedFit = fit;
-            modalState(() {});
+            setModal(() {});
           },
           child: Semantics(
             hint: name,
