@@ -259,7 +259,13 @@ class EFUILangEn extends EFUILang {
   String get gResetAll => 'Reset all';
 
   @override
-  String get gUndoWarn => 'Cannot be undone.';
+  String get gUndoWarn1 => 'Cannot be undone automatically.\n';
+
+  @override
+  String get gSave => 'Save';
+
+  @override
+  String get gUndoWarn2 => ' your current config to restore it manually.';
 
   @override
   String get gCreditTo => 'Credit to:';
@@ -890,7 +896,13 @@ class EFUILangEnUs extends EFUILangEn {
   String get gResetAll => 'Reset all';
 
   @override
-  String get gUndoWarn => 'Cannot be undone.';
+  String get gUndoWarn1 => 'Cannot be undone automatically.\n';
+
+  @override
+  String get gSave => 'Save';
+
+  @override
+  String get gUndoWarn2 => ' your current config to restore it manually.';
 
   @override
   String get gCreditTo => 'Credit to:';

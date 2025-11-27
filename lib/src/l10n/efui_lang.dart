@@ -567,11 +567,23 @@ abstract class EFUILang {
   /// **'Reset all'**
   String get gResetAll;
 
-  /// No description provided for @gUndoWarn.
+  /// No description provided for @gUndoWarn1.
   ///
   /// In en, this message translates to:
-  /// **'Cannot be undone.'**
-  String get gUndoWarn;
+  /// **'Cannot be undone automatically.\n'**
+  String get gUndoWarn1;
+
+  /// No description provided for @gSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get gSave;
+
+  /// No description provided for @gUndoWarn2.
+  ///
+  /// In en, this message translates to:
+  /// **' your current config to restore it manually.'**
+  String get gUndoWarn2;
 
   /// No description provided for @gCreditTo.
   ///

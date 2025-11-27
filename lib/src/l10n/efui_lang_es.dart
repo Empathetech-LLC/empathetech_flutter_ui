@@ -259,7 +259,14 @@ class EFUILangEs extends EFUILang {
   String get gResetAll => 'Restablecer todo';
 
   @override
-  String get gUndoWarn => 'No se puede deshacer.';
+  String get gUndoWarn1 => 'No se puede deshacer automáticamente.\n';
+
+  @override
+  String get gSave => 'Guarde';
+
+  @override
+  String get gUndoWarn2 =>
+      ' su configuración actual para restaurarla manualmente.';
 
   @override
   String get gCreditTo => 'Acreditando a:';

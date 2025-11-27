@@ -99,7 +99,9 @@
   "gResetValue": "Réinitialiser {name} ?",
   "gResetValueTo": "Réinitialiser {name} à {value}",
   "gResetAll": "Tout réinitialiser",
-  "gUndoWarn": "Ne peut pas être annulé.",
+  "gUndoWarn1": "Impossible d'annuler automatiquement.\n",
+  "gSave": "Enregistrez",
+  "gUndoWarn2": " votre configuration actuelle pour la restaurer manuellement.",
 
   "gCreditTo": "Crédits à :",
   "gCreator": "Créateur de",

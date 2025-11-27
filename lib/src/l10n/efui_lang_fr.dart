@@ -258,7 +258,14 @@ class EFUILangFr extends EFUILang {
   String get gResetAll => 'Tout réinitialiser';
 
   @override
-  String get gUndoWarn => 'Ne peut pas être annulé.';
+  String get gUndoWarn1 => 'Impossible d\'annuler automatiquement.\n';
+
+  @override
+  String get gSave => 'Enregistrez';
+
+  @override
+  String get gUndoWarn2 =>
+      ' votre configuration actuelle pour la restaurer manuellement.';
 
   @override
   String get gCreditTo => 'Crédits à :';

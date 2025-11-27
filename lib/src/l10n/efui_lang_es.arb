@@ -99,7 +99,9 @@
   "gResetValue": "¿Restablecer {name}?",
   "gResetValueTo": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
-  "gUndoWarn": "No se puede deshacer.",
+  "gUndoWarn1": "No se puede deshacer automáticamente.\n",
+  "gSave": "Guarde",
+  "gUndoWarn2": " su configuración actual para restaurarla manualmente.",
 
   "gCreditTo": "Acreditando a:",
   "gCreator": "Creador de",

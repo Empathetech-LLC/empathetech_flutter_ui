@@ -99,7 +99,9 @@
   "gResetValue": "Reset {name}?",
   "gResetValueTo": "Reset {name} to {value}",
   "gResetAll": "Reset all",
-  "gUndoWarn": "Cannot be undone.",
+  "gUndoWarn1": "Cannot be undone automatically.\n",
+  "gSave": "Save",
+  "gUndoWarn2": " your current config to restore it manually.",
 
   "gCreditTo": "Credit to:",
   "gCreator": "Creator of",
