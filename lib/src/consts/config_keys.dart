@@ -681,7 +681,7 @@ const String sampleString = '55.55';
 //* Global trackers *//
 
 /// [globalKeys], [allTextKeys], [allLayoutKeys], [allColorKeys], [allImageKeys]
-const Map<String, Type> allKeys = <String, Type>{
+const Map<String, Type> ezConfigKeys = <String, Type>{
   ...globalKeys,
   ...allColorKeys,
   ...allDesignKeys,

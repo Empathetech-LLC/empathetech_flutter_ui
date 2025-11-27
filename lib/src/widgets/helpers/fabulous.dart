@@ -68,7 +68,7 @@ class EzConfigFAB extends StatelessWidget {
   /// com.example.app
   final String? androidPackage;
 
-  /// [allKeys] included by default
+  /// [ezConfigKeys] included by default
   /// Include any app specific keys you want backed up here
   final List<String>? extraKeys;
 
@@ -101,7 +101,7 @@ class EzConfigFAB extends StatelessWidget {
           label: l10n.ssSaveConfig,
           onPressed: () async {
             final List<String> keys = <String>[
-              ...allKeys.keys,
+              ...ezConfigKeys.keys,
               if (extraKeys != null) ...extraKeys!,
             ];
 
