@@ -18,7 +18,11 @@ class ColorSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).csPageTitle,
         showSettings: false,
-        body: EzScreen(EzColorSettings(target: target)),
+        body: EzScreen(EzColorSettings(
+          target: target,
+          appName: appName,
+          androidPackage: androidPackage,
+        )),
         fabs: <Widget>[
           ezSpacer,
           EzConfigFAB(

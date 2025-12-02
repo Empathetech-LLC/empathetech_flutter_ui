@@ -16,7 +16,10 @@ class DesignSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).dsPageTitle,
         showSettings: false,
-        body: const EzScreen(EzDesignSettings()),
+        body: const EzScreen(EzDesignSettings(
+          appName: appName,
+          androidPackage: androidPackage,
+        )),
         fabs: <Widget>[
           ezSpacer,
           EzConfigFAB(

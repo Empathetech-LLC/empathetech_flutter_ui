@@ -22,6 +22,8 @@ class SettingsHomeScreen extends StatelessWidget {
           designSettingsPath: designSettingsPath,
           layoutSettingsPath: layoutSettingsPath,
           textSettingsPath: textSettingsPath,
+          appName: appName,
+          androidPackage: androidPackage,
         )),
         fabs: <Widget>[
           ezSpacer,
