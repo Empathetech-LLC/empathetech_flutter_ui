@@ -40,7 +40,7 @@ Future<void> testResetButton(
       await ezFindText(tester, l10n.tsResetAll);
       break;
   }
-  await ezFindText(tester, l10n.gUndoWarn);
+  await ezFindText(tester, l10n.gUndoWarn1);
 
   ezLog('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
