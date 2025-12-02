@@ -5,10 +5,14 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:file_saver/file_saver.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -18,8 +22,9 @@ import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
 // Platform checks //
 
+/// Get the current [TargetPlatform]; "slow" but reliable
 /// Alias exists for [kIsWeb] support
-bool isApple() => cupertinoCheck();
+TargetPlatform getBasePlatform() => getHostPlatform();
 
 /// Alias exists for [kIsWeb] support
 bool isMobile() => mobileCheck();
@@ -28,14 +33,8 @@ bool isMobile() => mobileCheck();
 /// [isMobile] is preferred; technically more efficient
 bool isDesktop() => desktopCheck();
 
-/// Get the current [TargetPlatform]; "slow" but reliable
 /// Alias exists for [kIsWeb] support
-TargetPlatform getBasePlatform() => getHostPlatform();
-
-/// First checks [PlatformTheme] then falls back to [MediaQuery]
-bool isDarkTheme(BuildContext context) =>
-    PlatformTheme.of(context)?.isDark ??
-    (MediaQuery.of(context).platformBrightness == Brightness.dark);
+bool isApple() => cupertinoCheck();
 
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
@@ -68,6 +67,11 @@ String archivePath({required String? androidPackage, required String appName}) {
   }
 }
 
+/// First checks [PlatformTheme] then falls back to [MediaQuery]
+bool isDarkTheme(BuildContext context) =>
+    PlatformTheme.of(context)?.isDark ??
+    (MediaQuery.of(context).platformBrightness == Brightness.dark);
+
 // Readability //
 
 /// Is there a required [Function] that you wish was optional?
@@ -75,29 +79,23 @@ String archivePath({required String? androidPackage, required String appName}) {
 void doNothing() {}
 
 /// More readable than...
-/// MediaQuery.of(context).size.width
-double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
-
-/// More readable than...
 /// MediaQuery.of(context).size.height
 double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 
 /// More readable than...
-/// FocusScope.of(context).unfocus();
-void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
+/// MediaQuery.of(context).size.width
+double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 
 /// More readable than...
 /// EFUILang.of(context) ?? EzConfig.l10nFallback
 EFUILang ezL10n(BuildContext context) =>
     EFUILang.of(context) ?? EzConfig.l10nFallback;
 
-// Custom //
+/// More readable than...
+/// FocusScope.of(context).unfocus();
+void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 
-/// Relaxed reading time for a US tween: 100 words per minute
-Duration ezReadingTime(String passage) {
-  final int words = passage.split(' ').length;
-  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
-}
+//* Custom functions *//
 
 /// Returns the [Directionality] of the current [BuildContext]
 /// Falls back to [rtlLanguageCodes] on context errors
@@ -108,6 +106,12 @@ bool isLTR(BuildContext context) {
     final Locale locale = WidgetsBinding.instance.platformDispatcher.locale;
     return !rtlLanguageCodes.contains(locale.languageCode);
   }
+}
+
+/// Relaxed reading time for a US tween: 100 words per minute
+Duration ezReadingTime(String passage) {
+  final int words = passage.split(' ').length;
+  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
 /// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
@@ -137,17 +141,6 @@ Page<dynamic> ezGoTransition(
   }
 }
 
-/// [TargetPlatform] aware helper that will request/exit a fullscreen window
-Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
-    toggleFullscreen(platform, isFull);
-
-/// Recommended size for an image
-/// Starts with 160.0; chosen by visual inspection
-/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
-double ezImageSize(BuildContext context) =>
-    MediaQuery.textScalerOf(context).scale(160.0) *
-    (EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey));
-
 /// Calculate a recommended [AppBar.toolbarHeight]
 /// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
 double ezToolbarHeight({
@@ -171,4 +164,91 @@ double ezToolbarHeight({
             : kMinInteractiveDimension,
       ) +
       margin;
+}
+
+/// Recommended size for an image
+/// Starts with 160.0; chosen by visual inspection
+/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
+double ezImageSize(BuildContext context) =>
+    MediaQuery.textScalerOf(context).scale(160.0) *
+    (EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey));
+
+/// [TargetPlatform] aware helper that will request/exit a fullscreen window
+Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
+    toggleFullscreen(platform, isFull);
+
+/// Save the current [EzConfig.prefs] to local storage
+Future<void> ezConfigSaver(
+  BuildContext context, {
+  List<String>? extraKeys,
+  required String appName,
+  String? androidPackage,
+}) async {
+  final List<String> keys = <String>[
+    ...ezConfigKeys.keys,
+    if (extraKeys != null) ...extraKeys,
+  ];
+
+  final Map<String, dynamic> config = Map<String, dynamic>.fromEntries(keys.map(
+    (String key) => MapEntry<String, dynamic>(
+      key,
+      EzConfig.get(key),
+    ),
+  ));
+
+  try {
+    await FileSaver.instance.saveFile(
+      name: '${ezTitleToSnake(appName)}_settings.json',
+      bytes: utf8.encode(jsonEncode(config)),
+      mimeType: MimeType.json,
+    );
+  } catch (e) {
+    if (context.mounted) ezLogAlert(context, message: e.toString());
+    return;
+  }
+
+  if (context.mounted) {
+    ezSnackBar(
+      context: context,
+      message: ezL10n(context).ssConfigSaved(archivePath(
+        appName: appName,
+        androidPackage: androidPackage,
+      )),
+    );
+  }
+}
+
+Future<void> ezConfigLoader(BuildContext context) async {
+  final FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: <String>['json'],
+  );
+
+  try {
+    if (result != null && result.files.single.path != null) {
+      if (kIsWeb) {
+        final Uint8List? fileBytes = result.files.first.bytes;
+        if (fileBytes == null) throw 'null file';
+
+        final String fileContent = utf8.decode(fileBytes);
+        await EzConfig.loadConfig(jsonDecode(fileContent));
+      } else {
+        final String filePath = result.files.single.path!;
+        final String fileContent = await File(filePath).readAsString();
+
+        await EzConfig.loadConfig(jsonDecode(fileContent));
+      }
+    }
+  } catch (e) {
+    if (context.mounted) ezLogAlert(context, message: e.toString());
+    return;
+  }
+
+  if (context.mounted) {
+    final EFUILang l10n = ezL10n(context);
+    ezSnackBar(
+      context: context,
+      message: kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder,
+    );
+  }
 }
