@@ -9,14 +9,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:feedback/feedback.dart';
 
-/// 0.667
-/// Shadow opacity should be "faster" than surface
-/// 1:1 looks... well, foggy
-const double shadowMod = 0.667;
-
-/// Crucial opacity threshold - some things are too important to be broken by user settings
-const double crucialOT = 0.25;
-
 /// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness, bool ltr) {
   //* Gather values from EzConfig *//
