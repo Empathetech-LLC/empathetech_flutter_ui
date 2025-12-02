@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 /// Includes and [EzInlineLink] to save current config to JSON
 Widget ezRichUndoWarning(
   BuildContext context, {
+  bool standalone = true,
   List<String>? extraKeys,
   required String appName,
   String? androidPackage,
@@ -18,35 +19,39 @@ Widget ezRichUndoWarning(
   final EFUILang l10n = ezL10n(context);
   final TextTheme textTheme = Theme.of(context).textTheme;
 
-  return SizedBox(
-    width: widthOf(context),
-    child: EzRichText(
-      <InlineSpan>[
-        EzPlainText(
-          text: l10n.gUndoWarn1,
-          style: textTheme.bodyLarge,
+  final EzRichText text = EzRichText(
+    <InlineSpan>[
+      EzPlainText(
+        text: l10n.gUndoWarn1,
+        style: textTheme.bodyLarge,
+      ),
+      EzInlineLink(
+        l10n.gSave,
+        onTap: () => ezConfigSaver(
+          context,
+          extraKeys: extraKeys,
+          appName: appName,
+          androidPackage: androidPackage,
         ),
-        EzInlineLink(
-          l10n.gSave,
-          onTap: () => ezConfigSaver(
-            context,
-            extraKeys: extraKeys,
-            appName: appName,
-            androidPackage: androidPackage,
-          ),
-          hint:
-              '', // TODO: Add a hint? Make this nullable? If yes (to nullable), audit others.
-          style: textTheme.bodyLarge,
-          textAlign: TextAlign.center,
-        ),
-        EzPlainText(
-          text: l10n.gUndoWarn2,
-          style: textTheme.bodyLarge,
-        ),
-      ],
-      textBackground: false,
-      style: textTheme.bodyLarge,
-      textAlign: TextAlign.center,
-    ),
+        hint:
+            '', // TODO: Add a hint? Make this nullable? If yes (to nullable), audit others.
+        style: textTheme.bodyLarge,
+        textAlign: TextAlign.center,
+      ),
+      EzPlainText(
+        text: l10n.gUndoWarn2,
+        style: textTheme.bodyLarge,
+      ),
+    ],
+    textBackground: false,
+    style: textTheme.bodyLarge,
+    textAlign: TextAlign.center,
   );
+
+  return standalone
+      ? SizedBox(
+          width: widthOf(context),
+          child: text,
+        )
+      : text;
 }
