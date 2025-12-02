@@ -14,6 +14,7 @@ import 'package:go_router/go_router.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:go_transitions/go_transitions.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
@@ -106,6 +107,13 @@ bool isLTR(BuildContext context) {
     final Locale locale = WidgetsBinding.instance.platformDispatcher.locale;
     return !rtlLanguageCodes.contains(locale.languageCode);
   }
+}
+
+/// Returns whether an app was installed from the Google Play Store
+/// Theoretically works on all platforms, but only relevant for Android
+Future<bool> isGPlayInstall() async {
+  final PackageInfo info = await PackageInfo.fromPlatform();
+  return info.installerStore == 'com.android.vending';
 }
 
 /// Relaxed reading time for a US tween: 100 words per minute
