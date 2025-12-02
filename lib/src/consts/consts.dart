@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+// BTS //
+
 /// /
 const String homePath = '/';
 
@@ -11,6 +13,8 @@ const String success = 'SUCCESS';
 
 /// example.com/image.jpg
 const String webImgHint = 'example.com/image.jpg';
+
+// Theme Data //
 
 /// 255
 const int rMax = 255;
@@ -23,6 +27,17 @@ const double focusOpacity = 0.12;
 
 /// 0.25
 const double selectionOpacity = 0.25;
+
+/// Crucial opacity threshold; some things are too important to be broken by user settings
+/// 0.25
+const double crucialOT = 0.25;
+
+/// 0.667
+/// Shadow opacity should be "faster" than surface
+/// 1:1 looks foggy
+const double shadowMod = 0.667;
+
+// Localization //
 
 /// Non-conclusive set containing...
 /// ar, fa, he, ur
