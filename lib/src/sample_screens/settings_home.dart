@@ -72,6 +72,15 @@ class EzSettingsHome extends StatefulWidget {
   /// [EzResetButton.skip] passthrough
   final Set<String>? skipKeys;
 
+  /// [EzConfigRandomizer.extraKeys] passthrough
+  final List<String>? extraKeys;
+
+  /// [EzConfigRandomizer.appName] passthrough
+  final String appName;
+
+  /// [EzConfigRandomizer.androidPackage] passthrough
+  final String? androidPackage;
+
   /// Widgets to be added below the [EzResetButton]
   /// BYO leading spacer, trailing is always [EzSeparator]
   final List<Widget>? footer;
@@ -94,6 +103,9 @@ class EzSettingsHome extends StatefulWidget {
     this.additionalRoutes,
     this.quickConfigSpacer = ezDivider,
     this.randomSpacer = ezSpacer,
+    this.extraKeys,
+    required this.appName,
+    this.androidPackage,
     this.resetSpacer = ezSpacer,
     this.skipKeys,
     this.footer,
@@ -247,7 +259,11 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         // Feeling lucky
         if (widget.randomSpacer != null) ...<Widget>[
           widget.randomSpacer!,
-          const EzConfigRandomizer(),
+          EzConfigRandomizer(
+            extraKeys: widget.extraKeys,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
+          ),
         ],
 
         // Reset button
