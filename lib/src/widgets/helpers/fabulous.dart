@@ -5,13 +5,8 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart';
-import 'package:file_saver/file_saver.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -62,23 +57,23 @@ class EzBackFAB extends StatelessWidget {
 }
 
 class EzConfigFAB extends StatelessWidget {
+  /// [ezConfigKeys] included by default
+  /// Include any app specific keys you want backed up here
+  final List<String>? extraKeys;
+
   /// App Name
   final String appName;
 
   /// com.example.app
   final String? androidPackage;
 
-  /// [ezConfigKeys] included by default
-  /// Include any app specific keys you want backed up here
-  final List<String>? extraKeys;
-
   /// [FloatingActionButton] that saves/loads config to/from JSON file(s)
   const EzConfigFAB(
     BuildContext context, {
     super.key,
-    required this.appName,
-    required this.androidPackage,
     this.extraKeys,
+    required this.appName,
+    this.androidPackage,
   });
 
   @override
@@ -99,82 +94,18 @@ class EzConfigFAB extends StatelessWidget {
         // Save config
         EzMenuButton(
           label: l10n.ssSaveConfig,
-          onPressed: () async {
-            final List<String> keys = <String>[
-              ...ezConfigKeys.keys,
-              if (extraKeys != null) ...extraKeys!,
-            ];
-
-            final Map<String, dynamic> config =
-                Map<String, dynamic>.fromEntries(keys.map(
-              (String key) => MapEntry<String, dynamic>(
-                key,
-                EzConfig.get(key),
-              ),
-            ));
-
-            try {
-              await FileSaver.instance.saveFile(
-                name: '${ezTitleToSnake(appName)}_settings.json',
-                bytes: utf8.encode(jsonEncode(config)),
-                mimeType: MimeType.json,
-              );
-            } catch (e) {
-              if (context.mounted) ezLogAlert(context, message: e.toString());
-              return;
-            }
-
-            if (context.mounted) {
-              ezSnackBar(
-                context: context,
-                message: l10n.ssConfigSaved(archivePath(
-                  appName: appName,
-                  androidPackage: androidPackage,
-                )),
-              );
-            }
-          },
+          onPressed: () => ezConfigSaver(
+            context,
+            extraKeys: extraKeys,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
         ),
 
         // Load config
         EzMenuButton(
           label: l10n.ssLoadConfig,
-          onPressed: () async {
-            final FilePickerResult? result =
-                await FilePicker.platform.pickFiles(
-              type: FileType.custom,
-              allowedExtensions: <String>['json'],
-            );
-
-            try {
-              if (result != null && result.files.single.path != null) {
-                if (kIsWeb) {
-                  final Uint8List? fileBytes = result.files.first.bytes;
-                  if (fileBytes == null) throw 'null file';
-
-                  final String fileContent = utf8.decode(fileBytes);
-                  await EzConfig.loadConfig(jsonDecode(fileContent));
-                } else {
-                  final String filePath = result.files.single.path!;
-                  final String fileContent =
-                      await File(filePath).readAsString();
-
-                  await EzConfig.loadConfig(jsonDecode(fileContent));
-                }
-              }
-            } catch (e) {
-              if (context.mounted) ezLogAlert(context, message: e.toString());
-              return;
-            }
-
-            if (context.mounted) {
-              ezSnackBar(
-                context: context,
-                message:
-                    kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder,
-              );
-            }
-          },
+          onPressed: () => ezConfigLoader(context),
         ),
       ],
     );
