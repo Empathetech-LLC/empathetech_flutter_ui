@@ -18,9 +18,18 @@ class EzConfigRandomizer extends StatelessWidget {
   /// Defaults to [EFUILang.ssRandomize]
   final String? dialogTitle;
 
-  /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.gUndoWarn]
-  final String? dialogContent;
+  /// Optional override for [EzAlertDialog.content] that shows on click
+  /// Defaults to [ezRichUndoWarning]
+  final Widget? dialogContent;
+
+  /// [ezRichUndoWarning] passthrough
+  final List<String>? extraKeys;
+
+  /// [ezRichUndoWarning] passthrough
+  final String? appName;
+
+  /// [ezRichUndoWarning] passthrough
+  final String? androidPackage;
 
   /// What happens when the user choses to randomize
   /// Defaults to [EzConfig.randomize]
@@ -37,9 +46,13 @@ class EzConfigRandomizer extends StatelessWidget {
     this.label,
     this.dialogTitle,
     this.dialogContent,
+    this.extraKeys,
+    this.appName,
+    this.androidPackage,
     this.onConfirm,
     this.onDeny,
-  });
+  }) : assert((appName == null) != (dialogContent == null),
+            'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +91,13 @@ class EzConfigRandomizer extends StatelessWidget {
                         : l10n.gLight.toLowerCase()),
                 textAlign: TextAlign.center,
               ),
-              content: Text(
-                dialogContent ?? l10n.gUndoWarn,
-                textAlign: TextAlign.center,
-              ),
+              content: dialogContent ??
+                  ezRichUndoWarning(
+                    context,
+                    extraKeys: extraKeys,
+                    appName: appName!,
+                    androidPackage: androidPackage,
+                  ),
               materialActions: materialActions,
               cupertinoActions: cupertinoActions,
               needsClose: false,

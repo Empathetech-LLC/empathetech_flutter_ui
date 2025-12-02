@@ -66,6 +66,15 @@ class EzDesignSettings extends StatefulWidget {
   /// Optional callback for when a local reset is confirmed
   final void Function()? onReset;
 
+  /// [EzResetButton.extraKeys] passthrough
+  final List<String>? extraSaveKeys;
+
+  /// [EzResetButton.appName] passthrough
+  final String appName;
+
+  /// [EzResetButton.androidPackage] passthrough
+  final String? androidPackage;
+
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
@@ -84,6 +93,9 @@ class EzDesignSettings extends StatefulWidget {
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.onReset,
+    this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
   });
 
   @override
@@ -579,6 +591,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             drawState();
             widget.onReset?.call();
           },
+          extraKeys: widget.extraSaveKeys,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
         ),
         ezSeparator,
       ],

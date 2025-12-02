@@ -24,6 +24,15 @@ class EzLayoutSettings extends StatefulWidget {
   /// [allLayoutKeys] are included by default
   final Set<String>? resetKeys;
 
+  /// [EzResetButton.extraKeys] passthrough
+  final List<String>? extraSaveKeys;
+
+  /// [EzResetButton.appName] passthrough
+  final String appName;
+
+  /// [EzResetButton.androidPackage] passthrough
+  final String? androidPackage;
+
   /// Empathetech layout settings
   /// Recommended to use as a [Scaffold.body]
   const EzLayoutSettings({
@@ -32,6 +41,9 @@ class EzLayoutSettings extends StatefulWidget {
     this.afterLayout,
     this.resetSpacer = ezSeparator,
     this.resetKeys,
+    this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
   });
 
   @override
@@ -127,6 +139,9 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             }
             setState(() => redraw = Random().nextInt(rMax));
           },
+          extraKeys: widget.extraSaveKeys,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
         ),
         ezSeparator,
       ],

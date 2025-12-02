@@ -24,9 +24,18 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
 
-  /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.gUndoWarn]
-  final String? dialogContent;
+  /// Optionally override [EzAlertDialog.content] that shows on click
+  /// Defaults to [ezRichUndoWarning]
+  final Widget? dialogContent;
+
+  /// [ezRichUndoWarning] passthrough
+  final List<String>? extraKeys;
+
+  /// [ezRichUndoWarning] passthrough
+  final String? appName;
+
+  /// [ezRichUndoWarning] passthrough
+  final String? androidPackage;
 
   /// [EzConfig.reset] passthrough
   /// Moot if [onConfirm] is provided
@@ -49,10 +58,14 @@ class EzResetButton extends StatelessWidget {
     this.skip,
     this.dialogTitle,
     this.dialogContent,
+    this.extraKeys,
+    this.appName,
+    this.androidPackage,
     this.storageOnly = false,
     this.onConfirm,
     this.onDeny,
-  });
+  }) : assert((appName == null) != (dialogContent == null),
+            'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
 
   @override
   Widget build(BuildContext context) {
@@ -111,10 +124,13 @@ class EzResetButton extends StatelessWidget {
                 dialogTitle ?? l10n.ssResetAll,
                 textAlign: TextAlign.center,
               ),
-              content: Text(
-                dialogContent ?? l10n.gUndoWarn,
-                textAlign: TextAlign.center,
-              ),
+              content: dialogContent ??
+                  ezRichUndoWarning(
+                    context,
+                    extraKeys: extraKeys,
+                    appName: appName!,
+                    androidPackage: androidPackage,
+                  ),
               materialActions: materialActions,
               cupertinoActions: cupertinoActions,
               needsClose: false,

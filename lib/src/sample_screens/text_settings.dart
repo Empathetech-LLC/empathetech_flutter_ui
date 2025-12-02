@@ -27,6 +27,15 @@ class EzTextSettings extends StatelessWidget {
   /// [allTextKeys] and [lightOnSurfaceKey] are included by default
   final Set<String>? lightThemeResetKeys;
 
+  /// [EzResetButton.extraKeys] passthrough
+  final List<String>? extraSaveKeys;
+
+  /// [EzResetButton.appName] passthrough
+  final String appName;
+
+  /// [EzResetButton.androidPackage] passthrough
+  final String? androidPackage;
+
   /// Whether the onSurfaceColor (quick) setting should be shown
   final bool showOnSurface;
 
@@ -59,6 +68,9 @@ class EzTextSettings extends StatelessWidget {
     this.resetSpacer = ezSeparator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
+    this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
 
     // Quick
     this.showOnSurface = true,
@@ -98,6 +110,9 @@ class EzTextSettings extends StatelessWidget {
           resetSpacer: resetSpacer,
           darkThemeResetKeys: darkThemeResetKeys,
           lightThemeResetKeys: lightThemeResetKeys,
+          extraSaveKeys: extraSaveKeys,
+          appName: appName,
+          androidPackage: androidPackage,
 
           // Quick
           showOnSurface: showOnSurface,
@@ -118,6 +133,9 @@ class _TextSettings extends StatefulWidget {
   final Widget resetSpacer;
   final Set<String>? darkThemeResetKeys;
   final Set<String>? lightThemeResetKeys;
+  final List<String>? extraSaveKeys;
+  final String appName;
+  final String? androidPackage;
 
   // Quick
   final bool showOnSurface;
@@ -134,6 +152,9 @@ class _TextSettings extends StatefulWidget {
     required this.resetSpacer,
     required this.darkThemeResetKeys,
     required this.lightThemeResetKeys,
+    required this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
     required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
@@ -261,6 +282,9 @@ class _TextSettingsState extends State<_TextSettings>
             resetSpacer: widget.resetSpacer,
             darkThemeResetKeys: widget.darkThemeResetKeys,
             lightThemeResetKeys: widget.lightThemeResetKeys,
+            extraSaveKeys: widget.extraSaveKeys,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
           )
         else
           _AdvancedTextSettings(
@@ -276,6 +300,9 @@ class _TextSettingsState extends State<_TextSettings>
             resetSpacer: widget.resetSpacer,
             darkThemeResetKeys: widget.darkThemeResetKeys,
             lightThemeResetKeys: widget.lightThemeResetKeys,
+            extraSaveKeys: widget.extraSaveKeys,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
           ),
       ],
     );
@@ -306,6 +333,9 @@ class _QuickTextSettings extends StatefulWidget {
   final Widget resetSpacer;
   final Set<String>? darkThemeResetKeys;
   final Set<String>? lightThemeResetKeys;
+  final List<String>? extraSaveKeys;
+  final String appName;
+  final String? androidPackage;
 
   const _QuickTextSettings({
     required this.displayProvider,
@@ -322,6 +352,9 @@ class _QuickTextSettings extends StatefulWidget {
     required this.resetSpacer,
     required this.darkThemeResetKeys,
     required this.lightThemeResetKeys,
+    required this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
   });
 
   @override
@@ -661,6 +694,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
             setState(() {});
           },
+          extraKeys: widget.extraSaveKeys,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
         ),
         ezSeparator,
       ],
@@ -681,6 +717,9 @@ class _AdvancedTextSettings extends StatefulWidget {
   final Widget resetSpacer;
   final Set<String>? darkThemeResetKeys;
   final Set<String>? lightThemeResetKeys;
+  final List<String>? extraSaveKeys;
+  final String appName;
+  final String? androidPackage;
 
   const _AdvancedTextSettings({
     required this.displayProvider,
@@ -692,6 +731,9 @@ class _AdvancedTextSettings extends StatefulWidget {
     required this.resetSpacer,
     required this.darkThemeResetKeys,
     required this.lightThemeResetKeys,
+    required this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
   });
 
   @override
@@ -1439,6 +1481,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
             setState(() {});
           },
+          extraKeys: widget.extraSaveKeys,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
         ),
         ezSeparator,
       ],

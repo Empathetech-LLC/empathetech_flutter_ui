@@ -23,6 +23,15 @@ class EzColorSettings extends StatefulWidget {
   /// [lightColorKeys] are included by default
   final Set<String>? lightThemeResetKeys;
 
+  /// [EzResetButton.extraKeys] passthrough
+  final List<String>? extraSaveKeys;
+
+  /// [EzResetButton.appName] passthrough
+  final String appName;
+
+  /// [EzResetButton.androidPackage] passthrough
+  final String? androidPackage;
+
   /// Optional additional quick settings
   /// Will appear first, above the monochrome
   /// BYO spacers
@@ -48,6 +57,9 @@ class EzColorSettings extends StatefulWidget {
     this.resetSpacer = ezSeparator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
+    this.extraSaveKeys,
+    required this.appName,
+    this.androidPackage,
 
     // Quick
     this.quickHeader,
@@ -184,6 +196,9 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
                   setState(() => currList = List<String>.from(defaultList));
                 },
+                extraKeys: widget.extraSaveKeys,
+                appName: widget.appName,
+                androidPackage: widget.androidPackage,
               )
             : EzResetButton(
                 dialogTitle: l10n.csResetAll(lightString),
@@ -196,6 +211,9 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
                   setState(() => currList = List<String>.from(defaultList));
                 },
+                extraKeys: widget.extraSaveKeys,
+                appName: widget.appName,
+                androidPackage: widget.androidPackage,
               ),
         ezSeparator,
       ],
