@@ -100,7 +100,7 @@ void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 
 /// Returns the [Directionality] of the current [BuildContext]
 /// Falls back to [rtlLanguageCodes] on context errors
-bool isLTR(BuildContext context) {
+bool ltrCheck(BuildContext context) {
   try {
     return Directionality.of(context) == TextDirection.ltr;
   } catch (_) {
