@@ -55,7 +55,7 @@ class EzAppProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool ltr = isLTR(context);
+    final bool ltr = ltrCheck(context);
     final ThemeData materialDark =
         darkTheme ?? ezThemeData(Brightness.dark, ltr);
     final ThemeData materialLight =
