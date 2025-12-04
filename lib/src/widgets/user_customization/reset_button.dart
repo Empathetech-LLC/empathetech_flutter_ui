@@ -73,7 +73,7 @@ class EzResetButton extends StatelessWidget {
 
     final EFUILang l10n = ezL10n(context);
 
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     late final bool isDark = isDarkTheme(context);
     late final bool useCrucial =

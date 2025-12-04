@@ -113,7 +113,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final bool isDark = isDarkTheme(context);
 
@@ -435,7 +435,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final bool isDark = isDarkTheme(context);
     final String userColorsKey =

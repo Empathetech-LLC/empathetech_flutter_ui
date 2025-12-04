@@ -698,7 +698,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     late final ThemeData theme = Theme.of(context);
 

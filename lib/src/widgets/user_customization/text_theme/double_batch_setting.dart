@@ -83,7 +83,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 

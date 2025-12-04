@@ -81,7 +81,7 @@ class _EzLinkState extends State<EzLink> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final ThemeData theme = Theme.of(context);
     final Color textColor = widget.textColor ?? theme.colorScheme.primary;

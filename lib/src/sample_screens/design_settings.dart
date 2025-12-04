@@ -148,7 +148,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final bool isDark = isDarkTheme(context);
     final String themeProfile = isDark ? darkString : lightString;

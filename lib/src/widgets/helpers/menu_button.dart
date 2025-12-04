@@ -103,7 +103,7 @@ class _EzMenuButtonState extends State<EzMenuButton> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final Color primary = Theme.of(context).colorScheme.primary;
 

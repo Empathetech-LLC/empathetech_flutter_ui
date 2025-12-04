@@ -79,7 +79,7 @@ class EzTextButton extends StatefulWidget {
 class _EzTextButtonState extends State<EzTextButton> {
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final Color primary = Theme.of(context).colorScheme.primary;
 
@@ -198,7 +198,7 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final Color primary = Theme.of(context).colorScheme.primary;
 

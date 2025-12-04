@@ -100,7 +100,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 

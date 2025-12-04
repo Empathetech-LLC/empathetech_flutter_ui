@@ -38,7 +38,7 @@ class EzWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
     final Color alertColor =
         iconColor ?? Theme.of(context).colorScheme.secondary;
