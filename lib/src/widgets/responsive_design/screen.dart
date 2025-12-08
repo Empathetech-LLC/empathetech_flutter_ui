@@ -83,6 +83,9 @@ class EzScreen extends StatelessWidget {
       if (imagePath == null || imagePath == noImageValue) {
         return null;
       } else {
+        final int? isColor = int.tryParse(imagePath);
+        if (isColor != null) return BoxDecoration(color: Color(isColor));
+
         final BoxFit? fit =
             ezFitFromName(EzConfig.get('$decorationKey$boxFitSuffix'));
 
