@@ -12,6 +12,9 @@ class EzColorSettings extends StatefulWidget {
   /// Optional starting [EzCSType] target
   final EzCSType? target;
 
+  /// If provided, the "Editing: X theme" text will be a link with this callback
+  final void Function()? themeLink;
+
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
@@ -54,6 +57,7 @@ class EzColorSettings extends StatefulWidget {
     // Shared
     super.key,
     this.target,
+    this.themeLink,
     this.resetSpacer = ezSeparator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
@@ -130,11 +134,19 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     return EzScrollView(
       children: <Widget>[
         // Current theme reminder
-        EzText(
-          l10n.gEditingTheme(isDark ? darkString : lightString),
-          style: Theme.of(context).textTheme.labelLarge,
-          textAlign: TextAlign.center,
-        ),
+        (widget.themeLink != null)
+            ? EzLink(
+                l10n.gEditingTheme(isDark ? darkString : lightString),
+                onTap: widget.themeLink,
+                hint: l10n.gEditingThemeHint,
+                style: Theme.of(context).textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              )
+            : EzText(
+                l10n.gEditingTheme(isDark ? darkString : lightString),
+                style: Theme.of(context).textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              ),
         ezMargin,
 
         // Mode switch

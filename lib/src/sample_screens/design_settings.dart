@@ -28,6 +28,9 @@ class EzDesignSettings extends StatefulWidget {
   /// BYO leading spacer, trailing spacer is a custom [EzDivider]
   final List<Widget>? globalSettingsPostpend;
 
+  /// If provided, the "Editing: X theme" text will be a link with this callback
+  final void Function()? themeLink;
+
   /// Optional additional themed design settings, before the main group
   /// BYO trailing spacer, leading is a custom [EzDivider]
   final List<Widget>? themedSettingsPrepend;
@@ -84,6 +87,7 @@ class EzDesignSettings extends StatefulWidget {
     this.includeIconSize = true,
     this.includeScroll = true,
     this.globalSettingsPostpend,
+    this.themeLink,
     this.themedSettingsPrepend,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
@@ -226,7 +230,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         icon: EzIcon(PlatformIcons(context).refresh),
                         label: l10n.gReset,
                       ),
-                      EzSpacer(space: spacing * 1.5),
+                      ezSeparator,
                     ],
                   ),
                 );
@@ -339,11 +343,19 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Global/themed divider, w/ theme reminder
         EzSpacer(space: spacing * 1.25),
         EzDivider(height: margin),
-        EzText(
-          l10n.gEditingTheme(themeProfile),
-          style: textTheme.labelLarge,
-          textAlign: TextAlign.center,
-        ),
+        (widget.themeLink != null)
+            ? EzLink(
+                l10n.gEditingTheme(isDark ? darkString : lightString),
+                onTap: widget.themeLink,
+                hint: l10n.gEditingThemeHint,
+                style: Theme.of(context).textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              )
+            : EzText(
+                l10n.gEditingTheme(themeProfile),
+                style: textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              ),
         EzSpacer(space: spacing * 1.25),
 
         if (widget.themedSettingsPrepend != null)
@@ -519,7 +531,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         icon: EzIcon(PlatformIcons(context).refresh),
                         label: l10n.gReset,
                       ),
-                      EzSpacer(space: spacing * 1.5),
+                      ezSeparator,
                     ],
                   );
                 },
