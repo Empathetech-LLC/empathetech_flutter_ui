@@ -36,6 +36,7 @@
 
   "gEditing": "Editing: ",
   "gEditingTheme": "Editing: {themeType} theme",
+  "gEditingThemeHint": "Open the system theme settings",
 
   "gLeft": "Left",
   "gRight": "Right",

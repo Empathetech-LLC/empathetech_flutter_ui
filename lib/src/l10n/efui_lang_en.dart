@@ -98,6 +98,9 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get gEditingThemeHint => 'Open the system theme settings';
+
+  @override
   String get gLeft => 'Left';
 
   @override
@@ -733,6 +736,9 @@ class EFUILangEnUs extends EFUILangEn {
   String gEditingTheme(Object themeType) {
     return 'Editing: $themeType theme';
   }
+
+  @override
+  String get gEditingThemeHint => 'Open the system theme settings';
 
   @override
   String get gLeft => 'Left';

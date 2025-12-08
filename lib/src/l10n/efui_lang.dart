@@ -273,6 +273,12 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
+  /// No description provided for @gEditingThemeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the system theme settings'**
+  String get gEditingThemeHint;
+
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:

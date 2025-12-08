@@ -98,6 +98,9 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get gEditingThemeHint => 'Abrir la configuración del tema del sistema';
+
+  @override
   String get gLeft => 'Izquierda';
 
   @override
