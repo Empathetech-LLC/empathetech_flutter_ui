@@ -616,7 +616,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ezRowSpacer,
                 ],
               ),
-              EzSpacer(space: spacing * 1.5),
+              ezSeparator,
             ],
           );
         },
