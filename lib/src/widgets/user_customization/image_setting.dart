@@ -26,6 +26,9 @@ class EzImageSetting extends StatefulWidget {
   ///   padding: EdgeInsets.all(padding * 0.75),
   final ButtonStyle? style;
 
+  /// If true, opens an [ezColorPicker] for the user, and saves the hex value (string) as the image path
+  final bool allowSolidColor;
+
   /// Effectively whether the image is nullable
   /// true is recommended
   /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
@@ -62,6 +65,7 @@ class EzImageSetting extends StatefulWidget {
     required this.configKey,
     required this.label,
     this.style,
+    this.allowSolidColor = false,
     this.allowClear = true,
     this.credits,
     this.updateTheme,
@@ -146,6 +150,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         builder: (_, StateSetter setModal) => EzScrollView(
           mainAxisSize: MainAxisSize.min,
           children: sourceOptions(
+            theme: theme,
             mContext: mContext,
             setModal: setModal,
           ),
@@ -153,9 +158,11 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
     );
     if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+    final bool isInt = (int.tryParse(newPath) != null);
 
     // Choose fit and/or edit image
-    if (fromLocal &&
+    if (!isInt &&
+        fromLocal &&
         widget.showEditor &&
         !kIsWeb &&
         !EzConfig.isPathAsset(newPath)) {
@@ -199,7 +206,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
 
     if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
-    if (widget.showFitOption) {
+    if (!isInt && widget.showFitOption) {
       final bool canceled = (await chooseFit(newPath, theme) == null);
       if (canceled) return;
     }
@@ -227,7 +234,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       }
 
       // Update the theme (conditionally)
-      if (widget.updateTheme != null && updateTheme) {
+      if (!isInt && widget.updateTheme != null && updateTheme) {
         final String result = await storeImageColorScheme(
           brightness: widget.updateTheme!,
           path: newPath,
@@ -251,6 +258,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Build the list of [ImageSource] options
   List<Widget> sourceOptions({
+    required ThemeData theme,
     required BuildContext mContext,
     required StateSetter setModal,
   }) {
@@ -402,6 +410,41 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: l10n.dsFromNetwork,
       ),
     ));
+
+    // Solid color (optional)
+    if (widget.allowSolidColor) {
+      options.add(Padding(
+        padding: wrapPadding,
+        child: EzElevatedIconButton(
+          onPressed: () async {
+            final int? pathARGB =
+                (currPath == null) ? null : int.tryParse(currPath!);
+            Color currColor = pathARGB == null
+                ? theme.colorScheme.surfaceContainer
+                : Color(pathARGB);
+
+            await ezColorPicker(
+              context,
+              startColor: currColor,
+              onColorChange: (Color color) => setModal(() => currColor = color),
+              onConfirm: () async {
+                await EzConfig.setString(
+                  widget.configKey,
+                  currColor.toARGB32().toString(),
+                );
+
+                if (mContext.mounted) {
+                  Navigator.of(mContext).pop(currColor.toARGB32().toString());
+                }
+              },
+              onDeny: doNothing,
+            );
+          },
+          icon: EzIcon(Icons.color_lens),
+          label: 'Solid color', // TODO: l10n
+        ),
+      ));
+    }
 
     // Reset
     if (defaultPath != null && defaultPath != noImageValue) {
@@ -703,6 +746,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     late final ThemeData theme = Theme.of(context);
 
     // Return the build //
+
+    final int? pathARGB = (currPath == null) ? null : int.tryParse(currPath!);
+
     return Semantics(
       label: widget.label,
       button: true,
@@ -729,11 +775,14 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
             child: CircleAvatar(
               radius: iconSize + padding,
-              foregroundImage:
-                  (inProgress || currPath == null || currPath == noImageValue)
-                      ? null
-                      : ezImageProvider(currPath!),
-              backgroundColor: Colors.transparent,
+              foregroundImage: (inProgress ||
+                      currPath == null ||
+                      currPath == noImageValue ||
+                      pathARGB != null)
+                  ? null
+                  : ezImageProvider(currPath!),
+              backgroundColor:
+                  (pathARGB != null) ? Color(pathARGB) : Colors.transparent,
               foregroundColor: theme.colorScheme.onSurface,
               child: inProgress
                   ? const CircularProgressIndicator()
