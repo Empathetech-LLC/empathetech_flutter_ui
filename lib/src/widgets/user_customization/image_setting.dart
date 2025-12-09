@@ -441,7 +441,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
           icon: EzIcon(Icons.color_lens),
-          label: 'Solid color', // TODO: l10n
+          label: l10n.dsSolidColor,
         ),
       ));
     }

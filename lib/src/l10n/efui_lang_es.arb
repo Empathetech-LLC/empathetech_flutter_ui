@@ -186,6 +186,7 @@
   "dsFromFile": "Usando un archivo",
   "dsFromCamera": "Usando la cámara",
   "dsFromNetwork": "Usando un link",
+  "dsSolidColor": "Color sólido",
   "dsResetIt": "Restablecer",
   "dsClearIt": "Borrar",
   "dsUseForColors": "Actualiza los colores de la app usando esta imagen",

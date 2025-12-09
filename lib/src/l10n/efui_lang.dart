@@ -939,6 +939,12 @@ abstract class EFUILang {
   /// **'From URL'**
   String get dsFromNetwork;
 
+  /// No description provided for @dsSolidColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Solid color'**
+  String get dsSolidColor;
+
   /// No description provided for @dsResetIt.
   ///
   /// In en, this message translates to:

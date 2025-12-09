@@ -460,6 +460,9 @@ class EFUILangEn extends EFUILang {
   String get dsFromNetwork => 'From URL';
 
   @override
+  String get dsSolidColor => 'Solid color';
+
+  @override
   String get dsResetIt => 'Reset it';
 
   @override
@@ -1101,6 +1104,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsFromNetwork => 'From URL';
+
+  @override
+  String get dsSolidColor => 'Solid color';
 
   @override
   String get dsResetIt => 'Reset it';

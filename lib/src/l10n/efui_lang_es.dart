@@ -463,6 +463,9 @@ class EFUILangEs extends EFUILang {
   String get dsFromNetwork => 'Usando un link';
 
   @override
+  String get dsSolidColor => 'Color sólido';
+
+  @override
   String get dsResetIt => 'Restablecer';
 
   @override

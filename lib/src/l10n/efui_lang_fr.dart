@@ -462,6 +462,9 @@ class EFUILangFr extends EFUILang {
   String get dsFromNetwork => 'Depuis une URL';
 
   @override
+  String get dsSolidColor => 'Couleur unie';
+
+  @override
   String get dsResetIt => 'Réinitialiser';
 
   @override

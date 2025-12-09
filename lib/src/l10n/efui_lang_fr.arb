@@ -186,6 +186,7 @@
   "dsFromFile": "Depuis un fichier",
   "dsFromCamera": "Depuis la caméra",
   "dsFromNetwork": "Depuis une URL",
+  "dsSolidColor": "Couleur unie",
   "dsResetIt": "Réinitialiser",
   "dsClearIt": "Effacer",
   "dsUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
