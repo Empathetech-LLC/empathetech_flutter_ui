@@ -102,6 +102,7 @@
   "gResetAll": "Tout réinitialiser",
   "gUndoWarn1": "Impossible d'annuler automatiquement.\n",
   "gSave": "Enregistrez",
+  "gSaveHint": "Activez pour enregistrer un fichier de configuration JSON.",
   "gUndoWarn2": " votre configuration actuelle pour la restaurer manuellement.",
 
   "gCreditTo": "Crédits à :",

@@ -102,6 +102,7 @@
   "gResetAll": "Restablecer todo",
   "gUndoWarn1": "No se puede deshacer automáticamente.\n",
   "gSave": "Guarde",
+  "gSaveHint": "Activar para guardar un archivo de configuración JSON.",
   "gUndoWarn2": " su configuración actual para restaurarla manualmente.",
 
   "gCreditTo": "Acreditando a:",

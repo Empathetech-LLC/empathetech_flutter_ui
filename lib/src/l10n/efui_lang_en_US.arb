@@ -102,6 +102,7 @@
   "gResetAll": "Reset all",
   "gUndoWarn1": "Cannot be undone automatically.\n",
   "gSave": "Save",
+  "gSaveHint": "Activate to save a JSON config file.",
   "gUndoWarn2": " your current config to restore it manually.",
 
   "gCreditTo": "Credit to:",

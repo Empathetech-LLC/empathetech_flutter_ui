@@ -585,6 +585,12 @@ abstract class EFUILang {
   /// **'Save'**
   String get gSave;
 
+  /// No description provided for @gSaveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to save a JSON config file.'**
+  String get gSaveHint;
+
   /// No description provided for @gUndoWarn2.
   ///
   /// In en, this message translates to:

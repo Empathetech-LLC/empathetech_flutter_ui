@@ -267,6 +267,10 @@ class EFUILangFr extends EFUILang {
   String get gSave => 'Enregistrez';
 
   @override
+  String get gSaveHint =>
+      'Activez pour enregistrer un fichier de configuration JSON.';
+
+  @override
   String get gUndoWarn2 =>
       ' votre configuration actuelle pour la restaurer manuellement.';
 

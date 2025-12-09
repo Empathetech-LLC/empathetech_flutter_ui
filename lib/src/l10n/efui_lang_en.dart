@@ -268,6 +268,9 @@ class EFUILangEn extends EFUILang {
   String get gSave => 'Save';
 
   @override
+  String get gSaveHint => 'Activate to save a JSON config file.';
+
+  @override
   String get gUndoWarn2 => ' your current config to restore it manually.';
 
   @override
@@ -906,6 +909,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gSave => 'Save';
+
+  @override
+  String get gSaveHint => 'Activate to save a JSON config file.';
 
   @override
   String get gUndoWarn2 => ' your current config to restore it manually.';

@@ -33,8 +33,7 @@ Widget ezRichUndoWarning(
           appName: appName,
           androidPackage: androidPackage,
         ),
-        hint:
-            '', // TODO: Add a hint? Make this nullable? If yes (to nullable), audit others.
+        hint: l10n.gSaveHint,
         style: textTheme.bodyLarge,
         textAlign: TextAlign.center,
       ),
