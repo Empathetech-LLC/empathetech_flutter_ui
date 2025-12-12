@@ -15,7 +15,7 @@ dependencies:
   # Flutter (Google)
   go_router: ^14.8.1
   intl: ^0.20.2
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.4
 
   # Community
   email_validator: ^3.0.0
