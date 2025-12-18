@@ -3,26 +3,18 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:empathetech_flutter_ui/src/functions/helpers_io.dart';
+
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
-  /// Optionally provide a [ScaffoldMessengerState] typed [GlobalKey]
-  /// To track [SnackBar]s, [MaterialBanner]s, etc.
-  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
-
   /// Provided to [PlatformProvider] with a [ScaffoldMessenger] layer
   final Widget app;
-
-  /// Optional [PlatformTheme.materialDarkTheme] override
-  /// Defaults to [ezThemeData] with [Brightness.dark]
-  final ThemeData? darkTheme;
-
-  /// Optional [PlatformTheme.materialLightTheme] override
-  /// Defaults to [ezThemeData] with [Brightness.light]
-  final ThemeData? lightTheme;
 
   /// [PlatformProvider.initialPlatform] passthrough
   final TargetPlatform? initialPlatform;
@@ -30,36 +22,110 @@ class EzAppProvider extends StatelessWidget {
   /// [PlatformProvider.settings] passthrough
   final PlatformSettingsData? settings;
 
+  /// Optionally provide a [ScaffoldMessengerState] typed [GlobalKey]
+  /// To track [SnackBar]s, [MaterialBanner]s, etc.
+  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
+
   /// [PlatformProvider] wrapper with [ezThemeData] defaults
-  EzAppProvider({
+  const EzAppProvider({
     super.key,
-    this.scaffoldMessengerKey,
     required this.app,
-    this.darkTheme,
-    this.lightTheme,
     this.initialPlatform,
     this.settings,
+    this.scaffoldMessengerKey,
   });
 
-  // Gather the fixed theme data //
+  @override
+  Widget build(BuildContext context) => ChangeNotifierProvider<EzThemeProvider>(
+        create: (_) => EzThemeProvider(
+          isLTR: ltrCheck(context),
+          useCupertino: cupertinoCheck(),
+        ),
+        child: _ProviderSquared(
+          app: app,
+          initialPlatform: initialPlatform,
+          settings: settings,
+          scaffoldMessengerKey: scaffoldMessengerKey,
+        ),
+      );
+}
 
-  late final bool? _savedDark = EzConfig.get(isDarkThemeKey);
+class EzThemeProvider extends ChangeNotifier {
+  late ThemeMode _initialMode;
 
-  late final ThemeMode _initialTheme = (_savedDark == null)
-      ? ThemeMode.system
-      : (_savedDark == true)
-          ? ThemeMode.dark
-          : ThemeMode.light;
+  late ThemeData _darkMaterial;
+  late ThemeData _lightMaterial;
 
-  // Return the build //
+  late CupertinoThemeData? _darkCupertino;
+  late CupertinoThemeData? _lightCupertino;
+
+  EzThemeProvider({required bool isLTR, required bool useCupertino}) {
+    final bool? savedDark = EzConfig.get(isDarkThemeKey);
+
+    _initialMode = (savedDark == null)
+        ? ThemeMode.system
+        : (savedDark == true)
+            ? ThemeMode.dark
+            : ThemeMode.light;
+
+    _darkMaterial = ezThemeData(Brightness.dark, isLTR);
+    _lightMaterial = ezThemeData(Brightness.light, isLTR);
+
+    if (useCupertino) {
+      _darkCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
+      _lightCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
+    } else {
+      _darkCupertino = null;
+      _lightCupertino = null;
+    }
+
+    void rebuildTheme(void Function()? onComplete) {
+      _darkMaterial = ezThemeData(Brightness.dark, isLTR);
+      _lightMaterial = ezThemeData(Brightness.light, isLTR);
+
+      if (useCupertino) {
+        _darkCupertino =
+            MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
+        _lightCupertino =
+            MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
+      } else {
+        _darkCupertino = null;
+        _lightCupertino = null;
+      }
+
+      notifyListeners();
+      onComplete?.call();
+    }
+  }
+
+  ThemeMode get initialMode => _initialMode;
+
+  ThemeData get darkMaterial => _darkMaterial;
+  ThemeData get lightMaterial => _lightMaterial;
+
+  CupertinoThemeData? get darkCupertino => _darkCupertino;
+  CupertinoThemeData? get lightCupertino => _lightCupertino;
+}
+
+class _ProviderSquared extends StatelessWidget {
+  final Widget app;
+  final TargetPlatform? initialPlatform;
+  final PlatformSettingsData? settings;
+
+  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
+
+  const _ProviderSquared({
+    required this.app,
+    required this.initialPlatform,
+    required this.settings,
+    required this.scaffoldMessengerKey,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final bool ltr = ltrCheck(context);
-    final ThemeData materialDark =
-        darkTheme ?? ezThemeData(Brightness.dark, ltr);
-    final ThemeData materialLight =
-        lightTheme ?? ezThemeData(Brightness.light, ltr);
+    final EzThemeProvider config = Provider.of<EzThemeProvider>(context);
 
     return PlatformProvider(
       builder: (_) => PlatformTheme(
@@ -67,19 +133,11 @@ class EzAppProvider extends StatelessWidget {
           key: scaffoldMessengerKey,
           child: app,
         ),
-        themeMode: _initialTheme,
-        materialLightTheme: materialLight,
-        materialDarkTheme: materialDark,
-        cupertinoLightTheme: MaterialBasedCupertinoThemeData(
-          materialTheme: materialLight,
-        ).copyWith(
-          primaryColor: materialLight.colorScheme.secondary,
-        ),
-        cupertinoDarkTheme: MaterialBasedCupertinoThemeData(
-          materialTheme: materialDark,
-        ).copyWith(
-          primaryColor: materialDark.colorScheme.secondary,
-        ),
+        themeMode: config.initialMode,
+        materialDarkTheme: config.darkMaterial,
+        materialLightTheme: config.lightMaterial,
+        cupertinoDarkTheme: config.darkCupertino,
+        cupertinoLightTheme: config.lightCupertino,
         matchCupertinoSystemChromeBrightness: true,
       ),
       initialPlatform: initialPlatform,
