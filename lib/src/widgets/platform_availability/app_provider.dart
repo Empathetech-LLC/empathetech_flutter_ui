@@ -51,6 +51,10 @@ class EzAppProvider extends StatelessWidget {
 }
 
 class EzThemeProvider extends ChangeNotifier {
+  // Construct //
+
+  bool _ltr;
+  final bool _cupertino;
   late ThemeMode _initialMode;
 
   late ThemeData _darkMaterial;
@@ -59,7 +63,9 @@ class EzThemeProvider extends ChangeNotifier {
   late CupertinoThemeData? _darkCupertino;
   late CupertinoThemeData? _lightCupertino;
 
-  EzThemeProvider({required bool isLTR, required bool useCupertino}) {
+  EzThemeProvider({required bool isLTR, required bool useCupertino})
+      : _ltr = isLTR,
+        _cupertino = useCupertino {
     final bool? savedDark = EzConfig.get(isDarkThemeKey);
 
     _initialMode = (savedDark == null)
@@ -80,26 +86,12 @@ class EzThemeProvider extends ChangeNotifier {
       _darkCupertino = null;
       _lightCupertino = null;
     }
-
-    void rebuildTheme(void Function()? onComplete) {
-      _darkMaterial = ezThemeData(Brightness.dark, isLTR);
-      _lightMaterial = ezThemeData(Brightness.light, isLTR);
-
-      if (useCupertino) {
-        _darkCupertino =
-            MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
-        _lightCupertino =
-            MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
-      } else {
-        _darkCupertino = null;
-        _lightCupertino = null;
-      }
-
-      notifyListeners();
-      onComplete?.call();
-    }
   }
 
+  // Get //
+
+  bool get isLTR => _ltr;
+  bool get isCupertino => _cupertino;
   ThemeMode get initialMode => _initialMode;
 
   ThemeData get darkMaterial => _darkMaterial;
@@ -107,6 +99,31 @@ class EzThemeProvider extends ChangeNotifier {
 
   CupertinoThemeData? get darkCupertino => _darkCupertino;
   CupertinoThemeData? get lightCupertino => _lightCupertino;
+
+  // Set //
+
+  void rebuildTheme({void Function()? onComplete}) {
+    _darkMaterial = ezThemeData(Brightness.dark, _ltr);
+    _lightMaterial = ezThemeData(Brightness.light, _ltr);
+
+    if (_cupertino) {
+      _darkCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
+      _lightCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
+    } else {
+      _darkCupertino = null;
+      _lightCupertino = null;
+    }
+
+    notifyListeners();
+    onComplete?.call();
+  }
+
+  void setDirection(bool isLTR, {void Function()? onComplete}) {
+    _ltr = isLTR;
+    rebuildTheme(onComplete: onComplete);
+  }
 }
 
 class _ProviderSquared extends StatelessWidget {
