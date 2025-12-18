@@ -10,51 +10,61 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EzConfig {
-  /// [SharedPreferences] instance
-  final SharedPreferences preferences;
+  /// [AssetImage] paths for the app
+  final Set<String> _assetPaths;
 
   /// Default config
-  final Map<String, dynamic> defaults;
+  final Map<String, dynamic> _defaults;
 
   /// Fallback [EFUILang] for unsupported [Locale]s
-  /// [english] is recommended
+  /// [english] or [americanEnglish] is recommended
   final EFUILang fallbackLang;
 
-  /// [AssetImage] paths for the app
-  final Set<String> assetPaths;
+  /// [SharedPreferences] instance
+  final SharedPreferencesAsync _preferences;
+
+  /// Allows [EzConfig] setters to call [EzThemeProvider.rebuildTheme]
+  final EzThemeProvider _themeProvider;
 
   /// Live values in use
-  /// [defaults] merged with user [preferences]
-  final Map<String, dynamic> prefs;
+  final Map<String, dynamic> _prefs;
 
   /// [EzConfig] key : value runtime [Type] map
-  final Map<String, Type> typeMap;
+  final Map<String, Type> _typeMap;
 
   /// Private instance
   static EzConfig? _instance;
 
   /// Private/internal constructor
   const EzConfig._({
-    // External
-    required this.preferences,
-    required this.defaults,
+    // External (factory parameters)
+    required Set<String> assetPaths,
+    required Map<String, dynamic> defaults,
     required this.fallbackLang,
-    required this.assetPaths,
+    required SharedPreferencesAsync preferences,
+    required EzThemeProvider themeProvider,
 
-    // Internal
-    required this.prefs,
-    required this.typeMap,
-  });
+    // Internal (built by factory)
+    required Map<String, dynamic> prefs,
+    required Map<String, Type> typeMap,
+  })  : _assetPaths = assetPaths,
+        _defaults = defaults,
+        _preferences = preferences,
+        _themeProvider = themeProvider,
+        _prefs = prefs,
+        _typeMap = typeMap;
 
-  /// [preferences] => provide a [SharedPreferences] instance
+  /// [assetPaths] => provide the [AssetImage] paths for this app
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
   /// [fallbackLang] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
-  /// [assetPaths] => provide the [AssetImage] paths for this app
+  /// [preferences] => provide a [SharedPreferences] instance
   factory EzConfig.init({
-    required SharedPreferences preferences,
+    required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
     required EFUILang fallbackLang,
-    required Set<String> assetPaths,
+    required SharedPreferencesAsync preferences,
+    required Set<String> storedKeys,
+    required EzThemeProvider themeProvider,
   }) {
     if (_instance == null) {
       // Get the value type for each key //
@@ -77,7 +87,7 @@ class EzConfig {
 
       // Find the keys that users have overwritten
       final Set<String> overwritten =
-          preferences.getKeys().intersection(typeMap.keys.toSet());
+          storedKeys.intersection(typeMap.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
@@ -121,6 +131,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         defaults: defaults,
         fallbackLang: fallbackLang,
         preferences: preferences,
+        themeProvider: themeProvider,
         prefs: prefs,
         typeMap: typeMap,
       );
@@ -136,21 +147,18 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   static EFUILang get l10nFallback => _instance!.fallbackLang;
 
-  /// Get the [key]s EzConfig (nullable) value
-  /// Uses the live values from [prefs], falling back to [defaults]
-  static dynamic get(String key) {
-    return _instance!.prefs[key] ?? _instance!.defaults[key];
-  }
+  /// Get the [key]s current EzConfig value
+  /// bool, int, double, String, String List, or null
+  static dynamic get(String key) =>
+      _instance!._prefs[key] ?? _instance!._defaults[key];
 
   /// Get the [key]s default EzConfig (nullable) value
-  static dynamic getDefault(String key) {
-    return _instance!.defaults[key];
-  }
+  static dynamic getDefault(String key) => _instance!._defaults[key];
 
   /// Return the user's selected [Locale], if any
   /// null otherwise
   static Locale? getLocale() {
-    final List<String>? localeData = _instance!.prefs[appLocaleKey];
+    final List<String>? localeData = _instance!._prefs[appLocaleKey];
 
     if (localeData == null) {
       return null;
@@ -164,7 +172,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Return the user's selected [ThemeMode]
   static ThemeMode getThemeMode() {
-    final bool? isDarkTheme = _instance!.prefs[isDarkThemeKey];
+    final bool? isDarkTheme = _instance!._prefs[isDarkThemeKey];
 
     if (isDarkTheme == null) {
       return ThemeMode.system;
@@ -174,118 +182,160 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Get the [key]s EzConfig (nullable) [bool] value
-  /// Uses the stored values from [EzConfig.preferences]
-  static bool? getBool(String key) {
-    return _instance!.preferences.getBool(key);
-  }
+  /// Uses the stored values from [SharedPreferencesAsync]
+  static Future<bool?> getBool(String key) =>
+      _instance!._preferences.getBool(key);
 
   /// Get the [key]s EzConfig (nullable) [int] value
-  /// Uses the stored values from [EzConfig.preferences]
-  static int? getInt(String key) {
-    return _instance!.preferences.getInt(key);
-  }
+  /// Uses the stored values from [SharedPreferencesAsync]
+  static Future<int?> getInt(String key) => _instance!._preferences.getInt(key);
 
   /// Get the [key]s EzConfig (nullable) [double] value
-  /// Uses the stored values from [EzConfig.preferences]
-  static double? getDouble(String key) {
-    return _instance!.preferences.getDouble(key);
-  }
+  /// Uses the stored values from [SharedPreferencesAsync]
+  static Future<double?> getDouble(String key) =>
+      _instance!._preferences.getDouble(key);
 
   /// Get the [key]s EzConfig (nullable) [String] value
-  /// Uses the stored values from [EzConfig.preferences]
-  static String? getString(String key) {
-    return _instance!.preferences.getString(key);
-  }
+  /// Uses the stored values from [SharedPreferencesAsync]
+  static Future<String?> getString(String key) =>
+      _instance!._preferences.getString(key);
 
   /// Get the [key]s EzConfig (nullable) [List] value
-  /// Uses the stored values from [EzConfig.preferences]
-  static List<String>? getStringList(String key) {
-    return _instance!.preferences.getStringList(key);
-  }
-
-  /// Wether the [key] points to an [AssetImage] path
-  /// via [assetPaths]
-  static bool isKeyAsset(String key) {
-    return _instance!.assetPaths.contains(_instance!.prefs[key]);
-  }
+  /// Uses the stored values from [SharedPreferencesAsync]
+  static Future<List<String>?> getStringList(String key) =>
+      _instance!._preferences.getStringList(key);
 
   /// Wether the [path] leads to an [AssetImage]
-  /// via [assetPaths]
-  static bool isPathAsset(String path) {
-    return _instance!.assetPaths.contains(path);
-  }
+  static bool isPathAsset(String path) => _instance!._assetPaths.contains(path);
+
+  /// Wether the [key] points to an [AssetImage] path
+  static bool isKeyAsset(String key) =>
+      _instance!._assetPaths.contains(_instance!._prefs[key]);
 
   // Setters //
 
   /// Set the EzConfig [key] to [value] with type [bool]
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<bool> setBool(
     String key,
     bool value, {
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
-    final bool result = await _instance!.preferences.setBool(key, value);
-    if (result && !storageOnly) _instance!.prefs[key] = value;
-    return result;
+    try {
+      await _instance!._preferences.setBool(key, value);
+      if (!storageOnly) _instance!._prefs[key] = value;
+
+      if (notifyTheme) {
+        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      }
+      return true;
+    } catch (e) {
+      ezLog('Error setting bool [$key]...\n$e');
+      return false;
+    }
   }
 
   /// Set the EzConfig [key] to [value] with type [int]
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<bool> setInt(
     String key,
     int value, {
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
-    final bool result = await _instance!.preferences.setInt(key, value);
-    if (result && !storageOnly) _instance!.prefs[key] = value;
-    return result;
+    try {
+      await _instance!._preferences.setInt(key, value);
+      if (!storageOnly) _instance!._prefs[key] = value;
+
+      if (notifyTheme) {
+        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      }
+      return true;
+    } catch (e) {
+      ezLog('Error setting int [$key]...\n$e');
+      return false;
+    }
   }
 
   /// Set the EzConfig [key] to [value] with type [double]
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<bool> setDouble(
     String key,
     double value, {
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
-    final bool result = await _instance!.preferences.setDouble(key, value);
-    if (result && !storageOnly) _instance!.prefs[key] = value;
-    return result;
+    try {
+      await _instance!._preferences.setDouble(key, value);
+      if (!storageOnly) _instance!._prefs[key] = value;
+
+      if (notifyTheme) {
+        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      }
+      return true;
+    } catch (e) {
+      ezLog('Error setting double [$key]...\n$e');
+      return false;
+    }
   }
 
   /// Set the EzConfig [key] to [value] with type [String]
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<bool> setString(
     String key,
     String value, {
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
-    final bool result = await _instance!.preferences.setString(key, value);
-    if (result && !storageOnly) _instance!.prefs[key] = value;
-    return result;
+    try {
+      await _instance!._preferences.setString(key, value);
+      if (!storageOnly) _instance!._prefs[key] = value;
+
+      if (notifyTheme) {
+        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      }
+      return true;
+    } catch (e) {
+      ezLog('Error setting String [$key]...\n$e');
+      return false;
+    }
   }
 
   /// Set the EzConfig [key] to [value] with type [List]
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<bool> setStringList(
     String key,
     List<String> value, {
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
-    final bool result = await _instance!.preferences.setStringList(key, value);
-    if (result && !storageOnly) _instance!.prefs[key] = value;
-    return result;
+    try {
+      await _instance!._preferences.setStringList(key, value);
+      if (!storageOnly) _instance!._prefs[key] = value;
+
+      if (notifyTheme) {
+        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      }
+      return true;
+    } catch (e) {
+      ezLog('Error setting String List [$key]...\n$e');
+      return false;
+    }
   }
 
-  /// Load values to [prefs]/[preferences]
+  /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<void> loadConfig(
     Map<String, dynamic> config, {
     Set<String>? filter,
+    bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
     for (final MapEntry<String, dynamic> entry in config.entries) {
       // Check filter
@@ -295,7 +345,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
 
       // Check type
-      final dynamic expectedType = _instance!.typeMap[entry.key];
+      final dynamic expectedType = _instance!._typeMap[entry.key];
       if (expectedType == null) {
         ezLog('Skipping unknown key [${entry.key}]');
         continue;
@@ -310,19 +360,48 @@ Must be one of [int, bool, double, String, List<String>]''');
       // Load value
       switch (entry.value.runtimeType) {
         case const (bool):
-          await setBool(entry.key, entry.value);
+          await setBool(
+            entry.key,
+            entry.value,
+            storageOnly: storageOnly,
+            notifyTheme: false,
+          );
           break;
         case const (int):
-          await setInt(entry.key, entry.value);
+          await setInt(
+            entry.key,
+            entry.value,
+            storageOnly: storageOnly,
+            notifyTheme: false,
+          );
         case const (double):
-          await setDouble(entry.key, entry.value);
+          await setDouble(
+            entry.key,
+            entry.value,
+            storageOnly: storageOnly,
+            notifyTheme: false,
+          );
         case const (String):
-          await setString(entry.key, entry.value);
+          await setString(
+            entry.key,
+            entry.value,
+            storageOnly: storageOnly,
+            notifyTheme: false,
+          );
           break;
         case const (List<String>):
-          await setStringList(entry.key, entry.value);
+          await setStringList(
+            entry.key,
+            entry.value,
+            storageOnly: storageOnly,
+            notifyTheme: false,
+          );
           break;
       }
+    }
+
+    if (notifyTheme) {
+      _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
     }
   }
 
@@ -330,7 +409,11 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// i.e. a triadic [ColorScheme] that should be highly legible
   /// Doubles are limited to half and/or twice their default values'
   /// There is an optional [shiny] chance (1 in 4096) to change the [Locale]
-  static Future<void> randomize(bool isDark, {bool shiny = true}) async {
+  static Future<void> randomize(
+    bool isDark, {
+    bool shiny = true,
+    void Function()? onNotify,
+  }) async {
     // Define data //
 
     final Random random = Random();
@@ -341,7 +424,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Update global settings //
 
     // Lefty
-    await setBool(isLeftyKey, random.nextBool());
+    await setBool(isLeftyKey, random.nextBool(), notifyTheme: false);
 
     // Leave theme as-is, don't wanna light blast peeps at night
 
@@ -359,7 +442,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         localeData.add(randomLocale.countryCode!);
       }
 
-      await setStringList(appLocaleKey, localeData);
+      await setStringList(appLocaleKey, localeData, notifyTheme: false);
     }
 
     // Update color settings //
@@ -444,30 +527,42 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     // Update design settings //
 
-    await setInt(animationDurationKey, random.nextInt(500) + 250);
+    await setInt(
+      animationDurationKey,
+      random.nextInt(500) + 250,
+      notifyTheme: false,
+    );
 
     await setDouble(
       isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
       random.nextDouble(),
+      notifyTheme: false,
     );
     await setDouble(
       isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
       random.nextDouble(),
+      notifyTheme: false,
     );
 
     // Update layout settings //
 
-    await setDouble(marginKey, defaultMargin * getScalar());
+    await setDouble(
+      marginKey,
+      defaultMargin * getScalar(),
+      notifyTheme: false,
+    );
     await setDouble(
       paddingKey,
       (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+      notifyTheme: false,
     );
     await setDouble(
       spacingKey,
       (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+      notifyTheme: false,
     );
 
-    await setBool(hideScrollKey, random.nextBool());
+    await setBool(hideScrollKey, random.nextBool(), notifyTheme: false);
 
     // Update text settings //
 
@@ -481,138 +576,253 @@ Must be one of [int, bool, double, String, List<String>]''');
         styleOptions[random.nextInt(styleOptions.length)];
     final double descriptionScale = getScalar();
 
-    await setString(displayFontFamilyKey, attentionStyle);
-    await setDouble(displayFontSizeKey, defaultDisplaySize * attentionScale);
-    await setBool(displayBoldedKey, false);
-    await setBool(displayItalicizedKey, false);
-    await setBool(displayUnderlinedKey, random.nextBool());
-    await setDouble(displayFontHeightKey, defaultFontHeight);
-    await setDouble(displayLetterSpacingKey, defaultLetterSpacing);
-    await setDouble(displayWordSpacingKey, defaultWordSpacing);
-
-    await setString(headlineFontFamilyKey, attentionStyle);
-    await setDouble(headlineFontSizeKey, defaultHeadlineSize * attentionScale);
-    await setBool(headlineBoldedKey, false);
-    await setBool(headlineItalicizedKey, false);
-    await setBool(headlineUnderlinedKey, false);
-    await setDouble(headlineFontHeightKey, defaultFontHeight);
-    await setDouble(headlineLetterSpacingKey, defaultLetterSpacing);
-    await setDouble(headlineWordSpacingKey, defaultWordSpacing);
+    await setString(
+      displayFontFamilyKey,
+      attentionStyle,
+      notifyTheme: false,
+    );
+    await setDouble(
+      displayFontSizeKey,
+      defaultDisplaySize * attentionScale,
+      notifyTheme: false,
+    );
+    await setBool(displayBoldedKey, false, notifyTheme: false);
+    await setBool(displayItalicizedKey, false, notifyTheme: false);
+    await setBool(
+      displayUnderlinedKey,
+      random.nextBool(),
+      notifyTheme: false,
+    );
+    await setDouble(
+      displayFontHeightKey,
+      defaultFontHeight,
+      notifyTheme: false,
+    );
+    await setDouble(
+      displayLetterSpacingKey,
+      defaultLetterSpacing,
+      notifyTheme: false,
+    );
+    await setDouble(
+      displayWordSpacingKey,
+      defaultWordSpacing,
+      notifyTheme: false,
+    );
 
     await setString(
-        titleFontFamilyKey, styleOptions[random.nextInt(styleOptions.length)]);
-    await setDouble(titleFontSizeKey, defaultTitleSize * attentionScale);
-    await setBool(titleBoldedKey, false);
-    await setBool(titleItalicizedKey, false);
-    await setBool(titleUnderlinedKey, random.nextBool());
-    await setDouble(titleFontHeightKey, defaultFontHeight);
-    await setDouble(titleLetterSpacingKey, defaultLetterSpacing);
-    await setDouble(titleWordSpacingKey, defaultWordSpacing);
+      headlineFontFamilyKey,
+      attentionStyle,
+      notifyTheme: false,
+    );
+    await setDouble(
+      headlineFontSizeKey,
+      defaultHeadlineSize * attentionScale,
+      notifyTheme: false,
+    );
+    await setBool(headlineBoldedKey, false, notifyTheme: false);
+    await setBool(headlineItalicizedKey, false, notifyTheme: false);
+    await setBool(headlineUnderlinedKey, false, notifyTheme: false);
+    await setDouble(
+      headlineFontHeightKey,
+      defaultFontHeight,
+      notifyTheme: false,
+    );
+    await setDouble(
+      headlineLetterSpacingKey,
+      defaultLetterSpacing,
+      notifyTheme: false,
+    );
+    await setDouble(
+      headlineWordSpacingKey,
+      defaultWordSpacing,
+      notifyTheme: false,
+    );
 
-    await setString(bodyFontFamilyKey, descriptionStyle);
-    await setDouble(bodyFontSizeKey, defaultBodySize * descriptionScale);
-    await setBool(bodyBoldedKey, false);
-    await setBool(bodyItalicizedKey, false);
-    await setBool(bodyUnderlinedKey, false);
-    await setDouble(bodyFontHeightKey, defaultFontHeight);
-    await setDouble(bodyLetterSpacingKey, defaultLetterSpacing);
-    await setDouble(bodyWordSpacingKey, defaultWordSpacing);
+    await setString(
+      titleFontFamilyKey,
+      styleOptions[random.nextInt(styleOptions.length)],
+      notifyTheme: false,
+    );
+    await setDouble(
+      titleFontSizeKey,
+      defaultTitleSize * attentionScale,
+      notifyTheme: false,
+    );
+    await setBool(titleBoldedKey, false, notifyTheme: false);
+    await setBool(titleItalicizedKey, false, notifyTheme: false);
+    await setBool(
+      titleUnderlinedKey,
+      random.nextBool(),
+      notifyTheme: false,
+    );
+    await setDouble(
+      titleFontHeightKey,
+      defaultFontHeight,
+      notifyTheme: false,
+    );
+    await setDouble(
+      titleLetterSpacingKey,
+      defaultLetterSpacing,
+      notifyTheme: false,
+    );
+    await setDouble(
+      titleWordSpacingKey,
+      defaultWordSpacing,
+      notifyTheme: false,
+    );
 
-    await setString(labelFontFamilyKey, descriptionStyle);
-    await setDouble(labelFontSizeKey, defaultLabelSize * descriptionScale);
-    await setBool(labelBoldedKey, false);
-    await setBool(labelItalicizedKey, false);
-    await setBool(labelUnderlinedKey, false);
-    await setDouble(labelFontHeightKey, defaultFontHeight);
-    await setDouble(labelLetterSpacingKey, defaultLetterSpacing);
-    await setDouble(labelWordSpacingKey, defaultWordSpacing);
+    await setString(
+      bodyFontFamilyKey,
+      descriptionStyle,
+      notifyTheme: false,
+    );
+    await setDouble(
+      bodyFontSizeKey,
+      defaultBodySize * descriptionScale,
+      notifyTheme: false,
+    );
+    await setBool(bodyBoldedKey, false, notifyTheme: false);
+    await setBool(bodyItalicizedKey, false, notifyTheme: false);
+    await setBool(bodyUnderlinedKey, false, notifyTheme: false);
+    await setDouble(
+      bodyFontHeightKey,
+      defaultFontHeight,
+      notifyTheme: false,
+    );
+    await setDouble(
+      bodyLetterSpacingKey,
+      defaultLetterSpacing,
+      notifyTheme: false,
+    );
+    await setDouble(
+      bodyWordSpacingKey,
+      defaultWordSpacing,
+      notifyTheme: false,
+    );
+
+    await setString(
+      labelFontFamilyKey,
+      descriptionStyle,
+      notifyTheme: false,
+    );
+    await setDouble(
+      labelFontSizeKey,
+      defaultLabelSize * descriptionScale,
+      notifyTheme: false,
+    );
+    await setBool(labelBoldedKey, false, notifyTheme: false);
+    await setBool(labelItalicizedKey, false, notifyTheme: false);
+    await setBool(labelUnderlinedKey, false, notifyTheme: false);
+    await setDouble(
+      labelFontHeightKey,
+      defaultFontHeight,
+      notifyTheme: false,
+    );
+    await setDouble(
+      labelLetterSpacingKey,
+      defaultLetterSpacing,
+      notifyTheme: false,
+    );
+    await setDouble(
+      labelWordSpacingKey,
+      defaultWordSpacing,
+      notifyTheme: false,
+    );
 
     // Leave text background opacity as-is
 
-    await setDouble(iconSizeKey, defaultIconSize * getScalar());
+    await setDouble(
+      iconSizeKey,
+      defaultIconSize * getScalar(),
+      notifyTheme: false,
+    );
+
+    _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
   }
 
   // Removers //
 
   /// Remove the custom value for [key]
   /// When [reset] is true, the default value is restored (if present)
-  /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
-  /// Set [storageOnly] to true to only update [EzConfig.preferences]
+  /// By default, both the live and [SharedPreferencesAsync] values are modified
   /// Setting [storageOnly] to true will make [reset] moot
   static Future<bool> remove(
     String key, {
     bool reset = true,
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
-    final bool result = await _instance!.preferences.remove(key);
+    try {
+      await _instance!._preferences.remove(key);
+      if (!storageOnly) {
+        (reset && _instance!._defaults.containsKey(key))
+            ? _instance!._prefs[key] = _instance!._defaults[key]
+            : _instance!._prefs.remove(key);
+      }
 
-    if (result && !storageOnly) {
-      (reset && _instance!.defaults.containsKey(key))
-          ? _instance!.prefs[key] = _instance!.defaults[key]
-          : _instance!.prefs.remove(key);
+      if (notifyTheme) {
+        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      }
+      return true;
+    } catch (e) {
+      ezLog('Error removing key [$key]...\n$e');
+      return false;
     }
-
-    return result;
   }
 
   /// Remove the [keys] custom values
   /// When [reset] is true, the default value is restored (if present)
-  /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
-  /// Set [storageOnly] to true to only update [EzConfig.preferences]
+  /// By default, both the live and [SharedPreferencesAsync] values are modified
   /// Setting [storageOnly] to true will make [reset] moot
   /// Returns false if any keys fail to be removed, but all keys will be attempted
   static Future<bool> removeKeys(
     Set<String> keys, {
     bool reset = true,
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
     bool success = true;
-
     for (final String key in keys) {
-      final bool result = await _instance!.preferences.remove(key);
-
-      if (result) {
-        if (!storageOnly) {
-          (reset && _instance!.defaults.containsKey(key))
-              ? _instance!.prefs[key] = _instance!.defaults[key]
-              : _instance!.prefs.remove(key);
-        }
-      } else {
-        success = false;
-        ezLog('Failed to remove key [$key]');
-      }
+      success &= await remove(
+        key,
+        reset: reset,
+        storageOnly: storageOnly,
+        notifyTheme: false,
+      );
     }
 
+    if (notifyTheme) {
+      _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+    }
     return success;
   }
 
-  /// Resets all keys in [EzConfig.prefs]
-  /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
-  /// Set [storageOnly] to true to only update [EzConfig.preferences]
-  /// Returns false if any keys fail to be reset, but all keys will be attempted
+  /// [removeKeys], all
   static Future<bool> reset({
     Set<String>? skip,
+    bool reset = true,
     bool storageOnly = false,
+    bool notifyTheme = true,
+    void Function()? onNotify,
   }) async {
+    final List<String> keys = List<String>.from(_instance!._prefs.keys);
+
     bool success = true;
-    final List<String> itr = List<String>.from(_instance!.prefs.keys);
-
-    for (final String key in itr) {
+    for (final String key in keys) {
       if (skip?.contains(key) ?? false) continue;
-      final bool result = await _instance!.preferences.remove(key);
-
-      if (result) {
-        if (!storageOnly) {
-          _instance!.defaults.containsKey(key)
-              ? _instance!.prefs[key] = _instance!.defaults[key]
-              : _instance!.prefs.remove(key);
-        }
-      } else {
-        success = false;
-        ezLog('Failed to remove key [$key]');
-      }
+      success &= await remove(
+        key,
+        reset: reset,
+        storageOnly: storageOnly,
+        notifyTheme: false,
+      );
     }
 
+    if (notifyTheme) {
+      _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+    }
     return success;
   }
 }
