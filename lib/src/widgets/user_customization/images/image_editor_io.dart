@@ -54,10 +54,6 @@ class EzImageEditor extends StatefulWidget {
 class _EzImageEditorState extends State<EzImageEditor> {
   // Gather the fixed theme data //
 
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-  final double iconSize = EzConfig.get(iconSizeKey);
-
   final Duration rotateDuration = ezAnimDuration(mod: 0.5);
 
   late final EFUILang l10n = ezL10n(context);
@@ -131,6 +127,12 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
   @override
   Widget build(BuildContext context) {
+    // Gather the contextual theme data //
+
+    final double padding = EzConfig.padding;
+    final double spacing = EzConfig.spacing;
+    final double iconSize = EzConfig.iconSize;
+
     // Return the build //
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;

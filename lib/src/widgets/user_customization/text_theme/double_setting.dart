@@ -67,9 +67,7 @@ class EzFontDoubleSetting extends StatefulWidget {
 }
 
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
-  // Gather the fixed theme data //
-
-  late final double padding = EzConfig.get(paddingKey);
+  // Define the build data //
 
   late final Size sizeLimit = ezTextSize(
     widget.sizingString,
@@ -78,13 +76,11 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   );
 
   late double formFieldWidth =
-      max(sizeLimit.width + padding, kMinInteractiveDimension);
+      max(sizeLimit.width + EzConfig.padding, kMinInteractiveDimension);
   late double formFieldHeight =
-      max(sizeLimit.height + padding, kMinInteractiveDimension);
+      max(sizeLimit.height + EzConfig.padding, kMinInteractiveDimension);
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Define the build data //
 
   late double currValue;
   final TextEditingController controller = TextEditingController();
@@ -100,8 +96,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
+    final double padding = EzConfig.padding;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // Return the build //
