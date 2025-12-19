@@ -118,8 +118,6 @@ class EzSettingsHome extends StatefulWidget {
 class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Gather the fixed theme data //
 
-  late final double spacing = EzConfig.get(spacingKey);
-
   late final EFUILang l10n = ezL10n(context);
 
   // Set the page title //
