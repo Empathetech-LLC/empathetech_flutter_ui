@@ -150,6 +150,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   static dynamic get(String key) =>
       _instance!._prefs[key] ?? _instance!._defaults[key];
 
+  /// Quick alias for [EzConfig.get] => [isLeftyKey]
+  static bool get isLefty => _instance!._prefs[isLeftyKey];
+
   /// Quick alias for [EzConfig.get] => [marginKey]
   static double get margin => _instance!._prefs[marginKey];
 
