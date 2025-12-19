@@ -30,7 +30,7 @@ void main() async {
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
-          allowList: ezConfigKeys.keys.toSet()),
+          allowList: allEZConfigKeys.keys.toSet()),
     ),
   );
 

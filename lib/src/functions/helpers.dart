@@ -193,7 +193,7 @@ Future<void> ezConfigSaver(
   String? androidPackage,
 }) async {
   final List<String> keys = <String>[
-    ...ezConfigKeys.keys,
+    ...allEZConfigKeys.keys,
     if (extraKeys != null) ...extraKeys,
   ];
 

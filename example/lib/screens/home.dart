@@ -776,7 +776,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           layoutSettings: layoutSettings,
                           textSettings: textSettings,
                           appDefaults: Map<String, dynamic>.fromEntries(
-                            ezConfigKeys.keys.map(
+                            allEZConfigKeys.keys.map(
                               (String key) => MapEntry<String, dynamic>(
                                   key, EzConfig.get(key)),
                             ),
@@ -857,7 +857,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             layoutSettings: layoutSettings,
                             textSettings: textSettings,
                             appDefaults: Map<String, dynamic>.fromEntries(
-                              ezConfigKeys.keys.map(
+                              allEZConfigKeys.keys.map(
                                 (String key) => MapEntry<String, dynamic>(
                                     key, EzConfig.get(key)),
                               ),

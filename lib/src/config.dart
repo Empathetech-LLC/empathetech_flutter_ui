@@ -69,7 +69,7 @@ class EzConfig {
       // Get the value type for each key //
 
       // Start with the known EzConfigverse
-      final Map<String, Type> typeMap = Map<String, Type>.from(ezConfigKeys);
+      final Map<String, Type> typeMap = Map<String, Type>.from(allEZConfigKeys);
 
       // Include defaults
       final Set<String> uniqueDefaults =

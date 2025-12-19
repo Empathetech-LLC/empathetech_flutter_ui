@@ -12,7 +12,7 @@ const String isDarkThemeKey = 'isDarkTheme';
 const String appLocaleKey = 'appLocale';
 
 ///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
-const Map<String, Type> globalKeys = <String, Type>{
+const Map<String, Type> allGlobalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   appLocaleKey: List<String>,
@@ -680,9 +680,9 @@ const String sampleString = '55.55';
 
 //* Global trackers *//
 
-/// [globalKeys], [allTextKeys], [allLayoutKeys], [allColorKeys], [allImageKeys]
-const Map<String, Type> ezConfigKeys = <String, Type>{
-  ...globalKeys,
+/// [allGlobalKeys], [allTextKeys], [allLayoutKeys], [allColorKeys], [allImageKeys]
+const Map<String, Type> allEZConfigKeys = <String, Type>{
+  ...allGlobalKeys,
   ...allColorKeys,
   ...allDesignKeys,
   ...allLayoutKeys,

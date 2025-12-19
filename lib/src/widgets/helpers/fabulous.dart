@@ -57,7 +57,7 @@ class EzBackFAB extends StatelessWidget {
 }
 
 class EzConfigFAB extends StatelessWidget {
-  /// [ezConfigKeys] included by default
+  /// [allEZConfigKeys] included by default
   /// Include any app specific keys you want backed up here
   final List<String>? extraKeys;
 
