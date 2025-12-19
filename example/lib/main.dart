@@ -26,13 +26,13 @@ void main() async {
 
   // Initialize EzConfig //
 
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
   EzConfig.init(
-    preferences: prefs,
+    assetPaths: <String>{},
     defaults: isMobile() ? empathMobileConfig : empathDesktopConfig,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    assetPaths: <String>{},
+    preferences: preferences,
+    storedKeys: await preferences.getKeys(),
   );
 
   // Run the app //
