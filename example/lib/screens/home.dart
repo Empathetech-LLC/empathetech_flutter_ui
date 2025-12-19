@@ -26,8 +26,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the fixed theme data //
 
-  final bool isLefty = EzConfig.get(isLeftyKey);
-
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
@@ -340,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   EzSwitchPair(
                     key: ValueKey<bool>(exampleDomain),
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: (exampleDomain || isLefty)
+                    mainAxisAlignment: (exampleDomain || EzConfig.isLefty)
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     text: el10n.gNA,
@@ -389,9 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: EzConfig.get(marginKey),
-              ),
+              padding: EdgeInsets.symmetric(horizontal: EzConfig.margin),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1336,7 +1332,7 @@ class _LicensePicker extends StatelessWidget {
         Visibility(
           visible: visible,
           child: Padding(
-            padding: EdgeInsets.only(top: EzConfig.get(marginKey)),
+            padding: EdgeInsets.only(top: EzConfig.margin),
             child: RadioGroup<String>(
               groupValue: groupValue,
               onChanged: onChanged,
