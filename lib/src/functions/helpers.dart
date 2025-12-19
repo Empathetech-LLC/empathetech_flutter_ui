@@ -156,23 +156,18 @@ double ezToolbarHeight({
   required String title,
   bool includeIconButton = true,
   TextStyle? style,
-}) {
-  late final double margin = EzConfig.get(marginKey);
-  late final double padding = EzConfig.get(paddingKey);
-  late final double iconSize = EzConfig.get(iconSizeKey);
-
-  return max(
-        ezTextSize(
-          title,
-          context: context,
-          style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
-        ).height,
-        includeIconButton
-            ? max(iconSize + padding, kMinInteractiveDimension)
-            : kMinInteractiveDimension,
-      ) +
-      margin;
-}
+}) =>
+    max(
+      ezTextSize(
+        title,
+        context: context,
+        style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
+      ).height,
+      includeIconButton
+          ? max(EzConfig.iconSize + EzConfig.padding, kMinInteractiveDimension)
+          : kMinInteractiveDimension,
+    ) +
+    EzConfig.margin;
 
 /// Recommended size for an image
 /// Starts with 160.0; chosen by visual inspection
