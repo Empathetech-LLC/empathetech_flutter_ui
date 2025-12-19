@@ -51,14 +51,9 @@ class EzLayoutSettings extends StatefulWidget {
 }
 
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
-  // Gather the fixed theme data //
-
-  final double margin = EzConfig.get(marginKey);
-  final double spacing = EzConfig.get(spacingKey);
+  // Define the build data //
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Define the build data //
 
   int redraw = 0;
 
@@ -74,6 +69,9 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = EzConfig.margin;
+    final double spacing = EzConfig.spacing;
+
     return EzScrollView(
       children: <Widget>[
         if (spacing > margin) EzSpacer(space: spacing - margin),
