@@ -148,11 +148,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   late final bool onMobile = isMobile();
 
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-  final double iconSize = EzConfig.get(iconSizeKey);
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
@@ -183,12 +178,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       widget.timeLabelVis == EzButtonVis.alwaysOff &&
       widget.speedVis == EzButtonVis.alwaysOff;
   // && widget.fullScreenVis == EzButtonVis.alwaysOff;
-
-  late final double controlsHeight = noControls
-      ? 0
-      : (widget.timeSliderVis == EzButtonVis.alwaysOff)
-          ? (2 * margin + iconSize + padding)
-          : (3 * margin + 2 * (iconSize + padding));
 
   // Define custom functions //
 
@@ -337,6 +326,17 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
+
+    final double margin = EzConfig.margin;
+    final double padding = EzConfig.padding;
+    final double spacing = EzConfig.spacing;
+    final double iconSize = EzConfig.iconSize;
+
+    final double controlsHeight = noControls
+        ? 0
+        : (widget.timeSliderVis == EzButtonVis.alwaysOff)
+            ? (2 * margin + iconSize + padding)
+            : (3 * margin + 2 * (iconSize + padding));
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color iconColor = widget.iconColor ?? colorScheme.primary;
@@ -765,9 +765,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             children: <Widget>[
                                               Icon(
                                                 Icons.speed,
-                                                size:
-                                                    EzConfig.get(iconSizeKey) *
-                                                        0.667,
+                                                size: EzConfig.iconSize * 0.667,
                                                 color: widget.textColor,
                                               ),
                                               Text(

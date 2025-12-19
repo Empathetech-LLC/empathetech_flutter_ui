@@ -110,11 +110,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
-  final double margin = EzConfig.get(marginKey);
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
-
   late final EFUILang l10n = ezL10n(context);
   late final String darkString = l10n.gDark.toLowerCase();
   late final String lightString = l10n.gLight.toLowerCase();
@@ -124,7 +119,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   final bool strictMobile = !kIsWeb && isMobile();
   int redraw = 0;
 
-  double iconSize = EzConfig.get(iconSizeKey);
+  double iconSize = EzConfig.iconSize;
 
   // Define custom functions //
 
@@ -153,6 +148,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
+
+    final double margin = EzConfig.margin;
+    final double spacing = EzConfig.spacing;
 
     final bool isDark = isDarkTheme(context);
     final String themeProfile = isDark ? darkString : lightString;
@@ -400,7 +398,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: wrapPadding,
+                            padding: EzInsets.wrap(spacing),
                             child: EzElevatedButton(
                               text: l10n.dsPreview,
                               onPressed: doNothing,
@@ -412,14 +410,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             ),
                           ),
                           Padding(
-                            padding: wrapPadding,
+                            padding: EzInsets.wrap(spacing),
                             child: Transform.scale(
                               scale: max(
                                   1.0,
                                   max(
                                       iconSize /
                                           EzConfig.getDefault(iconSizeKey),
-                                      EzConfig.get(paddingKey) /
+                                      EzConfig.padding /
                                           EzConfig.getDefault(paddingKey))),
                               child: Switch(
                                 value: dummyBool,

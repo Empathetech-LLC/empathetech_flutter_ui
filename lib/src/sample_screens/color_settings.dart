@@ -320,12 +320,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
-
   late final EFUILang l10n = widget.l10n;
 
   // Define the build data //
@@ -341,6 +335,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> dynamicColorSettings(String userColorsKey) {
     final List<Widget> toReturn = <Widget>[];
+    final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
 
     for (final String key in currList) {
       if (defaultSet.contains(key)) {
@@ -387,11 +382,11 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
       final Color liveColor = getLiveColor(context, configKey);
 
       return Padding(
-        padding: wrapPadding,
+        padding: EzInsets.wrap(EzConfig.spacing),
         child: EzElevatedIconButton(
           key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(padding * 0.75),
+            padding: EdgeInsets.all(EzConfig.padding * 0.75),
           ),
           onPressed: () {
             final int newColorIndex = fullList.indexOf(configKey);
@@ -416,7 +411,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,
-              radius: padding + margin,
+              radius: EzConfig.padding + EzConfig.margin,
               child: liveColor == Colors.transparent
                   ? EzIcon(PlatformIcons(context).eyeSlash)
                   : null,
@@ -522,7 +517,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             // Save changes
             await EzConfig.setStringList(userColorsKey, currList);
           },
-          style: TextButton.styleFrom(padding: EzInsets.wrap(margin)),
+          style: TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.margin)),
           icon: EzIcon(PlatformIcons(context).addCircledOutline),
           label: l10n.csAddColor,
         ),

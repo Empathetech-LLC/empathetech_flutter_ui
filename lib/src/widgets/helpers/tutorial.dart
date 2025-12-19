@@ -49,10 +49,10 @@ class EzTutorial extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final double margin = EzConfig.get(marginKey);
-    final double spacing = EzConfig.get(spacingKey);
+    final double margin = EzConfig.margin;
+    final double spacing = EzConfig.spacing;
 
-    final bool isLefty = EzConfig.get(isLeftyKey);
+    final bool isLefty = EzConfig.isLefty;
 
     // Return the build //
 

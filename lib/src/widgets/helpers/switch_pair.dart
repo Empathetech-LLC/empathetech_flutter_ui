@@ -232,11 +232,6 @@ class EzSwitchPair extends StatefulWidget {
 class _EzSwitchPairState extends State<EzSwitchPair> {
   late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
 
-  late final double margin = EzConfig.get(marginKey);
-  late final double ratio = widget.scale ??
-      max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
-          EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
-
   late final void Function(bool?) onChanged = widget.onChanged ??
       (bool? choice) async {
         if (choice == null) return;
@@ -254,6 +249,11 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = EzConfig.margin;
+    final double ratio = widget.scale ??
+        max(EzConfig.iconSize / EzConfig.getDefault(iconSizeKey),
+            EzConfig.padding / EzConfig.getDefault(paddingKey));
+
     return EzRow(
       reverseHands: widget.reverseHands,
       mainAxisSize: widget.mainAxisSize,

@@ -48,8 +48,8 @@ Future<dynamic> ezColorPicker(
   return showPlatformDialog(
     context: context,
     builder: (BuildContext dContext) {
-      final double padding = EzConfig.get(paddingKey);
-      final double spacing = EzConfig.get(spacingKey);
+      final double padding = EzConfig.padding;
+      final double spacing = EzConfig.spacing;
 
       void confirm() {
         onConfirm();
