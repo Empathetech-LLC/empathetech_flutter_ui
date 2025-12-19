@@ -278,7 +278,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                   label:
                       '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
                 ),
-                EzSpacer(space: EzConfig.get(spacingKey) * 1.5),
+                EzSpacer(space: EzConfig.spacing * 1.5),
               ],
             );
           },

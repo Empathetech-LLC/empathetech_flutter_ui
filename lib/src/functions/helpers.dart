@@ -174,7 +174,7 @@ double ezToolbarHeight({
 /// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
 double ezImageSize(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(160.0) *
-    (EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey));
+    (EzConfig.iconSize / EzConfig.getDefault(iconSizeKey));
 
 /// [TargetPlatform] aware helper that will request/exit a fullscreen window
 Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>

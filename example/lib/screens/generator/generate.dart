@@ -473,7 +473,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               maxWidth: widthOf(context) * 0.667,
               maxHeight: heightOf(context) / 2,
             ),
-            padding: EdgeInsets.all(EzConfig.get(marginKey)),
+            padding: EdgeInsets.all(EzConfig.margin),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceDim,
               borderRadius: ezRoundEdge,

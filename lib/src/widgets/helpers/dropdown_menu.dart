@@ -136,7 +136,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double? savedIconSize = EzConfig.get(iconSizeKey);
+    late final double savedIconSize = EzConfig.iconSize;
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     late final double buttonOpacity = EzConfig.get(

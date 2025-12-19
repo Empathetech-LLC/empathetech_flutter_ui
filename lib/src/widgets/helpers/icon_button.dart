@@ -24,7 +24,7 @@ class EzIcon extends Icon {
     super.textDirection,
     super.applyTextScaling,
     super.blendMode,
-  }) : super(size: EzConfig.get(iconSizeKey));
+  }) : super(size: EzConfig.iconSize);
 }
 
 class EzIconButton extends StatelessWidget {
@@ -139,7 +139,7 @@ class EzIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double savedIconSized = EzConfig.get(iconSizeKey);
+    late final double savedIconSized = EzConfig.iconSize;
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
     late final bool isDark = isDarkTheme(context);
 

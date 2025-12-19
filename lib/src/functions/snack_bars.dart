@@ -20,9 +20,8 @@ double snackWidth({
   final TextStyle? snackStyle =
       style ?? Theme.of(context).snackBarTheme.contentTextStyle;
 
-  final double snackMargin = margin ?? EzConfig.get(marginKey);
-
-  final double countDownSize = EzConfig.get(iconSizeKey) * 1.5;
+  final double snackMargin = margin ?? EzConfig.margin;
+  final double countDownSize = EzConfig.iconSize * 1.5;
 
   final double closeIconSize = showCloseIcon
       ? (Theme.of(context)
@@ -31,7 +30,7 @@ double snackWidth({
                   ?.iconSize
                   ?.resolve(<WidgetState>{WidgetState.selected}) ??
               0) +
-          EzConfig.get(spacingKey)
+          EzConfig.spacing
       : 0;
 
   return ezTextSize(message, context: context, style: snackStyle).width +
@@ -69,7 +68,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       : ezReadingTime(message) + const Duration(seconds: 1);
   late final Duration toastLength = duration ?? readingTime;
 
-  final double toastMargin = margin ?? EzConfig.get(marginKey);
+  final double toastMargin = margin ?? EzConfig.margin;
 
   late final TextStyle? bodyStyle = Theme.of(context).textTheme.bodyLarge;
   late final Color primary = Theme.of(context).colorScheme.primary;

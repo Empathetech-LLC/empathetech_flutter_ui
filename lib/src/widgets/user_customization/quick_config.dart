@@ -54,7 +54,7 @@ class EzQuickConfig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.get(spacingKey));
+    final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
     final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
@@ -142,9 +142,7 @@ class EzBigButtonsConfig extends StatelessWidget {
 
   static Future<void> onPressed() async {
     // Conditionally update text
-    if (EzConfig.get(iconSizeKey) < 25.0) {
-      await EzConfig.setDouble(iconSizeKey, 25.0);
-    }
+    if (EzConfig.iconSize < 25.0) await EzConfig.setDouble(iconSizeKey, 25.0);
 
     // Update layout
     await EzConfig.setDouble(marginKey, 12.5);
