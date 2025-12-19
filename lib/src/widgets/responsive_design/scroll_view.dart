@@ -140,8 +140,6 @@ class EzScrollView extends StatefulWidget {
 class _EzScrollViewState extends State<EzScrollView> {
   // Gather the fixed theme data //
 
-  final double margin = EzConfig.get(marginKey);
-
   // Define the build data //
 
   late final ScrollController controller;
