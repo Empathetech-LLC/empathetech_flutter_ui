@@ -18,7 +18,7 @@ class EzConfig {
 
   /// Fallback [EFUILang] for unsupported [Locale]s
   /// [english] or [americanEnglish] is recommended
-  final EFUILang fallbackLang;
+  final EFUILang _fallbackLang;
 
   /// [SharedPreferencesAsync] instance
   final SharedPreferencesAsync _preferences;
@@ -40,7 +40,7 @@ class EzConfig {
     // External (factory parameters)
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
-    required this.fallbackLang,
+    required EFUILang fallbackLang,
     required SharedPreferencesAsync preferences,
     EzThemeProvider? themeProvider,
 
@@ -49,6 +49,7 @@ class EzConfig {
     required Map<String, Type> typeMap,
   })  : _assetPaths = assetPaths,
         _defaults = defaults,
+        _fallbackLang = fallbackLang,
         _preferences = preferences,
         _themeProvider = themeProvider,
         _prefs = prefs,
@@ -58,6 +59,7 @@ class EzConfig {
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
   /// [fallbackLang] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [preferences] => provide a [SharedPreferencesAsync] instance
+  /// [themeProvider] => Set by [EzAppProvider], recommended to leave null unless you are not using [EzAppProvider]
   factory EzConfig.init({
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
@@ -139,46 +141,32 @@ Must be one of [int, bool, double, String, List<String>]''');
     return _instance!;
   }
 
-  // No null checks below, for expediency
-  // EFUI won't work at all if EzConfig isn't initialized, so they're moot
-
   // Getters //
-
-  static EFUILang get l10nFallback => _instance!.fallbackLang;
+  // w/out null checks
+  // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
   /// Get the [key]s current EzConfig value
   /// bool, int, double, String, String List, or null
   static dynamic get(String key) =>
       _instance!._prefs[key] ?? _instance!._defaults[key];
 
+  /// Quick alias for [EzConfig.get] => [marginKey]
+  static double get margin => _instance!._prefs[marginKey];
+
+  /// Quick alias for [EzConfig.get] => [paddingKey]
+  static double get padding => _instance!._prefs[paddingKey];
+
+  /// Quick alias for [EzConfig.get] => [spacingKey]
+  static double get spacing => _instance!._prefs[spacingKey];
+
+  /// Quick alias for [EzConfig.get] => [iconSizeKey]
+  static double get iconSize => _instance!._prefs[iconSizeKey];
+
+  /// Quick alias for [EzConfig.get] => [animationDurationKey]
+  static int get animDuration => _instance!._prefs[animationDurationKey];
+
   /// Get the [key]s default EzConfig (nullable) value
   static dynamic getDefault(String key) => _instance!._defaults[key];
-
-  /// Return the user's selected [Locale], if any
-  /// null otherwise
-  static Locale? getLocale() {
-    final List<String>? localeData = _instance!._prefs[appLocaleKey];
-
-    if (localeData == null) {
-      return null;
-    } else {
-      return Locale(
-        localeData[0],
-        (localeData.length > 1) ? localeData[1] : null,
-      );
-    }
-  }
-
-  /// Return the user's selected [ThemeMode]
-  static ThemeMode getThemeMode() {
-    final bool? isDarkTheme = _instance!._prefs[isDarkThemeKey];
-
-    if (isDarkTheme == null) {
-      return ThemeMode.system;
-    } else {
-      return isDarkTheme ? ThemeMode.dark : ThemeMode.light;
-    }
-  }
 
   /// Get the [key]s EzConfig (nullable) [bool] value
   /// Uses the stored values from [SharedPreferencesAsync]
@@ -210,6 +198,33 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Wether the [key] points to an [AssetImage] path
   static bool isKeyAsset(String key) =>
       _instance!._assetPaths.contains(_instance!._prefs[key]);
+
+  static EFUILang get l10nFallback => _instance!._fallbackLang;
+
+  /// Return the user's selected [Locale], if any (null otherwise)
+  static Locale? getLocale() {
+    final List<String>? localeData = _instance!._prefs[appLocaleKey];
+
+    if (localeData == null) {
+      return null;
+    } else {
+      return Locale(
+        localeData[0],
+        (localeData.length > 1) ? localeData[1] : null,
+      );
+    }
+  }
+
+  /// Return the user's selected [ThemeMode]
+  static ThemeMode getThemeMode() {
+    final bool? isDarkTheme = _instance!._prefs[isDarkThemeKey];
+
+    if (isDarkTheme == null) {
+      return ThemeMode.system;
+    } else {
+      return isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+    }
+  }
 
   // Setters //
 
