@@ -24,7 +24,7 @@ class EzConfig {
   final SharedPreferencesAsync _preferences;
 
   /// Allows [EzConfig] setters to call [EzThemeProvider.rebuildTheme]
-  final EzThemeProvider _themeProvider;
+  EzThemeProvider? _themeProvider;
 
   /// Live values in use
   final Map<String, dynamic> _prefs;
@@ -36,13 +36,13 @@ class EzConfig {
   static EzConfig? _instance;
 
   /// Private/internal constructor
-  const EzConfig._({
+  EzConfig._({
     // External (factory parameters)
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
     required this.fallbackLang,
     required SharedPreferencesAsync preferences,
-    required EzThemeProvider themeProvider,
+    EzThemeProvider? themeProvider,
 
     // Internal (built by factory)
     required Map<String, dynamic> prefs,
@@ -64,7 +64,7 @@ class EzConfig {
     required EFUILang fallbackLang,
     required SharedPreferencesAsync preferences,
     required Set<String> storedKeys,
-    required EzThemeProvider themeProvider,
+    EzThemeProvider? themeProvider,
   }) {
     if (_instance == null) {
       // Get the value type for each key //
@@ -214,6 +214,18 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   // Setters //
 
+  static bool setThemeProvider(EzThemeProvider themeProvider) {
+    if (_instance == null || _instance!._themeProvider != null) {
+      return false;
+    } else {
+      _instance!._themeProvider = themeProvider;
+      return true;
+    }
+  }
+
+  static void rebuildTheme({void Function()? onComplete}) =>
+      _instance!._themeProvider?.rebuildTheme(onComplete: onComplete);
+
   /// Set the EzConfig [key] to [value] with type [bool]
   /// Defaults to both the live and [SharedPreferencesAsync] values
   static Future<bool> setBool(
@@ -228,7 +240,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+        _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -251,7 +263,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+        _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -274,7 +286,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+        _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -297,7 +309,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+        _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -320,7 +332,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+        _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -401,7 +413,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
     }
   }
 
@@ -737,7 +749,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       notifyTheme: false,
     );
 
-    _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+    _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
   }
 
   // Removers //
@@ -762,7 +774,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
 
       if (notifyTheme) {
-        _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+        _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -794,7 +806,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
     }
     return success;
   }
@@ -821,7 +833,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._themeProvider.rebuildTheme(onComplete: onNotify);
+      _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
     }
     return success;
   }
