@@ -171,9 +171,6 @@ class _TextSettingsState extends State<_TextSettings>
     with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
-  final double margin = EzConfig.get(marginKey);
-  final double spacing = EzConfig.get(spacingKey);
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
@@ -229,7 +226,8 @@ class _TextSettingsState extends State<_TextSettings>
   Widget build(BuildContext context) {
     return EzScrollView(
       children: <Widget>[
-        if (spacing > margin) EzSpacer(space: spacing - margin),
+        if (EzConfig.spacing > EzConfig.margin)
+          EzSpacer(space: EzConfig.spacing - EzConfig.margin),
 
         // Mode selector
         SegmentedButton<EzTSType>(
@@ -362,28 +360,26 @@ class _QuickTextSettings extends StatefulWidget {
 }
 
 class _QuickTextSettingsState extends State<_QuickTextSettings> {
-  // Gather the fixed theme data //
-
-  final double margin = EzConfig.get(marginKey);
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EdgeInsets colMargin = EzInsets.col(margin);
-  late final EdgeInsets wrapPadding = EdgeInsets.only(
-    top: spacing,
-    left: spacing / 2,
-    right: spacing / 2,
-  );
+  // Gather the build data //
 
   late final EFUILang l10n = ezL10n(context);
 
-  // Gather the build data //
-
   late double backOpacity = EzConfig.get(widget.opacityKey);
-  late double iconSize = EzConfig.get(iconSizeKey);
+  late double iconSize = EzConfig.iconSize;
 
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
+
+    final double margin = EzConfig.margin;
+    final double spacing = EzConfig.spacing;
+
+    late final EdgeInsets colMargin = EzInsets.col(margin);
+    late final EdgeInsets wrapPadding = EdgeInsets.only(
+      top: spacing,
+      left: spacing / 2,
+      right: spacing / 2,
+    );
 
     final bool isDark = isDarkTheme(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -741,14 +737,9 @@ class _AdvancedTextSettings extends StatefulWidget {
 }
 
 class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
-  // Gather the fixed theme data //
-
-  final double margin = EzConfig.get(marginKey);
-  late final EdgeInsets colMargin = EzInsets.col(margin);
+  // Gather the build data //
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Gather the build data //
 
   EzTextSettingType editing = EzTextSettingType.display;
 
@@ -1230,6 +1221,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets colMargin = EzInsets.col(EzConfig.margin);
+
     final Map<EzTextSettingType, EzFontFamilySetting> familyControllers =
         buildFamilyControls();
     final Map<EzTextSettingType, Widget> sizeControllers = buildSizeControls();
