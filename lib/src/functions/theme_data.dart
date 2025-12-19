@@ -21,19 +21,11 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-
-  final int animDuration = EzConfig.get(animationDurationKey);
-
   // Icons //
-
-  final double iconSize = EzConfig.get(iconSizeKey);
 
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
-    size: iconSize,
+    size: EzConfig.iconSize,
     applyTextScaling: true,
   );
   final IconThemeData appBarIconData = IconThemeData(
@@ -135,7 +127,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
     // Transitions //
 
-    pageTransitionsTheme: animDuration > minAnimationDuration
+    pageTransitionsTheme: EzConfig.animDuration > minAnimationDuration
         ? EzTransitions()
         : EzNoTransitions(),
 
@@ -212,7 +204,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: spacing * 3,
+      space: EzConfig.spacing * 3,
     ),
 
     // Drawer
@@ -255,7 +247,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         side: BorderSide(color: buttonContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
+        padding: EdgeInsets.all(EzConfig.padding),
       ),
     ),
 
@@ -267,15 +259,15 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             iconColor: colorScheme.primary,
             collapsedIconColor: colorScheme.primary,
             tilePadding: EdgeInsets.only(
-              left: margin,
-              right: spacing,
-              top: margin,
-              bottom: margin,
+              left: EzConfig.margin,
+              right: EzConfig.spacing,
+              top: EzConfig.margin,
+              bottom: EzConfig.margin,
             ),
             childrenPadding: EdgeInsets.only(
-              left: margin * 2,
-              right: spacing,
-              bottom: margin,
+              left: EzConfig.margin * 2,
+              right: EzConfig.spacing,
+              bottom: EzConfig.margin,
             ),
             expandedAlignment: Alignment.centerLeft,
           )
@@ -285,15 +277,15 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             iconColor: colorScheme.primary,
             collapsedIconColor: colorScheme.primary,
             tilePadding: EdgeInsets.only(
-              left: spacing,
-              right: margin,
-              top: margin,
-              bottom: margin,
+              left: EzConfig.spacing,
+              right: EzConfig.margin,
+              top: EzConfig.margin,
+              bottom: EzConfig.margin,
             ),
             childrenPadding: EdgeInsets.only(
-              left: spacing,
-              right: margin * 2,
-              bottom: margin,
+              left: EzConfig.spacing,
+              right: EzConfig.margin * 2,
+              bottom: EzConfig.margin,
             ),
             expandedAlignment: Alignment.centerRight,
           ),
@@ -307,12 +299,12 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
-      iconSize: iconSize,
+      iconSize: EzConfig.iconSize,
       sizeConstraints: BoxConstraints(
-        minWidth: (iconSize * 1.25) + padding,
-        maxWidth: (iconSize * 1.25) + padding,
-        minHeight: (iconSize * 1.25) + padding,
-        maxHeight: (iconSize * 1.25) + padding,
+        minWidth: (EzConfig.iconSize * 1.25) + EzConfig.padding,
+        maxWidth: (EzConfig.iconSize * 1.25) + EzConfig.padding,
+        minHeight: (EzConfig.iconSize * 1.25) + EzConfig.padding,
+        maxHeight: (EzConfig.iconSize * 1.25) + EzConfig.padding,
       ),
     ),
 
@@ -327,9 +319,9 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: BorderSide.none,
-        iconSize: iconSize,
+        iconSize: EzConfig.iconSize,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(padding),
+        padding: EzInsets.wrap(EzConfig.padding),
       ),
     ),
 
@@ -386,7 +378,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(padding),
+        padding: EzInsets.wrap(EzConfig.padding),
       ),
     ),
 
@@ -403,8 +395,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Slider
     sliderTheme: SliderThemeData(
       thumbShape: RoundSliderThumbShape(
-        enabledThumbRadius: iconSize / 2,
-        disabledThumbRadius: iconSize / 2,
+        enabledThumbRadius: EzConfig.iconSize / 2,
+        disabledThumbRadius: EzConfig.iconSize / 2,
       ),
     ),
 
@@ -419,7 +411,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         side: BorderSide(color: buttonContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
+        padding: EdgeInsets.all(EzConfig.padding),
       ),
     ),
 
@@ -433,7 +425,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         borderRadius: ezRoundEdge,
       ),
       contentTextStyle: textTheme.bodyLarge,
-      insetPadding: EdgeInsets.all(margin),
+      insetPadding: EdgeInsets.all(EzConfig.margin),
     ),
 
     // Switch
@@ -473,8 +465,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       ),
       textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
-      margin: EdgeInsets.all(margin),
-      padding: EdgeInsets.all(margin),
+      margin: EdgeInsets.all(EzConfig.margin),
+      padding: EdgeInsets.all(EzConfig.margin),
       waitDuration: const Duration(milliseconds: 750),
     ),
   );
