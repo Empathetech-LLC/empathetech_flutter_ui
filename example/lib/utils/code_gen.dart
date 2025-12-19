@@ -513,8 +513,10 @@ void main() async {
     assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    preferences: preferences,
-    storedKeys: await preferences.getKeys(),
+    preferences: await SharedPreferencesWithCache.create(
+      cacheOptions: SharedPreferencesWithCacheOptions(
+          allowList: ezConfigKeys.keys.toSet()),
+    ),
   );
 
   // Run the app //
@@ -1492,8 +1494,10 @@ void main() async {
     assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    preferences: preferences,
-    storedKeys: await preferences.getKeys(),
+    preferences: await SharedPreferencesWithCache.create(
+      cacheOptions: SharedPreferencesWithCacheOptions(
+          allowList: ezConfigKeys.keys.toSet()),
+    ),
   );
   
   // Run the tests //

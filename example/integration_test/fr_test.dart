@@ -24,13 +24,14 @@ void main() async {
     appLocaleKey: <String>['fr'],
   };
 
-  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
   EzConfig.init(
     assetPaths: <String>{},
     defaults: testConfig,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    preferences: preferences,
-    storedKeys: await preferences.getKeys(),
+    preferences: await SharedPreferencesWithCache.create(
+      cacheOptions: SharedPreferencesWithCacheOptions(
+          allowList: ezConfigKeys.keys.toSet()),
+    ),
   );
 
   group(
