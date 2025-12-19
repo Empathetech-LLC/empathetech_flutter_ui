@@ -19,14 +19,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences.setMockInitialValues(empathMinConfig);
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
   EzConfig.init(
-    preferences: prefs,
+    assetPaths: <String>{},
     defaults: empathMinConfig,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    assetPaths: <String>{},
+    preferences: preferences,
+    storedKeys: await preferences.getKeys(),
   );
 
   group(

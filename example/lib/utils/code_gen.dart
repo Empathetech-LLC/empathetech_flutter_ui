@@ -508,13 +508,13 @@ void main() async {
 
   // Initialize EzConfig //
 
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
   EzConfig.init(
-    preferences: prefs,
+    assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    assetPaths: <String>{},
+    preferences: preferences,
+    storedKeys: await preferences.getKeys(),
   );
 
   // Run the app //
@@ -1486,14 +1486,14 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences.setMockInitialValues(${camelCaseAppName}Config);
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
+  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
   EzConfig.init(
-    preferences: prefs,
+    assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
-    assetPaths: <String>{},
+    preferences: preferences,
+    storedKeys: await preferences.getKeys(),
   );
   
   // Run the tests //

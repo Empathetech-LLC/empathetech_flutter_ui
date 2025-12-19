@@ -20,7 +20,7 @@ class EzConfig {
   /// [english] or [americanEnglish] is recommended
   final EFUILang fallbackLang;
 
-  /// [SharedPreferences] instance
+  /// [SharedPreferencesAsync] instance
   final SharedPreferencesAsync _preferences;
 
   /// Allows [EzConfig] setters to call [EzThemeProvider.rebuildTheme]
@@ -57,7 +57,7 @@ class EzConfig {
   /// [assetPaths] => provide the [AssetImage] paths for this app
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
   /// [fallbackLang] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
-  /// [preferences] => provide a [SharedPreferences] instance
+  /// [preferences] => provide a [SharedPreferencesAsync] instance
   factory EzConfig.init({
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
