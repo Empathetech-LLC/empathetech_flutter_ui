@@ -40,7 +40,7 @@ class EzMargin extends EzSpacer {
     super.key,
     super.vertical,
     super.horizontal,
-  }) : super(space: EzConfig.get(marginKey));
+  }) : super(space: EzConfig.margin);
 }
 
 class EzSpacer extends StatelessWidget {
@@ -63,7 +63,7 @@ class EzSpacer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double amount = space ?? EzConfig.get(spacingKey);
+    final double amount = space ?? EzConfig.spacing;
 
     return ExcludeSemantics(
       child: SizedBox(
@@ -95,7 +95,7 @@ class EzSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double amount = space ?? (EzConfig.get(spacingKey) * 2);
+    final double amount = space ?? (EzConfig.spacing * 2);
 
     return ExcludeSemantics(
       child: SizedBox(
@@ -175,8 +175,7 @@ const EzSwapSeparator ezMedSwapSeparator =
 
 class EzSwapMargin extends EzSwapSpacer {
   /// [EzSwapSpacer] with [EzConfig]s [marginKey] space
-  EzSwapMargin({super.key, super.breakpoint})
-      : super(space: EzConfig.get(marginKey));
+  EzSwapMargin({super.key, super.breakpoint}) : super(space: EzConfig.margin);
 }
 
 class EzSwapSpacer extends StatelessWidget {

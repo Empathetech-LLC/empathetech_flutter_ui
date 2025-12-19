@@ -58,7 +58,7 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(EzConfig.get(marginKey)),
+            padding: EdgeInsets.all(EzConfig.margin),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[

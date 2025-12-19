@@ -62,7 +62,7 @@ class EzTextBackground extends StatelessWidget {
         : lightTextBackgroundOpacityKey;
 
     return Container(
-      padding: margin ?? EzInsets.wrap(EzConfig.get(marginKey)),
+      padding: margin ?? EzInsets.wrap(EzConfig.margin),
       decoration: BoxDecoration(
         color: _color(context, EzConfig.get(oKey)),
         borderRadius: borderRadius ?? ezRoundEdge,

@@ -69,12 +69,12 @@ class EzRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
-            EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
+        max(EzConfig.iconSize / EzConfig.getDefault(iconSizeKey),
+            EzConfig.padding / EzConfig.getDefault(paddingKey));
 
     return Container(
       padding: ratio > 1.1
-          ? padding ?? EzInsets.wrap(EzConfig.get(marginKey))
+          ? padding ?? EzInsets.wrap(EzConfig.margin)
           : EdgeInsets.zero,
       decoration: BoxDecoration(
         color: Theme.of(context)
