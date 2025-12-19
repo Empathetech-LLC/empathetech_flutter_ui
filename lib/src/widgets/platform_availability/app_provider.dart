@@ -143,6 +143,7 @@ class _ProviderSquared extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EzThemeProvider config = Provider.of<EzThemeProvider>(context);
+    EzConfig.setThemeProvider(config);
 
     return PlatformProvider(
       builder: (_) => PlatformTheme(
