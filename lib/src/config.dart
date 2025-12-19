@@ -62,8 +62,7 @@ class EzConfig {
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
     required EFUILang fallbackLang,
-    required SharedPreferencesAsync preferences,
-    required Set<String> storedKeys,
+    required SharedPreferencesWithCache preferences,
     EzThemeProvider? themeProvider,
   }) {
     if (_instance == null) {
@@ -87,7 +86,7 @@ class EzConfig {
 
       // Find the keys that users have overwritten
       final Set<String> overwritten =
-          storedKeys.intersection(typeMap.keys.toSet());
+          preferences.keys.intersection(typeMap.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
@@ -130,7 +129,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         assetPaths: assetPaths,
         defaults: defaults,
         fallbackLang: fallbackLang,
-        preferences: preferences,
+        preferences: SharedPreferencesAsync(),
         themeProvider: themeProvider,
         prefs: prefs,
         typeMap: typeMap,
