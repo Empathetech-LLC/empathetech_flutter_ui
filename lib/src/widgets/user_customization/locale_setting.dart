@@ -39,12 +39,6 @@ class EzLocaleSetting extends StatefulWidget {
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
-  // Gather the fixed theme data //
-
-  final double iconSize = EzConfig.get(iconSizeKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-
   // Gather the build data  //
 
   late EFUILang l10n = ezL10n(context);
@@ -52,7 +46,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   late final List<Locale> locales;
   late Locale currLocale = Localizations.localeOf(context);
 
-  Widget flag(Locale lang) {
+  Widget flag(
+    Locale lang, {
+    required double iconSize,
+    required double padding,
+  }) {
     late final Widget flag;
 
     // Fix language code != flag code
@@ -123,6 +121,10 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   @override
   Widget build(BuildContext context) {
+    final double padding = EzConfig.padding;
+    final double spacing = EzConfig.spacing;
+    final double iconSize = EzConfig.iconSize;
+
     return Semantics(
       label: l10n.ssLanguage,
       button: true,
@@ -172,7 +174,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                                 Navigator.of(mContext).pop(locale);
                               }
                             },
-                            icon: flag(locale),
+                            icon: flag(
+                              locale,
+                              iconSize: iconSize,
+                              padding: padding,
+                            ),
                             label: localeName(locale),
                             labelPadding: false,
                           ),
@@ -184,7 +190,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
               ],
             ),
           ),
-          icon: flag(currLocale),
+          icon: flag(
+            currLocale,
+            iconSize: iconSize,
+            padding: padding,
+          ),
           label: l10n.ssLanguage,
           labelPadding: false,
         ),

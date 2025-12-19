@@ -82,15 +82,6 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather the fixed theme data //
 
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-  final double iconSize = EzConfig.get(iconSizeKey);
-
-  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
-
-  final bool isLefty = EzConfig.get(isLeftyKey);
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
@@ -264,6 +255,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   }) {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
+
+    final double spacing = EzConfig.spacing;
+    final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
 
     // From camera
     // Only works on mobile
@@ -626,8 +620,9 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               ezSpacer,
               EzRow(
-                mainAxisAlignment:
-                    isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+                mainAxisAlignment: EzConfig.isLefty
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.end,
                 children: <Widget>[
                   ezRowSpacer,
                   EzTextButton(
@@ -676,7 +671,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     required StateSetter setModal,
     required ThemeData theme,
   }) {
-    final double scaleMargin = margin * 0.25;
+    final double scaleMargin = EzConfig.margin * 0.25;
 
     final String name = fit.name;
 
@@ -742,6 +737,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
+
+    final double padding = EzConfig.padding;
+    final double iconSize = EzConfig.iconSize;
 
     late final ThemeData theme = Theme.of(context);
 
