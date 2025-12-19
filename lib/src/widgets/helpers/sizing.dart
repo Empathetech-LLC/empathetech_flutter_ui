@@ -76,17 +76,12 @@ BoxConstraints ezTextFieldConstraints(BuildContext context) {
 double ezDropdownWidth({
   required BuildContext context,
   required List<String> entries,
-}) {
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double iconSize = EzConfig.get(iconSizeKey);
-
-  return 2 * margin +
-      ezTextSize(
-        getLongest(entries),
-        context: context,
-        style: Theme.of(context).textTheme.bodyLarge,
-      ).width +
-      padding +
-      max(padding + iconSize, kMinInteractiveDimension);
-}
+}) =>
+    2 * EzConfig.margin +
+    ezTextSize(
+      getLongest(entries),
+      context: context,
+      style: Theme.of(context).textTheme.bodyLarge,
+    ).width +
+    EzConfig.padding +
+    max(EzConfig.padding + EzConfig.iconSize, kMinInteractiveDimension);

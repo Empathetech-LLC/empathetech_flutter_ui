@@ -36,14 +36,9 @@ class EzColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
-  // Gather the fixed theme data //
-
-  final double padding = EzConfig.get(paddingKey);
-  final double iconRadius = EzConfig.get(iconSizeKey) / 2;
+  // Define the build data //
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Define the build data //
 
   late final int? _prefsValue = EzConfig.get(widget.configKey);
 
@@ -147,7 +142,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ),
                 child: CircleAvatar(
                   backgroundColor: Color(recommended),
-                  radius: iconRadius + padding,
+                  radius: (EzConfig.iconSize / 2) + EzConfig.padding,
                 ),
               ),
             ],
@@ -256,12 +251,17 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
         );
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the contextual theme data //
+
+    final double padding = EzConfig.padding;
+    final double iconRadius = EzConfig.iconSize / 2;
+
     final ThemeData theme = Theme.of(context);
     final String label = getColorName(widget.configKey);
+
+    // Return the build //
 
     return Semantics(
       label: label,
