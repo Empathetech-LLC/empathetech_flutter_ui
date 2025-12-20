@@ -96,6 +96,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   @override
   Widget build(BuildContext context) {
+    // Gather the contextual theme data //
+
+    final EzMargin ezRowMargin = EzMargin(vertical: false);
+
     final double padding = EzConfig.padding;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 

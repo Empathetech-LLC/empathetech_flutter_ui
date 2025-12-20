@@ -85,6 +85,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    final EzMargin ezRowMargin = EzMargin(vertical: false);
+
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // Return the build //

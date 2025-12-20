@@ -88,7 +88,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               EzIcon(icon, color: color),
-              ezMargin,
+              EzMargin(),
               EzText(
                 name,
                 textAlign: TextAlign.center,
@@ -128,6 +128,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
+
+    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
 
     final double padding = EzConfig.padding;
     final double spacing = EzConfig.spacing;
