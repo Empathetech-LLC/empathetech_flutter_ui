@@ -65,7 +65,7 @@ class EzTextSettings extends StatelessWidget {
     // Shared
     super.key,
     this.target,
-    this.resetSpacer = ezSeparator,
+    this.resetSpacer = const EzSeparator(),
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.extraSaveKeys,
@@ -75,7 +75,7 @@ class EzTextSettings extends StatelessWidget {
     // Quick
     this.showOnSurface = true,
     this.moreQuickHeaderSettings,
-    this.textBlockSpacer = ezDivider,
+    this.textBlockSpacer = const EzDivider(),
     this.showOpacity = true,
     this.moreQuickFooterSettings,
 
@@ -226,8 +226,7 @@ class _TextSettingsState extends State<_TextSettings>
   Widget build(BuildContext context) {
     return EzScrollView(
       children: <Widget>[
-        if (EzConfig.spacing > EzConfig.margin)
-          EzSpacer(space: EzConfig.spacing - EzConfig.margin),
+        EzHeader(),
 
         // Mode selector
         SegmentedButton<EzTSType>(
@@ -370,6 +369,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
+
+    const EzSpacer ezSpacer = EzSpacer();
+    const EzSeparator ezSeparator = EzSeparator();
 
     final double margin = EzConfig.margin;
     final double spacing = EzConfig.spacing;
@@ -605,7 +607,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         color: colorScheme.outline,
                       ),
                     ),
-              ezRowMargin,
+              EzMargin(vertical: false),
 
               // Preview
               GestureDetector(
@@ -620,7 +622,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   color: colorScheme.onSurface,
                 ),
               ),
-              ezRowMargin,
+              EzMargin(vertical: false),
 
               // Plus
               (iconSize < maxIconSize)
@@ -1221,6 +1223,12 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   @override
   Widget build(BuildContext context) {
+    const EzSpacer ezSpacer = EzSpacer();
+    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
+    const EzSwapSpacer ezMedSwapSpacer =
+        EzSwapSpacer(breakpoint: ScreenSize.medium);
+    const EzSeparator ezSeparator = EzSeparator();
+
     final EdgeInsets colMargin = EzInsets.col(EzConfig.margin);
 
     final Map<EzTextSettingType, EzFontFamilySetting> familyControllers =
@@ -1249,7 +1257,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               style: widget.labelProvider.value,
               textAlign: TextAlign.center,
             ),
-            ezMargin,
+            EzMargin(),
             EzDropdownMenu<EzTextSettingType>(
               widthEntries: styleChoices
                   .map(

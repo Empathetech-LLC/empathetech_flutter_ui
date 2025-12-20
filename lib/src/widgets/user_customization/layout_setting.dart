@@ -93,6 +93,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
   List<Widget> buildPreview(BuildContext context, ThemeData theme) {
+    const EzSpacer ezSpacer = EzSpacer();
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
@@ -160,7 +161,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                 ),
                 text: l10n.gCurrently,
               ),
-              ezRowSpacer,
+              const EzSpacer(vertical: false),
               EzElevatedButton(
                 enabled: false,
                 style: ElevatedButton.styleFrom(
@@ -266,7 +267,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         value.toStringAsFixed(widget.decimals),
                   ),
                 ),
-                ezSpacer,
+                const EzSpacer(),
 
                 // Reset button
                 EzElevatedIconButton(
