@@ -991,19 +991,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
               Text(
                 l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
               Text(
                 l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
             ],
           ),
         ),
@@ -1078,7 +1078,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      fabs: <Widget>[ezSpacer, CountFAB(() => setState(() => count += 1))],
+      fabs: <Widget>[EzConfig.spacer, CountFAB(() => setState(() => count += 1))],
     );
   }
 }
@@ -1111,13 +1111,13 @@ class SettingsHomeScreen extends StatelessWidget {
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
         )),
         fabs: <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          ezSpacer,
+          EzConfig.spacer,
           const EzBackFAB(showHome: true),
         ],
       );
@@ -1148,13 +1148,13 @@ class ColorSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: EzScreen(EzColorSettings(target: target)),
         fabs: <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          ezSpacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1184,13 +1184,13 @@ class DesignSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: const EzScreen(EzDesignSettings()),
         fabs: <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          ezSpacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1220,13 +1220,13 @@ class LayoutSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: const EzScreen(EzLayoutSettings()),
         fabs: <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          ezSpacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1258,13 +1258,13 @@ class TextSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: EzScreen(EzTextSettings(target: target)),
         fabs: <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          ezSpacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );

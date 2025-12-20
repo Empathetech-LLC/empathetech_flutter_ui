@@ -21,7 +21,7 @@ class DesignSettingsScreen extends StatelessWidget {
           androidPackage: androidPackage,
         )),
         fabs: <Widget>[
-          const EzSpacer(),
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,

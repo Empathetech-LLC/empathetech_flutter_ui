@@ -42,7 +42,7 @@ class FailureHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const EzSpacer(),
+          EzConfig.spacer,
 
           // Error message
           message != null
@@ -85,55 +85,51 @@ class DeleteOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    const EzSpacer ezSpacer = EzSpacer();
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        EzText(
-          Lang.of(context)!.rsWouldYou,
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-        ezSpacer,
-        EzElevatedIconButton(
-          onPressed: () => ezCmd(
-            platform == TargetPlatform.windows
-                ? 'rmdir /s /q $appName'
-                : 'rm -rf $appName',
-            dir: dir,
-            onSuccess: () async {
-              await ezSnackBar(
-                context: context,
-                message: Lang.of(context)!.rsNextTime,
-              ).closed;
-
-              if (context.mounted) Navigator.of(context).maybePop();
-            },
-            onFailure: (String message) async {
-              await ezSnackBar(
-                context: context,
-                message: Lang.of(context)!.rsAnotherOne,
-              ).closed;
-
-              if (context.mounted) Navigator.of(context).maybePop();
-            },
-            readout: readout,
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          EzText(
+            Lang.of(context)!.rsWouldYou,
+            style: style,
+            textAlign: TextAlign.center,
           ),
-          icon: EzIcon(PlatformIcons(context).delete),
-          label: Lang.of(context)!.rsWipe,
-        ),
-        ezSpacer,
-        EzElevatedIconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: EzIcon(PlatformIcons(context).back),
-          label: Lang.of(context)!.rsLeave,
-        ),
-      ],
-    );
-  }
+          EzConfig.spacer,
+          EzElevatedIconButton(
+            onPressed: () => ezCmd(
+              platform == TargetPlatform.windows
+                  ? 'rmdir /s /q $appName'
+                  : 'rm -rf $appName',
+              dir: dir,
+              onSuccess: () async {
+                await ezSnackBar(
+                  context: context,
+                  message: Lang.of(context)!.rsNextTime,
+                ).closed;
+
+                if (context.mounted) Navigator.of(context).maybePop();
+              },
+              onFailure: (String message) async {
+                await ezSnackBar(
+                  context: context,
+                  message: Lang.of(context)!.rsAnotherOne,
+                ).closed;
+
+                if (context.mounted) Navigator.of(context).maybePop();
+              },
+              readout: readout,
+            ),
+            icon: EzIcon(PlatformIcons(context).delete),
+            label: Lang.of(context)!.rsWipe,
+          ),
+          EzConfig.spacer,
+          EzElevatedIconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: EzIcon(PlatformIcons(context).back),
+            label: Lang.of(context)!.rsLeave,
+          ),
+        ],
+      );
 }
 
 /// https://docs.flutter.dev/get-started/install
@@ -159,7 +155,7 @@ class LinkOption extends StatelessWidget {
           style: style,
           textAlign: TextAlign.center,
         ),
-        const EzSpacer(),
+        EzConfig.spacer,
         EzElevatedIconLink(
           url: Uri.parse(installFlutter),
           tooltip: installFlutter,

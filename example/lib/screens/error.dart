@@ -33,7 +33,6 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const EzSeparator ezSeparator = EzSeparator();
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return OpenUIScaffold(
@@ -47,19 +46,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
               Text(
                 l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
               Text(
                 l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
             ],
           ),
         ),
