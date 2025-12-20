@@ -145,6 +145,21 @@ Must be one of [int, bool, double, String, List<String>]''');
   // w/out null checks
   // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
+  /// [EzSpacer] alias that updates alongside [EzThemeProvider]
+  /// Bypasses the null check, do not call this without running [setThemeProvider] first
+  /// (Which is done automatically by [EzAppProvider])
+  static EzSpacer get spacer => _instance!._themeProvider!.spacer;
+
+  /// [EzSpacer] alias that updates alongside [EzThemeProvider]
+  /// Bypasses the null check, do not call this without running [setThemeProvider] first
+  /// (Which is done automatically by [EzAppProvider])
+  static EzSeparator get separator => _instance!._themeProvider!.separator;
+
+  /// [EzSpacer] alias that updates alongside [EzThemeProvider]
+  /// Bypasses the null check, do not call this without running [setThemeProvider] first
+  /// (Which is done automatically by [EzAppProvider])
+  static EzDivider get divider => _instance!._themeProvider!.divider;
+
   /// Get the [key]s current EzConfig value
   /// bool, int, double, String, String List, or null
   static dynamic get(String key) =>
