@@ -40,6 +40,8 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    final EzMargin ezRowMargin = EzMargin(vertical: false);
+
     final Color alertColor =
         iconColor ?? Theme.of(context).colorScheme.secondary;
 
@@ -91,7 +93,7 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                ezSpacer,
+                const EzSpacer(),
 
                 // Body
                 Text(body, style: bStyle, textAlign: TextAlign.center),

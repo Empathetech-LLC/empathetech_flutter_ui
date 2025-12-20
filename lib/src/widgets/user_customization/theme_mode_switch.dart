@@ -57,7 +57,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           style: widget.labelStyle,
           textAlign: TextAlign.center,
         ),
-        ezMargin,
+        EzMargin(),
 
         // Button
         EzDropdownMenu<ThemeMode>(
