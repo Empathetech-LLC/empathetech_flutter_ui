@@ -186,7 +186,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                       )
                       .toList(),
                 ),
-                ezSpacer,
+                const EzSpacer(),
               ],
             ),
           ),

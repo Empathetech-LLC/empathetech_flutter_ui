@@ -58,7 +58,7 @@ class EzColorSettings extends StatefulWidget {
     super.key,
     this.target,
     this.themeLink,
-    this.resetSpacer = ezSeparator,
+    this.resetSpacer = const EzSeparator(),
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.extraSaveKeys,
@@ -119,6 +119,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    const EzSeparator ezSeparator = EzSeparator();
+
     final bool isDark = isDarkTheme(context);
 
     final List<String> defaultList =
@@ -147,7 +149,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-        ezMargin,
+        EzMargin(),
 
         // Mode switch
         SegmentedButton<EzCSType>(
@@ -271,7 +273,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
           // MonoChrome
           const EzMonoChromeColorsSetting(),
-          ezSpacer,
+          const EzSpacer(),
 
           // From image
           Semantics(
@@ -476,7 +478,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
           ),
         ),
-        ezSeparator,
+        const EzSeparator(),
 
         // Add a color button
         EzTextIconButton(
@@ -507,7 +509,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: getUntrackedColors(setModalState, isDark),
                     ),
-                    ezSpacer,
+                    const EzSpacer(),
                   ],
                 ),
               ),
