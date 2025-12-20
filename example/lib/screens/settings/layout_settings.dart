@@ -21,7 +21,7 @@ class LayoutSettingsScreen extends StatelessWidget {
           androidPackage: androidPackage,
         )),
         fabs: <Widget>[
-          ezSpacer,
+          const EzSpacer(),
           EzConfigFAB(
             context,
             appName: appName,
