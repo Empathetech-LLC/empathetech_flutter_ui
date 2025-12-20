@@ -370,9 +370,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    const EzSpacer ezSpacer = EzSpacer();
-    const EzSeparator ezSeparator = EzSeparator();
-
     final double margin = EzConfig.margin;
     final double spacing = EzConfig.spacing;
 
@@ -468,7 +465,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Headline preview
         EzTextBackground(
@@ -480,7 +477,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Title preview
         EzTextBackground(
@@ -492,7 +489,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Body preview
         EzTextBackground(
@@ -504,7 +501,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Label preview
         EzTextBackground(
@@ -558,7 +555,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   value.toStringAsFixed(2),
             ),
           ),
-          ezSpacer,
+          EzConfig.spacer,
         ],
 
         // Icon size
@@ -696,7 +693,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        ezSeparator,
+        EzConfig.separator,
       ],
     );
   }
@@ -1223,11 +1220,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   @override
   Widget build(BuildContext context) {
-    const EzSpacer ezSpacer = EzSpacer();
     const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
     const EzSwapSpacer ezMedSwapSpacer =
         EzSwapSpacer(breakpoint: ScreenSize.medium);
-    const EzSeparator ezSeparator = EzSeparator();
 
     final EdgeInsets colMargin = EzInsets.col(EzConfig.margin);
 
@@ -1244,7 +1239,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ezSpacer,
+        EzConfig.spacer,
 
         // Style selector
         EzScrollView(
@@ -1273,7 +1268,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
           ],
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Controls
         EzRowCol.sym(
@@ -1321,7 +1316,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ],
           ],
         ),
-        ezSeparator,
+        EzConfig.separator,
 
         // Display preview
         EzTextBackground(
@@ -1347,7 +1342,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Headline preview
         EzTextBackground(
@@ -1373,7 +1368,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Title preview
         EzTextBackground(
@@ -1397,7 +1392,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Body preview
         EzTextBackground(
@@ -1422,7 +1417,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        ezSpacer,
+        EzConfig.spacer,
 
         // Label preview
         EzTextBackground(
@@ -1486,7 +1481,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        ezSeparator,
+        EzConfig.separator,
       ],
     );
   }

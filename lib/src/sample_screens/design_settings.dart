@@ -149,9 +149,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    const EzSpacer ezSpacer = EzSpacer();
-    const EzSeparator ezSeparator = EzSeparator();
-
     final double margin = EzConfig.margin;
     final double spacing = EzConfig.spacing;
 
@@ -191,7 +188,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           iconSize: iconSize,
                         ),
                       ),
-                      ezSpacer,
+                      EzConfig.spacer,
 
                       // Slider
                       Text(l10n.dsMilliseconds, style: textTheme.bodyLarge),
@@ -218,7 +215,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ),
                       ),
-                      ezSpacer,
+                      EzConfig.spacer,
 
                       // Reset button
                       EzElevatedIconButton(
@@ -231,7 +228,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         icon: EzIcon(PlatformIcons(context).refresh),
                         label: l10n.gReset,
                       ),
-                      ezSeparator,
+                      EzConfig.separator,
                     ],
                   ),
                 );
@@ -244,7 +241,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Icon size
         if (widget.includeIconSize) ...<Widget>[
-          if (widget.includeAnimation) ezSpacer,
+          if (widget.includeAnimation) EzConfig.spacer,
           Tooltip(
             message: l10n.gCenterReset,
             child: GestureDetector(
@@ -329,7 +326,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Scrollbar toggle
         if (widget.includeScroll) ...<Widget>[
-          if (widget.includeAnimation || widget.includeIconSize) ezSpacer,
+          if (widget.includeAnimation || widget.includeIconSize)
+            EzConfig.spacer,
           EzSwitchPair(
             key: ValueKey<String>('scroll_$redraw'),
             valueKey: hideScrollKey,
@@ -434,7 +432,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ],
                       ),
-                      ezSpacer,
+                      EzConfig.spacer,
 
                       // Background slider
                       Text(l10n.dsBackground, style: textTheme.bodyLarge),
@@ -468,7 +466,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ),
                       ),
-                      ezSpacer,
+                      EzConfig.spacer,
 
                       // Outline slider
                       Text(l10n.dsOutline, style: textTheme.bodyLarge),
@@ -502,7 +500,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ),
                       ),
-                      ezSpacer,
+                      EzConfig.spacer,
 
                       // Reset button
                       EzElevatedIconButton(
@@ -532,7 +530,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         icon: EzIcon(PlatformIcons(context).refresh),
                         label: l10n.gReset,
                       ),
-                      ezSeparator,
+                      EzConfig.separator,
                     ],
                   );
                 },
@@ -546,7 +544,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Background image
         if (widget.includeBackgroundImage) ...<Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
@@ -608,7 +606,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        ezSeparator,
+        EzConfig.separator,
       ],
     );
   }

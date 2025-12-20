@@ -130,7 +130,6 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Define custom functions //
 
   List<Widget> navButtons() {
-    const EzSpacer ezSpacer = EzSpacer();
     late final Widget navIcon = EzIcon(Icons.navigate_next);
 
     final List<Widget> buttons = <Widget>[];
@@ -153,7 +152,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.designSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(ezSpacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
 
       ezUrlCheck(widget.designSettingsPath!)
           ? buttons.add(Link(
@@ -172,7 +171,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.layoutSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(ezSpacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
 
       ezUrlCheck(widget.layoutSettingsPath!)
           ? buttons.add(Link(
@@ -191,7 +190,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.textSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(ezSpacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
 
       ezUrlCheck(widget.textSettingsPath!)
           ? buttons.add(Link(
@@ -219,62 +218,60 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    const EzSpacer ezSpacer = EzSpacer();
+  Widget build(BuildContext context) => EzScrollView(
+        children: <Widget>[
+          EzHeader(),
 
-    return EzScrollView(
-      children: <Widget>[
-        // Right/left
-        const EzDominantHandSwitch(),
-        ezSpacer,
+          // Right/left
+          const EzDominantHandSwitch(),
+          EzConfig.spacer,
 
-        // Theme mode
-        const EzThemeModeSwitch(),
-        ezSpacer,
+          // Theme mode
+          const EzThemeModeSwitch(),
+          EzConfig.spacer,
 
-        // Language
-        EzLocaleSetting(
-          skip: widget.skipLocales ?? <Locale>{english},
-          protest: widget.protest,
-          inDistress: widget.inDistress,
-        ),
-        widget.localeSpacer,
+          // Language
+          EzLocaleSetting(
+            skip: widget.skipLocales ?? <Locale>{english},
+            protest: widget.protest,
+            inDistress: widget.inDistress,
+          ),
+          widget.localeSpacer,
 
-        // Additional settings
-        if (widget.additionalSettings != null) ...widget.additionalSettings!,
+          // Additional settings
+          if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
-        // Navigation buttons
-        ...navButtons(),
+          // Navigation buttons
+          ...navButtons(),
 
-        // Quick config
-        if (widget.quickConfigSpacer != null) ...<Widget>[
-          widget.quickConfigSpacer!,
-          const EzQuickConfig(),
-        ],
+          // Quick config
+          if (widget.quickConfigSpacer != null) ...<Widget>[
+            widget.quickConfigSpacer!,
+            const EzQuickConfig(),
+          ],
 
-        // Feeling lucky
-        if (widget.randomSpacer != null) ...<Widget>[
-          widget.randomSpacer!,
-          EzConfigRandomizer(
+          // Feeling lucky
+          if (widget.randomSpacer != null) ...<Widget>[
+            widget.randomSpacer!,
+            EzConfigRandomizer(
+              extraKeys: widget.extraKeys,
+              appName: widget.appName,
+              androidPackage: widget.androidPackage,
+            ),
+          ],
+
+          // Reset button
+          widget.resetSpacer,
+          EzResetButton(
+            skip: widget.skipKeys,
             extraKeys: widget.extraKeys,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
           ),
+
+          // Footer
+          if (widget.footer != null) ...widget.footer!,
+          EzConfig.separator,
         ],
-
-        // Reset button
-        widget.resetSpacer,
-        EzResetButton(
-          skip: widget.skipKeys,
-          extraKeys: widget.extraKeys,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-        ),
-
-        // Footer
-        if (widget.footer != null) ...widget.footer!,
-        const EzSeparator(),
-      ],
-    );
-  }
+      );
 }

@@ -119,8 +119,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    const EzSeparator ezSeparator = EzSeparator();
-
     final bool isDark = isDarkTheme(context);
 
     final List<String> defaultList =
@@ -179,7 +177,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             setState(() {});
           },
         ),
-        ezSeparator,
+        EzConfig.separator,
 
         // Core settings
         if (currentTab == EzCSType.quick)
@@ -229,7 +227,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 appName: widget.appName,
                 androidPackage: widget.androidPackage,
               ),
-        ezSeparator,
+        EzConfig.separator,
       ],
     );
   }
@@ -273,7 +271,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
           // MonoChrome
           const EzMonoChromeColorsSetting(),
-          const EzSpacer(),
+          EzConfig.spacer,
 
           // From image
           Semantics(
@@ -478,7 +476,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
           ),
         ),
-        const EzSeparator(),
+        EzConfig.separator,
 
         // Add a color button
         EzTextIconButton(
@@ -509,7 +507,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: getUntrackedColors(setModalState, isDark),
                     ),
-                    const EzSpacer(),
+                    EzConfig.spacer,
                   ],
                 ),
               ),

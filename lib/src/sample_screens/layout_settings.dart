@@ -68,81 +68,76 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    const EzSpacer ezSpacer = EzSpacer();
-    const EzSeparator ezSeparator = EzSeparator();
+  Widget build(BuildContext context) => EzScrollView(
+        children: <Widget>[
+          EzHeader(),
 
-    return EzScrollView(
-      children: <Widget>[
-        EzHeader(),
+          // Before layout
+          if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
-        // Before layout
-        if (widget.beforeLayout != null) ...widget.beforeLayout!,
+          // Main //
+          // Margin
+          EzLayoutSetting(
+            key: ValueKey<String>('margin_$redraw'),
+            configKey: marginKey,
+            type: EzLayoutSettingType.margin,
+            min: minMargin,
+            max: maxMargin,
+            steps: 6,
+            decimals: 1,
+          ),
+          EzConfig.spacer,
 
-        // Main //
-        // Margin
-        EzLayoutSetting(
-          key: ValueKey<String>('margin_$redraw'),
-          configKey: marginKey,
-          type: EzLayoutSettingType.margin,
-          min: minMargin,
-          max: maxMargin,
-          steps: 6,
-          decimals: 1,
-        ),
-        ezSpacer,
+          // Padding
+          EzLayoutSetting(
+            key: ValueKey<String>('padding_$redraw'),
+            configKey: paddingKey,
+            type: EzLayoutSettingType.padding,
+            min: minPadding,
+            max: maxPadding,
+            steps: 12,
+            decimals: 1,
+          ),
+          EzConfig.spacer,
 
-        // Padding
-        EzLayoutSetting(
-          key: ValueKey<String>('padding_$redraw'),
-          configKey: paddingKey,
-          type: EzLayoutSettingType.padding,
-          min: minPadding,
-          max: maxPadding,
-          steps: 12,
-          decimals: 1,
-        ),
-        ezSpacer,
+          // Spacing
+          EzLayoutSetting(
+            key: ValueKey<String>('spacing_$redraw'),
+            configKey: spacingKey,
+            type: EzLayoutSettingType.spacing,
+            min: minSpacing,
+            max: maxSpacing,
+            steps: 13,
+            decimals: 0,
+          ),
+          EzConfig.separator,
 
-        // Spacing
-        EzLayoutSetting(
-          key: ValueKey<String>('spacing_$redraw'),
-          configKey: spacingKey,
-          type: EzLayoutSettingType.spacing,
-          min: minSpacing,
-          max: maxSpacing,
-          steps: 13,
-          decimals: 0,
-        ),
-        ezSeparator,
+          // Hide scroll
+          EzSwitchPair(
+            key: ValueKey<String>('scroll_$redraw'),
+            text: l10n.lsScroll,
+            valueKey: hideScrollKey,
+          ),
 
-        // Hide scroll
-        EzSwitchPair(
-          key: ValueKey<String>('scroll_$redraw'),
-          text: l10n.lsScroll,
-          valueKey: hideScrollKey,
-        ),
+          // After layout
+          if (widget.afterLayout != null) ...widget.afterLayout!,
 
-        // After layout
-        if (widget.afterLayout != null) ...widget.afterLayout!,
-
-        // Local reset all
-        widget.resetSpacer,
-        EzResetButton(
-          dialogTitle: l10n.lsResetAll,
-          onConfirm: () async {
-            await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
-            if (widget.resetKeys != null) {
-              await EzConfig.removeKeys(widget.resetKeys!);
-            }
-            setState(() => redraw = Random().nextInt(rMax));
-          },
-          extraKeys: widget.extraSaveKeys,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-        ),
-        ezSeparator,
-      ],
-    );
-  }
+          // Local reset all
+          widget.resetSpacer,
+          EzResetButton(
+            dialogTitle: l10n.lsResetAll,
+            onConfirm: () async {
+              await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
+              if (widget.resetKeys != null) {
+                await EzConfig.removeKeys(widget.resetKeys!);
+              }
+              setState(() => redraw = Random().nextInt(rMax));
+            },
+            extraKeys: widget.extraSaveKeys,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
+          ),
+          EzConfig.separator,
+        ],
+      );
 }
