@@ -61,60 +61,65 @@ class EzQuickConfig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final void Function()? onComplete =
-        notifyTheme ? () => EzConfig.rebuild(onComplete: onNotify) : null;
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
 
     return EzElevatedIconButton(
       onPressed: () => ezModal(
         context: context,
-        builder: (BuildContext mContext) => EzScrollView(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Wrap(
-              alignment: WrapAlignment.center,
-              runAlignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: <Widget>[
-                // Big buttons
-                if (bigButtons)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzBigButtonsConfig(onComplete: onComplete),
-                  ),
+        builder: (BuildContext mContext) {
+          void onComplete() {
+            Navigator.of(mContext).pop();
+            if (notifyTheme) EzConfig.rebuild(onComplete: onNotify);
+          }
 
-                // High visibility
-                if (highVisibility)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzHighVisibilityConfig(onComplete: onComplete),
-                  ),
+          return EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Wrap(
+                alignment: WrapAlignment.center,
+                runAlignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  // Big buttons
+                  if (bigButtons)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzBigButtonsConfig(onComplete: onComplete),
+                    ),
 
-                // Video game
-                if (videoGame)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzVideoGameConfig(onComplete: onComplete),
-                  ),
+                  // High visibility
+                  if (highVisibility)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzHighVisibilityConfig(onComplete: onComplete),
+                    ),
 
-                // Chalkboard
-                if (chalkboard)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzChalkboardConfig(onComplete: onComplete),
-                  ),
+                  // Video game
+                  if (videoGame)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzVideoGameConfig(onComplete: onComplete),
+                    ),
 
-                // Fancy pants
-                if (fancyPants)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzFancyPantsConfig(onComplete: onComplete),
-                  ),
-              ],
-            ),
-            EzConfig.spacer,
-          ],
-        ),
+                  // Chalkboard
+                  if (chalkboard)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzChalkboardConfig(onComplete: onComplete),
+                    ),
+
+                  // Fancy pants
+                  if (fancyPants)
+                    Padding(
+                      padding: wrapPadding,
+                      child: EzFancyPantsConfig(onComplete: onComplete),
+                    ),
+                ],
+              ),
+              EzConfig.spacer,
+            ],
+          );
+        },
       ),
       icon: EzIcon(PlatformIcons(context).edit),
       label: ezL10n(context).ssLoadPreset,
