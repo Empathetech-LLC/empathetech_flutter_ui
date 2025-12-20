@@ -53,8 +53,8 @@ class EzAppProvider extends StatelessWidget {
 class EzThemeProvider extends ChangeNotifier {
   // Construct //
 
-  bool _ltr;
   final bool _cupertino;
+  bool _ltr;
   late ThemeMode _themeMode;
 
   late ThemeData _darkMaterial;
@@ -63,10 +63,34 @@ class EzThemeProvider extends ChangeNotifier {
   late CupertinoThemeData? _darkCupertino;
   late CupertinoThemeData? _lightCupertino;
 
-  EzThemeProvider({required bool isLTR, required bool useCupertino})
-      : _ltr = isLTR,
-        _cupertino = useCupertino {
+  late EzSpacer _spacer;
+  late EzSeparator _separator;
+  late EzDivider _divider;
+
+  EzThemeProvider({required bool useCupertino, required bool isLTR})
+      : _cupertino = useCupertino,
+        _ltr = isLTR {
+    _themeMode = _getMode;
     _buildTheme();
+  }
+
+  void _buildTheme() {
+    _darkMaterial = ezThemeData(Brightness.dark, _ltr);
+    _lightMaterial = ezThemeData(Brightness.light, _ltr);
+
+    if (_cupertino) {
+      _darkCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
+      _lightCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
+    } else {
+      _darkCupertino = null;
+      _lightCupertino = null;
+    }
+
+    _spacer = const EzSpacer();
+    _separator = const EzSeparator();
+    _divider = const EzDivider();
   }
 
   // Get //
@@ -81,24 +105,8 @@ class EzThemeProvider extends ChangeNotifier {
             : ThemeMode.light;
   }
 
-  void _buildTheme() {
-    _themeMode = _getMode;
-    _darkMaterial = ezThemeData(Brightness.dark, _ltr);
-    _lightMaterial = ezThemeData(Brightness.light, _ltr);
-
-    if (_cupertino) {
-      _darkCupertino =
-          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
-      _lightCupertino =
-          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
-    } else {
-      _darkCupertino = null;
-      _lightCupertino = null;
-    }
-  }
-
-  bool get isLTR => _ltr;
   bool get isCupertino => _cupertino;
+  bool get isLTR => _ltr;
   ThemeMode get themeMode => _themeMode;
 
   ThemeData get darkMaterial => _darkMaterial;
@@ -107,17 +115,28 @@ class EzThemeProvider extends ChangeNotifier {
   CupertinoThemeData? get darkCupertino => _darkCupertino;
   CupertinoThemeData? get lightCupertino => _lightCupertino;
 
+  EzSpacer get spacer => _spacer;
+  EzSeparator get separator => _separator;
+  EzDivider get divider => _divider;
+
   // Set //
 
-  void rebuild({void Function()? onComplete}) {
-    _buildTheme();
+  void setTextDirection(bool isLTR, {void Function()? onComplete}) {
+    _ltr = isLTR;
+    rebuild(onComplete: onComplete);
+  }
+
+  void setThemeMode({void Function()? onComplete}) {
+    _themeMode = _getMode;
     notifyListeners();
     onComplete?.call();
   }
 
-  void setDirection(bool isLTR, {void Function()? onComplete}) {
-    _ltr = isLTR;
-    rebuild(onComplete: onComplete);
+  void rebuild({void Function()? onComplete}) {
+    _themeMode = _getMode;
+    _buildTheme();
+    notifyListeners();
+    onComplete?.call();
   }
 }
 
