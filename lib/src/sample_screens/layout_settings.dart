@@ -39,7 +39,7 @@ class EzLayoutSettings extends StatefulWidget {
     super.key,
     this.beforeLayout,
     this.afterLayout,
-    this.resetSpacer = ezSeparator,
+    this.resetSpacer = const EzSeparator(),
     this.resetKeys,
     this.extraSaveKeys,
     required this.appName,
@@ -69,12 +69,12 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
   @override
   Widget build(BuildContext context) {
-    final double margin = EzConfig.margin;
-    final double spacing = EzConfig.spacing;
+    const EzSpacer ezSpacer = EzSpacer();
+    const EzSeparator ezSeparator = EzSeparator();
 
     return EzScrollView(
       children: <Widget>[
-        if (spacing > margin) EzSpacer(space: spacing - margin),
+        EzHeader(),
 
         // Before layout
         if (widget.beforeLayout != null) ...widget.beforeLayout!,

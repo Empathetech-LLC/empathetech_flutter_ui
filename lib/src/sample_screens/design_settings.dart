@@ -93,7 +93,7 @@ class EzDesignSettings extends StatefulWidget {
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
     this.themedSettingsPostpend,
-    this.resetSpacer = ezDivider,
+    this.resetSpacer = const EzDivider(),
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.onReset,
@@ -149,6 +149,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    const EzSpacer ezSpacer = EzSpacer();
+    const EzSeparator ezSeparator = EzSeparator();
+
     final double margin = EzConfig.margin;
     final double spacing = EzConfig.spacing;
 
@@ -162,7 +165,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
     return EzScrollView(
       children: <Widget>[
-        if (spacing > margin) EzSpacer(space: spacing - margin),
+        EzHeader(),
 
         if (widget.globalSettingsPrepend != null)
           ...widget.globalSettingsPrepend!,
@@ -279,7 +282,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         ),
                         iconSize: iconSize,
                       ),
-                ezRowMargin,
+                EzMargin(vertical: false),
 
                 // Preview
                 GestureDetector(
@@ -294,7 +297,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     color: colorScheme.onSurface,
                   ),
                 ),
-                ezRowMargin,
+                EzMargin(vertical: false),
 
                 // Plus
                 (iconSize < maxIconSize)

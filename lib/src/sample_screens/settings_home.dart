@@ -7,7 +7,6 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
@@ -94,19 +93,19 @@ class EzSettingsHome extends StatefulWidget {
     this.skipLocales,
     this.protest = false,
     this.inDistress = const <String>{'US'},
-    this.localeSpacer = ezDivider,
+    this.localeSpacer = const EzDivider(),
     this.additionalSettings,
     required this.colorSettingsPath,
     required this.designSettingsPath,
     required this.layoutSettingsPath,
     required this.textSettingsPath,
     this.additionalRoutes,
-    this.quickConfigSpacer = ezDivider,
-    this.randomSpacer = ezSpacer,
+    this.quickConfigSpacer = const EzDivider(),
+    this.randomSpacer = const EzSpacer(),
     this.extraKeys,
     required this.appName,
     this.androidPackage,
-    this.resetSpacer = ezSpacer,
+    this.resetSpacer = const EzSpacer(),
     this.skipKeys,
     this.footer,
   });
@@ -131,7 +130,9 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Define custom functions //
 
   List<Widget> navButtons() {
+    const EzSpacer ezSpacer = EzSpacer();
     late final Widget navIcon = EzIcon(Icons.navigate_next);
+
     final List<Widget> buttons = <Widget>[];
 
     if (widget.colorSettingsPath != null) {
@@ -219,13 +220,10 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
   @override
   Widget build(BuildContext context) {
+    const EzSpacer ezSpacer = EzSpacer();
+
     return EzScrollView(
       children: <Widget>[
-        // Restart disclaimer
-        EzWarning(
-            '${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}${widget.notFun ? '' : '\n\n${l10n.ssHaveFun}'}'),
-        ezSeparator,
-
         // Right/left
         const EzDominantHandSwitch(),
         ezSpacer,
@@ -275,7 +273,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
         // Footer
         if (widget.footer != null) ...widget.footer!,
-        ezSeparator,
+        const EzSeparator(),
       ],
     );
   }
