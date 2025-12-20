@@ -249,7 +249,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     bool value, {
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     try {
@@ -272,7 +272,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     int value, {
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     try {
@@ -295,7 +295,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     double value, {
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     try {
@@ -318,7 +318,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     String value, {
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     try {
@@ -341,7 +341,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     List<String> value, {
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     try {
@@ -363,7 +363,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     Map<String, dynamic> config, {
     Set<String>? filter,
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     for (final MapEntry<String, dynamic> entry in config.entries) {
@@ -393,7 +393,6 @@ Must be one of [int, bool, double, String, List<String>]''');
             entry.key,
             entry.value,
             storageOnly: storageOnly,
-            notifyTheme: false,
           );
           break;
         case const (int):
@@ -401,21 +400,18 @@ Must be one of [int, bool, double, String, List<String>]''');
             entry.key,
             entry.value,
             storageOnly: storageOnly,
-            notifyTheme: false,
           );
         case const (double):
           await setDouble(
             entry.key,
             entry.value,
             storageOnly: storageOnly,
-            notifyTheme: false,
           );
         case const (String):
           await setString(
             entry.key,
             entry.value,
             storageOnly: storageOnly,
-            notifyTheme: false,
           );
           break;
         case const (List<String>):
@@ -423,7 +419,6 @@ Must be one of [int, bool, double, String, List<String>]''');
             entry.key,
             entry.value,
             storageOnly: storageOnly,
-            notifyTheme: false,
           );
           break;
       }
@@ -453,7 +448,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Update global settings //
 
     // Lefty
-    await setBool(isLeftyKey, random.nextBool(), notifyTheme: false);
+    await setBool(isLeftyKey, random.nextBool());
 
     // Leave theme as-is, don't wanna light blast peeps at night
 
@@ -471,7 +466,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         localeData.add(randomLocale.countryCode!);
       }
 
-      await setStringList(appLocaleKey, localeData, notifyTheme: false);
+      await setStringList(appLocaleKey, localeData);
     }
 
     // Update color settings //
@@ -559,18 +554,15 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setInt(
       animationDurationKey,
       random.nextInt(500) + 250,
-      notifyTheme: false,
     );
 
     await setDouble(
       isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
       random.nextDouble(),
-      notifyTheme: false,
     );
     await setDouble(
       isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
       random.nextDouble(),
-      notifyTheme: false,
     );
 
     // Update layout settings //
@@ -578,20 +570,17 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setDouble(
       marginKey,
       defaultMargin * getScalar(),
-      notifyTheme: false,
     );
     await setDouble(
       paddingKey,
       (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
-      notifyTheme: false,
     );
     await setDouble(
       spacingKey,
       (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-      notifyTheme: false,
     );
 
-    await setBool(hideScrollKey, random.nextBool(), notifyTheme: false);
+    await setBool(hideScrollKey, random.nextBool());
 
     // Update text settings //
 
@@ -608,154 +597,127 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setString(
       displayFontFamilyKey,
       attentionStyle,
-      notifyTheme: false,
     );
     await setDouble(
       displayFontSizeKey,
       defaultDisplaySize * attentionScale,
-      notifyTheme: false,
     );
-    await setBool(displayBoldedKey, false, notifyTheme: false);
-    await setBool(displayItalicizedKey, false, notifyTheme: false);
+    await setBool(displayBoldedKey, false);
+    await setBool(displayItalicizedKey, false);
     await setBool(
       displayUnderlinedKey,
       random.nextBool(),
-      notifyTheme: false,
     );
     await setDouble(
       displayFontHeightKey,
       defaultFontHeight,
-      notifyTheme: false,
     );
     await setDouble(
       displayLetterSpacingKey,
       defaultLetterSpacing,
-      notifyTheme: false,
     );
     await setDouble(
       displayWordSpacingKey,
       defaultWordSpacing,
-      notifyTheme: false,
     );
 
     await setString(
       headlineFontFamilyKey,
       attentionStyle,
-      notifyTheme: false,
     );
     await setDouble(
       headlineFontSizeKey,
       defaultHeadlineSize * attentionScale,
-      notifyTheme: false,
     );
-    await setBool(headlineBoldedKey, false, notifyTheme: false);
-    await setBool(headlineItalicizedKey, false, notifyTheme: false);
-    await setBool(headlineUnderlinedKey, false, notifyTheme: false);
+    await setBool(headlineBoldedKey, false);
+    await setBool(headlineItalicizedKey, false);
+    await setBool(headlineUnderlinedKey, false);
     await setDouble(
       headlineFontHeightKey,
       defaultFontHeight,
-      notifyTheme: false,
     );
     await setDouble(
       headlineLetterSpacingKey,
       defaultLetterSpacing,
-      notifyTheme: false,
     );
     await setDouble(
       headlineWordSpacingKey,
       defaultWordSpacing,
-      notifyTheme: false,
     );
 
     await setString(
       titleFontFamilyKey,
       styleOptions[random.nextInt(styleOptions.length)],
-      notifyTheme: false,
     );
     await setDouble(
       titleFontSizeKey,
       defaultTitleSize * attentionScale,
-      notifyTheme: false,
     );
-    await setBool(titleBoldedKey, false, notifyTheme: false);
-    await setBool(titleItalicizedKey, false, notifyTheme: false);
+    await setBool(titleBoldedKey, false);
+    await setBool(titleItalicizedKey, false);
     await setBool(
       titleUnderlinedKey,
       random.nextBool(),
-      notifyTheme: false,
     );
     await setDouble(
       titleFontHeightKey,
       defaultFontHeight,
-      notifyTheme: false,
     );
     await setDouble(
       titleLetterSpacingKey,
       defaultLetterSpacing,
-      notifyTheme: false,
     );
     await setDouble(
       titleWordSpacingKey,
       defaultWordSpacing,
-      notifyTheme: false,
     );
 
     await setString(
       bodyFontFamilyKey,
       descriptionStyle,
-      notifyTheme: false,
     );
     await setDouble(
       bodyFontSizeKey,
       defaultBodySize * descriptionScale,
-      notifyTheme: false,
     );
-    await setBool(bodyBoldedKey, false, notifyTheme: false);
-    await setBool(bodyItalicizedKey, false, notifyTheme: false);
-    await setBool(bodyUnderlinedKey, false, notifyTheme: false);
+    await setBool(bodyBoldedKey, false);
+    await setBool(bodyItalicizedKey, false);
+    await setBool(bodyUnderlinedKey, false);
     await setDouble(
       bodyFontHeightKey,
       defaultFontHeight,
-      notifyTheme: false,
     );
     await setDouble(
       bodyLetterSpacingKey,
       defaultLetterSpacing,
-      notifyTheme: false,
     );
     await setDouble(
       bodyWordSpacingKey,
       defaultWordSpacing,
-      notifyTheme: false,
     );
 
     await setString(
       labelFontFamilyKey,
       descriptionStyle,
-      notifyTheme: false,
     );
     await setDouble(
       labelFontSizeKey,
       defaultLabelSize * descriptionScale,
-      notifyTheme: false,
     );
-    await setBool(labelBoldedKey, false, notifyTheme: false);
-    await setBool(labelItalicizedKey, false, notifyTheme: false);
-    await setBool(labelUnderlinedKey, false, notifyTheme: false);
+    await setBool(labelBoldedKey, false);
+    await setBool(labelItalicizedKey, false);
+    await setBool(labelUnderlinedKey, false);
     await setDouble(
       labelFontHeightKey,
       defaultFontHeight,
-      notifyTheme: false,
     );
     await setDouble(
       labelLetterSpacingKey,
       defaultLetterSpacing,
-      notifyTheme: false,
     );
     await setDouble(
       labelWordSpacingKey,
       defaultWordSpacing,
-      notifyTheme: false,
     );
 
     // Leave text background opacity as-is
@@ -763,7 +725,6 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setDouble(
       iconSizeKey,
       defaultIconSize * getScalar(),
-      notifyTheme: false,
     );
 
     _instance!._themeProvider?.rebuildTheme(onComplete: onNotify);
@@ -779,7 +740,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key, {
     bool reset = true,
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     try {
@@ -809,7 +770,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     Set<String> keys, {
     bool reset = true,
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     bool success = true;
@@ -818,7 +779,6 @@ Must be one of [int, bool, double, String, List<String>]''');
         key,
         reset: reset,
         storageOnly: storageOnly,
-        notifyTheme: false,
       );
     }
 
@@ -833,7 +793,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     Set<String>? skip,
     bool reset = true,
     bool storageOnly = false,
-    bool notifyTheme = true,
+    bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
     final List<String> keys = List<String>.from(_instance!._prefs.keys);
@@ -845,7 +805,6 @@ Must be one of [int, bool, double, String, List<String>]''');
         key,
         reset: reset,
         storageOnly: storageOnly,
-        notifyTheme: false,
       );
     }
 
