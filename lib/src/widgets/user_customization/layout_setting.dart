@@ -93,7 +93,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
   List<Widget> buildPreview(BuildContext context, ThemeData theme) {
-    const EzSpacer ezSpacer = EzSpacer();
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
@@ -109,7 +108,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 
         return <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
           EzTextBackground(
             Text(
               valString,
@@ -140,13 +139,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               margin: EdgeInsets.all(currValue * 0.25),
             ),
           ),
-          ezSpacer,
+          EzConfig.spacer,
         ];
 
       // Padding
       case EzLayoutSettingType.padding:
         return <Widget>[
-          ezSpacer,
+          EzConfig.spacer,
 
           // Live label && preview
           EzScrollView(
@@ -173,7 +172,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             ],
           ),
 
-          ezSpacer,
+          EzConfig.spacer,
         ];
 
       // Spacing
@@ -267,7 +266,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         value.toStringAsFixed(widget.decimals),
                   ),
                 ),
-                const EzSpacer(),
+                EzConfig.spacer,
 
                 // Reset button
                 EzElevatedIconButton(

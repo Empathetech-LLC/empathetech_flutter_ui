@@ -93,7 +93,7 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                const EzSpacer(),
+                EzConfig.spacer,
 
                 // Body
                 Text(body, style: bStyle, textAlign: TextAlign.center),
