@@ -42,7 +42,7 @@ class EzQuickConfig extends StatelessWidget {
   /// Whether to notify [EzThemeProvider]
   final bool notifyTheme;
 
-  /// [EzThemeProvider.rebuildTheme] passthrough
+  /// [EzThemeProvider.rebuild] passthrough
   final void Function()? onNotify;
 
   /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
@@ -62,7 +62,7 @@ class EzQuickConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final void Function()? onComplete =
-        notifyTheme ? () => EzConfig.rebuildTheme(onComplete: onNotify) : null;
+        notifyTheme ? () => EzConfig.rebuild(onComplete: onNotify) : null;
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
 
     return EzElevatedIconButton(

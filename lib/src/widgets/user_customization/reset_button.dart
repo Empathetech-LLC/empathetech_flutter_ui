@@ -33,7 +33,7 @@ class EzResetButton extends StatelessWidget {
   /// Whether to notify [EzThemeProvider] of changes
   final bool notifyTheme;
 
-  /// [EzThemeProvider.rebuildTheme] passthrough
+  /// [EzThemeProvider.rebuild] passthrough
   final void Function()? onNotify;
 
   /// What happens when the user choses to reset
