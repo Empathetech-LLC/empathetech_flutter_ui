@@ -360,7 +360,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   message:
                       '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
                 ),
-                ezSeparator,
+                const EzSeparator(),
                 RunOption(
                   projDir: projDir,
                   style: subTitle,
@@ -401,7 +401,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   richMessage: richFailureMessage,
                 ),
                 if (showDelete == true) ...<Widget>[
-                  ezSpacer,
+                  const EzSpacer(),
                   DeleteOption(
                     appName: widget.config.appName,
                     platform: platform,
@@ -410,7 +410,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   ),
                 ],
                 if (showDelete == null) ...<Widget>[
-                  ezSpacer,
+                  const EzSpacer(),
                   LinkOption(subTitle),
                 ],
               ],
@@ -440,7 +440,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       running: genState == GeneratorState.running,
       body: EzScreen(EzScrollView(children: <Widget>[
         header(textTheme, subTitle),
-        ezDivider,
+        const EzDivider(),
 
         // Console output //
 
@@ -462,7 +462,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ],
         ),
-        ezMargin,
+        EzMargin(),
 
         // Readout
         Visibility(
@@ -491,7 +491,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ),
         ),
-        ezSeparator,
+        const EzSeparator(),
       ])),
     );
   }
