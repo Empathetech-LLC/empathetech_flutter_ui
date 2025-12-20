@@ -18,6 +18,18 @@ class EzMargin extends EzSpacer {
   }) : super(space: EzConfig.margin);
 }
 
+class EzHeader extends EzSpacer {
+  /// [EzSpacer.space] of [marginKey] - [spacingKey], unless margin is larger
+  EzHeader({
+    super.key,
+    super.vertical,
+    super.horizontal,
+  }) : super(
+            space: (EzConfig.spacing > EzConfig.margin)
+                ? EzConfig.spacing - EzConfig.margin
+                : 0.0);
+}
+
 class EzSpacer extends StatelessWidget {
   /// Defaults to [EzConfig]s [spacingKey] value
   final double? space;
