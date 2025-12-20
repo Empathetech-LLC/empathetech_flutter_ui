@@ -625,7 +625,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               ),
                             ),
                           ),
-                          ezMargin,
+                          EzMargin(),
 
                           // Buttons
                           NotificationListener<ScrollNotification>(
@@ -637,7 +637,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               scrollDirection: Axis.horizontal,
                               showScrollHint: true,
                               children: <Widget>[
-                                ezRowSpacer,
+                                const EzSpacer(vertical: false),
 
                                 // Play/pause
                                 Visibility(
@@ -755,7 +755,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                           icon: Icon(
                                               PlatformIcons(context).remove),
                                         ),
-                                        ezRowMargin,
+                                        EzMargin(vertical: false),
                                         Tooltip(
                                           message: l10n.gPlaybackSpeed,
                                           child: Column(
@@ -776,7 +776,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             ],
                                           ),
                                         ),
-                                        ezRowMargin,
+                                        EzMargin(vertical: false),
                                         EzIconButton(
                                           enabled: currSpeed < 2.0,
                                           onPressed: () async {

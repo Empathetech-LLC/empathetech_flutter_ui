@@ -500,7 +500,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           ),
         ),
-      ezSpacer,
+      const EzSpacer(),
     ];
   }
 
@@ -524,6 +524,8 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Opens a preview modal for choosing the desired [BoxFit]
   Future<bool?> chooseFit(String path, ThemeData theme) {
+    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
+
     final double width = widthOf(context) * 0.25;
     final double height = heightOf(context) * 0.25;
 
@@ -539,7 +541,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              ezMargin,
+              EzMargin(),
               RadioGroup<BoxFit>(
                 groupValue: selectedFit,
                 onChanged: (BoxFit? value) {
@@ -618,7 +620,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ],
                 ),
               ),
-              ezSpacer,
+              const EzSpacer(),
               EzRow(
                 mainAxisAlignment: EzConfig.isLefty
                     ? MainAxisAlignment.start
@@ -654,7 +656,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ezRowSpacer,
                 ],
               ),
-              ezSeparator,
+              const EzSeparator(),
             ],
           );
         },
