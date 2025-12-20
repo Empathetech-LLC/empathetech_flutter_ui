@@ -7,31 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-// Default instances //
-
-final EzSpacer ezMargin = EzMargin();
-const EzSpacer ezSpacer = EzSpacer();
-const EzSeparator ezSeparator = EzSeparator();
-const EzDivider ezDivider = EzDivider();
-
-/// vertical: false
-final EzMargin ezRowMargin = EzMargin(vertical: false);
-
-/// horizontal: false
-final EzMargin ezColMargin = EzMargin(horizontal: false);
-
-/// vertical: false
-const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
-
-/// horizontal: false
-const EzSpacer ezColSpacer = EzSpacer(horizontal: false);
-
-/// vertical: false
-const EzSeparator ezRowSeparator = EzSeparator(vertical: false);
-
-/// horizontal: false
-const EzSeparator ezColSeparator = EzSeparator(horizontal: false);
-
 // Default constructors //
 
 class EzMargin extends EzSpacer {
@@ -157,19 +132,6 @@ class EzDivider extends StatelessWidget {
         ),
       );
 }
-
-// Swap instances //
-
-final EzSwapMargin ezSwapMargin = EzSwapMargin();
-const EzSwapSpacer ezSwapSpacer = EzSwapSpacer();
-const EzSwapSeparator ezSwapSeparator = EzSwapSeparator();
-
-final EzSwapMargin ezMedSwapMargin =
-    EzSwapMargin(breakpoint: ScreenSize.medium);
-const EzSwapSpacer ezMedSwapSpacer =
-    EzSwapSpacer(breakpoint: ScreenSize.medium);
-const EzSwapSeparator ezMedSwapSeparator =
-    EzSwapSeparator(breakpoint: ScreenSize.medium);
 
 // Swap constructors //
 
