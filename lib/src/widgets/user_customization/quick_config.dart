@@ -120,7 +120,7 @@ class EzQuickConfig extends StatelessWidget {
                     ),
                 ],
               ),
-              ezSpacer,
+              const EzSpacer(),
             ],
           );
         },

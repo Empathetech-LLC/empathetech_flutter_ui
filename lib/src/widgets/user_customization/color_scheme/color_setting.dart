@@ -195,7 +195,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           contents: <Widget>[
             Text(l10n.csCurrVal, textAlign: TextAlign.center),
-            ezMargin,
+            EzMargin(),
             EzTextIconButton(
               onPressed: () => Clipboard.setData(
                 ClipboardData(text: currColorLabel),
@@ -233,7 +233,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 icon: EzIcon(PlatformIcons(context).delete),
                 label: l10n.gRemove,
               ),
-              ezSpacer,
+              const EzSpacer(),
 
               // Reset to default
               EzElevatedIconButton(
