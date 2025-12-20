@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class TryTip extends StatelessWidget {
@@ -40,6 +39,12 @@ class EzQuickConfig extends StatelessWidget {
   /// Toggle the [EzFancyPantsConfig]
   final bool fancyPants;
 
+  /// Whether to notify [EzThemeProvider]
+  final bool notifyTheme;
+
+  /// [EzThemeProvider.rebuildTheme] passthrough
+  final void Function()? onNotify;
+
   /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
   const EzQuickConfig({
     super.key,
@@ -48,82 +53,68 @@ class EzQuickConfig extends StatelessWidget {
     this.videoGame = true,
     this.chalkboard = true,
     this.fancyPants = true,
+    this.notifyTheme = true,
+    this.onNotify,
   });
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final void Function()? onComplete =
+        notifyTheme ? () => EzConfig.rebuildTheme(onComplete: onNotify) : null;
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
-    final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
       onPressed: () => ezModal(
         context: context,
-        builder: (BuildContext mContext) {
-          void onComplete(String configName) {
-            Navigator.pop(mContext);
+        builder: (BuildContext mContext) => EzScrollView(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Wrap(
+              alignment: WrapAlignment.center,
+              runAlignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: <Widget>[
+                // Big buttons
+                if (bigButtons)
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzBigButtonsConfig(onComplete: onComplete),
+                  ),
 
-            ezSnackBar(
-              context: context,
-              message:
-                  '${l10n.ssApplied(configName)} ${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}',
-            );
-          }
+                // High visibility
+                if (highVisibility)
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzHighVisibilityConfig(onComplete: onComplete),
+                  ),
 
-          return EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Wrap(
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: <Widget>[
-                  // Big buttons
-                  if (bigButtons)
-                    Padding(
-                      padding: wrapPadding,
-                      child: EzBigButtonsConfig(
-                          onComplete: () => onComplete(l10n.ssBigButtons)),
-                    ),
+                // Video game
+                if (videoGame)
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzVideoGameConfig(onComplete: onComplete),
+                  ),
 
-                  // High visibility
-                  if (highVisibility)
-                    Padding(
-                      padding: wrapPadding,
-                      child: EzHighVisibilityConfig(
-                          onComplete: () => onComplete(l10n.ssHighVisibility)),
-                    ),
+                // Chalkboard
+                if (chalkboard)
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzChalkboardConfig(onComplete: onComplete),
+                  ),
 
-                  // Video game
-                  if (videoGame)
-                    Padding(
-                      padding: wrapPadding,
-                      child: EzVideoGameConfig(
-                          onComplete: () => onComplete(l10n.ssVideoGame)),
-                    ),
-
-                  // Chalkboard
-                  if (chalkboard)
-                    Padding(
-                      padding: wrapPadding,
-                      child: EzChalkboardConfig(
-                          onComplete: () => onComplete(l10n.ssChalkboard)),
-                    ),
-
-                  // Fancy pants
-                  if (fancyPants)
-                    Padding(
-                      padding: wrapPadding,
-                      child: EzFancyPantsConfig(
-                          onComplete: () => onComplete(l10n.ssFancyPants)),
-                    ),
-                ],
-              ),
-              const EzSpacer(),
-            ],
-          );
-        },
+                // Fancy pants
+                if (fancyPants)
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzFancyPantsConfig(onComplete: onComplete),
+                  ),
+              ],
+            ),
+            const EzSpacer(),
+          ],
+        ),
       ),
       icon: EzIcon(PlatformIcons(context).edit),
       label: ezL10n(context).ssLoadPreset,
