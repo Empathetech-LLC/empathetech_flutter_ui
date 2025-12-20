@@ -9,37 +9,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
-  /// [EzElevatedIconButton.label] passthrough
-  /// Defaults to [EFUILang.gResetAll]
-  final String? label;
+  /// [ezRichUndoWarning] passthrough
+  final String? androidPackage;
 
-  /// [EzElevatedIconButton.style] passthrough
-  final ButtonStyle? style;
-
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final Set<String>? skip;
-
-  /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.ssResetAll]
-  final String? dialogTitle;
+  /// [ezRichUndoWarning] passthrough
+  final String? appName;
 
   /// Optionally override [EzAlertDialog.content] that shows on click
   /// Defaults to [ezRichUndoWarning]
   final Widget? dialogContent;
 
+  /// [EzAlertDialog.title] that shows on click
+  /// Defaults to [EFUILang.ssResetAll]
+  final String? dialogTitle;
+
   /// [ezRichUndoWarning] passthrough
   final List<String>? extraKeys;
 
-  /// [ezRichUndoWarning] passthrough
-  final String? appName;
+  /// [EzElevatedIconButton.label] passthrough
+  /// Defaults to [EFUILang.gResetAll]
+  final String? label;
 
-  /// [ezRichUndoWarning] passthrough
-  final String? androidPackage;
+  /// Whether to notify [EzThemeProvider] of changes
+  final bool notifyTheme;
 
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final bool storageOnly;
+  /// [EzThemeProvider.rebuildTheme] passthrough
+  final void Function()? onNotify;
 
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
@@ -50,20 +45,33 @@ class EzResetButton extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final Set<String>? skip;
+
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final bool storageOnly;
+
+  /// [EzElevatedIconButton.style] passthrough
+  final ButtonStyle? style;
+
   /// [EzElevatedIconButton] for clearing user settings
   const EzResetButton({
     super.key,
-    this.label,
-    this.style,
-    this.skip,
-    this.dialogTitle,
-    this.dialogContent,
-    this.extraKeys,
-    this.appName,
     this.androidPackage,
-    this.storageOnly = false,
+    this.appName,
+    this.dialogContent,
+    this.dialogTitle,
+    this.extraKeys,
+    this.label,
+    this.notifyTheme = true,
     this.onConfirm,
     this.onDeny,
+    this.onNotify,
+    this.skip,
+    this.storageOnly = false,
+    this.style,
   }) : assert((appName == null) != (dialogContent == null),
             'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
 
@@ -103,6 +111,8 @@ class EzResetButton extends StatelessWidget {
                 () => EzConfig.reset(
                       skip: skip,
                       storageOnly: storageOnly,
+                      notifyTheme: notifyTheme,
+                      onNotify: onNotify,
                     );
             final void Function() deny = onDeny ?? doNothing;
 
