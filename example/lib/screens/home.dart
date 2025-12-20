@@ -148,6 +148,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    final EzMargin ezMargin = EzMargin();
+    final EzMargin ezRowMargin = EzMargin(vertical: false);
+    const EzSpacer ezSpacer = EzSpacer();
+    const EzSeparator ezSeparator = EzSeparator();
+    const EzDivider ezDivider = EzDivider();
+
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
@@ -1136,10 +1142,13 @@ class _AdvancedSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EzMargin ezMargin = EzMargin();
+    final EzMargin ezRowMargin = EzMargin(vertical: false);
+
+    final bool isLefty = EzConfig.isLefty;
+
     late final EFUILang el10n = ezL10n(context);
     late final Lang l10n = Lang.of(context)!;
-
-    late final bool isLefty = EzConfig.get(isLeftyKey);
 
     late final Widget titleText = EzText(title, textAlign: TextAlign.start);
 
@@ -1256,10 +1265,13 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EzMargin ezRowMargin = EzMargin(vertical: false);
+    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
+
+    final bool isLefty = EzConfig.isLefty;
+
     final EFUILang el10n = ezL10n(context);
     final Lang l10n = Lang.of(context)!;
-
-    final bool isLefty = EzConfig.get(isLeftyKey);
 
     Widget radio({
       required String title,
