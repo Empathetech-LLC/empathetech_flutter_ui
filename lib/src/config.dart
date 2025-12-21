@@ -147,14 +147,9 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   static bool get isApple => _instance!._themeProvider!.isCupertino;
 
-  /// [EzSpacer] alias that updates alongside [EzThemeProvider]
-  static EzSpacer get spacer => _instance!._themeProvider!.spacer;
+  static EzThemeProvider get theme => _instance!._themeProvider!;
 
-  /// [EzSpacer] alias that updates alongside [EzThemeProvider]
-  static EzSeparator get separator => _instance!._themeProvider!.separator;
-
-  /// [EzSpacer] alias that updates alongside [EzThemeProvider]
-  static EzDivider get divider => _instance!._themeProvider!.divider;
+  static EzLayoutWidgets get layout => _instance!._themeProvider!.layout;
 
   /// Get the [key]s current EzConfig value
   /// bool, int, double, String, String List, or null
@@ -250,9 +245,6 @@ Must be one of [int, bool, double, String, List<String>]''');
       return true;
     }
   }
-
-  static void rebuild({void Function()? onComplete}) =>
-      _instance!._themeProvider!.rebuild(onComplete: onComplete);
 
   /// Set the EzConfig [key] to [value] with type [bool]
   /// Defaults to both the live and [SharedPreferencesAsync] values
