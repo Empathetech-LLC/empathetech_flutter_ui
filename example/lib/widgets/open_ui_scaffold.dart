@@ -47,41 +47,30 @@ class OpenUIScaffold extends StatelessWidget {
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);
 
-    final bool isLefty = EzConfig.get(isLeftyKey);
-
-    final EFUILang l10n = ezL10n(context);
-
     // Define custom widgets //
 
-    final Widget options = MenuAnchor(
-      builder: (_, MenuController controller, ___) => IconButton(
-        onPressed: () =>
-            (controller.isOpen) ? controller.close() : controller.open(),
-        tooltip: l10n.gOptions,
-        icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
-      ),
-      menuChildren: <Widget>[
-        if (showSettings) SettingsButton(context),
-        if (onUpload != null) UploadButton(context, onUpload: onUpload!),
-        EzFeedbackMenuButton(
-          parentContext: context,
-          appName: appName,
-          supportEmail: 'support@empathetech.net',
-        ),
-        const OpenSourceButton(),
-      ],
-    );
+    Widget options() {
+      final EFUILang l10n = ezL10n(context);
 
-    const Widget updater = EzUpdaterFAB(
-      appVersion: '2.3.2',
-      versionSource:
-          'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
-      gPlay:
-          'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
-      appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
-      github:
-          'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
-    );
+      return MenuAnchor(
+        builder: (_, MenuController controller, ___) => IconButton(
+          onPressed: () =>
+              (controller.isOpen) ? controller.close() : controller.open(),
+          tooltip: l10n.gOptions,
+          icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
+        ),
+        menuChildren: <Widget>[
+          if (showSettings) SettingsButton(context),
+          if (onUpload != null) UploadButton(context, onUpload: onUpload!),
+          EzFeedbackMenuButton(
+            parentContext: context,
+            appName: appName,
+            supportEmail: 'support@empathetech.net',
+          ),
+          const OpenSourceButton(),
+        ],
+      );
+    }
 
     // Return the build //
 
@@ -98,7 +87,7 @@ class OpenUIScaffold extends StatelessWidget {
               // Leading (aka left)
               leading: running
                   ? const SizedBox.shrink()
-                  : (isLefty ? options : const EzBackAction()),
+                  : (EzConfig.isLefty ? options() : const EzBackAction()),
               leadingWidth: toolbarHeight,
 
               // Title
@@ -110,7 +99,7 @@ class OpenUIScaffold extends StatelessWidget {
               actions: <Widget>[
                 running
                     ? const SizedBox.shrink()
-                    : (isLefty ? const EzBackAction() : options)
+                    : (EzConfig.isLefty ? const EzBackAction() : options())
               ],
             ),
           ),
@@ -121,9 +110,21 @@ class OpenUIScaffold extends StatelessWidget {
           // FAB
           floatingActionButton: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[updater, if (fabs != null) ...fabs!],
+            children: <Widget>[
+              const EzUpdaterFAB(
+                appVersion: '2.3.2',
+                versionSource:
+                    'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
+                gPlay:
+                    'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+                appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
+                github:
+                    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
+              ),
+              if (fabs != null) ...fabs!
+            ],
           ),
-          floatingActionButtonLocation: isLefty
+          floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
 
