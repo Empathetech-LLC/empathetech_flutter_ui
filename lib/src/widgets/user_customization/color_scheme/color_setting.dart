@@ -233,7 +233,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 icon: EzIcon(PlatformIcons(context).delete),
                 label: l10n.gRemove,
               ),
-              EzConfig.spacer,
+              EzConfig.layout.spacer,
 
               // Reset to default
               EzElevatedIconButton(

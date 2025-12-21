@@ -116,7 +116,7 @@ class EzQuickConfig extends StatelessWidget {
                     ),
                 ],
               ),
-              EzConfig.spacer,
+              EzConfig.layout.spacer,
             ],
           );
         },

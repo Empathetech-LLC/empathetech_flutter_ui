@@ -108,7 +108,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 
         return <Widget>[
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
           EzTextBackground(
             Text(
               valString,
@@ -139,13 +139,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               margin: EdgeInsets.all(currValue * 0.25),
             ),
           ),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
         ];
 
       // Padding
       case EzLayoutSettingType.padding:
         return <Widget>[
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // Live label && preview
           EzScrollView(
@@ -172,7 +172,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             ],
           ),
 
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
         ];
 
       // Spacing
@@ -266,7 +266,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         value.toStringAsFixed(widget.decimals),
                   ),
                 ),
-                EzConfig.spacer,
+                EzConfig.layout.spacer,
 
                 // Reset button
                 EzElevatedIconButton(

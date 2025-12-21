@@ -186,7 +186,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                       )
                       .toList(),
                 ),
-                EzConfig.spacer,
+                EzConfig.layout.spacer,
               ],
             ),
           ),

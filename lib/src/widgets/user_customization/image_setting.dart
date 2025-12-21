@@ -500,7 +500,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           ),
         ),
-      EzConfig.spacer,
+      EzConfig.layout.spacer,
     ];
   }
 
@@ -620,7 +620,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ],
                 ),
               ),
-              EzConfig.spacer,
+              EzConfig.layout.spacer,
               EzRow(
                 mainAxisAlignment: EzConfig.isLefty
                     ? MainAxisAlignment.start
@@ -656,7 +656,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ezRowSpacer,
                 ],
               ),
-              EzConfig.separator,
+              EzConfig.layout.separator,
             ],
           );
         },
