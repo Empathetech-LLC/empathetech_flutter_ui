@@ -45,7 +45,7 @@ class SuccessHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // Where to go next
           message == null
@@ -93,7 +93,7 @@ class RunOption extends StatelessWidget {
                 style: style,
                 textAlign: TextAlign.center,
               ),
-              EzConfig.spacer,
+              EzConfig.layout.spacer,
               EzElevatedIconButton(
                 onPressed: emulate,
                 icon: EzIcon(PlatformIcons(context).playArrowSolid),

@@ -465,7 +465,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Headline preview
         EzTextBackground(
@@ -477,7 +477,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Title preview
         EzTextBackground(
@@ -489,7 +489,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Body preview
         EzTextBackground(
@@ -501,7 +501,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Label preview
         EzTextBackground(
@@ -555,7 +555,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   value.toStringAsFixed(2),
             ),
           ),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
         ],
 
         // Icon size
@@ -693,7 +693,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        EzConfig.separator,
+        EzConfig.layout.separator,
       ],
     );
   }
@@ -1239,7 +1239,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Style selector
         EzScrollView(
@@ -1268,7 +1268,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
           ],
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Controls
         EzRowCol.sym(
@@ -1316,7 +1316,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ],
           ],
         ),
-        EzConfig.separator,
+        EzConfig.layout.separator,
 
         // Display preview
         EzTextBackground(
@@ -1342,7 +1342,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Headline preview
         EzTextBackground(
@@ -1368,7 +1368,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Title preview
         EzTextBackground(
@@ -1392,7 +1392,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Body preview
         EzTextBackground(
@@ -1417,7 +1417,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
 
         // Label preview
         EzTextBackground(
@@ -1481,7 +1481,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        EzConfig.separator,
+        EzConfig.layout.separator,
       ],
     );
   }

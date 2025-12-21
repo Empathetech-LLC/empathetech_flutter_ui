@@ -86,7 +86,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             steps: 6,
             decimals: 1,
           ),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // Padding
           EzLayoutSetting(
@@ -98,7 +98,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             steps: 12,
             decimals: 1,
           ),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // Spacing
           EzLayoutSetting(
@@ -110,7 +110,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             steps: 13,
             decimals: 0,
           ),
-          EzConfig.separator,
+          EzConfig.layout.separator,
 
           // Hide scroll
           EzSwitchPair(
@@ -137,7 +137,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             appName: widget.appName,
             androidPackage: widget.androidPackage,
           ),
-          EzConfig.separator,
+          EzConfig.layout.separator,
         ],
       );
 }
