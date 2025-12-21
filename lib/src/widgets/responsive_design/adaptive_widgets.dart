@@ -6,6 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // Enum declaration //
 
@@ -74,7 +75,7 @@ class EzAdaptiveParent extends StatelessWidget {
   /// Will be added to all [ScreenSize] calculations
   final double offset;
 
-  /// Enables real-time responses to screen space changes
+  /// Enables real-time responses to screen space and [EzThemeProvider] changes
   /// Recommended to wrap around your [Scaffold]s
   /// If a [Widget] is not provided, the next smaller size will be used
   const EzAdaptiveParent({
@@ -86,25 +87,30 @@ class EzAdaptiveParent extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final double width = widthOf(context);
+  Widget build(BuildContext context) =>
+      Consumer<EzThemeProvider>(builder: (_, EzThemeProvider theme, __) {
+        final double width = widthOf(context);
 
-    late final ScreenSize size;
-    late final Widget child;
+        late final ScreenSize size;
+        late final Widget child;
 
-    if (width <= (ScreenSize.small.size + offset)) {
-      size = ScreenSize.small;
-      child = small;
-    } else if (width <= (ScreenSize.medium.size + offset)) {
-      size = ScreenSize.medium;
-      child = medium ?? small;
-    } else {
-      size = ScreenSize.large;
-      child = large ?? medium ?? small;
-    }
+        if (width <= (ScreenSize.small.size + offset)) {
+          size = ScreenSize.small;
+          child = small;
+        } else if (width <= (ScreenSize.medium.size + offset)) {
+          size = ScreenSize.medium;
+          child = medium ?? small;
+        } else {
+          size = ScreenSize.large;
+          child = large ?? medium ?? small;
+        }
 
-    return EzScreenSize(screenSize: size, child: child);
-  }
+        return EzScreenSize(
+          key: ValueKey<int>(theme.seed),
+          screenSize: size,
+          child: child,
+        );
+      });
 }
 
 // Child Widgets && Values //
