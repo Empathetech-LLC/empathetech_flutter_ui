@@ -152,7 +152,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.designSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.layout.spacer);
 
       ezUrlCheck(widget.designSettingsPath!)
           ? buttons.add(Link(
@@ -171,7 +171,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.layoutSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.layout.spacer);
 
       ezUrlCheck(widget.layoutSettingsPath!)
           ? buttons.add(Link(
@@ -190,7 +190,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.textSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.layout.spacer);
 
       ezUrlCheck(widget.textSettingsPath!)
           ? buttons.add(Link(
@@ -224,11 +224,11 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
           // Right/left
           const EzDominantHandSwitch(),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // Theme mode
           const EzThemeModeSwitch(),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // Language
           EzLocaleSetting(
@@ -271,7 +271,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
           // Footer
           if (widget.footer != null) ...widget.footer!,
-          EzConfig.separator,
+          EzConfig.layout.separator,
         ],
       );
 }

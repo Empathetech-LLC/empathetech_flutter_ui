@@ -69,7 +69,7 @@ class EzQuickConfig extends StatelessWidget {
         builder: (BuildContext mContext) {
           void onComplete() {
             Navigator.of(mContext).pop();
-            if (notifyTheme) EzConfig.rebuild(onComplete: onNotify);
+            if (notifyTheme) EzConfig.theme.rebuild(onComplete: onNotify);
           }
 
           return EzScrollView(

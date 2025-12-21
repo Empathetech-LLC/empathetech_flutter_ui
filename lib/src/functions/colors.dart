@@ -515,7 +515,7 @@ Future<void> storeColorScheme({
   }
 
   if (notifyTheme) {
-    EzConfig.rebuild(onComplete: onNotify);
+    EzConfig.theme.rebuild(onComplete: onNotify);
   }
 }
 
