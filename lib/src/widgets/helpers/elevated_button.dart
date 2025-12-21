@@ -233,15 +233,6 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
     TextStyle? textStyle = (widget.textStyle ?? textTheme.bodyLarge)
         ?.copyWith(decorationColor: decorationColor);
 
-    final double margin =
-        ezTextSize(' ', context: context, style: textStyle).width;
-
-    final EdgeInsets labelPadding = widget.labelPadding
-        ? (isLefty
-            ? EdgeInsets.only(left: margin)
-            : EdgeInsets.only(right: margin))
-        : EdgeInsets.zero;
-
     // Define custom functions //
 
     void addUnderline(bool addIt) {
@@ -277,13 +268,10 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
       statesController: widget.statesController,
       icon: widget.icon,
       iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
-      label: Padding(
-        padding: labelPadding,
-        child: Text(
-          widget.label,
-          style: textStyle,
-          textAlign: widget.textAlign,
-        ),
+      label: Text(
+        widget.label,
+        style: textStyle,
+        textAlign: widget.textAlign,
       ),
     );
   }
