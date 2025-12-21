@@ -177,7 +177,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             setState(() {});
           },
         ),
-        EzConfig.separator,
+        EzConfig.layout.separator,
 
         // Core settings
         if (currentTab == EzCSType.quick)
@@ -227,7 +227,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 appName: widget.appName,
                 androidPackage: widget.androidPackage,
               ),
-        EzConfig.separator,
+        EzConfig.layout.separator,
       ],
     );
   }
@@ -271,7 +271,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
           // MonoChrome
           const EzMonoChromeColorsSetting(),
-          EzConfig.spacer,
+          EzConfig.layout.spacer,
 
           // From image
           Semantics(
@@ -476,7 +476,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
           ),
         ),
-        EzConfig.separator,
+        EzConfig.layout.separator,
 
         // Add a color button
         EzTextIconButton(
@@ -507,7 +507,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: getUntrackedColors(setModalState, isDark),
                     ),
-                    EzConfig.spacer,
+                    EzConfig.layout.spacer,
                   ],
                 ),
               ),

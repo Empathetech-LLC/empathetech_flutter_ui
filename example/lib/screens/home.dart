@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               hintText: l10n.csNamePreview,
             ),
-            EzConfig.spacer,
+            EzConfig.layout.spacer,
 
             // Publisher name
             _BasicField(
@@ -294,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               hintText: l10n.csPubPreview,
             ),
-            EzConfig.spacer,
+            EzConfig.layout.spacer,
 
             // Description
             _BasicField(
@@ -304,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   (value == null || value.isEmpty) ? el10n.gRequired : null,
               hintText: l10n.csDescPreview,
             ),
-            EzConfig.spacer,
+            EzConfig.layout.spacer,
 
             // Domain name
             Row(
@@ -356,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            EzConfig.spacer,
+            EzConfig.layout.spacer,
 
             // Support email
             _BasicField(
@@ -372,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               hintText: '${el10n.gOptional}@example.com',
             ),
-            EzConfig.separator,
+            EzConfig.layout.separator,
 
             // Settings selection //
 
@@ -434,7 +434,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            EzConfig.divider,
+            EzConfig.layout.divider,
 
             // Default app config //
 
@@ -466,7 +466,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: subTitle,
               textAlign: TextAlign.start,
             ),
-            EzConfig.divider,
+            EzConfig.layout.divider,
 
             // Flutter path picker
             Visibility(
@@ -538,7 +538,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
 
                   EzScrollView(
                     mainAxisSize: MainAxisSize.min,
@@ -548,7 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         l10n.csNotInstalled,
                         textAlign: TextAlign.start,
                       ),
-                      EzConfig.spacer,
+                      EzConfig.layout.spacer,
                       EzElevatedIconLink(
                         url: Uri.parse(installFlutter),
                         tooltip: installFlutter,
@@ -561,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            if (isMac) EzConfig.divider,
+            if (isMac) EzConfig.layout.divider,
 
             // Advanced settings //
 
@@ -602,7 +602,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  if (isDesktop) EzConfig.spacer,
+                  if (isDesktop) EzConfig.layout.spacer,
 
                   // Work path picker
                   Visibility(
@@ -667,7 +667,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
 
                   // Copyright config
                   _AdvancedSettingsField(
@@ -681,7 +681,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRemove: () => setState(() => removeCopyright = true),
                     onRestore: () => setState(() => removeCopyright = false),
                   ),
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
 
                   // LICENSE config
                   _LicensePicker(
@@ -692,7 +692,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (picked != null) setState(() => license = picked);
                     },
                   ),
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
 
                   // l10n config
                   _AdvancedSettingsField(
@@ -705,7 +705,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRemove: () => setState(() => removeL10n = true),
                     onRestore: () => setState(() => removeL10n = false),
                   ),
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
 
                   // Analysis options config
                   _AdvancedSettingsField(
@@ -718,7 +718,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRemove: () => setState(() => removeAnalysis = true),
                     onRestore: () => setState(() => removeAnalysis = false),
                   ),
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
 
                   // VS Code launch config
                   _AdvancedSettingsField(
@@ -734,7 +734,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            showAdvanced ? EzConfig.divider : EzConfig.separator,
+            showAdvanced ? EzConfig.layout.divider : EzConfig.layout.separator,
 
             // Make it so //
 
@@ -823,7 +823,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 // Generate app
                 if (isDesktop) ...<Widget>[
-                  EzConfig.spacer,
+                  EzConfig.layout.spacer,
                   EzElevatedIconButton(
                     enabled: canGen,
                     onPressed: () async {
@@ -904,13 +904,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ],
             ),
-            EzConfig.separator,
+            EzConfig.layout.separator,
           ],
         ),
         alignment: Alignment.topLeft,
       ),
       fabs: <Widget>[
-        EzConfig.spacer,
+        EzConfig.layout.spacer,
         ResetFAB(
           clearForms: () => setState(() {
             nameController.clear();
