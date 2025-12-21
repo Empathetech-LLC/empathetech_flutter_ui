@@ -85,6 +85,7 @@ export 'src/widgets/helpers/warning.dart';
 export 'src/widgets/platform_availability/alert_dialog.dart';
 export 'src/widgets/platform_availability/app_provider.dart';
 export 'src/widgets/platform_availability/back_action.dart';
+export 'src/widgets/platform_availability/theme_provider.dart';
 
 // Responsive design
 export 'src/widgets/responsive_design/adaptive_widgets.dart';
