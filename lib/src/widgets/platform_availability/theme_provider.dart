@@ -15,16 +15,15 @@ class EzThemeProvider extends ChangeNotifier {
   final bool _cupertino;
   bool _ltr;
 
-  int _seed;
   late ThemeMode _themeMode;
+  late EzLayoutWidgets _layout;
+  int _seed;
 
   late ThemeData _darkMaterial;
   late ThemeData _lightMaterial;
 
   late CupertinoThemeData? _darkCupertino;
   late CupertinoThemeData? _lightCupertino;
-
-  late EzLayoutWidgets _layout;
 
   EzThemeProvider({required bool useCupertino, required bool isLTR})
       : _cupertino = useCupertino,
@@ -73,9 +72,9 @@ class EzThemeProvider extends ChangeNotifier {
   bool get isCupertino => _cupertino;
   bool get isLTR => _ltr;
 
-  int get seed => _seed;
   ThemeMode get themeMode => _themeMode;
   EzLayoutWidgets get layout => _layout;
+  int get seed => _seed;
 
   ThemeData get darkMaterial => _darkMaterial;
   ThemeData get lightMaterial => _lightMaterial;
@@ -85,19 +84,9 @@ class EzThemeProvider extends ChangeNotifier {
 
   // Set //
 
-  void redraw() {
+  void redraw({void Function()? onComplete}) {
     _seed = Random().nextInt(rMax);
     notifyListeners();
-  }
-
-  void setTextDirection(bool isLTR, {void Function()? onComplete}) {
-    _ltr = isLTR;
-    rebuild(onComplete: onComplete);
-  }
-
-  void setThemeMode({void Function()? onComplete}) {
-    _themeMode = _getMode;
-    redraw();
     onComplete?.call();
   }
 
@@ -106,6 +95,17 @@ class EzThemeProvider extends ChangeNotifier {
     _buildTheme();
     redraw();
     onComplete?.call();
+  }
+
+  void setThemeMode({void Function()? onComplete}) {
+    _themeMode = _getMode;
+    redraw();
+    onComplete?.call();
+  }
+
+  void setTextDirection(bool isLTR, {void Function()? onComplete}) {
+    _ltr = isLTR;
+    rebuild(onComplete: onComplete);
   }
 }
 
