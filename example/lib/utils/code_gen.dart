@@ -580,7 +580,7 @@ class $classCaseAppName extends StatelessWidget {
           ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
         },
         supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
-        locale: EzConfig.locale,
+        locale: EzConfig.provider.storedLocale,
 
         // App title
         title: appName,
