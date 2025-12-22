@@ -26,6 +26,7 @@ dependencies:
   flutter_platform_widgets: ^9.0.0
   go_transitions: ^0.8.3
   line_icons: ^2.0.3
+  provider: ^6.1.5+1
   xml: ^6.6.1
 
   empathetech_flutter_ui:
