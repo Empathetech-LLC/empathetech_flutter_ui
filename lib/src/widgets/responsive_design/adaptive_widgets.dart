@@ -87,30 +87,31 @@ class EzAdaptiveParent extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) =>
-      Consumer<EzThemeProvider>(builder: (_, EzThemeProvider theme, __) {
-        final double width = widthOf(context);
+  Widget build(BuildContext context) {
+    final double width = widthOf(context);
 
-        late final ScreenSize size;
-        late final Widget child;
+    late final ScreenSize size;
+    late final Widget child;
 
-        if (width <= (ScreenSize.small.size + offset)) {
-          size = ScreenSize.small;
-          child = small;
-        } else if (width <= (ScreenSize.medium.size + offset)) {
-          size = ScreenSize.medium;
-          child = medium ?? small;
-        } else {
-          size = ScreenSize.large;
-          child = large ?? medium ?? small;
-        }
+    if (width <= (ScreenSize.small.size + offset)) {
+      size = ScreenSize.small;
+      child = small;
+    } else if (width <= (ScreenSize.medium.size + offset)) {
+      size = ScreenSize.medium;
+      child = medium ?? small;
+    } else {
+      size = ScreenSize.large;
+      child = large ?? medium ?? small;
+    }
 
-        return EzScreenSize(
-          key: ValueKey<int>(theme.seed),
-          screenSize: size,
-          child: child,
-        );
-      });
+    return Consumer<EzThemeProvider>(
+      builder: (_, EzThemeProvider theme, __) => EzScreenSize(
+        key: ValueKey<int>(theme.seed),
+        screenSize: size,
+        child: child,
+      ),
+    );
+  }
 }
 
 // Child Widgets && Values //
