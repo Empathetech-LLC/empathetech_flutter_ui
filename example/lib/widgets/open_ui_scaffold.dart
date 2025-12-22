@@ -49,28 +49,24 @@ class OpenUIScaffold extends StatelessWidget {
 
     // Define custom widgets //
 
-    Widget options() {
-      final EFUILang l10n = ezL10n(context);
-
-      return MenuAnchor(
-        builder: (_, MenuController controller, ___) => IconButton(
-          onPressed: () =>
-              (controller.isOpen) ? controller.close() : controller.open(),
-          tooltip: l10n.gOptions,
-          icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
+    final Widget options = MenuAnchor(
+      builder: (_, MenuController controller, ___) => IconButton(
+        onPressed: () =>
+            (controller.isOpen) ? controller.close() : controller.open(),
+        tooltip: ezL10n(context).gOptions,
+        icon: Icon(Icons.more_vert, semanticLabel: ezL10n(context).gOptions),
+      ),
+      menuChildren: <Widget>[
+        if (showSettings) SettingsButton(context),
+        if (onUpload != null) UploadButton(context, onUpload: onUpload!),
+        EzFeedbackMenuButton(
+          parentContext: context,
+          appName: appName,
+          supportEmail: 'support@empathetech.net',
         ),
-        menuChildren: <Widget>[
-          if (showSettings) SettingsButton(context),
-          if (onUpload != null) UploadButton(context, onUpload: onUpload!),
-          EzFeedbackMenuButton(
-            parentContext: context,
-            appName: appName,
-            supportEmail: 'support@empathetech.net',
-          ),
-          const OpenSourceButton(),
-        ],
-      );
-    }
+        const OpenSourceButton(),
+      ],
+    );
 
     // Return the build //
 
@@ -87,7 +83,7 @@ class OpenUIScaffold extends StatelessWidget {
               // Leading (aka left)
               leading: running
                   ? const SizedBox.shrink()
-                  : (EzConfig.isLefty ? options() : const EzBackAction()),
+                  : (EzConfig.isLefty ? options : const EzBackAction()),
               leadingWidth: toolbarHeight,
 
               // Title
@@ -99,7 +95,7 @@ class OpenUIScaffold extends StatelessWidget {
               actions: <Widget>[
                 running
                     ? const SizedBox.shrink()
-                    : (EzConfig.isLefty ? const EzBackAction() : options())
+                    : (EzConfig.isLefty ? const EzBackAction() : options)
               ],
             ),
           ),
