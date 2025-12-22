@@ -7,6 +7,7 @@ import './export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
@@ -71,61 +72,65 @@ class OpenUIScaffold extends StatelessWidget {
     // Return the build //
 
     return EzAdaptiveParent(
-      small: SelectionArea(
-        child: Scaffold(
-          // AppBar
-          appBar: PreferredSize(
-            preferredSize: Size(double.infinity, toolbarHeight),
-            child: AppBar(
-              excludeHeaderSemantics: true,
-              toolbarHeight: toolbarHeight,
+      small: Consumer<EzThemeProvider>(
+        key: ValueKey<int>(EzConfig.theme.seed),
+        builder: (_, EzThemeProvider theme, __) => SelectionArea(
+          child: Scaffold(
+            // AppBar
+            appBar: PreferredSize(
+              preferredSize: Size(double.infinity, toolbarHeight),
+              child: AppBar(
+                excludeHeaderSemantics: true,
+                toolbarHeight: toolbarHeight,
 
-              // Leading (aka left)
-              leading: running
-                  ? const SizedBox.shrink()
-                  : (EzConfig.isLefty ? options : const EzBackAction()),
-              leadingWidth: toolbarHeight,
-
-              // Title
-              title: Text(title, textAlign: TextAlign.center),
-              centerTitle: true,
-              titleSpacing: 0,
-
-              // Actions (aka trailing aka right)
-              actions: <Widget>[
-                running
+                // Leading (aka left)
+                leading: running
                     ? const SizedBox.shrink()
-                    : (EzConfig.isLefty ? const EzBackAction() : options)
+                    : (EzConfig.isLefty ? options : const EzBackAction()),
+                leadingWidth: toolbarHeight,
+
+                // Title
+                title: Text(title, textAlign: TextAlign.center),
+                centerTitle: true,
+                titleSpacing: 0,
+
+                // Actions (aka trailing aka right)
+                actions: <Widget>[
+                  running
+                      ? const SizedBox.shrink()
+                      : (EzConfig.isLefty ? const EzBackAction() : options)
+                ],
+              ),
+            ),
+
+            // Body
+            body: body,
+
+            // FAB
+            floatingActionButton: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const EzUpdaterFAB(
+                  appVersion: '2.3.2',
+                  versionSource:
+                      'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
+                  gPlay:
+                      'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+                  appStore:
+                      'https://apps.apple.com/us/app/open-ui/id6499560244',
+                  github:
+                      'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
+                ),
+                if (fabs != null) ...fabs!
               ],
             ),
+            floatingActionButtonLocation: EzConfig.isLefty
+                ? FloatingActionButtonLocation.startFloat
+                : FloatingActionButtonLocation.endFloat,
+
+            // Prevents the keyboard from pushing the body up
+            resizeToAvoidBottomInset: false,
           ),
-
-          // Body
-          body: body,
-
-          // FAB
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const EzUpdaterFAB(
-                appVersion: '2.3.2',
-                versionSource:
-                    'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
-                gPlay:
-                    'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
-                appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
-                github:
-                    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
-              ),
-              if (fabs != null) ...fabs!
-            ],
-          ),
-          floatingActionButtonLocation: EzConfig.isLefty
-              ? FloatingActionButtonLocation.startFloat
-              : FloatingActionButtonLocation.endFloat,
-
-          // Prevents the keyboard from pushing the body up
-          resizeToAvoidBottomInset: false,
         ),
       ),
     );

@@ -64,12 +64,15 @@ class EzScreenSize extends InheritedWidget {
 
 class EzAdaptiveParent extends StatelessWidget {
   /// Think phone thoughts
+  /// HIGHLY recommended to use a [Consumer] de [EzThemeProvider]
   final Widget small;
 
   /// Think tablet thoughts
+  /// HIGHLY recommended to use a [Consumer] de [EzThemeProvider]
   final Widget? medium;
 
   /// Think desktop thoughts
+  /// HIGHLY recommended to use a [Consumer] de [EzThemeProvider]
   final Widget? large;
 
   /// Will be added to all [ScreenSize] calculations
