@@ -160,14 +160,14 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                                 localeData,
                               );
                               currLocale = locale;
-
                               try {
                                 l10n = await EFUILang.delegate.load(locale);
                               } catch (_) {
                                 l10n = EzConfig.l10nFallback;
                               }
 
-                              EzConfig.provider.redraw(onComplete: () {
+                              // Refresh UI
+                              EzConfig.provider.setLocale(onComplete: () {
                                 if (mContext.mounted) {
                                   Navigator.of(mContext).pop(locale);
                                 }
