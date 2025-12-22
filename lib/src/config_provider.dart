@@ -43,6 +43,17 @@ class EzConfigProvider extends ChangeNotifier {
     _buildTheme();
   }
 
+  Future<EFUILang> _buildL10n() async {
+    try {
+      final Locale locale = storedLocale;
+      final EFUILang toReturn = await EFUILang.delegate.load(locale);
+      _locale = locale;
+      return toReturn;
+    } catch (_) {
+      return EzConfig.l10nFallback;
+    }
+  }
+
   void _buildTheme() {
     _darkMaterial = ezThemeData(Brightness.dark, _ltr);
     _lightMaterial = ezThemeData(Brightness.light, _ltr);
@@ -67,6 +78,30 @@ class EzConfigProvider extends ChangeNotifier {
     );
   }
 
+  // Get //
+
+  bool get isCupertino => _cupertino;
+  bool get isLTR => _ltr;
+
+  int get seed => _seed;
+
+  Locale get storedLocale {
+    final List<String>? localeData = EzConfig.get(appLocaleKey);
+    if (localeData == null || localeData.isEmpty) {
+      return EzConfig.localeFallback;
+    }
+
+    final String languageCode = localeData[0];
+    final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
+
+    return (countryCode != null)
+        ? Locale(languageCode, countryCode)
+        : Locale(languageCode);
+  }
+
+  Locale get locale => _locale;
+  EFUILang get l10n => _l10n;
+
   ThemeMode get _getMode {
     final bool? savedDark = EzConfig.get(isDarkThemeKey);
 
@@ -77,42 +112,8 @@ class EzConfigProvider extends ChangeNotifier {
             : ThemeMode.light;
   }
 
-  Future<EFUILang> get _buildL10n async {
-    final List<String>? localeData = EzConfig.get(appLocaleKey);
-
-    if (localeData == null || localeData.isEmpty) {
-      return EzConfig.l10nFallback;
-    }
-
-    try {
-      final String languageCode = localeData[0];
-      final String? countryCode =
-          (localeData.length > 1) ? localeData[1] : null;
-
-      final Locale locale = (countryCode != null)
-          ? Locale(languageCode, countryCode)
-          : Locale(languageCode);
-
-      final EFUILang toReturn = await EFUILang.delegate.load(locale);
-      _locale = locale;
-      return toReturn;
-    } catch (_) {
-      return EzConfig.l10nFallback;
-    }
-  }
-
-  // Get //
-
-  bool get isCupertino => _cupertino;
-  bool get isLTR => _ltr;
-
-  int get seed => _seed;
-
-  Locale get locale => _locale;
-  EFUILang get l10n => _l10n;
-
-  EzLayoutWidgets get layout => _layout;
   ThemeMode get themeMode => _themeMode;
+  EzLayoutWidgets get layout => _layout;
 
   ThemeData get darkMaterial => _darkMaterial;
   ThemeData get lightMaterial => _lightMaterial;
@@ -145,7 +146,7 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   Future<void> setLocale({void Function()? onComplete}) async {
-    _l10n = await _buildL10n;
+    _l10n = await _buildL10n();
     redraw(onComplete: onComplete);
   }
 }
