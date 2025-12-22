@@ -40,6 +40,7 @@ class EzAppProvider extends StatelessWidget {
         create: (_) => EzConfigProvider(
           isLTR: ltrCheck(context),
           useCupertino: cupertinoCheck(),
+          localeFallback: EzConfig.localeFallback,
           l10nFallback: EzConfig.l10nFallback,
         ),
         child: _ProviderSquared(

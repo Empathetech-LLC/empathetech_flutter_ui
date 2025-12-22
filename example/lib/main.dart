@@ -29,6 +29,7 @@ void main() async {
   EzConfig.init(
     assetPaths: <String>{},
     defaults: isMobile() ? empathMobileConfig : empathDesktopConfig,
+    localeFallback: americanEnglish,
     l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(

@@ -16,9 +16,14 @@ class EzConfig {
   /// Default config
   final Map<String, dynamic> _defaults;
 
-  /// Fallback [EFUILang] for unsupported [Locale]s
+  /// Fallback [Locale] for unsupported [Locale]s
   /// [english] or [americanEnglish] is recommended
-  final EFUILang _fallbackLang;
+  final Locale _localeFallback;
+
+  /// Fallback [EFUILang] for unsupported [Locale]s
+  /// [EFUILang.delegate] load the [_localeFallback]
+  /// Constructors cannot be async, so the load must be awaited externally/beforehand
+  final EFUILang _l10nFallback;
 
   /// [SharedPreferencesAsync] instance
   final SharedPreferencesAsync _preferences;
@@ -40,6 +45,7 @@ class EzConfig {
     // External (factory parameters)
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
+    required Locale localeFallback,
     required EFUILang l10nFallback,
     required SharedPreferencesAsync preferences,
     EzConfigProvider? provider,
@@ -49,7 +55,8 @@ class EzConfig {
     required Map<String, Type> typeMap,
   })  : _assetPaths = assetPaths,
         _defaults = defaults,
-        _fallbackLang = l10nFallback,
+        _localeFallback = localeFallback,
+        _l10nFallback = l10nFallback,
         _preferences = preferences,
         _provider = provider,
         _prefs = prefs,
@@ -63,6 +70,7 @@ class EzConfig {
   factory EzConfig.init({
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
+    required Locale localeFallback,
     required EFUILang l10nFallback,
     required SharedPreferencesWithCache preferences,
     EzConfigProvider? provider,
@@ -130,6 +138,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       _instance = EzConfig._(
         assetPaths: assetPaths,
         defaults: defaults,
+        localeFallback: localeFallback,
         l10nFallback: l10nFallback,
         preferences: SharedPreferencesAsync(),
         provider: provider,
@@ -154,7 +163,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   static Locale get locale => _instance!._provider!.locale;
   static EFUILang get l10n => _instance!._provider!.l10n;
-  static EFUILang get l10nFallback => _instance!._fallbackLang;
+  static Locale get localeFallback => _instance!._localeFallback;
+  static EFUILang get l10nFallback => _instance!._l10nFallback;
 
   static ThemeMode get themeMode => _instance!._provider!.themeMode;
   static EzLayoutWidgets get layout => _instance!._provider!.layout;

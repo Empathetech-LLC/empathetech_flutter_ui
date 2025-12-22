@@ -32,10 +32,12 @@ class EzConfigProvider extends ChangeNotifier {
   EzConfigProvider({
     required bool useCupertino,
     required bool isLTR,
+    required Locale localeFallback,
     required EFUILang l10nFallback,
   })  : _cupertino = useCupertino,
         _ltr = isLTR,
         _seed = Random().nextInt(rMax),
+        _locale = localeFallback,
         _l10n = l10nFallback {
     _themeMode = _getMode;
     _buildTheme();
