@@ -37,7 +37,7 @@ class EzImageEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-        ezL10n(context).dsNoWeb,
+        EzConfig.l10n.dsNoWeb,
         style: Theme.of(context).textTheme.bodyLarge,
         textAlign: TextAlign.center,
       );

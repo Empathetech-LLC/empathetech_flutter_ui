@@ -85,16 +85,12 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final EzMargin ezRowMargin = EzMargin(vertical: false);
-
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // Return the build //
 
-    final EFUILang l10n = ezL10n(context);
-
     return Tooltip(
-      message: l10n.tsFontSize,
+      message: EzConfig.l10n.tsFontSize,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -102,7 +98,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
           atMin
               ? EzIconButton(
                   enabled: false,
-                  tooltip: l10n.gMinimum,
+                  tooltip: EzConfig.l10n.gMinimum,
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
                     PlatformIcons(context).remove,
@@ -131,11 +127,12 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
                   },
-                  tooltip: '${l10n.gDecrease} ${l10n.tsFontSize.toLowerCase()}',
+                  tooltip:
+                      '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).remove),
                 ),
-          ezRowMargin,
+          EzConfig.layout.rowMargin,
 
           // Core
           GestureDetector(
@@ -153,13 +150,13 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
               color: colorScheme.onSurface,
             ),
           ),
-          ezRowMargin,
+          EzConfig.layout.rowMargin,
 
           // Plus icon
           atMax
               ? EzIconButton(
                   enabled: false,
-                  tooltip: l10n.gMaximum,
+                  tooltip: EzConfig.l10n.gMaximum,
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
                     PlatformIcons(context).add,
@@ -188,7 +185,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
                   },
-                  tooltip: '${l10n.gIncrease} ${l10n.tsFontSize.toLowerCase()}',
+                  tooltip:
+                      '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).add),
                 ),

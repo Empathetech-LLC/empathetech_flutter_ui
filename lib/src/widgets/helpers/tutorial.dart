@@ -47,13 +47,6 @@ class EzTutorial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the fixed theme data //
-
-    final double margin = EzConfig.margin;
-    final double spacing = EzConfig.spacing;
-
-    final bool isLefty = EzConfig.isLefty;
-
     // Return the build //
 
     return Positioned(
@@ -66,29 +59,30 @@ class EzTutorial extends StatelessWidget {
           // Title
           title: Text(title, textAlign: TextAlign.center),
           titlePadding: EdgeInsets.symmetric(
-            horizontal: margin,
-            vertical: spacing / 2,
+            horizontal: EzConfig.margin,
+            vertical: EzConfig.spacing / 2,
           ),
 
           // Content
           content: Text(content, textAlign: TextAlign.center),
           contentPadding: EdgeInsets.symmetric(
-            horizontal: margin,
-            vertical: spacing / 2,
+            horizontal: EzConfig.margin,
+            vertical: EzConfig.spacing / 2,
           ),
 
           // Actions
           actions: <Widget>[
             EzMaterialAction(text: acceptMessage, onPressed: onAccept)
           ],
-          actionsAlignment:
-              isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+          actionsAlignment: EzConfig.isLefty
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.end,
 
           // General
           iconPadding: EdgeInsets.zero,
           buttonPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.all(margin),
-          actionsPadding: EzInsets.wrap(spacing),
+          insetPadding: EdgeInsets.all(EzConfig.margin),
+          actionsPadding: EzInsets.wrap(EzConfig.spacing),
         ),
       ),
     );

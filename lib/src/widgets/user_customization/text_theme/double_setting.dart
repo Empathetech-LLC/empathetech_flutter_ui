@@ -80,8 +80,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late double formFieldHeight =
       max(sizeLimit.height + EzConfig.padding, kMinInteractiveDimension);
 
-  late final EFUILang l10n = ezL10n(context);
-
   late double currValue;
   final TextEditingController controller = TextEditingController();
 
@@ -97,8 +95,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
-
-    final EzMargin ezRowMargin = EzMargin(vertical: false);
 
     final double padding = EzConfig.padding;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -128,18 +124,18 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           setState(() {});
                         },
                         tooltip:
-                            '${l10n.gDecrease} ${widget.tooltip.toLowerCase()}',
+                            '${EzConfig.l10n.gDecrease} ${widget.tooltip.toLowerCase()}',
                         icon: EzIcon(PlatformIcons(context).remove),
                       )
                     : EzIconButton(
                         enabled: false,
-                        tooltip: l10n.gMinimum,
+                        tooltip: EzConfig.l10n.gMinimum,
                         icon: EzIcon(
                           PlatformIcons(context).remove,
                           color: colorScheme.outline,
                         ),
                       ),
-                ezRowMargin,
+                EzConfig.layout.rowMargin,
               ],
 
               // Text field
@@ -197,7 +193,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               ),
 
               if (widget.plusMinus) ...<Widget>[
-                ezRowMargin,
+                EzConfig.layout.rowMargin,
 
                 // Plus icon
                 (currValue < widget.max)
@@ -212,12 +208,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           setState(() {});
                         },
                         tooltip:
-                            '${l10n.gIncrease} ${widget.tooltip.toLowerCase()}',
+                            '${EzConfig.l10n.gIncrease} ${widget.tooltip.toLowerCase()}',
                         icon: EzIcon(PlatformIcons(context).add),
                       )
                     : EzIconButton(
                         enabled: false,
-                        tooltip: l10n.gMaximum,
+                        tooltip: EzConfig.l10n.gMaximum,
                         icon: EzIcon(
                           PlatformIcons(context).add,
                           color: colorScheme.outline,

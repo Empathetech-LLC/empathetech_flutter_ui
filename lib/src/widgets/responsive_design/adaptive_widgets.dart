@@ -64,21 +64,21 @@ class EzScreenSize extends InheritedWidget {
 
 class EzAdaptiveParent extends StatelessWidget {
   /// Think phone thoughts
-  /// HIGHLY recommended to use a [Consumer] de [EzThemeProvider]
+  /// HIGHLY recommended to use a [Consumer] de [EzConfigProvider]
   final Widget small;
 
   /// Think tablet thoughts
-  /// HIGHLY recommended to use a [Consumer] de [EzThemeProvider]
+  /// HIGHLY recommended to use a [Consumer] de [EzConfigProvider]
   final Widget? medium;
 
   /// Think desktop thoughts
-  /// HIGHLY recommended to use a [Consumer] de [EzThemeProvider]
+  /// HIGHLY recommended to use a [Consumer] de [EzConfigProvider]
   final Widget? large;
 
   /// Will be added to all [ScreenSize] calculations
   final double offset;
 
-  /// Enables real-time responses to screen space and [EzThemeProvider] changes
+  /// Enables real-time responses to screen space and [EzConfigProvider] changes
   /// Recommended to wrap around your [Scaffold]s
   /// If a [Widget] is not provided, the next smaller size will be used
   const EzAdaptiveParent({
@@ -107,8 +107,8 @@ class EzAdaptiveParent extends StatelessWidget {
       child = large ?? medium ?? small;
     }
 
-    return Consumer<EzThemeProvider>(
-      builder: (_, EzThemeProvider theme, __) => EzScreenSize(
+    return Consumer<EzConfigProvider>(
+      builder: (_, EzConfigProvider theme, __) => EzScreenSize(
         key: ValueKey<int>(theme.seed),
         screenSize: size,
         child: child,

@@ -115,16 +115,12 @@ class EzSettingsHome extends StatefulWidget {
 }
 
 class _EzSettingsHomeState extends State<EzSettingsHome> {
-  // Gather the fixed theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, l10n.ssPageTitle);
+    ezWindowNamer(context, EzConfig.l10n.ssPageTitle);
   }
 
   // Define custom functions //
@@ -141,13 +137,13 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.csPageTitle,
+                label: EzConfig.l10n.csPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.colorSettingsPath!),
               icon: navIcon,
-              label: l10n.csPageTitle,
+              label: EzConfig.l10n.csPageTitle,
             ));
     }
 
@@ -160,13 +156,13 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.dsPageTitle,
+                label: EzConfig.l10n.dsPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.designSettingsPath!),
               icon: navIcon,
-              label: l10n.dsPageTitle,
+              label: EzConfig.l10n.dsPageTitle,
             ));
     }
 
@@ -179,13 +175,13 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.lsPageTitle,
+                label: EzConfig.l10n.lsPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.layoutSettingsPath!),
               icon: navIcon,
-              label: l10n.lsPageTitle,
+              label: EzConfig.l10n.lsPageTitle,
             ));
     }
 
@@ -198,13 +194,13 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.tsPageTitle,
+                label: EzConfig.l10n.tsPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.textSettingsPath!),
               icon: navIcon,
-              label: l10n.tsPageTitle,
+              label: EzConfig.l10n.tsPageTitle,
             ));
     }
 

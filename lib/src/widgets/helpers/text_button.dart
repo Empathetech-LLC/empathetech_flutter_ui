@@ -192,10 +192,6 @@ class EzTextIconButton extends StatefulWidget {
 }
 
 class _EzTextIconButtonState extends State<EzTextIconButton> {
-  // Gather the fixed theme data //
-
-  final bool isLefty = EzConfig.get(isLeftyKey);
-
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
@@ -233,7 +229,7 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
       clipBehavior: widget.clipBehavior,
       statesController: widget.statesController,
       icon: widget.icon,
-      iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
+      iconAlignment: EzConfig.isLefty ? IconAlignment.start : IconAlignment.end,
       label: Text(widget.label, style: textStyle, textAlign: widget.textAlign),
     );
   }

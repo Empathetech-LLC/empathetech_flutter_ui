@@ -38,22 +38,18 @@ class EzTranslationsPendingNotice extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final Locale currLocale = EzConfig.getLocale() ?? defaultLocale;
-
-    return (currLocale == defaultLocale)
-        ? const SizedBox.shrink()
-        : Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              header,
-              Text(
-                message ?? ezL10n(context).gMachineTranslated,
-                style: style ?? Theme.of(context).textTheme.labelLarge,
-                textAlign: textAlign,
-              ),
-              footer,
-            ],
-          );
-  }
+  Widget build(BuildContext context) => (EzConfig.locale == defaultLocale)
+      ? const SizedBox.shrink()
+      : Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            header,
+            Text(
+              message ?? EzConfig.l10n.gMachineTranslated,
+              style: style ?? Theme.of(context).textTheme.labelLarge,
+              textAlign: textAlign,
+            ),
+            footer,
+          ],
+        );
 }

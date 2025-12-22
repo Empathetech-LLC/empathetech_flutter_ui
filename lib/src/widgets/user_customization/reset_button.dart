@@ -30,10 +30,10 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
-  /// Whether to notify [EzThemeProvider] of changes
+  /// Whether to notify [EzConfigProvider] of changes
   final bool notifyTheme;
 
-  /// [EzThemeProvider.rebuild] passthrough
+  /// [EzConfigProvider.rebuild] passthrough
   final void Function()? onNotify;
 
   /// What happens when the user choses to reset
@@ -78,8 +78,6 @@ class EzResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
-
-    final EFUILang l10n = ezL10n(context);
 
     // Gather the contextual theme data //
 
@@ -131,7 +129,7 @@ class EzResetButton extends StatelessWidget {
 
             return EzAlertDialog(
               title: Text(
-                dialogTitle ?? l10n.ssResetAll,
+                dialogTitle ?? EzConfig.l10n.ssResetAll,
                 textAlign: TextAlign.center,
               ),
               content: dialogContent ??
@@ -147,7 +145,7 @@ class EzResetButton extends StatelessWidget {
             );
           }),
       icon: EzIcon(PlatformIcons(context).refresh),
-      label: label ?? l10n.gResetAll,
+      label: label ?? EzConfig.l10n.gResetAll,
     );
   }
 }

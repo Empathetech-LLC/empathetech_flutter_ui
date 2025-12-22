@@ -20,7 +20,6 @@ void testSuite({
       // Load localization(s) //
 
       ezLog('Loading localizations');
-      final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
@@ -34,7 +33,7 @@ void testSuite({
 
       await ezTouch(
         tester,
-        find.widgetWithText(EzElevatedIconButton, l10n.lsPageTitle),
+        find.widgetWithText(EzElevatedIconButton, EzConfig.l10n.lsPageTitle),
       );
 
       //* Test functionality *//
@@ -93,15 +92,10 @@ void testSuite({
 
       // Reset button //
 
-      await testResetButton(
-        tester,
-        type: RBType.layout,
-        l10n: l10n,
-        isLefty: isLefty,
-      );
+      await testResetButton(tester, type: RBType.layout);
 
       // Reset for next test suite  //
 
-      await ezTapBack(tester, l10n.gBack);
+      await ezTapBack(tester, EzConfig.l10n.gBack);
       ezLog('\nLayout settings test suite complete\n\n');
     });

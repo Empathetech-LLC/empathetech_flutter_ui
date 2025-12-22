@@ -32,7 +32,7 @@ String? getArbDir(EAGConfig config) {
     }
   }
 
-  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
+  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-EzConfig.l10n-yaml-file
   return 'lib/10n';
 }
 
@@ -49,7 +49,7 @@ String? l10nClassName(EAGConfig config) {
     }
   }
 
-  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
+  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-EzConfig.l10n-yaml-file
   return 'AppLocalizations';
 }
 
@@ -141,7 +141,7 @@ aka translation. Add new text to the language files in ${getArbDir(config)} and 
 
 There is a step between: after editing the .arb files, run 
 ``` bash
-flutter gen-l10n
+flutter gen-EzConfig.l10n
 ``` 
 to generate the new aliases.
 ''' : ''}
@@ -232,7 +232,7 @@ aka translation. Add new text to the language files in ${getArbDir(config)} and 
 
 There is a step between: after editing the .arb files, run 
 ``` bash
-flutter gen-l10n
+flutter gen-EzConfig.l10n
 ``` 
 to generate the new aliases.
 ''' : ''}
@@ -312,7 +312,7 @@ aka translation. Add new text to the language files in ${getArbDir(config)} and 
 
 There is a step between: after editing the .arb files, run 
 ``` bash
-flutter gen-l10n
+flutter gen-EzConfig.l10n
 ``` 
 to generate the new aliases.
 ''' : ''}
@@ -512,7 +512,7 @@ void main() async {
   EzConfig.init(
     assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
-    fallbackLang: await EFUILang.delegate.load(americanEnglish),
+    l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
           allowList: allEZConfigKeys.keys.toSet()),
@@ -544,9 +544,9 @@ void main() async {
       sheetIsDraggable: true,
       dragHandleColor: Colors.white,
     ),
-    themeMode: EzConfig.getThemeMode(),
+    
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
-    localeOverride: EzConfig.getLocale(),
+    
     child: const $classCaseAppName(),
   ));''' : '\n  runApp(const $classCaseAppName());'}
 }
@@ -579,7 +579,7 @@ class $classCaseAppName extends StatelessWidget {
           ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
         },
         supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
-        locale: EzConfig.getLocale(),
+        locale: EzConfig.locale,
 
         // App title
         title: appName,
@@ -725,7 +725,7 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
 
 export 'consts.dart';
 
-${config.l10nConfig != null ? "export '../l10n/${ezClassToSnake(l10nClassName(config)!)}.dart'" : ''};
+${config.l10nConfig != null ? "export '../EzConfig.l10n/${ezClassToSnake(l10nClassName(config)!)}.dart'" : ''};
 """);
 
     // widgets //
@@ -774,7 +774,7 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
         icon: EzIcon(PlatformIcons(context).settings),
-        label: ezL10n(context).ssPageTitle,
+        label: EzConfig.l10n.ssPageTitle,
       );
 }
 
@@ -789,12 +789,9 @@ class EFUICredits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLefty = EzConfig.get(isLeftyKey);
-
-    final EFUILang l10n = ezL10n(context);
-    final String label = isLefty ? l10n.gMadeBy : l10n.gCreator;
-    final String tip = l10n.gOpenEmpathetech;
-    final String settings = l10n.ssPageTitle;
+    final String label = isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
+    final String tip = EzConfig.l10n.gOpenEmpathetech;
+    final String settings = EzConfig.l10n.ssPageTitle;
 
     return Tooltip(
       message: tip,
@@ -850,9 +847,6 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final bool isLefty = EzConfig.get(isLeftyKey);
-    final EFUILang l10n = ezL10n(context);
-
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);
 
@@ -862,8 +856,8 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             controller.isOpen ? controller.close() : controller.open(),
-        tooltip: l10n.gOptions,
-        icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
+        tooltip: EzConfig.l10n.gOptions,
+        icon: Icon(Icons.more_vert, semanticLabel: EzConfig.l10n.gOptions),
       ),
       menuChildren: <Widget>[
         (showSettings) ? SettingsButton(context) : EFUICredits(context),
@@ -969,12 +963,12 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, '404 \${l10n.gError}');
+    ezWindowNamer(context, '404 \${EzConfig.l10n.gError}');
   }
 
   // Return the build //
 
-  late final EFUILang l10n = ezL10n(context);
+  late 
 
   @override
   Widget build(BuildContext context) {
@@ -987,19 +981,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                l10n.g404Wonder,
+                EzConfig.l10n.g404Wonder,
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
               EzConfig.layout.separator,
               Text(
-                l10n.g404,
+                EzConfig.l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
               EzConfig.layout.separator,
               Text(
-                l10n.g404Note,
+                EzConfig.l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -1034,7 +1028,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ${config.l10nConfig != null ? '''// Gather the fixed theme data //
 
-  late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;
+  late final ${l10nClassName(config)} EzConfig.l10n = ${l10nClassName(config)}.of(context)!;
 
   ''' : ''}// Define the build data //
 
@@ -1065,7 +1059,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                ${config.l10nConfig != null ? 'l10n.hsCounterLabel' : 'You have pushed the button this many times:'},
+                ${config.l10nConfig != null ? 'EzConfig.l10n.hsCounterLabel' : 'You have pushed the button this many times:'},
                 style: subTitle,
                 textAlign: TextAlign.center,
               ),
@@ -1102,7 +1096,7 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).ssPageTitle,
+        title: EzConfig.l10n.ssPageTitle,
         showSettings: false,
         body: const EzScreen(EzSettingsHome(
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
@@ -1144,7 +1138,7 @@ class ColorSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).csPageTitle,
+        title: EzConfig.l10n.csPageTitle,
         showSettings: false,
         body: EzScreen(EzColorSettings(target: target)),
         fabs: <Widget>[
@@ -1180,7 +1174,7 @@ class DesignSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).dsPageTitle,
+        title: EzConfig.l10n.dsPageTitle,
         showSettings: false,
         body: const EzScreen(EzDesignSettings()),
         fabs: <Widget>[
@@ -1216,7 +1210,7 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).lsPageTitle,
+        title: EzConfig.l10n.lsPageTitle,
         showSettings: false,
         body: const EzScreen(EzLayoutSettings()),
         fabs: <Widget>[
@@ -1254,7 +1248,7 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).tsPageTitle,
+        title: EzConfig.l10n.tsPageTitle,
         showSettings: false,
         body: EzScreen(EzTextSettings(target: target)),
         fabs: <Widget>[
@@ -1367,7 +1361,7 @@ Future<void> genL10n({
   "hsCounterLabel": "Vous avez appuyé sur le bouton autant de fois que cela :"
 }''');
 
-    final File l10nConfig = File('$dir/l10n.yaml');
+    final File l10nConfig = File('$dir/EzConfig.l10n.yaml');
     await l10nConfig.writeAsString(config.l10nConfig!);
   } catch (e) {
     onFailure(e.toString());
@@ -1493,7 +1487,7 @@ void main() async {
   EzConfig.init(
     assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
-    fallbackLang: await EFUILang.delegate.load(americanEnglish),
+    l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
           allowList: allEZConfigKeys.keys.toSet()),
@@ -1506,11 +1500,6 @@ void main() async {
     'Generated tests',
     () {
       testWidgets('Test randomizer', (WidgetTester tester) async {
-        // Load localization(s) //
-
-        ezLog('Loading localizations');
-        final EFUILang l10n = await EFUILang.delegate.load(americanEnglish);
-
         // Load the app //
 
         ezLog('Loading $titleCaseAppName');
@@ -1523,14 +1512,14 @@ void main() async {
         await ezTouch(tester, find.byIcon(Icons.more_vert));
 
         // Go to the settings page
-        await ezTouchText(tester, l10n.ssPageTitle);
+        await ezTouchText(tester, EzConfig.l10n.ssPageTitle);
 
         // Randomize the settings
-        await ezTouchText(tester, l10n.ssRandom);
-        await ezTouchText(tester, l10n.gYes);
+        await ezTouchText(tester, EzConfig.l10n.ssRandom);
+        await ezTouchText(tester, EzConfig.l10n.gYes);
 
         // Return to home screen
-        await ezTapBack(tester, l10n.gBack);
+        await ezTapBack(tester, EzConfig.l10n.gBack);
       });
 
       testWidgets('Test CountFAB', (WidgetTester tester) async {

@@ -40,8 +40,6 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final EzMargin ezRowMargin = EzMargin(vertical: false);
-
     final Color alertColor =
         iconColor ?? Theme.of(context).colorScheme.secondary;
 
@@ -52,7 +50,7 @@ class EzWarning extends StatelessWidget {
 
     // Return the build //
 
-    final String warning = title ?? ezL10n(context).gAttention;
+    final String warning = title ?? EzConfig.l10n.gAttention;
 
     return Semantics(
       label: '$warning: $body',
@@ -76,14 +74,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    ezRowMargin,
+                    EzConfig.layout.rowMargin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    ezRowMargin,
+                    EzConfig.layout.rowMargin,
 
                     // Thing 2
                     Icon(

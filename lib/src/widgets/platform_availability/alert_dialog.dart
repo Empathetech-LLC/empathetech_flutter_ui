@@ -42,20 +42,13 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final double margin = EzConfig.margin;
-    final double spacing = EzConfig.spacing;
-
-    final bool isLefty = EzConfig.isLefty;
-
     // Define custom functions //
 
     List<Widget>? buildMActions(List<Widget>? actions) {
       if (actions == null) return null;
 
       return actions.length <= 2
-          ? isLefty
+          ? EzConfig.isLefty
               ? actions.reversed.toList()
               : actions
           : <Widget>[
@@ -78,7 +71,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         material: (BuildContext dContext, _) {
           late final Widget closeAction = EzTextButton(
             onPressed: () => Navigator.of(dContext).pop(),
-            text: ezL10n(context).gClose,
+            text: EzConfig.l10n.gClose,
           );
 
           late final List<Widget>? mActions = needsClose
@@ -96,8 +89,8 @@ class EzAlertDialog extends PlatformAlertDialog {
             titlePadding: title == null
                 ? null
                 : EdgeInsets.symmetric(
-                    horizontal: margin,
-                    vertical: spacing / 2,
+                    horizontal: EzConfig.margin,
+                    vertical: EzConfig.spacing / 2,
                   ),
 
             // Content
@@ -105,29 +98,29 @@ class EzAlertDialog extends PlatformAlertDialog {
             contentPadding: dialogContent == null
                 ? null
                 : EdgeInsets.symmetric(
-                    horizontal: margin,
-                    vertical: spacing / 2,
+                    horizontal: EzConfig.margin,
+                    vertical: EzConfig.spacing / 2,
                   ),
 
             // Actions
             actions: buildMActions(mActions),
             actionsAlignment: (mActions != null && mActions.length > 2)
                 ? MainAxisAlignment.center
-                : isLefty
+                : EzConfig.isLefty
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.end,
 
             // General
             iconPadding: EdgeInsets.zero,
             buttonPadding: EdgeInsets.zero,
-            insetPadding: EdgeInsets.all(margin),
-            actionsPadding: EzInsets.wrap(spacing),
+            insetPadding: EdgeInsets.all(EzConfig.margin),
+            actionsPadding: EzInsets.wrap(EzConfig.spacing),
           );
         },
         cupertino: (BuildContext dContext, _) {
           late final Widget closeAction = EzCupertinoAction(
             onPressed: () => Navigator.of(dContext).pop(),
-            text: ezL10n(context).gClose,
+            text: EzConfig.l10n.gClose,
           );
 
           late final List<Widget>? cActions = needsClose
@@ -144,7 +137,7 @@ class EzAlertDialog extends PlatformAlertDialog {
                 : Padding(
                     padding: dialogContent == null
                         ? EdgeInsets.zero
-                        : EdgeInsets.only(bottom: spacing / 2),
+                        : EdgeInsets.only(bottom: EzConfig.spacing / 2),
                     child: title,
                   ),
 
@@ -154,14 +147,15 @@ class EzAlertDialog extends PlatformAlertDialog {
                 : Padding(
                     padding: title == null
                         ? EdgeInsets.zero
-                        : EdgeInsets.symmetric(vertical: spacing / 2),
+                        : EdgeInsets.symmetric(vertical: EzConfig.spacing / 2),
                     child: dialogContent,
                   ),
 
             // Actions
-            actions: (cActions != null && cActions.length <= 2 && isLefty)
-                ? cActions.reversed.toList()
-                : cActions,
+            actions:
+                (cActions != null && cActions.length <= 2 && EzConfig.isLefty)
+                    ? cActions.reversed.toList()
+                    : cActions,
           );
         },
       ),
@@ -284,14 +278,14 @@ class EzCupertinoAction extends StatelessWidget {
 }) {
   final List<EzMaterialAction> materialActions = <EzMaterialAction>[
     EzMaterialAction(
-      text: denyMsg ?? ezL10n(context).gNo,
+      text: denyMsg ?? EzConfig.l10n.gNo,
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
       style: style,
     ),
     EzMaterialAction(
-      text: confirmMsg ?? ezL10n(context).gYes,
+      text: confirmMsg ?? EzConfig.l10n.gYes,
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
@@ -300,14 +294,14 @@ class EzCupertinoAction extends StatelessWidget {
   ];
   final List<EzCupertinoAction> cupertinoActions = <EzCupertinoAction>[
     EzCupertinoAction(
-      text: denyMsg ?? ezL10n(context).gNo,
+      text: denyMsg ?? EzConfig.l10n.gNo,
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
       style: style,
     ),
     EzCupertinoAction(
-      text: confirmMsg ?? ezL10n(context).gYes,
+      text: confirmMsg ?? EzConfig.l10n.gYes,
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,

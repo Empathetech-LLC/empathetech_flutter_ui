@@ -23,8 +23,8 @@ class EzConfig {
   /// [SharedPreferencesAsync] instance
   final SharedPreferencesAsync _preferences;
 
-  /// Allows [EzConfig] setters to call [EzThemeProvider.rebuild]
-  EzThemeProvider? _themeProvider;
+  /// Allows [EzConfig] setters to call [EzConfigProvider.rebuild]
+  EzConfigProvider? _provider;
 
   /// Live values in use
   final Map<String, dynamic> _prefs;
@@ -40,32 +40,32 @@ class EzConfig {
     // External (factory parameters)
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
-    required EFUILang fallbackLang,
+    required EFUILang l10nFallback,
     required SharedPreferencesAsync preferences,
-    EzThemeProvider? themeProvider,
+    EzConfigProvider? provider,
 
     // Internal (built by factory)
     required Map<String, dynamic> prefs,
     required Map<String, Type> typeMap,
   })  : _assetPaths = assetPaths,
         _defaults = defaults,
-        _fallbackLang = fallbackLang,
+        _fallbackLang = l10nFallback,
         _preferences = preferences,
-        _themeProvider = themeProvider,
+        _provider = provider,
         _prefs = prefs,
         _typeMap = typeMap;
 
   /// [assetPaths] => provide the [AssetImage] paths for this app
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
-  /// [fallbackLang] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
+  /// [l10nFallback] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [preferences] => provide a [SharedPreferencesAsync] instance
-  /// [themeProvider] => Set by [EzAppProvider], recommended to leave null unless you are not using [EzAppProvider]
+  /// [provider] => Set by [EzAppProvider], recommended to leave null unless you are not using [EzAppProvider]
   factory EzConfig.init({
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
-    required EFUILang fallbackLang,
+    required EFUILang l10nFallback,
     required SharedPreferencesWithCache preferences,
-    EzThemeProvider? themeProvider,
+    EzConfigProvider? provider,
   }) {
     if (_instance == null) {
       // Get the value type for each key //
@@ -130,9 +130,9 @@ Must be one of [int, bool, double, String, List<String>]''');
       _instance = EzConfig._(
         assetPaths: assetPaths,
         defaults: defaults,
-        fallbackLang: fallbackLang,
+        l10nFallback: l10nFallback,
         preferences: SharedPreferencesAsync(),
-        themeProvider: themeProvider,
+        provider: provider,
         prefs: prefs,
         typeMap: typeMap,
       );
@@ -145,11 +145,19 @@ Must be one of [int, bool, double, String, List<String>]''');
   // w/out null checks
   // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
-  static bool get isApple => _instance!._themeProvider!.isCupertino;
+  static EzConfigProvider get provider => _instance!._provider!;
 
-  static EzThemeProvider get theme => _instance!._themeProvider!;
+  static bool get isApple => _instance!._provider!.isCupertino;
+  static bool get isLTR => _instance!._provider!.isLTR;
 
-  static EzLayoutWidgets get layout => _instance!._themeProvider!.layout;
+  static int get seed => _instance!._provider!.seed;
+
+  static Locale get locale => _instance!._provider!.locale;
+  static EFUILang get l10n => _instance!._provider!.l10n;
+  static EFUILang get l10nFallback => _instance!._fallbackLang;
+
+  static ThemeMode get themeMode => _instance!._provider!.themeMode;
+  static EzLayoutWidgets get layout => _instance!._provider!.layout;
 
   /// Get the [key]s current EzConfig value
   /// bool, int, double, String, String List, or null
@@ -208,40 +216,13 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool isKeyAsset(String key) =>
       _instance!._assetPaths.contains(_instance!._prefs[key]);
 
-  static EFUILang get l10nFallback => _instance!._fallbackLang;
-
-  /// Return the user's selected [Locale], if any (null otherwise)
-  static Locale? getLocale() {
-    final List<String>? localeData = _instance!._prefs[appLocaleKey];
-
-    if (localeData == null) {
-      return null;
-    } else {
-      return Locale(
-        localeData[0],
-        (localeData.length > 1) ? localeData[1] : null,
-      );
-    }
-  }
-
-  /// Return the user's selected [ThemeMode]
-  static ThemeMode getThemeMode() {
-    final bool? isDarkTheme = _instance!._prefs[isDarkThemeKey];
-
-    if (isDarkTheme == null) {
-      return ThemeMode.system;
-    } else {
-      return isDarkTheme ? ThemeMode.dark : ThemeMode.light;
-    }
-  }
-
   // Setters //
 
-  static bool setThemeProvider(EzThemeProvider themeProvider) {
-    if (_instance == null || _instance!._themeProvider != null) {
+  static bool initProvider(EzConfigProvider configProvider) {
+    if (_instance == null || _instance!._provider != null) {
       return false;
     } else {
-      _instance!._themeProvider = themeProvider;
+      _instance!._provider = provider;
       return true;
     }
   }
@@ -260,7 +241,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider!.rebuild(onComplete: onNotify);
+        _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -283,7 +264,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider!.rebuild(onComplete: onNotify);
+        _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -306,7 +287,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider!.rebuild(onComplete: onNotify);
+        _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -329,7 +310,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider!.rebuild(onComplete: onNotify);
+        _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -352,7 +333,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._themeProvider!.rebuild(onComplete: onNotify);
+        _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -428,7 +409,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._themeProvider!.rebuild(onComplete: onNotify);
+      _instance!._provider!.rebuild(onComplete: onNotify);
     }
   }
 
@@ -459,7 +440,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     if (shiny && random.nextInt(4096) == 376) {
       final List<Locale> trimmedLocales =
           List<Locale>.from(EFUILang.supportedLocales);
-      trimmedLocales.remove(getLocale());
+      trimmedLocales.remove(locale);
 
       final Locale randomLocale =
           trimmedLocales.elementAt(random.nextInt(trimmedLocales.length));
@@ -730,7 +711,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       defaultIconSize * getScalar(),
     );
 
-    _instance!._themeProvider!.rebuild(onComplete: onNotify);
+    _instance!._provider!.rebuild(onComplete: onNotify);
   }
 
   // Removers //
@@ -755,7 +736,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
 
       if (notifyTheme) {
-        _instance!._themeProvider!.rebuild(onComplete: onNotify);
+        _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -786,7 +767,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._themeProvider!.rebuild(onComplete: onNotify);
+      _instance!._provider!.rebuild(onComplete: onNotify);
     }
     return success;
   }
@@ -812,7 +793,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._themeProvider!.rebuild(onComplete: onNotify);
+      _instance!._provider!.rebuild(onComplete: onNotify);
     }
     return success;
   }

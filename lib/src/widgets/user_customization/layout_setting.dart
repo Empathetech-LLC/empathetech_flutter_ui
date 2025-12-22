@@ -16,11 +16,11 @@ enum EzLayoutSettingType { margin, padding, spacing }
 String ezLstName(BuildContext context, EzLayoutSettingType settingType) {
   switch (settingType) {
     case EzLayoutSettingType.margin:
-      return ezL10n(context).lsMargin;
+      return EzConfig.l10n.lsMargin;
     case EzLayoutSettingType.padding:
-      return ezL10n(context).lsPadding;
+      return EzConfig.l10n.lsPadding;
     case EzLayoutSettingType.spacing:
-      return ezL10n(context).lsSpacing;
+      return EzConfig.l10n.lsSpacing;
   }
 }
 
@@ -86,8 +86,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late final double defaultValue = EzConfig.getDefault(widget.configKey);
 
   late final String label = ezLstName(context, widget.type);
-
-  late final EFUILang l10n = ezL10n(context);
 
   // Define build functions //
 
@@ -158,7 +156,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(currValue),
                 ),
-                text: l10n.gCurrently,
+                text: EzConfig.l10n.gCurrently,
               ),
               const EzSpacer(vertical: false),
               EzElevatedButton(
@@ -187,7 +185,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              EzElevatedButton(enabled: false, text: l10n.gCurrently),
+              EzElevatedButton(enabled: false, text: EzConfig.l10n.gCurrently),
               EzSpacer(space: currValue, vertical: false),
               EzElevatedButton(
                 enabled: false,
@@ -221,7 +219,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                 Semantics(
                   button: false,
                   readOnly: true,
-                  label: l10n.gSetToValue(
+                  label: EzConfig.l10n.gSetToValue(
                     label,
                     currValue.toStringAsFixed(widget.decimals),
                   ),
@@ -276,7 +274,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                   },
                   icon: EzIcon(PlatformIcons(context).refresh),
                   label:
-                      '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
+                      '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
                 ),
                 EzSpacer(space: EzConfig.spacing * 1.5),
               ],

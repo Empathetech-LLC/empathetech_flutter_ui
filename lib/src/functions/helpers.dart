@@ -88,11 +88,6 @@ double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 
 /// More readable than...
-/// EFUILang.of(context) ?? EzConfig.l10nFallback
-EFUILang ezL10n(BuildContext context) =>
-    EFUILang.of(context) ?? EzConfig.l10nFallback;
-
-/// More readable than...
 /// FocusScope.of(context).unfocus();
 void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 
@@ -213,7 +208,7 @@ Future<void> ezConfigSaver(
   if (context.mounted) {
     ezSnackBar(
       context: context,
-      message: ezL10n(context).ssConfigSaved(archivePath(
+      message: EzConfig.l10n.ssConfigSaved(archivePath(
         appName: appName,
         androidPackage: androidPackage,
       )),
@@ -248,10 +243,11 @@ Future<void> ezConfigLoader(BuildContext context) async {
   }
 
   if (context.mounted) {
-    final EFUILang l10n = ezL10n(context);
     ezSnackBar(
       context: context,
-      message: kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder,
+      message: kIsWeb
+          ? EzConfig.l10n.ssRestartReminderWeb
+          : EzConfig.l10n.ssRestartReminder,
     );
   }
 }

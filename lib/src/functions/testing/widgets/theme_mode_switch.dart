@@ -10,24 +10,20 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// For integration testing
 /// Test [EzThemeModeSwitch]
-Future<void> testTMSwitch(
-  WidgetTester tester, {
-  required EFUILang l10n,
-  required bool isLefty,
-}) async {
+Future<void> testTMSwitch(WidgetTester tester) async {
   ezLog('\nTesting theme mode setting');
 
   // Verify  layout
-  if (isLefty) {
+  if (EzConfig.isLefty) {
     assert(
       tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx <
-          tester.getCenter(find.text(l10n.ssThemeMode)).dx,
+          tester.getCenter(find.text(EzConfig.l10n.ssThemeMode)).dx,
       'DH layout mismatch',
     );
   } else {
     assert(
       tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx >
-          tester.getCenter(find.text(l10n.ssThemeMode)).dx,
+          tester.getCenter(find.text(EzConfig.l10n.ssThemeMode)).dx,
       'DH layout mismatch',
     );
   }
@@ -35,15 +31,15 @@ Future<void> testTMSwitch(
   // Activate light theme
   ezLog('Light');
   await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await ezTouchText(tester, l10n.gLight);
+  await ezTouchText(tester, EzConfig.l10n.gLight);
 
   // Activate system theme
   ezLog('System');
   await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await ezTouchText(tester, l10n.gSystem);
+  await ezTouchText(tester, EzConfig.l10n.gSystem);
 
   // Activate dark theme
   ezLog('Dark');
   await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await ezTouchText(tester, l10n.gDark);
+  await ezTouchText(tester, EzConfig.l10n.gDark);
 }

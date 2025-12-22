@@ -15,7 +15,7 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: ezL10n(context).ssPageTitle,
+        title: EzConfig.l10n.ssPageTitle,
         showSettings: false,
         body: const EzScreen(EzSettingsHome(
           colorSettingsPath: colorSettingsPath,

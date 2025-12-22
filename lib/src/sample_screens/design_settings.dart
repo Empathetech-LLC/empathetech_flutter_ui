@@ -110,9 +110,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
-  late final EFUILang l10n = ezL10n(context);
-  late final String darkString = l10n.gDark.toLowerCase();
-  late final String lightString = l10n.gLight.toLowerCase();
+  late final String darkString = EzConfig.l10n.gDark.toLowerCase();
+  late final String lightString = EzConfig.l10n.gLight.toLowerCase();
 
   // Define the build data //
 
@@ -136,7 +135,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, l10n.dsPageTitle);
+    ezWindowNamer(context, EzConfig.l10n.dsPageTitle);
   }
 
   @override
@@ -148,9 +147,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
-
-    final double margin = EzConfig.margin;
-    final double spacing = EzConfig.spacing;
 
     final bool isDark = isDarkTheme(context);
     final String themeProfile = isDark ? darkString : lightString;
@@ -191,7 +187,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       EzConfig.layout.spacer,
 
                       // Slider
-                      Text(l10n.dsMilliseconds, style: textTheme.bodyLarge),
+                      Text(EzConfig.l10n.dsMilliseconds,
+                          style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -226,7 +223,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                   .toDouble());
                         },
                         icon: EzIcon(PlatformIcons(context).refresh),
-                        label: l10n.gReset,
+                        label: EzConfig.l10n.gReset,
                       ),
                       EzConfig.layout.separator,
                     ],
@@ -234,7 +231,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 );
               },
             ),
-            label: l10n.dsAnimDuration,
+            label: EzConfig.l10n.dsAnimDuration,
             icon: Icon(PlatformIcons(context).time),
             style: ElevatedButton.styleFrom(iconSize: iconSize),
           ),
@@ -243,14 +240,15 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         if (widget.includeIconSize) ...<Widget>[
           if (widget.includeAnimation) EzConfig.layout.spacer,
           Tooltip(
-            message: l10n.gCenterReset,
+            message: EzConfig.l10n.gCenterReset,
             child: GestureDetector(
               onLongPress: () async {
                 iconSize = defaultIconSize;
                 await EzConfig.setDouble(iconSizeKey, defaultIconSize);
                 drawState();
               },
-              child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
+              child:
+                  EzText(EzConfig.l10n.tsIconSize, style: textTheme.bodyLarge),
             ),
           ),
           EzTextBackground(
@@ -266,13 +264,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           drawState();
                         },
                         tooltip:
-                            '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
+                            '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(PlatformIcons(context).remove),
                         iconSize: iconSize,
                       )
                     : EzIconButton(
                         enabled: false,
-                        tooltip: l10n.gMinimum,
+                        tooltip: EzConfig.l10n.gMinimum,
                         icon: Icon(
                           PlatformIcons(context).remove,
                           color: colorScheme.outline,
@@ -305,13 +303,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           drawState();
                         },
                         tooltip:
-                            '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
+                            '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(PlatformIcons(context).add),
                         iconSize: iconSize,
                       )
                     : EzIconButton(
                         enabled: false,
-                        tooltip: l10n.gMaximum,
+                        tooltip: EzConfig.l10n.gMaximum,
                         icon: Icon(
                           PlatformIcons(context).add,
                           color: colorScheme.outline,
@@ -332,7 +330,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             key: ValueKey<String>('scroll_$redraw'),
             valueKey: hideScrollKey,
             scale: iconSize / defaultIconSize,
-            text: l10n.lsScroll,
+            text: EzConfig.l10n.lsScroll,
           ),
         ],
 
@@ -340,22 +338,22 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ...widget.globalSettingsPostpend!,
 
         // Global/themed divider, w/ theme reminder
-        EzSpacer(space: spacing * 1.25),
-        EzDivider(height: margin),
+        EzSpacer(space: EzConfig.spacing * 1.25),
+        EzDivider(height: EzConfig.margin),
         (widget.themeLink != null)
             ? EzLink(
-                l10n.gEditingTheme(isDark ? darkString : lightString),
+                EzConfig.l10n.gEditingTheme(isDark ? darkString : lightString),
                 onTap: widget.themeLink,
-                hint: l10n.gEditingThemeHint,
+                hint: EzConfig.l10n.gEditingThemeHint,
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
-                l10n.gEditingTheme(themeProfile),
+                EzConfig.l10n.gEditingTheme(themeProfile),
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-        EzSpacer(space: spacing * 1.25),
+        EzSpacer(space: EzConfig.spacing * 1.25),
 
         if (widget.themedSettingsPrepend != null)
           ...widget.themedSettingsPrepend!,
@@ -399,9 +397,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: EzInsets.wrap(spacing),
+                            padding: EzInsets.wrap(EzConfig.spacing),
                             child: EzElevatedButton(
-                              text: l10n.dsPreview,
+                              text: EzConfig.l10n.dsPreview,
                               onPressed: doNothing,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: buttonBackground,
@@ -411,7 +409,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             ),
                           ),
                           Padding(
-                            padding: EzInsets.wrap(spacing),
+                            padding: EzInsets.wrap(EzConfig.spacing),
                             child: Transform.scale(
                               scale: max(
                                   1.0,
@@ -435,7 +433,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       EzConfig.layout.spacer,
 
                       // Background slider
-                      Text(l10n.dsBackground, style: textTheme.bodyLarge),
+                      Text(EzConfig.l10n.dsBackground,
+                          style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -469,7 +468,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       EzConfig.layout.spacer,
 
                       // Outline slider
-                      Text(l10n.dsOutline, style: textTheme.bodyLarge),
+                      Text(EzConfig.l10n.dsOutline, style: textTheme.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -528,7 +527,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           });
                         },
                         icon: EzIcon(PlatformIcons(context).refresh),
-                        label: l10n.gReset,
+                        label: EzConfig.l10n.gReset,
                       ),
                       EzConfig.layout.separator,
                     ],
@@ -537,7 +536,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               );
             },
           ),
-          label: l10n.dsButtonOpacity,
+          label: EzConfig.l10n.dsButtonOpacity,
           icon: const Icon(Icons.opacity),
           style: ElevatedButton.styleFrom(iconSize: iconSize),
         ),
@@ -554,14 +553,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     key: UniqueKey(),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
-                    label: l10n.dsBackgroundImg.replaceAll(' ', '\n'),
+                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
                     key: UniqueKey(),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
-                    label: l10n.dsBackgroundImg.replaceAll(' ', '\n'),
+                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
                     updateTheme: Brightness.light,
                   ),
           ),
@@ -575,7 +574,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         widget.resetSpacer,
         EzResetButton(
           key: ValueKey<String>('reset_$redraw'),
-          dialogTitle: l10n.dsResetAll(themeProfile),
+          dialogTitle: EzConfig.l10n.dsResetAll(themeProfile),
           onConfirm: () async {
             await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
             await EzConfig.remove(iconSizeKey);

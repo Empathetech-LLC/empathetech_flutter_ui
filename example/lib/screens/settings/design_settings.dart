@@ -14,7 +14,7 @@ class DesignSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: ezL10n(context).dsPageTitle,
+        title: EzConfig.l10n.dsPageTitle,
         showSettings: false,
         body: const EzScreen(EzDesignSettings(
           appName: appName,

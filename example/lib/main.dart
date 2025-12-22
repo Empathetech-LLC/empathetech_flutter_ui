@@ -29,7 +29,7 @@ void main() async {
   EzConfig.init(
     assetPaths: <String>{},
     defaults: isMobile() ? empathMobileConfig : empathDesktopConfig,
-    fallbackLang: await EFUILang.delegate.load(americanEnglish),
+    l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
           allowList: allEZConfigKeys.keys.toSet()),
@@ -42,9 +42,7 @@ void main() async {
   runApp(BetterFeedback(
     theme: empathFeedbackLight,
     darkTheme: empathFeedbackDark,
-    themeMode: EzConfig.getThemeMode(),
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
-    localeOverride: EzConfig.getLocale(),
     child: const OpenUI(),
   ));
 }
@@ -78,7 +76,7 @@ class OpenUI extends StatelessWidget {
           ...Lang.localizationsDelegates,
         },
         supportedLocales: Lang.supportedLocales,
-        locale: EzConfig.getLocale(),
+        locale: EzConfig.locale,
 
         // App title
         title: appName,

@@ -24,7 +24,6 @@ class ArchiveScreen extends StatefulWidget {
 class _ArchiveScreenState extends State<ArchiveScreen> {
   // Gather the fixed theme data //
 
-  late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
   // Define the build data //
@@ -60,7 +59,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         ? setState(() => genState = GeneratorState.successful)
         : setState(() {
             failureMessage =
-                '${el10n.ssWrongConfigExt} .json...\n\n$savedConfig';
+                '${EzConfig.l10n.ssWrongConfigExt} .json...\n\n$savedConfig';
             genState = GeneratorState.failed;
           });
   }
@@ -73,7 +72,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EmpathyLoading(semantics: el10n.gLoadingAnim),
+          child: EmpathyLoading(semantics: EzConfig.l10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return Center(
@@ -82,7 +81,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
             richMessage: EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: el10n.ssConfigSaved(archivePath(
+                  text: EzConfig.l10n.ssConfigSaved(archivePath(
                     appName: 'Open UI',
                     androidPackage: 'net.empathetech.open_ui',
                   )),
@@ -94,7 +93,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                     style: ezSubTitleStyle(textTheme),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),
-                    hint: el10n.gOpenUIReleases,
+                    hint: EzConfig.l10n.gOpenUIReleases,
                   ),
                   EzPlainText(text: l10n.asToGen(widget.config.appName)),
                 ]

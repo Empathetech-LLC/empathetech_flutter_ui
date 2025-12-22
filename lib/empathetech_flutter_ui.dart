@@ -6,6 +6,7 @@
 // Core //
 
 export 'src/config.dart';
+export 'src/config_provider.dart';
 
 // Constants //
 
@@ -43,7 +44,7 @@ export 'src/functions/testing/widgets/locale_setting.dart';
 export 'src/functions/testing/widgets/reset_button.dart';
 export 'src/functions/testing/widgets/theme_mode_switch.dart';
 
-// l10n //
+// EzConfig.l10n //
 
 export 'src/l10n/efui_lang.dart';
 
@@ -85,7 +86,6 @@ export 'src/widgets/helpers/warning.dart';
 export 'src/widgets/platform_availability/alert_dialog.dart';
 export 'src/widgets/platform_availability/app_provider.dart';
 export 'src/widgets/platform_availability/back_action.dart';
-export 'src/widgets/platform_availability/theme_provider.dart';
 
 // Responsive design
 export 'src/widgets/responsive_design/adaptive_widgets.dart';

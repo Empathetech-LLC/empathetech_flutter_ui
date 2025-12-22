@@ -94,7 +94,7 @@ void main() async {
     defaults: <String, Object>{},
 
     // Fallback Lang for unsupported Locales
-    fallbackLang: await EFUILang.delegate.load(americanEnglish),
+    l10nFallback: await EFUILang.delegate.load(americanEnglish),
 
     // Paths to any locally stored images the app uses
     assetPaths: <String>{},
@@ -140,7 +140,7 @@ class YourApp extends StatelessWidget {
         supportedLocales: YourLang.supportedLocales,
 
         // Current language
-        locale: EzConfig.getLocale(),
+        locale: EzConfig.locale,
 
         title: appName,
         routerConfig: router,
@@ -177,7 +177,7 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: ezL10n(context).tsPageTitle,
+        title: EzConfig.l10n.tsPageTitle,
         showSettings: false,
         body: const EzTextSettings(),
       );

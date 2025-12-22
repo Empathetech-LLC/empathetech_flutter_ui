@@ -35,10 +35,12 @@ class EzAppProvider extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider<EzThemeProvider>(
-        create: (_) => EzThemeProvider(
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider<EzConfigProvider>(
+        create: (_) => EzConfigProvider(
           isLTR: ltrCheck(context),
           useCupertino: cupertinoCheck(),
+          l10nFallback: EzConfig.l10nFallback,
         ),
         child: _ProviderSquared(
           app: app,
@@ -65,8 +67,8 @@ class _ProviderSquared extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EzThemeProvider config = Provider.of<EzThemeProvider>(context);
-    EzConfig.setThemeProvider(config);
+    final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
+    EzConfig.initProvider(config);
 
     return PlatformProvider(
       builder: (_) => PlatformTheme(

@@ -19,7 +19,6 @@ void testSuite({
       // Load localization(s) //
 
       ezLog('Loading localizations');
-      final EFUILang l10n = await EFUILang.delegate.load(locale);
       final LocaleNames l10nNames =
           await const LocaleNamesLocalizationsDelegate().load(locale);
 
@@ -34,8 +33,8 @@ void testSuite({
       ezLog('\nValidating text');
       await ezFindText(tester, appName);
       await ezFindWidget(tester, EzWarning);
-      await ezFindText(tester, l10n.ssDominantHand);
-      await ezFindText(tester, l10n.ssThemeMode);
+      await ezFindText(tester, EzConfig.l10n.ssDominantHand);
+      await ezFindText(tester, EzConfig.l10n.ssThemeMode);
 
       //* Test functionality *//
 
@@ -44,19 +43,17 @@ void testSuite({
       ezLog('\nTesting options menu');
       await ezTouch(tester, find.byType(MenuAnchor).last);
 
-      expect(find.text(l10n.gOpenSource).last, findsOneWidget);
-      expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
+      expect(find.text(EzConfig.l10n.gOpenSource).last, findsOneWidget);
+      expect(find.text(EzConfig.l10n.gGiveFeedback).last, findsOneWidget);
 
       ezLog('Dismissing');
       await ezDismiss(tester);
 
-      await testDHSetting(tester, l10n: l10n, isLefty: isLefty);
-      await testTMSwitch(tester, l10n: l10n, isLefty: isLefty);
+      await testDHSetting(tester);
+      await testTMSwitch(tester);
       await testLocaleSetting(
         tester,
-        l10n: l10n,
         l10nNames: l10nNames,
-        isLefty: isLefty,
       );
 
       // Reset button //
@@ -64,8 +61,6 @@ void testSuite({
       await testResetButton(
         tester,
         type: RBType.all,
-        l10n: l10n,
-        isLefty: isLefty,
       );
 
       // Reset for next test suite  //

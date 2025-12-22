@@ -16,29 +16,28 @@ Widget ezRichUndoWarning(
   required String appName,
   String? androidPackage,
 }) {
-  final EFUILang l10n = ezL10n(context);
   final TextTheme textTheme = Theme.of(context).textTheme;
 
   final EzRichText text = EzRichText(
     <InlineSpan>[
       EzPlainText(
-        text: l10n.gUndoWarn1,
+        text: EzConfig.l10n.gUndoWarn1,
         style: textTheme.bodyLarge,
       ),
       EzInlineLink(
-        l10n.gSave,
+        EzConfig.l10n.gSave,
         onTap: () => ezConfigSaver(
           context,
           extraKeys: extraKeys,
           appName: appName,
           androidPackage: androidPackage,
         ),
-        hint: l10n.gSaveHint,
+        hint: EzConfig.l10n.gSaveHint,
         style: textTheme.bodyLarge,
         textAlign: TextAlign.center,
       ),
       EzPlainText(
-        text: l10n.gUndoWarn2,
+        text: EzConfig.l10n.gUndoWarn2,
         style: textTheme.bodyLarge,
       ),
     ],

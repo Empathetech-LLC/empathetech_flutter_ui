@@ -36,7 +36,7 @@ Future<String?> ezImagePicker({
   } on Exception catch (e) {
     if (context.mounted) {
       final String errorMsg =
-          '${ezL10n(context).dsImgSetFailed}\n${e.toString()}';
+          '${EzConfig.l10n.dsImgSetFailed}\n${e.toString()}';
       await ezLogAlert(context, message: errorMsg);
     }
     return null;

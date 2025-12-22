@@ -3,21 +3,25 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class EzThemeProvider extends ChangeNotifier {
+class EzConfigProvider extends ChangeNotifier {
   // Construct //
 
   final bool _cupertino;
   bool _ltr;
 
+  int _seed;
+
+  late Locale _locale;
+  late EFUILang _l10n;
+
   late ThemeMode _themeMode;
   late EzLayoutWidgets _layout;
-  int _seed;
 
   late ThemeData _darkMaterial;
   late ThemeData _lightMaterial;
@@ -25,10 +29,14 @@ class EzThemeProvider extends ChangeNotifier {
   late CupertinoThemeData? _darkCupertino;
   late CupertinoThemeData? _lightCupertino;
 
-  EzThemeProvider({required bool useCupertino, required bool isLTR})
-      : _cupertino = useCupertino,
+  EzConfigProvider({
+    required bool useCupertino,
+    required bool isLTR,
+    required EFUILang l10nFallback,
+  })  : _cupertino = useCupertino,
         _ltr = isLTR,
-        _seed = Random().nextInt(rMax) {
+        _seed = Random().nextInt(rMax),
+        _l10n = l10nFallback {
     _themeMode = _getMode;
     _buildTheme();
   }
@@ -57,8 +65,6 @@ class EzThemeProvider extends ChangeNotifier {
     );
   }
 
-  // Get //
-
   ThemeMode get _getMode {
     final bool? savedDark = EzConfig.get(isDarkThemeKey);
 
@@ -69,12 +75,42 @@ class EzThemeProvider extends ChangeNotifier {
             : ThemeMode.light;
   }
 
+  Future<EFUILang> get _buildL10n async {
+    final List<String>? localeData = EzConfig.get(appLocaleKey);
+
+    if (localeData == null || localeData.isEmpty) {
+      return EzConfig.l10nFallback;
+    }
+
+    try {
+      final String languageCode = localeData[0];
+      final String? countryCode =
+          (localeData.length > 1) ? localeData[1] : null;
+
+      final Locale locale = (countryCode != null)
+          ? Locale(languageCode, countryCode)
+          : Locale(languageCode);
+
+      final EFUILang toReturn = await EFUILang.delegate.load(locale);
+      _locale = locale;
+      return toReturn;
+    } catch (_) {
+      return EzConfig.l10nFallback;
+    }
+  }
+
+  // Get //
+
   bool get isCupertino => _cupertino;
   bool get isLTR => _ltr;
 
-  ThemeMode get themeMode => _themeMode;
-  EzLayoutWidgets get layout => _layout;
   int get seed => _seed;
+
+  Locale get locale => _locale;
+  EFUILang get l10n => _l10n;
+
+  EzLayoutWidgets get layout => _layout;
+  ThemeMode get themeMode => _themeMode;
 
   ThemeData get darkMaterial => _darkMaterial;
   ThemeData get lightMaterial => _lightMaterial;
@@ -93,19 +129,22 @@ class EzThemeProvider extends ChangeNotifier {
   void rebuild({void Function()? onComplete}) {
     _themeMode = _getMode;
     _buildTheme();
-    redraw();
-    onComplete?.call();
-  }
-
-  void setThemeMode({void Function()? onComplete}) {
-    _themeMode = _getMode;
-    redraw();
-    onComplete?.call();
+    redraw(onComplete: onComplete);
   }
 
   void setTextDirection(bool isLTR, {void Function()? onComplete}) {
     _ltr = isLTR;
     rebuild(onComplete: onComplete);
+  }
+
+  void setThemeMode({void Function()? onComplete}) {
+    _themeMode = _getMode;
+    redraw(onComplete: onComplete);
+  }
+
+  Future<void> setLocale({void Function()? onComplete}) async {
+    _l10n = await _buildL10n;
+    redraw(onComplete: onComplete);
   }
 }
 

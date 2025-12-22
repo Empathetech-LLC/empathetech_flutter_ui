@@ -25,7 +25,7 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
         icon: EzIcon(PlatformIcons(context).settings),
-        label: ezL10n(context).ssPageTitle,
+        label: EzConfig.l10n.ssPageTitle,
       );
 }
 
@@ -68,7 +68,7 @@ class UploadButton extends StatelessWidget {
           }
         },
         icon: EzIcon(Icons.upload),
-        label: ezL10n(context).ssLoadConfig,
+        label: EzConfig.l10n.ssLoadConfig,
       );
 }
 
@@ -78,8 +78,7 @@ class OpenSourceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = ezL10n(context);
-    final String text = l10n.gOpenSource;
+    final String text = EzConfig.l10n.gOpenSource;
 
     return EzMenuLink(
       uri: Uri.parse(
@@ -87,7 +86,7 @@ class OpenSourceButton extends StatelessWidget {
       ),
       icon: EzIcon(LineIcons.github),
       label: text,
-      semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
+      semanticsLabel: '$text: ${EzConfig.l10n.gEFUISourceHint}',
     );
   }
 }

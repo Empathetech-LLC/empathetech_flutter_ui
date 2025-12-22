@@ -27,19 +27,18 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  // Gather the fixed theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Define the build data //
 
   late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
 
   late final List<DropdownMenuEntry<ThemeMode>> entries =
       <DropdownMenuEntry<ThemeMode>>[
-    DropdownMenuEntry<ThemeMode>(value: ThemeMode.system, label: l10n.gSystem),
-    DropdownMenuEntry<ThemeMode>(value: ThemeMode.light, label: l10n.gLight),
-    DropdownMenuEntry<ThemeMode>(value: ThemeMode.dark, label: l10n.gDark),
+    DropdownMenuEntry<ThemeMode>(
+        value: ThemeMode.system, label: EzConfig.l10n.gSystem),
+    DropdownMenuEntry<ThemeMode>(
+        value: ThemeMode.light, label: EzConfig.l10n.gLight),
+    DropdownMenuEntry<ThemeMode>(
+        value: ThemeMode.dark, label: EzConfig.l10n.gDark),
   ];
 
   // Return the build //
@@ -53,7 +52,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       children: <Widget>[
         // Label
         EzText(
-          l10n.ssThemeMode,
+          EzConfig.l10n.ssThemeMode,
           style: widget.labelStyle,
           textAlign: TextAlign.center,
         ),

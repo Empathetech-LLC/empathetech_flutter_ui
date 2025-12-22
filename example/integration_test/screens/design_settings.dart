@@ -19,7 +19,6 @@ void testSuite({
       // Load localization(s) //
 
       ezLog('Loading localizations');
-      final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
@@ -33,7 +32,7 @@ void testSuite({
 
       await ezTouch(
         tester,
-        find.widgetWithText(EzElevatedIconButton, l10n.dsPageTitle),
+        find.widgetWithText(EzElevatedIconButton, EzConfig.l10n.dsPageTitle),
       );
 
       // Verify text loaded //
@@ -41,7 +40,7 @@ void testSuite({
       ezLog('\nValidating text');
       await ezFindText(
         tester,
-        l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+        EzConfig.l10n.gEditingTheme(EzConfig.l10n.gDark.toLowerCase()),
       );
 
       //* Test functionality *//
@@ -52,24 +51,17 @@ void testSuite({
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
-        type: l10n.dsBackgroundImg,
+        type: EzConfig.l10n.dsBackgroundImg,
         updateCS: true,
-        l10n: l10n,
         networkImageURLs: imageURLs,
-        isLefty: isLefty,
       );
 
       // Reset button //
 
-      await testResetButton(
-        tester,
-        type: RBType.design,
-        l10n: l10n,
-        isLefty: isLefty,
-      );
+      await testResetButton(tester, type: RBType.design);
 
       // Reset for next test suite  //
 
-      await ezTapBack(tester, l10n.gBack);
+      await ezTapBack(tester, EzConfig.l10n.gBack);
       ezLog('\nDesign settings test suite complete\n\n');
     });

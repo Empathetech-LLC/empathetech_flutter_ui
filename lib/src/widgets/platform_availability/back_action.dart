@@ -14,18 +14,14 @@ class EzBackAction extends StatelessWidget {
   const EzBackAction({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final EFUILang l10n = ezL10n(context);
-
-    return Navigator.canPop(context)
-        ? IconButton(
-            onPressed: () => Navigator.of(context).maybePop(),
-            tooltip: l10n.gBack,
-            icon: Icon(
-              PlatformIcons(context).back,
-              semanticLabel: l10n.gBack,
-            ),
-          )
-        : const SizedBox.shrink();
-  }
+  Widget build(BuildContext context) => Navigator.canPop(context)
+      ? IconButton(
+          onPressed: () => Navigator.of(context).maybePop(),
+          tooltip: EzConfig.l10n.gBack,
+          icon: Icon(
+            PlatformIcons(context).back,
+            semanticLabel: EzConfig.l10n.gBack,
+          ),
+        )
+      : const SizedBox.shrink();
 }

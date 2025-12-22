@@ -28,15 +28,15 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the fixed theme data //
 
-  late final EFUILang l10n = ezL10n(context);
+  late
 
-  // Define the build data //
+      // Define the build data //
 
-  bool isLefty = EzConfig.get(isLeftyKey);
+      bool isLefty = EzConfig.get(isLeftyKey);
 
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
-    DropdownMenuEntry<bool>(value: false, label: l10n.gRight),
-    DropdownMenuEntry<bool>(value: true, label: l10n.gLeft),
+    DropdownMenuEntry<bool>(value: false, label: EzConfig.l10n.gRight),
+    DropdownMenuEntry<bool>(value: true, label: EzConfig.l10n.gLeft),
   ];
 
   // Return the build //
@@ -50,7 +50,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       children: <Widget>[
         // Label
         EzText(
-          l10n.ssDominantHand,
+          EzConfig.l10n.ssDominantHand,
           style: widget.labelStyle,
           textAlign: TextAlign.center,
         ),
@@ -68,7 +68,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
             if (makeLeft == null || makeLeft == isLefty) return;
 
             await EzConfig.setBool(isLeftyKey, makeLeft);
-            EzConfig.theme
+            EzConfig.provider
                 .redraw(onComplete: () => setState(() => isLefty = makeLeft));
           },
         ),

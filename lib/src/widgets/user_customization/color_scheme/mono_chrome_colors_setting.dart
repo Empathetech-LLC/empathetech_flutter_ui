@@ -90,7 +90,6 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
       style: isDark
@@ -132,8 +131,9 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
         if (context.mounted) {
           ezSnackBar(
             context: context,
-            message:
-                kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder,
+            message: kIsWeb
+                ? EzConfig.l10n.ssRestartReminderWeb
+                : EzConfig.l10n.ssRestartReminder,
           );
         }
       },
@@ -141,7 +141,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
         Icons.contrast,
         color: Theme.of(context).colorScheme.onSurface,
       ),
-      label: ezL10n(context).csMonoChrome,
+      label: EzConfig.l10n.csMonoChrome,
     );
   }
 }

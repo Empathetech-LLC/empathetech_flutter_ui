@@ -35,10 +35,6 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
 }
 
 class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
-  // Gather the fixed theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Define the build data //
 
   late Map<String, String?> currFonts = <String, String?>{
@@ -98,11 +94,11 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
         return EzAlertDialog(
           title: Text(
-            l10n.gAttention,
+            EzConfig.l10n.gAttention,
             textAlign: TextAlign.center,
           ),
           content: Text(
-            l10n.tsBatchOverride(l10n.tsFontFamily),
+            EzConfig.l10n.tsBatchOverride(EzConfig.l10n.tsFontFamily),
             textAlign: TextAlign.center,
           ),
           materialActions: materialActions,
@@ -118,7 +114,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: l10n.tsFontFamily,
+      message: EzConfig.l10n.tsFontFamily,
       child: EzDropdownMenu<String>(
         widthEntries: <String>[fingerPaint],
         iconSize: widget.iconSize,

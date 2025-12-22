@@ -16,7 +16,7 @@ class TryTip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: ezL10n(context).ssTryMe,
+      message: EzConfig.l10n.ssTryMe,
       excludeFromSemantics: true,
       child: child,
     );
@@ -39,10 +39,10 @@ class EzQuickConfig extends StatelessWidget {
   /// Toggle the [EzFancyPantsConfig]
   final bool fancyPants;
 
-  /// Whether to notify [EzThemeProvider]
+  /// Whether to notify [EzConfigProvider]
   final bool notifyTheme;
 
-  /// [EzThemeProvider.rebuild] passthrough
+  /// [EzConfigProvider.rebuild] passthrough
   final void Function()? onNotify;
 
   /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
@@ -69,7 +69,7 @@ class EzQuickConfig extends StatelessWidget {
         builder: (BuildContext mContext) {
           void onComplete() {
             Navigator.of(mContext).pop();
-            if (notifyTheme) EzConfig.theme.rebuild(onComplete: onNotify);
+            if (notifyTheme) EzConfig.provider.rebuild(onComplete: onNotify);
           }
 
           return EzScrollView(
@@ -122,7 +122,7 @@ class EzQuickConfig extends StatelessWidget {
         },
       ),
       icon: EzIcon(PlatformIcons(context).edit),
-      label: ezL10n(context).ssLoadPreset,
+      label: EzConfig.l10n.ssLoadPreset,
     );
   }
 }
@@ -161,7 +161,7 @@ class EzBigButtonsConfig extends StatelessWidget {
           await onPressed();
           onComplete?.call();
         },
-        text: ezL10n(context).ssBigButtons,
+        text: EzConfig.l10n.ssBigButtons,
       );
 }
 
@@ -275,7 +275,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = ezL10n(context);
 
     final TextStyle localBody = fuseWithGFont(
       starter: TextStyle(
@@ -318,7 +317,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
         await onPressed(isDark);
         onComplete?.call();
       },
-      text: l10n.ssHighVisibility,
+      text: EzConfig.l10n.ssHighVisibility,
       textStyle: localBody,
     );
   }
@@ -337,7 +336,6 @@ class EzVideoGameConfig extends StatelessWidget {
 
   static Future<bool> onPressed(BuildContext context) async {
     final bool onMobile = isMobile();
-    final EFUILang l10n = ezL10n(context);
 
     // If the current theme is not dark, show a warning dialog
     if (!isDarkTheme(context)) {
@@ -358,8 +356,9 @@ class EzVideoGameConfig extends StatelessWidget {
           );
 
           return EzAlertDialog(
-            title: Text(l10n.gAttention, textAlign: TextAlign.center),
-            content: Text(l10n.ssDarkOnly, textAlign: TextAlign.center),
+            title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
+            content:
+                Text(EzConfig.l10n.ssDarkOnly, textAlign: TextAlign.center),
             materialActions: materialActions,
             cupertinoActions: cupertinoActions,
             needsClose: false,
@@ -473,7 +472,7 @@ class EzVideoGameConfig extends StatelessWidget {
         final bool confirmed = await onPressed(context);
         if (confirmed) onComplete?.call();
       },
-      text: ezL10n(context).ssVideoGame,
+      text: EzConfig.l10n.ssVideoGame,
       textStyle: localBody,
     );
   }
@@ -492,8 +491,6 @@ class EzChalkboardConfig extends StatelessWidget {
   const EzChalkboardConfig({super.key, this.onComplete});
 
   static Future<bool> onPressed(BuildContext context) async {
-    final EFUILang l10n = ezL10n(context);
-
     // If the current theme is not dark, show a warning dialog
     if (!isDarkTheme(context)) {
       final bool doIt = await showPlatformDialog(
@@ -513,8 +510,9 @@ class EzChalkboardConfig extends StatelessWidget {
           );
 
           return EzAlertDialog(
-            title: Text(l10n.gAttention, textAlign: TextAlign.center),
-            content: Text(l10n.ssDarkOnly, textAlign: TextAlign.center),
+            title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
+            content:
+                Text(EzConfig.l10n.ssDarkOnly, textAlign: TextAlign.center),
             materialActions: materialActions,
             cupertinoActions: cupertinoActions,
             needsClose: false,
@@ -627,8 +625,6 @@ class EzChalkboardConfig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = ezL10n(context);
-
     final TextStyle localBody = fuseWithGFont(
       starter: const TextStyle(
         fontSize: defaultBodySize,
@@ -660,7 +656,7 @@ class EzChalkboardConfig extends StatelessWidget {
         final bool confirmed = await onPressed(context);
         if (confirmed) onComplete?.call();
       },
-      text: l10n.ssChalkboard,
+      text: EzConfig.l10n.ssChalkboard,
       textStyle: localBody,
     );
   }
@@ -754,7 +750,6 @@ class EzFancyPantsConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = ezL10n(context);
 
     final TextStyle localBody = fuseWithGFont(
       starter: TextStyle(
@@ -795,7 +790,7 @@ class EzFancyPantsConfig extends StatelessWidget {
         await onPressed(isDark);
         onComplete?.call();
       },
-      text: l10n.ssFancyPants,
+      text: EzConfig.l10n.ssFancyPants,
       textStyle: localBody,
     );
   }

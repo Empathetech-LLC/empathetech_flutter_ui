@@ -56,11 +56,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
   final Duration rotateDuration = ezAnimDuration(mod: 0.5);
 
-  late final EFUILang l10n = ezL10n(context);
+  late
 
-  // Define the build data //
+      // Define the build data //
 
-  final ImageEditorController _editorController = ImageEditorController();
+      final ImageEditorController _editorController = ImageEditorController();
   final GlobalKey<ExtendedImageEditorState> editorKey =
       GlobalKey<ExtendedImageEditorState>();
 
@@ -127,22 +127,12 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
-
-    final double padding = EzConfig.padding;
-    final double spacing = EzConfig.spacing;
-    final double iconSize = EzConfig.iconSize;
-
-    // Return the build //
-
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     final Widget vertDiv = SizedBox(
-      height: iconSize + padding,
+      height: EzConfig.iconSize + EzConfig.padding,
       child: VerticalDivider(
-        width: spacing * 2,
+        width: EzConfig.spacing * 2,
         color: colorScheme.secondary,
       ),
     );
@@ -164,11 +154,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   widget.initialCropAspectRatio ?? liveAspectRatio(),
               initCropRectType: widget.initCropRectType,
               cropRectPadding: EdgeInsets.only(
-                top: spacing,
-                left: spacing,
-                right: spacing,
+                top: EzConfig.spacing,
+                left: EzConfig.spacing,
+                right: EzConfig.spacing,
               ),
-              hitTestSize: max(padding, kMinInteractiveDimension),
+              hitTestSize: max(EzConfig.padding, kMinInteractiveDimension),
               controller: _editorController,
             ),
           ),
@@ -176,7 +166,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
         // Key && controls
         Padding(
-          padding: EdgeInsets.all(spacing),
+          padding: EdgeInsets.all(EzConfig.spacing),
           child: EzScrollView(
             mainAxisSize: MainAxisSize.min,
             scrollDirection: Axis.horizontal,
@@ -187,41 +177,41 @@ class _EzImageEditorState extends State<EzImageEditor> {
               keyIcon(
                 icon: Icons.touch_app,
                 color: colorScheme.outline,
-                name: l10n.dsDrag,
-                tooltip: l10n.dsDragHint,
+                name: EzConfig.l10n.dsDrag,
+                tooltip: EzConfig.l10n.dsDragHint,
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Swipe
               keyIcon(
                 icon: Icons.swipe,
                 color: colorScheme.outline,
-                name: l10n.dsSwipe,
-                tooltip: l10n.dsSwipeHint,
+                name: EzConfig.l10n.dsSwipe,
+                tooltip: EzConfig.l10n.dsSwipeHint,
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Scroll
               keyIcon(
                 icon: Icons.mouse,
                 color: colorScheme.outline,
-                name: l10n.dsScroll,
-                tooltip: l10n.dsScrollHint,
+                name: EzConfig.l10n.dsScroll,
+                tooltip: EzConfig.l10n.dsScrollHint,
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Pinch
               keyIcon(
                 icon: Icons.pinch,
                 color: colorScheme.outline,
-                name: l10n.dsPinch,
-                tooltip: l10n.dsPinchHint,
+                name: EzConfig.l10n.dsPinch,
+                tooltip: EzConfig.l10n.dsPinchHint,
               ),
               vertDiv,
 
               // Rotate left
               EzIconButton(
-                tooltip: l10n.dsRotateLeft,
+                tooltip: EzConfig.l10n.dsRotateLeft,
                 enabled: !processing,
                 onPressed: () {
                   _editorController.rotate(
@@ -234,11 +224,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.rotate_left),
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Rotate right
               EzIconButton(
-                tooltip: l10n.dsRotateRight,
+                tooltip: EzConfig.l10n.dsRotateRight,
                 enabled: !processing,
                 onPressed: () {
                   _editorController.rotate(
@@ -251,11 +241,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.rotate_right),
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Undo
               EzIconButton(
-                tooltip: l10n.gUndo,
+                tooltip: EzConfig.l10n.gUndo,
                 enabled: !processing && _editorController.canUndo,
                 onPressed: () {
                   _editorController.undo();
@@ -263,11 +253,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.undo),
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Redo
               EzIconButton(
-                tooltip: l10n.gRedo,
+                tooltip: EzConfig.l10n.gRedo,
                 enabled: !processing && _editorController.canRedo,
                 onPressed: () {
                   _editorController.redo();
@@ -275,11 +265,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: EzIcon(Icons.redo),
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Reset
               EzIconButton(
-                tooltip: l10n.gReset,
+                tooltip: EzConfig.l10n.gReset,
                 enabled: !processing,
                 onPressed: () {
                   _editorController.reset();
@@ -291,7 +281,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
               // Done
               EzIconButton(
-                tooltip: l10n.gApply,
+                tooltip: EzConfig.l10n.gApply,
                 onPressed: () async {
                   // Check exit cases
                   if (processing) return;
@@ -379,11 +369,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     ? const CircularProgressIndicator()
                     : EzIcon(Icons.check),
               ),
-              ezRowSpacer,
+              EzConfig.layout.rowSpacer,
 
               // Cancel
               EzIconButton(
-                tooltip: l10n.gCancel,
+                tooltip: EzConfig.l10n.gCancel,
                 onPressed: () => Navigator.pop(context, null),
                 icon: EzIcon(PlatformIcons(context).delete),
               ),

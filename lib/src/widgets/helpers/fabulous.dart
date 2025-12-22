@@ -33,7 +33,6 @@ class EzBackFAB extends StatelessWidget {
       ? GestureDetector(
           onLongPress: () => ezFeedback(
             parentContext: context,
-            l10n: ezL10n(context),
             supportEmail: supportEmail ?? 'null',
             appName: appName ?? 'null',
           ),
@@ -48,7 +47,7 @@ class EzBackFAB extends StatelessWidget {
         )
       : FloatingActionButton(
           heroTag: 'back_fab',
-          tooltip: ezL10n(context).gBack,
+          tooltip: EzConfig.l10n.gBack,
           onPressed: () => Navigator.of(context).maybePop(),
           child: EzIcon(showHome
               ? PlatformIcons(context).home
@@ -78,13 +77,11 @@ class EzConfigFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = ezL10n(context);
-
     return MenuAnchor(
       builder: (_, MenuController controller, __) {
         return FloatingActionButton(
           heroTag: 'config_fab',
-          tooltip: l10n.ssConfigTip,
+          tooltip: EzConfig.l10n.ssConfigTip,
           onPressed: () =>
               (controller.isOpen) ? controller.close() : controller.open(),
           child: EzIcon(Icons.save),
@@ -93,7 +90,7 @@ class EzConfigFAB extends StatelessWidget {
       menuChildren: <Widget>[
         // Save config
         EzMenuButton(
-          label: l10n.ssSaveConfig,
+          label: EzConfig.l10n.ssSaveConfig,
           onPressed: () => ezConfigSaver(
             context,
             extraKeys: extraKeys,
@@ -104,7 +101,7 @@ class EzConfigFAB extends StatelessWidget {
 
         // Load config
         EzMenuButton(
-          label: l10n.ssLoadConfig,
+          label: EzConfig.l10n.ssLoadConfig,
           onPressed: () => ezConfigLoader(context),
         ),
       ],
@@ -155,10 +152,6 @@ class EzUpdaterFAB extends StatefulWidget {
 }
 
 class _EzUpdaterState extends State<EzUpdaterFAB> {
-  // Gather that static theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Define the build data //
 
   late final TargetPlatform _platform = getBasePlatform();
@@ -205,11 +198,11 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
     switch (_platform) {
       case TargetPlatform.android:
       case TargetPlatform.iOS:
-        return l10n.gHardRefreshMobile;
+        return EzConfig.l10n.gHardRefreshMobile;
       case TargetPlatform.macOS:
-        return l10n.gHardRefreshMac;
+        return EzConfig.l10n.gHardRefreshMac;
       default:
-        return l10n.gHardRefresh;
+        return EzConfig.l10n.gHardRefresh;
     }
   }
 
@@ -244,11 +237,12 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
               onPressed: () => showPlatformDialog(
                 context: context,
                 builder: (_) => EzAlertDialog(
-                  title: Text(l10n.gUpdates, textAlign: TextAlign.center),
+                  title:
+                      Text(EzConfig.l10n.gUpdates, textAlign: TextAlign.center),
                   content: Text(hardRefresh(), textAlign: TextAlign.center),
                 ),
               ),
-              tooltip: ezL10n(context).gUpdates,
+              tooltip: EzConfig.l10n.gUpdates,
               backgroundColor: colorScheme.secondary,
               foregroundColor: colorScheme.onSecondary,
               child: EzIcon(Icons.update),
@@ -256,7 +250,7 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
           : FloatingActionButton(
               heroTag: 'updater_fab',
               onPressed: () => launchUrl(Uri.parse(url ?? widget.github!)),
-              tooltip: l10n.gUpdates,
+              tooltip: EzConfig.l10n.gUpdates,
               backgroundColor: colorScheme.secondary,
               foregroundColor: colorScheme.onSecondary,
               child: EzIcon(Icons.update),

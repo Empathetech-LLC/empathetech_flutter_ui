@@ -24,12 +24,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Gather the fixed theme data //
-
-  late final EFUILang el10n = ezL10n(context);
-  late final Lang l10n = Lang.of(context)!;
-
   // Define the build data //
+
+  late final Lang l10n = Lang.of(context)!;
 
   final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
@@ -147,9 +144,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
-
-    final EzMargin ezMargin = EzMargin();
-    final EzMargin ezRowMargin = EzMargin(vertical: false);
 
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? subTitle = ezSubTitleStyle(textTheme);
@@ -281,7 +275,9 @@ class _HomeScreenState extends State<HomeScreen> {
               tip: l10n.csPubTip,
               controller: pubController,
               validator: (String? value) {
-                if (value == null || value.isEmpty) return el10n.gRequired;
+                if (value == null || value.isEmpty) {
+                  return EzConfig.l10n.gRequired;
+                }
 
                 setState(() {
                   final String previous = pubPreview;
@@ -300,8 +296,9 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               title: l10n.csDescription,
               controller: descriptionController,
-              validator: (String? value) =>
-                  (value == null || value.isEmpty) ? el10n.gRequired : null,
+              validator: (String? value) => (value == null || value.isEmpty)
+                  ? EzConfig.l10n.gRequired
+                  : null,
               hintText: l10n.csDescPreview,
             ),
             EzConfig.layout.spacer,
@@ -344,8 +341,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: (exampleDomain || EzConfig.isLefty)
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
-                    text: el10n.gNA,
-                    semanticsLabel: el10n.gNAHint,
+                    text: EzConfig.l10n.gNA,
+                    semanticsLabel: EzConfig.l10n.gNAHint,
                     textAlign: TextAlign.start,
                     value: exampleDomain,
                     onChanged: (bool? value) {
@@ -370,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? null
                     : l10n.csInvalidEmail;
               },
-              hintText: '${el10n.gOptional}@example.com',
+              hintText: '${EzConfig.l10n.gOptional}@example.com',
             ),
             EzConfig.layout.separator,
 
@@ -395,36 +392,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ezMargin,
+                  EzConfig.layout.margin,
                   EzCheckboxPair(
-                    text: el10n.csPageTitle,
+                    text: EzConfig.l10n.csPageTitle,
                     value: colorSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => colorSettings = value);
                     },
                   ),
-                  ezMargin,
+                  EzConfig.layout.margin,
                   EzCheckboxPair(
-                    text: el10n.dsPageTitle,
+                    text: EzConfig.l10n.dsPageTitle,
                     value: designSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => designSettings = value);
                     },
                   ),
-                  ezMargin,
+                  EzConfig.layout.margin,
                   EzCheckboxPair(
-                    text: el10n.lsPageTitle,
+                    text: EzConfig.l10n.lsPageTitle,
                     value: layoutSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => layoutSettings = value);
                     },
                   ),
-                  ezMargin,
+                  EzConfig.layout.margin,
                   EzCheckboxPair(
-                    text: el10n.tsPageTitle,
+                    text: EzConfig.l10n.tsPageTitle,
                     value: textSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -446,11 +443,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       : l10n.csTheConfig),
                 ),
                 EzInlineLink(
-                  el10n.ssPageTitle.toLowerCase(),
+                  EzConfig.l10n.ssPageTitle.toLowerCase(),
                   style: subTitle,
                   textAlign: TextAlign.start,
                   onTap: () => context.goNamed(settingsHomePath),
-                  hint: el10n.ssNavHint,
+                  hint: EzConfig.l10n.ssNavHint,
                 ),
                 EzPlainText(
                     text: l10n
@@ -515,7 +512,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : 'example_path/flutter/bin'),
                         ),
                       ),
-                      ezRowMargin,
+                      EzConfig.layout.rowMargin,
 
                       // Browse
                       EzIconButton(
@@ -575,15 +572,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                ezRowMargin,
+                EzConfig.layout.rowMargin,
                 Semantics(
-                  hint: showAdvanced ? el10n.gClose : el10n.gOpen,
+                  hint:
+                      showAdvanced ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
                   button: true,
                   child: ExcludeSemantics(
                     child: EzIconButton(
                       onPressed: () =>
                           setState(() => showAdvanced = !showAdvanced),
-                      tooltip: showAdvanced ? el10n.gClose : el10n.gOpen,
+                      tooltip: showAdvanced
+                          ? EzConfig.l10n.gClose
+                          : EzConfig.l10n.gOpen,
                       icon: EzIcon(
                         showAdvanced
                             ? Icons.arrow_drop_up
@@ -641,7 +641,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 autovalidateMode: AutovalidateMode.onUnfocus,
                               ),
                             ),
-                            ezRowMargin,
+                            EzConfig.layout.rowMargin,
 
                             // Browse
                             EzIconButton(
@@ -694,7 +694,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   EzConfig.layout.spacer,
 
-                  // l10n config
+                  // EzConfig.l10n config
                   _AdvancedSettingsField(
                     title: 'l10n.yaml',
                     tip: l10n.csL10nTip,
@@ -818,7 +818,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   },
                   icon: EzIcon(Icons.save),
-                  label: el10n.ssSaveConfig,
+                  label: EzConfig.l10n.ssSaveConfig,
                 ),
 
                 // Generate app
@@ -999,14 +999,14 @@ class _HomeScreenState extends State<HomeScreen> {
   ]
 }''';
 
-  /// Recommended Empathetech l10n config
-  static const String l10nDefault = '''arb-dir: lib/l10n
-output-dir: lib/l10n
+  /// Recommended Empathetech EzConfig.l10n config
+  static const String l10nDefault = '''arb-dir: lib/EzConfig.l10n
+output-dir: lib/EzConfig.l10n
 template-arb-file: lang_en.arb
 output-localization-file: lang.dart
 output-class: Lang
 use-deferred-loading: true
-gen-inputs-and-outputs-list: lib/l10n
+gen-inputs-and-outputs-list: lib/EzConfig.l10n
 required-resource-attributes: false
 format: true
 suppress-warnings: false''';
@@ -1016,7 +1016,7 @@ suppress-warnings: false''';
       '''include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude: [lib/l10n/**]
+  exclude: [lib/EzConfig.l10n/**]
 
 linter:
   rules:
@@ -1139,23 +1139,15 @@ class _AdvancedSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EzMargin ezMargin = EzMargin();
-    final EzMargin ezRowMargin = EzMargin(vertical: false);
-
-    final bool isLefty = EzConfig.isLefty;
-
-    late final EFUILang el10n = ezL10n(context);
-    late final Lang l10n = Lang.of(context)!;
-
     late final Widget titleText = EzText(title, textAlign: TextAlign.start);
 
     late final Widget hideButton = Semantics(
-      label: visible ? el10n.gClose : el10n.gOpen,
+      label: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
       button: true,
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onHide,
-          tooltip: visible ? el10n.gClose : el10n.gOpen,
+          tooltip: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
           ),
@@ -1164,12 +1156,12 @@ class _AdvancedSettingsField extends StatelessWidget {
     );
 
     late final Widget removeButton = Semantics(
-      hint: el10n.gRemove,
+      hint: EzConfig.l10n.gRemove,
       button: true,
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onRemove,
-          tooltip: el10n.gRemove,
+          tooltip: EzConfig.l10n.gRemove,
           icon: EzIcon(PlatformIcons(context).delete),
         ),
       ),
@@ -1183,7 +1175,7 @@ class _AdvancedSettingsField extends StatelessWidget {
         ? EzTextIconButton(
             onPressed: onRestore,
             icon: EzIcon(Icons.undo),
-            label: l10n.csRestore(title),
+            label: Lang.of(context)!.csRestore(title),
           )
         : Column(
             mainAxisSize: MainAxisSize.min,
@@ -1193,30 +1185,30 @@ class _AdvancedSettingsField extends StatelessWidget {
               EzScrollView(
                 mainAxisSize: MainAxisSize.min,
                 scrollDirection: Axis.horizontal,
-                children: isLefty
+                children: EzConfig.isLefty
                     ? <Widget>[
                         hideButton,
-                        ezRowMargin,
+                        EzConfig.layout.rowMargin,
                         titleText,
                         if (onRemove != null) ...<Widget>[
-                          ezRowMargin,
+                          EzConfig.layout.rowMargin,
                           removeButton,
                         ],
                         if (tip != null) ...<Widget>[
-                          ezRowMargin,
+                          EzConfig.layout.rowMargin,
                           tooltip,
                         ],
                       ]
                     : <Widget>[
                         titleText,
-                        ezRowMargin,
+                        EzConfig.layout.rowMargin,
                         hideButton,
                         if (onRemove != null) ...<Widget>[
-                          ezRowMargin,
+                          EzConfig.layout.rowMargin,
                           removeButton,
                         ],
                         if (tip != null) ...<Widget>[
-                          ezRowMargin,
+                          EzConfig.layout.rowMargin,
                           tooltip,
                         ],
                       ],
@@ -1229,7 +1221,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    ezMargin,
+                    EzConfig.layout.margin,
                     ConstrainedBox(
                       constraints: ezTextFieldConstraints(context),
                       child: TextFormField(
@@ -1262,14 +1254,6 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EzMargin ezRowMargin = EzMargin(vertical: false);
-    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
-
-    final bool isLefty = EzConfig.isLefty;
-
-    final EFUILang el10n = ezL10n(context);
-    final Lang l10n = Lang.of(context)!;
-
     Widget radio({
       required String title,
       required String value,
@@ -1290,12 +1274,12 @@ class _LicensePicker extends StatelessWidget {
     const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
 
     final Widget hideButton = Semantics(
-      label: visible ? el10n.gClose : el10n.gOpen,
+      label: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
       button: true,
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onHide,
-          tooltip: visible ? el10n.gClose : el10n.gOpen,
+          tooltip: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
           ),
@@ -1309,7 +1293,7 @@ class _LicensePicker extends StatelessWidget {
         chooseALicense,
         textAlign: TextAlign.center,
         url: Uri.parse(chooseALicense),
-        hint: l10n.csLicenseDocs,
+        hint: Lang.of(context)!.csLicenseDocs,
       ),
     );
 
@@ -1321,18 +1305,18 @@ class _LicensePicker extends StatelessWidget {
         EzScrollView(
           mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
-          children: isLefty
+          children: EzConfig.isLefty
               ? <Widget>[
                   hideButton,
-                  ezRowMargin,
+                  EzConfig.layout.rowMargin,
                   title,
                   tip,
                 ]
               : <Widget>[
                   title,
-                  ezRowMargin,
+                  EzConfig.layout.rowMargin,
                   hideButton,
-                  ezRowMargin,
+                  EzConfig.layout.rowMargin,
                   tip,
                 ],
         ),
@@ -1349,42 +1333,42 @@ class _LicensePicker extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 thumbVisibility: false,
                 children: <Widget>[
-                  ezRowMargin,
+                  EzConfig.layout.rowMargin,
                   radio(
                     title: 'GNU GPLv3',
                     value: gnuKey,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   radio(
                     title: 'MIT',
                     value: mitKey,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   radio(
                     title: 'ISC',
                     value: iscKey,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   radio(
                     title: 'Apache 2.0',
                     value: apacheKey,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   radio(
                     title: 'Mozilla 2.0',
                     value: mozillaKey,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   radio(
                     title: 'Unlicense',
                     value: unlicenseKey,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   radio(
                     title: 'DWTFYW',
                     value: dwtfywKey,
                   ),
-                  ezRowMargin,
+                  EzConfig.layout.rowMargin,
                 ],
               ),
             ),

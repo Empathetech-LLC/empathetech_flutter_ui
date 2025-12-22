@@ -97,22 +97,20 @@ class EzColorSettings extends StatefulWidget {
 class _EzColorSettingsState extends State<EzColorSettings> {
   // Define the build data //
 
-  late final EFUILang l10n = ezL10n(context);
-
   late EzCSType currentTab = widget.target ??
       (EzConfig.get(advancedColorsKey) == true
           ? EzCSType.advanced
           : EzCSType.quick);
 
-  late final String darkString = l10n.gDark.toLowerCase();
-  late final String lightString = l10n.gLight.toLowerCase();
+  late final String darkString = EzConfig.l10n.gDark.toLowerCase();
+  late final String lightString = EzConfig.l10n.gLight.toLowerCase();
 
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, l10n.csPageTitle);
+    ezWindowNamer(context, EzConfig.l10n.csPageTitle);
   }
 
   @override
@@ -136,14 +134,14 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Current theme reminder
         (widget.themeLink != null)
             ? EzLink(
-                l10n.gEditingTheme(isDark ? darkString : lightString),
+                EzConfig.l10n.gEditingTheme(isDark ? darkString : lightString),
                 onTap: widget.themeLink,
-                hint: l10n.gEditingThemeHint,
+                hint: EzConfig.l10n.gEditingThemeHint,
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
-                l10n.gEditingTheme(isDark ? darkString : lightString),
+                EzConfig.l10n.gEditingTheme(isDark ? darkString : lightString),
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -154,11 +152,11 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           segments: <ButtonSegment<EzCSType>>[
             ButtonSegment<EzCSType>(
               value: EzCSType.quick,
-              label: Text(l10n.gQuick),
+              label: Text(EzConfig.l10n.gQuick),
             ),
             ButtonSegment<EzCSType>(
               value: EzCSType.advanced,
-              label: Text(l10n.gAdvanced),
+              label: Text(EzConfig.l10n.gAdvanced),
             ),
           ],
           selected: <EzCSType>{currentTab},
@@ -182,14 +180,12 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Core settings
         if (currentTab == EzCSType.quick)
           _QuickColorSettings(
-            l10n: l10n,
             quickHeader: widget.quickHeader,
             quickFooter: widget.quickFooter,
           )
         else
           _AdvancedColorSettings(
             key: UniqueKey(),
-            l10n: l10n,
             defaultList: defaultList,
             currList: currList,
           ),
@@ -198,7 +194,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         widget.resetSpacer,
         isDark
             ? EzResetButton(
-                dialogTitle: l10n.csResetAll(darkString),
+                dialogTitle: EzConfig.l10n.csResetAll(darkString),
                 onConfirm: () async {
                   await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
@@ -213,7 +209,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 androidPackage: widget.androidPackage,
               )
             : EzResetButton(
-                dialogTitle: l10n.csResetAll(lightString),
+                dialogTitle: EzConfig.l10n.csResetAll(lightString),
                 onConfirm: () async {
                   await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
@@ -234,12 +230,10 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 }
 
 class _QuickColorSettings extends StatefulWidget {
-  final EFUILang l10n;
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
 
   const _QuickColorSettings({
-    required this.l10n,
     required this.quickHeader,
     required this.quickFooter,
   });
@@ -249,8 +243,8 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  late final String fromImageLabel = widget.l10n.csSchemeBase;
-  late final String fromImageHint = widget.l10n.csFromImage;
+  late final String fromImageLabel = EzConfig.l10n.csSchemeBase;
+  late final String fromImageHint = EzConfig.l10n.csFromImage;
 
   @override
   Widget build(BuildContext context) {
@@ -276,7 +270,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           // From image
           Semantics(
             label: fromImageLabel.replaceAll('\n', ' '),
-            value: widget.l10n.gOptional,
+            value: EzConfig.l10n.gOptional,
             button: true,
             hint: fromImageHint,
             child: ExcludeSemantics(
@@ -301,13 +295,11 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 }
 
 class _AdvancedColorSettings extends StatefulWidget {
-  final EFUILang l10n;
   final List<String> defaultList;
   final List<String> currList;
 
   const _AdvancedColorSettings({
     super.key,
-    required this.l10n,
     required this.defaultList,
     required this.currList,
   });
@@ -319,8 +311,6 @@ class _AdvancedColorSettings extends StatefulWidget {
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     with WidgetsBindingObserver {
   // Gather the fixed theme data //
-
-  late final EFUILang l10n = widget.l10n;
 
   // Define the build data //
 
@@ -491,12 +481,12 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                   children: <Widget>[
                     // Tutorial link
                     EzLink(
-                      l10n.gHowThisWorks,
+                      EzConfig.l10n.gHowThisWorks,
                       style: Theme.of(context).textTheme.labelLarge!,
                       textAlign: TextAlign.center,
                       url: Uri.parse(
                           'https://m3.material.io/styles/color/roles'),
-                      hint: l10n.gHowThisWorksHint,
+                      hint: EzConfig.l10n.gHowThisWorksHint,
                       tooltip: 'https://m3.material.io/styles/color/roles',
                     ),
 
@@ -519,7 +509,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
           },
           style: TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.margin)),
           icon: EzIcon(PlatformIcons(context).addCircledOutline),
-          label: l10n.csAddColor,
+          label: EzConfig.l10n.csAddColor,
         ),
       ],
     );

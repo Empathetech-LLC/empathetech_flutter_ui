@@ -57,7 +57,6 @@ class EzConfigRandomizer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
       onPressed: () => showPlatformDialog(
@@ -86,9 +85,9 @@ class EzConfigRandomizer extends StatelessWidget {
             return EzAlertDialog(
               title: Text(
                 dialogTitle ??
-                    l10n.ssRandomize(isDark
-                        ? l10n.gDark.toLowerCase()
-                        : l10n.gLight.toLowerCase()),
+                    EzConfig.l10n.ssRandomize(isDark
+                        ? EzConfig.l10n.gDark.toLowerCase()
+                        : EzConfig.l10n.gLight.toLowerCase()),
                 textAlign: TextAlign.center,
               ),
               content: dialogContent ??
@@ -104,7 +103,7 @@ class EzConfigRandomizer extends StatelessWidget {
             );
           }),
       icon: EzIcon(LineIcons.diceD6),
-      label: label ?? l10n.ssRandom,
+      label: label ?? EzConfig.l10n.ssRandom,
     );
   }
 }

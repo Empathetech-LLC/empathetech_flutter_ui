@@ -16,7 +16,7 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: ezL10n(context).tsPageTitle,
+        title: EzConfig.l10n.tsPageTitle,
         showSettings: false,
         body: EzScreen(EzTextSettings(
           target: target,

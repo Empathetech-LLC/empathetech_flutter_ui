@@ -22,7 +22,7 @@ void main() async {
   EzConfig.init(
     assetPaths: <String>{},
     defaults: empathMobileConfig,
-    fallbackLang: await EFUILang.delegate.load(americanEnglish),
+    l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
           allowList: allEZConfigKeys.keys.toSet()),

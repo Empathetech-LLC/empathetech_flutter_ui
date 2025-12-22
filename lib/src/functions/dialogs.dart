@@ -23,7 +23,7 @@ Future<dynamic> ezLogAlert(
     context: context,
     builder: (_) => EzAlertDialog(
       title: Text(
-        title ?? ezL10n(context).gAttention,
+        title ?? EzConfig.l10n.gAttention,
         textAlign: TextAlign.center,
       ),
       contents: <Widget>[Text(message, textAlign: TextAlign.center)],
@@ -66,16 +66,16 @@ Future<dynamic> ezColorPicker(
 
       (materialActions, cupertinoActions) = ezActionPairs(
         context: context,
-        confirmMsg: confirmMsg ?? ezL10n(context).gApply,
+        confirmMsg: confirmMsg ?? EzConfig.l10n.gApply,
         onConfirm: confirm,
         confirmIsDestructive: true,
-        denyMsg: denyMsg ?? ezL10n(context).gCancel,
+        denyMsg: denyMsg ?? EzConfig.l10n.gCancel,
         onDeny: deny,
       );
 
       return EzAlertDialog(
         title: Text(
-          title ?? ezL10n(context).csPickerTitle,
+          title ?? EzConfig.l10n.csPickerTitle,
           textAlign: TextAlign.center,
         ),
         content: ColorPicker(

@@ -80,10 +80,6 @@ class EzImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<EzImageSetting> {
-  // Gather the fixed theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Define the build data //
 
   late String? currPath = EzConfig.get(widget.configKey);
@@ -106,7 +102,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         ? showPlatformDialog(
             context: context,
             builder: (_) => EzAlertDialog(
-              title: Text(l10n.gCreditTo, textAlign: TextAlign.center),
+              title: Text(EzConfig.l10n.gCreditTo, textAlign: TextAlign.center),
               content: Text(widget.credits!, textAlign: TextAlign.center),
             ),
           )
@@ -128,7 +124,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   /// Validate a URL
   String? validateUrl(String? value) {
     return (value == null || value.isEmpty || !ezUrlCheck(value))
-        ? l10n.gValidURL
+        ? EzConfig.l10n.gValidURL
         : null;
   }
 
@@ -167,16 +163,18 @@ class _ImageSettingState extends State<EzImageSetting> {
             void cancel() => Navigator.of(dContext).pop((_, __) async => null);
 
             return EzAlertDialog(
-              title: Text(l10n.dsUseFull, textAlign: TextAlign.center),
+              title: Text(EzConfig.l10n.dsUseFull, textAlign: TextAlign.center),
               materialActions: <EzMaterialAction>[
-                EzMaterialAction(text: l10n.gYes, onPressed: useFull),
-                EzMaterialAction(text: l10n.dsCrop, onPressed: crop),
-                EzMaterialAction(text: l10n.gCancel, onPressed: cancel),
+                EzMaterialAction(text: EzConfig.l10n.gYes, onPressed: useFull),
+                EzMaterialAction(text: EzConfig.l10n.dsCrop, onPressed: crop),
+                EzMaterialAction(
+                    text: EzConfig.l10n.gCancel, onPressed: cancel),
               ],
               cupertinoActions: <EzCupertinoAction>[
-                EzCupertinoAction(text: l10n.gYes, onPressed: useFull),
-                EzCupertinoAction(text: l10n.dsCrop, onPressed: crop),
-                EzCupertinoAction(text: l10n.gCancel, onPressed: cancel),
+                EzCupertinoAction(text: EzConfig.l10n.gYes, onPressed: useFull),
+                EzCupertinoAction(text: EzConfig.l10n.dsCrop, onPressed: crop),
+                EzCupertinoAction(
+                    text: EzConfig.l10n.gCancel, onPressed: cancel),
               ],
               needsClose: false,
             );
@@ -205,7 +203,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Set the new path
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
-      if (mounted) ezLogAlert(context, message: l10n.dsImgSetFailed);
+      if (mounted) ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
     } else {
       currPath = newPath;
 
@@ -234,9 +232,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result != success && mounted) {
           await ezLogAlert(
             context,
-            title: l10n.dsImgGetFailed,
+            title: EzConfig.l10n.dsImgGetFailed,
             message:
-                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.dsImgPermission}' : ''}',
+                '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
           );
         } else {
           widget.updateTheme == Brightness.light
@@ -275,7 +273,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             if (mContext.mounted) Navigator.of(mContext).pop(picked);
           },
           icon: EzIcon(PlatformIcons(context).photoCamera),
-          label: l10n.dsFromCamera,
+          label: EzConfig.l10n.dsFromCamera,
         ),
       ));
     }
@@ -296,7 +294,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             if (mContext.mounted) Navigator.of(mContext).pop(picked);
           },
           icon: EzIcon(PlatformIcons(context).folder),
-          label: l10n.dsFromFile,
+          label: EzConfig.l10n.dsFromFile,
         ),
       ));
     }
@@ -348,8 +346,9 @@ class _ImageSettingState extends State<EzImageSetting> {
                 if (mounted) {
                   await ezLogAlert(
                     context,
-                    title: l10n.dsImgGetFailed,
-                    message: '${e.toString()}\n\n${l10n.dsImgPermission}',
+                    title: EzConfig.l10n.dsImgGetFailed,
+                    message:
+                        '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}',
                   );
                 }
                 return;
@@ -372,16 +371,16 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             (materialActions, cupertinoActions) = ezActionPairs(
               context: context,
-              confirmMsg: l10n.gApply,
+              confirmMsg: EzConfig.l10n.gApply,
               onConfirm: onConfirm,
               confirmIsDestructive: true,
-              denyMsg: l10n.gCancel,
+              denyMsg: EzConfig.l10n.gCancel,
               onDeny: onDeny,
             );
 
             return EzAlertDialog(
               title: Text(
-                l10n.gEnterURL,
+                EzConfig.l10n.gEnterURL,
                 textAlign: TextAlign.center,
               ),
               content: Form(
@@ -401,7 +400,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           },
         ),
         icon: EzIcon(Icons.computer_outlined),
-        label: l10n.dsFromNetwork,
+        label: EzConfig.l10n.dsFromNetwork,
       ),
     ));
 
@@ -435,7 +434,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
           icon: EzIcon(Icons.color_lens),
-          label: l10n.dsSolidColor,
+          label: EzConfig.l10n.dsSolidColor,
         ),
       ));
     }
@@ -454,7 +453,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: EzIcon(PlatformIcons(context).refresh),
-          label: l10n.dsResetIt,
+          label: EzConfig.l10n.dsResetIt,
         ),
       ));
     }
@@ -473,7 +472,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: EzIcon(PlatformIcons(context).clear),
-          label: l10n.dsClearIt,
+          label: EzConfig.l10n.dsClearIt,
         ),
       ));
     }
@@ -491,7 +490,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           padding: EdgeInsets.symmetric(vertical: spacing / 2),
           child: EzSwitchPair(
             key: ValueKey<bool>(updateTheme),
-            text: l10n.dsUseForColors,
+            text: EzConfig.l10n.dsUseForColors,
             value: updateTheme,
             onChanged: (bool? choice) {
               updateTheme = (choice == null) ? false : choice;
@@ -524,8 +523,6 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Opens a preview modal for choosing the desired [BoxFit]
   Future<bool?> chooseFit(String path, ThemeData theme) {
-    const EzSpacer ezRowSpacer = EzSpacer(vertical: false);
-
     final double width = widthOf(context) * 0.25;
     final double height = heightOf(context) * 0.25;
 
@@ -537,7 +534,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                l10n.dsFit,
+                EzConfig.l10n.dsFit,
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -553,7 +550,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   primary: false,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.contain,
@@ -562,7 +559,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.cover,
@@ -571,7 +568,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fill,
@@ -580,7 +577,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fitWidth,
@@ -589,7 +586,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fitHeight,
@@ -598,7 +595,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.none,
@@ -607,7 +604,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.scaleDown,
@@ -616,7 +613,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       setModal: fitState,
                       theme: theme,
                     ),
-                    ezRowSpacer,
+                    EzConfig.layout.rowSpacer,
                   ],
                 ),
               ),
@@ -626,14 +623,14 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.end,
                 children: <Widget>[
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   EzTextButton(
                     onPressed: () => Navigator.of(fitContext).pop(null),
-                    text: l10n.gCancel,
+                    text: EzConfig.l10n.gCancel,
                     textStyle: theme.textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                   EzTextButton(
                     onPressed: () async {
                       if (selectedFit != null) {
@@ -647,13 +644,15 @@ class _ImageSettingState extends State<EzImageSetting> {
                         Navigator.of(fitContext).pop(true);
                       }
                     },
-                    text: selectedFit == null ? l10n.gSkip : l10n.gApply,
+                    text: selectedFit == null
+                        ? EzConfig.l10n.gSkip
+                        : EzConfig.l10n.gApply,
                     textStyle: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.colorScheme.primary,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  ezRowSpacer,
+                  EzConfig.layout.rowSpacer,
                 ],
               ),
               EzConfig.layout.separator,
@@ -752,7 +751,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return Semantics(
       label: widget.label,
       button: true,
-      hint: l10n.dsImgSettingHint(widget.label),
+      hint: EzConfig.l10n.dsImgSettingHint(widget.label),
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: widget.style ??

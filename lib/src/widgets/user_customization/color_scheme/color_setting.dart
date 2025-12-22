@@ -38,8 +38,6 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Define the build data //
 
-  late final EFUILang l10n = ezL10n(context);
-
   late final int? _prefsValue = EzConfig.get(widget.configKey);
 
   late Color currColor = (_prefsValue == null)
@@ -120,17 +118,17 @@ class _ColorSettingState extends State<EzColorSetting> {
 
           (materialActions, cupertinoActions) = ezActionPairs(
             context: context,
-            confirmMsg: l10n.csUseCustom,
+            confirmMsg: EzConfig.l10n.csUseCustom,
             onConfirm: onConfirm,
             confirmIsDestructive: true,
-            denyMsg: l10n.gYes,
+            denyMsg: EzConfig.l10n.gYes,
             denyIsDefault: true,
             onDeny: onDeny,
           );
 
           return EzAlertDialog(
             title: Text(
-              l10n.csRecommended,
+              EzConfig.l10n.csRecommended,
               textAlign: TextAlign.center,
             ),
             // Recommended color preview
@@ -188,13 +186,13 @@ class _ColorSettingState extends State<EzColorSetting> {
 
         return EzAlertDialog(
           title: Text(
-            l10n.gResetValue(
+            EzConfig.l10n.gResetValue(
               getColorName(widget.configKey).toLowerCase(),
             ),
             textAlign: TextAlign.center,
           ),
           contents: <Widget>[
-            Text(l10n.csCurrVal, textAlign: TextAlign.center),
+            Text(EzConfig.l10n.csCurrVal, textAlign: TextAlign.center),
             EzMargin(),
             EzTextIconButton(
               onPressed: () => Clipboard.setData(
@@ -220,7 +218,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           context: context,
           builder: (BuildContext dContext) => EzAlertDialog(
             title: Text(
-              l10n.gOptions,
+              EzConfig.l10n.gOptions,
               textAlign: TextAlign.center,
             ),
             contents: <Widget>[
@@ -231,7 +229,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                   Navigator.of(dContext).pop();
                 },
                 icon: EzIcon(PlatformIcons(context).delete),
-                label: l10n.gRemove,
+                label: EzConfig.l10n.gRemove,
               ),
               EzConfig.layout.spacer,
 
@@ -245,7 +243,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                   }
                 },
                 icon: EzIcon(PlatformIcons(context).refresh),
-                label: l10n.gReset,
+                label: EzConfig.l10n.gReset,
               ),
             ],
           ),
@@ -266,7 +264,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return Semantics(
       label: label,
       button: true,
-      hint: l10n.csPickerHint,
+      hint: EzConfig.l10n.csPickerHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(

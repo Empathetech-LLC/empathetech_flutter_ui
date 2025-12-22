@@ -54,8 +54,8 @@ class OpenUIScaffold extends StatelessWidget {
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
-        tooltip: ezL10n(context).gOptions,
-        icon: Icon(Icons.more_vert, semanticLabel: ezL10n(context).gOptions),
+        tooltip: EzConfig.l10n.gOptions,
+        icon: Icon(Icons.more_vert, semanticLabel: EzConfig.l10n.gOptions),
       ),
       menuChildren: <Widget>[
         if (showSettings) SettingsButton(context),
@@ -72,9 +72,9 @@ class OpenUIScaffold extends StatelessWidget {
     // Return the build //
 
     return EzAdaptiveParent(
-      small: Consumer<EzThemeProvider>(
-        key: ValueKey<int>(EzConfig.theme.seed),
-        builder: (_, EzThemeProvider theme, __) => SelectionArea(
+      small: Consumer<EzConfigProvider>(
+        key: ValueKey<int>(EzConfig.seed),
+        builder: (_, EzConfigProvider theme, __) => SelectionArea(
           child: Scaffold(
             // AppBar
             appBar: PreferredSize(

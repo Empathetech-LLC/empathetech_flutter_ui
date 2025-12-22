@@ -20,7 +20,6 @@ void testSuite({
       // Load localization(s) //
 
       ezLog('Loading localizations');
-      final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
@@ -34,7 +33,7 @@ void testSuite({
 
       await ezTouch(
         tester,
-        find.widgetWithText(EzElevatedIconButton, l10n.tsPageTitle),
+        find.widgetWithText(EzElevatedIconButton, EzConfig.l10n.tsPageTitle),
       );
 
       // Verify text loaded //
@@ -42,23 +41,31 @@ void testSuite({
       ezLog('\nValidating text');
       await ezFindText(
         tester,
-        l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
+        EzConfig.l10n.tsDisplayP1 +
+            EzConfig.l10n.tsDisplayLink +
+            EzConfig.l10n.tsDisplayP2,
       );
       await ezFindText(
         tester,
-        l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
+        EzConfig.l10n.tsHeadlineP1 +
+            EzConfig.l10n.tsHeadlineLink +
+            EzConfig.l10n.tsHeadlineP2,
       );
       await ezFindText(
         tester,
-        l10n.tsTitleP1 + l10n.tsTitleLink,
+        EzConfig.l10n.tsTitleP1 + EzConfig.l10n.tsTitleLink,
       );
       await ezFindText(
         tester,
-        l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
+        EzConfig.l10n.tsBodyP1 +
+            EzConfig.l10n.tsBodyLink +
+            EzConfig.l10n.tsBodyP2,
       );
       await ezFindText(
         tester,
-        l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
+        EzConfig.l10n.tsLabelP1 +
+            EzConfig.l10n.tsLabelLink +
+            EzConfig.l10n.tsLabelP2,
       );
 
       //* Test functionality: Quick settings *//
@@ -92,26 +99,22 @@ void testSuite({
 
       // Reset //
 
-      await testResetButton(
-        tester,
-        type: RBType.text,
-        l10n: l10n,
-        isLefty: isLefty,
-      );
+      await testResetButton(tester, type: RBType.text);
 
       //* Test functionality: Advanced settings *//
 
       ezLog('\nTesting advanced settings');
 
       ezLog('\nNavigation');
-      await ezTouchText(tester, l10n.gAdvanced);
+      await ezTouchText(tester, EzConfig.l10n.gAdvanced);
 
       ezLog('\nDisplay');
       await ezTouch(tester, find.byType(DropdownMenu<String>).first);
-      await ezTouch(tester, find.text(l10n.tsDisplay.toLowerCase()).first);
+      await ezTouch(
+          tester, find.text(EzConfig.l10n.tsDisplay.toLowerCase()).first);
       await ezTouch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsDisplayLink),
+        find.widgetWithText(EzLink, EzConfig.l10n.tsDisplayLink),
       );
       await testAdvancedOptions(
         tester,
@@ -121,10 +124,11 @@ void testSuite({
 
       ezLog('\nHeadline');
       await ezTouch(tester, find.byType(DropdownMenu<String>).first);
-      await ezTouch(tester, find.text(l10n.tsHeadline.toLowerCase()).first);
+      await ezTouch(
+          tester, find.text(EzConfig.l10n.tsHeadline.toLowerCase()).first);
       await ezTouch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsHeadlineLink),
+        find.widgetWithText(EzLink, EzConfig.l10n.tsHeadlineLink),
       );
       await testAdvancedOptions(
         tester,
@@ -134,10 +138,11 @@ void testSuite({
 
       ezLog('\nTitle');
       await ezTouch(tester, find.byType(DropdownMenu<String>).first);
-      await ezTouch(tester, find.text(l10n.tsTitle.toLowerCase()).first);
+      await ezTouch(
+          tester, find.text(EzConfig.l10n.tsTitle.toLowerCase()).first);
       await ezTouch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsTitleLink),
+        find.widgetWithText(EzLink, EzConfig.l10n.tsTitleLink),
       );
       await testAdvancedOptions(
         tester,
@@ -147,10 +152,11 @@ void testSuite({
 
       ezLog('\nBody');
       await ezTouch(tester, find.byType(DropdownMenu<String>).first);
-      await ezTouch(tester, find.text(l10n.tsBody.toLowerCase()).first);
+      await ezTouch(
+          tester, find.text(EzConfig.l10n.tsBody.toLowerCase()).first);
       await ezTouch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsBodyLink),
+        find.widgetWithText(EzLink, EzConfig.l10n.tsBodyLink),
       );
       await testAdvancedOptions(
         tester,
@@ -160,10 +166,11 @@ void testSuite({
 
       ezLog('\nLabel');
       await ezTouch(tester, find.byType(DropdownMenu<String>).first);
-      await ezTouch(tester, find.text(l10n.tsLabel.toLowerCase()).first);
+      await ezTouch(
+          tester, find.text(EzConfig.l10n.tsLabel.toLowerCase()).first);
       await ezTouch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsLabelLink),
+        find.widgetWithText(EzLink, EzConfig.l10n.tsLabelLink),
       );
       await testAdvancedOptions(
         tester,
@@ -173,16 +180,11 @@ void testSuite({
 
       // Reset //
 
-      await testResetButton(
-        tester,
-        type: RBType.text,
-        l10n: l10n,
-        isLefty: isLefty,
-      );
+      await testResetButton(tester, type: RBType.text);
 
       // Reset for next test suite  //
 
-      await ezTapBack(tester, l10n.gBack);
+      await ezTapBack(tester, EzConfig.l10n.gBack);
       ezLog('\nText settings test suite complete\n\n');
     });
 

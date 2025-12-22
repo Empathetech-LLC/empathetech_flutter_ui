@@ -24,12 +24,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, '404 ${l10n.gError}');
+    ezWindowNamer(context, '404 ${EzConfig.l10n.gError}');
   }
 
   // Return the build //
-
-  late final EFUILang l10n = ezL10n(context);
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +40,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                l10n.g404Wonder,
+                EzConfig.l10n.g404Wonder,
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
               EzConfig.layout.separator,
               Text(
-                l10n.g404,
+                EzConfig.l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
               EzConfig.layout.separator,
               Text(
-                l10n.g404Note,
+                EzConfig.l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),

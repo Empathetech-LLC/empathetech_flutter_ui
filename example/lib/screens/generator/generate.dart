@@ -24,7 +24,6 @@ class GenerateScreen extends StatefulWidget {
 class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the fixed theme data //
 
-  late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
   // Define the build data //
@@ -314,13 +313,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ezLog(runResult.stdout, buffer: readout);
       ezLog(runResult.stderr, buffer: readout);
 
-      // (optionally) Generate l10n files //
+      // (optionally) Generate EzConfig.l10n files //
 
       if (widget.config.l10nConfig != null) {
         ezLog('flutter gen-l10n...', buffer: readout);
         runResult = await Process.run(
           '${flutterPath}flutter',
-          <String>['gen-l10n'],
+          <String>['gen-EzConfig.l10n'],
           runInShell: true,
           workingDirectory: projDir,
         );
@@ -345,7 +344,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: (heightOf(context) / 3),
           width: double.infinity,
-          child: EmpathyLoading(semantics: el10n.gLoadingAnim),
+          child: EmpathyLoading(semantics: EzConfig.l10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return SizedBox(

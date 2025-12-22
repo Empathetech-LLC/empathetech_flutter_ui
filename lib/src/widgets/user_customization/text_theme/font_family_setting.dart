@@ -59,7 +59,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: widget.tooltip ?? ezL10n(context).tsFontFamily,
+      message: widget.tooltip ?? EzConfig.l10n.tsFontFamily,
       child: EzDropdownMenu<String>(
         widthEntries: <String>[fingerPaint],
         textStyle: fuseWithGFont(

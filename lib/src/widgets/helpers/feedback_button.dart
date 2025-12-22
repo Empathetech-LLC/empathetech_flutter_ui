@@ -15,7 +15,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 Future<void> ezFeedback({
   required BuildContext parentContext,
-  required EFUILang l10n,
   required String supportEmail,
   required String appName,
 }) async {
@@ -28,7 +27,7 @@ Future<void> ezFeedback({
       await ezSnackBar(
         context: parentContext,
         message:
-            '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}',
+            '${EzConfig.l10n.gOpeningFeedback}\n${EzConfig.l10n.gClipboard(EzConfig.l10n.gSupportEmail)}',
       ).closed;
     }
   }
@@ -57,7 +56,7 @@ Future<void> ezFeedback({
             mimeType: MimeType.png,
           );
           await launchUrl(Uri.parse(
-            'mailto:$supportEmail?subject=$appName%20feedback&body=${feedback.text}\n\n----%20%20----%20%20----\n\n${l10n.gAttachScreenshot}',
+            'mailto:$supportEmail?subject=$appName%20feedback&body=${feedback.text}\n\n----%20%20----%20%20----\n\n${EzConfig.l10n.gAttachScreenshot}',
           ));
         }
       },
@@ -86,17 +85,14 @@ class EzFeedbackMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = ezL10n(context);
-
     return EzMenuButton(
       onPressed: () => ezFeedback(
         parentContext: parentContext,
-        l10n: l10n,
         supportEmail: supportEmail,
         appName: appName,
       ),
       icon: EzIcon(Icons.feedback_outlined),
-      label: l10n.gGiveFeedback,
+      label: EzConfig.l10n.gGiveFeedback,
     );
   }
 }

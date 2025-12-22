@@ -19,14 +19,13 @@ class ResetFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang el10n = ezL10n(context);
     final Lang l10n = Lang.of(context)!;
 
     return Tooltip(
-      message: el10n.gReset,
+      message: EzConfig.l10n.gReset,
       excludeFromSemantics: true,
       child: Semantics(
-        label: el10n.gReset,
+        label: EzConfig.l10n.gReset,
         button: true,
         hint: l10n.csResetHint,
         child: ExcludeSemantics(
@@ -35,8 +34,8 @@ class ResetFAB extends StatelessWidget {
               context: context,
               builder: (BuildContext dContext) {
                 return EzAlertDialog(
-                  title:
-                      Text('${el10n.gReset}...', textAlign: TextAlign.center),
+                  title: Text('${EzConfig.l10n.gReset}...',
+                      textAlign: TextAlign.center),
                   materialActions: <Widget>[
                     EzMaterialAction(
                       onPressed: () async {

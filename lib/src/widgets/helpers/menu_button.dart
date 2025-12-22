@@ -97,10 +97,6 @@ class EzMenuButton extends StatefulWidget {
 }
 
 class _EzMenuButtonState extends State<EzMenuButton> {
-  // Gather the fixed theme data //
-
-  final bool isLefty = EzConfig.get(isLeftyKey);
-
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
@@ -139,15 +135,15 @@ class _EzMenuButtonState extends State<EzMenuButton> {
       style: widget.style,
       statesController: widget.statesController,
       clipBehavior: widget.clipBehavior,
-      leadingIcon: isLefty ? widget.icon : null,
-      trailingIcon: isLefty ? null : widget.icon,
+      leadingIcon: EzConfig.isLefty ? widget.icon : null,
+      trailingIcon: EzConfig.isLefty ? null : widget.icon,
       closeOnActivate: widget.closeOnActivate,
       overflowAxis: widget.overflowAxis,
       child: Text(
         widget.label,
         style: textStyle,
-        textAlign:
-            widget.textAlign ?? (isLefty ? TextAlign.start : TextAlign.end),
+        textAlign: widget.textAlign ??
+            (EzConfig.isLefty ? TextAlign.start : TextAlign.end),
       ),
     );
   }

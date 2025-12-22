@@ -53,16 +53,14 @@ class EzLayoutSettings extends StatefulWidget {
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Define the build data //
 
-  late final EFUILang l10n = ezL10n(context);
-
-  int redraw = 0;
+  late int redraw = 0;
 
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, l10n.lsPageTitle);
+    ezWindowNamer(context, EzConfig.l10n.lsPageTitle);
   }
 
   // Return the build //
@@ -115,7 +113,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           // Hide scroll
           EzSwitchPair(
             key: ValueKey<String>('scroll_$redraw'),
-            text: l10n.lsScroll,
+            text: EzConfig.l10n.lsScroll,
             valueKey: hideScrollKey,
           ),
 
@@ -125,7 +123,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           // Local reset all
           widget.resetSpacer,
           EzResetButton(
-            dialogTitle: l10n.lsResetAll,
+            dialogTitle: EzConfig.l10n.lsResetAll,
             onConfirm: () async {
               await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
               if (widget.resetKeys != null) {

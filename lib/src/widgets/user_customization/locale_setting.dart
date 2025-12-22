@@ -41,7 +41,7 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather the build data  //
 
-  late EFUILang l10n = ezL10n(context);
+  late EFUILang l10n = EzConfig.l10n;
 
   late final List<Locale> locales;
   late Locale currLocale = Localizations.localeOf(context);
@@ -126,9 +126,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
     final double iconSize = EzConfig.iconSize;
 
     return Semantics(
-      label: l10n.ssLanguage,
+      label: EzConfig.l10n.ssLanguage,
       button: true,
-      hint: l10n.ssLangHint,
+      hint: EzConfig.l10n.ssLangHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           onPressed: () => ezModal(
@@ -167,12 +167,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                                 l10n = EzConfig.l10nFallback;
                               }
 
-                              setState(() {});
-
-                              // Close modal
-                              if (mContext.mounted) {
-                                Navigator.of(mContext).pop(locale);
-                              }
+                              EzConfig.provider.redraw(onComplete: () {
+                                if (mContext.mounted) {
+                                  Navigator.of(mContext).pop(locale);
+                                }
+                              });
                             },
                             icon: flag(
                               locale,
@@ -195,7 +194,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             iconSize: iconSize,
             padding: padding,
           ),
-          label: l10n.ssLanguage,
+          label: EzConfig.l10n.ssLanguage,
           labelPadding: false,
         ),
       ),

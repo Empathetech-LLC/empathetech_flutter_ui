@@ -12,9 +12,7 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 /// Test [EzLocaleSetting]
 Future<void> testLocaleSetting(
   WidgetTester tester, {
-  required EFUILang l10n,
   required LocaleNames l10nNames,
-  required bool isLefty,
 }) async {
   ezLog('\nTesting language setting button');
 
@@ -39,6 +37,6 @@ Future<void> testLocaleSetting(
   // Activate English localizations
   ezLog('Close');
   await ezTouch(tester, find.byType(EzLocaleSetting));
-  await ezTouchText(tester, l10n.gClose);
+  await ezTouchText(tester, EzConfig.l10n.gClose);
   await tester.pumpAndSettle();
 }
