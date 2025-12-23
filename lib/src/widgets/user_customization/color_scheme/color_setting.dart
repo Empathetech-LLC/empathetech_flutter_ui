@@ -58,7 +58,8 @@ class _ColorSettingState extends State<EzColorSetting> {
           setState(() => currColor = chosenColor),
       onConfirm: () async {
         await EzConfig.setInt(widget.configKey, currColor.toARGB32());
-        widget.onUpdate?.call(currColor);
+        EzConfig.provider
+            .rebuild(onComplete: () => widget.onUpdate?.call(currColor));
       },
       onDeny: () => setState(() => currColor = backup),
     );
@@ -105,12 +106,12 @@ class _ColorSettingState extends State<EzColorSetting> {
             // Update the user's configKey
             currColor = Color(recommended);
             await EzConfig.setInt(widget.configKey, recommended);
-            setState(() {});
-            widget.onUpdate?.call(currColor);
 
             if (dContext.mounted) {
               Navigator.of(dContext).pop(recommended);
             }
+            EzConfig.provider
+                .rebuild(onComplete: () => widget.onUpdate?.call(currColor));
           }
 
           late final List<Widget> materialActions;

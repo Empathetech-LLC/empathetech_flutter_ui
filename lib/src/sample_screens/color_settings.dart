@@ -194,7 +194,10 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         widget.resetSpacer,
         isDark
             ? EzResetButton(
+                androidPackage: widget.androidPackage,
+                appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(darkString),
+                extraKeys: widget.extraSaveKeys,
                 onConfirm: () async {
                   await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
@@ -203,13 +206,14 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
+                  EzConfig.provider.rebuild();
                 },
-                extraKeys: widget.extraSaveKeys,
-                appName: widget.appName,
-                androidPackage: widget.androidPackage,
               )
             : EzResetButton(
+                androidPackage: widget.androidPackage,
+                appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(lightString),
+                extraKeys: widget.extraSaveKeys,
                 onConfirm: () async {
                   await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
@@ -218,10 +222,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
+                  EzConfig.provider.rebuild();
                 },
-                extraKeys: widget.extraSaveKeys,
-                appName: widget.appName,
-                androidPackage: widget.androidPackage,
               ),
         EzConfig.layout.separator,
       ],
