@@ -31,9 +31,11 @@ class EzResetButton extends StatelessWidget {
   final String? label;
 
   /// Whether to notify [EzConfigProvider] of changes
+  /// Moot if [onConfirm] is provided
   final bool notifyTheme;
 
   /// [EzConfigProvider.rebuild] passthrough
+  /// Moot if [onConfirm] is provided
   final void Function()? onNotify;
 
   /// What happens when the user choses to reset
