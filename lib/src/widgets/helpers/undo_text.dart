@@ -48,7 +48,7 @@ Widget ezRichUndoWarning(
 
   return standalone
       ? SizedBox(
-          height: EzConfig.isApple
+          height: isApple()
               ? (textTheme.bodyLarge?.fontSize ?? defaultBodySize) * 3
               : null,
           width: widthOf(context),

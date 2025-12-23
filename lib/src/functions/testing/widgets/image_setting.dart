@@ -204,7 +204,7 @@ Future<void> _testNetwork(
   await ezFindText(tester, EzConfig.l10n.gEnterURL);
 
   ezLog('Validating layout');
-  if (EzConfig.isApple) {
+  if (isApple()) {
     final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
             .cupertinoActions! as List<EzCupertinoAction>;
@@ -244,7 +244,7 @@ Future<void> _testNetwork(
   await tester.enterText(find.byType(TextFormField), getRandomURL(imageURLs));
   await ezTouchText(tester, EzConfig.l10n.gApply);
   expect(
-    find.byIcon(EzConfig.isApple ? CupertinoIcons.pencil : Icons.edit),
+    find.byIcon(isApple() ? CupertinoIcons.pencil : Icons.edit),
     findsNothing,
   );
 }
