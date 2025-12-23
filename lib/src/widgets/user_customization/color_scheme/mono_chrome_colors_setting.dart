@@ -127,15 +127,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                 colorScheme: light,
                 brightness: Brightness.light,
               );
-
-        if (context.mounted) {
-          ezSnackBar(
-            context: context,
-            message: kIsWeb
-                ? EzConfig.l10n.ssRestartReminderWeb
-                : EzConfig.l10n.ssRestartReminder,
-          );
-        }
+        EzConfig.provider.rebuild();
       },
       icon: EzIcon(
         Icons.contrast,
