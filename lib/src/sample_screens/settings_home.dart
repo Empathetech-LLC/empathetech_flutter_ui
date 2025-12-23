@@ -259,10 +259,10 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           // Reset button
           widget.resetSpacer,
           EzResetButton(
-            skip: widget.skipKeys,
-            extraKeys: widget.extraKeys,
-            appName: widget.appName,
             androidPackage: widget.androidPackage,
+            appName: widget.appName,
+            extraKeys: widget.extraKeys,
+            skip: widget.skipKeys,
           ),
 
           // Footer
