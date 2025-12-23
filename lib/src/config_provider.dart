@@ -45,7 +45,7 @@ class EzConfigProvider extends ChangeNotifier {
 
   Future<EFUILang> _buildL10n() async {
     try {
-      final Locale locale = storedLocale;
+      final Locale locale = getStoredLocale();
       final EFUILang toReturn = await EFUILang.delegate.load(locale);
       _locale = locale;
       return toReturn;
@@ -84,20 +84,6 @@ class EzConfigProvider extends ChangeNotifier {
   bool get isLTR => _ltr;
 
   int get seed => _seed;
-
-  Locale get storedLocale {
-    final List<String>? localeData = EzConfig.get(appLocaleKey);
-    if (localeData == null || localeData.isEmpty) {
-      return EzConfig.localeFallback;
-    }
-
-    final String languageCode = localeData[0];
-    final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
-
-    return (countryCode != null)
-        ? Locale(languageCode, countryCode)
-        : Locale(languageCode);
-  }
 
   Locale get locale => _locale;
   EFUILang get l10n => _l10n;

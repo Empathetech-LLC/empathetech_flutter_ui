@@ -73,6 +73,21 @@ bool isDarkTheme(BuildContext context) =>
     PlatformTheme.of(context)?.isDark ??
     (MediaQuery.of(context).platformBrightness == Brightness.dark);
 
+/// Gets any stored [Locale] from [EzConfig]
+Locale getStoredLocale() {
+  final List<String>? localeData = EzConfig.get(appLocaleKey);
+  if (localeData == null || localeData.isEmpty) {
+    return EzConfig.localeFallback;
+  }
+
+  final String languageCode = localeData[0];
+  final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
+
+  return (countryCode != null)
+      ? Locale(languageCode, countryCode)
+      : Locale(languageCode);
+}
+
 // Readability //
 
 /// Is there a required [Function] that you wish was optional?
