@@ -28,14 +28,14 @@ class EzConfig {
   /// [SharedPreferencesAsync] instance
   final SharedPreferencesAsync _preferences;
 
-  /// Allows [EzConfig] setters to call [EzConfigProvider.rebuild]
-  EzConfigProvider? _provider;
-
   /// Live values in use
   final Map<String, dynamic> _prefs;
 
   /// [EzConfig] key : value runtime [Type] map
   final Map<String, Type> _typeMap;
+
+  /// Allows [EzConfig] setters to call [EzConfigProvider.rebuild]
+  EzConfigProvider? _provider;
 
   /// Private instance
   static EzConfig? _instance;
@@ -48,7 +48,6 @@ class EzConfig {
     required Locale localeFallback,
     required EFUILang l10nFallback,
     required SharedPreferencesAsync preferences,
-    EzConfigProvider? provider,
 
     // Internal (built by factory)
     required Map<String, dynamic> prefs,
@@ -58,7 +57,6 @@ class EzConfig {
         _localeFallback = localeFallback,
         _l10nFallback = l10nFallback,
         _preferences = preferences,
-        _provider = provider,
         _prefs = prefs,
         _typeMap = typeMap;
 
@@ -141,7 +139,6 @@ Must be one of [int, bool, double, String, List<String>]''');
         localeFallback: localeFallback,
         l10nFallback: l10nFallback,
         preferences: SharedPreferencesAsync(),
-        provider: provider,
         prefs: prefs,
         typeMap: typeMap,
       );
@@ -154,17 +151,15 @@ Must be one of [int, bool, double, String, List<String>]''');
   // w/out null checks
   // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
-  static EzConfigProvider get provider => _instance!._provider!;
+  static Locale get localeFallback => _instance!._localeFallback;
+  static EFUILang get l10nFallback => _instance!._l10nFallback;
 
-  static bool get isApple => _instance!._provider!.isCupertino;
-  static bool get isLTR => _instance!._provider!.isLTR;
+  static EzConfigProvider get provider => _instance!._provider!;
 
   static int get seed => _instance!._provider!.seed;
 
   static Locale get locale => _instance!._provider!.locale;
   static EFUILang get l10n => _instance!._provider!.l10n;
-  static Locale get localeFallback => _instance!._localeFallback;
-  static EFUILang get l10nFallback => _instance!._l10nFallback;
 
   static ThemeMode get themeMode => _instance!._provider!.themeMode;
   static EzLayoutWidgets get layout => _instance!._provider!.layout;
@@ -229,7 +224,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   // Setters //
 
   static bool initProvider(EzConfigProvider configProvider) {
-    if (_instance == null || _instance!._provider != null) {
+    if (_instance == null) {
       return false;
     } else {
       _instance!._provider = provider;
