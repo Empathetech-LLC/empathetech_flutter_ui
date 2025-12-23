@@ -86,6 +86,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
               default:
                 break;
             }
+            EzConfig.provider.setThemeMode();
           },
         ),
       ],
