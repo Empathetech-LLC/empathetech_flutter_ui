@@ -227,7 +227,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     if (_instance == null) {
       return false;
     } else {
-      _instance!._provider = provider;
+      _instance!._provider = configProvider;
       return true;
     }
   }
