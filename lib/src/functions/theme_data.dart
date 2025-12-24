@@ -479,8 +479,8 @@ final FeedbackThemeData empathFeedbackDark = FeedbackThemeData(
   background: Colors.grey,
   feedbackSheetColor: Colors.black,
   activeFeedbackModeColor: empathEucalyptus,
-  bottomSheetDescriptionStyle: ezBodyStyle(Colors.white),
-  bottomSheetTextInputStyle: ezBodyStyle(Colors.white),
+  bottomSheetDescriptionStyle: ezBodyStyle(Colors.white, isDark: true),
+  bottomSheetTextInputStyle: ezBodyStyle(Colors.white, isDark: true),
   sheetIsDraggable: true,
   dragHandleColor: Colors.white,
 );
@@ -492,8 +492,8 @@ final FeedbackThemeData empathFeedbackLight = FeedbackThemeData(
   background: Colors.grey,
   feedbackSheetColor: Colors.white,
   activeFeedbackModeColor: empathPurple,
-  bottomSheetDescriptionStyle: ezBodyStyle(Colors.black),
-  bottomSheetTextInputStyle: ezBodyStyle(Colors.black),
+  bottomSheetDescriptionStyle: ezBodyStyle(Colors.black, isDark: false),
+  bottomSheetTextInputStyle: ezBodyStyle(Colors.black, isDark: false),
   sheetIsDraggable: true,
   dragHandleColor: Colors.black,
 );

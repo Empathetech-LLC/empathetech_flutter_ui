@@ -127,12 +127,12 @@ TextStyle? ezSubTitleStyle(TextTheme textTheme) =>
 /// https://m3.material.io/styles/typography/type-scale-tokens
 /// Each variant triplet (large, medium, small) are identical
 /// 15 different options would be overload for users... 5 makes much more sense
-TextTheme ezTextTheme(Color? color) {
-  final TextStyle display = ezDisplayStyle(color);
-  final TextStyle headline = ezHeadlineStyle(color);
-  final TextStyle title = ezTitleStyle(color);
-  final TextStyle body = ezBodyStyle(color);
-  final TextStyle label = ezLabelStyle(color);
+TextTheme ezTextTheme(Color? color, {bool? isDark}) {
+  final TextStyle display = ezDisplayStyle(color, isDark: isDark);
+  final TextStyle headline = ezHeadlineStyle(color, isDark: isDark);
+  final TextStyle title = ezTitleStyle(color, isDark: isDark);
+  final TextStyle body = ezBodyStyle(color, isDark: isDark);
+  final TextStyle label = ezLabelStyle(color, isDark: isDark);
 
   return TextTheme(
     displayLarge: display,
@@ -154,8 +154,10 @@ TextTheme ezTextTheme(Color? color) {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle ezDisplayStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkDisplayFontSizeKey),
           fontWeight: EzConfig.get(darkDisplayBoldedKey) == true
@@ -194,13 +196,15 @@ TextStyle ezDisplayStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.get(
-        EzConfig.isDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
+        useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle ezDefaultDisplayStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.getDefault(darkDisplayFontSizeKey),
           fontWeight: EzConfig.getDefault(darkDisplayBoldedKey) == true
@@ -239,13 +243,15 @@ TextStyle ezDefaultDisplayStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.getDefault(
-        EzConfig.isDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
+        useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.prefs]
-TextStyle ezHeadlineStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkHeadlineFontSizeKey),
           fontWeight: EzConfig.get(darkHeadlineBoldedKey) == true
@@ -283,15 +289,16 @@ TextStyle ezHeadlineStyle(Color? color) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(EzConfig.isDark
-        ? darkHeadlineFontFamilyKey
-        : lightHeadlineFontFamilyKey),
+    gFont: EzConfig.get(
+        useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultHeadlineStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.getDefault(darkHeadlineFontSizeKey),
           fontWeight: EzConfig.getDefault(darkHeadlineBoldedKey) == true
@@ -329,15 +336,16 @@ TextStyle ezDefaultHeadlineStyle(Color? color) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(EzConfig.isDark
-        ? darkHeadlineFontFamilyKey
-        : lightHeadlineFontFamilyKey),
+    gFont: EzConfig.getDefault(
+        useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.prefs]
-TextStyle ezTitleStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkTitleFontSizeKey),
           fontWeight: EzConfig.get(darkTitleBoldedKey) == true
@@ -376,13 +384,15 @@ TextStyle ezTitleStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.get(
-        EzConfig.isDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
+        useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultTitleStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.getDefault(darkTitleFontSizeKey),
           fontWeight: EzConfig.getDefault(darkTitleBoldedKey) == true
@@ -421,13 +431,15 @@ TextStyle ezDefaultTitleStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.getDefault(
-        EzConfig.isDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
+        useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.prefs]
-TextStyle ezBodyStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkBodyFontSizeKey),
           fontWeight: EzConfig.get(darkBodyBoldedKey) == true
@@ -465,14 +477,16 @@ TextStyle ezBodyStyle(Color? color) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(
-        EzConfig.isDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
+    gFont:
+        EzConfig.get(useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultBodyStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.getDefault(darkBodyFontSizeKey),
           fontWeight: EzConfig.getDefault(darkBodyBoldedKey) == true
@@ -511,13 +525,15 @@ TextStyle ezDefaultBodyStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.getDefault(
-        EzConfig.isDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
+        useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.prefs]
-TextStyle ezLabelStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkLabelFontSizeKey),
           fontWeight: EzConfig.get(darkLabelBoldedKey) == true
@@ -556,13 +572,15 @@ TextStyle ezLabelStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.get(
-        EzConfig.isDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
+        useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultLabelStyle(Color? color) {
-  final TextStyle starter = EzConfig.isDark
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.getDefault(darkLabelFontSizeKey),
           fontWeight: EzConfig.getDefault(darkLabelBoldedKey) == true
@@ -601,6 +619,6 @@ TextStyle ezDefaultLabelStyle(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.getDefault(
-        EzConfig.isDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
+        useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
   );
 }
