@@ -37,24 +37,55 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
 class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   // Define the build data //
 
-  late Map<String, String?> currFonts = <String, String?>{
-    displayFontFamilyKey: widget.displayProvider.value.fontFamily == null
-        ? null
-        : ezClassToCamel(ezFirstWord(widget.displayProvider.value.fontFamily!)),
-    headlineFontFamilyKey: widget.headlineProvider.value.fontFamily == null
-        ? null
-        : ezClassToCamel(
-            ezFirstWord(widget.headlineProvider.value.fontFamily!)),
-    titleFontFamilyKey: widget.titleProvider.value.fontFamily == null
-        ? null
-        : ezClassToCamel(ezFirstWord(widget.titleProvider.value.fontFamily!)),
-    bodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
-        ? null
-        : ezClassToCamel(ezFirstWord(widget.bodyProvider.value.fontFamily!)),
-    labelFontFamilyKey: widget.labelProvider.value.fontFamily == null
-        ? null
-        : ezClassToCamel(ezFirstWord(widget.labelProvider.value.fontFamily!)),
-  };
+  late Map<String, String?> currFonts = EzConfig.isDark
+      ? <String, String?>{
+          darkDisplayFontFamilyKey:
+              widget.displayProvider.value.fontFamily == null
+                  ? null
+                  : ezClassToCamel(
+                      ezFirstWord(widget.displayProvider.value.fontFamily!)),
+          darkHeadlineFontFamilyKey:
+              widget.headlineProvider.value.fontFamily == null
+                  ? null
+                  : ezClassToCamel(
+                      ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+          darkTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
+              ? null
+              : ezClassToCamel(
+                  ezFirstWord(widget.titleProvider.value.fontFamily!)),
+          darkBodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
+              ? null
+              : ezClassToCamel(
+                  ezFirstWord(widget.bodyProvider.value.fontFamily!)),
+          darkLabelFontFamilyKey: widget.labelProvider.value.fontFamily == null
+              ? null
+              : ezClassToCamel(
+                  ezFirstWord(widget.labelProvider.value.fontFamily!)),
+        }
+      : <String, String?>{
+          lightDisplayFontFamilyKey:
+              widget.displayProvider.value.fontFamily == null
+                  ? null
+                  : ezClassToCamel(
+                      ezFirstWord(widget.displayProvider.value.fontFamily!)),
+          lightHeadlineFontFamilyKey:
+              widget.headlineProvider.value.fontFamily == null
+                  ? null
+                  : ezClassToCamel(
+                      ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+          lightTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
+              ? null
+              : ezClassToCamel(
+                  ezFirstWord(widget.titleProvider.value.fontFamily!)),
+          lightBodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
+              ? null
+              : ezClassToCamel(
+                  ezFirstWord(widget.bodyProvider.value.fontFamily!)),
+          lightLabelFontFamilyKey: widget.labelProvider.value.fontFamily == null
+              ? null
+              : ezClassToCamel(
+                  ezFirstWord(widget.labelProvider.value.fontFamily!)),
+        };
 
   late bool isUniform =
       currFonts.values.every((String? font) => font == currFonts.values.first);

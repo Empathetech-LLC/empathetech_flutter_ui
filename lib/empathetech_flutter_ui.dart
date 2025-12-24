@@ -119,6 +119,7 @@ export 'src/widgets/user_customization/text_theme/double_batch_setting.dart';
 export 'src/widgets/user_customization/text_theme/double_setting.dart';
 export 'src/widgets/user_customization/text_theme/font_family_batch_setting.dart';
 export 'src/widgets/user_customization/text_theme/font_family_setting.dart';
+export 'src/widgets/user_customization/text_theme/icon_size_setting.dart';
 export 'src/widgets/user_customization/text_theme/italic_setting.dart';
 export 'src/widgets/user_customization/text_theme/providers.dart';
 export 'src/widgets/user_customization/text_theme/underline_setting.dart';
