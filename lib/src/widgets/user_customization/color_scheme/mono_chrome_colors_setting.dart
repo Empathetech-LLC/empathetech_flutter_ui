@@ -6,7 +6,6 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 /// Custom [ColorScheme.highContrastDark]
 const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(

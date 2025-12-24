@@ -109,6 +109,35 @@ class EzConfigFAB extends StatelessWidget {
   }
 }
 
+class EzSettingsDupeFAB extends StatefulWidget {
+  /// Toggle-able [FloatingActionButton] for updating both light and dark theme settings simultaneously
+  const EzSettingsDupeFAB({super.key});
+
+  @override
+  State<EzSettingsDupeFAB> createState() => _EzSettingsDupeFABState();
+}
+
+class _EzSettingsDupeFABState extends State<EzSettingsDupeFAB> {
+  bool isDuplicating = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return isDuplicating
+        ? FloatingActionButton(
+            onPressed: () => setState(() => isDuplicating = false),
+            foregroundColor: colorScheme.secondary,
+            backgroundColor: colorScheme.primary,
+          )
+        : FloatingActionButton(
+            onPressed: () => setState(() => isDuplicating = true),
+            foregroundColor: colorScheme.outline,
+            backgroundColor: colorScheme.surface,
+          );
+  }
+}
+
 class EzUpdaterFAB extends StatefulWidget {
   /// Local app version
   final String appVersion;

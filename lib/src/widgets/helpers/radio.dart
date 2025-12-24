@@ -9,10 +9,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzRadio<T> extends StatelessWidget {
-  /// Defaults to max(current [EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  /// Defaults to max([EzConfig.iconSize] / [EzConfig.getDefault], 1.0)
   final double? scale;
 
-  /// Defaults to [EdgeInsets.all] with [EzConfig]s [marginKey] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.margin] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Radio.value] passthrough
@@ -69,8 +69,13 @@ class EzRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        max(EzConfig.iconSize / EzConfig.getDefault(iconSizeKey),
-            EzConfig.padding / EzConfig.getDefault(paddingKey));
+        max(
+            EzConfig.iconSize /
+                EzConfig.getDefault(
+                    EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+            EzConfig.padding /
+                EzConfig.getDefault(
+                    EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
 
     return Container(
       padding: ratio > 1.1

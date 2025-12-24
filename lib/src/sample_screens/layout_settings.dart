@@ -74,48 +74,95 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
           // Main //
-          // Margin
-          EzLayoutSetting(
-            key: ValueKey<String>('margin_$redraw'),
-            configKey: marginKey,
-            type: EzLayoutSettingType.margin,
-            min: minMargin,
-            max: maxMargin,
-            steps: 6,
-            decimals: 1,
-          ),
-          EzConfig.layout.spacer,
+          ...EzConfig.isDark
+              ? <Widget>[
+                  // Margin
+                  EzLayoutSetting(
+                    key: ValueKey<String>('margin_$redraw'),
+                    configKey: darkMarginKey,
+                    type: EzLayoutSettingType.margin,
+                    min: minMargin,
+                    max: maxMargin,
+                    steps: 6,
+                    decimals: 1,
+                  ),
+                  EzConfig.layout.spacer,
 
-          // Padding
-          EzLayoutSetting(
-            key: ValueKey<String>('padding_$redraw'),
-            configKey: paddingKey,
-            type: EzLayoutSettingType.padding,
-            min: minPadding,
-            max: maxPadding,
-            steps: 12,
-            decimals: 1,
-          ),
-          EzConfig.layout.spacer,
+                  // Padding
+                  EzLayoutSetting(
+                    key: ValueKey<String>('padding_$redraw'),
+                    configKey: darkPaddingKey,
+                    type: EzLayoutSettingType.padding,
+                    min: minPadding,
+                    max: maxPadding,
+                    steps: 12,
+                    decimals: 1,
+                  ),
+                  EzConfig.layout.spacer,
 
-          // Spacing
-          EzLayoutSetting(
-            key: ValueKey<String>('spacing_$redraw'),
-            configKey: spacingKey,
-            type: EzLayoutSettingType.spacing,
-            min: minSpacing,
-            max: maxSpacing,
-            steps: 13,
-            decimals: 0,
-          ),
-          EzConfig.layout.separator,
+                  // Spacing
+                  EzLayoutSetting(
+                    key: ValueKey<String>('spacing_$redraw'),
+                    configKey: darkSpacingKey,
+                    type: EzLayoutSettingType.spacing,
+                    min: minSpacing,
+                    max: maxSpacing,
+                    steps: 13,
+                    decimals: 0,
+                  ),
+                  EzConfig.layout.separator,
 
-          // Hide scroll
-          EzSwitchPair(
-            key: ValueKey<String>('scroll_$redraw'),
-            text: EzConfig.l10n.lsScroll,
-            valueKey: hideScrollKey,
-          ),
+                  // Hide scroll
+                  EzSwitchPair(
+                    key: ValueKey<String>('scroll_$redraw'),
+                    text: EzConfig.l10n.lsScroll,
+                    valueKey: darkHideScrollKey,
+                  ),
+                ]
+              : <Widget>[
+                  // Margin
+                  EzLayoutSetting(
+                    key: ValueKey<String>('margin_$redraw'),
+                    configKey: lightMarginKey,
+                    type: EzLayoutSettingType.margin,
+                    min: minMargin,
+                    max: maxMargin,
+                    steps: 6,
+                    decimals: 1,
+                  ),
+                  EzConfig.layout.spacer,
+
+                  // Padding
+                  EzLayoutSetting(
+                    key: ValueKey<String>('padding_$redraw'),
+                    configKey: lightPaddingKey,
+                    type: EzLayoutSettingType.padding,
+                    min: minPadding,
+                    max: maxPadding,
+                    steps: 12,
+                    decimals: 1,
+                  ),
+                  EzConfig.layout.spacer,
+
+                  // Spacing
+                  EzLayoutSetting(
+                    key: ValueKey<String>('spacing_$redraw'),
+                    configKey: lightSpacingKey,
+                    type: EzLayoutSettingType.spacing,
+                    min: minSpacing,
+                    max: maxSpacing,
+                    steps: 13,
+                    decimals: 0,
+                  ),
+                  EzConfig.layout.separator,
+
+                  // Hide scroll
+                  EzSwitchPair(
+                    key: ValueKey<String>('scroll_$redraw'),
+                    text: EzConfig.l10n.lsScroll,
+                    valueKey: lightHideScrollKey,
+                  ),
+                ],
 
           // After layout
           if (widget.afterLayout != null) ...widget.afterLayout!,

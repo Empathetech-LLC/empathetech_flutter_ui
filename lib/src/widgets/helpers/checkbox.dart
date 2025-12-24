@@ -9,7 +9,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
-  /// Defaults to [EdgeInsets.all] with [EzConfig]s [marginKey] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.margin]s when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Checkbox.value] passthrough
@@ -21,7 +21,7 @@ class EzCheckbox extends StatelessWidget {
   /// [Checkbox.onChanged] passthrough
   final ValueChanged<bool?>? onChanged;
 
-  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  /// Defaults to max([EzConfig.iconSize] / [EzConfig.getDefault], 1.0)
   final double? scale;
 
   /// [Checkbox.mouseCursor] passthrough
@@ -93,8 +93,13 @@ class EzCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        max(EzConfig.iconSize / EzConfig.getDefault(iconSizeKey),
-            EzConfig.padding / EzConfig.getDefault(paddingKey));
+        max(
+            EzConfig.iconSize /
+                EzConfig.getDefault(
+                    EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+            EzConfig.padding /
+                EzConfig.getDefault(
+                    EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
 
     return Padding(
       padding: ratio > 1.1

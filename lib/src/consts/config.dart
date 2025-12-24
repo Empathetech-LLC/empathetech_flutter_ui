@@ -178,11 +178,16 @@ const double defaultLabelSize = 14.0;
 
 /// 42.0, 32.0, 22.0, 16.0, 14.0
 const Map<String, double> fontSizeDefaults = <String, double>{
-  displayFontSizeKey: defaultDisplaySize,
-  headlineFontSizeKey: defaultHeadlineSize,
-  titleFontSizeKey: defaultTitleSize,
-  bodyFontSizeKey: defaultBodySize,
-  labelFontSizeKey: defaultLabelSize,
+  darkDisplayFontSizeKey: defaultDisplaySize,
+  lightDisplayFontSizeKey: defaultDisplaySize,
+  darkHeadlineFontSizeKey: defaultHeadlineSize,
+  lightHeadlineFontSizeKey: defaultHeadlineSize,
+  darkTitleFontSizeKey: defaultTitleSize,
+  lightTitleFontSizeKey: defaultTitleSize,
+  darkBodyFontSizeKey: defaultBodySize,
+  lightBodyFontSizeKey: defaultBodySize,
+  darkLabelFontSizeKey: defaultLabelSize,
+  lightLabelFontSizeKey: defaultLabelSize,
 };
 
 /// 0.0
@@ -240,11 +245,16 @@ const double minLabel = 7.0;
 
 /// 21.0, 16.0, 11.0, 8.0, 7.0
 const Map<String, double> fontSizeMins = <String, double>{
-  displayFontSizeKey: minDisplay,
-  headlineFontSizeKey: minHeadline,
-  titleFontSizeKey: minTitle,
-  bodyFontSizeKey: minBody,
-  labelFontSizeKey: minLabel,
+  darkDisplayFontSizeKey: minDisplay,
+  lightDisplayFontSizeKey: minDisplay,
+  darkHeadlineFontSizeKey: minHeadline,
+  lightHeadlineFontSizeKey: minHeadline,
+  darkTitleFontSizeKey: minTitle,
+  lightTitleFontSizeKey: minTitle,
+  darkBodyFontSizeKey: minBody,
+  lightBodyFontSizeKey: minBody,
+  darkLabelFontSizeKey: minLabel,
+  lightLabelFontSizeKey: minLabel,
 };
 
 /// 0.0
@@ -299,11 +309,16 @@ const double maxLabel = 28.0;
 
 /// 84.0, 64.0, 42.0, 32.0, 28.0
 const Map<String, double> fontSizeMaxes = <String, double>{
-  displayFontSizeKey: maxDisplay,
-  headlineFontSizeKey: maxHeadline,
-  titleFontSizeKey: maxTitle,
-  bodyFontSizeKey: maxBody,
-  labelFontSizeKey: maxLabel,
+  darkDisplayFontSizeKey: maxDisplay,
+  lightDisplayFontSizeKey: maxDisplay,
+  darkHeadlineFontSizeKey: maxHeadline,
+  lightHeadlineFontSizeKey: maxHeadline,
+  darkTitleFontSizeKey: maxTitle,
+  lightTitleFontSizeKey: maxTitle,
+  darkBodyFontSizeKey: maxBody,
+  lightBodyFontSizeKey: maxBody,
+  darkLabelFontSizeKey: maxLabel,
+  lightLabelFontSizeKey: maxLabel,
 };
 
 /// 1.0
@@ -397,16 +412,17 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Design settings //
 
-  // Global
-  animationDurationKey: defaultAnimationDuration,
-
   // Dark
+  darkAnimationDurationKey: defaultAnimationDuration,
+
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': none,
   darkButtonOpacityKey: maxOpacity,
   darkButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
 
   // Light
+  lightAnimationDurationKey: defaultAnimationDuration,
+
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': none,
   lightButtonOpacityKey: maxOpacity,
@@ -414,68 +430,115 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Layout settings //
 
-  marginKey: defaultMargin,
+  // Dark
+  darkMarginKey: defaultMargin,
+  // padding and spacing defined in mobile/desktop configs
+
+  // Light
+  lightMarginKey: defaultMargin,
+  // ditto
 
   // Text settings //
   // Selector
   advancedTextKey: false,
 
-  // Display
-  displayFontFamilyKey: roboto,
-  displayFontSizeKey: defaultDisplaySize,
-  displayBoldedKey: false,
-  displayItalicizedKey: false,
-  displayUnderlinedKey: false,
-  displayFontHeightKey: defaultFontHeight,
-  displayLetterSpacingKey: defaultLetterSpacing,
-  displayWordSpacingKey: defaultWordSpacing,
+  // Dark
+  darkDisplayFontFamilyKey: roboto,
+  darkDisplayFontSizeKey: defaultDisplaySize,
+  darkDisplayBoldedKey: false,
+  darkDisplayItalicizedKey: false,
+  darkDisplayUnderlinedKey: false,
+  darkDisplayFontHeightKey: defaultFontHeight,
+  darkDisplayLetterSpacingKey: defaultLetterSpacing,
+  darkDisplayWordSpacingKey: defaultWordSpacing,
 
-  // Headline
-  headlineFontFamilyKey: roboto,
-  headlineFontSizeKey: defaultHeadlineSize,
-  headlineBoldedKey: false,
-  headlineItalicizedKey: false,
-  headlineUnderlinedKey: false,
-  headlineFontHeightKey: defaultFontHeight,
-  headlineLetterSpacingKey: defaultLetterSpacing,
-  headlineWordSpacingKey: defaultWordSpacing,
+  darkHeadlineFontFamilyKey: roboto,
+  darkHeadlineFontSizeKey: defaultHeadlineSize,
+  darkHeadlineBoldedKey: false,
+  darkHeadlineItalicizedKey: false,
+  darkHeadlineUnderlinedKey: false,
+  darkHeadlineFontHeightKey: defaultFontHeight,
+  darkHeadlineLetterSpacingKey: defaultLetterSpacing,
+  darkHeadlineWordSpacingKey: defaultWordSpacing,
 
-  // Title
-  titleFontFamilyKey: roboto,
-  titleFontSizeKey: defaultTitleSize,
-  titleBoldedKey: true,
-  titleItalicizedKey: false,
-  titleUnderlinedKey: false,
-  titleFontHeightKey: defaultFontHeight,
-  titleLetterSpacingKey: defaultLetterSpacing,
-  titleWordSpacingKey: defaultWordSpacing,
+  darkTitleFontFamilyKey: roboto,
+  darkTitleFontSizeKey: defaultTitleSize,
+  darkTitleBoldedKey: true,
+  darkTitleItalicizedKey: false,
+  darkTitleUnderlinedKey: false,
+  darkTitleFontHeightKey: defaultFontHeight,
+  darkTitleLetterSpacingKey: defaultLetterSpacing,
+  darkTitleWordSpacingKey: defaultWordSpacing,
 
-  // Body
-  bodyFontFamilyKey: roboto,
-  bodyFontSizeKey: defaultBodySize,
-  bodyBoldedKey: false,
-  bodyItalicizedKey: false,
-  bodyUnderlinedKey: false,
-  bodyFontHeightKey: defaultFontHeight,
-  bodyLetterSpacingKey: defaultLetterSpacing,
-  bodyWordSpacingKey: defaultWordSpacing,
+  darkBodyFontFamilyKey: roboto,
+  darkBodyFontSizeKey: defaultBodySize,
+  darkBodyBoldedKey: false,
+  darkBodyItalicizedKey: false,
+  darkBodyUnderlinedKey: false,
+  darkBodyFontHeightKey: defaultFontHeight,
+  darkBodyLetterSpacingKey: defaultLetterSpacing,
+  darkBodyWordSpacingKey: defaultWordSpacing,
 
-  // Label
-  labelFontFamilyKey: roboto,
-  labelFontSizeKey: defaultLabelSize,
-  labelBoldedKey: false,
-  labelItalicizedKey: false,
-  labelUnderlinedKey: false,
-  labelFontHeightKey: defaultFontHeight,
-  labelLetterSpacingKey: defaultLetterSpacing,
-  labelWordSpacingKey: defaultWordSpacing,
+  darkLabelFontFamilyKey: roboto,
+  darkLabelFontSizeKey: defaultLabelSize,
+  darkLabelBoldedKey: false,
+  darkLabelItalicizedKey: false,
+  darkLabelUnderlinedKey: false,
+  darkLabelFontHeightKey: defaultFontHeight,
+  darkLabelLetterSpacingKey: defaultLetterSpacing,
+  darkLabelWordSpacingKey: defaultWordSpacing,
 
-  // Background opacity
   darkTextBackgroundOpacityKey: defaultTextOpacity,
-  lightTextBackgroundOpacityKey: defaultTextOpacity,
+  darkIconSizeKey: defaultIconSize,
 
-  // Icon size
-  iconSizeKey: defaultIconSize,
+  // Light
+  lightDisplayFontFamilyKey: roboto,
+  lightDisplayFontSizeKey: defaultDisplaySize,
+  lightDisplayBoldedKey: false,
+  lightDisplayItalicizedKey: false,
+  lightDisplayUnderlinedKey: false,
+  lightDisplayFontHeightKey: defaultFontHeight,
+  lightDisplayLetterSpacingKey: defaultLetterSpacing,
+  lightDisplayWordSpacingKey: defaultWordSpacing,
+
+  lightHeadlineFontFamilyKey: roboto,
+  lightHeadlineFontSizeKey: defaultHeadlineSize,
+  lightHeadlineBoldedKey: false,
+  lightHeadlineItalicizedKey: false,
+  lightHeadlineUnderlinedKey: false,
+  lightHeadlineFontHeightKey: defaultFontHeight,
+  lightHeadlineLetterSpacingKey: defaultLetterSpacing,
+  lightHeadlineWordSpacingKey: defaultWordSpacing,
+
+  lightTitleFontFamilyKey: roboto,
+  lightTitleFontSizeKey: defaultTitleSize,
+  lightTitleBoldedKey: true,
+  lightTitleItalicizedKey: false,
+  lightTitleUnderlinedKey: false,
+  lightTitleFontHeightKey: defaultFontHeight,
+  lightTitleLetterSpacingKey: defaultLetterSpacing,
+  lightTitleWordSpacingKey: defaultWordSpacing,
+
+  lightBodyFontFamilyKey: roboto,
+  lightBodyFontSizeKey: defaultBodySize,
+  lightBodyBoldedKey: false,
+  lightBodyItalicizedKey: false,
+  lightBodyUnderlinedKey: false,
+  lightBodyFontHeightKey: defaultFontHeight,
+  lightBodyLetterSpacingKey: defaultLetterSpacing,
+  lightBodyWordSpacingKey: defaultWordSpacing,
+
+  lightLabelFontFamilyKey: roboto,
+  lightLabelFontSizeKey: defaultLabelSize,
+  lightLabelBoldedKey: false,
+  lightLabelItalicizedKey: false,
+  lightLabelUnderlinedKey: false,
+  lightLabelFontHeightKey: defaultFontHeight,
+  lightLabelLetterSpacingKey: defaultLetterSpacing,
+  lightLabelWordSpacingKey: defaultWordSpacing,
+
+  lightTextBackgroundOpacityKey: defaultTextOpacity,
+  lightIconSizeKey: defaultIconSize,
 };
 
 /// [baseEmpathConfig] with a more compact layout and hidden scrolls
@@ -485,10 +548,17 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 const Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
-  // Layout
-  paddingKey: defaultMobilePadding,
-  spacingKey: defaultMobileSpacing,
-  hideScrollKey: true,
+  // Layout //
+
+  // Dark
+  darkPaddingKey: defaultMobilePadding,
+  darkSpacingKey: defaultMobileSpacing,
+  darkHideScrollKey: true,
+
+  // Light
+  lightPaddingKey: defaultMobilePadding,
+  lightSpacingKey: defaultMobileSpacing,
+  lightHideScrollKey: true,
 };
 
 /// [baseEmpathConfig] with a more open layout and visible scrolls
@@ -498,10 +568,17 @@ const Map<String, Object> empathMobileConfig = <String, Object>{
 const Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
-  // Layout
-  paddingKey: defaultDesktopPadding,
-  spacingKey: defaultDesktopSpacing,
-  hideScrollKey: false,
+  // Layout //
+
+  // Dark
+  darkPaddingKey: defaultDesktopPadding,
+  darkSpacingKey: defaultDesktopSpacing,
+  darkHideScrollKey: false,
+
+  // Light
+  lightPaddingKey: defaultDesktopPadding,
+  lightSpacingKey: defaultDesktopSpacing,
+  lightHideScrollKey: false,
 };
 
 /// [EzConfig.defaults] set to all recommended max values
@@ -513,49 +590,75 @@ final Map<String, Object> empathMaxConfig = <String, Object>{
 
   // Design settings //
 
-  animationDurationKey: maxAnimationDuration,
+  darkAnimationDurationKey: maxAnimationDuration,
+  lightAnimationDurationKey: maxAnimationDuration,
 
   // Layout settings //
 
-  marginKey: maxMargin,
-  paddingKey: maxPadding,
-  spacingKey: maxSpacing,
+  darkMarginKey: maxMargin,
+  lightMarginKey: maxMargin,
+  darkPaddingKey: maxPadding,
+  lightPaddingKey: maxPadding,
+  darkSpacingKey: maxSpacing,
+  lightSpacingKey: maxSpacing,
 
-  hideScrollKey: false,
+  darkHideScrollKey: false,
+  lightHideScrollKey: false,
 
   // Text settings //
 
   // Display
-  displayFontSizeKey: maxDisplay,
-  displayFontHeightKey: maxFontHeight,
-  displayLetterSpacingKey: maxLetterSpacing,
-  displayWordSpacingKey: maxWordSpacing,
+  darkDisplayFontSizeKey: maxDisplay,
+  lightDisplayFontSizeKey: maxDisplay,
+  darkDisplayFontHeightKey: maxFontHeight,
+  lightDisplayFontHeightKey: maxFontHeight,
+  darkDisplayLetterSpacingKey: maxLetterSpacing,
+  lightDisplayLetterSpacingKey: maxLetterSpacing,
+  darkDisplayWordSpacingKey: maxWordSpacing,
+  lightDisplayWordSpacingKey: maxWordSpacing,
 
   // Headline
-  headlineFontSizeKey: maxHeadline,
-  headlineFontHeightKey: maxFontHeight,
-  headlineLetterSpacingKey: maxLetterSpacing,
-  headlineWordSpacingKey: maxWordSpacing,
+  darkHeadlineFontSizeKey: maxHeadline,
+  lightHeadlineFontSizeKey: maxHeadline,
+  darkHeadlineFontHeightKey: maxFontHeight,
+  lightHeadlineFontHeightKey: maxFontHeight,
+  darkHeadlineLetterSpacingKey: maxLetterSpacing,
+  lightHeadlineLetterSpacingKey: maxLetterSpacing,
+  darkHeadlineWordSpacingKey: maxWordSpacing,
+  lightHeadlineWordSpacingKey: maxWordSpacing,
 
   // Title
-  titleFontSizeKey: maxTitle,
-  titleFontHeightKey: maxFontHeight,
-  titleLetterSpacingKey: maxLetterSpacing,
-  titleWordSpacingKey: maxWordSpacing,
+  darkTitleFontSizeKey: maxTitle,
+  lightTitleFontSizeKey: maxTitle,
+  darkTitleFontHeightKey: maxFontHeight,
+  lightTitleFontHeightKey: maxFontHeight,
+  darkTitleLetterSpacingKey: maxLetterSpacing,
+  lightTitleLetterSpacingKey: maxLetterSpacing,
+  darkTitleWordSpacingKey: maxWordSpacing,
+  lightTitleWordSpacingKey: maxWordSpacing,
 
   // Body
-  bodyFontSizeKey: maxBody,
-  bodyFontHeightKey: maxFontHeight,
-  bodyLetterSpacingKey: maxLetterSpacing,
-  bodyWordSpacingKey: maxWordSpacing,
+  darkBodyFontSizeKey: maxBody,
+  lightBodyFontSizeKey: maxBody,
+  darkBodyFontHeightKey: maxFontHeight,
+  lightBodyFontHeightKey: maxFontHeight,
+  darkBodyLetterSpacingKey: maxLetterSpacing,
+  lightBodyLetterSpacingKey: maxLetterSpacing,
+  darkBodyWordSpacingKey: maxWordSpacing,
+  lightBodyWordSpacingKey: maxWordSpacing,
 
   // Label
-  labelFontSizeKey: maxLabel,
-  labelFontHeightKey: maxFontHeight,
-  labelLetterSpacingKey: maxLetterSpacing,
-  labelWordSpacingKey: maxWordSpacing,
+  darkLabelFontSizeKey: maxLabel,
+  lightLabelFontSizeKey: maxLabel,
+  darkLabelFontHeightKey: maxFontHeight,
+  lightLabelFontHeightKey: maxFontHeight,
+  darkLabelLetterSpacingKey: maxLetterSpacing,
+  lightLabelLetterSpacingKey: maxLetterSpacing,
+  darkLabelWordSpacingKey: maxWordSpacing,
+  lightLabelWordSpacingKey: maxWordSpacing,
 
-  iconSizeKey: maxIconSize,
+  darkIconSizeKey: maxIconSize,
+  lightIconSizeKey: maxIconSize,
 };
 
 /// [EzConfig.defaults] set to all recommended min values
@@ -567,47 +670,73 @@ final Map<String, Object> empathMinConfig = <String, Object>{
 
   // Design settings //
 
-  animationDurationKey: minAnimationDuration,
+  darkAnimationDurationKey: minAnimationDuration,
+  lightAnimationDurationKey: minAnimationDuration,
 
   // Layout settings //
 
-  marginKey: minMargin,
-  paddingKey: minPadding,
-  spacingKey: minSpacing,
+  darkMarginKey: minMargin,
+  lightMarginKey: minMargin,
+  darkPaddingKey: minPadding,
+  lightPaddingKey: minPadding,
+  darkSpacingKey: minSpacing,
+  lightSpacingKey: minSpacing,
 
-  hideScrollKey: true,
+  darkHideScrollKey: true,
+  lightHideScrollKey: true,
 
   // Text settings //
 
   // Display
-  displayFontSizeKey: minDisplay,
-  displayFontHeightKey: minFontHeight,
-  displayLetterSpacingKey: minLetterSpacing,
-  displayWordSpacingKey: minWordSpacing,
+  darkDisplayFontSizeKey: minDisplay,
+  lightDisplayFontSizeKey: minDisplay,
+  darkDisplayFontHeightKey: minFontHeight,
+  lightDisplayFontHeightKey: minFontHeight,
+  darkDisplayLetterSpacingKey: minLetterSpacing,
+  lightDisplayLetterSpacingKey: minLetterSpacing,
+  darkDisplayWordSpacingKey: minWordSpacing,
+  lightDisplayWordSpacingKey: minWordSpacing,
 
   // Headline
-  headlineFontSizeKey: minHeadline,
-  headlineFontHeightKey: minFontHeight,
-  headlineLetterSpacingKey: minLetterSpacing,
-  headlineWordSpacingKey: minWordSpacing,
+  darkHeadlineFontSizeKey: minHeadline,
+  lightHeadlineFontSizeKey: minHeadline,
+  darkHeadlineFontHeightKey: minFontHeight,
+  lightHeadlineFontHeightKey: minFontHeight,
+  darkHeadlineLetterSpacingKey: minLetterSpacing,
+  lightHeadlineLetterSpacingKey: minLetterSpacing,
+  darkHeadlineWordSpacingKey: minWordSpacing,
+  lightHeadlineWordSpacingKey: minWordSpacing,
 
   // Title
-  titleFontSizeKey: minTitle,
-  titleFontHeightKey: minFontHeight,
-  titleLetterSpacingKey: minLetterSpacing,
-  titleWordSpacingKey: minWordSpacing,
+  darkTitleFontSizeKey: minTitle,
+  lightTitleFontSizeKey: minTitle,
+  darkTitleFontHeightKey: minFontHeight,
+  lightTitleFontHeightKey: minFontHeight,
+  darkTitleLetterSpacingKey: minLetterSpacing,
+  lightTitleLetterSpacingKey: minLetterSpacing,
+  darkTitleWordSpacingKey: minWordSpacing,
+  lightTitleWordSpacingKey: minWordSpacing,
 
   // Body
-  bodyFontSizeKey: minBody,
-  bodyFontHeightKey: minFontHeight,
-  bodyLetterSpacingKey: minLetterSpacing,
-  bodyWordSpacingKey: minWordSpacing,
+  darkBodyFontSizeKey: minBody,
+  lightBodyFontSizeKey: minBody,
+  darkBodyFontHeightKey: minFontHeight,
+  lightBodyFontHeightKey: minFontHeight,
+  darkBodyLetterSpacingKey: minLetterSpacing,
+  lightBodyLetterSpacingKey: minLetterSpacing,
+  darkBodyWordSpacingKey: minWordSpacing,
+  lightBodyWordSpacingKey: minWordSpacing,
 
   // Label
-  labelFontSizeKey: minLabel,
-  labelFontHeightKey: minFontHeight,
-  labelLetterSpacingKey: minLetterSpacing,
-  labelWordSpacingKey: minWordSpacing,
+  darkLabelFontSizeKey: minLabel,
+  lightLabelFontSizeKey: minLabel,
+  darkLabelFontHeightKey: minFontHeight,
+  lightLabelFontHeightKey: minFontHeight,
+  darkLabelLetterSpacingKey: minLetterSpacing,
+  lightLabelLetterSpacingKey: minLetterSpacing,
+  darkLabelWordSpacingKey: minWordSpacing,
+  lightLabelWordSpacingKey: minWordSpacing,
 
-  iconSizeKey: minIconSize,
+  darkIconSizeKey: minIconSize,
+  lightIconSizeKey: minIconSize,
 };

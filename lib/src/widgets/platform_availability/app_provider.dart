@@ -42,6 +42,7 @@ class EzAppProvider extends StatelessWidget {
           useCupertino: cupertinoCheck(),
           localeFallback: EzConfig.localeFallback,
           l10nFallback: EzConfig.l10nFallback,
+          isDark: isDarkTheme(context),
         ),
         child: _ProviderSquared(
           app: app,
@@ -52,7 +53,7 @@ class EzAppProvider extends StatelessWidget {
       );
 }
 
-class _ProviderSquared extends StatelessWidget {
+class _ProviderSquared extends StatefulWidget {
   final Widget app;
   final TargetPlatform? initialPlatform;
   final PlatformSettingsData? settings;
@@ -67,15 +68,36 @@ class _ProviderSquared extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
-    EzConfig.initProvider(config);
+  State<_ProviderSquared> createState() => _ProviderSquaredState();
+}
 
+class _ProviderSquaredState extends State<_ProviderSquared>
+    with WidgetsBindingObserver {
+  late final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
+
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    EzConfig.initProvider(config);
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    config.toggleTheme();
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
     return PlatformProvider(
       builder: (_) => PlatformTheme(
         builder: (_) => ScaffoldMessenger(
-          key: scaffoldMessengerKey,
-          child: app,
+          key: widget.scaffoldMessengerKey,
+          child: widget.app,
         ),
         themeMode: config.themeMode,
         materialDarkTheme: config.darkMaterial,
@@ -84,13 +106,19 @@ class _ProviderSquared extends StatelessWidget {
         cupertinoLightTheme: config.lightCupertino,
         matchCupertinoSystemChromeBrightness: true,
       ),
-      initialPlatform: initialPlatform,
-      settings: settings ??
+      initialPlatform: widget.initialPlatform,
+      settings: widget.settings ??
           PlatformSettingsData(
             iosUsesMaterialWidgets: true,
             legacyIosUsesMaterialWidgets: true,
             iosUseZeroPaddingForAppbarPlatformIcon: true,
           ),
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }

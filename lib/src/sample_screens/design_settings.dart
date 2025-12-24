@@ -169,8 +169,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             onPressed: () => ezModal(
               context: context,
               builder: (_) {
-                double animDuration =
-                    (EzConfig.get(animationDurationKey) as int).toDouble();
+                double animDuration = (EzConfig.animDuration as int).toDouble();
 
                 return StatefulBuilder(
                   builder: (_, StateSetter setModal) => EzScrollView(

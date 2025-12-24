@@ -132,10 +132,10 @@ Duration ezReadingTime(String passage) {
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
-/// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
+/// [Duration] with milliseconds set to [EzConfig.animDuration]
 /// Provide [mod] to adjust the duration, relative to the base value
-Duration ezAnimDuration({double mod = 1.0}) => Duration(
-    milliseconds: ((EzConfig.get(animationDurationKey) as int) * mod).toInt());
+Duration ezAnimDuration({double mod = 1.0}) =>
+    Duration(milliseconds: (EzConfig.animDuration * mod).toInt());
 
 /// A [GoTransition] based on the current platform and [EzConfig] setup
 Page<dynamic> ezGoTransition(
@@ -180,11 +180,13 @@ double ezToolbarHeight({
     EzConfig.margin;
 
 /// Recommended size for an image
-/// Starts with 160.0; chosen by visual inspection
+/// Starts with 160.0, chosen by visual inspection
 /// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
 double ezImageSize(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(160.0) *
-    (EzConfig.iconSize / EzConfig.getDefault(iconSizeKey));
+    (EzConfig.iconSize /
+        EzConfig.getDefault(
+            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
 
 /// [TargetPlatform] aware helper that will request/exit a fullscreen window
 Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>

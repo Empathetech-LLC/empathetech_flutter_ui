@@ -156,39 +156,41 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   static EzConfigProvider get provider => _instance!._provider!;
 
-  static int get seed => _instance!._provider!.seed;
+  static int get seed => provider.seed;
 
-  static Locale get locale => _instance!._provider!.locale;
-  static EFUILang get l10n => _instance!._provider!.l10n;
+  static Locale get locale => provider.locale;
+  static EFUILang get l10n => provider.l10n;
 
-  static ThemeMode get themeMode => _instance!._provider!.themeMode;
-  static EzLayoutWidgets get layout => _instance!._provider!.layout;
-
-  /// Get the [key]s current EzConfig value
-  /// bool, int, double, String, String List, or null
-  static dynamic get(String key) =>
-      _instance!._prefs[key] ?? _instance!._defaults[key];
-
-  /// Quick alias for [EzConfig.get] => [isLeftyKey]
-  static bool get isLefty => _instance!._prefs[isLeftyKey];
-
-  /// Quick alias for [EzConfig.get] => [marginKey]
-  static double get margin => _instance!._prefs[marginKey];
-
-  /// Quick alias for [EzConfig.get] => [paddingKey]
-  static double get padding => _instance!._prefs[paddingKey];
-
-  /// Quick alias for [EzConfig.get] => [spacingKey]
-  static double get spacing => _instance!._prefs[spacingKey];
-
-  /// Quick alias for [EzConfig.get] => [iconSizeKey]
-  static double get iconSize => _instance!._prefs[iconSizeKey];
-
-  /// Quick alias for [EzConfig.get] => [animationDurationKey]
-  static int get animDuration => _instance!._prefs[animationDurationKey];
+  static ThemeMode get themeMode => provider.themeMode;
+  static bool get isDark => provider.isDark;
+  static EzLayoutWidgets get layout => provider.layout;
 
   /// Get the [key]s default EzConfig (nullable) value
   static dynamic getDefault(String key) => _instance!._defaults[key];
+
+  /// Get the [key]s current EzConfig value
+  /// bool, int, double, String, String List, or null
+  static dynamic get(String key) => _instance!._prefs[key] ?? getDefault(key);
+
+  /// Quick alias for [EzConfig.get] => [isLeftyKey]
+  static bool get isLefty => get(isLeftyKey);
+
+  /// Theme aware alias for [EzConfig.get] => [darkAnimationDurationKey] || [lightAnimationDurationKey]
+  static int get animDuration =>
+      get(isDark ? darkAnimationDurationKey : lightAnimationDurationKey);
+
+  /// Theme aware alias for [EzConfig.get] => [darkMarginKey] || [lightMarginKey]
+  static double get margin => get(isDark ? darkMarginKey : lightMarginKey);
+
+  /// Theme aware alias for [EzConfig.get] => [darkPaddingKey] || [lightPaddingKey]
+  static double get padding => get(isDark ? darkPaddingKey : lightPaddingKey);
+
+  /// Theme aware alias for [EzConfig.get] => [darkSpacingKey] || [lightSpacingKey]
+  static double get spacing => get(isDark ? darkSpacingKey : lightSpacingKey);
+
+  /// Theme aware alias for [EzConfig.get] => [darkIconSizeKey] || [lightIconSizeKey]
+  static double get iconSize =>
+      get(isDark ? darkIconSizeKey : lightIconSizeKey);
 
   /// Get the [key]s EzConfig (nullable) [bool] value
   /// Uses the stored values from [SharedPreferencesAsync]
@@ -490,231 +492,247 @@ Must be one of [int, bool, double, String, List<String>]''');
     ).toColor();
     final Color onTertiary = getTextColor(tertiary);
 
-    // Create a pseudo-random ColorScheme that follows the default vibe
-    await storeColorScheme(
-      colorScheme: isDark
-          ? ColorScheme.fromSeed(
-              brightness: Brightness.dark,
-              seedColor: primary,
-              primary: primary,
-              primaryContainer:
-                  primary.withValues(alpha: defaultButtonOutlineOpacity),
-              onPrimary: onPrimary,
-              onPrimaryContainer: onPrimary,
-              secondary: secondary,
-              secondaryContainer:
-                  secondary.withValues(alpha: defaultButtonOutlineOpacity),
-              onSecondary: onSecondary,
-              onSecondaryContainer: onSecondary,
-              tertiary: tertiary,
-              tertiaryContainer:
-                  tertiary.withValues(alpha: defaultButtonOutlineOpacity),
-              onTertiary: onTertiary,
-              onTertiaryContainer: onTertiary,
-              onSurface: Colors.white,
-              surfaceTint: Colors.transparent,
-            )
-          : ColorScheme.fromSeed(
-              brightness: Brightness.light,
-              seedColor: primary,
-              primary: primary,
-              primaryContainer:
-                  primary.withValues(alpha: defaultButtonOutlineOpacity),
-              onPrimary: onPrimary,
-              onPrimaryContainer: onPrimary,
-              secondary: secondary,
-              secondaryContainer:
-                  secondary.withValues(alpha: defaultButtonOutlineOpacity),
-              onSecondary: onSecondary,
-              onSecondaryContainer: onSecondary,
-              tertiary: tertiary,
-              tertiaryContainer:
-                  tertiary.withValues(alpha: defaultButtonOutlineOpacity),
-              onTertiary: onTertiary,
-              onTertiaryContainer: onTertiary,
-              onSurface: Colors.black,
-              surfaceTint: Colors.transparent,
-            ),
-      brightness: isDark ? Brightness.dark : Brightness.light,
-    );
+    if (isDark) {
+      // Create a pseudo-random ColorScheme that follows the default vibe
+      await storeColorScheme(
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: primary,
+          primary: primary,
+          primaryContainer:
+              primary.withValues(alpha: defaultButtonOutlineOpacity),
+          onPrimary: onPrimary,
+          onPrimaryContainer: onPrimary,
+          secondary: secondary,
+          secondaryContainer:
+              secondary.withValues(alpha: defaultButtonOutlineOpacity),
+          onSecondary: onSecondary,
+          onSecondaryContainer: onSecondary,
+          tertiary: tertiary,
+          tertiaryContainer:
+              tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+          onTertiary: onTertiary,
+          onTertiaryContainer: onTertiary,
+          onSurface: Colors.white,
+          surfaceTint: Colors.transparent,
+        ),
+        brightness: Brightness.dark,
+      );
 
-    // Update design settings //
+      // Update design settings //
 
-    await setInt(
-      animationDurationKey,
-      random.nextInt(500) + 250,
-    );
+      await setInt(darkAnimationDurationKey, random.nextInt(500) + 250);
 
-    await setDouble(
-      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-      random.nextDouble(),
-    );
-    await setDouble(
-      isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
-      random.nextDouble(),
-    );
+      await setDouble(darkButtonOpacityKey, random.nextDouble());
+      await setDouble(darkButtonOutlineOpacityKey, random.nextDouble());
 
-    // Update layout settings //
+      // Update layout settings //
 
-    await setDouble(
-      marginKey,
-      defaultMargin * getScalar(),
-    );
-    await setDouble(
-      paddingKey,
-      (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
-    );
-    await setDouble(
-      spacingKey,
-      (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-    );
+      await setDouble(darkMarginKey, defaultMargin * getScalar());
+      await setDouble(
+        darkPaddingKey,
+        (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+      );
+      await setDouble(
+        darkSpacingKey,
+        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+      );
 
-    await setBool(hideScrollKey, random.nextBool());
+      await setBool(darkHideScrollKey, random.nextBool());
 
-    // Update text settings //
+      // Update text settings //
 
-    final List<String> styleOptions = googleStyles.keys.toList();
+      final List<String> styleOptions = googleStyles.keys.toList();
 
-    final String attentionStyle =
-        styleOptions[random.nextInt(styleOptions.length)];
-    final double attentionScale = getScalar();
+      final String attentionStyle =
+          styleOptions[random.nextInt(styleOptions.length)];
+      final double attentionScale = getScalar();
 
-    final String descriptionStyle =
-        styleOptions[random.nextInt(styleOptions.length)];
-    final double descriptionScale = getScalar();
+      final String descriptionStyle =
+          styleOptions[random.nextInt(styleOptions.length)];
+      final double descriptionScale = getScalar();
 
-    await setString(
-      displayFontFamilyKey,
-      attentionStyle,
-    );
-    await setDouble(
-      displayFontSizeKey,
-      defaultDisplaySize * attentionScale,
-    );
-    await setBool(displayBoldedKey, false);
-    await setBool(displayItalicizedKey, false);
-    await setBool(
-      displayUnderlinedKey,
-      random.nextBool(),
-    );
-    await setDouble(
-      displayFontHeightKey,
-      defaultFontHeight,
-    );
-    await setDouble(
-      displayLetterSpacingKey,
-      defaultLetterSpacing,
-    );
-    await setDouble(
-      displayWordSpacingKey,
-      defaultWordSpacing,
-    );
+      await setString(darkDisplayFontFamilyKey, attentionStyle);
+      await setDouble(
+        darkDisplayFontSizeKey,
+        defaultDisplaySize * attentionScale,
+      );
+      await setBool(darkDisplayBoldedKey, false);
+      await setBool(darkDisplayItalicizedKey, false);
+      await setBool(darkDisplayUnderlinedKey, random.nextBool());
+      await setDouble(darkDisplayFontHeightKey, defaultFontHeight);
+      await setDouble(darkDisplayLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(darkDisplayWordSpacingKey, defaultWordSpacing);
 
-    await setString(
-      headlineFontFamilyKey,
-      attentionStyle,
-    );
-    await setDouble(
-      headlineFontSizeKey,
-      defaultHeadlineSize * attentionScale,
-    );
-    await setBool(headlineBoldedKey, false);
-    await setBool(headlineItalicizedKey, false);
-    await setBool(headlineUnderlinedKey, false);
-    await setDouble(
-      headlineFontHeightKey,
-      defaultFontHeight,
-    );
-    await setDouble(
-      headlineLetterSpacingKey,
-      defaultLetterSpacing,
-    );
-    await setDouble(
-      headlineWordSpacingKey,
-      defaultWordSpacing,
-    );
+      await setString(darkHeadlineFontFamilyKey, attentionStyle);
+      await setDouble(
+        darkHeadlineFontSizeKey,
+        defaultHeadlineSize * attentionScale,
+      );
+      await setBool(darkHeadlineBoldedKey, false);
+      await setBool(darkHeadlineItalicizedKey, false);
+      await setBool(darkHeadlineUnderlinedKey, false);
+      await setDouble(darkHeadlineFontHeightKey, defaultFontHeight);
+      await setDouble(darkHeadlineLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(darkHeadlineWordSpacingKey, defaultWordSpacing);
 
-    await setString(
-      titleFontFamilyKey,
-      styleOptions[random.nextInt(styleOptions.length)],
-    );
-    await setDouble(
-      titleFontSizeKey,
-      defaultTitleSize * attentionScale,
-    );
-    await setBool(titleBoldedKey, false);
-    await setBool(titleItalicizedKey, false);
-    await setBool(
-      titleUnderlinedKey,
-      random.nextBool(),
-    );
-    await setDouble(
-      titleFontHeightKey,
-      defaultFontHeight,
-    );
-    await setDouble(
-      titleLetterSpacingKey,
-      defaultLetterSpacing,
-    );
-    await setDouble(
-      titleWordSpacingKey,
-      defaultWordSpacing,
-    );
+      await setString(
+        darkTitleFontFamilyKey,
+        styleOptions[random.nextInt(styleOptions.length)],
+      );
+      await setDouble(darkTitleFontSizeKey, defaultTitleSize * attentionScale);
+      await setBool(darkTitleBoldedKey, false);
+      await setBool(darkTitleItalicizedKey, false);
+      await setBool(darkTitleUnderlinedKey, random.nextBool());
+      await setDouble(darkTitleFontHeightKey, defaultFontHeight);
+      await setDouble(darkTitleLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(darkTitleWordSpacingKey, defaultWordSpacing);
 
-    await setString(
-      bodyFontFamilyKey,
-      descriptionStyle,
-    );
-    await setDouble(
-      bodyFontSizeKey,
-      defaultBodySize * descriptionScale,
-    );
-    await setBool(bodyBoldedKey, false);
-    await setBool(bodyItalicizedKey, false);
-    await setBool(bodyUnderlinedKey, false);
-    await setDouble(
-      bodyFontHeightKey,
-      defaultFontHeight,
-    );
-    await setDouble(
-      bodyLetterSpacingKey,
-      defaultLetterSpacing,
-    );
-    await setDouble(
-      bodyWordSpacingKey,
-      defaultWordSpacing,
-    );
+      await setString(darkBodyFontFamilyKey, descriptionStyle);
+      await setDouble(darkBodyFontSizeKey, defaultBodySize * descriptionScale);
+      await setBool(darkBodyBoldedKey, false);
+      await setBool(darkBodyItalicizedKey, false);
+      await setBool(darkBodyUnderlinedKey, false);
+      await setDouble(darkBodyFontHeightKey, defaultFontHeight);
+      await setDouble(darkBodyLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(darkBodyWordSpacingKey, defaultWordSpacing);
 
-    await setString(
-      labelFontFamilyKey,
-      descriptionStyle,
-    );
-    await setDouble(
-      labelFontSizeKey,
-      defaultLabelSize * descriptionScale,
-    );
-    await setBool(labelBoldedKey, false);
-    await setBool(labelItalicizedKey, false);
-    await setBool(labelUnderlinedKey, false);
-    await setDouble(
-      labelFontHeightKey,
-      defaultFontHeight,
-    );
-    await setDouble(
-      labelLetterSpacingKey,
-      defaultLetterSpacing,
-    );
-    await setDouble(
-      labelWordSpacingKey,
-      defaultWordSpacing,
-    );
+      await setString(darkLabelFontFamilyKey, descriptionStyle);
+      await setDouble(
+        darkLabelFontSizeKey,
+        defaultLabelSize * descriptionScale,
+      );
+      await setBool(darkLabelBoldedKey, false);
+      await setBool(darkLabelItalicizedKey, false);
+      await setBool(darkLabelUnderlinedKey, false);
+      await setDouble(darkLabelFontHeightKey, defaultFontHeight);
+      await setDouble(darkLabelLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(darkLabelWordSpacingKey, defaultWordSpacing);
 
-    // Leave text background opacity as-is
+      // Leave text background opacity as-is
 
-    await setDouble(
-      iconSizeKey,
-      defaultIconSize * getScalar(),
-    );
+      await setDouble(darkIconSizeKey, defaultIconSize * getScalar());
+    } else {
+      // Create a pseudo-random ColorScheme that follows the default vibe
+      await storeColorScheme(
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: primary,
+          primary: primary,
+          primaryContainer:
+              primary.withValues(alpha: defaultButtonOutlineOpacity),
+          onPrimary: onPrimary,
+          onPrimaryContainer: onPrimary,
+          secondary: secondary,
+          secondaryContainer:
+              secondary.withValues(alpha: defaultButtonOutlineOpacity),
+          onSecondary: onSecondary,
+          onSecondaryContainer: onSecondary,
+          tertiary: tertiary,
+          tertiaryContainer:
+              tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+          onTertiary: onTertiary,
+          onTertiaryContainer: onTertiary,
+          onSurface: Colors.black,
+          surfaceTint: Colors.transparent,
+        ),
+        brightness: Brightness.light,
+      );
+
+      // Update design settings //
+
+      await setInt(lightAnimationDurationKey, random.nextInt(500) + 250);
+
+      await setDouble(lightButtonOpacityKey, random.nextDouble());
+      await setDouble(lightButtonOutlineOpacityKey, random.nextDouble());
+
+      // Update layout settings //
+
+      await setDouble(lightMarginKey, defaultMargin * getScalar());
+      await setDouble(
+        lightPaddingKey,
+        (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+      );
+      await setDouble(
+        lightSpacingKey,
+        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+      );
+
+      await setBool(lightHideScrollKey, random.nextBool());
+
+      // Update text settings //
+
+      final List<String> styleOptions = googleStyles.keys.toList();
+
+      final String attentionStyle =
+          styleOptions[random.nextInt(styleOptions.length)];
+      final double attentionScale = getScalar();
+
+      final String descriptionStyle =
+          styleOptions[random.nextInt(styleOptions.length)];
+      final double descriptionScale = getScalar();
+
+      await setString(lightDisplayFontFamilyKey, attentionStyle);
+      await setDouble(
+        lightDisplayFontSizeKey,
+        defaultDisplaySize * attentionScale,
+      );
+      await setBool(lightDisplayBoldedKey, false);
+      await setBool(lightDisplayItalicizedKey, false);
+      await setBool(lightDisplayUnderlinedKey, random.nextBool());
+      await setDouble(lightDisplayFontHeightKey, defaultFontHeight);
+      await setDouble(lightDisplayLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(lightDisplayWordSpacingKey, defaultWordSpacing);
+
+      await setString(lightHeadlineFontFamilyKey, attentionStyle);
+      await setDouble(
+        lightHeadlineFontSizeKey,
+        defaultHeadlineSize * attentionScale,
+      );
+      await setBool(lightHeadlineBoldedKey, false);
+      await setBool(lightHeadlineItalicizedKey, false);
+      await setBool(lightHeadlineUnderlinedKey, false);
+      await setDouble(lightHeadlineFontHeightKey, defaultFontHeight);
+      await setDouble(lightHeadlineLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(lightHeadlineWordSpacingKey, defaultWordSpacing);
+
+      await setString(
+        lightTitleFontFamilyKey,
+        styleOptions[random.nextInt(styleOptions.length)],
+      );
+      await setDouble(lightTitleFontSizeKey, defaultTitleSize * attentionScale);
+      await setBool(lightTitleBoldedKey, false);
+      await setBool(lightTitleItalicizedKey, false);
+      await setBool(lightTitleUnderlinedKey, random.nextBool());
+      await setDouble(lightTitleFontHeightKey, defaultFontHeight);
+      await setDouble(lightTitleLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(lightTitleWordSpacingKey, defaultWordSpacing);
+
+      await setString(lightBodyFontFamilyKey, descriptionStyle);
+      await setDouble(lightBodyFontSizeKey, defaultBodySize * descriptionScale);
+      await setBool(lightBodyBoldedKey, false);
+      await setBool(lightBodyItalicizedKey, false);
+      await setBool(lightBodyUnderlinedKey, false);
+      await setDouble(lightBodyFontHeightKey, defaultFontHeight);
+      await setDouble(lightBodyLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(lightBodyWordSpacingKey, defaultWordSpacing);
+
+      await setString(lightLabelFontFamilyKey, descriptionStyle);
+      await setDouble(
+        lightLabelFontSizeKey,
+        defaultLabelSize * descriptionScale,
+      );
+      await setBool(lightLabelBoldedKey, false);
+      await setBool(lightLabelItalicizedKey, false);
+      await setBool(lightLabelUnderlinedKey, false);
+      await setDouble(lightLabelFontHeightKey, defaultFontHeight);
+      await setDouble(lightLabelLetterSpacingKey, defaultLetterSpacing);
+      await setDouble(lightLabelWordSpacingKey, defaultWordSpacing);
+
+      // Leave text background opacity as-is
+
+      await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
+    }
 
     _instance!._provider!.rebuild(onComplete: onNotify);
   }

@@ -21,6 +21,7 @@ class EzConfigProvider extends ChangeNotifier {
   late EFUILang _l10n;
 
   late ThemeMode _themeMode;
+  late bool _isDark;
   late EzLayoutWidgets _layout;
 
   late ThemeData _darkMaterial;
@@ -34,11 +35,13 @@ class EzConfigProvider extends ChangeNotifier {
     required bool isLTR,
     required Locale localeFallback,
     required EFUILang l10nFallback,
+    required bool isDark,
   })  : _cupertino = useCupertino,
         _ltr = isLTR,
         _seed = Random().nextInt(rMax),
         _locale = localeFallback,
-        _l10n = l10nFallback {
+        _l10n = l10nFallback,
+        _isDark = isDark {
     _themeMode = _getMode;
     _buildTheme();
   }
@@ -99,6 +102,7 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   ThemeMode get themeMode => _themeMode;
+  bool get isDark => _isDark;
   EzLayoutWidgets get layout => _layout;
 
   ThemeData get darkMaterial => _darkMaterial;
@@ -124,6 +128,11 @@ class EzConfigProvider extends ChangeNotifier {
   void setTextDirection(bool isLTR, {void Function()? onComplete}) {
     _ltr = isLTR;
     rebuild(onComplete: onComplete);
+  }
+
+  void toggleTheme({void Function()? onComplete}) {
+    _isDark = !_isDark;
+    redraw(onComplete: onComplete);
   }
 
   void setThemeMode({void Function()? onComplete}) {
