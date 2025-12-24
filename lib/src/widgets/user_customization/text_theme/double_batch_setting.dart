@@ -24,6 +24,10 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   /// Required for max/min awareness
   final EzLabelStyleProvider labelProvider;
 
+  /// Null will update both theme modes
+  /// Quantum computing
+  final bool? isDark;
+
   /// Amount to scale on each click
   final double delta;
 
@@ -40,18 +44,27 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
     required this.titleProvider,
     required this.bodyProvider,
     required this.labelProvider,
+    required this.isDark,
     this.delta = 0.1,
     this.iconSize,
   });
 
   // Define the build data //
 
-  static const List<String> keys = <String>[
-    displayFontSizeKey,
-    headlineFontSizeKey,
-    titleFontSizeKey,
-    bodyFontSizeKey,
-    labelFontSizeKey,
+  static const List<String> darkKeys = <String>[
+    darkDisplayFontSizeKey,
+    darkHeadlineFontSizeKey,
+    darkTitleFontSizeKey,
+    darkBodyFontSizeKey,
+    darkLabelFontSizeKey,
+  ];
+
+  static const List<String> lightKeys = <String>[
+    lightDisplayFontSizeKey,
+    lightHeadlineFontSizeKey,
+    lightTitleFontSizeKey,
+    lightBodyFontSizeKey,
+    lightLabelFontSizeKey,
   ];
 
   final bool atMax = fontSizeMaxes.entries.every(
@@ -66,15 +79,20 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
 
   EzTextStyleProvider providerFromKey(String key) {
     switch (key) {
-      case displayFontSizeKey:
+      case darkDisplayFontSizeKey:
+      case lightDisplayFontSizeKey:
         return displayProvider;
-      case headlineFontSizeKey:
+      case darkHeadlineFontSizeKey:
+      case lightHeadlineFontSizeKey:
         return headlineProvider;
-      case titleFontSizeKey:
+      case darkTitleFontSizeKey:
+      case lightTitleFontSizeKey:
         return titleProvider;
-      case bodyFontSizeKey:
+      case darkBodyFontSizeKey:
+      case lightBodyFontSizeKey:
         return bodyProvider;
-      case labelFontSizeKey:
+      case darkLabelFontSizeKey:
+      case lightLabelFontSizeKey:
         return labelProvider;
       default:
         throw Exception('Invalid key: $key');
@@ -107,22 +125,48 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    for (final String key in keys) {
-                      final EzTextStyleProvider provider = providerFromKey(key);
+                    if (isDark == null || isDark == true) {
+                      for (final String key in darkKeys) {
+                        final EzTextStyleProvider provider =
+                            providerFromKey(key);
 
-                      final double currSize =
-                          provider.value.fontSize ?? EzConfig.get(key);
+                        final double currSize =
+                            provider.value.fontSize ?? EzConfig.get(key);
 
-                      if (currSize != fontSizeMins[key]) {
-                        final double newSize = currSize * (1 - delta);
-                        final double sizeLimit = fontSizeMins[key]!;
+                        if (currSize != fontSizeMins[key]) {
+                          final double newSize = currSize * (1 - delta);
+                          final double sizeLimit = fontSizeMins[key]!;
 
-                        if (newSize >= sizeLimit) {
-                          await EzConfig.setDouble(key, newSize);
-                          provider.resize(newSize);
-                        } else {
-                          await EzConfig.setDouble(key, sizeLimit);
-                          provider.resize(sizeLimit);
+                          if (newSize >= sizeLimit) {
+                            await EzConfig.setDouble(key, newSize);
+                            provider.resize(newSize);
+                          } else {
+                            await EzConfig.setDouble(key, sizeLimit);
+                            provider.resize(sizeLimit);
+                          }
+                        }
+                      }
+                    }
+
+                    if (isDark == null || isDark == false) {
+                      for (final String key in lightKeys) {
+                        final EzTextStyleProvider provider =
+                            providerFromKey(key);
+
+                        final double currSize =
+                            provider.value.fontSize ?? EzConfig.get(key);
+
+                        if (currSize != fontSizeMins[key]) {
+                          final double newSize = currSize * (1 - delta);
+                          final double sizeLimit = fontSizeMins[key]!;
+
+                          if (newSize >= sizeLimit) {
+                            await EzConfig.setDouble(key, newSize);
+                            provider.resize(newSize);
+                          } else {
+                            await EzConfig.setDouble(key, sizeLimit);
+                            provider.resize(sizeLimit);
+                          }
                         }
                       }
                     }
@@ -137,11 +181,22 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
           // Core
           GestureDetector(
             onLongPress: () async {
-              for (final String key in keys) {
-                final EzTextStyleProvider provider = providerFromKey(key);
+              if (isDark == null || isDark == true) {
+                for (final String key in darkKeys) {
+                  final EzTextStyleProvider provider = providerFromKey(key);
 
-                await EzConfig.setDouble(key, fontSizeDefaults[key]!);
-                provider.resize(fontSizeDefaults[key]!);
+                  await EzConfig.setDouble(key, fontSizeDefaults[key]!);
+                  provider.resize(fontSizeDefaults[key]!);
+                }
+              }
+
+              if (isDark == null || isDark == false) {
+                for (final String key in lightKeys) {
+                  final EzTextStyleProvider provider = providerFromKey(key);
+
+                  await EzConfig.setDouble(key, fontSizeDefaults[key]!);
+                  provider.resize(fontSizeDefaults[key]!);
+                }
               }
             },
             child: Icon(
@@ -165,22 +220,48 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    for (final String key in keys) {
-                      final EzTextStyleProvider provider = providerFromKey(key);
+                    if (isDark == null || isDark == true) {
+                      for (final String key in darkKeys) {
+                        final EzTextStyleProvider provider =
+                            providerFromKey(key);
 
-                      final double currSize =
-                          provider.value.fontSize ?? EzConfig.get(key);
+                        final double currSize =
+                            provider.value.fontSize ?? EzConfig.get(key);
 
-                      if (currSize != fontSizeMaxes[key]) {
-                        final double newSize = currSize * (1 + delta);
-                        final double sizeLimit = fontSizeMaxes[key]!;
+                        if (currSize != fontSizeMaxes[key]) {
+                          final double newSize = currSize * (1 + delta);
+                          final double sizeLimit = fontSizeMaxes[key]!;
 
-                        if (newSize <= sizeLimit) {
-                          await EzConfig.setDouble(key, newSize);
-                          provider.resize(newSize);
-                        } else {
-                          await EzConfig.setDouble(key, sizeLimit);
-                          provider.resize(sizeLimit);
+                          if (newSize <= sizeLimit) {
+                            await EzConfig.setDouble(key, newSize);
+                            provider.resize(newSize);
+                          } else {
+                            await EzConfig.setDouble(key, sizeLimit);
+                            provider.resize(sizeLimit);
+                          }
+                        }
+                      }
+                    }
+
+                    if (isDark == null || isDark == false) {
+                      for (final String key in lightKeys) {
+                        final EzTextStyleProvider provider =
+                            providerFromKey(key);
+
+                        final double currSize =
+                            provider.value.fontSize ?? EzConfig.get(key);
+
+                        if (currSize != fontSizeMaxes[key]) {
+                          final double newSize = currSize * (1 + delta);
+                          final double sizeLimit = fontSizeMaxes[key]!;
+
+                          if (newSize <= sizeLimit) {
+                            await EzConfig.setDouble(key, newSize);
+                            provider.resize(newSize);
+                          } else {
+                            await EzConfig.setDouble(key, sizeLimit);
+                            provider.resize(sizeLimit);
+                          }
                         }
                       }
                     }
