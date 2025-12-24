@@ -7,7 +7,6 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum EzTextSettingType { display, headline, title, body, label }
@@ -65,7 +64,7 @@ class EzTextSettings extends StatelessWidget {
     // Shared
     super.key,
     this.target,
-    this.resetSpacer = EzConfig.layout.separator,
+    this.resetSpacer = const EzSeparator(),
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.extraSaveKeys,
@@ -75,7 +74,7 @@ class EzTextSettings extends StatelessWidget {
     // Quick
     this.showOnSurface = true,
     this.moreQuickHeaderSettings,
-    this.textBlockSpacer = EzConfig.layout.divider,
+    this.textBlockSpacer = const EzDivider(),
     this.showOpacity = true,
     this.moreQuickFooterSettings,
 
@@ -360,6 +359,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late double backOpacity = EzConfig.get(widget.opacityKey);
   late double iconSize = EzConfig.iconSize;
 
+  bool setBoth = false;
+
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
@@ -371,7 +372,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       right: EzConfig.spacing / 2,
     );
 
-    final bool isDark = isDarkTheme(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color surface = colorScheme.surface;
 
@@ -410,7 +410,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 padding: wrapPadding,
                 child: EzColorSetting(
                   key: UniqueKey(),
-                  configKey: isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
+                  configKey:
+                      EzConfig.isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
                   onUpdate: (Color color) {
                     widget.displayProvider.redraw(color);
                     widget.headlineProvider.redraw(color);
@@ -432,6 +433,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   titleProvider: widget.titleProvider,
                   bodyProvider: widget.bodyProvider,
                   labelProvider: widget.labelProvider,
+                  isDark: setBoth ? null : EzConfig.isDark,
                   iconSize: iconSize,
                 ),
                 backgroundColor: backgroundColor,
@@ -558,95 +560,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ],
 
         // Icon size
-        Tooltip(
-          message: EzConfig.l10n.gCenterReset,
-          child: GestureDetector(
-            onLongPress: () async {
-              iconSize = defaultIconSize;
-              await EzConfig.setDouble(iconSizeKey, defaultIconSize);
-              setState(() {});
-            },
-            child: EzTextBackground(
-              Text(
-                EzConfig.l10n.tsIconSize,
-                style: widget.labelProvider.value,
-                textAlign: TextAlign.center,
-              ),
-              backgroundColor: backgroundColor,
-              margin: colMargin,
-            ),
-          ),
-        ),
-        EzTextBackground(
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Minus
-              (iconSize > minIconSize)
-                  ? EzIconButton(
-                      onPressed: () async {
-                        iconSize -= iconDelta;
-                        await EzConfig.setDouble(iconSizeKey, iconSize);
-                        setState(() {});
-                      },
-                      tooltip:
-                          '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
-                      iconSize: iconSize,
-                      icon: Icon(PlatformIcons(context).remove),
-                    )
-                  : EzIconButton(
-                      enabled: false,
-                      tooltip: EzConfig.l10n.gMinimum,
-                      iconSize: iconSize,
-                      icon: Icon(
-                        PlatformIcons(context).remove,
-                        color: colorScheme.outline,
-                      ),
-                    ),
-              EzMargin(vertical: false),
-
-              // Preview
-              GestureDetector(
-                onLongPress: () async {
-                  iconSize = defaultIconSize;
-                  await EzConfig.setDouble(iconSizeKey, defaultIconSize);
-                  setState(() {});
-                },
-                child: Icon(
-                  Icons.sync_alt,
-                  size: iconSize,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-              EzMargin(vertical: false),
-
-              // Plus
-              (iconSize < maxIconSize)
-                  ? EzIconButton(
-                      onPressed: () async {
-                        iconSize += iconDelta;
-                        await EzConfig.setDouble(iconSizeKey, iconSize);
-                        setState(() {});
-                      },
-                      tooltip:
-                          '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
-                      iconSize: iconSize,
-                      icon: Icon(PlatformIcons(context).add),
-                    )
-                  : EzIconButton(
-                      enabled: false,
-                      tooltip: EzConfig.l10n.gMaximum,
-                      iconSize: iconSize,
-                      icon: Icon(
-                        PlatformIcons(context).add,
-                        color: colorScheme.outline,
-                      ),
-                    ),
-            ],
-          ),
-          backgroundColor: backgroundColor,
-          borderRadius: ezPillShape,
-        ),
+        EzIconSizeSetting(redraw: () => setState(() {})),
 
         // Optional additional settings
         if (widget.moreQuickFooterSettings != null)
@@ -657,36 +571,25 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         EzResetButton(
           dialogTitle: EzConfig.l10n.tsResetAll,
           onConfirm: () async {
-            final Set<String> textKeys = allTextKeys.keys.toSet();
-
-            if (isDark) {
-              textKeys.remove(lightTextBackgroundOpacityKey);
-              textKeys.add(darkOnSurfaceKey);
+            if (setBoth || EzConfig.isDark) {
+              EzConfig.removeKeys(darkTextKeys.keys.toSet());
+              EzConfig.remove(darkOnSurfaceKey);
 
               if (widget.darkThemeResetKeys != null) {
-                textKeys.addAll(widget.darkThemeResetKeys!);
-              }
-            } else {
-              textKeys.remove(darkTextBackgroundOpacityKey);
-              textKeys.add(lightOnSurfaceKey);
-
-              if (widget.lightThemeResetKeys != null) {
-                textKeys.addAll(widget.lightThemeResetKeys!);
+                EzConfig.removeKeys(widget.darkThemeResetKeys!);
               }
             }
-            await EzConfig.removeKeys(textKeys);
 
-            widget.displayProvider.reset();
-            widget.headlineProvider.reset();
-            widget.titleProvider.reset();
-            widget.bodyProvider.reset();
-            widget.labelProvider.reset();
+            if (setBoth || !EzConfig.isDark) {
+              EzConfig.removeKeys(lightTextKeys.keys.toSet());
+              EzConfig.remove(lightOnSurfaceKey);
 
-            backOpacity = EzConfig.getDefault(widget.opacityKey);
-            backgroundColor = surface.withValues(alpha: backOpacity);
-            iconSize = EzConfig.getDefault(iconSizeKey);
+              if (widget.lightThemeResetKeys != null) {
+                EzConfig.removeKeys(widget.lightThemeResetKeys!);
+              }
+            }
 
-            setState(() {});
+            EzConfig.provider.rebuild();
           },
           extraKeys: widget.extraSaveKeys,
           appName: widget.appName,
@@ -771,7 +674,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   // Define the setting controllers //
 
-  /// Font family setting(s)
+  // Font family setting(s)
+  final String displayFontFamilyKey =
+      EzConfig.isDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey;
+  final String headlineFontFamilyKey =
+      EzConfig.isDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey;
+  final String titleFontFamilyKey =
+      EzConfig.isDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey;
+  final String bodyFontFamilyKey =
+      EzConfig.isDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey;
+  final String labelFontFamilyKey =
+      EzConfig.isDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey;
+
   Map<EzTextSettingType, EzFontFamilySetting> buildFamilyControls() =>
       <EzTextSettingType, EzFontFamilySetting>{
         EzTextSettingType.display: EzFontFamilySetting(
@@ -806,7 +720,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         ),
       };
 
-  /// Font size setting(s)
+  // Font size setting(s)
+  final String displayFontSizeKey =
+      EzConfig.isDark ? darkDisplayFontSizeKey : lightDisplayFontSizeKey;
+  final String headlineFontSizeKey =
+      EzConfig.isDark ? darkHeadlineFontSizeKey : lightHeadlineFontSizeKey;
+  final String titleFontSizeKey =
+      EzConfig.isDark ? darkTitleFontSizeKey : lightTitleFontSizeKey;
+  final String bodyFontSizeKey =
+      EzConfig.isDark ? darkBodyFontSizeKey : lightBodyFontSizeKey;
+  final String labelFontSizeKey =
+      EzConfig.isDark ? darkLabelFontSizeKey : lightLabelFontSizeKey;
+
   Map<EzTextSettingType, Widget> buildSizeControls() {
     final Widget fontSizeIcon = EzTextBackground(
       Icon(
@@ -883,7 +808,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     };
   }
 
-  /// Font weight setting(s)
+  // Font weight setting(s)
+  final String displayBoldedKey =
+      EzConfig.isDark ? darkDisplayBoldedKey : lightDisplayBoldedKey;
+  final String headlineBoldedKey =
+      EzConfig.isDark ? darkHeadlineBoldedKey : lightHeadlineBoldedKey;
+  final String titleBoldedKey =
+      EzConfig.isDark ? darkTitleBoldedKey : lightTitleBoldedKey;
+  final String bodyBoldedKey =
+      EzConfig.isDark ? darkBodyBoldedKey : lightBodyBoldedKey;
+  final String labelBoldedKey =
+      EzConfig.isDark ? darkLabelBoldedKey : lightLabelBoldedKey;
+
   late final Map<EzTextSettingType, EzBoldSetting> boldControllers =
       <EzTextSettingType, EzBoldSetting>{
     EzTextSettingType.display: EzBoldSetting(
@@ -919,6 +855,17 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   };
 
   /// Font style setting(s)
+  final String displayItalicizedKey =
+      EzConfig.isDark ? darkDisplayItalicizedKey : lightDisplayItalicizedKey;
+  final String headlineItalicizedKey =
+      EzConfig.isDark ? darkHeadlineItalicizedKey : lightHeadlineItalicizedKey;
+  final String titleItalicizedKey =
+      EzConfig.isDark ? darkTitleItalicizedKey : lightTitleItalicizedKey;
+  final String bodyItalicizedKey =
+      EzConfig.isDark ? darkBodyItalicizedKey : lightBodyItalicizedKey;
+  final String labelItalicizedKey =
+      EzConfig.isDark ? darkLabelItalicizedKey : lightLabelItalicizedKey;
+
   late final Map<EzTextSettingType, EzItalicSetting> italicsControllers =
       <EzTextSettingType, EzItalicSetting>{
     EzTextSettingType.display: EzItalicSetting(
@@ -955,7 +902,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     ),
   };
 
-  /// Font decoration setting(s)
+  // Font decoration setting(s)
+  final String displayUnderlinedKey =
+      EzConfig.isDark ? darkDisplayUnderlinedKey : lightDisplayUnderlinedKey;
+  final String headlineUnderlinedKey =
+      EzConfig.isDark ? darkHeadlineUnderlinedKey : lightHeadlineUnderlinedKey;
+  final String titleUnderlinedKey =
+      EzConfig.isDark ? darkTitleUnderlinedKey : lightTitleUnderlinedKey;
+  final String bodyUnderlinedKey =
+      EzConfig.isDark ? darkBodyUnderlinedKey : lightBodyUnderlinedKey;
+  final String labelUnderlinedKey =
+      EzConfig.isDark ? darkLabelUnderlinedKey : lightLabelUnderlinedKey;
+
   late final Map<EzTextSettingType, EzUnderlineSetting> underlineControllers =
       <EzTextSettingType, EzUnderlineSetting>{
     EzTextSettingType.display: EzUnderlineSetting(
@@ -992,7 +950,20 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     ),
   };
 
-  /// Letter EzConfig.spacing setting(s)
+  // Letter EzConfig.spacing setting(s)
+  final String displayLetterSpacingKey = EzConfig.isDark
+      ? darkDisplayLetterSpacingKey
+      : lightDisplayLetterSpacingKey;
+  final String headlineLetterSpacingKey = EzConfig.isDark
+      ? darkHeadlineLetterSpacingKey
+      : lightHeadlineLetterSpacingKey;
+  final String titleLetterSpacingKey =
+      EzConfig.isDark ? darkTitleLetterSpacingKey : lightTitleLetterSpacingKey;
+  final String bodyLetterSpacingKey =
+      EzConfig.isDark ? darkBodyLetterSpacingKey : lightBodyLetterSpacingKey;
+  final String labelLetterSpacingKey =
+      EzConfig.isDark ? darkLabelLetterSpacingKey : lightLabelLetterSpacingKey;
+
   Map<EzTextSettingType, EzFontDoubleSetting> buildLetterSpaceControls() {
     final Widget letterSpacingIcon = EzTextBackground(
       Icon(
@@ -1067,7 +1038,19 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     };
   }
 
-  /// Word EzConfig.spacing setting(s)
+  // Word EzConfig.spacing setting(s)
+  final String displayWordSpacingKey =
+      EzConfig.isDark ? darkDisplayWordSpacingKey : lightDisplayWordSpacingKey;
+  final String headlineWordSpacingKey = EzConfig.isDark
+      ? darkHeadlineWordSpacingKey
+      : lightHeadlineWordSpacingKey;
+  final String titleWordSpacingKey =
+      EzConfig.isDark ? darkTitleWordSpacingKey : lightTitleWordSpacingKey;
+  final String bodyWordSpacingKey =
+      EzConfig.isDark ? darkBodyWordSpacingKey : lightBodyWordSpacingKey;
+  final String labelWordSpacingKey =
+      EzConfig.isDark ? darkLabelWordSpacingKey : lightLabelWordSpacingKey;
+
   Map<EzTextSettingType, EzFontDoubleSetting> buildWordSpaceControls() {
     final Widget wordSpacingIcon = EzTextBackground(
       Icon(
@@ -1141,7 +1124,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     };
   }
 
-  /// Line height setting(s)
+  // Line height setting(s)
+  final String displayFontHeightKey =
+      EzConfig.isDark ? darkDisplayFontHeightKey : lightDisplayFontHeightKey;
+  final String headlineFontHeightKey =
+      EzConfig.isDark ? darkHeadlineFontHeightKey : lightHeadlineFontHeightKey;
+  final String titleFontHeightKey =
+      EzConfig.isDark ? darkTitleFontHeightKey : lightTitleFontHeightKey;
+  final String bodyFontHeightKey =
+      EzConfig.isDark ? darkBodyFontHeightKey : lightBodyFontHeightKey;
+  final String labelFontHeightKey =
+      EzConfig.isDark ? darkLabelFontHeightKey : lightLabelFontHeightKey;
+
   Map<EzTextSettingType, EzFontDoubleSetting> buildLineHeightControls() {
     final Widget lineHeightIcon = EzTextBackground(
       Icon(
