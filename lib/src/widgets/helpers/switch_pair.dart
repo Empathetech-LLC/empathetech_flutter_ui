@@ -250,8 +250,13 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
   @override
   Widget build(BuildContext context) {
     final double ratio = widget.scale ??
-        max(EzConfig.iconSize / EzConfig.getDefault(iconSizeKey),
-            EzConfig.padding / EzConfig.getDefault(paddingKey));
+        max(
+            EzConfig.iconSize /
+                EzConfig.getDefault(
+                    EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+            EzConfig.padding /
+                EzConfig.getDefault(
+                    EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
 
     return EzRow(
       reverseHands: widget.reverseHands,

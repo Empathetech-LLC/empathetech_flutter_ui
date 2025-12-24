@@ -39,7 +39,7 @@ class EzLayoutSettings extends StatefulWidget {
     super.key,
     this.beforeLayout,
     this.afterLayout,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = EzConfig.layout.separator,
     this.resetKeys,
     this.extraSaveKeys,
     required this.appName,

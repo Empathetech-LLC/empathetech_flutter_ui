@@ -144,7 +144,7 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   late final ScrollController controller;
   late final bool hideScroll =
-      EzConfig.get(hideScrollKey) || (widget.thumbVisibility == false);
+      EzConfig.hideScroll || (widget.thumbVisibility == false);
 
   bool canScrollUp = false;
   bool canScrollDown = false;

@@ -88,7 +88,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               EzIcon(icon, color: color),
-              EzMargin(),
+              EzConfig.layout.margin,
               EzText(
                 name,
                 textAlign: TextAlign.center,

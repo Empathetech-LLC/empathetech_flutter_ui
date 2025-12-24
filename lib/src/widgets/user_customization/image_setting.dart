@@ -541,7 +541,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              EzMargin(),
+              EzConfig.layout.margin,
               RadioGroup<BoxFit>(
                 groupValue: selectedFit,
                 onChanged: (BoxFit? value) {

@@ -65,7 +65,7 @@ class EzTextSettings extends StatelessWidget {
     // Shared
     super.key,
     this.target,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = EzConfig.layout.separator,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.extraSaveKeys,
@@ -75,7 +75,7 @@ class EzTextSettings extends StatelessWidget {
     // Quick
     this.showOnSurface = true,
     this.moreQuickHeaderSettings,
-    this.textBlockSpacer = const EzDivider(),
+    this.textBlockSpacer = EzConfig.layout.divider,
     this.showOpacity = true,
     this.moreQuickFooterSettings,
 
@@ -1247,7 +1247,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               style: widget.labelProvider.value,
               textAlign: TextAlign.center,
             ),
-            EzMargin(),
+            EzConfig.layout.margin,
             EzDropdownMenu<EzTextSettingType>(
               widthEntries: styleChoices
                   .map(

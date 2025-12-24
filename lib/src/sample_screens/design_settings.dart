@@ -93,7 +93,7 @@ class EzDesignSettings extends StatefulWidget {
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
     this.themedSettingsPostpend,
-    this.resetSpacer = const EzDivider(),
+    this.resetSpacer = EzConfig.layout.divider,
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
     this.onReset,

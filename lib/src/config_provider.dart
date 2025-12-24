@@ -72,12 +72,12 @@ class EzConfigProvider extends ChangeNotifier {
     }
 
     _layout = EzLayoutWidgets(
-      margin: EzMargin(),
+      margin: EzConfig.layout.margin,
       rowMargin: EzMargin(vertical: false),
-      spacer: const EzSpacer(),
+      spacer: EzConfig.layout.spacer,
       rowSpacer: const EzSpacer(vertical: false),
-      separator: const EzSeparator(),
-      divider: const EzDivider(),
+      separator: EzConfig.layout.separator,
+      divider: EzConfig.layout.divider,
     );
   }
 

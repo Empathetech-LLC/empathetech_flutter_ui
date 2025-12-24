@@ -619,7 +619,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               ),
                             ),
                           ),
-                          EzMargin(),
+                          EzConfig.layout.margin,
 
                           // Buttons
                           NotificationListener<ScrollNotification>(

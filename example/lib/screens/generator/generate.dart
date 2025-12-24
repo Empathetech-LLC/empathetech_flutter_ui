@@ -461,7 +461,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ],
         ),
-        EzMargin(),
+        EzConfig.layout.margin,
 
         // Readout
         Visibility(

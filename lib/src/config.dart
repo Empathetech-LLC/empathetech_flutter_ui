@@ -188,6 +188,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Theme aware alias for [EzConfig.get] => [darkSpacingKey] || [lightSpacingKey]
   static double get spacing => get(isDark ? darkSpacingKey : lightSpacingKey);
 
+  static bool get hideScroll =>
+      get(isDark ? darkHideScrollKey : lightHideScrollKey);
+
   /// Theme aware alias for [EzConfig.get] => [darkIconSizeKey] || [lightIconSizeKey]
   static double get iconSize =>
       get(isDark ? darkIconSizeKey : lightIconSizeKey);
