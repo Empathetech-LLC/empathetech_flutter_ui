@@ -9,6 +9,7 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_transitions/go_transitions.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
@@ -81,12 +82,16 @@ class _ProviderSquaredState extends State<_ProviderSquared>
   void initState() {
     super.initState();
     EzConfig.initProvider(config);
+    GoTransition.defaultDuration =
+        Duration(milliseconds: EzConfig.animDuration);
   }
 
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
     config.toggleTheme();
+    GoTransition.defaultDuration =
+        Duration(milliseconds: EzConfig.animDuration);
   }
 
   // Return the build //
