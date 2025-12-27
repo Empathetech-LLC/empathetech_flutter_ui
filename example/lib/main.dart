@@ -55,14 +55,11 @@ class OpenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     // Prep the router //
 
-    final int animDuration = kIsWeb ? 0 : EzConfig.animDuration;
-    final TargetPlatform currPlatform = getBasePlatform();
-
     GoTransition.defaultCurve = Curves.easeInOut;
-    GoTransition.defaultDuration = Duration(milliseconds: animDuration);
 
+    final TargetPlatform currPlatform = getBasePlatform();
     Page<dynamic> getTransition(BuildContext context, GoRouterState state) =>
-        ezGoTransition(context, state, animDuration, currPlatform);
+        ezGoTransition(context, state, EzConfig.animDuration, currPlatform);
 
     // Return the app //
 
