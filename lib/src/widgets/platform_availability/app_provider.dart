@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/src/functions/helpers_io.dart';
-
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -40,31 +38,40 @@ class EzAppProvider extends StatelessWidget {
       ChangeNotifierProvider<EzConfigProvider>(
         create: (_) => EzConfigProvider(
           isLTR: ltrCheck(context),
-          useCupertino: cupertinoCheck(),
+          useCupertino: isApple(),
           localeFallback: EzConfig.localeFallback,
           l10nFallback: EzConfig.l10nFallback,
           isDark: isDarkTheme(context),
         ),
-        child: _ProviderSquared(
-          app: app,
-          initialPlatform: initialPlatform,
-          settings: settings,
-          scaffoldMessengerKey: scaffoldMessengerKey,
+        child: Builder(
+          builder: (BuildContext bContext) {
+            EzConfig.initProvider(Provider.of<EzConfigProvider>(
+              bContext,
+              listen: false,
+            ));
+
+            return _ProviderSquared(
+              initialPlatform: initialPlatform,
+              settings: settings,
+              app: app,
+              scaffoldMessengerKey: scaffoldMessengerKey,
+            );
+          },
         ),
       );
 }
 
 class _ProviderSquared extends StatefulWidget {
-  final Widget app;
   final TargetPlatform? initialPlatform;
   final PlatformSettingsData? settings;
 
+  final Widget app;
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
 
   const _ProviderSquared({
-    required this.app,
     required this.initialPlatform,
     required this.settings,
+    required this.app,
     required this.scaffoldMessengerKey,
   });
 
@@ -74,14 +81,12 @@ class _ProviderSquared extends StatefulWidget {
 
 class _ProviderSquaredState extends State<_ProviderSquared>
     with WidgetsBindingObserver {
-  late final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
-
   // Init //
 
   @override
   void initState() {
     super.initState();
-    EzConfig.initProvider(config);
+
     GoTransition.defaultDuration =
         Duration(milliseconds: EzConfig.animDuration);
   }
@@ -89,7 +94,8 @@ class _ProviderSquaredState extends State<_ProviderSquared>
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    config.toggleTheme();
+
+    EzConfig.provider.toggleTheme();
     GoTransition.defaultDuration =
         Duration(milliseconds: EzConfig.animDuration);
   }
@@ -104,11 +110,11 @@ class _ProviderSquaredState extends State<_ProviderSquared>
           key: widget.scaffoldMessengerKey,
           child: widget.app,
         ),
-        themeMode: config.themeMode,
-        materialDarkTheme: config.darkMaterial,
-        materialLightTheme: config.lightMaterial,
-        cupertinoDarkTheme: config.darkCupertino,
-        cupertinoLightTheme: config.lightCupertino,
+        themeMode: EzConfig.provider.themeMode,
+        materialDarkTheme: EzConfig.provider.darkMaterial,
+        materialLightTheme: EzConfig.provider.lightMaterial,
+        cupertinoDarkTheme: EzConfig.provider.darkCupertino,
+        cupertinoLightTheme: EzConfig.provider.lightCupertino,
         matchCupertinoSystemChromeBrightness: true,
       ),
       initialPlatform: widget.initialPlatform,
