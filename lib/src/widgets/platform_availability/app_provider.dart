@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:go_transitions/go_transitions.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
@@ -43,20 +42,11 @@ class EzAppProvider extends StatelessWidget {
           l10nFallback: EzConfig.l10nFallback,
           isDark: isDarkTheme(context),
         ),
-        child: Builder(
-          builder: (BuildContext bContext) {
-            EzConfig.initProvider(Provider.of<EzConfigProvider>(
-              bContext,
-              listen: false,
-            ));
-
-            return _ProviderSquared(
-              initialPlatform: initialPlatform,
-              settings: settings,
-              app: app,
-              scaffoldMessengerKey: scaffoldMessengerKey,
-            );
-          },
+        child: _ProviderSquared(
+          initialPlatform: initialPlatform,
+          settings: settings,
+          app: app,
+          scaffoldMessengerKey: scaffoldMessengerKey,
         ),
       );
 }
@@ -79,43 +69,25 @@ class _ProviderSquared extends StatefulWidget {
   State<_ProviderSquared> createState() => _ProviderSquaredState();
 }
 
-class _ProviderSquaredState extends State<_ProviderSquared>
-    with WidgetsBindingObserver {
-  // Init //
-
-  @override
-  void initState() {
-    super.initState();
-
-    GoTransition.defaultDuration =
-        Duration(milliseconds: EzConfig.animDuration);
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    super.didChangePlatformBrightness();
-
-    EzConfig.provider.toggleTheme();
-    GoTransition.defaultDuration =
-        Duration(milliseconds: EzConfig.animDuration);
-  }
-
-  // Return the build //
-
+class _ProviderSquaredState extends State<_ProviderSquared> {
   @override
   Widget build(BuildContext context) {
+    final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
+    EzConfig.initProvider(config);
+
     return PlatformProvider(
       builder: (_) => PlatformTheme(
         builder: (_) => ScaffoldMessenger(
           key: widget.scaffoldMessengerKey,
           child: widget.app,
         ),
-        themeMode: EzConfig.provider.themeMode,
-        materialDarkTheme: EzConfig.provider.darkMaterial,
-        materialLightTheme: EzConfig.provider.lightMaterial,
-        cupertinoDarkTheme: EzConfig.provider.darkCupertino,
-        cupertinoLightTheme: EzConfig.provider.lightCupertino,
+        themeMode: config.themeMode,
+        materialDarkTheme: config.darkMaterial,
+        materialLightTheme: config.lightMaterial,
+        cupertinoDarkTheme: config.darkCupertino,
+        cupertinoLightTheme: config.lightCupertino,
         matchCupertinoSystemChromeBrightness: true,
+        onThemeModeChanged: (_) => config.toggleTheme(),
       ),
       initialPlatform: widget.initialPlatform,
       settings: widget.settings ??
@@ -125,11 +97,5 @@ class _ProviderSquaredState extends State<_ProviderSquared>
             iosUseZeroPaddingForAppbarPlatformIcon: true,
           ),
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 }
