@@ -42,19 +42,36 @@ class EzConfigProvider extends ChangeNotifier {
         _locale = localeFallback,
         _l10n = l10nFallback,
         _isDark = isDark {
-    _themeMode = _getMode;
-    _buildTheme();
-  }
+    // Explicit _getMode to avoid self reference
+    final bool? savedDark = EzConfig.get(isDarkThemeKey);
+    _themeMode = (savedDark == null)
+        ? ThemeMode.system
+        : (savedDark == true)
+            ? ThemeMode.dark
+            : ThemeMode.light;
 
-  Future<EFUILang> _buildL10n() async {
-    try {
-      final Locale locale = getStoredLocale();
-      final EFUILang toReturn = await EFUILang.delegate.load(locale);
-      _locale = locale;
-      return toReturn;
-    } catch (_) {
-      return EzConfig.l10nFallback;
+    // Ditto for _buildTheme
+    _darkMaterial = ezThemeData(Brightness.dark, _ltr);
+    _lightMaterial = ezThemeData(Brightness.light, _ltr);
+
+    if (_cupertino) {
+      _darkCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
+      _lightCupertino =
+          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
+    } else {
+      _darkCupertino = null;
+      _lightCupertino = null;
     }
+
+    _layout = EzLayoutWidgets(
+      margin: EzMargin(isDark: isDark),
+      rowMargin: EzMargin(isDark: isDark, vertical: false),
+      spacer: EzSpacer(isDark: isDark),
+      rowSpacer: EzSpacer(isDark: isDark, vertical: false),
+      separator: EzSeparator(isDark: isDark),
+      divider: const EzDivider(),
+    );
   }
 
   void _buildTheme() {
@@ -72,12 +89,12 @@ class EzConfigProvider extends ChangeNotifier {
     }
 
     _layout = EzLayoutWidgets(
-      margin: EzConfig.layout.margin,
+      margin: EzMargin(),
       rowMargin: EzMargin(vertical: false),
-      spacer: EzConfig.layout.spacer,
+      spacer: const EzSpacer(),
       rowSpacer: const EzSpacer(vertical: false),
-      separator: EzConfig.layout.separator,
-      divider: EzConfig.layout.divider,
+      separator: const EzSeparator(),
+      divider: const EzDivider(),
     );
   }
 
@@ -141,7 +158,16 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   Future<void> setLocale({void Function()? onComplete}) async {
-    _l10n = await _buildL10n();
+    try {
+      final Locale locale = getStoredLocale();
+      final EFUILang localization = await EFUILang.delegate.load(locale);
+
+      _locale = locale;
+      _l10n = localization;
+    } catch (_) {
+      _l10n = EzConfig.l10nFallback;
+    }
+
     redraw(onComplete: onComplete);
   }
 }
