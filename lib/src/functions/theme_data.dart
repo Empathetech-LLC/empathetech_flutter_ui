@@ -13,51 +13,40 @@ import 'package:feedback/feedback.dart';
 ThemeData ezThemeData(Brightness brightness, bool ltr) {
   //* Gather values from EzConfig *//
 
+  final bool isDark = Brightness.dark == brightness;
+
   // Shared //
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
   final Color highlightColor =
       colorScheme.primary.withValues(alpha: highlightOpacity);
 
-  final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
+  final int animDuration = Brightness.dark == brightness
+      ? EzConfig.get(darkAnimationDurationKey)
+      : EzConfig.get(lightAnimationDurationKey);
 
-  // Icons //
+  final double margin =
+      isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
+  final double padding =
+      isDark ? EzConfig.get(darkPaddingKey) : EzConfig.get(lightPaddingKey);
+  final double spacing =
+      isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
 
-  final IconThemeData iconData = IconThemeData(
-    color: colorScheme.primary,
-    size: EzConfig.iconSize,
-    applyTextScaling: true,
+  final double iconSize =
+      isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
+
+  final TextTheme textTheme = ezTextTheme(
+    colorScheme.onSurface,
+    isDark: isDark,
   );
-  final IconThemeData appBarIconData = IconThemeData(
-    color: colorScheme.primary,
-    size: textTheme.headlineLarge!.fontSize,
-    applyTextScaling: true,
-  );
-
-  // Text //
-
-  final double textOpacity = EzConfig.get(
-    brightness == Brightness.dark
-        ? darkTextBackgroundOpacityKey
-        : lightTextBackgroundOpacityKey,
-  );
-  final bool calcText = textOpacity < 1.0;
-
-  final Color textSurfaceColor = calcText
-      ? colorScheme.surface.withValues(alpha: textOpacity)
-      : colorScheme.surface;
 
   // Buttons //
 
   final double buttonOpacity = EzConfig.get(
-    brightness == Brightness.dark
-        ? darkButtonOpacityKey
-        : lightButtonOpacityKey,
+    isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
   );
   final double outlineOpacity = EzConfig.get(
-    brightness == Brightness.dark
-        ? darkButtonOutlineOpacityKey
-        : lightButtonOutlineOpacityKey,
+    isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
   );
 
   final bool calcButton = buttonOpacity < 1.0;
@@ -98,6 +87,30 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
           : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
       : colorScheme.outlineVariant;
 
+  // Icons //
+
+  final IconThemeData iconData = IconThemeData(
+    color: colorScheme.primary,
+    size: iconSize,
+    applyTextScaling: true,
+  );
+  final IconThemeData appBarIconData = IconThemeData(
+    color: colorScheme.primary,
+    size: textTheme.headlineLarge!.fontSize,
+    applyTextScaling: true,
+  );
+
+  // Text //
+
+  final double textOpacity = EzConfig.get(
+    isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey,
+  );
+  final bool calcText = textOpacity < 1.0;
+
+  final Color textSurfaceColor = calcText
+      ? colorScheme.surface.withValues(alpha: textOpacity)
+      : colorScheme.surface;
+
   // Misc //
 
   final double crucialOpacity =
@@ -127,7 +140,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
     // Transitions //
 
-    pageTransitionsTheme: EzConfig.animDuration > minAnimationDuration
+    pageTransitionsTheme: animDuration > minAnimationDuration
         ? EzTransitions()
         : EzNoTransitions(),
 
@@ -204,7 +217,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: EzConfig.spacing * 3,
+      space: spacing * 3,
     ),
 
     // Drawer
@@ -247,7 +260,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         side: BorderSide(color: buttonContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(EzConfig.padding),
+        padding: EdgeInsets.all(padding),
       ),
     ),
 
@@ -259,15 +272,15 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             iconColor: colorScheme.primary,
             collapsedIconColor: colorScheme.primary,
             tilePadding: EdgeInsets.only(
-              left: EzConfig.margin,
-              right: EzConfig.spacing,
-              top: EzConfig.margin,
-              bottom: EzConfig.margin,
+              left: margin,
+              right: spacing,
+              top: margin,
+              bottom: margin,
             ),
             childrenPadding: EdgeInsets.only(
-              left: EzConfig.margin * 2,
-              right: EzConfig.spacing,
-              bottom: EzConfig.margin,
+              left: margin * 2,
+              right: spacing,
+              bottom: margin,
             ),
             expandedAlignment: Alignment.centerLeft,
           )
@@ -277,15 +290,15 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             iconColor: colorScheme.primary,
             collapsedIconColor: colorScheme.primary,
             tilePadding: EdgeInsets.only(
-              left: EzConfig.spacing,
-              right: EzConfig.margin,
-              top: EzConfig.margin,
-              bottom: EzConfig.margin,
+              left: spacing,
+              right: margin,
+              top: margin,
+              bottom: margin,
             ),
             childrenPadding: EdgeInsets.only(
-              left: EzConfig.spacing,
-              right: EzConfig.margin * 2,
-              bottom: EzConfig.margin,
+              left: spacing,
+              right: margin * 2,
+              bottom: margin,
             ),
             expandedAlignment: Alignment.centerRight,
           ),
@@ -299,12 +312,12 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
-      iconSize: EzConfig.iconSize,
+      iconSize: iconSize,
       sizeConstraints: BoxConstraints(
-        minWidth: (EzConfig.iconSize * 1.25) + EzConfig.padding,
-        maxWidth: (EzConfig.iconSize * 1.25) + EzConfig.padding,
-        minHeight: (EzConfig.iconSize * 1.25) + EzConfig.padding,
-        maxHeight: (EzConfig.iconSize * 1.25) + EzConfig.padding,
+        minWidth: (iconSize * 1.25) + padding,
+        maxWidth: (iconSize * 1.25) + padding,
+        minHeight: (iconSize * 1.25) + padding,
+        maxHeight: (iconSize * 1.25) + padding,
       ),
     ),
 
@@ -319,9 +332,9 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: BorderSide.none,
-        iconSize: EzConfig.iconSize,
+        iconSize: iconSize,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(EzConfig.padding),
+        padding: EzInsets.wrap(padding),
       ),
     ),
 
@@ -378,7 +391,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(EzConfig.padding),
+        padding: EzInsets.wrap(padding),
       ),
     ),
 
@@ -395,8 +408,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Slider
     sliderTheme: SliderThemeData(
       thumbShape: RoundSliderThumbShape(
-        enabledThumbRadius: EzConfig.iconSize / 2,
-        disabledThumbRadius: EzConfig.iconSize / 2,
+        enabledThumbRadius: iconSize / 2,
+        disabledThumbRadius: iconSize / 2,
       ),
     ),
 
@@ -411,7 +424,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         side: BorderSide(color: buttonContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(EzConfig.padding),
+        padding: EdgeInsets.all(padding),
       ),
     ),
 
@@ -425,7 +438,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         borderRadius: ezRoundEdge,
       ),
       contentTextStyle: textTheme.bodyLarge,
-      insetPadding: EdgeInsets.all(EzConfig.margin),
+      insetPadding: EdgeInsets.all(margin),
     ),
 
     // Switch
@@ -465,8 +478,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       ),
       textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
-      margin: EdgeInsets.all(EzConfig.margin),
-      padding: EdgeInsets.all(EzConfig.margin),
+      margin: EdgeInsets.all(margin),
+      padding: EdgeInsets.all(margin),
       waitDuration: const Duration(milliseconds: 750),
     ),
   );
