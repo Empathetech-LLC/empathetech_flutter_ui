@@ -48,7 +48,7 @@ class EzRow extends StatelessWidget {
 
   /// Reverses [children] when [reverseHands] is true and [isLeftyKey] is true
   List<Widget> getChildren() {
-    if (reverseHands && EzConfig.get(isLeftyKey) == true) {
+    if (reverseHands && EzConfig.isLefty == true) {
       return children.reversed.toList();
     } else {
       return children;

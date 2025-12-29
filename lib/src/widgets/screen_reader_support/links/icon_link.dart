@@ -128,7 +128,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                   onHover: (bool isHovering) => underline(isHovering),
                   onFocusChange: (bool hasFocus) => underline(hasFocus),
                   icon: widget.icon,
-                  iconAlignment: (EzConfig.get(isLeftyKey))
+                  iconAlignment: EzConfig.isLefty
                       ? IconAlignment.start
                       : IconAlignment.end,
                   label: text,
@@ -142,7 +142,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                     onHover: (bool isHovering) => underline(isHovering),
                     onFocusChange: (bool hasFocus) => underline(hasFocus),
                     icon: widget.icon,
-                    iconAlignment: (EzConfig.get(isLeftyKey))
+                    iconAlignment: EzConfig.isLefty
                         ? IconAlignment.start
                         : IconAlignment.end,
                     label: text,

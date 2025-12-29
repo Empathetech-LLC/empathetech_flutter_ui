@@ -26,13 +26,9 @@ class EzDominantHandSwitch extends StatefulWidget {
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
-  // Gather the fixed theme data //
+  // Define the build data //
 
-  late
-
-      // Define the build data //
-
-      bool isLefty = EzConfig.get(isLeftyKey);
+  bool isLefty = EzConfig.isLefty;
 
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
     DropdownMenuEntry<bool>(value: false, label: EzConfig.l10n.gRight),
