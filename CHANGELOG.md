@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - appName and androidPackage parameters to all sample settings screen constructions
   - For EzUpdater and/or config saving/loading
+- Undo passthrough to ezSnackBar
 
 ### Removed
 - ezL10n function, now use EzConfig.l10n
