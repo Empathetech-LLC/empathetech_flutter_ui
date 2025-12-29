@@ -130,11 +130,11 @@ ColorScheme ezColorScheme(Brightness brightness) {
 /// Store the passed [ColorScheme] in [EzConfig.prefs]
 Future<void> storeColorScheme({
   required ColorScheme colorScheme,
-  required Brightness brightness,
+  required Brightness? brightness,
   bool notifyTheme = false,
   void Function()? onNotify,
 }) async {
-  if (brightness == Brightness.dark) {
+  if (brightness == null || brightness == Brightness.dark) {
     await EzConfig.removeKeys(
       darkColorKeys.keys.toSet(),
     );
@@ -323,7 +323,9 @@ Future<void> storeColorScheme({
       darkSurfaceTintKey,
       colorScheme.surfaceTint.toARGB32(),
     );
-  } else {
+  }
+
+  if (brightness == null || brightness == Brightness.light) {
     await EzConfig.removeKeys(
       lightColorKeys.keys.toSet(),
     );
