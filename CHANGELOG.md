@@ -12,8 +12,13 @@ All notable changes to this project will be documented in this file.
 
 ### Updated
 - !! EzConfig/settings updates are fully live now !!
+  - EzConfig.set can optionally redraw the UI immediately
+    - Default false for performance
+      - All sample settings screens have appropriate instances set true (ImageSettings, for example)
+      - Sample settings screens also have a new EzApplyFAB that appears when changes are made
   - EzConfig.init has breaking changes (see docs, minor break)
   - EzConfig.getLocale -> getStoredLocale
+  - Privatized EzConfig fields, added lots of getters/setters
   - Common spacers should now be access via EzConfig.layout.[spacer,separator,margin,...] (previously ezSpacer, ezSeparator, ezMargin...)
 - Flutter 3.38.X
 
