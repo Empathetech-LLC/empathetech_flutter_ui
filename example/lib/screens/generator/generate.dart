@@ -313,13 +313,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ezLog(runResult.stdout, buffer: readout);
       ezLog(runResult.stderr, buffer: readout);
 
-      // (optionally) Generate EzConfig.l10n files //
+      // (optionally) Generate l10n files //
 
       if (widget.config.l10nConfig != null) {
         ezLog('flutter gen-l10n...', buffer: readout);
         runResult = await Process.run(
           '${flutterPath}flutter',
-          <String>['gen-EzConfig.l10n'],
+          <String>['gen-l10n'],
           runInShell: true,
           workingDirectory: projDir,
         );

@@ -2,9 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [10.2.1] - 2025-11-??
+## [11.0.0] - 2025-12-31
+### Added
+- appName and androidPackage parameters to all sample settings screen constructions
+  - For EzUpdater and/or config saving/loading
+
+### Removed
+- ezL10n function, now use EzConfig.l10n
+
 ### Updated
-- Minor breaking changes && deprecations from Flutter 3.38.0
+- !! EzConfig/settings updates are fully live now !!
+  - EzConfig.init has breaking changes (see docs, minor break)
+  - EzConfig.getLocale -> getStoredLocale
+  - Common spacers should now be access via EzConfig.layout.[spacer,separator,margin,...] (previously ezSpacer, ezSeparator, ezMargin...)
+- Flutter 3.38.X
 
 ## [10.2.0] - 2025-10-20
 ### Added

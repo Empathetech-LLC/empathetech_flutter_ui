@@ -2,10 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.3.3] - 2025-11-??
+## [3.0.0] - 2025-12-31
 ### Updated
-- Flutter 3.38.0
-- EFUI 10.2.1
+- Flutter 3.38.X
+- EFUI 11.0.0
 
 ## [2.3.2] - 2025-10-20
 ### Updated
