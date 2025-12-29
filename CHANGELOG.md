@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 - appName and androidPackage parameters to all sample settings screen constructions
   - For EzUpdater and/or config saving/loading
 - Undo passthrough to ezSnackBar
+- Save config link to randomize and reset buttons
+  - Toggle-able in Widget, included in sample settings screens
 
 ### Removed
 - ezL10n function, now use EzConfig.l10n
@@ -22,6 +24,7 @@ All notable changes to this project will be documented in this file.
   - Privatized EzConfig fields, added lots of getters/setters
   - Common spacers should now be access via EzConfig.layout.[spacer,separator,margin,...] (previously ezSpacer, ezSeparator, ezMargin...)
 - Flutter 3.38.X
+- Simplified/shortened the human translations pending message to "Machine translated"
 
 ## [10.2.0] - 2025-10-20
 ### Added
