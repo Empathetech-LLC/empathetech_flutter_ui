@@ -73,9 +73,9 @@ class OpenUIScaffold extends StatelessWidget {
 
     return EzAdaptiveParent(
       small: Consumer<EzConfigProvider>(
-        key: ValueKey<int>(EzConfig.seed),
-        builder: (_, EzConfigProvider theme, __) => SelectionArea(
+        builder: (_, EzConfigProvider provider, __) => SelectionArea(
           child: Scaffold(
+            key: ValueKey<int>(provider.seed),
             // AppBar
             appBar: PreferredSize(
               preferredSize: Size(double.infinity, toolbarHeight),
@@ -111,7 +111,7 @@ class OpenUIScaffold extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 const EzUpdaterFAB(
-                  appVersion: '2.3.2',
+                  appVersion: '3.0.0',
                   versionSource:
                       'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
                   gPlay:
