@@ -32,7 +32,7 @@ String? getArbDir(EAGConfig config) {
     }
   }
 
-  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-EzConfig.l10n-yaml-file
+  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
   return 'lib/10n';
 }
 
@@ -49,7 +49,7 @@ String? l10nClassName(EAGConfig config) {
     }
   }
 
-  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-EzConfig.l10n-yaml-file
+  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
   return 'AppLocalizations';
 }
 
@@ -141,7 +141,7 @@ aka translation. Add new text to the language files in ${getArbDir(config)} and 
 
 There is a step between: after editing the .arb files, run 
 ``` bash
-flutter gen-EzConfig.l10n
+flutter gen-l10n
 ``` 
 to generate the new aliases.
 ''' : ''}
@@ -232,7 +232,7 @@ aka translation. Add new text to the language files in ${getArbDir(config)} and 
 
 There is a step between: after editing the .arb files, run 
 ``` bash
-flutter gen-EzConfig.l10n
+flutter gen-l10n
 ``` 
 to generate the new aliases.
 ''' : ''}
@@ -312,7 +312,7 @@ aka translation. Add new text to the language files in ${getArbDir(config)} and 
 
 There is a step between: after editing the .arb files, run 
 ``` bash
-flutter gen-EzConfig.l10n
+flutter gen-l10n
 ``` 
 to generate the new aliases.
 ''' : ''}
@@ -723,7 +723,7 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
 
 export 'consts.dart';
 
-${config.l10nConfig != null ? "export '../EzConfig.l10n/${ezClassToSnake(l10nClassName(config)!)}.dart'" : ''};
+${config.l10nConfig != null ? "export '../l10n/${ezClassToSnake(l10nClassName(config)!)}.dart'" : ''};
 """);
 
     // widgets //
@@ -787,7 +787,7 @@ class EFUICredits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String label = isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
+    final String label = EzConfig.isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
     final String tip = EzConfig.l10n.gOpenEmpathetech;
     final String settings = EzConfig.l10n.ssPageTitle;
 
@@ -799,7 +799,7 @@ class EFUICredits extends StatelessWidget {
         icon: EzIcon(PlatformIcons(context).settings),
         label: label,
         semanticsLabel:
-          '\${isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
+          '\${EzConfig.isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
       ),
     );
   }
@@ -891,7 +891,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
               toolbarHeight: toolbarHeight,
 
               // Leading (aka left)
-              leading: isLefty ? options : const EzBackAction(),
+              leading: EzConfig.isLefty ? options : const EzBackAction(),
               leadingWidth: toolbarHeight,
 
               // Title
@@ -900,7 +900,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
               titleSpacing: 0,
 
               // Actions (aka trailing aka right)
-              actions: <Widget>[isLefty ? const EzBackAction() : options],
+              actions: <Widget>[EzConfig.isLefty ? const EzBackAction() : options],
             ),
           ),
 
@@ -912,7 +912,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[updater, if (fabs != null) ...fabs!],
           ),
-          floatingActionButtonLocation: isLefty
+          floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
 
@@ -965,8 +965,6 @@ class _ErrorScreenState extends State<ErrorScreen> {
   }
 
   // Return the build //
-
-  late 
 
   @override
   Widget build(BuildContext context) {
@@ -1026,7 +1024,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ${config.l10nConfig != null ? '''// Gather the fixed theme data //
 
-  late final ${l10nClassName(config)} EzConfig.l10n = ${l10nClassName(config)}.of(context)!;
+  late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;
 
   ''' : ''}// Define the build data //
 
@@ -1359,7 +1357,7 @@ Future<void> genL10n({
   "hsCounterLabel": "Vous avez appuyé sur le bouton autant de fois que cela :"
 }''');
 
-    final File l10nConfig = File('$dir/EzConfig.l10n.yaml');
+    final File l10nConfig = File('$dir/l10n.yaml');
     await l10nConfig.writeAsString(config.l10nConfig!);
   } catch (e) {
     onFailure(e.toString());

@@ -694,7 +694,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   EzConfig.layout.spacer,
 
-                  // EzConfig.l10n config
+                  // l10n config
                   _AdvancedSettingsField(
                     title: 'l10n.yaml',
                     tip: l10n.csL10nTip,
@@ -999,14 +999,14 @@ class _HomeScreenState extends State<HomeScreen> {
   ]
 }''';
 
-  /// Recommended Empathetech EzConfig.l10n config
-  static const String l10nDefault = '''arb-dir: lib/EzConfig.l10n
-output-dir: lib/EzConfig.l10n
+  /// Recommended Empathetech l10n config
+  static const String l10nDefault = '''arb-dir: lib/l10n
+output-dir: lib/l10n
 template-arb-file: lang_en.arb
 output-localization-file: lang.dart
 output-class: Lang
 use-deferred-loading: true
-gen-inputs-and-outputs-list: lib/EzConfig.l10n
+gen-inputs-and-outputs-list: lib/l10n
 required-resource-attributes: false
 format: true
 suppress-warnings: false''';
@@ -1016,7 +1016,7 @@ suppress-warnings: false''';
       '''include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude: [lib/EzConfig.l10n/**]
+  exclude: [lib/l10n/**]
 
 linter:
   rules:
