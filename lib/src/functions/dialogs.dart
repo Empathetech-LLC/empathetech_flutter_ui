@@ -48,9 +48,6 @@ Future<dynamic> ezColorPicker(
   return showPlatformDialog(
     context: context,
     builder: (BuildContext dContext) {
-      final double padding = EzConfig.padding;
-      final double spacing = EzConfig.spacing;
-
       void confirm() {
         onConfirm();
         Navigator.of(dContext).pop();
@@ -82,9 +79,9 @@ Future<dynamic> ezColorPicker(
           color: startColor,
           mainAxisSize: MainAxisSize.min,
           padding: EdgeInsets.zero,
-          spacing: spacing / 2,
-          runSpacing: spacing / 2,
-          columnSpacing: spacing,
+          spacing: EzConfig.spacing / 2,
+          runSpacing: EzConfig.spacing / 2,
+          columnSpacing: EzConfig.spacing,
           pickersEnabled: const <ColorPickerType, bool>{
             ColorPickerType.both: false,
             ColorPickerType.primary: false,
@@ -97,8 +94,8 @@ Future<dynamic> ezColorPicker(
           onColorChanged: onColorChange,
           showRecentColors: true,
           enableOpacity: true,
-          opacityThumbRadius: min(padding, 25.0),
-          opacityTrackHeight: min(padding * 2, 50.0),
+          opacityThumbRadius: min(EzConfig.padding, 25.0),
+          opacityTrackHeight: min(EzConfig.padding * 2, 50.0),
           showColorCode: true,
         ),
         materialActions: materialActions,
