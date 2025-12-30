@@ -260,7 +260,7 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 
     return Visibility(
       visible: !isLatest,
-      child: widget.isWeb // Trinary here, if in onPressed iOS web breaks
+      child: widget.isWeb // Trinary required, if/else breaks iOS web links
           ? FloatingActionButton(
               heroTag: 'updater_fab',
               onPressed: () => showPlatformDialog(
