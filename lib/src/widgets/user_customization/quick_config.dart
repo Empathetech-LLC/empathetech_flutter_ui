@@ -65,7 +65,6 @@ class EzQuickConfig extends StatelessWidget {
 
     return EzElevatedIconButton(
       onPressed: () async {
-        final bool isDark = isDarkTheme(context);
         bool updateBoth = false;
 
         await ezModal(
@@ -105,7 +104,7 @@ class EzQuickConfig extends StatelessWidget {
                           padding: wrapPadding,
                           child: EzBigButtonsConfig(
                             onComplete: onComplete,
-                            isDark: updateBoth ? null : isDark,
+                            isDark: updateBoth ? null : EzConfig.isDark,
                           ),
                         ),
 
@@ -115,7 +114,7 @@ class EzQuickConfig extends StatelessWidget {
                           padding: wrapPadding,
                           child: EzHighVisibilityConfig(
                             onComplete: onComplete,
-                            isDark: updateBoth ? null : isDark,
+                            isDark: updateBoth ? null : EzConfig.isDark,
                           ),
                         ),
 
@@ -139,7 +138,7 @@ class EzQuickConfig extends StatelessWidget {
                           padding: wrapPadding,
                           child: EzFancyPantsConfig(
                             onComplete: onComplete,
-                            isDark: updateBoth ? null : isDark,
+                            isDark: updateBoth ? null : EzConfig.isDark,
                           ),
                         ),
                     ],
@@ -420,7 +419,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: isDarkTheme(context) ? Colors.white : Colors.black,
+        color: EzConfig.isDark ? Colors.white : Colors.black,
         height: 1.75,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: 0.30,
@@ -430,7 +429,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
     );
 
     return EzElevatedButton(
-      style: isDarkTheme(context)
+      style: EzConfig.isDark
           ? ElevatedButton.styleFrom(
               backgroundColor: darkSurface,
               foregroundColor: Colors.white,
@@ -474,10 +473,9 @@ class EzVideoGameConfig extends StatelessWidget {
 
   static Future<bool> onPressed(BuildContext context) async {
     final bool onMobile = isMobile();
-    final bool isDark = isDarkTheme(context);
 
     // If the current theme is not dark, show a warning dialog
-    if (!isDark) {
+    if (!EzConfig.isDark) {
       final bool doIt = await showPlatformDialog(
         context: context,
         builder: (BuildContext dContext) {
@@ -517,7 +515,7 @@ class EzVideoGameConfig extends StatelessWidget {
 
     // Update colors //
 
-    if (!isDark) await EzConfig.setBool(isDarkThemeKey, true);
+    if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
     await storeColorScheme(
       colorScheme: ezColorScheme(Brightness.dark),
       brightness: Brightness.dark,
@@ -626,10 +624,8 @@ class EzChalkboardConfig extends StatelessWidget {
   const EzChalkboardConfig({super.key, this.onComplete});
 
   static Future<bool> onPressed(BuildContext context) async {
-    final bool isDark = isDarkTheme(context);
-
     // If the current theme is not dark, show a warning dialog
-    if (!isDark) {
+    if (!EzConfig.isDark) {
       final bool doIt = await showPlatformDialog(
         context: context,
         builder: (BuildContext dContext) {
@@ -669,7 +665,7 @@ class EzChalkboardConfig extends StatelessWidget {
 
     // Update colors //
 
-    if (!isDark) await EzConfig.setBool(isDarkThemeKey, true);
+    if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
     await storeColorScheme(
       colorScheme: const ColorScheme(
         brightness: Brightness.dark,
@@ -933,7 +929,7 @@ class EzFancyPantsConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: isDarkTheme(context) ? Colors.white : Colors.black,
+        color: EzConfig.isDark ? Colors.white : Colors.black,
         height: defaultFontHeight,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: defaultLetterSpacing,
@@ -943,7 +939,7 @@ class EzFancyPantsConfig extends StatelessWidget {
     );
 
     return EzElevatedButton(
-      style: isDarkTheme(context)
+      style: EzConfig.isDark
           ? ElevatedButton.styleFrom(
               backgroundColor: darkSurface,
               foregroundColor: Colors.white,

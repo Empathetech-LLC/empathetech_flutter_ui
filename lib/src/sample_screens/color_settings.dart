@@ -117,13 +117,11 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final bool isDark = isDarkTheme(context);
-
     final List<String> defaultList =
-        isDark ? widget.darkStarterSet : widget.lightStarterSet;
+        EzConfig.isDark ? widget.darkStarterSet : widget.lightStarterSet;
 
     final String userColorsKey =
-        isDark ? userDarkColorsKey : userLightColorsKey;
+        EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
     List<String> currList =
         EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
@@ -134,14 +132,16 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Current theme reminder
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n.gEditingTheme(isDark ? darkString : lightString),
+                EzConfig.l10n
+                    .gEditingTheme(EzConfig.isDark ? darkString : lightString),
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
-                EzConfig.l10n.gEditingTheme(isDark ? darkString : lightString),
+                EzConfig.l10n
+                    .gEditingTheme(EzConfig.isDark ? darkString : lightString),
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -192,7 +192,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
         // Reset button
         widget.resetSpacer,
-        isDark
+        EzConfig.isDark
             ? EzResetButton(
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
@@ -250,11 +250,10 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = isDarkTheme(context);
-    final Brightness brightness = isDark ? Brightness.dark : Brightness.light;
-
+    final Brightness brightness =
+        EzConfig.isDark ? Brightness.dark : Brightness.light;
     final String fromImageKey =
-        isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
+        EzConfig.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
 
     return EzScrollView(
       scrollDirection: Axis.horizontal,
@@ -364,9 +363,10 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
   }
 
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
-  List<Widget> getUntrackedColors(StateSetter setModalState, bool isDark) {
+  List<Widget> getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
-    final List<String> fullList = isDark ? darkColorOrder : lightColorOrder;
+    final List<String> fullList =
+        EzConfig.isDark ? darkColorOrder : lightColorOrder;
 
     return fullList
         .where((String element) => !currSet.contains(element))
@@ -432,15 +432,12 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     }
   }
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final bool isDark = isDarkTheme(context);
     final String userColorsKey =
-        isDark ? userDarkColorsKey : userLightColorsKey;
-
-    // Return the build //
+        EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -497,7 +494,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                       alignment: WrapAlignment.center,
                       runAlignment: WrapAlignment.center,
                       crossAxisAlignment: WrapCrossAlignment.center,
-                      children: getUntrackedColors(setModalState, isDark),
+                      children: getUntrackedColors(setModalState),
                     ),
                     EzConfig.layout.spacer,
                   ],
