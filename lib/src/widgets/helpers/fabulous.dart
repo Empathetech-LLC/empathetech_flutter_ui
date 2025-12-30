@@ -110,8 +110,10 @@ class EzConfigFAB extends StatelessWidget {
 }
 
 class EzSettingsDupeFAB extends StatefulWidget {
+  final void Function(bool) onSwitch;
+
   /// Toggle-able [FloatingActionButton] for updating both light and dark theme settings simultaneously
-  const EzSettingsDupeFAB({super.key});
+  const EzSettingsDupeFAB({super.key, required this.onSwitch});
 
   @override
   State<EzSettingsDupeFAB> createState() => _EzSettingsDupeFABState();
@@ -126,12 +128,18 @@ class _EzSettingsDupeFABState extends State<EzSettingsDupeFAB> {
 
     return isDuplicating
         ? FloatingActionButton(
-            onPressed: () => setState(() => isDuplicating = false),
+            onPressed: () {
+              setState(() => isDuplicating = false);
+              widget.onSwitch(false);
+            },
             foregroundColor: colorScheme.secondary,
             backgroundColor: colorScheme.primary,
           )
         : FloatingActionButton(
-            onPressed: () => setState(() => isDuplicating = true),
+            onPressed: () {
+              setState(() => isDuplicating = true);
+              widget.onSwitch(true);
+            },
             foregroundColor: colorScheme.outline,
             backgroundColor: colorScheme.surface,
           );
@@ -286,4 +294,31 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
             ),
     );
   }
+}
+
+class EzRebuildFAB extends StatelessWidget {
+  /// [EzConfig.provider] passthrough
+  final void Function()? onComplete;
+
+  /// Optional override, defaults to 'Apply changes'
+  final String? tooltip;
+
+  /// Optional override, defaults to [PlatformIcons.checkMark]
+  final IconData? icon;
+
+  /// [FloatingActionButton] that rebuilds the app when pressed
+  const EzRebuildFAB({
+    super.key,
+    this.onComplete,
+    this.tooltip,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) => FloatingActionButton(
+        heroTag: 'rebuild_fab',
+        onPressed: () => EzConfig.provider.rebuild(onComplete: onComplete),
+        tooltip: tooltip ?? 'Apply changes', // TODO: l10n
+        child: EzIcon(icon ?? PlatformIcons(context).checkMark),
+      );
 }
