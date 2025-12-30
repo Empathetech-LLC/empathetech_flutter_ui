@@ -141,12 +141,12 @@ class EzIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final double iSize = iconSize ?? EzConfig.iconSize;
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    late final bool isDark = isDarkTheme(context);
 
-    late final double buttonOpacity =
-        EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
-    late final double outlineOpacity = EzConfig.get(
-        isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey);
+    late final double buttonOpacity = EzConfig.get(
+        EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+    late final double outlineOpacity = EzConfig.get(EzConfig.isDark
+        ? darkButtonOutlineOpacityKey
+        : lightButtonOutlineOpacityKey);
 
     late final bool calcButton = buttonOpacity < 1.0;
     late final bool calcOutline = outlineOpacity < 1.0;
