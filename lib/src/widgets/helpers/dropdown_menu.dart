@@ -140,8 +140,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     late final double buttonOpacity = EzConfig.get(
-      isDarkTheme(context) ? darkButtonOpacityKey : lightButtonOpacityKey,
-    );
+        EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
 
     late final Color buttonBackground = buttonOpacity < 1.0
         ? (buttonOpacity < 0.01)

@@ -55,55 +55,51 @@ class EzConfigRandomizer extends StatelessWidget {
             'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
 
   @override
-  Widget build(BuildContext context) {
-    final bool isDark = isDarkTheme(context);
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        onPressed: () => showPlatformDialog(
+            context: context,
+            builder: (BuildContext dContext) {
+              final void Function() confirm =
+                  onConfirm ?? () => EzConfig.randomize();
+              final void Function() deny = onDeny ?? doNothing;
 
-    return EzElevatedIconButton(
-      onPressed: () => showPlatformDialog(
-          context: context,
-          builder: (BuildContext dContext) {
-            final void Function() confirm =
-                onConfirm ?? () => EzConfig.randomize(isDark);
-            final void Function() deny = onDeny ?? doNothing;
+              late final List<Widget> materialActions;
+              late final List<Widget> cupertinoActions;
 
-            late final List<Widget> materialActions;
-            late final List<Widget> cupertinoActions;
+              (materialActions, cupertinoActions) = ezActionPairs(
+                context: context,
+                onConfirm: () {
+                  confirm();
+                  Navigator.of(dContext).pop();
+                },
+                confirmIsDestructive: true,
+                onDeny: () {
+                  deny();
+                  Navigator.of(dContext).pop();
+                },
+              );
 
-            (materialActions, cupertinoActions) = ezActionPairs(
-              context: context,
-              onConfirm: () {
-                confirm();
-                Navigator.of(dContext).pop();
-              },
-              confirmIsDestructive: true,
-              onDeny: () {
-                deny();
-                Navigator.of(dContext).pop();
-              },
-            );
-
-            return EzAlertDialog(
-              title: Text(
-                dialogTitle ??
-                    EzConfig.l10n.ssRandomize(isDark
-                        ? EzConfig.l10n.gDark.toLowerCase()
-                        : EzConfig.l10n.gLight.toLowerCase()),
-                textAlign: TextAlign.center,
-              ),
-              content: dialogContent ??
-                  ezRichUndoWarning(
-                    context,
-                    extraKeys: extraKeys,
-                    appName: appName!,
-                    androidPackage: androidPackage,
-                  ),
-              materialActions: materialActions,
-              cupertinoActions: cupertinoActions,
-              needsClose: false,
-            );
-          }),
-      icon: EzIcon(LineIcons.diceD6),
-      label: label ?? EzConfig.l10n.ssRandom,
-    );
-  }
+              return EzAlertDialog(
+                title: Text(
+                  dialogTitle ??
+                      EzConfig.l10n.ssRandomize(EzConfig.isDark
+                          ? EzConfig.l10n.gDark.toLowerCase()
+                          : EzConfig.l10n.gLight.toLowerCase()),
+                  textAlign: TextAlign.center,
+                ),
+                content: dialogContent ??
+                    ezRichUndoWarning(
+                      context,
+                      extraKeys: extraKeys,
+                      appName: appName!,
+                      androidPackage: androidPackage,
+                    ),
+                materialActions: materialActions,
+                cupertinoActions: cupertinoActions,
+                needsClose: false,
+              );
+            }),
+        icon: EzIcon(LineIcons.diceD6),
+        label: label ?? EzConfig.l10n.ssRandom,
+      );
 }
