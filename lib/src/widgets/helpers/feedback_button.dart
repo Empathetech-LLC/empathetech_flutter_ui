@@ -84,15 +84,13 @@ class EzFeedbackMenuButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzMenuButton(
-      onPressed: () => ezFeedback(
-        parentContext: parentContext,
-        supportEmail: supportEmail,
-        appName: appName,
-      ),
-      icon: EzIcon(Icons.feedback_outlined),
-      label: EzConfig.l10n.gGiveFeedback,
-    );
-  }
+  Widget build(BuildContext context) => EzMenuButton(
+        onPressed: () => ezFeedback(
+          parentContext: parentContext,
+          supportEmail: supportEmail,
+          appName: appName,
+        ),
+        icon: EzIcon(Icons.feedback_outlined),
+        label: EzConfig.l10n.gGiveFeedback,
+      );
 }
