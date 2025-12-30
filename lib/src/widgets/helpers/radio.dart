@@ -68,14 +68,7 @@ class EzRadio<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double ratio = scale ??
-        max(
-            EzConfig.iconSize /
-                EzConfig.getDefault(
-                    EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
-            EzConfig.padding /
-                EzConfig.getDefault(
-                    EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+    final double ratio = scale ?? ezIconRatio();
 
     return Container(
       padding: ratio > 1.1

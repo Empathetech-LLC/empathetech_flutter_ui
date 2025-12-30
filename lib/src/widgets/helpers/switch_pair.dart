@@ -234,14 +234,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
 
   late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
 
-  late final double ratio = widget.scale ??
-      max(
-          EzConfig.iconSize /
-              EzConfig.getDefault(
-                  EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
-          EzConfig.padding /
-              EzConfig.getDefault(
-                  EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+  late final double ratio = widget.scale ?? ezIconRatio();
 
   // Define custom functions //
 
