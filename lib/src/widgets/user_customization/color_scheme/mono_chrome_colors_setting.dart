@@ -87,52 +87,48 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final bool isDark = isDarkTheme(context);
-
-    return EzElevatedIconButton(
-      style: isDark
-          ? ElevatedButton.styleFrom(
-              backgroundColor: darkSurface,
-              foregroundColor: Colors.white,
-              shadowColor: Colors.transparent,
-              iconColor: Colors.white,
-              overlayColor: Colors.white,
-              side: const BorderSide(color: darkOutline),
-              textStyle: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Colors.white),
-            )
-          : ElevatedButton.styleFrom(
-              backgroundColor: lightSurface,
-              foregroundColor: Colors.black,
-              shadowColor: Colors.transparent,
-              iconColor: Colors.black,
-              overlayColor: Colors.black,
-              side: const BorderSide(color: lightOutline),
-              textStyle: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Colors.black),
-            ),
-      onPressed: () async {
-        isDark
-            ? await storeColorScheme(
-                colorScheme: dark,
-                brightness: Brightness.dark,
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        style: EzConfig.isDark
+            ? ElevatedButton.styleFrom(
+                backgroundColor: darkSurface,
+                foregroundColor: Colors.white,
+                shadowColor: Colors.transparent,
+                iconColor: Colors.white,
+                overlayColor: Colors.white,
+                side: const BorderSide(color: darkOutline),
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: Colors.white),
               )
-            : await storeColorScheme(
-                colorScheme: light,
-                brightness: Brightness.light,
-              );
-        EzConfig.provider.rebuild();
-      },
-      icon: EzIcon(
-        Icons.contrast,
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
-      label: EzConfig.l10n.csMonoChrome,
-    );
-  }
+            : ElevatedButton.styleFrom(
+                backgroundColor: lightSurface,
+                foregroundColor: Colors.black,
+                shadowColor: Colors.transparent,
+                iconColor: Colors.black,
+                overlayColor: Colors.black,
+                side: const BorderSide(color: lightOutline),
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: Colors.black),
+              ),
+        onPressed: () async {
+          EzConfig.isDark
+              ? await storeColorScheme(
+                  colorScheme: dark,
+                  brightness: Brightness.dark,
+                )
+              : await storeColorScheme(
+                  colorScheme: light,
+                  brightness: Brightness.light,
+                );
+          EzConfig.provider.rebuild();
+        },
+        icon: EzIcon(
+          Icons.contrast,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+        label: EzConfig.l10n.csMonoChrome,
+      );
 }

@@ -83,11 +83,10 @@ class EzResetButton extends StatelessWidget {
 
     // Gather the contextual theme data //
 
-    late final bool isDark = isDarkTheme(context);
-    late final bool useCrucial =
-        (EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey)
-                as double) <
-            0.50;
+    late final bool useCrucial = (EzConfig.get(
+                EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey)
+            as double) <
+        0.50;
     late final Color crucialSurface =
         Theme.of(context).colorScheme.surface.withValues(alpha: 0.50);
 
