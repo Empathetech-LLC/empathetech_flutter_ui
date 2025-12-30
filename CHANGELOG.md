@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Undo passthrough to ezSnackBar
 - Save config link to randomize and reset buttons
   - Toggle-able in Widget, included in sample settings screens
+- Solid color option to EzImageSetting
 
 ### Removed
 - ezL10n function, now use EzConfig.l10n
