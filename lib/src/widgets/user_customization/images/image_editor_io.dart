@@ -52,15 +52,11 @@ class EzImageEditor extends StatefulWidget {
 }
 
 class _EzImageEditorState extends State<EzImageEditor> {
-  // Gather the fixed theme data //
+  // Define the build data //
 
   final Duration rotateDuration = ezAnimDuration(mod: 0.5);
 
-  late
-
-      // Define the build data //
-
-      final ImageEditorController _editorController = ImageEditorController();
+  final ImageEditorController _editorController = ImageEditorController();
   final GlobalKey<ExtendedImageEditorState> editorKey =
       GlobalKey<ExtendedImageEditorState>();
 
