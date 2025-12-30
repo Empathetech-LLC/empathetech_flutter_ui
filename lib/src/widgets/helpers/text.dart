@@ -56,20 +56,19 @@ class EzTextBackground extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    late final String oKey = isDarkTheme(context)
-        ? darkTextBackgroundOpacityKey
-        : lightTextBackgroundOpacityKey;
-
-    return Container(
-      padding: margin ?? EzInsets.wrap(EzConfig.margin),
-      decoration: BoxDecoration(
-        color: _color(context, EzConfig.get(oKey)),
-        borderRadius: borderRadius ?? ezRoundEdge,
-      ),
-      child: text,
-    );
-  }
+  Widget build(BuildContext context) => Container(
+        padding: margin ?? EzInsets.wrap(EzConfig.margin),
+        decoration: BoxDecoration(
+          color: _color(
+            context,
+            EzConfig.get(EzConfig.isDark
+                ? darkTextBackgroundOpacityKey
+                : lightTextBackgroundOpacityKey),
+          ),
+          borderRadius: borderRadius ?? ezRoundEdge,
+        ),
+        child: text,
+      );
 }
 
 class EzText extends StatelessWidget {

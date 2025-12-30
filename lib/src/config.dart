@@ -427,8 +427,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// i.e. a triadic [ColorScheme] that should be highly legible
   /// Doubles are limited to half and/or twice their default values'
   /// There is an optional [shiny] chance (1 in 4096) to change the [Locale]
-  static Future<void> randomize(
-    bool isDark, {
+  static Future<void> randomize({
     bool shiny = true,
     void Function()? onNotify,
   }) async {
