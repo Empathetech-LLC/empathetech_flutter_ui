@@ -23,19 +23,53 @@ import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
 // Platform checks //
 
+/// Where to find saved files on the current [TargetPlatform]
+String archivePath({required String? androidPackage, required String appName}) {
+  final TargetPlatform platform = getBasePlatform();
+
+  switch (platform) {
+    case TargetPlatform.android:
+      return 'Root > Android > Data > ${androidPackage ?? 'com.example.app'} > files';
+    case TargetPlatform.iOS:
+      return 'Files > Browse > $appName';
+    default:
+      return 'Downloads';
+  }
+}
+
 /// Get the current [TargetPlatform]; "slow" but reliable
 /// Alias exists for [kIsWeb] support
 TargetPlatform getBasePlatform() => getHostPlatform();
 
+/// Gets any stored [Locale] from [EzConfig]
+Locale getStoredLocale() {
+  final List<String>? localeData = EzConfig.get(appLocaleKey);
+  if (localeData == null || localeData.isEmpty) {
+    return EzConfig.localeFallback;
+  }
+
+  final String languageCode = localeData[0];
+  final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
+
+  return (countryCode != null)
+      ? Locale(languageCode, countryCode)
+      : Locale(languageCode);
+}
+
 /// Alias exists for [kIsWeb] support
-bool isMobile() => mobileCheck();
+bool isApple() => cupertinoCheck();
+
+/// First checks [PlatformTheme] then falls back to [MediaQuery]
+bool isDarkTheme(BuildContext context) =>
+    PlatformTheme.of(context)?.isDark ??
+    (MediaQuery.of(context).platformBrightness == Brightness.dark);
 
 /// Alias exists for [kIsWeb] support
 /// [isMobile] is preferred; technically more efficient
 bool isDesktop() => desktopCheck();
 
 /// Alias exists for [kIsWeb] support
-bool isApple() => cupertinoCheck();
+bool isMobile() => mobileCheck();
 
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
@@ -54,41 +88,11 @@ String screenshotHint() {
   }
 }
 
-/// Where to find saved files on the current [TargetPlatform]
-String archivePath({required String? androidPackage, required String appName}) {
-  final TargetPlatform platform = getBasePlatform();
-
-  switch (platform) {
-    case TargetPlatform.android:
-      return 'Root > Android > Data > ${androidPackage ?? 'com.example.app'} > files';
-    case TargetPlatform.iOS:
-      return 'Files > Browse > $appName';
-    default:
-      return 'Downloads';
-  }
-}
-
-/// First checks [PlatformTheme] then falls back to [MediaQuery]
-bool isDarkTheme(BuildContext context) =>
-    PlatformTheme.of(context)?.isDark ??
-    (MediaQuery.of(context).platformBrightness == Brightness.dark);
-
-/// Gets any stored [Locale] from [EzConfig]
-Locale getStoredLocale() {
-  final List<String>? localeData = EzConfig.get(appLocaleKey);
-  if (localeData == null || localeData.isEmpty) {
-    return EzConfig.localeFallback;
-  }
-
-  final String languageCode = localeData[0];
-  final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
-
-  return (countryCode != null)
-      ? Locale(languageCode, countryCode)
-      : Locale(languageCode);
-}
-
 // Readability //
+
+/// More readable than...
+/// FocusScope.of(context).unfocus();
+void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 
 /// Is there a required [Function] that you wish was optional?
 /// Then [doNothing]!
@@ -102,95 +106,48 @@ double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 /// MediaQuery.of(context).size.width
 double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 
-/// More readable than...
-/// FocusScope.of(context).unfocus();
-void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
-
 //* Custom functions *//
-
-/// Returns the [Directionality] of the current [BuildContext]
-/// Falls back to [rtlLanguageCodes] on context errors
-bool ltrCheck(BuildContext context) {
-  try {
-    return Directionality.of(context) == TextDirection.ltr;
-  } catch (_) {
-    final Locale locale = WidgetsBinding.instance.platformDispatcher.locale;
-    return !rtlLanguageCodes.contains(locale.languageCode);
-  }
-}
-
-/// Returns whether an app was installed from the Google Play Store
-/// Theoretically works on all platforms, but only relevant for Android
-Future<bool> isGPlayInstall() async {
-  final PackageInfo info = await PackageInfo.fromPlatform();
-  return info.installerStore == 'com.android.vending';
-}
-
-/// Relaxed reading time for a US tween: 100 words per minute
-Duration ezReadingTime(String passage) {
-  final int words = passage.split(' ').length;
-  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
-}
 
 /// [Duration] with milliseconds set to [EzConfig.animDuration]
 /// Provide [mod] to adjust the duration, relative to the base value
 Duration ezAnimDuration({double mod = 1.0}) =>
     Duration(milliseconds: (EzConfig.animDuration * mod).toInt());
 
-/// A [GoTransition] based on the current platform and [EzConfig] setup
-Page<dynamic> ezGoTransition(
-  BuildContext context,
-  GoRouterState state,
-  int animDuration,
-  TargetPlatform platform,
-) {
-  if (animDuration < 1) return GoTransitions.none(context, state);
+Future<void> ezConfigLoader(BuildContext context) async {
+  final FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: <String>['json'],
+  );
 
-  switch (platform) {
-    case TargetPlatform.android:
-      return GoTransitions.zoom(context, state);
-    case TargetPlatform.iOS:
-    case TargetPlatform.macOS:
-      return GoTransitions.cupertino(context, state);
-    case TargetPlatform.fuchsia:
-    case TargetPlatform.linux:
-    case TargetPlatform.windows:
-      return GoTransitions.slide.withFade(context, state);
+  try {
+    if (result != null && result.files.single.path != null) {
+      if (kIsWeb) {
+        final Uint8List? fileBytes = result.files.first.bytes;
+        if (fileBytes == null) throw 'null file';
+
+        final String fileContent = utf8.decode(fileBytes);
+        await EzConfig.loadConfig(jsonDecode(fileContent));
+      } else {
+        final String filePath = result.files.single.path!;
+        final String fileContent = await File(filePath).readAsString();
+
+        await EzConfig.loadConfig(jsonDecode(fileContent));
+      }
+    }
+  } catch (e) {
+    if (context.mounted) ezLogAlert(context, message: e.toString());
+    return;
+  }
+
+  if (context.mounted) {
+    ezSnackBar(
+      context: context,
+      message: kIsWeb
+          ? EzConfig.l10n.ssRestartReminderWeb
+          : EzConfig.l10n.ssRestartReminder,
+    );
   }
 }
-
-/// Calculate a recommended [AppBar.toolbarHeight]
-/// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
-double ezToolbarHeight({
-  required BuildContext context,
-  required String title,
-  bool includeIconButton = true,
-  TextStyle? style,
-}) =>
-    max(
-      ezTextSize(
-        title,
-        context: context,
-        style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
-      ).height,
-      includeIconButton
-          ? max(EzConfig.iconSize + EzConfig.padding, kMinInteractiveDimension)
-          : kMinInteractiveDimension,
-    ) +
-    EzConfig.margin;
-
-/// Recommended size for an image
-/// Starts with 160.0, chosen by visual inspection
-/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
-double ezImageSize(BuildContext context) =>
-    MediaQuery.textScalerOf(context).scale(160.0) *
-    (EzConfig.iconSize /
-        EzConfig.getDefault(
-            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
-
-/// [TargetPlatform] aware helper that will request/exit a fullscreen window
-Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
-    toggleFullscreen(platform, isFull);
 
 /// Save the current [EzConfig.prefs] to local storage
 Future<void> ezConfigSaver(
@@ -233,38 +190,91 @@ Future<void> ezConfigSaver(
   }
 }
 
-Future<void> ezConfigLoader(BuildContext context) async {
-  final FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: <String>['json'],
-  );
+/// [TargetPlatform] aware helper that will request/exit a fullscreen window
+Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
+    toggleFullscreen(platform, isFull);
 
-  try {
-    if (result != null && result.files.single.path != null) {
-      if (kIsWeb) {
-        final Uint8List? fileBytes = result.files.first.bytes;
-        if (fileBytes == null) throw 'null file';
+/// A [GoTransition] based on the current platform and [EzConfig] setup
+Page<dynamic> ezGoTransition(
+  BuildContext context,
+  GoRouterState state,
+  int animDuration,
+  TargetPlatform platform,
+) {
+  if (animDuration < 1) return GoTransitions.none(context, state);
 
-        final String fileContent = utf8.decode(fileBytes);
-        await EzConfig.loadConfig(jsonDecode(fileContent));
-      } else {
-        final String filePath = result.files.single.path!;
-        final String fileContent = await File(filePath).readAsString();
-
-        await EzConfig.loadConfig(jsonDecode(fileContent));
-      }
-    }
-  } catch (e) {
-    if (context.mounted) ezLogAlert(context, message: e.toString());
-    return;
+  switch (platform) {
+    case TargetPlatform.android:
+      return GoTransitions.zoom(context, state);
+    case TargetPlatform.iOS:
+    case TargetPlatform.macOS:
+      return GoTransitions.cupertino(context, state);
+    case TargetPlatform.fuchsia:
+    case TargetPlatform.linux:
+    case TargetPlatform.windows:
+      return GoTransitions.slide.withFade(context, state);
   }
+}
 
-  if (context.mounted) {
-    ezSnackBar(
-      context: context,
-      message: kIsWeb
-          ? EzConfig.l10n.ssRestartReminderWeb
-          : EzConfig.l10n.ssRestartReminder,
-    );
+/// Scale Widgets based on IconSize
+/// For Widgets that don't do it automatically, like [Radio] and [Checkbox]
+double ezIconRatio() => max(
+    EzConfig.iconSize /
+        EzConfig.getDefault(
+            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+    EzConfig.padding /
+        EzConfig.getDefault(
+            EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+
+/// Recommended size for an image
+/// Starts with 160.0, chosen by visual inspection
+/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
+double ezImageSize(BuildContext context) =>
+    MediaQuery.textScalerOf(context).scale(160.0) *
+    (EzConfig.iconSize /
+        EzConfig.getDefault(
+            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
+
+/// Calculate a recommended [AppBar.toolbarHeight]
+/// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
+double ezToolbarHeight({
+  required BuildContext context,
+  required String title,
+  bool includeIconButton = true,
+  TextStyle? style,
+}) =>
+    max(
+      ezTextSize(
+        title,
+        context: context,
+        style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
+      ).height,
+      includeIconButton
+          ? max(EzConfig.iconSize + EzConfig.padding, kMinInteractiveDimension)
+          : kMinInteractiveDimension,
+    ) +
+    EzConfig.margin;
+
+/// Relaxed reading time for a US tween: 100 words per minute
+Duration ezReadingTime(String passage) {
+  final int words = passage.split(' ').length;
+  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
+}
+
+/// Returns whether an app was installed from the Google Play Store
+/// Theoretically works on all platforms, but only relevant for Android
+Future<bool> isGPlayInstall() async {
+  final PackageInfo info = await PackageInfo.fromPlatform();
+  return info.installerStore == 'com.android.vending';
+}
+
+/// Returns the [Directionality] of the current [BuildContext]
+/// Falls back to [rtlLanguageCodes] on context errors
+bool ltrCheck(BuildContext context) {
+  try {
+    return Directionality.of(context) == TextDirection.ltr;
+  } catch (_) {
+    final Locale locale = WidgetsBinding.instance.platformDispatcher.locale;
+    return !rtlLanguageCodes.contains(locale.languageCode);
   }
 }
