@@ -230,7 +230,20 @@ class EzSwitchPair extends StatefulWidget {
 }
 
 class _EzSwitchPairState extends State<EzSwitchPair> {
+  // Define the build data //
+
   late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
+
+  late final double ratio = widget.scale ??
+      max(
+          EzConfig.iconSize /
+              EzConfig.getDefault(
+                  EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+          EzConfig.padding /
+              EzConfig.getDefault(
+                  EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+
+  // Define custom functions //
 
   late final void Function(bool?) onChanged = widget.onChanged ??
       (bool? choice) async {
@@ -247,76 +260,67 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
         widget.onChangedCallback?.call(choice);
       };
 
-  @override
-  Widget build(BuildContext context) {
-    final double ratio = widget.scale ??
-        max(
-            EzConfig.iconSize /
-                EzConfig.getDefault(
-                    EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
-            EzConfig.padding /
-                EzConfig.getDefault(
-                    EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+  // Return the build //
 
-    return EzRow(
-      reverseHands: widget.reverseHands,
-      mainAxisSize: widget.mainAxisSize,
-      mainAxisAlignment: widget.mainAxisAlignment,
-      crossAxisAlignment: widget.crossAxisAlignment,
-      children: <Widget>[
-        Flexible(
-          child: EzText(
-            widget.text,
-            useSurface: widget.useSurface,
-            style: widget.style,
-            strutStyle: widget.strutStyle,
-            textAlign: widget.textAlign,
-            textDirection: widget.textDirection,
-            locale: widget.locale,
-            softWrap: widget.softWrap,
-            overflow: widget.overflow,
-            textScaler: widget.textScaler,
-            maxLines: widget.maxLines,
-            semanticsLabel: widget.semanticsLabel,
-            textWidthBasis: widget.textWidthBasis,
-            textHeightBehavior: widget.textHeightBehavior,
-            selectionColor: widget.selectionColor,
-            backgroundColor: widget.backgroundColor,
+  @override
+  Widget build(BuildContext context) => EzRow(
+        reverseHands: widget.reverseHands,
+        mainAxisSize: widget.mainAxisSize,
+        mainAxisAlignment: widget.mainAxisAlignment,
+        crossAxisAlignment: widget.crossAxisAlignment,
+        children: <Widget>[
+          Flexible(
+            child: EzText(
+              widget.text,
+              useSurface: widget.useSurface,
+              style: widget.style,
+              strutStyle: widget.strutStyle,
+              textAlign: widget.textAlign,
+              textDirection: widget.textDirection,
+              locale: widget.locale,
+              softWrap: widget.softWrap,
+              overflow: widget.overflow,
+              textScaler: widget.textScaler,
+              maxLines: widget.maxLines,
+              semanticsLabel: widget.semanticsLabel,
+              textWidthBasis: widget.textWidthBasis,
+              textHeightBehavior: widget.textHeightBehavior,
+              selectionColor: widget.selectionColor,
+              backgroundColor: widget.backgroundColor,
+            ),
           ),
-        ),
-        Transform.scale(
-          scale: max(1.0, ratio),
-          // Could be PlatformSwitch
-          // Dev's opinion: Material switches are better
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeThumbColor: widget.activeThumbColor,
-            activeTrackColor: widget.activeTrackColor,
-            inactiveThumbColor: widget.inactiveThumbColor,
-            inactiveTrackColor: widget.inactiveTrackColor,
-            trackOutlineColor: widget.trackOutlineColor,
-            trackOutlineWidth: widget.trackOutlineWidth,
-            activeThumbImage: widget.activeThumbImage,
-            onActiveThumbImageError: widget.onActiveThumbImageError,
-            inactiveThumbImage: widget.inactiveThumbImage,
-            onInactiveThumbImageError: widget.onInactiveThumbImageError,
-            materialTapTargetSize: widget.materialTapTargetSize,
-            dragStartBehavior: widget.dragStartBehavior,
-            mouseCursor: widget.mouseCursor,
-            focusColor: widget.focusColor,
-            hoverColor: widget.hoverColor,
-            splashRadius: widget.splashRadius,
-            focusNode: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
-            autofocus: widget.autofocus,
-            padding: widget.padding ??
-                (ratio > 1.1
-                    ? EdgeInsets.all(EzConfig.margin * ratio)
-                    : EdgeInsets.symmetric(horizontal: EzConfig.margin)),
+          Transform.scale(
+            scale: max(1.0, ratio),
+            // Could be PlatformSwitch
+            // Dev's opinion: Material switches are better
+            child: Switch(
+              value: value,
+              onChanged: onChanged,
+              activeThumbColor: widget.activeThumbColor,
+              activeTrackColor: widget.activeTrackColor,
+              inactiveThumbColor: widget.inactiveThumbColor,
+              inactiveTrackColor: widget.inactiveTrackColor,
+              trackOutlineColor: widget.trackOutlineColor,
+              trackOutlineWidth: widget.trackOutlineWidth,
+              activeThumbImage: widget.activeThumbImage,
+              onActiveThumbImageError: widget.onActiveThumbImageError,
+              inactiveThumbImage: widget.inactiveThumbImage,
+              onInactiveThumbImageError: widget.onInactiveThumbImageError,
+              materialTapTargetSize: widget.materialTapTargetSize,
+              dragStartBehavior: widget.dragStartBehavior,
+              mouseCursor: widget.mouseCursor,
+              focusColor: widget.focusColor,
+              hoverColor: widget.hoverColor,
+              splashRadius: widget.splashRadius,
+              focusNode: widget.focusNode,
+              onFocusChange: widget.onFocusChange,
+              autofocus: widget.autofocus,
+              padding: widget.padding ??
+                  (ratio > 1.1
+                      ? EdgeInsets.all(EzConfig.margin * ratio)
+                      : EdgeInsets.symmetric(horizontal: EzConfig.margin)),
+            ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
 }
