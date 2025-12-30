@@ -139,7 +139,7 @@ class EzIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double savedIconSized = EzConfig.iconSize;
+    final double iSize = iconSize ?? EzConfig.iconSize;
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
     late final bool isDark = isDarkTheme(context);
 
@@ -175,7 +175,7 @@ class EzIconButton extends StatelessWidget {
             ? IconButton.styleFrom(
                 backgroundColor: buttonBackground,
                 side: BorderSide(color: enabledOutline),
-                iconSize: iconSize ?? savedIconSized,
+                iconSize: iSize,
               )
             : IconButton.styleFrom(
                 backgroundColor: buttonBackground,
@@ -183,11 +183,11 @@ class EzIconButton extends StatelessWidget {
                 overlayColor: colorScheme.outline,
                 shadowColor: Colors.transparent,
                 side: BorderSide(color: disabledOutline),
-                iconSize: iconSize ?? savedIconSized,
+                iconSize: iSize,
               ));
 
     return IconButton(
-      iconSize: iconSize ?? savedIconSized,
+      iconSize: iSize,
       visualDensity: visualDensity,
       padding: padding,
       alignment: alignment,
