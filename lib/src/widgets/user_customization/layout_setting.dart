@@ -96,12 +96,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     switch (widget.type) {
       // Margin
       case EzLayoutSettingType.margin:
-        late final bool isDark = isDarkTheme(context);
-
         late final String? backgroundImagePath = EzConfig.get(
-            isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
+            EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
 
-        late final BoxFit? backgroundImageFit = ezFitFromName(isDark
+        late final BoxFit? backgroundImageFit = ezFitFromName(EzConfig.isDark
             ? EzConfig.get('$darkBackgroundImageKey$boxFitSuffix')
             : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 

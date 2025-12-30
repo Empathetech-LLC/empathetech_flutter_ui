@@ -267,7 +267,7 @@ class _TextSettingsState extends State<_TextSettings>
             moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
             textBlockSpacer: widget.textBlockSpacer,
             showOpacity: widget.showOpacity,
-            opacityKey: isDarkTheme(context)
+            opacityKey: EzConfig.isDark
                 ? darkTextBackgroundOpacityKey
                 : lightTextBackgroundOpacityKey,
             moreQuickFooterSettings: widget.moreQuickFooterSettings,
@@ -1439,7 +1439,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           onConfirm: () async {
             final Set<String> textKeys = allTextKeys.keys.toSet();
 
-            if (isDarkTheme(context)) {
+            if (EzConfig.isDark) {
               textKeys.remove(lightTextBackgroundOpacityKey);
               textKeys.add(darkOnSurfaceKey);
 
