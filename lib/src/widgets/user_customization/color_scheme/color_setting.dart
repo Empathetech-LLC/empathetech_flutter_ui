@@ -254,10 +254,9 @@ class _ColorSettingState extends State<EzColorSetting> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final double padding = EzConfig.padding;
     final double iconRadius = EzConfig.iconSize / 2;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final ThemeData theme = Theme.of(context);
     final String label = getColorName(widget.configKey);
 
     // Return the build //
@@ -269,25 +268,25 @@ class _ColorSettingState extends State<EzColorSetting> {
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(padding * 0.75),
+            padding: EdgeInsets.all(EzConfig.padding * 0.75),
           ),
           onPressed: () => changeColor(context),
           onLongPress: () => options(context),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: theme.colorScheme.primaryContainer),
+              border: Border.all(color: colorScheme.primaryContainer),
             ),
             child: currColor == Colors.transparent
                 ? CircleAvatar(
-                    backgroundColor: theme.colorScheme.surface,
-                    foregroundColor: theme.colorScheme.onSurface,
-                    radius: iconRadius + padding,
+                    backgroundColor: colorScheme.surface,
+                    foregroundColor: colorScheme.onSurface,
+                    radius: iconRadius + EzConfig.padding,
                     child: EzIcon(PlatformIcons(context).eyeSlash),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,
-                    radius: iconRadius + padding,
+                    radius: iconRadius + EzConfig.padding,
                   ),
           ),
           label: label,

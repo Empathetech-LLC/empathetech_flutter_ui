@@ -94,12 +94,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final double padding = EzConfig.padding;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     // Return the build //
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Tooltip(
       message: widget.tooltip,
@@ -162,15 +159,17 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         doubleVale < widget.min ||
                         doubleVale > widget.max) {
                       setState(() {
-                        formFieldWidth = (sizeLimit.width + padding) * 1.75;
-                        formFieldHeight = (sizeLimit.height + padding) * 1.75;
+                        formFieldWidth =
+                            (sizeLimit.width + EzConfig.padding) * 1.75;
+                        formFieldHeight =
+                            (sizeLimit.height + EzConfig.padding) * 1.75;
                       });
                       return '${widget.min}  <->  ${widget.max}';
                     }
 
                     setState(() {
-                      formFieldWidth = sizeLimit.width + padding;
-                      formFieldHeight = sizeLimit.height + padding;
+                      formFieldWidth = sizeLimit.width + EzConfig.padding;
+                      formFieldHeight = sizeLimit.height + EzConfig.padding;
                     });
                     return null;
                   },

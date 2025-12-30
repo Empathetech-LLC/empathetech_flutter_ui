@@ -259,8 +259,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
-    final double spacing = EzConfig.spacing;
-    final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
+    final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
 
     // From camera
     // Only works on mobile
@@ -492,7 +491,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
       if (widget.updateTheme != null && widget.updateThemeOption)
         Padding(
-          padding: EdgeInsets.symmetric(vertical: spacing / 2),
+          padding: EdgeInsets.symmetric(vertical: EzConfig.spacing / 2),
           child: EzSwitchPair(
             key: ValueKey<bool>(updateTheme),
             text: EzConfig.l10n.dsUseForColors,
