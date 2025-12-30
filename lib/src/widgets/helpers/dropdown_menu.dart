@@ -136,7 +136,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double savedIconSize = EzConfig.iconSize;
+    final double iSize = iconSize ?? EzConfig.iconSize;
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     late final double buttonOpacity = EzConfig.get(
@@ -153,7 +153,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
       data: IconButtonThemeData(
         style: IconButton.styleFrom(
           backgroundColor: buttonBackground,
-          iconSize: iconSize ?? savedIconSize,
+          iconSize: iSize,
         ),
       ),
       child: DropdownMenu<T>(
@@ -165,14 +165,13 @@ class EzDropdownMenu<T> extends StatelessWidget {
                 : ezDropdownWidth(context: context, entries: widthEntries!)),
         menuHeight: menuHeight,
         leadingIcon: leadingIcon,
-        trailingIcon: trailingIcon ??
-            Icon(Icons.arrow_drop_down, size: iconSize ?? savedIconSize),
+        trailingIcon: trailingIcon ?? Icon(Icons.arrow_drop_down, size: iSize),
         label: label,
         hintText: hintText,
         helperText: helperText,
         errorText: errorText,
-        selectedTrailingIcon: selectedTrailingIcon ??
-            Icon(Icons.arrow_drop_up, size: iconSize ?? savedIconSize),
+        selectedTrailingIcon:
+            selectedTrailingIcon ?? Icon(Icons.arrow_drop_up, size: iSize),
         enableFilter: enableFilter,
         enableSearch: enableSearch,
         keyboardType: keyboardType,
