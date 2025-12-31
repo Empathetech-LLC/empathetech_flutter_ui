@@ -39,12 +39,9 @@ class EzLocaleSetting extends StatefulWidget {
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
-  // Gather the build data  //
-
-  late EFUILang l10n = EzConfig.l10n;
+  // Define the build data  //
 
   late final List<Locale> locales;
-  late Locale currLocale = Localizations.localeOf(context);
 
   Widget flag(
     Locale lang, {
@@ -85,7 +82,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         : flag;
   }
 
-  // Create custom functions //
+  // Define custom functions //
 
   String localeName(Locale locale) {
     final String? supported =
@@ -120,78 +117,74 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) => Semantics(
-        label: EzConfig.l10n.ssLanguage,
-        button: true,
-        hint: EzConfig.l10n.ssLangHint,
-        child: ExcludeSemantics(
-          child: EzElevatedIconButton(
-            onPressed: () => ezModal(
-              context: context,
-              builder: (BuildContext mContext) => EzScrollView(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    runAlignment: WrapAlignment.center,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: locales
-                        .map(
-                          (Locale locale) => Padding(
-                            padding: EzInsets.wrap(EzConfig.spacing),
-                            child: EzElevatedIconButton(
-                              onPressed: () async {
-                                // Gather data
-                                final List<String> localeData = <String>[
-                                  locale.languageCode,
-                                ];
-                                if (locale.countryCode != null) {
-                                  localeData.add(locale.countryCode!);
-                                }
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: EzConfig.l10n.ssLanguage,
+      button: true,
+      hint: EzConfig.l10n.ssLangHint,
+      child: ExcludeSemantics(
+        child: EzElevatedIconButton(
+          onPressed: () => ezModal(
+            context: context,
+            builder: (BuildContext mContext) => EzScrollView(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: locales
+                      .map(
+                        (Locale locale) => Padding(
+                          padding: EzInsets.wrap(EzConfig.spacing),
+                          child: EzElevatedIconButton(
+                            onPressed: () async {
+                              // Gather data
+                              final List<String> localeData = <String>[
+                                locale.languageCode,
+                              ];
+                              if (locale.countryCode != null) {
+                                localeData.add(locale.countryCode!);
+                              }
 
-                                // Set data
-                                await EzConfig.setStringList(
-                                  appLocaleKey,
-                                  localeData,
-                                );
-                                currLocale = locale;
-                                try {
-                                  l10n = await EFUILang.delegate.load(locale);
-                                } catch (_) {
-                                  l10n = EzConfig.l10nFallback;
-                                }
+                              // Set data
+                              await EzConfig.setStringList(
+                                appLocaleKey,
+                                localeData,
+                              );
 
-                                // Refresh UI
-                                EzConfig.provider.setLocale(onComplete: () {
-                                  if (mContext.mounted) {
-                                    Navigator.of(mContext).pop(locale);
-                                  }
-                                });
-                              },
-                              icon: flag(
-                                locale,
-                                iconSize: EzConfig.iconSize,
-                                padding: EzConfig.padding,
-                              ),
-                              label: localeName(locale),
-                              labelPadding: false,
+                              // Refresh UI
+                              EzConfig.provider.setLocale(onComplete: () {
+                                if (mContext.mounted) {
+                                  Navigator.of(mContext).pop(locale);
+                                }
+                              });
+                            },
+                            icon: flag(
+                              locale,
+                              iconSize: EzConfig.iconSize,
+                              padding: EzConfig.padding,
                             ),
+                            label: localeName(locale),
+                            labelPadding: false,
                           ),
-                        )
-                        .toList(),
-                  ),
-                  EzConfig.layout.spacer,
-                ],
-              ),
+                        ),
+                      )
+                      .toList(),
+                ),
+                EzConfig.layout.spacer,
+              ],
             ),
-            icon: flag(
-              currLocale,
-              iconSize: EzConfig.iconSize,
-              padding: EzConfig.padding,
-            ),
-            label: EzConfig.l10n.ssLanguage,
-            labelPadding: false,
           ),
+          icon: flag(
+            EzConfig.locale,
+            iconSize: EzConfig.iconSize,
+            padding: EzConfig.padding,
+          ),
+          label: EzConfig.l10n.ssLanguage,
+          labelPadding: false,
         ),
-      );
+      ),
+    );
+  }
 }
