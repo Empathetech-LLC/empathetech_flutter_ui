@@ -7,9 +7,7 @@ import '../utils/image_links.dart';
 
 import 'package:example/main.dart';
 
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -163,34 +161,18 @@ Future<void> testCS(
   }
 
   ezLog('Layout');
-  final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
-  if (isCupertino) {
-    final List<EzCupertinoAction> actions =
-        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions! as List<EzCupertinoAction>;
+  List<EzTextButton> actions =
+      (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog).actions!
+          as List<EzTextButton>;
 
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, EzConfig.l10n.gApply);
-      expect(actions[1].text, EzConfig.l10n.gCancel);
-    } else {
-      expect(actions[0].text, EzConfig.l10n.gCancel);
-      expect(actions[1].text, EzConfig.l10n.gApply);
-    }
+  expect(actions.length, 2);
+  if (EzConfig.isLefty) {
+    expect(actions[0].text, EzConfig.l10n.gApply);
+    expect(actions[1].text, EzConfig.l10n.gCancel);
   } else {
-    final List<EzTextButton> actions =
-        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<EzTextButton>;
-
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, EzConfig.l10n.gApply);
-      expect(actions[1].text, EzConfig.l10n.gCancel);
-    } else {
-      expect(actions[0].text, EzConfig.l10n.gCancel);
-      expect(actions[1].text, EzConfig.l10n.gApply);
-    }
+    expect(actions[0].text, EzConfig.l10n.gCancel);
+    expect(actions[1].text, EzConfig.l10n.gApply);
   }
 
   ezLog('Cancel');
@@ -214,32 +196,16 @@ Future<void> testCS(
 
   await ezFindText(tester, EzConfig.l10n.gReset);
 
-  if (isCupertino) {
-    final List<EzCupertinoAction> actions =
-        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions! as List<EzCupertinoAction>;
+  actions = (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
+      .actions! as List<EzTextButton>;
 
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, Text(EzConfig.l10n.gYes));
-      expect(actions[1].text, Text(EzConfig.l10n.gNo));
-    } else {
-      expect(actions[0].text, Text(EzConfig.l10n.gNo));
-      expect(actions[1].text, Text(EzConfig.l10n.gYes));
-    }
+  expect(actions.length, 2);
+  if (EzConfig.isLefty) {
+    expect(actions[0].text, Text(EzConfig.l10n.gYes));
+    expect(actions[1].text, Text(EzConfig.l10n.gNo));
   } else {
-    final List<EzTextButton> actions =
-        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<EzTextButton>;
-
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, Text(EzConfig.l10n.gYes));
-      expect(actions[1].text, Text(EzConfig.l10n.gNo));
-    } else {
-      expect(actions[0].text, Text(EzConfig.l10n.gNo));
-      expect(actions[1].text, Text(EzConfig.l10n.gYes));
-    }
+    expect(actions[0].text, Text(EzConfig.l10n.gNo));
+    expect(actions[1].text, Text(EzConfig.l10n.gYes));
   }
 
   ezLog('No');
