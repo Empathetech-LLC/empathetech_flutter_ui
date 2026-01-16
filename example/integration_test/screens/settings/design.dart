@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/image_links.dart';
+import '../../utils/image_links.dart';
 
 import 'package:example/main.dart';
 
