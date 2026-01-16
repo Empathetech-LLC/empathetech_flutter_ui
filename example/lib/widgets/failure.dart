@@ -7,7 +7,6 @@ import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class FailureHeader extends StatelessWidget {
   /// [ThemeData.textTheme] passthrough
@@ -27,8 +26,10 @@ class FailureHeader extends StatelessWidget {
     required this.textTheme,
     this.message,
     this.richMessage,
-  }) : assert((message == null) != (richMessage == null),
-            'Either message or richMessage must be provided, not both');
+  }) : assert(
+          (message == null) != (richMessage == null),
+          'Either message or richMessage must be provided, not both',
+        );
 
   @override
   Widget build(BuildContext context) => Column(
@@ -42,7 +43,7 @@ class FailureHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
 
           // Error message
           message != null
@@ -94,7 +95,7 @@ class DeleteOption extends StatelessWidget {
             style: style,
             textAlign: TextAlign.center,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzElevatedIconButton(
             onPressed: () => ezCmd(
               platform == TargetPlatform.windows
@@ -119,13 +120,13 @@ class DeleteOption extends StatelessWidget {
               },
               readout: readout,
             ),
-            icon: EzIcon(PlatformIcons(context).delete),
+            icon: const Icon(Icons.delete),
             label: Lang.of(context)!.rsWipe,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: EzIcon(PlatformIcons(context).back),
+            icon: const Icon(Icons.arrow_back),
             label: Lang.of(context)!.rsLeave,
           ),
         ],
@@ -150,17 +151,13 @@ class LinkOption extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        EzText(
-          l10n.rsWouldYou,
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-        EzConfig.layout.spacer,
+        EzText(l10n.rsWouldYou, style: style, textAlign: TextAlign.center),
+        EzConfig.spacer,
         EzElevatedIconLink(
           url: Uri.parse(installFlutter),
           tooltip: installFlutter,
           hint: l10n.rsInstallHint,
-          icon: EzIcon(Icons.computer),
+          icon: const Icon(Icons.computer),
           label: l10n.rsInstall,
         ),
       ],
