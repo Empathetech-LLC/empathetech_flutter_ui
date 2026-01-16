@@ -204,32 +204,18 @@ Future<void> _testNetwork(
   await ezFindText(tester, EzConfig.l10n.gEnterURL);
 
   ezLog('Validating layout');
-  if (isApple()) {
-    final List<EzCupertinoAction> actions =
-        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions! as List<EzCupertinoAction>;
 
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, EzConfig.l10n.gApply);
-      expect(actions[1].text, EzConfig.l10n.gCancel);
-    } else {
-      expect(actions[0].text, EzConfig.l10n.gCancel);
-      expect(actions[1].text, EzConfig.l10n.gApply);
-    }
+  final List<EzTextButton> actions =
+      (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog).actions!
+          as List<EzTextButton>;
+
+  expect(actions.length, 2);
+  if (EzConfig.isLefty) {
+    expect(actions[0].text, EzConfig.l10n.gApply);
+    expect(actions[1].text, EzConfig.l10n.gCancel);
   } else {
-    final List<EzTextButton> actions =
-        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<EzTextButton>;
-
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, EzConfig.l10n.gApply);
-      expect(actions[1].text, EzConfig.l10n.gCancel);
-    } else {
-      expect(actions[0].text, EzConfig.l10n.gCancel);
-      expect(actions[1].text, EzConfig.l10n.gApply);
-    }
+    expect(actions[0].text, EzConfig.l10n.gCancel);
+    expect(actions[1].text, EzConfig.l10n.gApply);
   }
 
   ezLog('Cancel');
