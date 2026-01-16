@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
 
   # Flutter (Google)
-  google_fonts: ^7.0.1
+  google_fonts: ^7.0.2
   go_router: ^14.8.1
   http: ^1.6.0
   image_picker: ^1.2.1
@@ -29,22 +29,19 @@ dependencies:
   # Community
   country_flags: ^4.1.1
   extended_image: ^10.0.1
-  feedback: ^3.2.0
   file_picker: ^10.3.8
   file_saver: ^0.2.14
   flex_color_picker: ^3.8.0
   flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^9.0.0
   go_transitions: ^0.8.3
   image: ^4.7.2
   line_icons: ^2.0.3
   package_info_plus: ^9.0.0
   provider: ^6.1.5+1
   share_plus: ^12.0.1
-  window_manager: ^0.5.1
   
 dev_dependencies:
-  # For development
+  ## For development
   integration_test:
     sdk: flutter 
 
@@ -52,12 +49,14 @@ dev_dependencies:
   dependency_validator: ^5.0.3
   flutter_lints: ^6.0.0
 
-  # For example app (Open UI)
+  ## For example app (Open UI)
+  # Local
   example:
     path: example
   efui_bios:
     path: ../efui_bios
   
+  # Community
   email_validator: ^3.0.0
   flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.7
