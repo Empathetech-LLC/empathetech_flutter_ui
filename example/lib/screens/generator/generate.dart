@@ -359,7 +359,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   message:
                       '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
                 ),
-                EzConfig.layout.separator,
+                EzConfig.separator,
                 RunOption(
                   projDir: projDir,
                   style: subTitle,
@@ -400,7 +400,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   richMessage: richFailureMessage,
                 ),
                 if (showDelete == true) ...<Widget>[
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
                   DeleteOption(
                     appName: widget.config.appName,
                     platform: platform,
@@ -409,7 +409,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   ),
                 ],
                 if (showDelete == null) ...<Widget>[
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
                   LinkOption(subTitle),
                 ],
               ],
@@ -439,7 +439,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       running: genState == GeneratorState.running,
       body: EzScreen(EzScrollView(children: <Widget>[
         header(textTheme, subTitle),
-        EzConfig.layout.divider,
+        EzConfig.divider,
 
         // Console output //
 
@@ -461,7 +461,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ],
         ),
-        EzConfig.layout.margin,
+        EzConfig.margin,
 
         // Readout
         Visibility(
@@ -472,7 +472,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               maxWidth: widthOf(context) * 0.667,
               maxHeight: heightOf(context) / 2,
             ),
-            padding: EdgeInsets.all(EzConfig.margin),
+            padding: EdgeInsets.all(EzConfig.margining),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceDim,
               borderRadius: ezRoundEdge,
@@ -490,7 +490,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
           ),
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
       ])),
     );
   }

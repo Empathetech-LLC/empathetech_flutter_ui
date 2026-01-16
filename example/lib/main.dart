@@ -8,12 +8,12 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:feedback/feedback.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
@@ -39,12 +39,7 @@ void main() async {
   // Run the app //
   // With a feedback wrapper
 
-  runApp(BetterFeedback(
-    theme: empathFeedbackLight,
-    darkTheme: empathFeedbackDark,
-    localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
-    child: const OpenUI(),
-  ));
+  runApp(const OpenUI());
 }
 
 class OpenUI extends StatelessWidget {
@@ -63,7 +58,7 @@ class OpenUI extends StatelessWidget {
     // Return the app //
 
     return EzAppProvider(
-      app: PlatformApp.router(
+      app: MaterialApp.router(
         debugShowCheckedModeBanner: false,
 
         // Language handlers
