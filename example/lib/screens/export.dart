@@ -11,11 +11,12 @@ export 'home.dart';
 export 'generator/generate.dart';
 export 'generator/archive.dart';
 
-export 'settings/settings_home.dart';
-export 'settings/color_settings.dart';
-export 'settings/design_settings.dart';
-export 'settings/layout_settings.dart';
-export 'settings/text_settings.dart';
+export 'settings/home.dart';
+
+export 'settings/color.dart';
+export 'settings/design.dart';
+export 'settings/layout.dart';
+export 'settings/text.dart';
 
 // Route names //
 
