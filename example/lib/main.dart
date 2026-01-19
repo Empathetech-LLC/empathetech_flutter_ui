@@ -57,7 +57,7 @@ class OpenUI extends StatelessWidget {
 
     // Return the app //
 
-    return EzAppProvider(
+    return EzConfigurableApp(
       app: MaterialApp.router(
         debugShowCheckedModeBanner: false,
 
