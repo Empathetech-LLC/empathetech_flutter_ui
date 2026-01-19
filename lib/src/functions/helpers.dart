@@ -11,7 +11,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:file_saver/file_saver.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -143,43 +142,6 @@ Future<void> ezConfigLoader(BuildContext context) async {
       message: kIsWeb
           ? EzConfig.l10n.ssRestartReminderWeb
           : EzConfig.l10n.ssRestartReminder,
-    );
-  }
-}
-
-/// Save the current [EzConfig.prefs] to local storage
-Future<void> ezConfigSaver(
-  BuildContext context, {
-  List<String>? extraKeys,
-  required String appName,
-  String? androidPackage,
-}) async {
-  final List<String> keys = <String>[
-    ...allEZConfigKeys.keys,
-    if (extraKeys != null) ...extraKeys,
-  ];
-
-  final Map<String, dynamic> config = Map<String, dynamic>.fromEntries(
-    keys.map((String key) => MapEntry<String, dynamic>(key, EzConfig.get(key))),
-  );
-
-  try {
-    await FileSaver.instance.saveFile(
-      name: '${ezTitleToSnake(appName)}_settings.json',
-      bytes: utf8.encode(jsonEncode(config)),
-      mimeType: MimeType.json,
-    );
-  } catch (e) {
-    if (context.mounted) ezLogAlert(context, message: e.toString());
-    return;
-  }
-
-  if (context.mounted) {
-    ezSnackBar(
-      context: context,
-      message: EzConfig.l10n.ssConfigSaved(
-        archivePath(appName: appName, androidPackage: androidPackage),
-      ),
     );
   }
 }
