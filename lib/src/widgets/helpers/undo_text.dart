@@ -16,14 +16,11 @@ Widget ezRichUndoWarning(
   required String appName,
   String? androidPackage,
 }) {
-  final TextTheme textTheme = Theme.of(context).textTheme;
+  final TextStyle? style = Theme.of(context).textTheme.bodyLarge;
 
   final EzRichText text = EzRichText(
     <InlineSpan>[
-      EzPlainText(
-        text: EzConfig.l10n.gUndoWarn1,
-        style: textTheme.bodyLarge,
-      ),
+      EzPlainText(text: EzConfig.l10n.gUndoWarn1, style: style),
       EzInlineLink(
         EzConfig.l10n.gSave,
         onTap: () => ezConfigSaver(
@@ -33,25 +30,23 @@ Widget ezRichUndoWarning(
           androidPackage: androidPackage,
         ),
         hint: EzConfig.l10n.gSaveHint,
-        style: textTheme.bodyLarge,
+        style: style,
         textAlign: TextAlign.center,
       ),
-      EzPlainText(
-        text: EzConfig.l10n.gUndoWarn2,
-        style: textTheme.bodyLarge,
-      ),
+      EzPlainText(text: EzConfig.l10n.gUndoWarn2, style: style),
     ],
     textBackground: false,
-    style: textTheme.bodyLarge,
+    style: style,
     textAlign: TextAlign.center,
   );
 
   return standalone
       ? SizedBox(
-          height: isApple()
-              ? (textTheme.bodyLarge?.fontSize ?? defaultBodySize) * 3
-              : null,
-          width: widthOf(context),
+          width: ezTextSize(
+            EzConfig.l10n.gSave + EzConfig.l10n.gUndoWarn2,
+            context: context,
+            style: style,
+          ).width,
           child: text,
         )
       : text;
