@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
   /// [ezRichUndoWarning] passthrough
@@ -100,52 +99,49 @@ class EzResetButton extends StatelessWidget {
               ? ElevatedButton.styleFrom(backgroundColor: crucialSurface)
               : null
           : style,
-      onPressed: () => showPlatformDialog(
-          context: context,
-          builder: (BuildContext dContext) {
-            late final List<Widget> materialActions;
-            late final List<Widget> cupertinoActions;
-
-            final void Function() confirm = onConfirm ??
-                () => EzConfig.reset(
-                      skip: skip,
-                      storageOnly: storageOnly,
-                      notifyTheme: notifyTheme,
-                      onNotify: onNotify,
-                    );
-            final void Function() deny = onDeny ?? doNothing;
-
-            (materialActions, cupertinoActions) = ezActionPairs(
-              context: context,
-              onConfirm: () {
-                confirm();
-                Navigator.of(dContext).pop();
-              },
-              confirmIsDestructive: true,
-              onDeny: () {
-                deny();
-                Navigator.of(dContext).pop();
-              },
-            );
-
-            return EzAlertDialog(
-              title: Text(
-                dialogTitle ?? EzConfig.l10n.ssResetAll,
-                textAlign: TextAlign.center,
+      onPressed: () => showDialog(
+        context: context,
+        builder: (BuildContext dContext) => EzAlertDialog(
+          title: Text(
+            dialogTitle ?? EzConfig.l10n.ssResetAll,
+            textAlign: TextAlign.center,
+          ),
+          content: dialogContent ??
+              ezRichUndoWarning(
+                context,
+                extraKeys: extraKeys,
+                appName: appName!,
+                androidPackage: androidPackage,
               ),
-              content: dialogContent ??
-                  ezRichUndoWarning(
-                    context,
-                    extraKeys: extraKeys,
-                    appName: appName!,
-                    androidPackage: androidPackage,
-                  ),
-              materialActions: materialActions,
-              cupertinoActions: cupertinoActions,
-              needsClose: false,
-            );
-          }),
-      icon: EzIcon(PlatformIcons(context).refresh),
+          actions: ezActionPair(
+            context: context,
+            onConfirm: () {
+              if (onConfirm == null) {
+                EzConfig.reset(
+                  skip: skip,
+                  storageOnly: storageOnly,
+                  notifyTheme: notifyTheme,
+                  onNotify: onNotify,
+                );
+              } else {
+                onConfirm!.call();
+              }
+              Navigator.of(dContext).pop();
+            },
+            confirmIsDestructive: true,
+            onDeny: () {
+              if (onDeny == null) {
+                doNothing();
+              } else {
+                onDeny!.call();
+              }
+              Navigator.of(dContext).pop();
+            },
+          ),
+          needsClose: false,
+        ),
+      ),
+      icon: const Icon(Icons.refresh),
       label: label ?? EzConfig.l10n.gResetAll,
     );
   }

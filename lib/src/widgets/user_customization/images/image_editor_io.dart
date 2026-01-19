@@ -13,7 +13,6 @@ import 'package:image/image.dart' as img;
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageEditor extends StatefulWidget {
   /// [File] path of the image being edited
@@ -84,7 +83,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               EzIcon(icon, color: color),
-              EzConfig.layout.margin,
+              EzConfig.margin,
               EzText(
                 name,
                 textAlign: TextAlign.center,
@@ -92,7 +91,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     .textTheme
                     .labelLarge
                     ?.copyWith(color: color),
-              )
+              ),
             ],
           ),
         ),
@@ -176,7 +175,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: EzConfig.l10n.dsDrag,
                 tooltip: EzConfig.l10n.dsDragHint,
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Swipe
               keyIcon(
@@ -185,7 +184,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: EzConfig.l10n.dsSwipe,
                 tooltip: EzConfig.l10n.dsSwipeHint,
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Scroll
               keyIcon(
@@ -194,7 +193,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 name: EzConfig.l10n.dsScroll,
                 tooltip: EzConfig.l10n.dsScrollHint,
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Pinch
               keyIcon(
@@ -218,9 +217,9 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   );
                   setState(() {});
                 },
-                icon: EzIcon(Icons.rotate_left),
+                icon: const Icon(Icons.rotate_left),
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Rotate right
               EzIconButton(
@@ -235,9 +234,9 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   );
                   setState(() {});
                 },
-                icon: EzIcon(Icons.rotate_right),
+                icon: const Icon(Icons.rotate_right),
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Undo
               EzIconButton(
@@ -247,9 +246,9 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   _editorController.undo();
                   setState(() {});
                 },
-                icon: EzIcon(Icons.undo),
+                icon: const Icon(Icons.undo),
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Redo
               EzIconButton(
@@ -259,9 +258,9 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   _editorController.redo();
                   setState(() {});
                 },
-                icon: EzIcon(Icons.redo),
+                icon: const Icon(Icons.redo),
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Reset
               EzIconButton(
@@ -271,7 +270,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   _editorController.reset();
                   setState(() {});
                 },
-                icon: EzIcon(PlatformIcons(context).refresh),
+                icon: const Icon(Icons.refresh),
               ),
               vertDiv,
 
@@ -363,19 +362,19 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 },
                 icon: processing
                     ? const CircularProgressIndicator()
-                    : EzIcon(Icons.check),
+                    : const Icon(Icons.check),
               ),
-              EzConfig.layout.rowSpacer,
+              EzConfig.rowSpacer,
 
               // Cancel
               EzIconButton(
                 tooltip: EzConfig.l10n.gCancel,
                 onPressed: () => Navigator.pop(context, null),
-                icon: EzIcon(PlatformIcons(context).delete),
+                icon: const Icon(Icons.delete),
               ),
             ],
           ),
-        )
+        ),
       ]),
     );
   }

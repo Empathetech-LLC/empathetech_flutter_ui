@@ -6,7 +6,6 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
   final EzDisplayStyleProvider displayProvider;
@@ -95,48 +94,35 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   // Define button functions //
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
-  late final List<DropdownMenuEntry<String>> entries =
-      googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
-    return DropdownMenuEntry<String>(
-      value: entry.key,
-      label: ezCamelToTitle(entry.key),
-      style: TextButton.styleFrom(textStyle: entry.value),
-    );
-  }).toList();
+  late final List<DropdownMenuEntry<String>> entries = googleStyles.entries.map(
+    (MapEntry<String, TextStyle> entry) {
+      return DropdownMenuEntry<String>(
+        value: entry.key,
+        label: ezCamelToTitle(entry.key),
+        style: TextButton.styleFrom(textStyle: entry.value),
+      );
+    },
+  ).toList();
 
   /// Only activated if the user has already edited the font families in the advanced settings, and the changes aren't uniform
   // Confirm that the user wants to continue with batch editing, which will force uniformity
   Future<bool> confirmBatchOverride() async {
-    return await showPlatformDialog(
+    return await showDialog(
       context: context,
-      builder: (BuildContext dContext) {
-        void onConfirm() => Navigator.of(dContext).pop(true);
-        void onDeny() => Navigator.of(dContext).pop(false);
-
-        late final List<Widget> materialActions;
-        late final List<Widget> cupertinoActions;
-
-        (materialActions, cupertinoActions) = ezActionPairs(
+      builder: (BuildContext dContext) => EzAlertDialog(
+        title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
+        content: Text(
+          EzConfig.l10n.tsBatchOverride(EzConfig.l10n.tsFontFamily),
+          textAlign: TextAlign.center,
+        ),
+        actions: ezActionPair(
           context: context,
-          onConfirm: onConfirm,
+          onConfirm: () => Navigator.of(dContext).pop(true),
           confirmIsDestructive: true,
-          onDeny: onDeny,
-        );
-
-        return EzAlertDialog(
-          title: Text(
-            EzConfig.l10n.gAttention,
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            EzConfig.l10n.tsBatchOverride(EzConfig.l10n.tsFontFamily),
-            textAlign: TextAlign.center,
-          ),
-          materialActions: materialActions,
-          cupertinoActions: cupertinoActions,
-          needsClose: false,
-        );
-      },
+          onDeny: () => Navigator.of(dContext).pop(false),
+        ),
+        needsClose: false,
+      ),
     );
   }
 

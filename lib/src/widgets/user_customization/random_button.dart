@@ -85,9 +85,9 @@ class EzConfigRandomizer extends StatelessWidget {
               confirmIsDestructive: true,
               onDeny: () {
                 if (onDeny == null) {
-                  doNothing;
+                  doNothing();
                 } else {
-                  onConfirm!.call();
+                  onDeny!.call();
                 }
                 Navigator.of(dContext).pop();
               },

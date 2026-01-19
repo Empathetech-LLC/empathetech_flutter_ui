@@ -12,7 +12,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose value is being updated
@@ -99,7 +98,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     final bool showCredits = !hasChanged && (widget.credits != null);
 
     return showCredits
-        ? showPlatformDialog(
+        ? showDialog(
             context: context,
             builder: (_) => EzAlertDialog(
               title: Text(EzConfig.l10n.gCreditTo, textAlign: TextAlign.center),
@@ -154,8 +153,10 @@ class _ImageSettingState extends State<EzImageSetting> {
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
         final Future<dynamic> Function(
-                String path, ColorScheme colorScheme, TextTheme textTheme)
-            toDo = await showPlatformDialog(
+          String path,
+          ColorScheme colorScheme,
+          TextTheme textTheme,
+        ) toDo = await showDialog(
           context: context,
           builder: (BuildContext dContext) {
             void useFull() => Navigator.of(dContext).pop((_, __) async => true);
@@ -164,17 +165,13 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             return EzAlertDialog(
               title: Text(EzConfig.l10n.dsUseFull, textAlign: TextAlign.center),
-              materialActions: <EzMaterialAction>[
+              actions: <EzMaterialAction>[
                 EzMaterialAction(text: EzConfig.l10n.gYes, onPressed: useFull),
                 EzMaterialAction(text: EzConfig.l10n.dsCrop, onPressed: crop),
                 EzMaterialAction(
-                    text: EzConfig.l10n.gCancel, onPressed: cancel),
-              ],
-              cupertinoActions: <EzCupertinoAction>[
-                EzCupertinoAction(text: EzConfig.l10n.gYes, onPressed: useFull),
-                EzCupertinoAction(text: EzConfig.l10n.dsCrop, onPressed: crop),
-                EzCupertinoAction(
-                    text: EzConfig.l10n.gCancel, onPressed: cancel),
+                  text: EzConfig.l10n.gCancel,
+                  onPressed: cancel,
+                ),
               ],
               needsClose: false,
             );
@@ -276,7 +273,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             fromLocal = true;
             if (mContext.mounted) Navigator.of(mContext).pop(picked);
           },
-          icon: EzIcon(PlatformIcons(context).photoCamera),
+          icon: const Icon(Icons.camera),
           label: EzConfig.l10n.dsFromCamera,
         ),
       ));
@@ -297,7 +294,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             fromLocal = true;
             if (mContext.mounted) Navigator.of(mContext).pop(picked);
           },
-          icon: EzIcon(PlatformIcons(context).folder),
+          icon: const Icon(Icons.folder),
           label: EzConfig.l10n.dsFromFile,
         ),
       ));
@@ -308,100 +305,88 @@ class _ImageSettingState extends State<EzImageSetting> {
     options.add(Padding(
       padding: wrapPadding,
       child: EzElevatedIconButton(
-        onPressed: () => showPlatformDialog(
+        onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dContext) {
-            void onConfirm() async {
-              closeKeyboard(dContext);
-
-              // Validate the URL
-              final String url = urlController.text.trim();
-              if (validateUrl(url) != null) return;
-
-              // Verify that the image is accessible
-              try {
-                final Completer<void> completer = Completer<void>();
-                final ImageStream stream =
-                    NetworkImage(url).resolve(const ImageConfiguration());
-
-                late ImageStreamListener listener;
-                listener = ImageStreamListener(
-                  // onImage (onSuccess)
-                  (_, __) {
-                    completer.complete();
-                    stream.removeListener(listener);
-                  },
-                  onError: (Object error, StackTrace? stackTrace) {
-                    completer.completeError(error, stackTrace);
-                    stream.removeListener(listener);
-                  },
-                );
-
-                stream.addListener(listener);
-                await completer.future;
-              } catch (e) {
-                if (dContext.mounted) {
-                  Navigator.of(dContext).pop(null);
-                }
-                if (mContext.mounted) {
-                  Navigator.of(mContext).pop(null);
-                }
-
-                if (mounted) {
-                  await ezLogAlert(
-                    context,
-                    title: EzConfig.l10n.dsImgGetFailed,
-                    message:
-                        '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}',
-                  );
-                }
-                return;
-              }
-
-              // Pop dialogs
-              if (dContext.mounted) {
-                Navigator.of(dContext).pop(url);
-              }
-
-              if (mContext.mounted) {
-                Navigator.of(mContext).pop(url);
-              }
-            }
-
-            void onDeny() => Navigator.of(dContext).pop(null);
-
-            late final List<Widget> materialActions;
-            late final List<Widget> cupertinoActions;
-
-            (materialActions, cupertinoActions) = ezActionPairs(
+          builder: (BuildContext dContext) => EzAlertDialog(
+            title: Text(
+              EzConfig.l10n.gEnterURL,
+              textAlign: TextAlign.center,
+            ),
+            content: Form(
+              child: TextFormField(
+                controller: urlController,
+                maxLines: 1,
+                autofillHints: const <String>[AutofillHints.url],
+                decoration: const InputDecoration(hintText: webImgHint),
+                autovalidateMode: AutovalidateMode.onUnfocus,
+                validator: validateUrl,
+              ),
+            ),
+            actions: ezActionPair(
               context: context,
               confirmMsg: EzConfig.l10n.gApply,
-              onConfirm: onConfirm,
+              onConfirm: () async {
+                closeKeyboard(dContext);
+
+                // Validate the URL
+                final String url = urlController.text.trim();
+                if (validateUrl(url) != null) return;
+
+                // Verify that the image is accessible
+                try {
+                  final Completer<void> completer = Completer<void>();
+                  final ImageStream stream =
+                      NetworkImage(url).resolve(const ImageConfiguration());
+
+                  late ImageStreamListener listener;
+                  listener = ImageStreamListener(
+                    // onImage (onSuccess)
+                    (_, __) {
+                      completer.complete();
+                      stream.removeListener(listener);
+                    },
+                    onError: (Object error, StackTrace? stackTrace) {
+                      completer.completeError(error, stackTrace);
+                      stream.removeListener(listener);
+                    },
+                  );
+
+                  stream.addListener(listener);
+                  await completer.future;
+                } catch (e) {
+                  if (dContext.mounted) {
+                    Navigator.of(dContext).pop(null);
+                  }
+                  if (mContext.mounted) {
+                    Navigator.of(mContext).pop(null);
+                  }
+
+                  if (mounted) {
+                    await ezLogAlert(
+                      context,
+                      title: EzConfig.l10n.dsImgGetFailed,
+                      message:
+                          '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}',
+                    );
+                  }
+                  return;
+                }
+
+                // Pop dialogs
+                if (dContext.mounted) {
+                  Navigator.of(dContext).pop(url);
+                }
+
+                if (mContext.mounted) {
+                  Navigator.of(mContext).pop(url);
+                }
+              },
               confirmIsDestructive: true,
               denyMsg: EzConfig.l10n.gCancel,
-              onDeny: onDeny,
-            );
-
-            return EzAlertDialog(
-              title: Text(
-                EzConfig.l10n.gEnterURL,
-                textAlign: TextAlign.center,
-              ),
-              content: Form(
-                child: TextFormField(
-                  controller: urlController,
-                  maxLines: 1,
-                  autofillHints: const <String>[AutofillHints.url],
-                  decoration: const InputDecoration(hintText: webImgHint),
-                  autovalidateMode: AutovalidateMode.onUnfocus,
-                  validator: validateUrl,
-                ),
-              ),
-              materialActions: materialActions,
-              cupertinoActions: cupertinoActions,
-              needsClose: false,
-            );
-          },
+              onDeny: () => Navigator.of(dContext).pop(null),
+            ),
+            needsClose: false,
+          ),
         ),
         icon: EzIcon(Icons.computer_outlined),
         label: EzConfig.l10n.dsFromNetwork,
@@ -456,7 +441,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(mContext).pop(defaultPath);
             }
           },
-          icon: EzIcon(PlatformIcons(context).refresh),
+          icon: EzIcon(Icons.refresh),
           label: EzConfig.l10n.dsResetIt,
         ),
       ));
@@ -475,7 +460,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(mContext).pop(noImageValue);
             }
           },
-          icon: EzIcon(PlatformIcons(context).clear),
+          icon: EzIcon(Icons.clear),
           label: EzConfig.l10n.dsClearIt,
         ),
       ));
@@ -503,7 +488,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           ),
         ),
-      EzConfig.layout.spacer,
+      EzConfig.spacer,
     ];
   }
 
@@ -546,7 +531,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 style: textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              EzConfig.layout.margin,
+              EzConfig.margin,
               RadioGroup<BoxFit>(
                 groupValue: selectedFit,
                 onChanged: (BoxFit? value) {
@@ -558,7 +543,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   primary: false,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.contain,
@@ -568,7 +553,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.cover,
@@ -578,7 +563,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fill,
@@ -588,7 +573,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fitWidth,
@@ -598,7 +583,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.fitHeight,
@@ -608,7 +593,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.none,
@@ -618,7 +603,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                     fitPreview(
                       path: path,
                       fit: BoxFit.scaleDown,
@@ -628,24 +613,24 @@ class _ImageSettingState extends State<EzImageSetting> {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                     ),
-                    EzConfig.layout.rowSpacer,
+                    EzConfig.rowSpacer,
                   ],
                 ),
               ),
-              EzConfig.layout.spacer,
+              EzConfig.spacer,
               EzRow(
                 mainAxisAlignment: EzConfig.isLefty
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.end,
                 children: <Widget>[
-                  EzConfig.layout.rowSpacer,
+                  EzConfig.rowSpacer,
                   EzTextButton(
                     onPressed: () => Navigator.of(fitContext).pop(null),
                     text: EzConfig.l10n.gCancel,
                     textStyle: textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
-                  EzConfig.layout.rowSpacer,
+                  EzConfig.rowSpacer,
                   EzTextButton(
                     onPressed: () async {
                       if (selectedFit != null) {
@@ -667,10 +652,10 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  EzConfig.layout.rowSpacer,
+                  EzConfig.rowSpacer,
                 ],
               ),
-              EzConfig.layout.separator,
+              EzConfig.separator,
             ],
           );
         },
@@ -688,16 +673,13 @@ class _ImageSettingState extends State<EzImageSetting> {
     required ColorScheme colorScheme,
     required TextTheme textTheme,
   }) {
-    final double scaleMargin = EzConfig.margin * 0.25;
+    final double scaleMargin = EzConfig.marginVal * 0.25;
 
     final String name = fit.name;
 
-    final double toolbarHeight = ezTextSize(
-          name,
-          style: textTheme.bodyLarge,
-          context: context,
-        ).height +
-        scaleMargin;
+    final double toolbarHeight =
+        ezTextSize(name, style: textTheme.bodyLarge, context: context).height +
+            scaleMargin;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -799,7 +781,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ? const CircularProgressIndicator()
                   : (currPath == null || currPath == noImageValue)
                       ? EzIcon(
-                          PlatformIcons(context).edit,
+                          Icons.edit,
                           color: colorScheme.primary,
                         )
                       : null,
