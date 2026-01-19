@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -60,8 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool exampleDomain = false;
 
   final TextEditingController descriptionController = TextEditingController();
-
-  final TextEditingController supportEmailController = TextEditingController();
 
   late final int currentYear = DateTime.now().year;
 
@@ -164,10 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
         pubPreview = config.publisherName;
 
         descriptionController.text = config.appDescription;
-        if (config.supportEmail != null &&
-            EmailValidator.validate(config.supportEmail!)) {
-          supportEmailController.text = config.supportEmail!;
-        }
 
         domainController.text = config.domainName;
         if (config.domainName == 'com.example') exampleDomain = true;
@@ -351,22 +344,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            ),
-            EzConfig.spacer,
-
-            // Support email
-            _BasicField(
-              title: l10n.csSupportEmail,
-              tip: l10n.csSupportTip,
-              controller: supportEmailController,
-              validator: (String? value) {
-                if (value == null || value.isEmpty) return null;
-
-                return EmailValidator.validate(value)
-                    ? null
-                    : l10n.csInvalidEmail;
-              },
-              hintText: '${EzConfig.l10n.gOptional}@example.com',
             ),
             EzConfig.separator,
 
@@ -747,9 +724,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             validateDomain(domainController.text, context) ==
                                 null) &&
                         descriptionController.text.isNotEmpty &&
-                        (supportEmailController.text.isEmpty ||
-                            EmailValidator.validate(
-                                supportEmailController.text)) &&
                         (!isDesktop ||
                             ((!isMac || await checkPath(flutterPathControl)) &&
                                 await checkPath(workPathControl))) &&
@@ -763,9 +737,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           domainName: exampleDomain
                               ? 'com.example'
                               : domainController.text,
-                          supportEmail: supportEmailController.text.isEmpty
-                              ? null
-                              : supportEmailController.text,
                           colorSettings: colorSettings,
                           designSettings: designSettings,
                           layoutSettings: layoutSettings,
@@ -829,9 +800,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               validateDomain(domainController.text, context) ==
                                   null) &&
                           descriptionController.text.isNotEmpty &&
-                          (supportEmailController.text.isEmpty ||
-                              EmailValidator.validate(
-                                  supportEmailController.text)) &&
                           (!isMac || await checkPath(flutterPathControl)) &&
                           await checkPath(workPathControl) &&
                           context.mounted) {
@@ -844,9 +812,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             domainName: exampleDomain
                                 ? 'com.example'
                                 : domainController.text,
-                            supportEmail: supportEmailController.text.isEmpty
-                                ? null
-                                : supportEmailController.text,
                             colorSettings: colorSettings,
                             designSettings: designSettings,
                             layoutSettings: layoutSettings,
@@ -921,8 +886,6 @@ class _HomeScreenState extends State<HomeScreen> {
             domainController.clear();
             exampleDomain = false;
 
-            supportEmailController.clear();
-
             colorSettings = true;
             designSettings = true;
             layoutSettings = true;
@@ -964,7 +927,6 @@ class _HomeScreenState extends State<HomeScreen> {
     pubController.dispose();
     descriptionController.dispose();
     domainController.dispose();
-    supportEmailController.dispose();
     flutterPathControl.dispose();
     workPathControl.dispose();
     copyrightController.dispose();

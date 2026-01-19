@@ -56,16 +56,6 @@ class LangFr extends Lang {
       '\'domain.name\' seulement; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
 
   @override
-  String get csSupportEmail => 'Courriel de soutien';
-
-  @override
-  String get csSupportTip =>
-      'Si fourni, le système de commentaires que nous utilisons sera inclus.';
-
-  @override
-  String get csInvalidEmail => 'Courriel invalide';
-
-  @override
   String get csInclude => 'Inclure';
 
   @override
@@ -152,8 +142,7 @@ class LangFr extends Lang {
   String get csInvalidFields => 'Certains champs sont invalides';
 
   @override
-  String get csRequired =>
-      'Tous les champs sauf le courriel de soutien sont obligatoires';
+  String get csRequired => 'Tous les champs sont obligatoires';
 
   @override
   String get csResetHint =>

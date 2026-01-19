@@ -189,24 +189,6 @@ abstract class Lang {
   /// **'\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')'**
   String get csInvalidDomain;
 
-  /// No description provided for @csSupportEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Support email'**
-  String get csSupportEmail;
-
-  /// No description provided for @csSupportTip.
-  ///
-  /// In en, this message translates to:
-  /// **'If provided, the feedback system we use will be included.'**
-  String get csSupportTip;
-
-  /// No description provided for @csInvalidEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid email'**
-  String get csInvalidEmail;
-
   /// No description provided for @csInclude.
   ///
   /// In en, this message translates to:
@@ -360,7 +342,7 @@ abstract class Lang {
   /// No description provided for @csRequired.
   ///
   /// In en, this message translates to:
-  /// **'All fields except support email are required'**
+  /// **'All fields are required'**
   String get csRequired;
 
   /// No description provided for @csResetHint.

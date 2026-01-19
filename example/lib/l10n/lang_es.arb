@@ -19,9 +19,6 @@
   "csDomainName": "Nombre de dominio",
   "csDomainTip": "Revés, esta al",
   "csInvalidDomain": "'domain.name' solamente; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
-  "csSupportEmail": "Correo de soporte",
-  "csSupportTip": "Si se proporciona, se incluirá el sistema de comentarios que utilizamos.",
-  "csInvalidEmail": "Correo no válido",
   "csInclude": "Incluir",
   "csEasy": "Fácil de cambiar más tarde",
 
@@ -51,7 +48,7 @@
 
   "csGenerate": "Generar aplicación",
   "csInvalidFields": "Algunos campos son inválidos",
-  "csRequired": "Todos los campos excepto el correo de soporte son obligatorios",
+  "csRequired": "Todos los campos son obligatorios",
 
   "csResetHint": "Activa y confirma lo que se debe reiniciar.",
   "csResetBuilder": "Valores del constructor",

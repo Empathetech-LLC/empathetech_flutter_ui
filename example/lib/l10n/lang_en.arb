@@ -19,9 +19,6 @@
   "csDomainName": "Domain name",
   "csDomainTip": "Backwards, it is",
   "csInvalidDomain": "'domain.name' only; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
-  "csSupportEmail": "Support email",
-  "csSupportTip": "If provided, the feedback system we use will be included.",
-  "csInvalidEmail": "Invalid email",
   "csInclude": "Include",
   "csEasy": "Easy to change later",
 
@@ -51,7 +48,7 @@
 
   "csGenerate": "Generate app",
   "csInvalidFields": "Some fields are invalid",
-  "csRequired": "All fields except support email are required",
+  "csRequired": "All fields are required",
 
   "csResetHint": "Activate and confirm what should be reset.",
   "csResetBuilder": "Builder values",
