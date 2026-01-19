@@ -73,6 +73,11 @@ class OpenUI extends StatelessWidget {
         // App title
         title: appName,
 
+        // App theme
+        themeMode: EzConfig.provider.themeMode,
+        darkTheme: EzConfig.provider.darkTheme,
+        theme: EzConfig.provider.lightTheme,
+
         // Router (page) config
         routerConfig: GoRouter(
           initialLocation: homePath,
