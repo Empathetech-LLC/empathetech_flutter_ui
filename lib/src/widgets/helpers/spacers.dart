@@ -18,22 +18,22 @@ class EzMargin extends EzSpacer {
     super.horizontal,
   }) : super(
             space: (isDark == null)
-                ? EzConfig.margin
+                ? EzConfig.marginVal
                 : isDark
                     ? EzConfig.get(darkMarginKey)
                     : EzConfig.get(lightMarginKey));
 }
 
 class EzHeader extends EzSpacer {
-  /// [EzSpacer.space] of [EzConfig.spacing] - [EzConfig.margin], unless margin is larger
+  /// [EzSpacer.space] of [EzConfig.spacing] - [EzConfig.marginVal], unless margin is larger
   /// Fails if [EzConfigProvider] is not in the context
   EzHeader({
     super.key,
     super.vertical,
     super.horizontal,
   }) : super(
-            space: (EzConfig.spacing > EzConfig.margin)
-                ? EzConfig.spacing - EzConfig.margin
+            space: (EzConfig.spacing > EzConfig.marginVal)
+                ? EzConfig.spacing - EzConfig.marginVal
                 : 0.0);
 }
 
@@ -180,7 +180,7 @@ class EzSwapMargin extends EzSwapSpacer {
     super.breakpoint,
   }) : super(
             space: (isDark == null)
-                ? EzConfig.margin
+                ? EzConfig.marginVal
                 : isDark
                     ? EzConfig.get(darkMarginKey)
                     : EzConfig.get(lightMarginKey));

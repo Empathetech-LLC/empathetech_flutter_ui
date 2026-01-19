@@ -12,7 +12,7 @@ class EzRadio<T> extends StatelessWidget {
   /// Defaults to max([EzConfig.iconSize] / [EzConfig.getDefault], 1.0)
   final double? scale;
 
-  /// Defaults to [EdgeInsets.all] with [EzConfig.margining] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Radio.value] passthrough
@@ -72,7 +72,7 @@ class EzRadio<T> extends StatelessWidget {
 
     return Container(
       padding: ratio > 1.1
-          ? padding ?? EzInsets.wrap(EzConfig.margining)
+          ? padding ?? EzInsets.wrap(EzConfig.marginVal)
           : EdgeInsets.zero,
       decoration: BoxDecoration(
         color: Theme.of(context)

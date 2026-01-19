@@ -77,7 +77,7 @@ double ezDropdownWidth({
   required BuildContext context,
   required List<String> entries,
 }) =>
-    2 * EzConfig.margin +
+    2 * EzConfig.marginVal +
     ezTextSize(
       getLongest(entries),
       context: context,

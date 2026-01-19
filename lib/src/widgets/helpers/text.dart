@@ -57,7 +57,7 @@ class EzTextBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: margin ?? EzInsets.wrap(EzConfig.margin),
+        padding: margin ?? EzInsets.wrap(EzConfig.marginVal),
         decoration: BoxDecoration(
           color: _color(
             context,
