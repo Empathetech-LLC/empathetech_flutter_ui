@@ -9,11 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EzConfigurableApp extends StatelessWidget {
-  /// App to wrap
-  final Widget app;
+  /// LocaleNamesLocalizationsDelegate(), etc.
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
 
-  /// Wraps [app] in a [ChangeNotifierProvider] for live configuration
-  const EzConfigurableApp({super.key, required this.app});
+  /// Languages/locales the app supports
+  final Iterable<Locale> supportedLocales;
+
+  /// App name (window title, etc.)
+  final String appName;
+
+  /// Router/page config
+  final RouterConfig<Object>? routerConfig;
+
+  /// [MaterialApp.router] wrapper with a [ChangeNotifierProvider] for live configuration
+  const EzConfigurableApp({
+    super.key,
+    this.localizationsDelegates,
+    required this.supportedLocales,
+    required this.appName,
+    this.routerConfig,
+  });
 
   @override
   Widget build(BuildContext context) =>
@@ -24,14 +39,27 @@ class EzConfigurableApp extends StatelessWidget {
           l10nFallback: EzConfig.l10nFallback,
           isDark: isDarkTheme(context),
         ),
-        child: _ThemeDrawer(app),
+        child: _ThemeDrawer(
+          localizationsDelegates: localizationsDelegates,
+          supportedLocales: supportedLocales,
+          appName: appName,
+          routerConfig: routerConfig,
+        ),
       );
 }
 
 class _ThemeDrawer extends StatefulWidget {
-  final Widget app;
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+  final Iterable<Locale> supportedLocales;
+  final String appName;
+  final RouterConfig<Object>? routerConfig;
 
-  const _ThemeDrawer(this.app);
+  const _ThemeDrawer({
+    required this.localizationsDelegates,
+    required this.supportedLocales,
+    required this.appName,
+    required this.routerConfig,
+  });
 
   @override
   State<_ThemeDrawer> createState() => _ThemeDrawerState();
@@ -60,7 +88,17 @@ class _ThemeDrawerState extends State<_ThemeDrawer>
   @override
   Widget build(BuildContext context) {
     EzConfig.initProvider(config);
-    return widget.app;
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: widget.localizationsDelegates,
+      supportedLocales: widget.supportedLocales,
+      locale: getStoredLocale(),
+      title: widget.appName,
+      themeMode: config.themeMode,
+      darkTheme: config.darkTheme,
+      theme: config.lightTheme,
+      routerConfig: widget.routerConfig,
+    );
   }
 
   @override
