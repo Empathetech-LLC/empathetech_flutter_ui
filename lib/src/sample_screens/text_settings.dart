@@ -365,7 +365,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    late final EdgeInsets colMargin = EzInsets.col(EzConfig.margin);
+    late final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
     late final EdgeInsets wrapPadding = EdgeInsets.only(
       top: EzConfig.spacing,
       left: EzConfig.spacing / 2,
@@ -460,7 +460,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Headline preview
         EzTextBackground(
@@ -474,7 +474,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Title preview
         EzTextBackground(
@@ -486,7 +486,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Body preview
         EzTextBackground(
@@ -500,7 +500,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Label preview
         EzTextBackground(
@@ -556,7 +556,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   value.toStringAsFixed(2),
             ),
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
         ],
 
         // Icon size
@@ -595,7 +595,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
       ],
     );
   }
@@ -1213,7 +1213,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   Widget build(BuildContext context) {
     const EzSwapSpacer swapSpacer = EzSwapSpacer(breakpoint: ScreenSize.medium);
 
-    final EdgeInsets colMargin = EzInsets.col(EzConfig.margin);
+    final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
 
     final Map<EzTextSettingType, EzFontFamilySetting> familyControllers =
         buildFamilyControls();
@@ -1228,7 +1228,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Style selector
         EzScrollView(
@@ -1241,7 +1241,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               style: widget.labelProvider.value,
               textAlign: TextAlign.center,
             ),
-            EzConfig.layout.margin,
+            EzConfig.margin,
             EzDropdownMenu<EzTextSettingType>(
               widthEntries: styleChoices
                   .map(
@@ -1257,7 +1257,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
           ],
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Controls
         EzRowCol.sym(
@@ -1280,9 +1280,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 boldControllers[editing]!,
-                EzConfig.layout.rowSpacer,
+                EzConfig.rowSpacer,
                 italicsControllers[editing]!,
-                EzConfig.layout.rowSpacer,
+                EzConfig.rowSpacer,
                 underlineControllers[editing]!,
               ],
             ),
@@ -1296,16 +1296,16 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   letterSpacingControllers[editing]!,
-                  EzConfig.layout.rowSpacer,
+                  EzConfig.rowSpacer,
                   wordSpacingControllers[editing]!,
-                  EzConfig.layout.rowSpacer,
+                  EzConfig.rowSpacer,
                   lineHeightControllers[editing]!,
                 ],
               ),
             ],
           ],
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
 
         // Display preview
         EzTextBackground(
@@ -1331,7 +1331,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Headline preview
         EzTextBackground(
@@ -1357,7 +1357,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Title preview
         EzTextBackground(
@@ -1381,7 +1381,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Body preview
         EzTextBackground(
@@ -1406,7 +1406,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        EzConfig.layout.spacer,
+        EzConfig.spacer,
 
         // Label preview
         EzTextBackground(
@@ -1470,7 +1470,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
       ],
     );
   }

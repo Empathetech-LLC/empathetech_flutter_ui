@@ -8,51 +8,20 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzBackFAB extends StatelessWidget {
   final bool showHome;
-  final bool hold4Feedback;
-  final String? supportEmail;
-  final String? appName;
 
   /// [FloatingActionButton] that goes back; [Navigator.pop]
-  const EzBackFAB({
-    super.key,
-    this.showHome = false,
-    this.hold4Feedback = false,
-    this.supportEmail,
-    this.appName,
-  }) : assert(
-          !hold4Feedback || (supportEmail != null && appName != null),
-          'supportEmail and appName must be provided when hold4Feedback is true',
-        );
+  const EzBackFAB({super.key, this.showHome = false});
 
   @override
-  Widget build(BuildContext context) => hold4Feedback
-      ? GestureDetector(
-          onLongPress: () => ezFeedback(
-            parentContext: context,
-            supportEmail: supportEmail ?? 'null',
-            appName: appName ?? 'null',
-          ),
-          child: FloatingActionButton(
-            heroTag: 'back_fab',
-            tooltip: null,
-            onPressed: () => Navigator.of(context).maybePop(),
-            child: EzIcon(showHome
-                ? PlatformIcons(context).home
-                : PlatformIcons(context).back),
-          ),
-        )
-      : FloatingActionButton(
-          heroTag: 'back_fab',
-          tooltip: EzConfig.l10n.gBack,
-          onPressed: () => Navigator.of(context).maybePop(),
-          child: EzIcon(showHome
-              ? PlatformIcons(context).home
-              : PlatformIcons(context).back),
-        );
+  Widget build(BuildContext context) => FloatingActionButton(
+        heroTag: 'back_fab',
+        tooltip: EzConfig.l10n.gBack,
+        onPressed: () => Navigator.of(context).maybePop(),
+        child: EzIcon(showHome ? Icons.home : Icons.arrow_back),
+      );
 }
 
 class EzConfigFAB extends StatelessWidget {
@@ -271,11 +240,13 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
       child: widget.isWeb // Trinary required, if/else breaks iOS web links
           ? FloatingActionButton(
               heroTag: 'updater_fab',
-              onPressed: () => showPlatformDialog(
+              onPressed: () => showDialog(
                 context: context,
                 builder: (_) => EzAlertDialog(
-                  title:
-                      Text(EzConfig.l10n.gUpdates, textAlign: TextAlign.center),
+                  title: Text(
+                    EzConfig.l10n.gUpdates,
+                    textAlign: TextAlign.center,
+                  ),
                   content: Text(hardRefresh(), textAlign: TextAlign.center),
                 ),
               ),
@@ -307,18 +278,13 @@ class EzRebuildFAB extends StatelessWidget {
   final IconData? icon;
 
   /// [FloatingActionButton] that rebuilds the app when pressed
-  const EzRebuildFAB({
-    super.key,
-    this.onComplete,
-    this.tooltip,
-    this.icon,
-  });
+  const EzRebuildFAB({super.key, this.onComplete, this.tooltip, this.icon});
 
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
         onPressed: () => EzConfig.provider.rebuild(onComplete: onComplete),
         tooltip: tooltip ?? 'Apply changes', // TODO: l10n
-        child: EzIcon(icon ?? PlatformIcons(context).checkMark),
+        child: EzIcon(icon ?? Icons.check),
       );
 }
