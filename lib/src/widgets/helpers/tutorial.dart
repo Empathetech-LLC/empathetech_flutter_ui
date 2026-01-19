@@ -59,14 +59,14 @@ class EzTutorial extends StatelessWidget {
           // Title
           title: Text(title, textAlign: TextAlign.center),
           titlePadding: EdgeInsets.symmetric(
-            horizontal: EzConfig.margin,
+            horizontal: EzConfig.marginVal,
             vertical: EzConfig.spacing / 2,
           ),
 
           // Content
           content: Text(content, textAlign: TextAlign.center),
           contentPadding: EdgeInsets.symmetric(
-            horizontal: EzConfig.margin,
+            horizontal: EzConfig.marginVal,
             vertical: EzConfig.spacing / 2,
           ),
 
@@ -81,7 +81,7 @@ class EzTutorial extends StatelessWidget {
           // General
           iconPadding: EdgeInsets.zero,
           buttonPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.all(EzConfig.margin),
+          insetPadding: EdgeInsets.all(EzConfig.marginVal),
           actionsPadding: EzInsets.wrap(EzConfig.spacing),
         ),
       ),

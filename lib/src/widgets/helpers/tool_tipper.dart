@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzToolTipper extends StatelessWidget {
   /// [Tooltip.message] passthrough
@@ -17,11 +16,8 @@ class EzToolTipper extends StatelessWidget {
   final InlineSpan? richMessage;
 
   /// Classic question mark tool tip
-  const EzToolTipper({
-    super.key,
-    this.message,
-    this.richMessage,
-  }) : assert(((message == null) != (richMessage == null)),
+  const EzToolTipper({super.key, this.message, this.richMessage})
+      : assert(((message == null) != (richMessage == null)),
             'Either message or richMessage must be provided, but not both');
 
   @override
@@ -91,7 +87,7 @@ class EzToolTipper extends StatelessWidget {
           message: message,
           richMessage: richMessage,
           child: EzIcon(
-            PlatformIcons(context).helpOutline,
+            Icons.help_outline,
             color: Theme.of(context).colorScheme.outline,
           ),
         ),

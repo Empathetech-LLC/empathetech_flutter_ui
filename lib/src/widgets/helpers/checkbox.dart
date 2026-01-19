@@ -9,7 +9,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
-  /// Defaults to [EdgeInsets.all] with [EzConfig.margin]s when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal]s when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Checkbox.value] passthrough
@@ -96,7 +96,7 @@ class EzCheckbox extends StatelessWidget {
 
     return Padding(
       padding: ratio > 1.1
-          ? padding ?? EzInsets.wrap(EzConfig.margin)
+          ? padding ?? EzInsets.wrap(EzConfig.marginVal)
           : EdgeInsets.zero,
       child: Transform.scale(
         scale: max(1.0, ratio),

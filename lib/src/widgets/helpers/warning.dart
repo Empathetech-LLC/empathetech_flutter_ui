@@ -58,7 +58,7 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(EzConfig.margin),
+            padding: EdgeInsets.all(EzConfig.marginVal),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -74,14 +74,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    EzConfig.layout.rowMargin,
+                    EzConfig.rowMargin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    EzConfig.layout.rowMargin,
+                    EzConfig.rowMargin,
 
                     // Thing 2
                     Icon(
@@ -91,7 +91,7 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                EzConfig.layout.spacer,
+                EzConfig.spacer,
 
                 // Body
                 Text(body, style: bStyle, textAlign: TextAlign.center),
