@@ -60,11 +60,6 @@ class OpenUIScaffold extends StatelessWidget {
       menuChildren: <Widget>[
         if (showSettings) SettingsButton(context),
         if (onUpload != null) UploadButton(context, onUpload: onUpload!),
-        EzFeedbackMenuButton(
-          parentContext: context,
-          appName: appName,
-          supportEmail: 'support@empathetech.net',
-        ),
         const OpenSourceButton(),
       ],
     );

@@ -8,7 +8,6 @@ import '../utils/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SuccessHeader extends StatelessWidget {
   /// [ThemeData.textTheme] passthrough
@@ -45,7 +44,7 @@ class SuccessHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
 
           // Where to go next
           message == null
@@ -93,10 +92,10 @@ class RunOption extends StatelessWidget {
                 style: style,
                 textAlign: TextAlign.center,
               ),
-              EzConfig.layout.spacer,
+              EzConfig.spacer,
               EzElevatedIconButton(
                 onPressed: emulate,
-                icon: EzIcon(PlatformIcons(context).playArrowSolid),
+                icon: const Icon(Icons.play_arrow),
                 label: Lang.of(context)!.rsRun,
               ),
             ],

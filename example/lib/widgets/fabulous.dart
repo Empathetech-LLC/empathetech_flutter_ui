@@ -8,7 +8,6 @@ import 'package:efui_bios/efui_bios.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ResetFAB extends StatelessWidget {
   /// Function to execute with 'Builder values' and 'Both' options
@@ -30,13 +29,15 @@ class ResetFAB extends StatelessWidget {
         hint: l10n.csResetHint,
         child: ExcludeSemantics(
           child: FloatingActionButton(
-            onPressed: () => showPlatformDialog(
+            onPressed: () => showDialog(
               context: context,
               builder: (BuildContext dContext) {
                 return EzAlertDialog(
-                  title: Text('${EzConfig.l10n.gReset}...',
-                      textAlign: TextAlign.center),
-                  materialActions: <Widget>[
+                  title: Text(
+                    '${EzConfig.l10n.gReset}...',
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: <Widget>[
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
@@ -69,43 +70,6 @@ class ResetFAB extends StatelessWidget {
                       isDestructiveAction: true,
                     ),
                     EzMaterialAction(
-                      onPressed: () => Navigator.of(dContext).pop(),
-                      text: l10n.csResetNothing,
-                    ),
-                  ],
-                  cupertinoActions: <EzCupertinoAction>[
-                    EzCupertinoAction(
-                      onPressed: () async {
-                        clearForms();
-                        if (dContext.mounted) {
-                          Navigator.of(dContext).pop();
-                        }
-                      },
-                      text: l10n.csResetBuilder,
-                      isDefaultAction: true,
-                    ),
-                    EzCupertinoAction(
-                      onPressed: () async {
-                        await EzConfig.reset();
-                        if (dContext.mounted) {
-                          Navigator.of(dContext).pop();
-                        }
-                      },
-                      text: l10n.csResetApp,
-                      isDestructiveAction: true,
-                    ),
-                    EzCupertinoAction(
-                      onPressed: () async {
-                        clearForms();
-                        await EzConfig.reset();
-                        if (dContext.mounted) {
-                          Navigator.of(dContext).pop();
-                        }
-                      },
-                      text: l10n.csResetBoth,
-                      isDestructiveAction: true,
-                    ),
-                    EzCupertinoAction(
                       onPressed: () => Navigator.of(dContext).pop(),
                       text: l10n.csResetNothing,
                     ),
@@ -114,7 +78,7 @@ class ResetFAB extends StatelessWidget {
                 );
               },
             ),
-            child: EzIcon(PlatformIcons(context).refresh),
+            child: EzIcon(Icons.refresh),
           ),
         ),
       ),
@@ -131,7 +95,7 @@ class MacStoreFAB extends StatelessWidget {
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'macStore',
         tooltip: 'EoL',
-        onPressed: () => showPlatformDialog(
+        onPressed: () => showDialog(
           context: context,
           builder: (BuildContext dContext) {
             return EzAlertDialog(contents: <Widget>[
@@ -147,7 +111,7 @@ The full (free and open source) app generator can be downloaded from the ''',
                 'GitHub releases',
                 url: Uri.parse(openUIReleases),
                 hint: openUIReleases,
-              )
+              ),
             ]);
           },
         ),

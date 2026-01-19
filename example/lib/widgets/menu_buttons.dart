@@ -13,7 +13,6 @@ import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SettingsButton extends StatelessWidget {
   final BuildContext parentContext;
@@ -24,7 +23,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
-        icon: EzIcon(PlatformIcons(context).settings),
+        icon: EzIcon(Icons.settings),
         label: EzConfig.l10n.ssPageTitle,
       );
 }
@@ -34,11 +33,7 @@ class UploadButton extends StatelessWidget {
   final Future<void> Function(EAGConfig) onUpload;
 
   /// [EzMenuButton] for uploading a config
-  const UploadButton(
-    this.parentContext, {
-    super.key,
-    required this.onUpload,
-  });
+  const UploadButton(this.parentContext, {super.key, required this.onUpload});
 
   @override
   Widget build(BuildContext context) => EzMenuButton(
@@ -59,10 +54,7 @@ class UploadButton extends StatelessWidget {
               await onUpload(config);
             } catch (e) {
               if (context.mounted) {
-                ezSnackBar(
-                  context: context,
-                  message: e.toString(),
-                );
+                ezSnackBar(context: context, message: e.toString());
               }
             }
           }

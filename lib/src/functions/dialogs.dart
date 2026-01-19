@@ -8,18 +8,17 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// [ezLog] the passed message and display an [EzAlertDialog] to notify the user
 Future<dynamic> ezLogAlert(
   BuildContext context, {
   String? title,
   required String message,
-  (List<Widget> materialActions, List<Widget> cupertinoActions)? customActions,
+  List<Widget>? customActions,
 }) async {
   ezLog(message);
 
-  return showPlatformDialog(
+  return showDialog(
     context: context,
     builder: (_) => EzAlertDialog(
       title: Text(
@@ -27,8 +26,7 @@ Future<dynamic> ezLogAlert(
         textAlign: TextAlign.center,
       ),
       contents: <Widget>[Text(message, textAlign: TextAlign.center)],
-      materialActions: customActions?.$1,
-      cupertinoActions: customActions?.$2,
+      actions: customActions,
       needsClose: customActions == null,
     ),
   );
@@ -44,33 +42,10 @@ Future<dynamic> ezColorPicker(
   required void Function() onConfirm,
   String? denyMsg,
   required void Function() onDeny,
-}) {
-  return showPlatformDialog(
-    context: context,
-    builder: (BuildContext dContext) {
-      void confirm() {
-        onConfirm();
-        Navigator.of(dContext).pop();
-      }
-
-      void deny() {
-        onDeny();
-        Navigator.of(dContext).pop();
-      }
-
-      late final List<Widget> materialActions;
-      late final List<Widget> cupertinoActions;
-
-      (materialActions, cupertinoActions) = ezActionPairs(
-        context: context,
-        confirmMsg: confirmMsg ?? EzConfig.l10n.gApply,
-        onConfirm: confirm,
-        confirmIsDestructive: true,
-        denyMsg: denyMsg ?? EzConfig.l10n.gCancel,
-        onDeny: deny,
-      );
-
-      return EzAlertDialog(
+}) =>
+    showDialog(
+      context: context,
+      builder: (BuildContext dContext) => EzAlertDialog(
         title: Text(
           title ?? EzConfig.l10n.csPickerTitle,
           textAlign: TextAlign.center,
@@ -89,7 +64,7 @@ Future<dynamic> ezColorPicker(
             ColorPickerType.bw: false,
             ColorPickerType.custom: false,
             ColorPickerType.customSecondary: false,
-            ColorPickerType.wheel: true
+            ColorPickerType.wheel: true,
           },
           onColorChanged: onColorChange,
           showRecentColors: true,
@@ -98,10 +73,20 @@ Future<dynamic> ezColorPicker(
           opacityTrackHeight: min(EzConfig.padding * 2, 50.0),
           showColorCode: true,
         ),
-        materialActions: materialActions,
-        cupertinoActions: cupertinoActions,
+        actions: ezActionPair(
+          context: context,
+          confirmMsg: confirmMsg ?? EzConfig.l10n.gApply,
+          onConfirm: () {
+            onConfirm();
+            Navigator.of(dContext).pop();
+          },
+          confirmIsDestructive: true,
+          denyMsg: denyMsg ?? EzConfig.l10n.gCancel,
+          onDeny: () {
+            onDeny();
+            Navigator.of(dContext).pop();
+          },
+        ),
         needsClose: false,
-      );
-    },
-  );
-}
+      ),
+    );

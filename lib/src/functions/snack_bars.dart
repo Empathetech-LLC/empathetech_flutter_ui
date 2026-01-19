@@ -20,7 +20,7 @@ double snackWidth({
   final TextStyle? snackStyle =
       style ?? Theme.of(context).snackBarTheme.contentTextStyle;
 
-  final double snackMargin = margin ?? EzConfig.margin;
+  final double snackMargin = margin ?? EzConfig.marginVal;
   final double countDownSize = EzConfig.iconSize * 1.5;
 
   final double closeIconSize = showCloseIcon
@@ -68,7 +68,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       : ezReadingTime(message) + const Duration(seconds: 1);
   late final Duration toastLength = duration ?? readingTime;
 
-  final double toastMargin = margin ?? EzConfig.margin;
+  final double toastMargin = margin ?? EzConfig.marginVal;
 
   late final TextStyle? bodyStyle = Theme.of(context).textTheme.bodyLarge;
   late final Color primary = Theme.of(context).colorScheme.primary;
