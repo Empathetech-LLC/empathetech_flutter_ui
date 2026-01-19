@@ -115,9 +115,9 @@ class EzResetButton extends StatelessWidget {
               ),
           actions: ezActionPair(
             context: context,
-            onConfirm: () {
+            onConfirm: () async {
               if (onConfirm == null) {
-                EzConfig.reset(
+                await EzConfig.reset(
                   skip: skip,
                   storageOnly: storageOnly,
                   notifyTheme: notifyTheme,
@@ -126,7 +126,7 @@ class EzResetButton extends StatelessWidget {
               } else {
                 onConfirm!.call();
               }
-              Navigator.of(dContext).pop();
+              if (dContext.mounted) Navigator.of(dContext).pop();
             },
             confirmIsDestructive: true,
             onDeny: () {
