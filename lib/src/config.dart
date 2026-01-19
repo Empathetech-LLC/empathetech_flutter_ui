@@ -163,7 +163,13 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   static ThemeMode get themeMode => provider.themeMode;
   static bool get isDark => provider.isDark;
-  static EzLayoutWidgets get layout => provider.layout;
+
+  static EzMargin get margin => provider.layout.margin;
+  static EzMargin get rowMargin => provider.layout.rowMargin;
+  static EzSpacer get spacer => provider.layout.spacer;
+  static EzSpacer get rowSpacer => provider.layout.rowSpacer;
+  static EzSeparator get separator => provider.layout.separator;
+  static EzDivider get divider => provider.layout.divider;
 
   /// Get the [key]s default EzConfig (nullable) value
   static dynamic getDefault(String key) => _instance!._defaults[key];
@@ -180,7 +186,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       get(isDark ? darkAnimationDurationKey : lightAnimationDurationKey);
 
   /// Theme aware alias for [EzConfig.get] => [darkMarginKey] || [lightMarginKey]
-  static double get margin => get(isDark ? darkMarginKey : lightMarginKey);
+  static double get marginVal => get(isDark ? darkMarginKey : lightMarginKey);
 
   /// Theme aware alias for [EzConfig.get] => [darkPaddingKey] || [lightPaddingKey]
   static double get padding => get(isDark ? darkPaddingKey : lightPaddingKey);

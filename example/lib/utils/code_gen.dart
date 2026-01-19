@@ -418,14 +418,10 @@ dependencies:
   go_router: ^14.8.1
   intl: ^0.20.2
   shared_preferences: ^2.5.3
-  url_launcher: ^6.3.2
 
   # Community
-  empathetech_flutter_ui: ^10.0.0
-  ${config.supportEmail != null ? 'feedback: ^3.2.0' : ''}
+  empathetech_flutter_ui: ^11.0.0
   flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^9.0.0
-  go_transitions: ^0.8.2
 
 dev_dependencies:
   dependency_validator: ^5.0.2
@@ -490,13 +486,12 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-${config.supportEmail != null ? "import 'package:feedback/feedback.dart';" : ''}
+${config.supportEmail != null ? "" : ''}
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
@@ -521,35 +516,8 @@ void main() async {
   );
 
   // Run the app //
-  ${config.supportEmail != null ? '''// With a feedback wrapper
-
-  late final TextStyle lightFeedbackText = ezBodyStyle(Colors.black);
-  late final TextStyle darkFeedbackText = ezBodyStyle(Colors.white);
-
-  runApp(BetterFeedback(
-    theme: FeedbackThemeData(
-      background: Colors.grey,
-      feedbackSheetColor: Colors.white,
-      // activeFeedbackModeColor: lightPrimaryColor,
-      bottomSheetDescriptionStyle: lightFeedbackText,
-      bottomSheetTextInputStyle: lightFeedbackText,
-      sheetIsDraggable: true,
-      dragHandleColor: Colors.black,
-    ),
-    darkTheme: FeedbackThemeData(
-      background: Colors.grey,
-      feedbackSheetColor: Colors.black,
-      // activeFeedbackModeColor: darkPrimaryColor,
-      bottomSheetDescriptionStyle: darkFeedbackText,
-      bottomSheetTextInputStyle: darkFeedbackText,
-      sheetIsDraggable: true,
-      dragHandleColor: Colors.white,
-    ),
-    
-    localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
-    
-    child: const $classCaseAppName(),
-  ));''' : '\n  runApp(const $classCaseAppName());'}
+  
+  runApp(const $classCaseAppName());
 }
 
 class $classCaseAppName extends StatelessWidget {
@@ -568,7 +536,7 @@ class $classCaseAppName extends StatelessWidget {
     // Return the app //
 
     return EzAppProvider(
-      app: PlatformApp.router(
+      app: MaterialApp.router(
         debugShowCheckedModeBanner: false,
 
         // Language handlers
@@ -734,7 +702,6 @@ ${config.l10nConfig != null ? "export '../l10n/${ezClassToSnake(l10nClassName(co
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CountFAB extends StatelessWidget {
   /// [FloatingActionButton.onPressed] passthrough
@@ -746,7 +713,7 @@ class CountFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         onPressed: count,
-        child: EzIcon(PlatformIcons(context).add),
+        child: EzIcon(Icons.add),
       );
 }
 """);
@@ -760,7 +727,6 @@ import '../screens/export.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SettingsButton extends StatelessWidget {
   final BuildContext parentContext;
@@ -771,7 +737,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
-        icon: EzIcon(PlatformIcons(context).settings),
+        icon: EzIcon(Icons.settings),
         label: EzConfig.l10n.ssPageTitle,
       );
 }
@@ -796,7 +762,7 @@ class EFUICredits extends StatelessWidget {
       excludeFromSemantics: true,
       child: EzMenuLink(
         uri: Uri.parse('https://www.empathetech.net/#/products/open-ui'),
-        icon: EzIcon(PlatformIcons(context).settings),
+        icon: EzIcon(Icons.settings),
         label: label,
         semanticsLabel:
           '\${EzConfig.isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
@@ -981,19 +947,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 style: textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              EzConfig.layout.separator,
+              EzConfig.separator,
               Text(
                 EzConfig.l10n.g404,
                 style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
-              EzConfig.layout.separator,
+              EzConfig.separator,
               Text(
                 EzConfig.l10n.g404Note,
                 style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-              EzConfig.layout.separator,
+              EzConfig.separator,
             ],
           ),
         ),
@@ -1068,7 +1034,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      fabs: <Widget>[EzConfig.layout.spacer, CountFAB(() => setState(() => count += 1))],
+      fabs: <Widget>[EzConfig.spacer, CountFAB(() => setState(() => count += 1))],
     );
   }
 }
@@ -1101,23 +1067,23 @@ class SettingsHomeScreen extends StatelessWidget {
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
         )),
         fabs: <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           const EzBackFAB(showHome: true),
         ],
       );
 }
 """);
 
-    // color_settings.dart?
+    // Color settings?
     if (config.colorSettings) {
       final File colorSettings = File(
-        '$dir/lib/screens/settings/color_settings.dart',
+        '$dir/lib/screens/settings/color.dart',
       );
       await colorSettings.writeAsString("""$copyright
 
@@ -1138,13 +1104,13 @@ class ColorSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: EzScreen(EzColorSettings(target: target)),
         fabs: <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1152,10 +1118,10 @@ class ColorSettingsScreen extends StatelessWidget {
 """);
     }
 
-    // design_settings.dart?
+    // Design settings?
     if (config.designSettings) {
       final File designSettings = File(
-        '$dir/lib/screens/settings/design_settings.dart',
+        '$dir/lib/screens/settings/design.dart',
       );
       await designSettings.writeAsString("""$copyright
 
@@ -1174,13 +1140,13 @@ class DesignSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: const EzScreen(EzDesignSettings()),
         fabs: <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1188,10 +1154,10 @@ class DesignSettingsScreen extends StatelessWidget {
 """);
     }
 
-    // layout_settings.dart?
+    // Layout settings?
     if (config.layoutSettings) {
       final File layoutSettings = File(
-        '$dir/lib/screens/settings/layout_settings.dart',
+        '$dir/lib/screens/settings/layout.dart',
       );
       await layoutSettings.writeAsString("""$copyright
 
@@ -1210,13 +1176,13 @@ class LayoutSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: const EzScreen(EzLayoutSettings()),
         fabs: <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1224,10 +1190,10 @@ class LayoutSettingsScreen extends StatelessWidget {
 """);
     }
 
-    // text_settings.dart?
+    // Text settings?
     if (config.textSettings) {
       final File textSettings = File(
-        '$dir/lib/screens/settings/text_settings.dart',
+        '$dir/lib/screens/settings/text.dart',
       );
       await textSettings.writeAsString("""$copyright
 
@@ -1248,13 +1214,13 @@ class TextSettingsScreen extends StatelessWidget {
         showSettings: false,
         body: EzScreen(EzTextSettings(target: target)),
         fabs: <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           const EzBackFAB(),
         ],
       );
@@ -1271,11 +1237,12 @@ class TextSettingsScreen extends StatelessWidget {
 export 'error.dart';
 export 'home.dart';
 
-export 'settings/settings_home.dart';
-${config.colorSettings ? "export 'settings/color_settings.dart';" : ''}
-${config.designSettings ? "export 'settings/design_settings.dart';" : ''}
-${config.layoutSettings ? "export 'settings/layout_settings.dart';" : ''}
-${config.textSettings ? "export 'settings/text_settings.dart';" : ''}
+export 'settings/home.dart';
+
+${config.colorSettings ? "export 'settings/color.dart';" : ''}
+${config.designSettings ? "export 'settings/design.dart';" : ''}
+${config.layoutSettings ? "export 'settings/layout.dart';" : ''}
+${config.textSettings ? "export 'settings/text.dart';" : ''}
 
 // Route names //
 

@@ -5,7 +5,6 @@
 
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:window_manager/window_manager.dart';
 
 /// True if [Platform.isIOS] or [Platform.isMacOS]
 bool cupertinoCheck() => Platform.isIOS || Platform.isMacOS;
@@ -50,9 +49,9 @@ Future<void> toggleFullscreen(TargetPlatform platform, bool isFull) async {
     case TargetPlatform.macOS:
     case TargetPlatform.windows:
       if (isFull) {
-        await windowManager.setFullScreen(true);
+        // REPLACE: await windowManager.setFullScreen(true);
       } else {
-        await windowManager.setFullScreen(false);
+        // REPLACE: await windowManager.setFullScreen(false);
       }
       break;
   }

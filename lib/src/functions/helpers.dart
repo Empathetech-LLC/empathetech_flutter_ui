@@ -15,7 +15,6 @@ import 'package:file_saver/file_saver.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
@@ -61,8 +60,7 @@ bool isApple() => cupertinoCheck();
 
 /// First checks [PlatformTheme] then falls back to [MediaQuery]
 bool isDarkTheme(BuildContext context) =>
-    PlatformTheme.of(context)?.isDark ??
-    (MediaQuery.of(context).platformBrightness == Brightness.dark);
+    MediaQuery.of(context).platformBrightness == Brightness.dark;
 
 /// Alias exists for [kIsWeb] support
 /// [isMobile] is preferred; technically more efficient
@@ -161,12 +159,9 @@ Future<void> ezConfigSaver(
     if (extraKeys != null) ...extraKeys,
   ];
 
-  final Map<String, dynamic> config = Map<String, dynamic>.fromEntries(keys.map(
-    (String key) => MapEntry<String, dynamic>(
-      key,
-      EzConfig.get(key),
-    ),
-  ));
+  final Map<String, dynamic> config = Map<String, dynamic>.fromEntries(
+    keys.map((String key) => MapEntry<String, dynamic>(key, EzConfig.get(key))),
+  );
 
   try {
     await FileSaver.instance.saveFile(
@@ -182,10 +177,9 @@ Future<void> ezConfigSaver(
   if (context.mounted) {
     ezSnackBar(
       context: context,
-      message: EzConfig.l10n.ssConfigSaved(archivePath(
-        appName: appName,
-        androidPackage: androidPackage,
-      )),
+      message: EzConfig.l10n.ssConfigSaved(
+        archivePath(appName: appName, androidPackage: androidPackage),
+      ),
     );
   }
 }
@@ -253,7 +247,7 @@ double ezToolbarHeight({
           ? max(EzConfig.iconSize + EzConfig.padding, kMinInteractiveDimension)
           : kMinInteractiveDimension,
     ) +
-    EzConfig.margin;
+    EzConfig.marginVal;
 
 /// Relaxed reading time for a US tween: 100 words per minute
 Duration ezReadingTime(String passage) {
