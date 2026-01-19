@@ -6,7 +6,9 @@
 import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EzConfig {
@@ -64,7 +66,7 @@ class EzConfig {
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
   /// [l10nFallback] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [preferences] => provide a [SharedPreferencesAsync] instance
-  /// [provider] => Set by [EzAppProvider], recommended to leave null unless you are not using [EzAppProvider]
+  /// [provider] => Set by [EzConfigurableApp], recommended to leave null unless you are not using [EzConfigurableApp]
   factory EzConfig.init({
     required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
@@ -355,6 +357,42 @@ Must be one of [int, bool, double, String, List<String>]''');
     } catch (e) {
       ezLog('Error setting String List [$key]...\n$e');
       return false;
+    }
+  }
+
+  /// Save the current [EzConfig] to local storage
+  static Future<void> saveConfig(
+    BuildContext context, {
+    required String appName,
+    String? androidPackage,
+    List<String>? skip,
+  }) async {
+    final Map<String, dynamic> config =
+        Map<String, dynamic>.from(_instance!._prefs);
+    if (skip != null) {
+      for (final String key in skip) {
+        config.remove(key);
+      }
+    }
+
+    try {
+      await FileSaver.instance.saveFile(
+        name: '${ezTitleToSnake(appName)}_settings.json',
+        bytes: utf8.encode(jsonEncode(config)),
+        mimeType: MimeType.json,
+      );
+    } catch (e) {
+      if (context.mounted) ezLogAlert(context, message: e.toString());
+      return;
+    }
+
+    if (context.mounted) {
+      ezSnackBar(
+        context: context,
+        message: EzConfig.l10n.ssConfigSaved(
+          archivePath(appName: appName, androidPackage: androidPackage),
+        ),
+      );
     }
   }
 
