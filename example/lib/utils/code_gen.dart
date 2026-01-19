@@ -486,7 +486,6 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-${config.supportEmail != null ? "" : ''}
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
@@ -825,11 +824,6 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
       ),
       menuChildren: <Widget>[
         (showSettings) ? SettingsButton(context) : EFUICredits(context),
-        ${config.supportEmail != null ? '''EzFeedbackMenuButton(
-          parentContext: context,
-          appName: appName,
-          supportEmail: '${config.supportEmail}',
-        ),''' : ''}
       ],
     );
 
