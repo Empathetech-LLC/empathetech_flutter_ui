@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
   /// [EzElevatedIconButton.label] passthrough
@@ -56,49 +55,46 @@ class EzConfigRandomizer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
-        onPressed: () => showPlatformDialog(
-            context: context,
-            builder: (BuildContext dContext) {
-              final void Function() confirm =
-                  onConfirm ?? () => EzConfig.randomize();
-              final void Function() deny = onDeny ?? doNothing;
-
-              late final List<Widget> materialActions;
-              late final List<Widget> cupertinoActions;
-
-              (materialActions, cupertinoActions) = ezActionPairs(
-                context: context,
-                onConfirm: () {
-                  confirm();
-                  Navigator.of(dContext).pop();
-                },
-                confirmIsDestructive: true,
-                onDeny: () {
-                  deny();
-                  Navigator.of(dContext).pop();
-                },
-              );
-
-              return EzAlertDialog(
-                title: Text(
-                  dialogTitle ??
-                      EzConfig.l10n.ssRandomize(EzConfig.isDark
-                          ? EzConfig.l10n.gDark.toLowerCase()
-                          : EzConfig.l10n.gLight.toLowerCase()),
-                  textAlign: TextAlign.center,
+        onPressed: () => showDialog(
+          context: context,
+          builder: (BuildContext dContext) => EzAlertDialog(
+            title: Text(
+              dialogTitle ??
+                  EzConfig.l10n.ssRandomize(EzConfig.isDark
+                      ? EzConfig.l10n.gDark.toLowerCase()
+                      : EzConfig.l10n.gLight.toLowerCase()),
+              textAlign: TextAlign.center,
+            ),
+            content: dialogContent ??
+                ezRichUndoWarning(
+                  context,
+                  extraKeys: extraKeys,
+                  appName: appName!,
+                  androidPackage: androidPackage,
                 ),
-                content: dialogContent ??
-                    ezRichUndoWarning(
-                      context,
-                      extraKeys: extraKeys,
-                      appName: appName!,
-                      androidPackage: androidPackage,
-                    ),
-                materialActions: materialActions,
-                cupertinoActions: cupertinoActions,
-                needsClose: false,
-              );
-            }),
+            actions: ezActionPair(
+              context: context,
+              onConfirm: () {
+                if (onConfirm == null) {
+                  EzConfig.randomize();
+                } else {
+                  onConfirm!.call();
+                }
+                Navigator.of(dContext).pop();
+              },
+              confirmIsDestructive: true,
+              onDeny: () {
+                if (onDeny == null) {
+                  doNothing;
+                } else {
+                  onConfirm!.call();
+                }
+                Navigator.of(dContext).pop();
+              },
+            ),
+            needsClose: false,
+          ),
+        ),
         icon: EzIcon(LineIcons.diceD6),
         label: label ?? EzConfig.l10n.ssRandom,
       );

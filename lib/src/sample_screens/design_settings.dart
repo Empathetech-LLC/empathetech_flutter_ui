@@ -8,7 +8,6 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzDesignSettings extends StatefulWidget {
   /// Optional additional global design settings, before the main group
@@ -183,11 +182,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           iconSize: iconSize,
                         ),
                       ),
-                      EzConfig.layout.spacer,
+                      EzConfig.spacer,
 
                       // Slider
-                      Text(EzConfig.l10n.dsMilliseconds,
-                          style: textTheme.bodyLarge),
+                      Text(
+                        EzConfig.l10n.dsMilliseconds,
+                        style: textTheme.bodyLarge,
+                      ),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -208,13 +209,17 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                 setModal(() => animDuration = value),
                             onChangeEnd: (double value) => EzConfig.isDark
                                 ? EzConfig.setInt(
-                                    darkAnimationDurationKey, value.toInt())
+                                    darkAnimationDurationKey,
+                                    value.toInt(),
+                                  )
                                 : EzConfig.setInt(
-                                    lightAnimationDurationKey, value.toInt()),
+                                    lightAnimationDurationKey,
+                                    value.toInt(),
+                                  ),
                           ),
                         ),
                       ),
-                      EzConfig.layout.spacer,
+                      EzConfig.spacer,
 
                       // Reset button
                       EzElevatedIconButton(
@@ -233,10 +238,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                     .toDouble());
                           }
                         },
-                        icon: EzIcon(PlatformIcons(context).refresh),
+                        icon: const Icon(Icons.refresh),
                         label: EzConfig.l10n.gReset,
                       ),
-                      EzConfig.layout.separator,
+                      EzConfig.separator,
                     ],
                   ),
                 ),
@@ -245,16 +250,16 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               if (animDuration != backup) EzConfig.provider.rebuild();
             },
             label: EzConfig.l10n.dsAnimDuration,
-            icon: Icon(PlatformIcons(context).time),
+            icon: const Icon(Icons.watch),
             style: ElevatedButton.styleFrom(iconSize: iconSize),
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
         ],
 
         // Icon size
         if (widget.includeIconSize) ...<Widget>[
           EzIconSizeSetting(redraw: drawState),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
         ],
 
         // Scrollbar toggle
@@ -272,11 +277,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Global/themed divider, w/ theme reminder
         EzSpacer(space: EzConfig.spacing * 1.25),
-        EzDivider(height: EzConfig.margin),
+        EzDivider(height: EzConfig.marginVal),
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n
-                    .gEditingTheme(EzConfig.isDark ? darkString : lightString),
+                EzConfig.l10n.gEditingTheme(
+                  EzConfig.isDark ? darkString : lightString,
+                ),
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
                 style: Theme.of(context).textTheme.labelLarge,
@@ -375,11 +381,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ],
                       ),
-                      EzConfig.layout.spacer,
+                      EzConfig.spacer,
 
                       // Background slider
-                      Text(EzConfig.l10n.dsBackground,
-                          style: textTheme.bodyLarge),
+                      Text(
+                        EzConfig.l10n.dsBackground,
+                        style: textTheme.bodyLarge,
+                      ),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -410,7 +418,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ),
                       ),
-                      EzConfig.layout.spacer,
+                      EzConfig.spacer,
 
                       // Outline slider
                       Text(EzConfig.l10n.dsOutline, style: textTheme.bodyLarge),
@@ -444,7 +452,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           ),
                         ),
                       ),
-                      EzConfig.layout.spacer,
+                      EzConfig.spacer,
 
                       // Reset button
                       EzElevatedIconButton(
@@ -471,10 +479,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                 WidgetStatePropertyAll<Color>(buttonOutline);
                           });
                         },
-                        icon: EzIcon(PlatformIcons(context).refresh),
+                        icon: EzIcon(Icons.refresh),
                         label: EzConfig.l10n.gReset,
                       ),
-                      EzConfig.layout.separator,
+                      EzConfig.separator,
                     ],
                   );
                 },
@@ -488,7 +496,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Background image
         if (widget.includeBackgroundImage) ...<Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
@@ -526,7 +534,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 ...darkDesignKeys.keys.toSet(),
                 darkColorSchemeImageKey,
                 darkIconSizeKey,
-                darkHideScrollKey
+                darkHideScrollKey,
               });
 
               if (widget.darkThemeResetKeys != null) {
@@ -537,7 +545,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 ...lightDesignKeys.keys.toSet(),
                 lightColorSchemeImageKey,
                 lightIconSizeKey,
-                lightHideScrollKey
+                lightHideScrollKey,
               });
 
               if (widget.lightThemeResetKeys != null) {
@@ -554,7 +562,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
       ],
     );
   }
@@ -590,9 +598,8 @@ class _AnimationPreviewState extends State<_AnimationPreview>
       duration: Duration(milliseconds: widget.duration),
       vsync: this,
     );
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.linear),
-    );
+    _animation = Tween<double>(begin: 0.0, end: 1.0)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
   }
 
   @override
@@ -639,7 +646,7 @@ class _AnimationPreviewState extends State<_AnimationPreview>
               onPressed: () => _controller.isAnimating
                   ? _controller.stop()
                   : _controller.forward(from: 0.0),
-              icon: EzIcon(PlatformIcons(context).playArrow),
+              icon: const Icon(Icons.play_arrow),
               iconSize: widget.iconSize,
             ),
           ),

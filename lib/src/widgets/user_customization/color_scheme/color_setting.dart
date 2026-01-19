@@ -7,7 +7,6 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color] will be updated
@@ -91,64 +90,53 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Just open a color picker if the value is already what's recommended
       if (recommended == currColor.toARGB32()) return openColorPicker(context);
 
-      return showPlatformDialog(
+      return showDialog(
         context: context,
-        builder: (BuildContext dContext) {
-          void onConfirm() async {
-            final dynamic chosen = await openColorPicker(context);
-
-            if (dContext.mounted) {
-              Navigator.of(dContext).pop(chosen);
-            }
-          }
-
-          void onDeny() async {
-            // Update the user's configKey
-            currColor = Color(recommended);
-            await EzConfig.setInt(widget.configKey, recommended);
-
-            if (dContext.mounted) {
-              Navigator.of(dContext).pop(recommended);
-            }
-            EzConfig.provider
-                .rebuild(onComplete: () => widget.onUpdate?.call(currColor));
-          }
-
-          late final List<Widget> materialActions;
-          late final List<Widget> cupertinoActions;
-
-          (materialActions, cupertinoActions) = ezActionPairs(
+        builder: (BuildContext dContext) => EzAlertDialog(
+          title: Text(
+            EzConfig.l10n.csRecommended,
+            textAlign: TextAlign.center,
+          ),
+          // Recommended color preview
+          contents: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: backgroundColor),
+              ),
+              child: CircleAvatar(
+                backgroundColor: Color(recommended),
+                radius: (EzConfig.iconSize / 2) + EzConfig.padding,
+              ),
+            ),
+          ],
+          actions: ezActionPair(
             context: context,
             confirmMsg: EzConfig.l10n.csUseCustom,
-            onConfirm: onConfirm,
+            onConfirm: () async {
+              final dynamic chosen = await openColorPicker(context);
+
+              if (dContext.mounted) {
+                Navigator.of(dContext).pop(chosen);
+              }
+            },
             confirmIsDestructive: true,
             denyMsg: EzConfig.l10n.gYes,
             denyIsDefault: true,
-            onDeny: onDeny,
-          );
+            onDeny: () async {
+              // Update the user's configKey
+              currColor = Color(recommended);
+              await EzConfig.setInt(widget.configKey, recommended);
 
-          return EzAlertDialog(
-            title: Text(
-              EzConfig.l10n.csRecommended,
-              textAlign: TextAlign.center,
-            ),
-            // Recommended color preview
-            contents: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: backgroundColor),
-                ),
-                child: CircleAvatar(
-                  backgroundColor: Color(recommended),
-                  radius: (EzConfig.iconSize / 2) + EzConfig.padding,
-                ),
-              ),
-            ],
-            materialActions: materialActions,
-            cupertinoActions: cupertinoActions,
-          );
-        },
+              if (dContext.mounted) {
+                Navigator.of(dContext).pop(recommended);
+              }
+              EzConfig.provider.rebuild(
+                onComplete: () => widget.onUpdate?.call(currColor),
+              );
+            },
+          ),
+        ),
       );
     }
   }
@@ -157,7 +145,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> reset(BuildContext context) async {
-    return showPlatformDialog(
+    return showDialog(
       context: context,
       builder: (BuildContext dContext) {
         final int? resetValue = EzConfig.getDefault(widget.configKey);
@@ -175,16 +163,6 @@ class _ColorSettingState extends State<EzColorSetting> {
 
         void onDeny() => Navigator.of(dContext).pop();
 
-        late final List<Widget> materialActions;
-        late final List<Widget> cupertinoActions;
-
-        (materialActions, cupertinoActions) = ezActionPairs(
-          context: context,
-          onConfirm: onConfirm,
-          confirmIsDestructive: true,
-          onDeny: onDeny,
-        );
-
         return EzAlertDialog(
           title: Text(
             EzConfig.l10n.gResetValue(
@@ -194,17 +172,20 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           contents: <Widget>[
             Text(EzConfig.l10n.csCurrVal, textAlign: TextAlign.center),
-            EzConfig.layout.margin,
+            EzConfig.margin,
             EzTextIconButton(
-              onPressed: () => Clipboard.setData(
-                ClipboardData(text: currColorLabel),
-              ),
+              onPressed: () =>
+                  Clipboard.setData(ClipboardData(text: currColorLabel)),
               icon: EzIcon(Icons.copy),
               label: currColorLabel,
             ),
           ],
-          materialActions: materialActions,
-          cupertinoActions: cupertinoActions,
+          actions: ezActionPair(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            onDeny: onDeny,
+          ),
           needsClose: false,
         );
       },
@@ -215,13 +196,10 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Currently: remove from list and reset to default
   Future<dynamic> options(BuildContext context) => (widget.onRemove == null)
       ? reset(context)
-      : showPlatformDialog(
+      : showDialog(
           context: context,
           builder: (BuildContext dContext) => EzAlertDialog(
-            title: Text(
-              EzConfig.l10n.gOptions,
-              textAlign: TextAlign.center,
-            ),
+            title: Text(EzConfig.l10n.gOptions, textAlign: TextAlign.center),
             contents: <Widget>[
               // Remove from list
               EzElevatedIconButton(
@@ -229,10 +207,10 @@ class _ColorSettingState extends State<EzColorSetting> {
                   widget.onRemove!();
                   Navigator.of(dContext).pop();
                 },
-                icon: EzIcon(PlatformIcons(context).delete),
+                icon: const Icon(Icons.delete),
                 label: EzConfig.l10n.gRemove,
               ),
-              EzConfig.layout.spacer,
+              EzConfig.spacer,
 
               // Reset to default
               EzElevatedIconButton(
@@ -243,7 +221,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     Navigator.of(dContext).pop(resetResponse);
                   }
                 },
-                icon: EzIcon(PlatformIcons(context).refresh),
+                icon: const Icon(Icons.refresh),
                 label: EzConfig.l10n.gReset,
               ),
             ],
@@ -282,7 +260,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     backgroundColor: colorScheme.surface,
                     foregroundColor: colorScheme.onSurface,
                     radius: iconRadius + EzConfig.padding,
-                    child: EzIcon(PlatformIcons(context).eyeSlash),
+                    child: EzIcon(Icons.visibility_off),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,

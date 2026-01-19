@@ -6,7 +6,6 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSettings extends StatefulWidget {
   /// Optional starting [EzCSType] target
@@ -145,7 +144,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
-        EzConfig.layout.margin,
+        EzConfig.margin,
 
         // Mode switch
         SegmentedButton<EzCSType>(
@@ -175,7 +174,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             setState(() {});
           },
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
 
         // Core settings
         if (currentTab == EzCSType.quick)
@@ -225,7 +224,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   EzConfig.provider.rebuild();
                 },
               ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
       ],
     );
   }
@@ -266,7 +265,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
           // MonoChrome
           const EzMonoChromeColorsSetting(),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
 
           // From image
           Semantics(
@@ -334,10 +333,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         toReturn.add(
           Padding(
             padding: wrapPadding,
-            child: (EzColorSetting(
-              key: ValueKey<String>(key),
-              configKey: key,
-            )),
+            child: (EzColorSetting(key: ValueKey<String>(key), configKey: key)),
           ),
         );
       } else {
@@ -403,9 +399,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,
-              radius: EzConfig.padding + EzConfig.margin,
+              radius: EzConfig.padding + EzConfig.marginVal,
               child: liveColor == Colors.transparent
-                  ? EzIcon(PlatformIcons(context).eyeSlash)
+                  ? EzIcon(Icons.visibility_off)
                   : null,
             ),
           ),
@@ -445,9 +441,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         // Dynamic color settings
         EzSwapWidget(
           expanded: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: widthOf(context) * 0.75,
-            ),
+            constraints: BoxConstraints(maxWidth: widthOf(context) * 0.75),
             child: Wrap(
               alignment: WrapAlignment.center,
               runAlignment: WrapAlignment.center,
@@ -465,7 +459,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             ),
           ),
         ),
-        EzConfig.layout.separator,
+        EzConfig.separator,
 
         // Add a color button
         EzTextIconButton(
@@ -496,7 +490,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: getUntrackedColors(setModalState),
                     ),
-                    EzConfig.layout.spacer,
+                    EzConfig.spacer,
                   ],
                 ),
               ),
@@ -506,8 +500,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
             // Save changes
             await EzConfig.setStringList(userColorsKey, currList);
           },
-          style: TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.margin)),
-          icon: EzIcon(PlatformIcons(context).addCircledOutline),
+          style:
+              TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.marginVal)),
+          icon: const Icon(Icons.add_circle_outline),
           label: EzConfig.l10n.csAddColor,
         ),
       ],

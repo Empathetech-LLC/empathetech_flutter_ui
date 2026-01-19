@@ -5,8 +5,6 @@
 
 import '../../../../empathetech_flutter_ui.dart';
 
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 enum RBType { all, color, design, layout, text }
@@ -43,34 +41,18 @@ Future<void> testResetButton(
   await ezFindText(tester, EzConfig.l10n.gUndoWarn1);
 
   ezLog('Layout');
-  final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
-  if (isCupertino) {
-    final List<EzCupertinoAction> actions =
-        (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-            .cupertinoActions! as List<EzCupertinoAction>;
+  final List<EzTextButton> actions =
+      (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog).actions!
+          as List<EzTextButton>;
 
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, EzConfig.l10n.gYes);
-      expect(actions[1].text, EzConfig.l10n.gNo);
-    } else {
-      expect(actions[0].text, EzConfig.l10n.gNo);
-      expect(actions[1].text, EzConfig.l10n.gYes);
-    }
+  expect(actions.length, 2);
+  if (EzConfig.isLefty) {
+    expect(actions[0].text, EzConfig.l10n.gYes);
+    expect(actions[1].text, EzConfig.l10n.gNo);
   } else {
-    final List<EzTextButton> actions =
-        (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-            .materialActions! as List<EzTextButton>;
-
-    expect(actions.length, 2);
-    if (EzConfig.isLefty) {
-      expect(actions[0].text, EzConfig.l10n.gYes);
-      expect(actions[1].text, EzConfig.l10n.gNo);
-    } else {
-      expect(actions[0].text, EzConfig.l10n.gNo);
-      expect(actions[1].text, EzConfig.l10n.gYes);
-    }
+    expect(actions[0].text, EzConfig.l10n.gNo);
+    expect(actions[1].text, EzConfig.l10n.gYes);
   }
 
   ezLog('No');
