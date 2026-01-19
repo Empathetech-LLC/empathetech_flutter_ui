@@ -38,6 +38,7 @@ class ResetFAB extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   actions: <Widget>[
+                    // Builder/forms
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
@@ -48,9 +49,11 @@ class ResetFAB extends StatelessWidget {
                       text: l10n.csResetBuilder,
                       isDefaultAction: true,
                     ),
+
+                    // App settings
                     EzMaterialAction(
                       onPressed: () async {
-                        await EzConfig.reset();
+                        await EzConfig.reset(notifyTheme: true);
                         if (dContext.mounted) {
                           Navigator.of(dContext).pop();
                         }
@@ -58,10 +61,12 @@ class ResetFAB extends StatelessWidget {
                       text: l10n.csResetApp,
                       isDestructiveAction: true,
                     ),
+
+                    // Both
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
-                        await EzConfig.reset();
+                        await EzConfig.reset(notifyTheme: true);
                         if (dContext.mounted) {
                           Navigator.of(dContext).pop();
                         }
@@ -69,6 +74,8 @@ class ResetFAB extends StatelessWidget {
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,
                     ),
+
+                    // None
                     EzMaterialAction(
                       onPressed: () => Navigator.of(dContext).pop(),
                       text: l10n.csResetNothing,
