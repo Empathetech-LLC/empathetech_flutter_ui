@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
       - Sample settings screens also have a new EzApplyFAB that appears when changes are made
   - EzConfig.init has breaking changes (see docs, minor break)
   - EzConfig.getLocale -> getStoredLocale
+  - EzAppProvider -> EzConfigurableApp
   - Privatized EzConfig fields, added lots of getters/setters
   - Common spacers should now be access via EzConfig.[spacer,separator,margin,...] (previously ezSpacer, ezSeparator, ezMargin...)
 - Flutter 3.38.X
