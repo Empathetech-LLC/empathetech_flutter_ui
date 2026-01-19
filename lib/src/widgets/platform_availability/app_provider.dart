@@ -8,54 +8,44 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EzAppProvider extends StatelessWidget {
-  /// The core [app] with a [ScaffoldMessenger] layer
+class EzConfigurableApp extends StatelessWidget {
+  /// App to wrap
   final Widget app;
 
-  /// Optionally provide a [ScaffoldMessengerState] typed [GlobalKey]
-  /// To track [SnackBar]s, [MaterialBanner]s, etc.
-  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
-
   /// Wraps [app] in a [ChangeNotifierProvider] for live configuration
-  const EzAppProvider({
-    super.key,
-    required this.app,
-    this.scaffoldMessengerKey,
-  });
+  const EzConfigurableApp({super.key, required this.app});
 
   @override
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<EzConfigProvider>(
         create: (_) => EzConfigProvider(
           isLTR: ltrCheck(context),
-          useCupertino: isApple(),
           localeFallback: EzConfig.localeFallback,
           l10nFallback: EzConfig.l10nFallback,
           isDark: isDarkTheme(context),
         ),
-        child: _ProviderSquared(
-          app: app,
-          scaffoldMessengerKey: scaffoldMessengerKey,
-        ),
+        child: _ThemeDrawer(app),
       );
 }
 
-class _ProviderSquared extends StatefulWidget {
+class _ThemeDrawer extends StatefulWidget {
   final Widget app;
-  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
 
-  const _ProviderSquared({
-    required this.app,
-    required this.scaffoldMessengerKey,
-  });
+  const _ThemeDrawer(this.app);
 
   @override
-  State<_ProviderSquared> createState() => _ProviderSquaredState();
+  State<_ThemeDrawer> createState() => _ThemeDrawerState();
 }
 
-class _ProviderSquaredState extends State<_ProviderSquared>
+class _ThemeDrawerState extends State<_ThemeDrawer>
     with WidgetsBindingObserver {
-  late final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
   @override
   void didChangePlatformBrightness() {
@@ -63,13 +53,19 @@ class _ProviderSquaredState extends State<_ProviderSquared>
     config.toggleTheme();
   }
 
+  // Return the build //
+
+  late final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
+
   @override
   Widget build(BuildContext context) {
     EzConfig.initProvider(config);
+    return widget.app;
+  }
 
-    return ScaffoldMessenger(
-      key: widget.scaffoldMessengerKey,
-      child: widget.app,
-    );
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }

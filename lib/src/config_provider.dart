@@ -7,15 +7,12 @@ import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class EzConfigProvider extends ChangeNotifier {
   // Construct //
 
-  final bool _cupertino;
-  bool _ltr;
-
   int _seed;
+  bool _ltr;
 
   late Locale _locale;
   late EFUILang _l10n;
@@ -24,21 +21,16 @@ class EzConfigProvider extends ChangeNotifier {
   late bool _isDark;
   late EzLayoutWidgets _layout;
 
-  late ThemeData _darkMaterial;
-  late ThemeData _lightMaterial;
-
-  late CupertinoThemeData? _darkCupertino;
-  late CupertinoThemeData? _lightCupertino;
+  late ThemeData _darkTheme;
+  late ThemeData _lightTheme;
 
   EzConfigProvider({
-    required bool useCupertino,
     required bool isLTR,
     required Locale localeFallback,
     required EFUILang l10nFallback,
     required bool isDark,
-  })  : _cupertino = useCupertino,
+  })  : _seed = Random().nextInt(rMax),
         _ltr = isLTR,
-        _seed = Random().nextInt(rMax),
         _locale = localeFallback,
         _l10n = l10nFallback,
         _isDark = isDark {
@@ -51,18 +43,8 @@ class EzConfigProvider extends ChangeNotifier {
             : ThemeMode.light;
 
     // Ditto for _buildTheme
-    _darkMaterial = ezThemeData(Brightness.dark, _ltr);
-    _lightMaterial = ezThemeData(Brightness.light, _ltr);
-
-    if (_cupertino) {
-      _darkCupertino =
-          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
-      _lightCupertino =
-          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
-    } else {
-      _darkCupertino = null;
-      _lightCupertino = null;
-    }
+    _darkTheme = ezThemeData(Brightness.dark, _ltr);
+    _lightTheme = ezThemeData(Brightness.light, _ltr);
 
     _layout = EzLayoutWidgets(
       margin: EzMargin(isDark: isDark),
@@ -75,18 +57,8 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   void _buildTheme() {
-    _darkMaterial = ezThemeData(Brightness.dark, _ltr);
-    _lightMaterial = ezThemeData(Brightness.light, _ltr);
-
-    if (_cupertino) {
-      _darkCupertino =
-          MaterialBasedCupertinoThemeData(materialTheme: _darkMaterial);
-      _lightCupertino =
-          MaterialBasedCupertinoThemeData(materialTheme: _lightMaterial);
-    } else {
-      _darkCupertino = null;
-      _lightCupertino = null;
-    }
+    _darkTheme = ezThemeData(Brightness.dark, _ltr);
+    _lightTheme = ezThemeData(Brightness.light, _ltr);
 
     _layout = EzLayoutWidgets(
       margin: EzMargin(),
@@ -100,10 +72,8 @@ class EzConfigProvider extends ChangeNotifier {
 
   // Get //
 
-  bool get isCupertino => _cupertino;
-  bool get isLTR => _ltr;
-
   int get seed => _seed;
+  bool get isLTR => _ltr;
 
   Locale get locale => _locale;
   EFUILang get l10n => _l10n;
@@ -122,11 +92,8 @@ class EzConfigProvider extends ChangeNotifier {
   bool get isDark => _isDark;
   EzLayoutWidgets get layout => _layout;
 
-  ThemeData get darkMaterial => _darkMaterial;
-  ThemeData get lightMaterial => _lightMaterial;
-
-  CupertinoThemeData? get darkCupertino => _darkCupertino;
-  CupertinoThemeData? get lightCupertino => _lightCupertino;
+  ThemeData get darkTheme => _darkTheme;
+  ThemeData get lightTheme => _lightTheme;
 
   // Set //
 
