@@ -86,7 +86,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                     steps: 6,
                     decimals: 1,
                   ),
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
 
                   // Padding
                   EzLayoutSetting(
@@ -98,7 +98,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                     steps: 12,
                     decimals: 1,
                   ),
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
 
                   // Spacing
                   EzLayoutSetting(
@@ -110,7 +110,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                     steps: 13,
                     decimals: 0,
                   ),
-                  EzConfig.layout.separator,
+                  EzConfig.separator,
 
                   // Hide scroll
                   EzSwitchPair(
@@ -130,7 +130,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                     steps: 6,
                     decimals: 1,
                   ),
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
 
                   // Padding
                   EzLayoutSetting(
@@ -142,7 +142,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                     steps: 12,
                     decimals: 1,
                   ),
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
 
                   // Spacing
                   EzLayoutSetting(
@@ -154,7 +154,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                     steps: 13,
                     decimals: 0,
                   ),
-                  EzConfig.layout.separator,
+                  EzConfig.separator,
 
                   // Hide scroll
                   EzSwitchPair(
@@ -182,7 +182,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             appName: widget.appName,
             androidPackage: widget.androidPackage,
           ),
-          EzConfig.layout.separator,
+          EzConfig.separator,
         ],
       );
 }

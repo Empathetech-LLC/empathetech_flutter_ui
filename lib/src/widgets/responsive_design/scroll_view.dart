@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzScrollView extends StatefulWidget {
   /// [Scrollbar.controller] passthrough
@@ -190,7 +189,7 @@ class _EzScrollViewState extends State<EzScrollView> {
     late final Color hover =
         Theme.of(context).colorScheme.secondary.withValues(alpha: 0.5);
 
-    late final Widget core = PlatformScrollbar(
+    late final Widget core = Scrollbar(
       controller: controller,
       thumbVisibility: hideScroll ? false : widget.thumbVisibility,
       thickness: hideScroll ? 0.0 : widget.thickness,
@@ -272,10 +271,7 @@ class _EzScrollViewState extends State<EzScrollView> {
                             right: 0,
                             top: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(
-                                PlatformIcons(context).upArrow,
-                                color: hover,
-                              ),
+                              child: EzIcon(Icons.arrow_upward, color: hover),
                             ),
                           )
                         : Positioned(
@@ -283,10 +279,7 @@ class _EzScrollViewState extends State<EzScrollView> {
                             top: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(
-                                PlatformIcons(context).leftChevron,
-                                color: hover,
-                              ),
+                              child: EzIcon(Icons.chevron_left, color: hover),
                             ),
                           ),
 
@@ -298,10 +291,7 @@ class _EzScrollViewState extends State<EzScrollView> {
                             right: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(
-                                PlatformIcons(context).downArrow,
-                                color: hover,
-                              ),
+                              child: EzIcon(Icons.arrow_downward, color: hover),
                             ),
                           )
                         : Positioned(
@@ -309,12 +299,9 @@ class _EzScrollViewState extends State<EzScrollView> {
                             top: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(
-                                PlatformIcons(context).rightChevron,
-                                color: hover,
-                              ),
+                              child: EzIcon(Icons.chevron_right, color: hover),
                             ),
-                          )
+                          ),
                 ],
               ),
             )
