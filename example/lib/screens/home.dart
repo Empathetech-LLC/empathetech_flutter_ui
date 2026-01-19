@@ -530,7 +530,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         },
                         tooltip: l10n.csFileBrowser,
-                        icon: EzIcon(Icons.folder_open),
+                        icon: const Icon(Icons.folder_open),
                       ),
                     ],
                   ),
@@ -546,7 +546,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         url: Uri.parse(installFlutter),
                         tooltip: installFlutter,
                         hint: l10n.rsInstallHint,
-                        icon: EzIcon(Icons.computer),
+                        icon: const Icon(Icons.computer),
                         label: Lang.of(context)!.rsInstall,
                       ),
                     ],
@@ -580,7 +580,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       tooltip: showAdvanced
                           ? EzConfig.l10n.gClose
                           : EzConfig.l10n.gOpen,
-                      icon: EzIcon(
+                      icon: Icon(
                         showAdvanced
                             ? Icons.arrow_drop_up
                             : Icons.arrow_drop_down,
@@ -656,7 +656,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 });
                               },
                               tooltip: l10n.csFileBrowser,
-                              icon: EzIcon(Icons.folder_open),
+                              icon: const Icon(Icons.folder_open),
                             ),
                           ],
                         ),
@@ -813,7 +813,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => canGen = true);
                     }
                   },
-                  icon: EzIcon(Icons.save),
+                  icon: const Icon(Icons.save),
                   label: EzConfig.l10n.ssSaveConfig,
                 ),
 
@@ -1168,7 +1168,7 @@ class _AdvancedSettingsField extends StatelessWidget {
     return removed
         ? EzTextIconButton(
             onPressed: onRestore,
-            icon: EzIcon(Icons.undo),
+            icon: const Icon(Icons.undo),
             label: Lang.of(context)!.csRestore(title),
           )
         : Column(

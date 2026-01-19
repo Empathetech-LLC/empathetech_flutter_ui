@@ -479,7 +479,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                 WidgetStatePropertyAll<Color>(buttonOutline);
                           });
                         },
-                        icon: EzIcon(Icons.refresh),
+                        icon: const Icon(Icons.refresh),
                         label: EzConfig.l10n.gReset,
                       ),
                       EzConfig.separator,

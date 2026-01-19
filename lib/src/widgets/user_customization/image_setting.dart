@@ -388,7 +388,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             needsClose: false,
           ),
         ),
-        icon: EzIcon(Icons.computer_outlined),
+        icon: const Icon(Icons.computer_outlined),
         label: EzConfig.l10n.dsFromNetwork,
       ),
     ));
@@ -422,7 +422,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               onDeny: doNothing,
             );
           },
-          icon: EzIcon(Icons.color_lens),
+          icon: const Icon(Icons.color_lens),
           label: EzConfig.l10n.dsSolidColor,
         ),
       ));
@@ -441,7 +441,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(mContext).pop(defaultPath);
             }
           },
-          icon: EzIcon(Icons.refresh),
+          icon: const Icon(Icons.refresh),
           label: EzConfig.l10n.dsResetIt,
         ),
       ));
@@ -460,7 +460,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(mContext).pop(noImageValue);
             }
           },
-          icon: EzIcon(Icons.clear),
+          icon: const Icon(Icons.clear),
           label: EzConfig.l10n.dsClearIt,
         ),
       ));

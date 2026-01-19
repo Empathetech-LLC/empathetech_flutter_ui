@@ -125,7 +125,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                 );
           EzConfig.provider.rebuild();
         },
-        icon: EzIcon(
+        icon: Icon(
           Icons.contrast,
           color: Theme.of(context).colorScheme.onSurface,
         ),

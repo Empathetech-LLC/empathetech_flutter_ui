@@ -126,9 +126,8 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Define custom functions //
 
   List<Widget> navButtons() {
-    late final Widget navIcon = EzIcon(Icons.navigate_next);
-
     final List<Widget> buttons = <Widget>[];
+    const Widget navIcon = Icon(Icons.navigate_next);
 
     if (widget.colorSettingsPath != null) {
       ezUrlCheck(widget.colorSettingsPath!)

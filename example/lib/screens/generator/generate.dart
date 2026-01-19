@@ -455,7 +455,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             EzMargin(vertical: false),
             EzIconButton(
               onPressed: () => setState(() => showReadout = !showReadout),
-              icon: EzIcon(
+              icon: Icon(
                 showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
               ),
             ),
