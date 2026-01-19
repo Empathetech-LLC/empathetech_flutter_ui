@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which piece of the layout is being updated
 /// This will determine the preview [Widget]s
@@ -104,7 +103,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 
         return <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
           EzTextBackground(
             Text(
               valString,
@@ -135,13 +134,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               margin: EdgeInsets.all(currValue * 0.25),
             ),
           ),
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
         ];
 
       // Padding
       case EzLayoutSettingType.padding:
         return <Widget>[
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
 
           // Live label && preview
           EzScrollView(
@@ -168,7 +167,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             ],
           ),
 
-          EzConfig.layout.spacer,
+          EzConfig.spacer,
         ];
 
       // Spacing
@@ -262,7 +261,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         value.toStringAsFixed(widget.decimals),
                   ),
                 ),
-                EzConfig.layout.spacer,
+                EzConfig.spacer,
 
                 // Reset button
                 EzElevatedIconButton(
@@ -270,7 +269,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                     await EzConfig.remove(widget.configKey);
                     setModal(() => currValue = defaultValue);
                   },
-                  icon: EzIcon(PlatformIcons(context).refresh),
+                  icon: const Icon(Icons.refresh),
                   label:
                       '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
                 ),
