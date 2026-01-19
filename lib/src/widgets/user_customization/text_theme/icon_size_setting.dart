@@ -5,7 +5,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzIconSizeSetting extends StatefulWidget {
   final void Function() redraw;
@@ -55,14 +54,14 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       },
                       tooltip:
                           '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
-                      icon: Icon(PlatformIcons(context).remove),
+                      icon: const Icon(Icons.remove),
                       iconSize: iconSize,
                     )
                   : EzIconButton(
                       enabled: false,
                       tooltip: EzConfig.l10n.gMinimum,
                       icon: Icon(
-                        PlatformIcons(context).remove,
+                        Icons.remove,
                         color: colorScheme.outline,
                       ),
                       iconSize: iconSize,
@@ -94,14 +93,14 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       },
                       tooltip:
                           '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
-                      icon: Icon(PlatformIcons(context).add),
+                      icon: const Icon(Icons.add),
                       iconSize: iconSize,
                     )
                   : EzIconButton(
                       enabled: false,
                       tooltip: EzConfig.l10n.gMaximum,
                       icon: Icon(
-                        PlatformIcons(context).add,
+                        Icons.add,
                         color: colorScheme.outline,
                       ),
                       iconSize: iconSize,

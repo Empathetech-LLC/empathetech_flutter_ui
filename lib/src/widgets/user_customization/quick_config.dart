@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class TryTip extends StatelessWidget {
   final Widget child;
@@ -90,7 +89,7 @@ class EzQuickConfig extends StatelessWidget {
                       setModal(() => updateBoth = choice);
                     },
                   ),
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
 
                   // Choices
                   Wrap(
@@ -143,14 +142,14 @@ class EzQuickConfig extends StatelessWidget {
                         ),
                     ],
                   ),
-                  EzConfig.layout.spacer,
+                  EzConfig.spacer,
                 ],
               );
             },
           ),
         );
       },
-      icon: EzIcon(PlatformIcons(context).edit),
+      icon: const Icon(Icons.edit),
       label: EzConfig.l10n.ssLoadPreset,
     );
   }
@@ -175,10 +174,7 @@ class EzBigButtonsConfig extends StatelessWidget {
     if (isDark == null || isDark == true) {
       // Conditionally update text
       if (EzConfig.iconSize < 25.0) {
-        await EzConfig.setDouble(
-          darkIconSizeKey,
-          25.0,
-        );
+        await EzConfig.setDouble(darkIconSizeKey, 25.0);
       }
 
       // Update layout
@@ -476,31 +472,22 @@ class EzVideoGameConfig extends StatelessWidget {
 
     // If the current theme is not dark, show a warning dialog
     if (!EzConfig.isDark) {
-      final bool doIt = await showPlatformDialog(
+      final bool doIt = await showDialog(
         context: context,
-        builder: (BuildContext dContext) {
-          void onConfirm() => Navigator.of(dContext).pop(true);
-          void onDeny() => Navigator.of(dContext).pop(false);
-
-          late final List<Widget> materialActions;
-          late final List<Widget> cupertinoActions;
-
-          (materialActions, cupertinoActions) = ezActionPairs(
+        builder: (BuildContext dContext) => EzAlertDialog(
+          title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
+          content: Text(
+            EzConfig.l10n.ssDarkOnly,
+            textAlign: TextAlign.center,
+          ),
+          actions: ezActionPair(
             context: context,
-            onConfirm: onConfirm,
+            onConfirm: () => Navigator.of(dContext).pop(true),
             confirmIsDestructive: true,
-            onDeny: onDeny,
-          );
-
-          return EzAlertDialog(
-            title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
-            content:
-                Text(EzConfig.l10n.ssDarkOnly, textAlign: TextAlign.center),
-            materialActions: materialActions,
-            cupertinoActions: cupertinoActions,
-            needsClose: false,
-          );
-        },
+            onDeny: () => Navigator.of(dContext).pop(false),
+          ),
+          needsClose: false,
+        ),
       );
 
       if (!doIt) return false;
@@ -626,31 +613,22 @@ class EzChalkboardConfig extends StatelessWidget {
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not dark, show a warning dialog
     if (!EzConfig.isDark) {
-      final bool doIt = await showPlatformDialog(
+      final bool doIt = await showDialog(
         context: context,
-        builder: (BuildContext dContext) {
-          void onConfirm() => Navigator.of(dContext).pop(true);
-          void onDeny() => Navigator.of(dContext).pop(false);
-
-          late final List<Widget> materialActions;
-          late final List<Widget> cupertinoActions;
-
-          (materialActions, cupertinoActions) = ezActionPairs(
+        builder: (BuildContext dContext) => EzAlertDialog(
+          title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
+          content: Text(
+            EzConfig.l10n.ssDarkOnly,
+            textAlign: TextAlign.center,
+          ),
+          actions: ezActionPair(
             context: context,
-            onConfirm: onConfirm,
+            onConfirm: () => Navigator.of(dContext).pop(true),
             confirmIsDestructive: true,
-            onDeny: onDeny,
-          );
-
-          return EzAlertDialog(
-            title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
-            content:
-                Text(EzConfig.l10n.ssDarkOnly, textAlign: TextAlign.center),
-            materialActions: materialActions,
-            cupertinoActions: cupertinoActions,
-            needsClose: false,
-          );
-        },
+            onDeny: () => Navigator.of(dContext).pop(false),
+          ),
+          needsClose: false,
+        ),
       );
 
       if (!doIt) return false;
@@ -782,7 +760,8 @@ class EzChalkboardConfig extends StatelessWidget {
         side: const BorderSide(color: chalkboardGreen),
         textStyle: localBody,
         padding: EdgeInsets.all(
-            isMobile() ? defaultMobilePadding : defaultDesktopPadding),
+          isMobile() ? defaultMobilePadding : defaultDesktopPadding,
+        ),
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);

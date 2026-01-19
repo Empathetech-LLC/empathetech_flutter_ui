@@ -7,7 +7,6 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontDoubleSetting extends StatefulWidget {
   /// The [EzConfig] key being edited
@@ -122,17 +121,17 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         },
                         tooltip:
                             '${EzConfig.l10n.gDecrease} ${widget.tooltip.toLowerCase()}',
-                        icon: EzIcon(PlatformIcons(context).remove),
+                        icon: const Icon(Icons.remove),
                       )
                     : EzIconButton(
                         enabled: false,
                         tooltip: EzConfig.l10n.gMinimum,
-                        icon: EzIcon(
-                          PlatformIcons(context).remove,
+                        icon: Icon(
+                          Icons.remove,
                           color: colorScheme.outline,
                         ),
                       ),
-                EzConfig.layout.rowMargin,
+                EzConfig.rowMargin,
               ],
 
               // Text field
@@ -192,7 +191,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               ),
 
               if (widget.plusMinus) ...<Widget>[
-                EzConfig.layout.rowMargin,
+                EzConfig.rowMargin,
 
                 // Plus icon
                 (currValue < widget.max)
@@ -208,13 +207,13 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         },
                         tooltip:
                             '${EzConfig.l10n.gIncrease} ${widget.tooltip.toLowerCase()}',
-                        icon: EzIcon(PlatformIcons(context).add),
+                        icon: const Icon(Icons.add),
                       )
                     : EzIconButton(
                         enabled: false,
                         tooltip: EzConfig.l10n.gMaximum,
-                        icon: EzIcon(
-                          PlatformIcons(context).add,
+                        icon: Icon(
+                          Icons.add,
                           color: colorScheme.outline,
                         ),
                       ),

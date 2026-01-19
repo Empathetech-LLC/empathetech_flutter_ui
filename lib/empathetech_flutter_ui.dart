@@ -12,7 +12,6 @@ export 'src/config_provider.dart';
 
 // Localization delegates
 export 'src/consts/custom_delegates/creole.dart';
-export 'src/consts/custom_delegates/feedback.dart';
 
 // General
 export 'src/consts/config_keys.dart';
@@ -66,7 +65,6 @@ export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/dropdown_menu.dart';
 export 'src/widgets/helpers/elevated_button.dart';
 export 'src/widgets/helpers/fabulous.dart';
-export 'src/widgets/helpers/feedback_button.dart';
 export 'src/widgets/helpers/icon_button.dart';
 export 'src/widgets/helpers/menu_button.dart';
 export 'src/widgets/helpers/radio.dart';

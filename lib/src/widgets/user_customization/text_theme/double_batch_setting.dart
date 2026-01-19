@@ -6,7 +6,6 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontDoubleBatchSetting extends StatelessWidget {
   /// Required for max/min awareness
@@ -119,7 +118,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   tooltip: EzConfig.l10n.gMinimum,
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
-                    PlatformIcons(context).remove,
+                    Icons.remove,
                     color: colorScheme.outline,
                   ),
                 )
@@ -174,9 +173,9 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   tooltip:
                       '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
                   iconSize: iconSize ?? titleProvider.value.fontSize,
-                  icon: Icon(PlatformIcons(context).remove),
+                  icon: const Icon(Icons.remove),
                 ),
-          EzConfig.layout.rowMargin,
+          EzConfig.rowMargin,
 
           // Core
           GestureDetector(
@@ -205,7 +204,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
               color: colorScheme.onSurface,
             ),
           ),
-          EzConfig.layout.rowMargin,
+          EzConfig.rowMargin,
 
           // Plus icon
           atMax
@@ -214,7 +213,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   tooltip: EzConfig.l10n.gMaximum,
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
-                    PlatformIcons(context).add,
+                    Icons.add,
                     color: colorScheme.outline,
                   ),
                 )
@@ -269,7 +268,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   tooltip:
                       '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
                   iconSize: iconSize ?? titleProvider.value.fontSize,
-                  icon: Icon(PlatformIcons(context).add),
+                  icon: const Icon(Icons.add),
                 ),
         ],
       ),

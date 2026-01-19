@@ -50,7 +50,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
           style: widget.labelStyle,
           textAlign: TextAlign.center,
         ),
-        EzConfig.layout.margin,
+        EzConfig.margin,
 
         // Button
         EzDropdownMenu<bool>(
