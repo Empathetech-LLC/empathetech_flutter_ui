@@ -25,23 +25,22 @@ class EzBackFAB extends StatelessWidget {
 }
 
 class EzConfigFAB extends StatelessWidget {
-  /// [allEZConfigKeys] included by default
-  /// Include any app specific keys you want backed up here
-  final List<String>? extraKeys;
-
   /// App Name
   final String appName;
 
   /// com.example.app
   final String? androidPackage;
 
+  /// Dumps all of [EzConfig] by default
+  final Set<String>? skip;
+
   /// [FloatingActionButton] that saves/loads config to/from JSON file(s)
   const EzConfigFAB(
     BuildContext context, {
     super.key,
-    this.extraKeys,
     required this.appName,
     this.androidPackage,
+    this.skip,
   });
 
   @override
@@ -60,11 +59,11 @@ class EzConfigFAB extends StatelessWidget {
         // Save config
         EzMenuButton(
           label: EzConfig.l10n.ssSaveConfig,
-          onPressed: () => ezConfigSaver(
+          onPressed: () => EzConfig.saveConfig(
             context,
-            extraKeys: extraKeys,
             appName: appName,
             androidPackage: androidPackage,
+            skip: skip,
           ),
         ),
 
