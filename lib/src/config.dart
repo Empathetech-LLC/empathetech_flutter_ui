@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//* Constructor(s) *//
+
 class EzConfig {
   /// [AssetImage] paths for the app
   final Set<String> _assetPaths;
@@ -149,29 +151,72 @@ Must be one of [int, bool, double, String, List<String>]''');
     return _instance!;
   }
 
-  // Getters //
+  //* Getters *//
   // w/out null checks
   // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
-  static Locale get localeFallback => _instance!._localeFallback;
-  static EFUILang get l10nFallback => _instance!._l10nFallback;
+  // Provider //
 
+  /// Active [EzConfigProvider]
   static EzConfigProvider get provider => _instance!._provider!;
 
+  /// Tracks major changes to the config
   static int get seed => provider.seed;
 
+  /// Active [Locale]
   static Locale get locale => provider.locale;
+
+  /// EFUI localizations
   static EFUILang get l10n => provider.l10n;
 
+  /// Active [ThemeMode]
   static ThemeMode get themeMode => provider.themeMode;
+
+  /// Whether the active [ThemeMode] is [Brightness.dark]
   static bool get isDark => provider.isDark;
 
+  /// Theme aware alias
+  static int get animDur => provider.design.animDur;
+
+  /// Theme aware alias
+  static double get marginVal => provider.layout.marginVal;
+
+  /// Theme aware alias
+  static double get padding => provider.layout.padding;
+
+  /// Theme aware alias
+  static double get spacing => provider.layout.spacing;
+
+  /// Theme aware alias
   static EzMargin get margin => provider.layout.margin;
+
+  /// Theme aware alias
   static EzMargin get rowMargin => provider.layout.rowMargin;
+
+  /// Theme aware alias
   static EzSpacer get spacer => provider.layout.spacer;
+
+  /// Theme aware alias
   static EzSpacer get rowSpacer => provider.layout.rowSpacer;
+
+  /// Theme aware alias
   static EzSeparator get separator => provider.layout.separator;
+
+  /// Theme aware alias
   static EzDivider get divider => provider.layout.divider;
+
+  static bool get hideScroll => provider.layout.hideScroll;
+
+  /// Theme aware alias
+  static double get iconSize => provider.text.iconSize;
+
+  // Core //
+
+  /// Default/fallback for unsupported [Locale]s
+  static Locale get localeFallback => _instance!._localeFallback;
+
+  /// Default/fallback localizations for [localeFallback]
+  static EFUILang get l10nFallback => _instance!._l10nFallback;
 
   /// Get the [key]s default EzConfig (nullable) value
   static dynamic getDefault(String key) => _instance!._defaults[key];
@@ -180,28 +225,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// bool, int, double, String, String List, or null
   static dynamic get(String key) => _instance!._prefs[key] ?? getDefault(key);
 
-  /// Quick alias for [EzConfig.get] => [isLeftyKey]
+  /// Alias for [EzConfig.get] => [isLeftyKey]
   static bool get isLefty => get(isLeftyKey);
-
-  /// Theme aware alias for [EzConfig.get] => [darkAnimationDurationKey] || [lightAnimationDurationKey]
-  static int get animDuration =>
-      get(isDark ? darkAnimationDurationKey : lightAnimationDurationKey);
-
-  /// Theme aware alias for [EzConfig.get] => [darkMarginKey] || [lightMarginKey]
-  static double get marginVal => get(isDark ? darkMarginKey : lightMarginKey);
-
-  /// Theme aware alias for [EzConfig.get] => [darkPaddingKey] || [lightPaddingKey]
-  static double get padding => get(isDark ? darkPaddingKey : lightPaddingKey);
-
-  /// Theme aware alias for [EzConfig.get] => [darkSpacingKey] || [lightSpacingKey]
-  static double get spacing => get(isDark ? darkSpacingKey : lightSpacingKey);
-
-  static bool get hideScroll =>
-      get(isDark ? darkHideScrollKey : lightHideScrollKey);
-
-  /// Theme aware alias for [EzConfig.get] => [darkIconSizeKey] || [lightIconSizeKey]
-  static double get iconSize =>
-      get(isDark ? darkIconSizeKey : lightIconSizeKey);
 
   /// Get the [key]s EzConfig (nullable) [bool] value
   /// Uses the stored values from [SharedPreferencesAsync]
@@ -234,7 +259,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool isKeyAsset(String key) =>
       _instance!._assetPaths.contains(_instance!._prefs[key]);
 
-  // Setters //
+  //* Setters *//
 
   static bool initProvider(EzConfigProvider configProvider) {
     if (_instance == null) {
@@ -365,7 +390,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     BuildContext context, {
     required String appName,
     String? androidPackage,
-    List<String>? skip,
+    Set<String>? skip,
   }) async {
     final Map<String, dynamic> config =
         Map<String, dynamic>.from(_instance!._prefs);
@@ -783,7 +808,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     _instance!._provider!.rebuild(onComplete: onNotify);
   }
 
-  // Removers //
+  //* Removers *//
 
   /// Remove the custom value for [key]
   /// When [reset] is true, the default value is restored (if present)
