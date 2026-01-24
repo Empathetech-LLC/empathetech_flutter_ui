@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 Widget ezRichUndoWarning(
   BuildContext context, {
   bool standalone = true,
-  List<String>? extraKeys,
   required String appName,
   String? androidPackage,
+  Set<String>? skip,
 }) {
   final TextStyle? style = Theme.of(context).textTheme.bodyLarge;
 
@@ -23,11 +23,11 @@ Widget ezRichUndoWarning(
       EzPlainText(text: EzConfig.l10n.gUndoWarn1, style: style),
       EzInlineLink(
         EzConfig.l10n.gSave,
-        onTap: () => ezConfigSaver(
+        onTap: () => EzConfig.saveConfig(
           context,
-          extraKeys: extraKeys,
           appName: appName,
           androidPackage: androidPackage,
+          skip: skip,
         ),
         hint: EzConfig.l10n.gSaveHint,
         style: style,
