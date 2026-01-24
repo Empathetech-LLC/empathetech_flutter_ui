@@ -20,18 +20,22 @@ class EzLayoutSettings extends StatefulWidget {
   /// Spacer between the main (or [afterLayout], if present) settings and the trailing [EzResetButton]
   final Widget resetSpacer;
 
-  /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [allLayoutKeys] are included by default
-  final Set<String>? resetKeys;
+  /// Optional additional reset keys for the dark theme
+  /// [allTextKeys] and [darkOnSurfaceKey] are included by default
+  final Set<String>? resetExtraDark;
 
-  /// [EzResetButton.extraKeys] passthrough
-  final List<String>? extraSaveKeys;
+  /// Optional additional reset keys for the light theme
+  /// [allTextKeys] and [lightOnSurfaceKey] are included by default
+  final Set<String>? resetExtraLight;
 
   /// [EzResetButton.appName] passthrough
   final String appName;
 
   /// [EzResetButton.androidPackage] passthrough
   final String? androidPackage;
+
+  /// [EzResetButton.skip] passthrough
+  final Set<String>? resetSkip;
 
   /// Empathetech layout settings
   /// Recommended to use as a [Scaffold.body]
@@ -40,10 +44,11 @@ class EzLayoutSettings extends StatefulWidget {
     this.beforeLayout,
     this.afterLayout,
     this.resetSpacer = const EzSeparator(),
-    this.resetKeys,
-    this.extraSaveKeys,
+    this.resetExtraDark,
+    this.resetExtraLight,
     required this.appName,
     this.androidPackage,
+    this.resetSkip,
   });
 
   @override
@@ -172,13 +177,20 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           EzResetButton(
             dialogTitle: EzConfig.l10n.lsResetAll,
             onConfirm: () async {
-              await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
-              if (widget.resetKeys != null) {
-                await EzConfig.removeKeys(widget.resetKeys!);
+              if (EzConfig.isDark) {
+                await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
+                if (widget.resetExtraDark != null) {
+                  await EzConfig.removeKeys(widget.resetExtraDark!);
+                }
+              } else {
+                await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
+                if (widget.resetExtraLight != null) {
+                  await EzConfig.removeKeys(widget.resetExtraLight!);
+                }
               }
               setState(() => redraw = Random().nextInt(rMax));
             },
-            extraKeys: widget.extraSaveKeys,
+            skip: widget.resetSkip,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
           ),

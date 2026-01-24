@@ -17,22 +17,23 @@ class EzColorSettings extends StatefulWidget {
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
-  /// Additional [EzConfig] keys for the shared [EzResetButton]
+  /// Additional [EzConfig] keys for the local [EzResetButton]
   /// [darkColorKeys] are included by default
-  final Set<String>? darkThemeResetKeys;
+  final Set<String>? resetExtraDark;
 
-  /// Additional [EzConfig] keys for the shared [EzResetButton]
+  /// Additional [EzConfig] keys for the local [EzResetButton]
   /// [lightColorKeys] are included by default
-  final Set<String>? lightThemeResetKeys;
-
-  /// [EzResetButton.extraKeys] passthrough
-  final List<String>? extraSaveKeys;
+  final Set<String>? resetExtraLight;
 
   /// [EzResetButton.appName] passthrough
   final String appName;
 
   /// [EzResetButton.androidPackage] passthrough
   final String? androidPackage;
+
+  /// [EzResetButton.skip] passthrough
+  /// Shared for both themes
+  final Set<String>? resetSkip;
 
   /// Optional additional quick settings
   /// Will appear first, above the monochrome
@@ -58,11 +59,11 @@ class EzColorSettings extends StatefulWidget {
     this.target,
     this.themeLink,
     this.resetSpacer = const EzSeparator(),
-    this.darkThemeResetKeys,
-    this.lightThemeResetKeys,
-    this.extraSaveKeys,
+    this.resetExtraDark,
+    this.resetExtraLight,
     required this.appName,
     this.androidPackage,
+    this.resetSkip,
 
     // Quick
     this.quickHeader,
@@ -196,12 +197,12 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(darkString),
-                extraKeys: widget.extraSaveKeys,
+                skip: widget.resetSkip,
                 onConfirm: () async {
                   await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
-                  if (widget.darkThemeResetKeys != null) {
-                    await EzConfig.removeKeys(widget.darkThemeResetKeys!);
+                  if (widget.resetExtraDark != null) {
+                    await EzConfig.removeKeys(widget.resetExtraDark!);
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
@@ -212,12 +213,12 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(lightString),
-                extraKeys: widget.extraSaveKeys,
+                skip: widget.resetSkip,
                 onConfirm: () async {
                   await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
-                  if (widget.lightThemeResetKeys != null) {
-                    await EzConfig.removeKeys(widget.lightThemeResetKeys!);
+                  if (widget.resetExtraLight != null) {
+                    await EzConfig.removeKeys(widget.resetExtraLight!);
                   }
 
                   setState(() => currList = List<String>.from(defaultList));

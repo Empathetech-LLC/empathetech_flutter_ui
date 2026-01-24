@@ -10,29 +10,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class EzDesignSettings extends StatefulWidget {
-  /// Optional additional global design settings, before the main group
+  /// If provided, the "Editing: X theme" text will be a link with this callback
+  final void Function()? themeLink;
+
+  /// Optional additional settings at the top of the page
   /// BYO tailing spacer, leading spacer is a custom [EzSpacer]
-  final List<Widget>? globalSettingsPrepend;
+  final List<Widget>? beforeDesign;
 
   /// Whether to include animation duration control
   final bool includeAnimation;
 
-  /// Whether to include icon size controls
-  final bool includeIconSize;
-
   /// Whether to include the scrollbar visibility toggle
   final bool includeScroll;
 
-  /// Optional additional global design settings, after the main group
-  /// BYO leading spacer, trailing spacer is a custom [EzDivider]
-  final List<Widget>? globalSettingsPostpend;
-
-  /// If provided, the "Editing: X theme" text will be a link with this callback
-  final void Function()? themeLink;
-
-  /// Optional additional themed design settings, before the main group
-  /// BYO trailing spacer, leading is a custom [EzDivider]
-  final List<Widget>? themedSettingsPrepend;
+  /// Whether to include icon size controls
+  final bool includeIconSize;
 
   /// Whether to include the background image setting
   /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
@@ -46,30 +38,23 @@ class EzDesignSettings extends StatefulWidget {
   /// Moot if [includeBackgroundImage] is false
   final String? lightBackgroundCredits;
 
-  /// Optional additional themed design settings, after the main group
+  /// Optional additional settings at the bottom of the page (above the (optional) reset button)
   /// BYO leading spacer, trailing is [resetSpacer]
-  final List<Widget>? themedSettingsPostpend;
+  final List<Widget>? afterDesign;
 
   /// Spacer before the [EzResetButton]
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [globalDesignKeys], [darkDesignKeys], && [darkColorSchemeImageKey] are included by default
-  /// Intentionally just resets the image, not the color scheme itself
-  /// Include [darkColorKeys] if desired
-  final Set<String>? darkThemeResetKeys;
+  /// [darkDesignKeys], [darkHideScrollKey], [darkIconSizeKey] are included by default
+  final Set<String>? resetExtraDark;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [globalDesignKeys], [lightDesignKeys], && [lightColorSchemeImageKey] are included by default
-  /// /// Intentionally just resets the image, not the color scheme itself
-  /// Include [lightColorKeys] if desired
-  final Set<String>? lightThemeResetKeys;
+  /// [lightDesignKeys], [lightHideScrollKey], [lightIconSizeKey] are included by default
+  final Set<String>? resetExtraLight;
 
   /// Optional callback for when a local reset is confirmed
   final void Function()? onReset;
-
-  /// [EzResetButton.extraKeys] passthrough
-  final List<String>? extraSaveKeys;
 
   /// [EzResetButton.appName] passthrough
   final String appName;
@@ -77,28 +62,29 @@ class EzDesignSettings extends StatefulWidget {
   /// [EzResetButton.androidPackage] passthrough
   final String? androidPackage;
 
+  /// [EzResetButton.skip] passthrough
+  final Set<String>? resetSkip;
+
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
-    this.globalSettingsPrepend,
-    this.includeAnimation = true,
-    this.includeIconSize = true,
-    this.includeScroll = true,
-    this.globalSettingsPostpend,
     this.themeLink,
-    this.themedSettingsPrepend,
+    this.beforeDesign,
+    this.includeAnimation = true,
+    this.includeScroll = true,
+    this.includeIconSize = true,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.themedSettingsPostpend,
+    this.afterDesign,
     this.resetSpacer = const EzDivider(),
-    this.darkThemeResetKeys,
-    this.lightThemeResetKeys,
+    this.resetExtraDark,
+    this.resetExtraLight,
     this.onReset,
-    this.extraSaveKeys,
     required this.appName,
     this.androidPackage,
+    this.resetSkip,
   });
 
   @override
@@ -156,16 +142,30 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
     return EzScrollView(
       children: <Widget>[
-        EzHeader(),
+        (widget.themeLink != null)
+            ? EzLink(
+                EzConfig.l10n.gEditingTheme(
+                  EzConfig.isDark ? darkString : lightString,
+                ),
+                onTap: widget.themeLink,
+                hint: EzConfig.l10n.gEditingThemeHint,
+                style: Theme.of(context).textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              )
+            : EzText(
+                EzConfig.l10n.gEditingTheme(themeProfile),
+                style: textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              ),
+        EzConfig.spacer,
 
-        if (widget.globalSettingsPrepend != null)
-          ...widget.globalSettingsPrepend!,
+        if (widget.beforeDesign != null) ...widget.beforeDesign!,
 
         // Animation duration
         if (widget.includeAnimation) ...<Widget>[
           EzElevatedIconButton(
             onPressed: () async {
-              double animDuration = EzConfig.animDuration.toDouble();
+              double animDuration = EzConfig.animDur.toDouble();
               final double backup = animDuration;
 
               await ezModal(
@@ -256,12 +256,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           EzConfig.spacer,
         ],
 
-        // Icon size
-        if (widget.includeIconSize) ...<Widget>[
-          EzIconSizeSetting(redraw: drawState),
-          EzConfig.spacer,
-        ],
-
         // Scrollbar toggle
         if (widget.includeScroll) ...<Widget>[
           EzSwitchPair(
@@ -271,32 +265,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             text: EzConfig.l10n.lsScroll,
           ),
         ],
-
-        if (widget.globalSettingsPostpend != null)
-          ...widget.globalSettingsPostpend!,
-
-        // Global/themed divider, w/ theme reminder
-        EzSpacer(space: EzConfig.spacing * 1.25),
-        EzDivider(height: EzConfig.marginVal),
-        (widget.themeLink != null)
-            ? EzLink(
-                EzConfig.l10n.gEditingTheme(
-                  EzConfig.isDark ? darkString : lightString,
-                ),
-                onTap: widget.themeLink,
-                hint: EzConfig.l10n.gEditingThemeHint,
-                style: Theme.of(context).textTheme.labelLarge,
-                textAlign: TextAlign.center,
-              )
-            : EzText(
-                EzConfig.l10n.gEditingTheme(themeProfile),
-                style: textTheme.labelLarge,
-                textAlign: TextAlign.center,
-              ),
-        EzSpacer(space: EzConfig.spacing * 1.25),
-
-        if (widget.themedSettingsPrepend != null)
-          ...widget.themedSettingsPrepend!,
 
         // Button opacity
         EzElevatedIconButton(
@@ -494,6 +462,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           style: ElevatedButton.styleFrom(iconSize: iconSize),
         ),
 
+        // Icon size
+        if (widget.includeIconSize) ...<Widget>[
+          EzIconSizeSetting(redraw: drawState),
+          EzConfig.spacer,
+        ],
+
         // Background image
         if (widget.includeBackgroundImage) ...<Widget>[
           EzConfig.spacer,
@@ -520,8 +494,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ],
 
         // After background
-        if (widget.themedSettingsPostpend != null)
-          ...widget.themedSettingsPostpend!,
+        if (widget.afterDesign != null) ...widget.afterDesign!,
 
         // Reset button
         widget.resetSpacer,
@@ -537,8 +510,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 darkHideScrollKey,
               });
 
-              if (widget.darkThemeResetKeys != null) {
-                await EzConfig.removeKeys(widget.darkThemeResetKeys!);
+              if (widget.resetExtraDark != null) {
+                await EzConfig.removeKeys(widget.resetExtraDark!);
               }
             } else {
               await EzConfig.removeKeys(<String>{
@@ -548,8 +521,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 lightHideScrollKey,
               });
 
-              if (widget.lightThemeResetKeys != null) {
-                await EzConfig.removeKeys(widget.lightThemeResetKeys!);
+              if (widget.resetExtraLight != null) {
+                await EzConfig.removeKeys(widget.resetExtraLight!);
               }
             }
 
@@ -558,7 +531,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             drawState();
             widget.onReset?.call();
           },
-          extraKeys: widget.extraSaveKeys,
+          skip: widget.resetSkip,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),

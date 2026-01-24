@@ -10,10 +10,6 @@ import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
-  /// Optionally remove the 'Have fun!' part of the settings disclaimer
-  /// There are apps where it's not appropriate
-  final bool notFun;
-
   /// Locales to skip in the [EzLocaleSetting]
   /// Defaults to [english] to not dupe [americanEnglish]
   final Set<Locale>? skipLocales;
@@ -56,6 +52,15 @@ class EzSettingsHome extends StatefulWidget {
   /// BYO leading spacer, trailing spacer will be one of the parameters below
   final List<Widget>? additionalRoutes;
 
+  /// [EzConfig.saveConfig] passthrough
+  final String appName;
+
+  /// [EzConfig.saveConfig] passthrough
+  final String? androidPackage;
+
+  /// [EzConfig.saveConfig] passthrough
+  final Set<String>? saveSkip;
+
   /// Spacer before the [EzQuickConfig]
   /// If null, [EzQuickConfig] will not be included
   final Widget? quickConfigSpacer;
@@ -69,16 +74,7 @@ class EzSettingsHome extends StatefulWidget {
   final Widget resetSpacer;
 
   /// [EzResetButton.skip] passthrough
-  final Set<String>? skipKeys;
-
-  /// [EzConfigRandomizer.extraKeys] passthrough
-  final List<String>? extraKeys;
-
-  /// [EzConfigRandomizer.appName] passthrough
-  final String appName;
-
-  /// [EzConfigRandomizer.androidPackage] passthrough
-  final String? androidPackage;
+  final Set<String>? resetSkip;
 
   /// Widgets to be added below the [EzResetButton]
   /// BYO leading spacer, trailing is always [EzSeparator]
@@ -89,7 +85,6 @@ class EzSettingsHome extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
-    this.notFun = false,
     this.skipLocales,
     this.protest = false,
     this.inDistress = const <String>{'US'},
@@ -100,13 +95,13 @@ class EzSettingsHome extends StatefulWidget {
     required this.layoutSettingsPath,
     required this.textSettingsPath,
     this.additionalRoutes,
-    this.quickConfigSpacer = const EzDivider(),
-    this.randomSpacer = const EzSpacer(),
-    this.extraKeys,
     required this.appName,
     this.androidPackage,
+    this.saveSkip,
+    this.quickConfigSpacer = const EzDivider(),
+    this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSpacer(),
-    this.skipKeys,
+    this.resetSkip,
     this.footer,
   });
 
@@ -249,19 +244,18 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           if (widget.randomSpacer != null) ...<Widget>[
             widget.randomSpacer!,
             EzConfigRandomizer(
-              extraKeys: widget.extraKeys,
               appName: widget.appName,
               androidPackage: widget.androidPackage,
+              skip: widget.saveSkip,
             ),
           ],
 
           // Reset button
           widget.resetSpacer,
           EzResetButton(
-            androidPackage: widget.androidPackage,
             appName: widget.appName,
-            extraKeys: widget.extraKeys,
-            skip: widget.skipKeys,
+            androidPackage: widget.androidPackage,
+            skip: widget.resetSkip,
           ),
 
           // Footer

@@ -20,14 +20,15 @@ class EzTextSettings extends StatelessWidget {
 
   /// Optional additional reset keys for the dark theme
   /// [allTextKeys] and [darkOnSurfaceKey] are included by default
-  final Set<String>? darkThemeResetKeys;
+  final Set<String>? resetExtraDark;
 
   /// Optional additional reset keys for the light theme
   /// [allTextKeys] and [lightOnSurfaceKey] are included by default
-  final Set<String>? lightThemeResetKeys;
+  final Set<String>? resetExtraLight;
 
-  /// [EzResetButton.extraKeys] passthrough
-  final List<String>? extraSaveKeys;
+  /// [EzResetButton.skip] passthrough
+  /// Shared for both themes
+  final Set<String>? resetSkip;
 
   /// [EzResetButton.appName] passthrough
   final String appName;
@@ -65,11 +66,11 @@ class EzTextSettings extends StatelessWidget {
     super.key,
     this.target,
     this.resetSpacer = const EzSeparator(),
-    this.darkThemeResetKeys,
-    this.lightThemeResetKeys,
-    this.extraSaveKeys,
+    this.resetExtraDark,
+    this.resetExtraLight,
     required this.appName,
     this.androidPackage,
+    this.resetSkip,
 
     // Quick
     this.showOnSurface = true,
@@ -107,11 +108,11 @@ class EzTextSettings extends StatelessWidget {
           //Shared
           target: target,
           resetSpacer: resetSpacer,
-          darkThemeResetKeys: darkThemeResetKeys,
-          lightThemeResetKeys: lightThemeResetKeys,
-          extraSaveKeys: extraSaveKeys,
+          extraDark: resetExtraDark,
+          extraLight: resetExtraLight,
           appName: appName,
           androidPackage: androidPackage,
+          skip: resetSkip,
 
           // Quick
           showOnSurface: showOnSurface,
@@ -130,11 +131,11 @@ class _TextSettings extends StatefulWidget {
   // Shared
   final EzTSType? target;
   final Widget resetSpacer;
-  final Set<String>? darkThemeResetKeys;
-  final Set<String>? lightThemeResetKeys;
-  final List<String>? extraSaveKeys;
+  final Set<String>? extraDark;
+  final Set<String>? extraLight;
   final String appName;
   final String? androidPackage;
+  final Set<String>? skip;
 
   // Quick
   final bool showOnSurface;
@@ -149,11 +150,11 @@ class _TextSettings extends StatefulWidget {
   const _TextSettings({
     required this.target,
     required this.resetSpacer,
-    required this.darkThemeResetKeys,
-    required this.lightThemeResetKeys,
-    required this.extraSaveKeys,
+    required this.extraDark,
+    required this.extraLight,
     required this.appName,
     this.androidPackage,
+    required this.skip,
     required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
@@ -272,11 +273,11 @@ class _TextSettingsState extends State<_TextSettings>
                 : lightTextBackgroundOpacityKey,
             moreQuickFooterSettings: widget.moreQuickFooterSettings,
             resetSpacer: widget.resetSpacer,
-            darkThemeResetKeys: widget.darkThemeResetKeys,
-            lightThemeResetKeys: widget.lightThemeResetKeys,
-            extraSaveKeys: widget.extraSaveKeys,
+            extraDark: widget.extraDark,
+            extraLight: widget.extraLight,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
+            skip: widget.skip,
           )
         else
           _AdvancedTextSettings(
@@ -290,11 +291,11 @@ class _TextSettingsState extends State<_TextSettings>
             // Settings config
             showSpacing: widget.showSpacing,
             resetSpacer: widget.resetSpacer,
-            darkThemeResetKeys: widget.darkThemeResetKeys,
-            lightThemeResetKeys: widget.lightThemeResetKeys,
-            extraSaveKeys: widget.extraSaveKeys,
+            extraDark: widget.extraDark,
+            extraLight: widget.extraLight,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
+            skip: widget.skip,
           ),
       ],
     );
@@ -323,11 +324,11 @@ class _QuickTextSettings extends StatefulWidget {
   final String opacityKey;
   final List<Widget>? moreQuickFooterSettings;
   final Widget resetSpacer;
-  final Set<String>? darkThemeResetKeys;
-  final Set<String>? lightThemeResetKeys;
-  final List<String>? extraSaveKeys;
+  final Set<String>? extraDark;
+  final Set<String>? extraLight;
   final String appName;
   final String? androidPackage;
+  final Set<String>? skip;
 
   const _QuickTextSettings({
     required this.displayProvider,
@@ -342,11 +343,11 @@ class _QuickTextSettings extends StatefulWidget {
     required this.opacityKey,
     required this.moreQuickFooterSettings,
     required this.resetSpacer,
-    required this.darkThemeResetKeys,
-    required this.lightThemeResetKeys,
-    required this.extraSaveKeys,
+    required this.extraDark,
+    required this.extraLight,
     required this.appName,
     this.androidPackage,
+    required this.skip,
   });
 
   @override
@@ -575,8 +576,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               EzConfig.removeKeys(darkTextKeys.keys.toSet());
               EzConfig.remove(darkOnSurfaceKey);
 
-              if (widget.darkThemeResetKeys != null) {
-                EzConfig.removeKeys(widget.darkThemeResetKeys!);
+              if (widget.extraDark != null) {
+                EzConfig.removeKeys(widget.extraDark!);
               }
             }
 
@@ -584,14 +585,14 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               EzConfig.removeKeys(lightTextKeys.keys.toSet());
               EzConfig.remove(lightOnSurfaceKey);
 
-              if (widget.lightThemeResetKeys != null) {
-                EzConfig.removeKeys(widget.lightThemeResetKeys!);
+              if (widget.extraLight != null) {
+                EzConfig.removeKeys(widget.extraLight!);
               }
             }
 
             EzConfig.provider.rebuild();
           },
-          extraKeys: widget.extraSaveKeys,
+          skip: widget.skip,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
@@ -612,11 +613,11 @@ class _AdvancedTextSettings extends StatefulWidget {
   // Settings config
   final bool showSpacing;
   final Widget resetSpacer;
-  final Set<String>? darkThemeResetKeys;
-  final Set<String>? lightThemeResetKeys;
-  final List<String>? extraSaveKeys;
+  final Set<String>? extraDark;
+  final Set<String>? extraLight;
   final String appName;
   final String? androidPackage;
+  final Set<String>? skip;
 
   const _AdvancedTextSettings({
     required this.displayProvider,
@@ -626,11 +627,11 @@ class _AdvancedTextSettings extends StatefulWidget {
     required this.labelProvider,
     required this.showSpacing,
     required this.resetSpacer,
-    required this.darkThemeResetKeys,
-    required this.lightThemeResetKeys,
-    required this.extraSaveKeys,
+    required this.extraDark,
+    required this.extraLight,
     required this.appName,
     this.androidPackage,
+    required this.skip,
   });
 
   @override
@@ -1443,15 +1444,15 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               textKeys.remove(lightTextBackgroundOpacityKey);
               textKeys.add(darkOnSurfaceKey);
 
-              if (widget.darkThemeResetKeys != null) {
-                textKeys.addAll(widget.darkThemeResetKeys!);
+              if (widget.extraDark != null) {
+                textKeys.addAll(widget.extraDark!);
               }
             } else {
               textKeys.remove(darkTextBackgroundOpacityKey);
               textKeys.add(lightOnSurfaceKey);
 
-              if (widget.lightThemeResetKeys != null) {
-                textKeys.addAll(widget.lightThemeResetKeys!);
+              if (widget.extraLight != null) {
+                textKeys.addAll(widget.extraLight!);
               }
             }
             await EzConfig.removeKeys(textKeys);
@@ -1466,7 +1467,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
             setState(() {});
           },
-          extraKeys: widget.extraSaveKeys,
+          skip: widget.skip,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
