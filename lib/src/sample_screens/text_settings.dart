@@ -26,9 +26,13 @@ class EzTextSettings extends StatelessWidget {
   /// [allTextKeys] and [lightOnSurfaceKey] are included by default
   final Set<String>? resetExtraLight;
 
-  /// [EzResetButton.skip] passthrough
+  /// [EzResetButton.resetSkip] passthrough
   /// Shared for both themes
   final Set<String>? resetSkip;
+
+  /// [EzResetButton.saveSkip] passthrough
+  /// Shared for both themes
+  final Set<String>? saveSkip;
 
   /// [EzResetButton.appName] passthrough
   final String appName;
@@ -71,6 +75,7 @@ class EzTextSettings extends StatelessWidget {
     required this.appName,
     this.androidPackage,
     this.resetSkip,
+    this.saveSkip,
 
     // Quick
     this.showOnSurface = true,
@@ -112,7 +117,8 @@ class EzTextSettings extends StatelessWidget {
           extraLight: resetExtraLight,
           appName: appName,
           androidPackage: androidPackage,
-          skip: resetSkip,
+          resetSkip: resetSkip,
+          saveSkip: saveSkip,
 
           // Quick
           showOnSurface: showOnSurface,
@@ -135,7 +141,8 @@ class _TextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final String appName;
   final String? androidPackage;
-  final Set<String>? skip;
+  final Set<String>? resetSkip;
+  final Set<String>? saveSkip;
 
   // Quick
   final bool showOnSurface;
@@ -153,8 +160,9 @@ class _TextSettings extends StatefulWidget {
     required this.extraDark,
     required this.extraLight,
     required this.appName,
-    this.androidPackage,
-    required this.skip,
+    required this.androidPackage,
+    required this.resetSkip,
+    required this.saveSkip,
     required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
@@ -277,7 +285,8 @@ class _TextSettingsState extends State<_TextSettings>
             extraLight: widget.extraLight,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
-            skip: widget.skip,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
           )
         else
           _AdvancedTextSettings(
@@ -295,7 +304,8 @@ class _TextSettingsState extends State<_TextSettings>
             extraLight: widget.extraLight,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
-            skip: widget.skip,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
           ),
       ],
     );
@@ -328,7 +338,8 @@ class _QuickTextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final String appName;
   final String? androidPackage;
-  final Set<String>? skip;
+  final Set<String>? resetSkip;
+  final Set<String>? saveSkip;
 
   const _QuickTextSettings({
     required this.displayProvider,
@@ -346,8 +357,9 @@ class _QuickTextSettings extends StatefulWidget {
     required this.extraDark,
     required this.extraLight,
     required this.appName,
-    this.androidPackage,
-    required this.skip,
+    required this.androidPackage,
+    required this.resetSkip,
+    required this.saveSkip,
   });
 
   @override
@@ -592,7 +604,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
             EzConfig.provider.rebuild();
           },
-          skip: widget.skip,
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),
@@ -617,7 +630,8 @@ class _AdvancedTextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final String appName;
   final String? androidPackage;
-  final Set<String>? skip;
+  final Set<String>? resetSkip;
+  final Set<String>? saveSkip;
 
   const _AdvancedTextSettings({
     required this.displayProvider,
@@ -630,8 +644,9 @@ class _AdvancedTextSettings extends StatefulWidget {
     required this.extraDark,
     required this.extraLight,
     required this.appName,
-    this.androidPackage,
-    required this.skip,
+    required this.androidPackage,
+    required this.resetSkip,
+    required this.saveSkip,
   });
 
   @override
@@ -1467,7 +1482,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
             setState(() {});
           },
-          skip: widget.skip,
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),

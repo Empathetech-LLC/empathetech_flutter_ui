@@ -34,8 +34,11 @@ class EzLayoutSettings extends StatefulWidget {
   /// [EzResetButton.androidPackage] passthrough
   final String? androidPackage;
 
-  /// [EzResetButton.skip] passthrough
+  /// [EzResetButton.resetSkip] passthrough
   final Set<String>? resetSkip;
+
+  /// [EzResetButton.saveSkip] passthrough
+  final Set<String>? saveSkip;
 
   /// Empathetech layout settings
   /// Recommended to use as a [Scaffold.body]
@@ -49,6 +52,7 @@ class EzLayoutSettings extends StatefulWidget {
     required this.appName,
     this.androidPackage,
     this.resetSkip,
+    this.saveSkip,
   });
 
   @override
@@ -190,7 +194,8 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
               }
               setState(() => redraw = Random().nextInt(rMax));
             },
-            skip: widget.resetSkip,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
           ),

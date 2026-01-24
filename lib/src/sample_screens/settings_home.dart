@@ -73,7 +73,7 @@ class EzSettingsHome extends StatefulWidget {
   /// [EzResetButton] is always included
   final Widget resetSpacer;
 
-  /// [EzResetButton.skip] passthrough
+  /// [EzResetButton.resetSkip] passthrough
   final Set<String>? resetSkip;
 
   /// Widgets to be added below the [EzResetButton]
@@ -246,7 +246,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
             EzConfigRandomizer(
               appName: widget.appName,
               androidPackage: widget.androidPackage,
-              skip: widget.saveSkip,
+              saveSkip: widget.saveSkip,
             ),
           ],
 
@@ -255,7 +255,8 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           EzResetButton(
             appName: widget.appName,
             androidPackage: widget.androidPackage,
-            skip: widget.resetSkip,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
           ),
 
           // Footer

@@ -62,8 +62,11 @@ class EzDesignSettings extends StatefulWidget {
   /// [EzResetButton.androidPackage] passthrough
   final String? androidPackage;
 
-  /// [EzResetButton.skip] passthrough
+  /// [EzResetButton.resetSkip] passthrough
   final Set<String>? resetSkip;
+
+  /// [EzResetButton.saveSkip] passthrough
+  final Set<String>? saveSkip;
 
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
@@ -85,6 +88,7 @@ class EzDesignSettings extends StatefulWidget {
     required this.appName,
     this.androidPackage,
     this.resetSkip,
+    this.saveSkip,
   });
 
   @override
@@ -531,7 +535,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             drawState();
             widget.onReset?.call();
           },
-          skip: widget.resetSkip,
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
         ),

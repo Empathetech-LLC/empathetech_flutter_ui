@@ -31,9 +31,13 @@ class EzColorSettings extends StatefulWidget {
   /// [EzResetButton.androidPackage] passthrough
   final String? androidPackage;
 
-  /// [EzResetButton.skip] passthrough
+  /// [EzResetButton.resetSkip] passthrough
   /// Shared for both themes
   final Set<String>? resetSkip;
+
+  /// [EzResetButton.saveSkip] passthrough
+  /// Shared for both themes
+  final Set<String>? saveSkip;
 
   /// Optional additional quick settings
   /// Will appear first, above the monochrome
@@ -64,6 +68,7 @@ class EzColorSettings extends StatefulWidget {
     required this.appName,
     this.androidPackage,
     this.resetSkip,
+    this.saveSkip,
 
     // Quick
     this.quickHeader,
@@ -197,7 +202,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(darkString),
-                skip: widget.resetSkip,
+                resetSkip: widget.resetSkip,
                 onConfirm: () async {
                   await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
@@ -213,7 +218,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(lightString),
-                skip: widget.resetSkip,
+                resetSkip: widget.resetSkip,
+                saveSkip: widget.saveSkip,
                 onConfirm: () async {
                   await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
