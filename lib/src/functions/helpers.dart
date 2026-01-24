@@ -108,7 +108,7 @@ double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 /// [Duration] with milliseconds set to [EzConfig.animDuration]
 /// Provide [mod] to adjust the duration, relative to the base value
 Duration ezAnimDuration({double mod = 1.0}) =>
-    Duration(milliseconds: (EzConfig.animDuration * mod).toInt());
+    Duration(milliseconds: (EzConfig.animDur * mod).toInt());
 
 Future<void> ezConfigLoader(BuildContext context) async {
   final FilePickerResult? result = await FilePicker.platform.pickFiles(

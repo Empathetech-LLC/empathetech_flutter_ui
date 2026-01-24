@@ -53,7 +53,7 @@ class OpenUI extends StatelessWidget {
 
     final TargetPlatform currPlatform = getBasePlatform();
     Page<dynamic> getTransition(BuildContext context, GoRouterState state) =>
-        ezGoTransition(context, state, EzConfig.animDuration, currPlatform);
+        ezGoTransition(context, state, EzConfig.animDur, currPlatform);
 
     // Return the app //
 
