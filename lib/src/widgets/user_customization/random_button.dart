@@ -22,13 +22,13 @@ class EzConfigRandomizer extends StatelessWidget {
   final Widget? dialogContent;
 
   /// [ezRichUndoWarning] passthrough
-  final List<String>? extraKeys;
-
-  /// [ezRichUndoWarning] passthrough
   final String? appName;
 
   /// [ezRichUndoWarning] passthrough
   final String? androidPackage;
+
+  /// [ezRichUndoWarning] passthrough
+  final Set<String>? saveSkip;
 
   /// What happens when the user choses to randomize
   /// Defaults to [EzConfig.randomize]
@@ -45,9 +45,9 @@ class EzConfigRandomizer extends StatelessWidget {
     this.label,
     this.dialogTitle,
     this.dialogContent,
-    this.extraKeys,
     this.appName,
     this.androidPackage,
+    this.saveSkip,
     this.onConfirm,
     this.onDeny,
   }) : assert((appName == null) != (dialogContent == null),
@@ -68,9 +68,9 @@ class EzConfigRandomizer extends StatelessWidget {
             content: dialogContent ??
                 ezRichUndoWarning(
                   context,
-                  extraKeys: extraKeys,
                   appName: appName!,
                   androidPackage: androidPackage,
+                  skip: saveSkip,
                 ),
             actions: ezActionPair(
               context: context,

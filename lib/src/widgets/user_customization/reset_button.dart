@@ -8,11 +8,21 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzResetButton extends StatelessWidget {
+  /// [EzElevatedIconButton.style] passthrough
+  final ButtonStyle? style;
+
+  /// [EzElevatedIconButton.label] passthrough
+  /// Defaults to [EFUILang.gResetAll]
+  final String? label;
+
+  /// [ezRichUndoWarning] passthrough
+  final String appName;
+
   /// [ezRichUndoWarning] passthrough
   final String? androidPackage;
 
   /// [ezRichUndoWarning] passthrough
-  final String? appName;
+  final Set<String>? saveSkip;
 
   /// Optionally override [EzAlertDialog.content] that shows on click
   /// Defaults to [ezRichUndoWarning]
@@ -22,12 +32,13 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
 
-  /// [ezRichUndoWarning] passthrough
-  final List<String>? extraKeys;
+  /// [EzConfig.reset] skip passthrough
+  /// Moot if [onConfirm] is provided
+  final Set<String>? resetSkip;
 
-  /// [EzElevatedIconButton.label] passthrough
-  /// Defaults to [EFUILang.gResetAll]
-  final String? label;
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final bool storageOnly;
 
   /// Whether to notify [EzConfigProvider] of changes
   /// Moot if [onConfirm] is provided
@@ -46,35 +57,23 @@ class EzResetButton extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final Set<String>? skip;
-
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final bool storageOnly;
-
-  /// [EzElevatedIconButton.style] passthrough
-  final ButtonStyle? style;
-
   /// [EzElevatedIconButton] for clearing user settings
   const EzResetButton({
     super.key,
+    this.style,
+    this.label,
+    required this.appName,
     this.androidPackage,
-    this.appName,
+    this.saveSkip,
     this.dialogContent,
     this.dialogTitle,
-    this.extraKeys,
-    this.label,
+    this.resetSkip,
+    this.storageOnly = false,
     this.notifyTheme = true,
+    this.onNotify,
     this.onConfirm,
     this.onDeny,
-    this.onNotify,
-    this.skip,
-    this.storageOnly = false,
-    this.style,
-  }) : assert((appName == null) != (dialogContent == null),
-            'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +108,7 @@ class EzResetButton extends StatelessWidget {
           content: dialogContent ??
               ezRichUndoWarning(
                 context,
-                extraKeys: extraKeys,
-                appName: appName!,
+                appName: appName,
                 androidPackage: androidPackage,
               ),
           actions: ezActionPair(
@@ -118,7 +116,7 @@ class EzResetButton extends StatelessWidget {
             onConfirm: () async {
               if (onConfirm == null) {
                 await EzConfig.reset(
-                  skip: skip,
+                  skip: resetSkip,
                   storageOnly: storageOnly,
                   notifyTheme: notifyTheme,
                   onNotify: onNotify,
