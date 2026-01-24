@@ -19,7 +19,10 @@ class EzConfigProvider extends ChangeNotifier {
 
   late ThemeMode _themeMode;
   late bool _isDark;
-  late EzLayoutWidgets _layout;
+
+  late EzDesignCache _design;
+  late EzLayoutCache _layout;
+  late EzTextCache _text;
 
   late ThemeData _darkTheme;
   late ThemeData _lightTheme;
@@ -34,40 +37,59 @@ class EzConfigProvider extends ChangeNotifier {
         _locale = localeFallback,
         _l10n = l10nFallback,
         _isDark = isDark {
-    // Explicit _getMode to avoid self reference
+    _buildMode();
+    _buildTheme();
+  }
+
+  void _buildMode() {
     final bool? savedDark = EzConfig.get(isDarkThemeKey);
+
     _themeMode = (savedDark == null)
         ? ThemeMode.system
         : (savedDark == true)
             ? ThemeMode.dark
             : ThemeMode.light;
-
-    // Ditto for _buildTheme
-    _darkTheme = ezThemeData(Brightness.dark, _ltr);
-    _lightTheme = ezThemeData(Brightness.light, _ltr);
-
-    _layout = EzLayoutWidgets(
-      margin: EzMargin(isDark: isDark),
-      rowMargin: EzMargin(isDark: isDark, vertical: false),
-      spacer: EzSpacer(isDark: isDark),
-      rowSpacer: EzSpacer(isDark: isDark, vertical: false),
-      separator: EzSeparator(isDark: isDark),
-      divider: const EzDivider(),
-    );
   }
 
   void _buildTheme() {
     _darkTheme = ezThemeData(Brightness.dark, _ltr);
     _lightTheme = ezThemeData(Brightness.light, _ltr);
 
-    _layout = EzLayoutWidgets(
-      margin: EzMargin(),
-      rowMargin: EzMargin(vertical: false),
-      spacer: const EzSpacer(),
-      rowSpacer: const EzSpacer(vertical: false),
-      separator: const EzSeparator(),
-      divider: const EzDivider(),
-    );
+    if (isDark) {
+      _design = EzDesignCache(animDur: EzConfig.get(darkAnimationDurationKey));
+
+      _layout = EzLayoutCache(
+        marginVal: EzConfig.get(darkMarginKey),
+        padding: EzConfig.get(darkPaddingKey),
+        spacing: EzConfig.get(darkSpacingKey),
+        margin: EzMargin(isDark: true),
+        rowMargin: EzMargin(isDark: true, vertical: false),
+        spacer: const EzSpacer(isDark: true),
+        rowSpacer: const EzSpacer(isDark: true, vertical: false),
+        separator: const EzSeparator(isDark: true),
+        divider: const EzDivider(),
+        hideScroll: EzConfig.get(darkHideScrollKey),
+      );
+
+      _text = EzTextCache(iconSize: EzConfig.get(darkIconSizeKey));
+    } else {
+      _design = EzDesignCache(animDur: EzConfig.get(lightAnimationDurationKey));
+
+      _layout = EzLayoutCache(
+        marginVal: EzConfig.get(lightMarginKey),
+        padding: EzConfig.get(lightPaddingKey),
+        spacing: EzConfig.get(lightSpacingKey),
+        margin: EzMargin(isDark: false),
+        rowMargin: EzMargin(isDark: false, vertical: false),
+        spacer: const EzSpacer(isDark: false),
+        rowSpacer: const EzSpacer(isDark: false, vertical: false),
+        separator: const EzSeparator(isDark: false),
+        divider: const EzDivider(),
+        hideScroll: EzConfig.get(lightHideScrollKey),
+      );
+
+      _text = EzTextCache(iconSize: EzConfig.get(lightIconSizeKey));
+    }
   }
 
   // Get //
@@ -78,19 +100,12 @@ class EzConfigProvider extends ChangeNotifier {
   Locale get locale => _locale;
   EFUILang get l10n => _l10n;
 
-  ThemeMode get _getMode {
-    final bool? savedDark = EzConfig.get(isDarkThemeKey);
-
-    return (savedDark == null)
-        ? ThemeMode.system
-        : (savedDark == true)
-            ? ThemeMode.dark
-            : ThemeMode.light;
-  }
-
   ThemeMode get themeMode => _themeMode;
   bool get isDark => _isDark;
-  EzLayoutWidgets get layout => _layout;
+
+  EzDesignCache get design => _design;
+  EzLayoutCache get layout => _layout;
+  EzTextCache get text => _text;
 
   ThemeData get darkTheme => _darkTheme;
   ThemeData get lightTheme => _lightTheme;
@@ -104,7 +119,7 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   void rebuild({void Function()? onComplete}) {
-    _themeMode = _getMode;
+    _buildMode();
     _buildTheme();
     redraw(onComplete: onComplete);
   }
@@ -120,7 +135,7 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   void setThemeMode({void Function()? onComplete}) {
-    _themeMode = _getMode;
+    _buildMode();
     redraw(onComplete: onComplete);
   }
 
@@ -139,7 +154,17 @@ class EzConfigProvider extends ChangeNotifier {
   }
 }
 
-class EzLayoutWidgets {
+class EzDesignCache {
+  final int animDur;
+
+  EzDesignCache({required this.animDur});
+}
+
+class EzLayoutCache {
+  final double marginVal;
+  final double padding;
+  final double spacing;
+
   final EzMargin margin;
   final EzMargin rowMargin;
   final EzSpacer spacer;
@@ -147,12 +172,24 @@ class EzLayoutWidgets {
   final EzSeparator separator;
   final EzDivider divider;
 
-  EzLayoutWidgets({
+  final bool hideScroll;
+
+  EzLayoutCache({
+    required this.marginVal,
+    required this.padding,
+    required this.spacing,
     required this.margin,
     required this.rowMargin,
     required this.spacer,
     required this.rowSpacer,
     required this.separator,
     required this.divider,
+    required this.hideScroll,
   });
+}
+
+class EzTextCache {
+  final double iconSize;
+
+  EzTextCache({required this.iconSize});
 }
