@@ -868,7 +868,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// [removeKeys], all
   static Future<bool> reset({
-    Set<String>? skip,
+    Set<String>? skip = const <String>{appLocaleKey},
     bool reset = true,
     bool storageOnly = false,
     bool notifyTheme = false,
