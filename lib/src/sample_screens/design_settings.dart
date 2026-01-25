@@ -20,12 +20,6 @@ class EzDesignSettings extends StatefulWidget {
   /// Whether to include animation duration control
   final bool includeAnimation;
 
-  /// Whether to include the scrollbar visibility toggle
-  final bool includeScroll;
-
-  /// Whether to include icon size controls
-  final bool includeIconSize;
-
   /// Whether to include the background image setting
   /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
   final bool includeBackgroundImage;
@@ -37,6 +31,12 @@ class EzDesignSettings extends StatefulWidget {
   /// Optional credits for the light background image
   /// Moot if [includeBackgroundImage] is false
   final String? lightBackgroundCredits;
+
+  /// Whether to include the scrollbar visibility toggle
+  final bool includeScroll;
+
+  /// Whether to include icon size controls
+  final bool includeIconSize;
 
   /// Optional additional settings at the bottom of the page (above the (optional) reset button)
   /// BYO leading spacer, trailing is [resetSpacer]
@@ -75,11 +75,11 @@ class EzDesignSettings extends StatefulWidget {
     this.themeLink,
     this.beforeDesign,
     this.includeAnimation = true,
-    this.includeScroll = true,
-    this.includeIconSize = true,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
+    this.includeScroll = true,
+    this.includeIconSize = true,
     this.afterDesign,
     this.resetSpacer = const EzDivider(),
     this.resetExtraDark,
@@ -97,11 +97,6 @@ class EzDesignSettings extends StatefulWidget {
 
 class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
-  // Gather the fixed theme data //
-
-  late final String darkString = EzConfig.l10n.gDark.toLowerCase();
-  late final String lightString = EzConfig.l10n.gLight.toLowerCase();
-
   // Define the build data //
 
   final bool strictMobile = !kIsWeb && isMobile();
@@ -137,9 +132,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final String themeProfile = EzConfig.isDark ? darkString : lightString;
-
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    final String themeProfile = EzConfig.isDark
+        ? EzConfig.l10n.gDark.toLowerCase()
+        : EzConfig.l10n.gLight.toLowerCase();
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     // Return the build //
@@ -148,12 +145,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       children: <Widget>[
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n.gEditingTheme(
-                  EzConfig.isDark ? darkString : lightString,
-                ),
+                EzConfig.l10n.gEditingTheme(themeProfile),
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
-                style: Theme.of(context).textTheme.labelLarge,
+                style: textTheme.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
@@ -254,20 +249,35 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               if (animDuration != backup) EzConfig.provider.rebuild();
             },
             label: EzConfig.l10n.dsAnimDuration,
-            icon: const Icon(Icons.watch),
+            icon: const Icon(Icons.timer_outlined),
             style: ElevatedButton.styleFrom(iconSize: iconSize),
           ),
           EzConfig.spacer,
         ],
 
-        // Scrollbar toggle
-        if (widget.includeScroll) ...<Widget>[
-          EzSwitchPair(
-            key: ValueKey<String>('scroll_$redraw'),
-            valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
-            scale: iconSize / defaultIconSize,
-            text: EzConfig.l10n.lsScroll,
+        // Background image
+        if (widget.includeBackgroundImage) ...<Widget>[
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            startCentered: true,
+            mainAxisSize: MainAxisSize.min,
+            child: EzConfig.isDark
+                ? EzImageSetting(
+                    key: UniqueKey(),
+                    configKey: darkBackgroundImageKey,
+                    credits: widget.darkBackgroundCredits,
+                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
+                    updateTheme: Brightness.dark,
+                  )
+                : EzImageSetting(
+                    key: UniqueKey(),
+                    configKey: lightBackgroundImageKey,
+                    credits: widget.lightBackgroundCredits,
+                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
+                    updateTheme: Brightness.light,
+                  ),
           ),
+          EzConfig.spacer,
         ],
 
         // Button opacity
@@ -465,37 +475,23 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           icon: const Icon(Icons.opacity),
           style: ElevatedButton.styleFrom(iconSize: iconSize),
         ),
+        (widget.includeScroll || widget.includeIconSize)
+            ? EzConfig.divider
+            : EzConfig.spacer,
+
+        // Scrollbar toggle
+        if (widget.includeScroll) ...<Widget>[
+          EzSwitchPair(
+            key: ValueKey<String>('scroll_$redraw'),
+            valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
+            scale: iconSize / defaultIconSize,
+            text: EzConfig.l10n.lsScroll,
+          ),
+          EzConfig.spacer,
+        ],
 
         // Icon size
-        if (widget.includeIconSize) ...<Widget>[
-          EzIconSizeSetting(redraw: drawState),
-          EzConfig.spacer,
-        ],
-
-        // Background image
-        if (widget.includeBackgroundImage) ...<Widget>[
-          EzConfig.spacer,
-          EzScrollView(
-            scrollDirection: Axis.horizontal,
-            startCentered: true,
-            mainAxisSize: MainAxisSize.min,
-            child: EzConfig.isDark
-                ? EzImageSetting(
-                    key: UniqueKey(),
-                    configKey: darkBackgroundImageKey,
-                    credits: widget.darkBackgroundCredits,
-                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                    updateTheme: Brightness.dark,
-                  )
-                : EzImageSetting(
-                    key: UniqueKey(),
-                    configKey: lightBackgroundImageKey,
-                    credits: widget.lightBackgroundCredits,
-                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                    updateTheme: Brightness.light,
-                  ),
-          ),
-        ],
+        if (widget.includeIconSize) EzIconSizeSetting(redraw: drawState),
 
         // After background
         if (widget.afterDesign != null) ...widget.afterDesign!,
