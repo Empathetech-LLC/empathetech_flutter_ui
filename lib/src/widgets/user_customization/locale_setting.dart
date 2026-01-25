@@ -84,12 +84,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   // Define custom functions //
 
-  String localeName(Locale locale) {
-    final String? supported =
-        LocaleNames.of(context)!.nameOf(locale.languageCode);
-
-    if (supported != null) return supported;
-
+  String manualNames(Locale locale) {
     switch (locale) {
       case filipino:
         return 'Filipino';
@@ -139,33 +134,32 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                           padding: EzInsets.wrap(EzConfig.spacing),
                           child: EzElevatedIconButton(
                             onPressed: () async {
-                              // Gather data
+                              // Gather && set data
                               final List<String> localeData = <String>[
-                                locale.languageCode,
+                                locale.languageCode
                               ];
                               if (locale.countryCode != null) {
                                 localeData.add(locale.countryCode!);
                               }
-
-                              // Set data
                               await EzConfig.setStringList(
                                 appLocaleKey,
                                 localeData,
                               );
 
-                              // Refresh UI
-                              EzConfig.provider.setLocale(onComplete: () {
-                                if (mContext.mounted) {
-                                  Navigator.of(mContext).pop(locale);
-                                }
-                              });
+                              // Refresh the UI
+                              if (mContext.mounted) {
+                                Navigator.of(mContext).pop();
+                              }
+                              await EzConfig.provider.buildLocale();
                             },
                             icon: flag(
                               locale,
                               iconSize: EzConfig.iconSize,
                               padding: EzConfig.padding,
                             ),
-                            label: localeName(locale),
+                            label: LocaleNames.of(mContext)
+                                    ?.nameOf(locale.languageCode) ??
+                                manualNames(locale),
                             labelPadding: false,
                           ),
                         ),
