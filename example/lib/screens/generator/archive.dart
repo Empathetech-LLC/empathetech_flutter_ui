@@ -22,10 +22,6 @@ class ArchiveScreen extends StatefulWidget {
 }
 
 class _ArchiveScreenState extends State<ArchiveScreen> {
-  // Gather the fixed theme data //
-
-  late final Lang l10n = Lang.of(context)!;
-
   // Define the build data //
 
   GeneratorState genState = GeneratorState.running;
@@ -64,7 +60,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
           });
   }
 
-  Widget header() {
+  Widget header(Lang l10n) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     switch (genState) {
@@ -124,9 +120,13 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   // Return the build //
 
   @override
-  Widget build(_) => OpenUIScaffold(
-        title: l10n.asPageTitle,
-        running: genState == GeneratorState.running,
-        body: EzScreen(header(), alignment: Alignment.center),
-      );
+  Widget build(_) {
+    final Lang l10n = Lang.of(context)!;
+
+    return OpenUIScaffold(
+      title: l10n.asPageTitle,
+      running: genState == GeneratorState.running,
+      body: EzScreen(header(l10n), alignment: Alignment.center),
+    );
+  }
 }

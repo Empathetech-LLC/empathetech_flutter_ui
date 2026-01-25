@@ -22,10 +22,6 @@ class GenerateScreen extends StatefulWidget {
 }
 
 class _GenerateScreenState extends State<GenerateScreen> {
-  // Gather the fixed theme data //
-
-  late final Lang l10n = Lang.of(context)!;
-
   // Define the build data //
 
   GeneratorState genState = GeneratorState.running;
@@ -80,13 +76,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// The only way to begin
   /// Is by beginning
-  Future<void> genStuff() async {
+  Future<void> genStuff(Lang l10n) async {
     final TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
 
     await ezCmd(
       '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
       dir: workDir,
-      onSuccess: delStuff,
+      onSuccess: () => delStuff(l10n),
       onFailure: (String message) {
         if (message.contains('not permitted') &&
             platform == TargetPlatform.macOS) {
@@ -125,7 +121,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   }
 
   /// Runs immediately after a successful [genStuff]
-  Future<void> delStuff() async {
+  Future<void> delStuff(Lang l10n) async {
     const String files =
         'analysis_options.yaml pubspec.lock pubspec.yaml README.md';
     const String dirs = 'lib test';
@@ -143,14 +139,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
     await ezCmd(
       isWindows ? 'rmdir /s /q $dirs' : 'rm -rf $dirs',
       dir: projDir,
-      onSuccess: addStuff,
+      onSuccess: () => addStuff(l10n),
       onFailure: onFailure,
       readout: readout,
     );
   }
 
   /// Runs immediately after a successful [delStuff]
-  Future<void> addStuff() async {
+  Future<void> addStuff(Lang l10n) async {
     await genREADME(
       config: widget.config,
       dir: projDir,
@@ -223,12 +219,12 @@ class _GenerateScreenState extends State<GenerateScreen> {
       readout: readout,
     );
 
-    await runStuff();
+    await runStuff(l10n);
   }
 
   /// Runs immediately after a successful [addStuff]
   /// Last method before completion
-  Future<void> runStuff() async {
+  Future<void> runStuff(Lang l10n) async {
     late ProcessResult? runResult;
     try {
       // Update entitlements //
@@ -338,7 +334,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         : onFailure(l10n.gsPartialSuccess);
   }
 
-  Widget header(TextTheme textTheme, TextStyle? subTitle) {
+  Widget header(Lang l10n, TextTheme textTheme, TextStyle? subTitle) {
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -424,13 +420,16 @@ class _GenerateScreenState extends State<GenerateScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => genStuff());
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => genStuff(Lang.of(context)!), // TODO: test me
+    );
   }
 
   // Return the build //
 
   @override
   Widget build(_) {
+    final Lang l10n = Lang.of(context)!;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
@@ -438,7 +437,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       title: l10n.gsPageTitle,
       running: genState == GeneratorState.running,
       body: EzScreen(EzScrollView(children: <Widget>[
-        header(textTheme, subTitle),
+        header(l10n, textTheme, subTitle),
         EzConfig.divider,
 
         // Console output //

@@ -24,8 +24,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Define the build data //
 
-  late final Lang l10n = Lang.of(context)!;
-
   final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
       ? false
@@ -49,11 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
       : '';
 
   final TextEditingController nameController = TextEditingController();
-  late String namePreview = l10n.csNamePreview;
+  late String namePreview = Lang.of(context)!.csNamePreview;
   bool validName = false;
 
   final TextEditingController pubController = TextEditingController();
-  late String pubPreview = l10n.csPubPreview;
+  late String pubPreview = Lang.of(context)!.csPubPreview;
 
   final TextEditingController domainController = TextEditingController();
   bool exampleDomain = false;
@@ -107,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define custom functions //
 
   /// Validate the code gen file path (Desktop only)
-  Future<bool> checkPath(TextEditingController controller) async {
+  Future<bool> checkPath(Lang l10n, TextEditingController controller) async {
     if (await Directory(controller.text).exists()) return true;
 
     final String badPath = l10n.csBadPath;
@@ -141,6 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    final Lang l10n = Lang.of(context)!;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
@@ -725,8 +724,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 null) &&
                         descriptionController.text.isNotEmpty &&
                         (!isDesktop ||
-                            ((!isMac || await checkPath(flutterPathControl)) &&
-                                await checkPath(workPathControl))) &&
+                            ((!isMac ||
+                                    await checkPath(
+                                        l10n, flutterPathControl)) &&
+                                await checkPath(l10n, workPathControl))) &&
                         context.mounted) {
                       context.goNamed(
                         archiveScreenPath,
@@ -800,8 +801,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               validateDomain(domainController.text, context) ==
                                   null) &&
                           descriptionController.text.isNotEmpty &&
-                          (!isMac || await checkPath(flutterPathControl)) &&
-                          await checkPath(workPathControl) &&
+                          (!isMac ||
+                              await checkPath(l10n, flutterPathControl)) &&
+                          await checkPath(l10n, workPathControl) &&
                           context.mounted) {
                         context.goNamed(
                           generateScreenPath,
