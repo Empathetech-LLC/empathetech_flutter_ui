@@ -43,7 +43,7 @@ class OpenUIScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the fixed theme data //
+    // Gather the contextual theme data //
 
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);

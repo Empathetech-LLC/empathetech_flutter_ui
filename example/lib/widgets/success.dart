@@ -79,7 +79,7 @@ class RunOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMac = !kIsWeb && getBasePlatform() == TargetPlatform.macOS;
+    final bool isMac = !kIsWeb && EzConfig.platform == TargetPlatform.macOS;
 
     return isMac
         ? const SizedBox.shrink()

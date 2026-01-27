@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 //* Global (home) settings' keys *//
 
 const String isLeftyKey = 'isLefty';
@@ -425,6 +427,8 @@ const String csSurfaceTint = 'Surface tint';
 // Dark theme //
 
 const String darkAnimationDurationKey = 'darkAnimationDuration';
+const String darkTransitionTypeKey = 'darkTransitionType';
+const String darkTransitionFadeKey = 'darkTransitionFade';
 const String darkBackgroundImageKey = 'darkBackgroundImage';
 const String darkButtonOpacityKey = 'darkButtonOpacity';
 const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
@@ -432,6 +436,8 @@ const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
 /// Animation, background, && button opacity keys
 const Map<String, Type> darkDesignKeys = <String, Type>{
   darkAnimationDurationKey: int,
+  darkTransitionTypeKey: String,
+  darkTransitionFadeKey: bool,
   darkBackgroundImageKey: String,
   '$darkBackgroundImageKey$boxFitSuffix': String,
   darkButtonOpacityKey: double,
@@ -441,6 +447,8 @@ const Map<String, Type> darkDesignKeys = <String, Type>{
 // Light theme //
 
 const String lightAnimationDurationKey = 'lightAnimationDuration';
+const String lightTransitionTypeKey = 'lightTransitionType';
+const String lightTransitionFadeKey = 'lightTransitionFade';
 const String lightBackgroundImageKey = 'lightBackgroundImage';
 const String lightButtonOpacityKey = 'lightButtonOpacity';
 const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
@@ -448,6 +456,8 @@ const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
 /// Animation, background, && button opacity keys
 const Map<String, Type> lightDesignKeys = <String, Type>{
   lightAnimationDurationKey: int,
+  lightTransitionTypeKey: String,
+  lightTransitionFadeKey: bool,
   lightBackgroundImageKey: String,
   '$lightBackgroundImageKey$boxFitSuffix': String,
   lightButtonOpacityKey: double,
@@ -461,37 +471,6 @@ const Map<String, Type> allDesignKeys = <String, Type>{
   ...darkDesignKeys,
   ...lightDesignKeys,
 };
-
-//* Design settings' values *//
-
-// Image values //
-
-/// Allows for app images whose default is an asset to be "null"
-const String noImageValue = 'noImage';
-
-/// Fit
-const String boxFitSuffix = 'Fit';
-
-/// contain
-const String contain = 'contain';
-
-/// cover
-const String cover = 'cover';
-
-/// fill
-const String fill = 'fill';
-
-/// fitWidth
-const String fitWidth = 'fitWidth';
-
-/// fitHeight
-const String fitHeight = 'fitHeight';
-
-/// none
-const String none = 'none';
-
-/// scaleDown
-const String scaleDown = 'scaleDown';
 
 //* Layout settings' keys *//
 
@@ -790,20 +769,6 @@ const Map<String, Type> allTextKeys = <String, Type>{
   ...darkTextKeys,
   ...lightTextKeys,
 };
-
-//* Text settings' values *//
-
-/// bold
-const String bold = 'bold';
-
-/// italic
-const String italic = 'italic';
-
-/// underlined
-const String underlined = 'underlined';
-
-/// -55.55
-const String sampleString = '55.55';
 
 //* Global trackers *//
 

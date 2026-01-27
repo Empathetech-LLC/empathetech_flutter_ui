@@ -14,10 +14,11 @@ export 'src/config_provider.dart';
 export 'src/consts/custom_delegates/creole.dart';
 
 // General
+export 'src/consts/config_enums.dart';
 export 'src/consts/config_keys.dart';
-export 'src/consts/config.dart';
-export 'src/consts/consts.dart';
+export 'src/consts/empath_config.dart';
 export 'src/consts/google_fonts.dart';
+export 'src/consts/shared.dart';
 
 // Functions //
 
