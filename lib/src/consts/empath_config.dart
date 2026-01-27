@@ -416,7 +416,7 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   darkAnimationDurationKey: defaultAnimationDuration,
 
   darkBackgroundImageKey: noImageValue,
-  '$darkBackgroundImageKey$boxFitSuffix': none,
+  '$darkBackgroundImageKey$boxFitSuffix': '',
   darkButtonOpacityKey: maxOpacity,
   darkButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
 
@@ -424,7 +424,7 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   lightAnimationDurationKey: defaultAnimationDuration,
 
   lightBackgroundImageKey: noImageValue,
-  '$lightBackgroundImageKey$boxFitSuffix': none,
+  '$lightBackgroundImageKey$boxFitSuffix': '',
   lightButtonOpacityKey: maxOpacity,
   lightButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
 
