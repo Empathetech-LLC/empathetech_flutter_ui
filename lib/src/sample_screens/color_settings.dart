@@ -317,8 +317,6 @@ class _AdvancedColorSettings extends StatefulWidget {
 
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     with WidgetsBindingObserver {
-  // Gather the fixed theme data //
-
   // Define the build data //
 
   late final List<String> defaultList = widget.defaultList;

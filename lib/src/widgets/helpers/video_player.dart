@@ -9,7 +9,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
-// import 'package:go_transitions/go_transitions.dart';
 
 enum EzButtonVis { alwaysOff, alwaysOn, auto }
 
@@ -85,10 +84,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// Recommended to leave as false to start
   /// Navigating to the fullscreen page is made much simpler with this as a parameter
   // final bool isFullscreen;
-
-  /// The platform the app is running on
-  /// Recommended to use [getBasePlatform]
-  // final TargetPlatform platform;
 
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
   /// Only for desktop (and desktop Web), is always true for mobile (and mobile Web)
