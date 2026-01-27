@@ -11,11 +11,12 @@ import 'package:flutter/material.dart';
 class EzConfigProvider extends ChangeNotifier {
   // Construct //
 
+  final TargetPlatform _platform;
   int _seed;
-  bool _ltr;
 
   late Locale _locale;
   late EFUILang _l10n;
+  bool _ltr;
 
   late ThemeMode _themeMode;
   late bool _isDark;
@@ -28,14 +29,15 @@ class EzConfigProvider extends ChangeNotifier {
   late ThemeData _lightTheme;
 
   EzConfigProvider({
-    required bool isLTR,
     required Locale localeFallback,
     required EFUILang l10nFallback,
+    required bool isLTR,
     required bool isDark,
-  })  : _seed = Random().nextInt(rMax),
-        _ltr = isLTR,
+  })  : _platform = getBasePlatform(),
+        _seed = Random().nextInt(rMax),
         _locale = localeFallback,
         _l10n = l10nFallback,
+        _ltr = isLTR,
         _isDark = isDark {
     _buildMode();
     _buildTheme();
@@ -99,14 +101,17 @@ class EzConfigProvider extends ChangeNotifier {
   /// Track [redraw] and [rebuild] (randomized on each call)
   int get seed => _seed;
 
-  /// Text direction for the [locale]
-  bool get isLTR => _ltr;
+  /// Current [TargetPlatform]
+  TargetPlatform get platform => _platform;
 
   /// Current language for the app
   Locale get locale => _locale;
 
   /// EFUI localizations for the [locale]
   EFUILang get l10n => _l10n;
+
+  /// Text direction for the [locale]
+  bool get isLTR => _ltr;
 
   /// Current [ThemeMode]
   ThemeMode get themeMode => _themeMode;
@@ -171,7 +176,7 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Set the apps [Locale] from storage and load corresponding localizations
   Future<void> buildLocale({void Function()? onComplete}) async {
-    final Locale locale = getStoredLocale();
+    final Locale locale = ezStoredLocale();
     _locale = locale;
 
     try {

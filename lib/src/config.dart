@@ -160,6 +160,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Active [EzConfigProvider]
   static EzConfigProvider get provider => _instance!._provider!;
 
+  /// Current [TargetPlatform]
+  static TargetPlatform get platform => provider.platform;
+
   /// Tracks major changes to the config
   static int get seed => provider.seed;
 
