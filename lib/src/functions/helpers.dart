@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:go_transitions/go_transitions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
@@ -23,9 +22,7 @@ import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
 /// Where to find saved files on the current [TargetPlatform]
 String archivePath({required String? androidPackage, required String appName}) {
-  final TargetPlatform platform = getBasePlatform();
-
-  switch (platform) {
+  switch (EzConfig.platform) {
     case TargetPlatform.android:
       return 'Root > Android > Data > ${androidPackage ?? 'com.example.app'} > files';
     case TargetPlatform.iOS:
@@ -39,25 +36,10 @@ String archivePath({required String? androidPackage, required String appName}) {
 /// Alias exists for [kIsWeb] support
 TargetPlatform getBasePlatform() => getHostPlatform();
 
-/// Gets any stored [Locale] from [EzConfig]
-Locale getStoredLocale() {
-  final List<String>? localeData = EzConfig.get(appLocaleKey);
-  if (localeData == null || localeData.isEmpty) {
-    return EzConfig.localeFallback;
-  }
-
-  final String languageCode = localeData[0];
-  final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
-
-  return (countryCode != null)
-      ? Locale(languageCode, countryCode)
-      : Locale(languageCode);
-}
-
 /// Alias exists for [kIsWeb] support
 bool isApple() => cupertinoCheck();
 
-/// First checks [PlatformTheme] then falls back to [MediaQuery]
+/// Alias for [MediaQuery] brightness check
 bool isDarkTheme(BuildContext context) =>
     MediaQuery.of(context).platformBrightness == Brightness.dark;
 
@@ -71,9 +53,7 @@ bool isMobile() => mobileCheck();
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
 String screenshotHint() {
-  final TargetPlatform platform = getBasePlatform();
-
-  switch (platform) {
+  switch (EzConfig.platform) {
     case TargetPlatform.linux:
     case TargetPlatform.fuchsia:
     case TargetPlatform.windows:
@@ -150,28 +130,6 @@ Future<void> ezConfigLoader(BuildContext context) async {
 Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
     toggleFullscreen(platform, isFull);
 
-/// A [GoTransition] based on the current platform and [EzConfig] setup
-Page<dynamic> ezGoTransition(
-  BuildContext context,
-  GoRouterState state,
-  int animDuration,
-  TargetPlatform platform,
-) {
-  if (animDuration < 1) return GoTransitions.none(context, state);
-
-  switch (platform) {
-    case TargetPlatform.android:
-      return GoTransitions.zoom(context, state);
-    case TargetPlatform.iOS:
-    case TargetPlatform.macOS:
-      return GoTransitions.cupertino(context, state);
-    case TargetPlatform.fuchsia:
-    case TargetPlatform.linux:
-    case TargetPlatform.windows:
-      return GoTransitions.slide.withFade(context, state);
-  }
-}
-
 /// Scale Widgets based on IconSize
 /// For Widgets that don't do it automatically, like [Radio] and [Checkbox]
 double ezIconRatio() => max(
@@ -190,6 +148,37 @@ double ezImageSize(BuildContext context) =>
     (EzConfig.iconSize /
         EzConfig.getDefault(
             EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
+
+/// A [Page] animator based on [EzConfig]
+Page<dynamic> ezPageBuilder(
+  BuildContext context,
+  GoRouterState state,
+  Widget child, {
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+      transitionsBuilder,
+}) =>
+    CustomTransitionPage<dynamic>(
+      key: state.pageKey,
+      transitionsBuilder: transitionsBuilder ?? ezTransitionsBuilder,
+      transitionDuration: ezAnimDuration(),
+      reverseTransitionDuration: ezAnimDuration(),
+      child: child,
+    );
+
+/// Gets any stored [Locale] from [EzConfig]
+Locale ezStoredLocale() {
+  final List<String>? localeData = EzConfig.get(appLocaleKey);
+  if (localeData == null || localeData.isEmpty) {
+    return EzConfig.localeFallback;
+  }
+
+  final String languageCode = localeData[0];
+  final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
+
+  return (countryCode != null)
+      ? Locale(languageCode, countryCode)
+      : Locale(languageCode);
+}
 
 /// Calculate a recommended [AppBar.toolbarHeight]
 /// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
@@ -210,6 +199,163 @@ double ezToolbarHeight({
           : kMinInteractiveDimension,
     ) +
     EzConfig.marginVal;
+
+/// A [Page] animator based on [EzConfig]
+Widget ezTransitionsBuilder(
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
+  // Check for no animation
+  if (EzConfig.animDur < 1) return child;
+
+  // Gather the transition details
+  final EzPageTransition transitionType = EzPageTransitionConfig.lookup(
+      EzConfig.get(
+          EzConfig.isDark ? darkTransitionTypeKey : lightTransitionTypeKey));
+
+  Widget smartFade(Widget child) => (EzConfig.get(EzConfig.isDark
+              ? darkTransitionFadeKey
+              : lightTransitionFadeKey) ==
+          true)
+      ? FadeTransition(opacity: animation, child: child)
+      : child;
+
+  if (transitionType == EzPageTransition.system) {
+    switch (EzConfig.platform) {
+      // Android
+      case TargetPlatform.android:
+        return ScaleTransition(
+          scale: CurveTween(curve: Curves.easeInOut).animate(animation),
+          alignment: Alignment.center,
+          child: child,
+        );
+
+      // Apple
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(-1.0, 0.0),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInOut,
+          )),
+          child: FadeTransition(opacity: animation, child: child),
+        );
+
+      // Other
+      default:
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: FadeTransition(opacity: animation, child: child),
+        );
+    }
+  }
+
+  switch (transitionType) {
+    // Flip
+    case EzPageTransition.flip:
+      return AnimatedBuilder(
+        animation: animation,
+        builder: (BuildContext context, Widget? bChild) => Transform(
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.001)
+            ..rotateY((1.0 - animation.value) * (pi / 2)),
+          alignment: Alignment.center,
+          child: bChild,
+        ),
+        child: smartFade(child),
+      );
+
+    // Rotate
+    case EzPageTransition.rotate:
+      return RotationTransition(
+        turns: CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+        child: smartFade(child),
+      );
+
+    // Scale
+    case EzPageTransition.scale:
+      return ScaleTransition(
+        scale: CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        ),
+        alignment: Alignment.center,
+        child: smartFade(child),
+      );
+
+    // Slide left
+    case EzPageTransition.slideLeft:
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(-1.0, 0.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
+        child: smartFade(child),
+      );
+
+    // Slide right
+    case EzPageTransition.slideRight:
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
+        child: smartFade(child),
+      );
+
+    // Slide up
+    case EzPageTransition.slideUp:
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0.0, 1.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
+        child: smartFade(child),
+      );
+
+    // Slide down
+    case EzPageTransition.slideDown:
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0.0, -1.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
+        child: smartFade(child),
+      );
+
+    // Zoom
+    case EzPageTransition.zoom:
+      return ScaleTransition(
+        scale: CurveTween(curve: Curves.easeInOut).animate(animation),
+        alignment: Alignment.center,
+        child: smartFade(child),
+      );
+
+    // None
+    default:
+      return child;
+  }
+}
 
 /// Relaxed reading time for a US tween: 100 words per minute
 Duration ezReadingTime(String passage) {
