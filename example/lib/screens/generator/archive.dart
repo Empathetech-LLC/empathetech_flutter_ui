@@ -27,11 +27,9 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   GeneratorState genState = GeneratorState.running;
   String failureMessage = '';
 
-  final TargetPlatform platform = getBasePlatform();
-
-  late final bool isDesktop = platform == TargetPlatform.linux ||
-      platform == TargetPlatform.macOS ||
-      platform == TargetPlatform.windows;
+  late final bool isDesktop = EzConfig.platform == TargetPlatform.linux ||
+      EzConfig.platform == TargetPlatform.macOS ||
+      EzConfig.platform == TargetPlatform.windows;
 
   // Define custom functions //
 

@@ -24,15 +24,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Define the build data //
 
-  final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
       ? false
-      : (platform == TargetPlatform.linux ||
-          platform == TargetPlatform.macOS ||
-          platform == TargetPlatform.windows);
+      : (EzConfig.platform == TargetPlatform.linux ||
+          EzConfig.platform == TargetPlatform.macOS ||
+          EzConfig.platform == TargetPlatform.windows);
 
-  late final bool isMac = isDesktop && platform == TargetPlatform.macOS;
-  late final bool isWindows = isDesktop && platform == TargetPlatform.windows;
+  late final bool isMac =
+      isDesktop && EzConfig.platform == TargetPlatform.macOS;
+  late final bool isWindows =
+      isDesktop && EzConfig.platform == TargetPlatform.windows;
 
   late final String homePath = isDesktop
       ? isWindows
