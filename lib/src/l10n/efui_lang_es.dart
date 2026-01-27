@@ -12,6 +12,9 @@ class EFUILangEs extends EFUILang {
   String get gApply => 'Aplicar';
 
   @override
+  String get gApplyChanges => 'Aplicar cambios';
+
+  @override
   String get gContinue => 'Continuar';
 
   @override

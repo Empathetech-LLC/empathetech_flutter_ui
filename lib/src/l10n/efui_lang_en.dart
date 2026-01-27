@@ -12,6 +12,9 @@ class EFUILangEn extends EFUILang {
   String get gApply => 'Apply';
 
   @override
+  String get gApplyChanges => 'Apply changes';
+
+  @override
   String get gContinue => 'Continue';
 
   @override
@@ -656,6 +659,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gApply => 'Apply';
+
+  @override
+  String get gApplyChanges => 'Apply changes';
 
   @override
   String get gContinue => 'Continue';

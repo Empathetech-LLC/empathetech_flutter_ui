@@ -105,6 +105,12 @@ abstract class EFUILang {
   /// **'Apply'**
   String get gApply;
 
+  /// No description provided for @gApplyChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply changes'**
+  String get gApplyChanges;
+
   /// No description provided for @gContinue.
   ///
   /// In en, this message translates to:
