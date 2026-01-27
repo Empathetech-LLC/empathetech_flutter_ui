@@ -44,10 +44,11 @@ extension EzPageTransitionConfig on EzPageTransition {
     }
   }
 
+  /// Defaults to [EzPageTransition.system]
   static EzPageTransition lookup(String? value) {
     switch (value) {
-      case 'system':
-        return EzPageTransition.system;
+      case 'none':
+        return EzPageTransition.none;
       case 'flip':
         return EzPageTransition.flip;
       case 'rotate':
@@ -65,7 +66,7 @@ extension EzPageTransitionConfig on EzPageTransition {
       case 'zoom':
         return EzPageTransition.zoom;
       default:
-        return EzPageTransition.none;
+        return EzPageTransition.system;
     }
   }
 }
