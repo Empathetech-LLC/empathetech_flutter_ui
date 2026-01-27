@@ -77,8 +77,6 @@ class EzResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the fixed theme data //
-
     // Gather the contextual theme data //
 
     late final bool useCrucial = (EzConfig.get(

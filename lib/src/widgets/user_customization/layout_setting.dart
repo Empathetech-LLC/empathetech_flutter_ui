@@ -79,12 +79,10 @@ class EzLayoutSetting extends StatefulWidget {
 }
 
 class _LayoutSettingState extends State<EzLayoutSetting> {
-  // Gather the fixed theme data //
+  // Define the build data //
 
   late double currValue = EzConfig.get(widget.configKey);
   late final double defaultValue = EzConfig.getDefault(widget.configKey);
-
-  late final String label = ezLstName(context, widget.type);
 
   // Define build functions //
 
@@ -98,9 +96,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         late final String? backgroundImagePath = EzConfig.get(
             EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
 
-        late final BoxFit? backgroundImageFit = ezFitFromName(EzConfig.isDark
-            ? EzConfig.get('$darkBackgroundImageKey$boxFitSuffix')
-            : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
+        late final BoxFit? backgroundImageFit = boxFitLib[EzConfig.get(
+            EzConfig.isDark
+                ? '$darkBackgroundImageKey$boxFitSuffix'
+                : '$lightBackgroundImageKey$boxFitSuffix')];
 
         return <Widget>[
           EzConfig.spacer,
@@ -203,6 +202,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final String label = ezLstName(context, widget.type);
 
     return EzElevatedIconButton(
       onPressed: () => ezModal(

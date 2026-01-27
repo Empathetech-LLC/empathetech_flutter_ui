@@ -92,7 +92,7 @@ class _ThemeDrawerState extends State<_ThemeDrawer>
       debugShowCheckedModeBanner: false,
       localizationsDelegates: widget.localizationsDelegates,
       supportedLocales: widget.supportedLocales,
-      locale: getStoredLocale(),
+      locale: ezStoredLocale(),
       title: widget.appName,
       themeMode: config.themeMode,
       darkTheme: config.darkTheme,

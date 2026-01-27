@@ -137,8 +137,6 @@ class EzScrollView extends StatefulWidget {
 }
 
 class _EzScrollViewState extends State<EzScrollView> {
-  // Gather the fixed theme data //
-
   // Define the build data //
 
   late final ScrollController controller;
