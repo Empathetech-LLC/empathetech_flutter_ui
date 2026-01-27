@@ -414,17 +414,23 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Dark
   darkAnimationDurationKey: defaultAnimationDuration,
+  // darkTransitionTypeKey: null,
+  // darkTransitionFadeKey: null,
 
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': '',
+
   darkButtonOpacityKey: maxOpacity,
   darkButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
 
   // Light
   lightAnimationDurationKey: defaultAnimationDuration,
+  // lightTransitionTypeKey: null,
+  // lightTransitionFadeKey: null,
 
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': '',
+
   lightButtonOpacityKey: maxOpacity,
   lightButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
 
