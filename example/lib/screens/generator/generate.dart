@@ -31,11 +31,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// Quantum supremacy achieved
   bool? showDelete = true;
 
-  final TargetPlatform platform = getBasePlatform();
-  late final bool isWindows = platform == TargetPlatform.windows;
+  late final bool isWindows = EzConfig.platform == TargetPlatform.windows;
 
   String device() {
-    switch (platform) {
+    switch (EzConfig.platform) {
       case TargetPlatform.linux:
         return 'linux';
       case TargetPlatform.macOS:
@@ -76,7 +75,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// The only way to begin
   /// Is by beginning
-  Future<void> genStuff(Lang l10n) async {
+  Future<void> genStuff() async {
+    final Lang l10n = Lang.of(context)!;
     final TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
 
     await ezCmd(
@@ -85,7 +85,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       onSuccess: () => delStuff(l10n),
       onFailure: (String message) {
         if (message.contains('not permitted') &&
-            platform == TargetPlatform.macOS) {
+            EzConfig.platform == TargetPlatform.macOS) {
           setState(() {
             showDelete = false;
             richFailureMessage = EzRichText(
@@ -177,7 +177,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     await genLib(
       config: widget.config,
-      platform: platform,
       dir: projDir,
       onFailure: onFailure,
       readout: readout,
@@ -186,7 +185,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
     if (widget.config.l10nConfig != null) {
       await genL10n(
         config: widget.config,
-        platform: platform,
         dir: projDir,
         onFailure: onFailure,
         readout: readout,
@@ -213,7 +211,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     await genIntegrationTests(
       config: widget.config,
-      platform: platform,
       dir: projDir,
       onFailure: onFailure,
       readout: readout,
@@ -399,7 +396,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   EzConfig.spacer,
                   DeleteOption(
                     appName: widget.config.appName,
-                    platform: platform,
                     dir: workDir,
                     style: subTitle,
                   ),
@@ -420,9 +416,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => genStuff(Lang.of(context)!), // TODO: test me
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) => genStuff());
   }
 
   // Return the build //

@@ -63,9 +63,6 @@ class DeleteOption extends StatelessWidget {
   /// Directory that will be rm -rf'd
   final String appName;
 
-  /// Current [TargetPlatform]
-  final TargetPlatform platform;
-
   /// Directory to run the rm command in
   final String dir;
 
@@ -79,7 +76,6 @@ class DeleteOption extends StatelessWidget {
   const DeleteOption({
     super.key,
     required this.appName,
-    required this.platform,
     required this.dir,
     required this.style,
     this.readout,
@@ -98,7 +94,7 @@ class DeleteOption extends StatelessWidget {
           EzConfig.spacer,
           EzElevatedIconButton(
             onPressed: () => ezCmd(
-              platform == TargetPlatform.windows
+              EzConfig.platform == TargetPlatform.windows
                   ? 'rmdir /s /q $appName'
                   : 'rm -rf $appName',
               dir: dir,
