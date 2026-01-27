@@ -42,26 +42,3 @@ Future<String?> ezImagePicker({
     return null;
   }
 }
-
-/// Given a [BoxFit].name, return the associated [BoxFit]
-/// Returns null is [name] is unrecognized
-BoxFit? ezFitFromName(String? name) {
-  switch (name) {
-    case contain:
-      return BoxFit.contain;
-    case cover:
-      return BoxFit.cover;
-    case fill:
-      return BoxFit.fill;
-    case fitWidth:
-      return BoxFit.fitWidth;
-    case fitHeight:
-      return BoxFit.fitHeight;
-    case none:
-      return BoxFit.none;
-    case scaleDown:
-      return BoxFit.scaleDown;
-    default:
-      return null;
-  }
-}
