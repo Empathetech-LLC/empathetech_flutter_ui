@@ -8,12 +8,9 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:go_router/go_router.dart';
-import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
@@ -32,12 +29,12 @@ void main() async {
     l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
-          allowList: allEZConfigKeys.keys.toSet()),
+        allowList: allEZConfigKeys.keys.toSet(),
+      ),
     ),
   );
 
   // Run the app //
-  // With a feedback wrapper
 
   runApp(const OpenUI());
 }
@@ -47,16 +44,6 @@ class OpenUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Prep the router //
-
-    GoTransition.defaultCurve = Curves.easeInOut;
-
-    final TargetPlatform currPlatform = getBasePlatform();
-    Page<dynamic> getTransition(BuildContext context, GoRouterState state) =>
-        ezGoTransition(context, state, EzConfig.animDur, currPlatform);
-
-    // Return the app //
-
     return EzConfigurableApp(
       localizationsDelegates: <LocalizationsDelegate<dynamic>>{
         const LocaleNamesLocalizationsDelegate(),
@@ -69,89 +56,118 @@ class OpenUI extends StatelessWidget {
         initialLocation: homePath,
         errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
         routes: <RouteBase>[
+          // Home
           GoRoute(
             path: homePath,
             name: homePath,
-            builder: (_, __) => const HomeScreen(),
-            pageBuilder: getTransition,
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                ezPageBuilder(context, state, const HomeScreen()),
             routes: <RouteBase>[
+              // Generate app
               GoRoute(
                 path: generateScreenPath,
                 name: generateScreenPath,
-                builder: (_, GoRouterState state) {
-                  final EAGConfig config = state.extra as EAGConfig;
-                  return GenerateScreen(config: config);
-                },
-                pageBuilder: getTransition,
+                pageBuilder: (BuildContext context, GoRouterState state) =>
+                    ezPageBuilder(context, state,
+                        GenerateScreen(config: (state.extra as EAGConfig))),
               ),
+
+              // Archive config
               GoRoute(
                 path: archiveScreenPath,
                 name: archiveScreenPath,
-                builder: (_, GoRouterState state) {
-                  final EAGConfig config = state.extra as EAGConfig;
-                  return ArchiveScreen(config: config);
-                },
-                pageBuilder: getTransition,
+                pageBuilder: (BuildContext context, GoRouterState state) =>
+                    ezPageBuilder(context, state,
+                        ArchiveScreen(config: (state.extra as EAGConfig))),
               ),
+
+              // Settings home
               GoRoute(
                 path: settingsHomePath,
                 name: settingsHomePath,
-                builder: (_, __) => const SettingsHomeScreen(),
-                pageBuilder: getTransition,
+                pageBuilder: (BuildContext context, GoRouterState state) =>
+                    ezPageBuilder(context, state, const SettingsHomeScreen()),
                 routes: <RouteBase>[
+                  // Color settings
                   GoRoute(
                     path: colorSettingsPath,
                     name: colorSettingsPath,
-                    builder: (_, __) => const ColorSettingsScreen(),
-                    pageBuilder: getTransition,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                            context, state, const ColorSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzCSType.quick.path,
                         name: EzCSType.quick.name,
-                        builder: (_, __) =>
-                            const ColorSettingsScreen(target: EzCSType.quick),
-                        pageBuilder: getTransition,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const ColorSettingsScreen(target: EzCSType.quick),
+                        ),
                       ),
                       GoRoute(
                         path: EzCSType.advanced.path,
                         name: EzCSType.advanced.name,
-                        builder: (_, __) => const ColorSettingsScreen(
-                            target: EzCSType.advanced),
-                        pageBuilder: getTransition,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const ColorSettingsScreen(target: EzCSType.advanced),
+                        ),
                       ),
                     ],
                   ),
+
+                  // Design settings
                   GoRoute(
                     path: designSettingsPath,
                     name: designSettingsPath,
-                    builder: (_, __) => const DesignSettingsScreen(),
-                    pageBuilder: getTransition,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                            context, state, const DesignSettingsScreen()),
                   ),
+
+                  // Layout settings
                   GoRoute(
                     path: layoutSettingsPath,
                     name: layoutSettingsPath,
-                    builder: (_, __) => const LayoutSettingsScreen(),
-                    pageBuilder: getTransition,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                            context, state, const LayoutSettingsScreen()),
                   ),
+
+                  // Text settings
                   GoRoute(
                     path: textSettingsPath,
                     name: textSettingsPath,
-                    builder: (_, __) => const TextSettingsScreen(),
-                    pageBuilder: getTransition,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                            context, state, const TextSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzTSType.quick.path,
                         name: EzTSType.quick.name,
-                        builder: (_, __) =>
-                            const TextSettingsScreen(target: EzTSType.quick),
-                        pageBuilder: getTransition,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const TextSettingsScreen(target: EzTSType.quick),
+                        ),
                       ),
                       GoRoute(
                         path: EzTSType.advanced.path,
                         name: EzTSType.advanced.name,
-                        builder: (_, __) =>
-                            const TextSettingsScreen(target: EzTSType.advanced),
-                        pageBuilder: getTransition,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const TextSettingsScreen(target: EzTSType.advanced),
+                        ),
                       ),
                     ],
                   ),
