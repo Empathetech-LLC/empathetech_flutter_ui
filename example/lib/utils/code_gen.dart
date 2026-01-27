@@ -446,7 +446,6 @@ flutter:
 /// Heavily modified from the standard template
 Future<void> genLib({
   required EAGConfig config,
-  required TargetPlatform platform,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
@@ -465,7 +464,7 @@ Future<void> genLib({
   // Directories //
 
   await ezCmd(
-    platform == TargetPlatform.windows
+    EzConfig.platform == TargetPlatform.windows
         ? 'mkdir lib lib\\utils lib\\widgets lib\\screens lib\\screens\\settings'
         : 'mkdir lib lib/utils lib/widgets lib/screens lib/screens/settings',
     dir: dir,
@@ -486,9 +485,7 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -502,7 +499,6 @@ void main() async {
 
   // Initialize EzConfig //
 
-  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
   EzConfig.init(
     assetPaths: <String>{},
     defaults: ${camelCaseAppName}Config,
@@ -510,7 +506,8 @@ void main() async {
     l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
-          allowList: allEZConfigKeys.keys.toSet()),
+        allowList: allEZConfigKeys.keys.toSet(),
+      ),
     ),
   );
 
@@ -524,110 +521,131 @@ class $classCaseAppName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Prep the router //
-
-    GoTransition.defaultCurve = Curves.easeInOut;
-
-    final TargetPlatform currPlatform = getBasePlatform();
-    Page<dynamic> getTransition(BuildContext context, GoRouterState state) =>
-        ezGoTransition(context, state, EzConfig.animDuration, currPlatform);
-
-    // Return the app //
-
-    return EzAppProvider(
-      app: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-
-        // Language handlers
-        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
-          const LocaleNamesLocalizationsDelegate(),
-          ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
-        },
-        supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
-        locale: getStoredLocale(),
-
-        // App title
-        title: appName,
-
-        // Router (page) config
-        routerConfig: GoRouter(
-          initialLocation: homePath,
-          errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
-          routes: <RouteBase>[
-            GoRoute(
-              path: homePath,
-              name: homePath,
-              builder: (_, __) => const HomeScreen(),
-              pageBuilder: getTransition,
-              routes: <RouteBase>[
-                GoRoute(
-                  path: settingsHomePath,
-                  name: settingsHomePath,
-                  builder: (_, __) => const SettingsHomeScreen(),
-                  pageBuilder: getTransition,
-                  routes: <RouteBase>[
-                    ${config.colorSettings ? '''GoRoute(
-                      path: colorSettingsPath,
-                      name: colorSettingsPath,
-                      builder: (_, __) => const ColorSettingsScreen(),
-                      pageBuilder: getTransition,
-                      routes: <RouteBase>[
-                        GoRoute(
-                          path: EzCSType.quick.path,
-                          name: EzCSType.quick.name,
-                          builder: (_, __) =>
-                              const ColorSettingsScreen(target: EzCSType.quick),
-                          pageBuilder: getTransition,
+    return EzConfigurableApp(
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>{
+        const LocaleNamesLocalizationsDelegate(),
+        ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
+      },
+      supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
+      appName: appName,
+      routerConfig: GoRouter(
+        initialLocation: homePath,
+        errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
+        routes: <RouteBase>[
+          // Home
+          GoRoute(
+            path: homePath,
+            name: homePath,
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                ezPageBuilder(context, state, const HomeScreen()),
+            routes: <RouteBase>[
+              // Settings home
+              GoRoute(
+                path: settingsHomePath,
+                name: settingsHomePath,
+                pageBuilder: (BuildContext context, GoRouterState state) =>
+                    ezPageBuilder(context, state, const SettingsHomeScreen()),
+                routes: <RouteBase>[
+                  ${config.colorSettings ? '''// Color settings
+                  GoRoute(
+                    path: colorSettingsPath,
+                    name: colorSettingsPath,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                      context,
+                      state,
+                      const ColorSettingsScreen(),
+                    ),
+                    routes: <RouteBase>[
+                      GoRoute(
+                        path: EzCSType.quick.path,
+                        name: EzCSType.quick.name,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const ColorSettingsScreen(target: EzCSType.quick),
                         ),
-                        GoRoute(
-                          path: EzCSType.advanced.path,
-                          name: EzCSType.advanced.name,
-                          builder: (_, __) =>
-                              const ColorSettingsScreen(target: EzCSType.advanced),
-                          pageBuilder: getTransition,
+                      ),
+                      GoRoute(
+                        path: EzCSType.advanced.path,
+                        name: EzCSType.advanced.name,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const ColorSettingsScreen(target: EzCSType.advanced),
                         ),
-                      ],
-                    ),''' : ''}
-                    ${config.designSettings ? '''GoRoute(
-                      path: designSettingsPath,
-                      name: designSettingsPath,
-                      builder: (_, __) => const DesignSettingsScreen(),
-                      pageBuilder: getTransition,
-                    ),''' : ''}
-                    ${config.layoutSettings ? '''GoRoute(
-                      path: layoutSettingsPath,
-                      name: layoutSettingsPath,
-                      builder: (_, __) => const LayoutSettingsScreen(),
-                      pageBuilder: getTransition,
-                    ),''' : ''}
-                    ${config.textSettings ? '''GoRoute(
-                      path: textSettingsPath,
-                      name: textSettingsPath,
-                      builder: (_, __) => const TextSettingsScreen(),
-                      pageBuilder: getTransition,
-                      routes: <RouteBase>[
-                        GoRoute(
-                          path: EzTSType.quick.path,
-                          name: EzTSType.quick.name,
-                          builder: (_, __) =>
-                              const TextSettingsScreen(target: EzTSType.quick),
-                          pageBuilder: getTransition,
+                      ),
+                    ],
+                  ),''' : ''}
+                  ${config.designSettings ? '''
+                  // Design settings
+                  GoRoute(
+                    path: designSettingsPath,
+                    name: designSettingsPath,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                      context,
+                      state,
+                      const DesignSettingsScreen(),
+                    ),
+                  ),''' : ''}
+                  ${config.layoutSettings ? '''
+                  // Layout settings
+                  GoRoute(
+                    path: layoutSettingsPath,
+                    name: layoutSettingsPath,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                      context,
+                      state,
+                      const LayoutSettingsScreen(),
+                    ),
+                  ),''' : ''}
+                  ${config.textSettings ? '''
+                  // Text settings
+                  GoRoute(
+                    path: textSettingsPath,
+                    name: textSettingsPath,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        ezPageBuilder(
+                      context,
+                      state,
+                      const TextSettingsScreen(),
+                    ),
+                    routes: <RouteBase>[
+                      GoRoute(
+                        path: EzTSType.quick.path,
+                        name: EzTSType.quick.name,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const TextSettingsScreen(target: EzTSType.quick),
                         ),
-                        GoRoute(
-                          path: EzTSType.advanced.path,
-                          name: EzTSType.advanced.name,
-                          builder: (_, __) =>
-                              const TextSettingsScreen(target: EzTSType.advanced),
-                          pageBuilder: getTransition,
+                      ),
+                      GoRoute(
+                        path: EzTSType.advanced.path,
+                        name: EzTSType.advanced.name,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) =>
+                                ezPageBuilder(
+                          context,
+                          state,
+                          const TextSettingsScreen(target: EzTSType.advanced),
                         ),
-                      ],
-                    ),''' : ''}                     
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+                      ),
+                    ],
+                  ),''' : ''}                     
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -808,7 +826,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the fixed theme data //
+    // Gather the contextual theme data //
 
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);
@@ -982,11 +1000,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ${config.l10nConfig != null ? '''// Gather the fixed theme data //
-
-  late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;
-
-  ''' : ''}// Define the build data //
+  // Define the build data //
 
   int count = 0;
 
@@ -1002,6 +1016,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
+    ${config.l10nConfig != null ? 'final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
@@ -1265,7 +1280,6 @@ const String textSettingsPath = 'text-settings';""" : ''}
 /// Localizations config
 Future<void> genL10n({
   required EAGConfig config,
-  required TargetPlatform platform,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
@@ -1276,7 +1290,7 @@ Future<void> genL10n({
   // Gather setup //
 
   final String snakeName = ezClassToSnake(l10nClassName(config)!);
-  final String arbPath = platform == TargetPlatform.windows
+  final String arbPath = EzConfig.platform == TargetPlatform.windows
       ? getArbDir(config)!.replaceAll('/', '\\')
       : getArbDir(config)!;
 
@@ -1383,7 +1397,6 @@ Future<void> genVSCode({
 /// Skeleton setup to reduce testing friction
 Future<void> genIntegrationTests({
   required EAGConfig config,
-  required TargetPlatform platform,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
@@ -1541,7 +1554,7 @@ flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" 
 ''');
 
     await ezCmd(
-      platform == TargetPlatform.windows
+      EzConfig.platform == TargetPlatform.windows
           ? 'attrib +x integration_test\\run_int_tests.sh'
           : 'chmod a+x integration_test/run_int_tests.sh',
       dir: dir,
