@@ -159,8 +159,6 @@ class EzUpdaterFAB extends StatefulWidget {
 class _EzUpdaterState extends State<EzUpdaterFAB> {
   // Define the build data //
 
-  late final TargetPlatform _platform = getBasePlatform();
-
   String? latestVersion;
   String? url;
 
@@ -200,7 +198,7 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 
   /// Platform aware instructions
   String hardRefresh() {
-    switch (_platform) {
+    switch (EzConfig.platform) {
       case TargetPlatform.android:
       case TargetPlatform.iOS:
         return EzConfig.l10n.gHardRefreshMobile;
@@ -218,7 +216,7 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
     super.initState();
     checkVersion();
 
-    switch (_platform) {
+    switch (EzConfig.platform) {
       case TargetPlatform.android:
         url = widget.gPlay ?? widget.github;
       case TargetPlatform.iOS:
