@@ -41,10 +41,10 @@ const String sampleString = '55.55';
 /// 0.25
 const double selectionOpacity = 0.25;
 
-/// 0.667
+/// 0.333
 /// Shadow opacity should be "faster" than surface
 /// 1:1 looks foggy
-const double shadowMod = 0.667;
+const double shadowMod = 0.333;
 
 // Localization //
 
