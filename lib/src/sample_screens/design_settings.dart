@@ -163,6 +163,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Animation duration
         if (widget.includeAnimation) ...<Widget>[
           EzElevatedIconButton(
+            // TODO: make the icon size a fab save and make these into classes
             onPressed: () async {
               double animDuration = EzConfig.animDur.toDouble();
               final double backup = animDuration;
