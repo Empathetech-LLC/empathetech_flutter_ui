@@ -426,10 +426,6 @@ dependencies:
 dev_dependencies:
   dependency_validator: ^5.0.2
   flutter_lints: ^6.0.0
-  flutter_test:
-    sdk: flutter
-  integration_test:
-    sdk: flutter
 
 flutter:
   generate: true
@@ -515,11 +511,23 @@ void main() async {
 
   // Run the app //
   
-  runApp(const $classCaseAppName());
+  ${config.l10nConfig != null ? """final (Locale storedLocale, EFUILang storedEFUILang) = await ezStoredL10n();
+  final $l10nClass storedLang = await $l10nClass.delegate.load(storedLocale);
+
+  runApp($classCaseAppName(storedLocale, storedEFUILang, storedLang));""" : 'runApp(const $classCaseAppName());'}
 }
 
 class $classCaseAppName extends StatelessWidget {
-  const $classCaseAppName({super.key});
+  ${config.l10nConfig != null ? """final Locale storedLocale;
+  final EFUILang storedEFUILang;
+  final $l10nClass storedLang;
+  
+  const $classCaseAppName(
+    this.storedLocale,
+    this.storedEFUILang,
+    this.storedLang, {
+    super.key,
+  });""" : 'const $classCaseAppName({super.key});'}
 
   @override
   Widget build(BuildContext context) {
@@ -529,7 +537,9 @@ class $classCaseAppName extends StatelessWidget {
         ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
       },
       supportedLocales: ${l10nClass ?? 'EFUILang'}.supportedLocales,
-      appName: appName,
+      ${config.l10nConfig != null ? """locale: storedLocale,
+      el10n: storedEFUILang,
+      appCache: ${classCaseAppName}Cache(storedLocale, storedLang),""" : ''}appName: appName,
       routerConfig: GoRouter(
         initialLocation: homePath,
         errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
@@ -554,10 +564,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: colorSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                      context,
-                      state,
-                      const ColorSettingsScreen(),
-                    ),
+                            context, state, const ColorSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzCSType.quick.path,
@@ -590,10 +597,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: designSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                      context,
-                      state,
-                      const DesignSettingsScreen(),
-                    ),
+                            context, state, const DesignSettingsScreen()),
                   ),''' : ''}
                   ${config.layoutSettings ? '''
                   // Layout settings
@@ -602,10 +606,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: layoutSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                      context,
-                      state,
-                      const LayoutSettingsScreen(),
-                    ),
+                            context, state, const LayoutSettingsScreen()),
                   ),''' : ''}
                   ${config.textSettings ? '''
                   // Text settings
@@ -614,10 +615,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: textSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                      context,
-                      state,
-                      const TextSettingsScreen(),
-                    ),
+                            context, state, const TextSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzTSType.quick.path,
@@ -1083,10 +1081,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 """);
 
-    // settings_home.dart
-    final File settingsHome = File(
-      '$dir/lib/screens/settings/settings_home.dart',
-    );
+    // home.dart
+    final File settingsHome = File('$dir/lib/screens/settings/home.dart');
     await settingsHome.writeAsString("""$copyright
 
 import '../../screens/export.dart';
@@ -1425,181 +1421,5 @@ Future<void> genVSCode({
     onFailure(e.toString());
   }
   ezLog('VS Code launch config successfully generated', buffer: readout);
-  onSuccess();
-}
-
-/// Skeleton setup to reduce testing friction
-Future<void> genIntegrationTests({
-  required EAGConfig config,
-  required String dir,
-  void Function() onSuccess = doNothing,
-  required void Function(String) onFailure,
-  required ValueNotifier<String> readout,
-}) async {
-  // Gather Strings //
-
-  final String camelCaseAppName = ezSnakeToCamel(config.appName);
-  final String titleCaseAppName = ezSnakeToTitle(config.appName);
-  final String classCaseAppName = ezSnakeToClass(config.appName);
-
-  final String copyright = genCopyright(config);
-
-  // Make dir(s) //
-
-  await ezCmd(
-    'mkdir test_driver integration_test',
-    dir: dir,
-    onSuccess: doNothing,
-    onFailure: onFailure,
-    readout: readout,
-  );
-
-  // Make files //
-
-  try {
-    // Driver
-    final File driver = File('$dir/test_driver/integration_test_driver.dart');
-    await driver.writeAsString("""$copyright
-
-import 'package:integration_test/integration_test_driver.dart';
-
-Future<void> main() => integrationDriver();
-""");
-
-    // Tests
-    final File tests = File('$dir/integration_test/test.dart');
-    await tests.writeAsString("""$copyright
-
-import 'package:${config.appName}/main.dart';
-import 'package:${config.appName}/utils/export.dart';
-import 'package:${config.appName}/widgets/export.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-void main() async {
-  // Setup the test environment //
-
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
-
-
-  final SharedPreferencesAsync preferences = SharedPreferencesAsync();
-  EzConfig.init(
-    assetPaths: <String>{},
-    defaults: ${camelCaseAppName}Config,
-    localeFallback: americanEnglish,
-    l10nFallback: await EFUILang.delegate.load(americanEnglish),
-    preferences: await SharedPreferencesWithCache.create(
-      cacheOptions: SharedPreferencesWithCacheOptions(
-        allowList: allEZConfigKeys.keys.toSet(),
-      ),
-    ),
-  );
-  
-  // Run the tests //
-
-  group(
-    'Generated tests',
-    () {
-      testWidgets('Test randomizer', (WidgetTester tester) async {
-        // Load the app //
-
-        ezLog('Loading $titleCaseAppName');
-        await tester.pumpWidget(const $classCaseAppName());
-        await tester.pumpAndSettle();
-
-        // Randomize the settings //
-
-        // Open the settings menu
-        await ezTouch(tester, find.byIcon(Icons.more_vert));
-
-        // Go to the settings page
-        await ezTouchText(tester, EzConfig.l10n.ssPageTitle);
-
-        // Randomize the settings
-        await ezTouchText(tester, EzConfig.l10n.ssRandom);
-        await ezTouchText(tester, EzConfig.l10n.gYes);
-
-        // Return to home screen
-        await ezTapBack(tester, EzConfig.l10n.gBack);
-      });
-
-      testWidgets('Test CountFAB', (WidgetTester tester) async {
-        // Re-load the app //
-
-        ezLog('Loading $titleCaseAppName');
-        await tester.pumpWidget(const $classCaseAppName());
-        await tester.pumpAndSettle();
-
-        // ♫ It's as Ez as... ♫ //
-
-        await ezTouch(tester, find.byType(CountFAB)); // 1
-        await ezTouch(tester, find.byType(CountFAB)); // 2
-        await ezTouch(tester, find.byType(CountFAB)); // 3
-      });
-    },
-  );
-}
-""");
-
-    String relativeDir() {
-      final String? home = Platform.environment['HOME'];
-
-      if (home == null) return dir;
-
-      final List<String> split = dir.split(home);
-
-      return (split.length > 1 ? '$home${split.last}' : split.first).replaceAll(
-        ' ',
-        '\\ ',
-      );
-    }
-
-    final File runner = File('$dir/integration_test/run_int_tests.sh');
-    await runner.writeAsString('''#!/usr/bin/env bash
-
-set -e
-
-## Setup ##
-
-project_dir="${relativeDir()}"
-device=""
-
-# Gather flag variables
-while [[ "\$1" != "" ]]; do
-  case \$1 in
-    -d ) shift
-               device="-d \$1"
-               ;;
-    -p ) shift
-              project_dir="\$1"
-              ;;
-    * ) echo "Invalid input. Aborting."; exit 1
-  esac
-  shift
-done
-
-## Tests ##
-
-flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" --target="\$project_dir/integration_test/test.dart" \$device
-''');
-
-    await ezCmd(
-      EzConfig.platform == TargetPlatform.windows
-          ? 'attrib +x integration_test\\run_int_tests.sh'
-          : 'chmod a+x integration_test/run_int_tests.sh',
-      dir: dir,
-      onSuccess: doNothing,
-      onFailure: onFailure,
-      readout: readout,
-    );
-  } catch (e) {
-    onFailure(e.toString());
-  }
-  ezLog('Integration test code successfully generated', buffer: readout);
   onSuccess();
 }
