@@ -173,6 +173,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// EFUI localizations
   static EFUILang get l10n => provider.l10n;
 
+  /// Whether the active [Locale] is a left-to-right language
+  static bool get isLTR => provider.isLTR;
+
   /// Active [ThemeMode]
   static ThemeMode get themeMode => provider.themeMode;
 
