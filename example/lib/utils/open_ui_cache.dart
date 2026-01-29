@@ -14,7 +14,7 @@ class OpenUICache extends EzAppCache {
   Locale _locale;
   Lang _l10n;
 
-  OpenUICache({required Locale locale, required Lang l10n})
+  OpenUICache(Locale locale, Lang l10n)
       : _locale = locale,
         _l10n = l10n;
 
