@@ -165,19 +165,27 @@ Page<dynamic> ezPageBuilder(
       child: child,
     );
 
-/// Gets any stored [Locale] from [EzConfig]
-Locale ezStoredLocale() {
+/// Returns the app's current [Locale] and it's corresponding [EFUILang]
+Future<(Locale, EFUILang)> ezStoredL10n() async {
   final List<String>? localeData = EzConfig.get(appLocaleKey);
   if (localeData == null || localeData.isEmpty) {
-    return EzConfig.localeFallback;
+    return (EzConfig.localeFallback, EzConfig.l10nFallback);
   }
 
   final String languageCode = localeData[0];
   final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
-
-  return (countryCode != null)
+  final Locale locale = (countryCode != null)
       ? Locale(languageCode, countryCode)
       : Locale(languageCode);
+
+  late final EFUILang el10n;
+  try {
+    el10n = await EFUILang.delegate.load(locale);
+  } catch (_) {
+    el10n = EzConfig.l10nFallback;
+  }
+
+  return (locale, el10n);
 }
 
 /// Calculate a recommended [AppBar.toolbarHeight]
@@ -368,15 +376,4 @@ Duration ezReadingTime(String passage) {
 Future<bool> isGPlayInstall() async {
   final PackageInfo info = await PackageInfo.fromPlatform();
   return info.installerStore == 'com.android.vending';
-}
-
-/// Returns the [Directionality] of the current [BuildContext]
-/// Falls back to [rtlLanguageCodes] on context errors
-bool ltrCheck(BuildContext context) {
-  try {
-    return Directionality.of(context) == TextDirection.ltr;
-  } catch (_) {
-    final Locale locale = WidgetsBinding.instance.platformDispatcher.locale;
-    return !rtlLanguageCodes.contains(locale.languageCode);
-  }
 }
