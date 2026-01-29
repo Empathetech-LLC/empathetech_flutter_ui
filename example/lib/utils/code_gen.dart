@@ -1002,7 +1002,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             EzConfig.separator,
             Text(
               EzConfig.l10n.g404,
-              style: ezSubTitleStyle(textTheme),
+              style: ezSubTitleStyle(),
               textAlign: TextAlign.center,
             ),
             EzConfig.separator,
@@ -1075,7 +1075,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       title: appName,
-      fabs: <Widget>[EzConfig.spacer, CountFAB(() => setState(() => count += 1))],
+      fabs: <Widget>[
+        EzConfig.spacer,
+        CountFAB(() => setState(() => count += 1)),
+      ],
     );
   }
 }
@@ -1102,6 +1105,8 @@ class SettingsHomeScreen extends StatelessWidget {
           designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
+          appName: appName,
+          androidPackage: androidPackage,
         )),
         title: EzConfig.l10n.ssPageTitle,
         showSettings: false,
@@ -1112,8 +1117,6 @@ class SettingsHomeScreen extends StatelessWidget {
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.spacer,
-          const EzBackFAB(showHome: true),
         ],
       );
 }
@@ -1139,7 +1142,11 @@ class ColorSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        EzScreen(EzColorSettings(target: target)),
+        EzScreen(EzColorSettings(
+          target: target,
+          appName: appName,
+          androidPackage: androidPackage,
+        )),
         title: EzConfig.l10n.csPageTitle,
         showSettings: false,
         fabs: <Widget>[
@@ -1149,8 +1156,6 @@ class ColorSettingsScreen extends StatelessWidget {
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.spacer,
-          const EzBackFAB(),
         ],
       );
 }
@@ -1175,7 +1180,10 @@ class DesignSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        const EzScreen(EzDesignSettings()),
+        const EzScreen(EzDesignSettings(
+          appName: appName,
+          androidPackage: androidPackage,
+        )),
         title: EzConfig.l10n.dsPageTitle,
         showSettings: false,
         fabs: <Widget>[
@@ -1185,8 +1193,6 @@ class DesignSettingsScreen extends StatelessWidget {
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.spacer,
-          const EzBackFAB(),
         ],
       );
 }
@@ -1211,7 +1217,10 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        const EzScreen(EzLayoutSettings()),
+        const EzScreen(EzLayoutSettings(
+          appName: appName,
+          androidPackage: androidPackage,
+        )),
         title: EzConfig.l10n.lsPageTitle,
         showSettings: false,
         fabs: <Widget>[
@@ -1221,8 +1230,6 @@ class LayoutSettingsScreen extends StatelessWidget {
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.spacer,
-          const EzBackFAB(),
         ],
       );
 }
@@ -1249,7 +1256,11 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        EzScreen(EzTextSettings(target: target)),
+        EzScreen(EzTextSettings(
+          target: target,
+          appName: appName,
+          androidPackage: androidPackage,
+        )),
         title: EzConfig.l10n.tsPageTitle,
         showSettings: false,
         fabs: <Widget>[
@@ -1259,8 +1270,6 @@ class TextSettingsScreen extends StatelessWidget {
             appName: appName,
             androidPackage: androidPackage,
           ),
-          EzConfig.spacer,
-          const EzBackFAB(),
         ],
       );
 }
