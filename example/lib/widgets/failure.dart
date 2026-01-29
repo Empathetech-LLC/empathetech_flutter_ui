@@ -83,7 +83,7 @@ class DeleteOption extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           EzText(
-            Lang.of(context)!.rsWouldYou,
+            l10n.rsWouldYou,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -97,7 +97,7 @@ class DeleteOption extends StatelessWidget {
               onSuccess: () async {
                 await ezSnackBar(
                   context: context,
-                  message: Lang.of(context)!.rsNextTime,
+                  message: l10n.rsNextTime,
                 ).closed;
 
                 if (context.mounted) Navigator.of(context).maybePop();
@@ -105,7 +105,7 @@ class DeleteOption extends StatelessWidget {
               onFailure: (String message) async {
                 await ezSnackBar(
                   context: context,
-                  message: Lang.of(context)!.rsAnotherOne,
+                  message: l10n.rsAnotherOne,
                 ).closed;
 
                 if (context.mounted) Navigator.of(context).maybePop();
@@ -113,13 +113,13 @@ class DeleteOption extends StatelessWidget {
               readout: readout,
             ),
             icon: const Icon(Icons.delete),
-            label: Lang.of(context)!.rsWipe,
+            label: l10n.rsWipe,
           ),
           EzConfig.spacer,
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.arrow_back),
-            label: Lang.of(context)!.rsLeave,
+            label: l10n.rsLeave,
           ),
         ],
       );
@@ -136,23 +136,19 @@ class LinkOption extends StatelessWidget {
   const LinkOption(this.style, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final Lang l10n = Lang.of(context)!;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        EzText(l10n.rsWouldYou, style: style, textAlign: TextAlign.center),
-        EzConfig.spacer,
-        EzElevatedIconLink(
-          url: Uri.parse(installFlutter),
-          tooltip: installFlutter,
-          hint: l10n.rsInstallHint,
-          icon: const Icon(Icons.computer),
-          label: l10n.rsInstall,
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          EzText(l10n.rsWouldYou, style: style, textAlign: TextAlign.center),
+          EzConfig.spacer,
+          EzElevatedIconLink(
+            url: Uri.parse(installFlutter),
+            tooltip: installFlutter,
+            hint: l10n.rsInstallHint,
+            icon: const Icon(Icons.computer),
+            label: l10n.rsInstall,
+          ),
+        ],
+      );
 }
