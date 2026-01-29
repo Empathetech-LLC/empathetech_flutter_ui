@@ -422,6 +422,7 @@ dependencies:
   # Community
   empathetech_flutter_ui: ^11.0.0
   flutter_localized_locales: ^2.0.5
+  provider: ^6.1.5
 
 dev_dependencies:
   dependency_validator: ^5.0.2
