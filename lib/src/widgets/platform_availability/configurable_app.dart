@@ -15,6 +15,14 @@ class EzConfigurableApp extends StatelessWidget {
   /// Languages/locales the app supports
   final Iterable<Locale> supportedLocales;
 
+  /// Initial locale
+  /// Recommended to use [ezStoredL10n]
+  final Locale locale;
+
+  /// Initial EFUILang
+  /// Recommended to use [ezStoredL10n]
+  final EFUILang el10n;
+
   /// Sets [EzConfigProvider.appCache]
   final EzAppCache? appCache;
 
@@ -29,6 +37,8 @@ class EzConfigurableApp extends StatelessWidget {
     super.key,
     this.localizationsDelegates,
     required this.supportedLocales,
+    required this.locale,
+    required this.el10n,
     this.appCache,
     required this.appName,
     this.routerConfig,
@@ -38,13 +48,12 @@ class EzConfigurableApp extends StatelessWidget {
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<EzConfigProvider>(
         create: (_) => EzConfigProvider(
-          isLTR: ltrCheck(context),
-          localeFallback: EzConfig.localeFallback,
-          l10nFallback: EzConfig.l10nFallback,
+          locale: locale,
+          el10n: el10n,
           isDark: isDarkTheme(context),
           appCache: appCache,
         ),
-        child: _ThemeDrawer(
+        child: _AppDrawer(
           localizationsDelegates: localizationsDelegates,
           supportedLocales: supportedLocales,
           appName: appName,
@@ -53,13 +62,13 @@ class EzConfigurableApp extends StatelessWidget {
       );
 }
 
-class _ThemeDrawer extends StatefulWidget {
+class _AppDrawer extends StatefulWidget {
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
   final Iterable<Locale> supportedLocales;
   final String appName;
   final RouterConfig<Object>? routerConfig;
 
-  const _ThemeDrawer({
+  const _AppDrawer({
     required this.localizationsDelegates,
     required this.supportedLocales,
     required this.appName,
@@ -67,11 +76,10 @@ class _ThemeDrawer extends StatefulWidget {
   });
 
   @override
-  State<_ThemeDrawer> createState() => _ThemeDrawerState();
+  State<_AppDrawer> createState() => _AppDrawerState();
 }
 
-class _ThemeDrawerState extends State<_ThemeDrawer>
-    with WidgetsBindingObserver {
+class _AppDrawerState extends State<_AppDrawer> with WidgetsBindingObserver {
   // Init //
 
   @override
@@ -99,7 +107,7 @@ class _ThemeDrawerState extends State<_ThemeDrawer>
       debugShowCheckedModeBanner: false,
       localizationsDelegates: widget.localizationsDelegates,
       supportedLocales: widget.supportedLocales,
-      locale: ezStoredLocale(),
+      locale: EzConfig.locale,
       title: widget.appName,
       themeMode: config.themeMode,
       darkTheme: config.darkTheme,
