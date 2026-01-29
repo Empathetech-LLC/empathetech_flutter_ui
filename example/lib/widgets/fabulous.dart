@@ -18,8 +18,6 @@ class ResetFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Lang l10n = Lang.of(context)!;
-
     return Tooltip(
       message: EzConfig.l10n.gReset,
       excludeFromSemantics: true,

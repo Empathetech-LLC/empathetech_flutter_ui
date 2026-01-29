@@ -83,8 +83,8 @@ export 'src/widgets/helpers/warning.dart';
 
 // Platform availability
 export 'src/widgets/platform_availability/alert_dialog.dart';
-export 'src/widgets/platform_availability/app_provider.dart';
 export 'src/widgets/platform_availability/back_action.dart';
+export 'src/widgets/platform_availability/configurable_app.dart';
 
 // Responsive design
 export 'src/widgets/responsive_design/adaptive_widgets.dart';

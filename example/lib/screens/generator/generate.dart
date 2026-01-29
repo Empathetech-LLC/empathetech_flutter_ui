@@ -76,7 +76,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// The only way to begin
   /// Is by beginning
   Future<void> genStuff() async {
-    final Lang l10n = Lang.of(context)!;
     final TextStyle? subTitle = ezSubTitleStyle();
 
     await ezCmd(
@@ -421,8 +420,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   @override
   Widget build(_) {
-    final Lang l10n = Lang.of(context)!;
-
     return OpenUIScaffold(
       EzScreen(EzScrollView(children: <Widget>[
         header(l10n),

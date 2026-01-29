@@ -74,27 +74,24 @@ class RunOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final bool isMac = !kIsWeb && EzConfig.platform == TargetPlatform.macOS;
-
-    return isMac
-        ? const SizedBox.shrink()
-        : Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              EzText(
-                Lang.of(context)!.rsWouldYou,
-                style: style,
-                textAlign: TextAlign.center,
-              ),
-              EzConfig.spacer,
-              EzElevatedIconButton(
-                onPressed: emulate,
-                icon: const Icon(Icons.play_arrow),
-                label: Lang.of(context)!.rsRun,
-              ),
-            ],
-          );
-  }
+  Widget build(BuildContext context) =>
+      (!kIsWeb && EzConfig.platform == TargetPlatform.macOS)
+          ? const SizedBox.shrink()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                EzText(
+                  l10n.rsWouldYou,
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+                EzConfig.spacer,
+                EzElevatedIconButton(
+                  onPressed: emulate,
+                  icon: const Icon(Icons.play_arrow),
+                  label: l10n.rsRun,
+                ),
+              ],
+            );
 }

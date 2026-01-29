@@ -58,7 +58,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
           });
   }
 
-  Widget header(Lang l10n) {
+  Widget header() {
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -110,13 +110,9 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    final Lang l10n = Lang.of(context)!;
-
-    return OpenUIScaffold(
-      EzScreen(header(l10n), alignment: Alignment.center),
-      title: l10n.asPageTitle,
-      running: genState == GeneratorState.running,
-    );
-  }
+  Widget build(BuildContext context) => OpenUIScaffold(
+        EzScreen(header(), alignment: Alignment.center),
+        title: l10n.asPageTitle,
+        running: genState == GeneratorState.running,
+      );
 }
