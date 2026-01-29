@@ -31,24 +31,23 @@ class EzConfigProvider extends ChangeNotifier {
   late ThemeData _lightTheme;
 
   EzConfigProvider({
-    required Locale localeFallback,
-    required EFUILang l10nFallback,
-    required bool isLTR,
+    required Locale locale,
+    required EFUILang el10n,
     required bool isDark,
     EzAppCache? appCache,
   })  : _platform = getBasePlatform(),
         _seed = Random().nextInt(rMax),
-        _locale = localeFallback,
-        _l10n = l10nFallback,
-        _ltr = isLTR,
+        _locale = locale,
+        _l10n = el10n,
+        _ltr = !rtlLanguageCodes.contains(locale.languageCode),
         _isDark = isDark,
         _appCache = appCache {
-    _buildMode();
-    _buildTheme();
+    _buildThemeMode();
+    _buildThemeData();
   }
 
   /// Gather and set [_themeMode] from storage
-  void _buildMode() {
+  void _buildThemeMode() {
     final bool? savedDark = EzConfig.get(isDarkThemeKey);
 
     _themeMode = (savedDark == null)
@@ -59,7 +58,7 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   /// Builds fresh themes and config caches
-  void _buildTheme() {
+  void _buildThemeData() {
     _darkTheme = ezThemeData(Brightness.dark, _ltr);
     _lightTheme = ezThemeData(Brightness.light, _ltr);
 
@@ -163,8 +162,8 @@ class EzConfigProvider extends ChangeNotifier {
   /// HIGHLY recommended to wrap [Scaffold] Widgets in a [Consumer] for [EzConfigProvider]
   /// Simply set the [Scaffold.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed] and all [EzConfig] updates will be live!
   Future<void> rebuild({void Function()? onComplete}) async {
-    _buildMode();
-    _buildTheme();
+    _buildThemeMode();
+    _buildThemeData();
     await redraw(onComplete: onComplete);
   }
 
@@ -186,22 +185,16 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Set the apps [ThemeMode] from storage and [redraw] with [onComplete]
   Future<void> buildThemeMode({void Function()? onComplete}) async {
-    _buildMode();
+    _buildThemeMode();
     _currTheme = _isDark ? _darkTheme : _lightTheme;
     await redraw(onComplete: onComplete);
   }
 
   /// Set the apps [Locale] from storage and load corresponding localizations
   Future<void> buildLocale({void Function()? onComplete}) async {
-    final Locale locale = ezStoredLocale();
-    _locale = locale;
-
-    try {
-      final EFUILang localization = await EFUILang.delegate.load(locale);
-      _l10n = localization;
-    } catch (_) {
-      _l10n = EzConfig.l10nFallback;
-    }
+    final (Locale, EFUILang) result = await ezStoredL10n();
+    _locale = result.$1;
+    _l10n = result.$2;
 
     await redraw(onComplete: onComplete);
   }
