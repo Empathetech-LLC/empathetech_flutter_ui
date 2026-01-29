@@ -48,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
       : '';
 
   final TextEditingController nameController = TextEditingController();
-  late String namePreview = Lang.of(context)!.csNamePreview;
+  late String namePreview = l10n.csNamePreview;
   bool validName = false;
 
   final TextEditingController pubController = TextEditingController();
-  late String pubPreview = Lang.of(context)!.csPubPreview;
+  late String pubPreview = l10n.csPubPreview;
 
   final TextEditingController domainController = TextEditingController();
   bool exampleDomain = false;
@@ -138,12 +138,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final Lang l10n = Lang.of(context)!;
-    final TextStyle? subTitle = ezSubTitleStyle();
-
     // Return the build //
+
+    final TextStyle? subTitle = ezSubTitleStyle();
 
     return OpenUIScaffold(
       EzScreen(
@@ -167,7 +164,6 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: nameController,
               validator: (String? entry) => validateAppName(
                 value: entry,
-                context: context,
                 onSuccess: () => setState(() {
                   final String previous = namePreview;
                   validName = true;
@@ -246,8 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: domainController,
                       textAlign: TextAlign.start,
                       maxLines: 1,
-                      validator: (String? text) =>
-                          validateDomain(text, context),
+                      validator: (String? text) => validateDomain(text),
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       decoration:
                           const InputDecoration(hintText: 'com.example'),
@@ -450,7 +445,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         tooltip: installFlutter,
                         hint: l10n.rsInstallHint,
                         icon: const Icon(Icons.computer),
-                        label: Lang.of(context)!.rsInstall,
+                        label: l10n.rsInstall,
                       ),
                     ],
                   ),
@@ -647,8 +642,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (validName &&
                         pubController.text.isNotEmpty &&
                         (exampleDomain ||
-                            validateDomain(domainController.text, context) ==
-                                null) &&
+                            validateDomain(domainController.text) == null) &&
                         descriptionController.text.isNotEmpty &&
                         (!isDesktop ||
                             ((!isMac ||
@@ -725,8 +719,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (validName &&
                           pubController.text.isNotEmpty &&
                           (exampleDomain ||
-                              validateDomain(domainController.text, context) ==
-                                  null) &&
+                              validateDomain(domainController.text) == null) &&
                           descriptionController.text.isNotEmpty &&
                           (!isMac ||
                               await checkPath(l10n, flutterPathControl)) &&
@@ -1133,7 +1126,7 @@ class _AdvancedSettingsField extends StatelessWidget {
         ? EzTextIconButton(
             onPressed: onRestore,
             icon: const Icon(Icons.undo),
-            label: Lang.of(context)!.csRestore(title),
+            label: l10n.csRestore(title),
           )
         : Column(
             mainAxisSize: MainAxisSize.min,
@@ -1244,7 +1237,7 @@ class _LicensePicker extends StatelessWidget {
         chooseALicense,
         textAlign: TextAlign.center,
         url: Uri.parse(chooseALicense),
-        hint: Lang.of(context)!.csLicenseDocs,
+        hint: l10n.csLicenseDocs,
       ),
     );
 
