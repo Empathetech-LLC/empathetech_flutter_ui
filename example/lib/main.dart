@@ -36,11 +36,23 @@ void main() async {
 
   // Run the app //
 
-  runApp(const OpenUI());
+  final (Locale storedLocale, EFUILang storedEFUILang) = await ezStoredL10n();
+  final Lang storedLang = await Lang.delegate.load(storedLocale);
+
+  runApp(OpenUI(storedLocale, storedEFUILang, storedLang));
 }
 
 class OpenUI extends StatelessWidget {
-  const OpenUI({super.key});
+  final Locale storedLocale;
+  final EFUILang storedEFUILang;
+  final Lang storedLang;
+
+  const OpenUI(
+    this.storedLocale,
+    this.storedEFUILang,
+    this.storedLang, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +63,9 @@ class OpenUI extends StatelessWidget {
         ...Lang.localizationsDelegates,
       },
       supportedLocales: Lang.supportedLocales,
+      locale: storedLocale,
+      el10n: storedEFUILang,
+      appCache: OpenUICache(storedLocale, storedLang),
       appName: appName,
       routerConfig: GoRouter(
         initialLocation: homePath,
