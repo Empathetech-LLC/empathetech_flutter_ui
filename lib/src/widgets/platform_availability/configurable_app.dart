@@ -83,7 +83,7 @@ class _ThemeDrawerState extends State<_ThemeDrawer>
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    config.toggleTheme();
+    config.toggleTheme(); // Send platform brightness change to EzConfigProvider
   }
 
   // Return the build //
@@ -92,7 +92,9 @@ class _ThemeDrawerState extends State<_ThemeDrawer>
 
   @override
   Widget build(BuildContext context) {
+    // Sets once, then auto success
     EzConfig.initProvider(config);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: widget.localizationsDelegates,
