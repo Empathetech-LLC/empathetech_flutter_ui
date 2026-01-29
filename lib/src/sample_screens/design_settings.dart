@@ -579,7 +579,7 @@ class _AnimationPreviewState extends State<_AnimationPreview>
     return LayoutBuilder(
       builder: (_, BoxConstraints constraints) {
         final double width = constraints.maxWidth;
-        final double direction = ltrCheck(context) ? 1.0 : -1.0;
+        final double direction = EzConfig.isLTR ? 1.0 : -1.0;
 
         return AnimatedBuilder(
           animation: _animation,
