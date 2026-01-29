@@ -208,13 +208,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
       );
     }
 
-    await genIntegrationTests(
-      config: widget.config,
-      dir: projDir,
-      onFailure: onFailure,
-      readout: readout,
-    );
-
     await runStuff(l10n);
   }
 
