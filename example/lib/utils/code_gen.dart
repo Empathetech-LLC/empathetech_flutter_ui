@@ -459,6 +459,8 @@ Future<void> genLib({
 
   final String copyright = genCopyright(config);
 
+  final String? l10nClass = l10nClassName(config);
+
   //* Make it so *//
 
   // Directories //
@@ -526,7 +528,7 @@ class $classCaseAppName extends StatelessWidget {
         const LocaleNamesLocalizationsDelegate(),
         ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
       },
-      supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
+      supportedLocales: ${l10nClass ?? 'EFUILang'}.supportedLocales,
       appName: appName,
       routerConfig: GoRouter(
         initialLocation: homePath,
@@ -702,13 +704,53 @@ const String androidPackage = '${config.domainName}.${config.appName}';
 const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
 """);
 
+    // APP_cache.dart
+    if (config.l10nConfig != null) {
+      final File appCache = File('$dir/lib/utils/${config.appName}_cache.dart');
+      await appCache.writeAsString("""$copyright
+
+import './export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class ${classCaseAppName}Cache extends EzAppCache {
+  // Construct //
+
+  Locale _locale;
+  Lang _l10n;
+
+  ${classCaseAppName}Cache({required Locale locale, required $l10nClass l10n})
+      : _locale = locale,
+        _l10n = l10n;
+
+  // Get //
+
+  Lang get l10n => _l10n;
+
+  // Set //
+
+  @override
+  Future<void> redraw() async {
+    if (_locale != EzConfig.locale) {
+      _l10n = await $l10nClass.delegate.load(EzConfig.locale);
+      _locale = EzConfig.locale;
+    }
+  }
+}
+
+Lang get l10n => (EzConfig.appCache! as ${classCaseAppName}Cache).l10n;
+""");
+    }
+
     // export.dart
     final File utilsExport = File('$dir/lib/utils/export.dart');
     await utilsExport.writeAsString("""$copyright
 
 export 'consts.dart';
+${config.l10nConfig != null ? """export '${config.appName}_cache.dart';
 
-${config.l10nConfig != null ? "export '../l10n/${ezClassToSnake(l10nClassName(config)!)}.dart'" : ''};
+export '../l10n/${ezClassToSnake(l10nClass!)}.dart'""" : ''};
 """);
 
     // widgets //
@@ -733,6 +775,17 @@ class CountFAB extends StatelessWidget {
         child: EzIcon(Icons.add),
       );
 }
+
+// TODO: Complete link placeholders (_PH)
+const Widget updater = EzUpdaterFAB(
+  appVersion: '1.0.0', // TODO (recommended): include a check for this in your release scripts
+  versionSource:
+      'https://raw.githubusercontent.com/USER_PH/REPO_PH/refs/heads/main/APP_VERSION',
+  gPlay:
+      'https://play.google.com/store/apps/details?id=${config.domainName}.${config.appName}',
+  appStore: 'https://apps.apple.com/us/app/${config.appName.replaceAll('_', '-')}/APP_ID_PH',
+  github: 'https://github.com/USER_PH/REPO_PH/releases',
+);
 """);
 
     // menu_buttons.dart
@@ -795,10 +848,11 @@ class EFUICredits extends StatelessWidget {
     );
     await scaffoldWidget.writeAsString("""$copyright
 
-import './export.dart';
 import '../utils/export.dart';
+import './export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ${classCaseAppName}Scaffold extends StatelessWidget {
@@ -816,11 +870,10 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
-  const ${classCaseAppName}Scaffold({
+  const ${classCaseAppName}Scaffold(this.body, {
     super.key,
     this.title = appName,
     this.showSettings = true,
-    required this.body,
     this.fabs,
   });
 
@@ -845,57 +898,50 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
       ],
     );
 
-    // TODO: Complete link placeholders (_PH)
-    const Widget updater = EzUpdaterFAB(
-      appVersion: '1.0.0', // TODO (recommended): include a check for this in your release scripts
-      versionSource:
-          'https://raw.githubusercontent.com/USER_PH/REPO_PH/refs/heads/main/APP_VERSION',
-      gPlay:
-          'https://play.google.com/store/apps/details?id=${config.domainName}.${config.appName}',
-      appStore: 'https://apps.apple.com/us/app/${config.appName.replaceAll('_', '-')}/APP_ID_PH',
-      github: 'https://github.com/USER_PH/REPO_PH/releases',
-    );
-
     // Return the build //
 
     return EzAdaptiveParent(
-      small: SelectionArea(
-        child: Scaffold(
-          // AppBar
-          appBar: PreferredSize(
-            preferredSize: Size(double.infinity, toolbarHeight),
-            child: AppBar(
-              excludeHeaderSemantics: true,
-              toolbarHeight: toolbarHeight,
+      small: Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider provider, __) => SelectionArea(
+          child: Scaffold(
+            key: ValueKey<int>(provider.seed),
+            
+            // AppBar
+            appBar: PreferredSize(
+              preferredSize: Size(double.infinity, toolbarHeight),
+              child: AppBar(
+                excludeHeaderSemantics: true,
+                toolbarHeight: toolbarHeight,
 
-              // Leading (aka left)
-              leading: EzConfig.isLefty ? options : const EzBackAction(),
-              leadingWidth: toolbarHeight,
+                // Leading (aka left)
+                leading: EzConfig.isLefty ? options : const EzBackAction(),
+                leadingWidth: toolbarHeight,
 
-              // Title
-              title: Text(title, textAlign: TextAlign.center),
-              centerTitle: true,
-              titleSpacing: 0,
+                // Title
+                title: Text(title, textAlign: TextAlign.center),
+                centerTitle: true,
+                titleSpacing: 0,
 
-              // Actions (aka trailing aka right)
-              actions: <Widget>[EzConfig.isLefty ? const EzBackAction() : options],
+                // Actions (aka trailing aka right)
+                actions: <Widget>[EzConfig.isLefty ? const EzBackAction() : options],
+              ),
             ),
+
+            // Body
+            body: body,
+
+            // FABs
+            floatingActionButton: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[updater, if (fabs != null) ...fabs!],
+            ),
+            floatingActionButtonLocation: EzConfig.isLefty
+                ? FloatingActionButtonLocation.startFloat
+                : FloatingActionButtonLocation.endFloat,
+
+            // Prevents the keyboard from pushing the body up
+            resizeToAvoidBottomInset: false,
           ),
-
-          // Body
-          body: body,
-
-          // FABs
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[updater, if (fabs != null) ...fabs!],
-          ),
-          floatingActionButtonLocation: EzConfig.isLefty
-              ? FloatingActionButtonLocation.startFloat
-              : FloatingActionButtonLocation.endFloat,
-
-          // Prevents the keyboard from pushing the body up
-          resizeToAvoidBottomInset: false,
         ),
       ),
     );
@@ -937,48 +983,42 @@ class _ErrorScreenState extends State<ErrorScreen> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, '404 \${EzConfig.l10n.gError}');
+  void initState() {
+    super.initState();
+    ezWindowNamer(ez404());
   }
 
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return ${classCaseAppName}Scaffold(
-      body: EzScreen(
-        Center(
-          child: EzScrollView(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                EzConfig.l10n.g404Wonder,
-                style: textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-              ),
-              EzConfig.separator,
-              Text(
-                EzConfig.l10n.g404,
-                style: ezSubTitleStyle(textTheme),
-                textAlign: TextAlign.center,
-              ),
-              EzConfig.separator,
-              Text(
-                EzConfig.l10n.g404Note,
-                style: textTheme.labelLarge,
-                textAlign: TextAlign.center,
-              ),
-              EzConfig.separator,
-            ],
-          ),
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(EzScreen(
+      Center(
+        child: EzScrollView(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              EzConfig.l10n.g404Wonder,
+              style: EzConfig.styles.headlineLarge,
+              textAlign: TextAlign.center,
+            ),
+            EzConfig.separator,
+            Text(
+              EzConfig.l10n.g404,
+              style: ezSubTitleStyle(textTheme),
+              textAlign: TextAlign.center,
+            ),
+            EzConfig.separator,
+            Text(
+              EzConfig.l10n.g404Note,
+              style: EzConfig.styles.labelLarge,
+              textAlign: TextAlign.center,
+            ),
+            EzConfig.separator,
+          ],
         ),
-        useImageDecoration: false,
       ),
-    );
-  }
+      useImageDecoration: false,
+    ));
 }
 """);
 
@@ -1007,42 +1047,36 @@ class _HomeScreenState extends State<HomeScreen> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, appName);
+  void initState() {
+    super.initState();
+    ezWindowNamer(appName);
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    ${config.l10nConfig != null ? 'final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
-
-    // Return the build //
-
     return ${classCaseAppName}Scaffold(
-      title: appName,
-      body: EzScreen(
+      EzScreen(
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                ${config.l10nConfig != null ? 'EzConfig.l10n.hsCounterLabel' : 'You have pushed the button this many times:'},
-                style: subTitle,
+                ${config.l10nConfig != null ? 'l10n.hsCounterLabel' : 'You have pushed the button this many times:'},
+                style: ezSubTitleStyle(),
                 textAlign: TextAlign.center,
               ),
               Text(
                 count.toString(),
-                style: textTheme.headlineLarge,
+                style: EzConfig.styles.headlineLarge,
                 textAlign: TextAlign.center,
               ),
             ],
           ),
         ),
       ),
+      title: appName,
       fabs: <Widget>[EzConfig.spacer, CountFAB(() => setState(() => count += 1))],
     );
   }
@@ -1067,14 +1101,14 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EzConfig.l10n.ssPageTitle,
-        showSettings: false,
-        body: const EzScreen(EzSettingsHome(
+        const EzScreen(EzSettingsHome(
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
           designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
         )),
+        title: EzConfig.l10n.ssPageTitle,
+        showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(
@@ -1109,9 +1143,9 @@ class ColorSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        EzScreen(EzColorSettings(target: target)),
         title: EzConfig.l10n.csPageTitle,
         showSettings: false,
-        body: EzScreen(EzColorSettings(target: target)),
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(
@@ -1145,9 +1179,9 @@ class DesignSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        const EzScreen(EzDesignSettings()),
         title: EzConfig.l10n.dsPageTitle,
         showSettings: false,
-        body: const EzScreen(EzDesignSettings()),
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(
@@ -1181,9 +1215,9 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        const EzScreen(EzLayoutSettings()),
         title: EzConfig.l10n.lsPageTitle,
         showSettings: false,
-        body: const EzScreen(EzLayoutSettings()),
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(
@@ -1219,9 +1253,9 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        EzScreen(EzTextSettings(target: target)),
         title: EzConfig.l10n.tsPageTitle,
         showSettings: false,
-        body: EzScreen(EzTextSettings(target: target)),
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(
@@ -1461,7 +1495,8 @@ void main() async {
     l10nFallback: await EFUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
-          allowList: allEZConfigKeys.keys.toSet()),
+        allowList: allEZConfigKeys.keys.toSet(),
+      ),
     ),
   );
   

@@ -15,6 +15,9 @@ class EzConfigurableApp extends StatelessWidget {
   /// Languages/locales the app supports
   final Iterable<Locale> supportedLocales;
 
+  /// Sets [EzConfigProvider.appCache]
+  final EzAppCache? appCache;
+
   /// App name (window title, etc.)
   final String appName;
 
@@ -26,6 +29,7 @@ class EzConfigurableApp extends StatelessWidget {
     super.key,
     this.localizationsDelegates,
     required this.supportedLocales,
+    this.appCache,
     required this.appName,
     this.routerConfig,
   });
@@ -38,6 +42,7 @@ class EzConfigurableApp extends StatelessWidget {
           localeFallback: EzConfig.localeFallback,
           l10nFallback: EzConfig.l10nFallback,
           isDark: isDarkTheme(context),
+          appCache: appCache,
         ),
         child: _ThemeDrawer(
           localizationsDelegates: localizationsDelegates,

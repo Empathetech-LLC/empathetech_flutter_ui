@@ -113,31 +113,17 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   void initState() {
     super.initState();
+    ezWindowNamer(EzConfig.l10n.dsPageTitle);
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, EzConfig.l10n.dsPageTitle);
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    super.didChangePlatformBrightness();
-    drawState();
   }
 
   @override
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     final String themeProfile = EzConfig.isDark
         ? EzConfig.l10n.gDark.toLowerCase()
         : EzConfig.l10n.gLight.toLowerCase();
-    final TextTheme textTheme = Theme.of(context).textTheme;
 
     // Return the build //
 
@@ -148,12 +134,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 EzConfig.l10n.gEditingTheme(themeProfile),
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
-                style: textTheme.labelLarge,
+                style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
                 EzConfig.l10n.gEditingTheme(themeProfile),
-                style: textTheme.labelLarge,
+                style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
         EzConfig.spacer,
@@ -187,7 +173,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       // Slider
                       Text(
                         EzConfig.l10n.dsMilliseconds,
-                        style: textTheme.bodyLarge,
+                        style: EzConfig.styles.bodyLarge,
                       ),
                       ConstrainedBox(
                         constraints:
@@ -301,13 +287,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               return StatefulBuilder(
                 builder: (_, StateSetter setModal) {
                   Color buttonBackground =
-                      colorScheme.surface.withValues(alpha: buttonOpacity);
-                  Color buttonShadow = colorScheme.shadow
+                      EzConfig.colors.surface.withValues(alpha: buttonOpacity);
+                  Color buttonShadow = EzConfig.colors.shadow
                       .withValues(alpha: buttonOpacity * shadowMod);
-                  Color buttonOutline = colorScheme.primaryContainer
+                  Color buttonOutline = EzConfig.colors.primaryContainer
                       .withValues(alpha: outlineOpacity);
 
-                  Color trackColor = colorScheme.surface
+                  Color trackColor = EzConfig.colors.surface
                       .withValues(alpha: max(crucialOT, buttonOpacity));
                   WidgetStatePropertyAll<Color> trackOutline =
                       WidgetStatePropertyAll<Color>(buttonOutline);
@@ -369,7 +355,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       // Background slider
                       Text(
                         EzConfig.l10n.dsBackground,
-                        style: textTheme.bodyLarge,
+                        style: EzConfig.styles.bodyLarge,
                       ),
                       ConstrainedBox(
                         constraints:
@@ -404,7 +390,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       EzConfig.spacer,
 
                       // Outline slider
-                      Text(EzConfig.l10n.dsOutline, style: textTheme.bodyLarge),
+                      Text(EzConfig.l10n.dsOutline,
+                          style: EzConfig.styles.bodyLarge),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
@@ -449,14 +436,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             outlineOpacity =
                                 EzConfig.getDefault(buttonOutlineOpacityKey);
 
-                            buttonBackground = colorScheme.surface
+                            buttonBackground = EzConfig.colors.surface
                                 .withValues(alpha: buttonOpacity);
-                            buttonShadow = colorScheme.shadow
+                            buttonShadow = EzConfig.colors.shadow
                                 .withValues(alpha: buttonOpacity * shadowMod);
-                            buttonOutline = colorScheme.primaryContainer
+                            buttonOutline = EzConfig.colors.primaryContainer
                                 .withValues(alpha: outlineOpacity);
 
-                            trackColor = colorScheme.surface.withValues(
+                            trackColor = EzConfig.colors.surface.withValues(
                                 alpha: max(crucialOT, buttonOpacity));
                             trackOutline =
                                 WidgetStatePropertyAll<Color>(buttonOutline);

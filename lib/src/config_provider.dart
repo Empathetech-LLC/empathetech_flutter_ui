@@ -24,7 +24,9 @@ class EzConfigProvider extends ChangeNotifier {
   late EzDesignCache _design;
   late EzLayoutCache _layout;
   late EzTextCache _text;
+  final EzAppCache? _appCache;
 
+  late ThemeData _currTheme;
   late ThemeData _darkTheme;
   late ThemeData _lightTheme;
 
@@ -33,12 +35,14 @@ class EzConfigProvider extends ChangeNotifier {
     required EFUILang l10nFallback,
     required bool isLTR,
     required bool isDark,
+    EzAppCache? appCache,
   })  : _platform = getBasePlatform(),
         _seed = Random().nextInt(rMax),
         _locale = localeFallback,
         _l10n = l10nFallback,
         _ltr = isLTR,
-        _isDark = isDark {
+        _isDark = isDark,
+        _appCache = appCache {
     _buildMode();
     _buildTheme();
   }
@@ -61,7 +65,6 @@ class EzConfigProvider extends ChangeNotifier {
 
     if (isDark) {
       _design = EzDesignCache(animDur: EzConfig.get(darkAnimationDurationKey));
-
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(darkMarginKey),
         padding: EzConfig.get(darkPaddingKey),
@@ -74,11 +77,11 @@ class EzConfigProvider extends ChangeNotifier {
         divider: const EzDivider(),
         hideScroll: EzConfig.get(darkHideScrollKey),
       );
-
       _text = EzTextCache(iconSize: EzConfig.get(darkIconSizeKey));
+
+      _currTheme = _darkTheme;
     } else {
       _design = EzDesignCache(animDur: EzConfig.get(lightAnimationDurationKey));
-
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(lightMarginKey),
         padding: EzConfig.get(lightPaddingKey),
@@ -91,8 +94,9 @@ class EzConfigProvider extends ChangeNotifier {
         divider: const EzDivider(),
         hideScroll: EzConfig.get(lightHideScrollKey),
       );
-
       _text = EzTextCache(iconSize: EzConfig.get(lightIconSizeKey));
+
+      _currTheme = _lightTheme;
     }
   }
 
@@ -128,20 +132,28 @@ class EzConfigProvider extends ChangeNotifier {
   /// Cache of frequently used text config values
   EzTextCache get text => _text;
 
-  /// Current dark theme
+  /// Cache for external values that should track [seed] changes
+  /// Most helpful for external localizations, but the possibilities are endless!
+  EzAppCache? get appCache => _appCache;
+
+  /// Current, [ThemeMode] aware, [ThemeData]
+  ThemeData get theme => _currTheme;
+
+  /// Current [ThemeData] for [ThemeMode.dark]/[Brightness.dark]
   ThemeData get darkTheme => _darkTheme;
 
-  /// Current light theme
+  /// Current [ThemeData] for [ThemeMode.light]/[Brightness.light]
   ThemeData get lightTheme => _lightTheme;
 
-  // Set //
+  // Set // TODO: check all calls to the functions here. they should be awaited now
 
   /// Randomizes the [seed] and notifies listeners
   /// Optionally calls [onComplete] after notifying
   /// HIGHLY recommended to wrap [Scaffold] Widgets in a [Consumer] for [EzConfigProvider]
   /// Simply set the [Scaffold.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed] and all [EzConfig] updates will be live!
-  void redraw({void Function()? onComplete}) {
+  Future<void> redraw({void Function()? onComplete}) async {
     _seed = Random().nextInt(rMax);
+    if (_appCache != null) await _appCache.redraw();
     notifyListeners();
     onComplete?.call();
   }
@@ -150,28 +162,33 @@ class EzConfigProvider extends ChangeNotifier {
   /// Then calls [redraw] with [onComplete]
   /// HIGHLY recommended to wrap [Scaffold] Widgets in a [Consumer] for [EzConfigProvider]
   /// Simply set the [Scaffold.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed] and all [EzConfig] updates will be live!
-  void rebuild({void Function()? onComplete}) {
+  Future<void> rebuild({void Function()? onComplete}) async {
     _buildMode();
     _buildTheme();
-    redraw(onComplete: onComplete);
+    await redraw(onComplete: onComplete);
   }
 
   /// Set the text direction for the app and [rebuild] with [onComplete]
-  void setTextDirection(bool isLTR, {void Function()? onComplete}) {
+  Future<void> setTextDirection(
+    bool isLTR, {
+    void Function()? onComplete,
+  }) async {
     _ltr = isLTR;
-    rebuild(onComplete: onComplete);
+    await rebuild(onComplete: onComplete);
   }
 
   /// Toggle between dark/light themes and [redraw] with [onComplete]
-  void toggleTheme({void Function()? onComplete}) {
+  Future<void> toggleTheme({void Function()? onComplete}) async {
     _isDark = !_isDark;
-    redraw(onComplete: onComplete);
+    _currTheme = _isDark ? _darkTheme : _lightTheme;
+    await redraw(onComplete: onComplete);
   }
 
   /// Set the apps [ThemeMode] from storage and [redraw] with [onComplete]
-  void buildThemeMode({void Function()? onComplete}) {
+  Future<void> buildThemeMode({void Function()? onComplete}) async {
     _buildMode();
-    redraw(onComplete: onComplete);
+    _currTheme = _isDark ? _darkTheme : _lightTheme;
+    await redraw(onComplete: onComplete);
   }
 
   /// Set the apps [Locale] from storage and load corresponding localizations
@@ -186,7 +203,7 @@ class EzConfigProvider extends ChangeNotifier {
       _l10n = EzConfig.l10nFallback;
     }
 
-    redraw(onComplete: onComplete);
+    await redraw(onComplete: onComplete);
   }
 }
 
@@ -236,4 +253,10 @@ class EzTextCache {
   /// Margin, padding, and spacing
   /// Icon size
   EzTextCache({required this.iconSize});
+}
+
+abstract class EzAppCache {
+  /// Will run on any [EzConfig] redraw
+  /// AKA when [EzConfig.seed] changes
+  Future<void> redraw();
 }

@@ -14,12 +14,12 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: EzConfig.l10n.lsPageTitle,
-        showSettings: false,
-        body: const EzScreen(EzLayoutSettings(
+        const EzScreen(EzLayoutSettings(
           appName: appName,
           androidPackage: androidPackage,
         )),
+        title: EzConfig.l10n.lsPageTitle,
+        showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(

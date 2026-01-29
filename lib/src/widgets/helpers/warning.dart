@@ -40,13 +40,10 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final Color alertColor =
-        iconColor ?? Theme.of(context).colorScheme.secondary;
+    final Color alertColor = iconColor ?? EzConfig.colors.secondary;
 
-    final TextStyle? tStyle =
-        titleStyle ?? Theme.of(context).textTheme.titleLarge;
-    final TextStyle? bStyle =
-        bodyStyle ?? Theme.of(context).textTheme.bodyLarge;
+    final TextStyle? tStyle = titleStyle ?? EzConfig.styles.titleLarge;
+    final TextStyle? bStyle = bodyStyle ?? EzConfig.styles.bodyLarge;
 
     // Return the build //
 

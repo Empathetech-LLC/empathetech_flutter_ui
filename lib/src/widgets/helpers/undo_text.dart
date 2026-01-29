@@ -16,7 +16,7 @@ Widget ezRichUndoWarning(
   String? androidPackage,
   Set<String>? skip,
 }) {
-  final TextStyle? style = Theme.of(context).textTheme.bodyLarge;
+  final TextStyle? style = EzConfig.styles.bodyLarge;
 
   final EzRichText text = EzRichText(
     <InlineSpan>[

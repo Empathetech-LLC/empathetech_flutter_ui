@@ -9,9 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class FailureHeader extends StatelessWidget {
-  /// [ThemeData.textTheme] passthrough
-  final TextTheme textTheme;
-
   /// Core [Text] to display... under 'Failure'
   /// Provide [message] OR [richMessage]
   final String? message;
@@ -23,7 +20,6 @@ class FailureHeader extends StatelessWidget {
   /// header [Widget] for a failed run
   const FailureHeader({
     super.key,
-    required this.textTheme,
     this.message,
     this.richMessage,
   }) : assert(
@@ -39,7 +35,7 @@ class FailureHeader extends StatelessWidget {
           Flexible(
             child: EzText(
               EzConfig.l10n.gFailure,
-              style: textTheme.headlineLarge,
+              style: EzConfig.styles.headlineLarge,
               textAlign: TextAlign.center,
             ),
           ),
@@ -50,7 +46,7 @@ class FailureHeader extends StatelessWidget {
               ? Flexible(
                   child: EzText(
                     message!,
-                    style: ezSubTitleStyle(textTheme),
+                    style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                   ),
                 )

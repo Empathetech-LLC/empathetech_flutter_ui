@@ -86,13 +86,11 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
   Widget build(_) {
     // Gather the contextual theme data //
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color decorationColor = widget.decorationColor ??
-        (widget.enabled ? colorScheme.primary : colorScheme.outline);
+        (widget.enabled ? EzConfig.colors.primary : EzConfig.colors.outline);
 
-    TextStyle? textStyle =
-        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
-            ?.copyWith(decorationColor: decorationColor);
+    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)
+        ?.copyWith(decorationColor: decorationColor);
 
     // Define custom functions //
 
@@ -120,7 +118,7 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
           ? widget.style
           : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
               ?.copyWith(
-              overlayColor: WidgetStateProperty.all(colorScheme.outline),
+              overlayColor: WidgetStateProperty.all(EzConfig.colors.outline),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
             ),
       focusNode: widget.focusNode,
@@ -220,13 +218,10 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
     final Color decorationColor = widget.decorationColor ??
-        (widget.enabled ? colorScheme.primary : colorScheme.outline);
+        (widget.enabled ? EzConfig.colors.primary : EzConfig.colors.outline);
 
-    TextStyle? textStyle = (widget.textStyle ?? textTheme.bodyLarge)
+    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)
         ?.copyWith(decorationColor: decorationColor);
 
     // Define custom functions //
@@ -255,7 +250,7 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
           ? widget.style
           : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
               ?.copyWith(
-              overlayColor: WidgetStateProperty.all(colorScheme.outline),
+              overlayColor: WidgetStateProperty.all(EzConfig.colors.outline),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
             ),
       focusNode: widget.focusNode,

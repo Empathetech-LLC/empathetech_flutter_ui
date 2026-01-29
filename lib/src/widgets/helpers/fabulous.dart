@@ -91,27 +91,23 @@ class _EzSettingsDupeFABState extends State<EzSettingsDupeFAB> {
   bool isDuplicating = false;
 
   @override
-  Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    return isDuplicating
-        ? FloatingActionButton(
-            onPressed: () {
-              setState(() => isDuplicating = false);
-              widget.onSwitch(false);
-            },
-            foregroundColor: colorScheme.secondary,
-            backgroundColor: colorScheme.primary,
-          )
-        : FloatingActionButton(
-            onPressed: () {
-              setState(() => isDuplicating = true);
-              widget.onSwitch(true);
-            },
-            foregroundColor: colorScheme.outline,
-            backgroundColor: colorScheme.surface,
-          );
-  }
+  Widget build(BuildContext context) => isDuplicating
+      ? FloatingActionButton(
+          onPressed: () {
+            setState(() => isDuplicating = false);
+            widget.onSwitch(false);
+          },
+          foregroundColor: EzConfig.colors.secondary,
+          backgroundColor: EzConfig.colors.primary,
+        )
+      : FloatingActionButton(
+          onPressed: () {
+            setState(() => isDuplicating = true);
+            widget.onSwitch(true);
+          },
+          foregroundColor: EzConfig.colors.outline,
+          backgroundColor: EzConfig.colors.surface,
+        );
 }
 
 class EzUpdaterFAB extends StatefulWidget {
@@ -230,8 +226,6 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     return Visibility(
       visible: !isLatest,
       child: widget.isWeb // Trinary required, if/else breaks iOS web links
@@ -248,16 +242,16 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
                 ),
               ),
               tooltip: EzConfig.l10n.gUpdates,
-              backgroundColor: colorScheme.secondary,
-              foregroundColor: colorScheme.onSecondary,
+              backgroundColor: EzConfig.colors.secondary,
+              foregroundColor: EzConfig.colors.onSecondary,
               child: EzIcon(Icons.update),
             )
           : FloatingActionButton(
               heroTag: 'updater_fab',
               onPressed: () => launchUrl(Uri.parse(url ?? widget.github!)),
               tooltip: EzConfig.l10n.gUpdates,
-              backgroundColor: colorScheme.secondary,
-              foregroundColor: colorScheme.onSecondary,
+              backgroundColor: EzConfig.colors.secondary,
+              foregroundColor: EzConfig.colors.onSecondary,
               child: EzIcon(Icons.update),
             ),
     );
@@ -281,7 +275,7 @@ class EzRebuildFAB extends StatelessWidget {
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
         onPressed: () => EzConfig.provider.rebuild(onComplete: onComplete),
-        tooltip: tooltip ?? 'Apply changes', // TODO: l10n
+        tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
         child: EzIcon(icon ?? Icons.check),
       );
 }

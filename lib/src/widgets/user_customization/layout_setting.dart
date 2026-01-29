@@ -87,7 +87,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   // Define build functions //
 
   /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
-  List<Widget> buildPreview(BuildContext context, ThemeData theme) {
+  List<Widget> buildPreview(BuildContext context) {
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
@@ -107,21 +107,21 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             Text(
               valString,
               style: widget.bodyStyle ??
-                  theme.textTheme.bodyLarge
-                      ?.copyWith(color: theme.colorScheme.surface),
+                  EzConfig.styles.bodyLarge
+                      ?.copyWith(color: EzConfig.colors.surface),
               textAlign: TextAlign.center,
             ),
             margin: EzInsets.wrap(currValue),
-            backgroundColor: theme.colorScheme.onSurface,
+            backgroundColor: EzConfig.colors.onSurface,
           ),
           EzSpacer(space: currValue),
           Container(
-            color: theme.colorScheme.onSurface,
+            color: EzConfig.colors.onSurface,
             height: heightOf(context) * 0.25,
             width: widthOf(context) * 0.25,
             child: Container(
               decoration: BoxDecoration(
-                color: theme.colorScheme.surface,
+                color: EzConfig.colors.surface,
                 image: (backgroundImagePath == null ||
                         backgroundImagePath == noImageValue)
                     ? null
@@ -201,7 +201,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final String label = ezLstName(context, widget.type);
 
     return EzElevatedIconButton(
@@ -229,12 +228,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         Text(
                           label,
                           style:
-                              widget.titleStyle ?? theme.textTheme.titleLarge,
+                              widget.titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
 
                         // Preview
-                        ...buildPreview(context, theme),
+                        ...buildPreview(context),
                       ],
                     ),
                   ),

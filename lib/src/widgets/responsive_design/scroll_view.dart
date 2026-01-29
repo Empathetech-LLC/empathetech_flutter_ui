@@ -184,8 +184,7 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    late final Color hover =
-        Theme.of(context).colorScheme.secondary.withValues(alpha: 0.5);
+    late final Color hover = EzConfig.colors.secondary.withValues(alpha: 0.5);
 
     late final Widget core = Scrollbar(
       controller: controller,

@@ -15,9 +15,7 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: EzConfig.l10n.ssPageTitle,
-        showSettings: false,
-        body: const EzScreen(EzSettingsHome(
+        const EzScreen(EzSettingsHome(
           colorSettingsPath: colorSettingsPath,
           designSettingsPath: designSettingsPath,
           layoutSettingsPath: layoutSettingsPath,
@@ -25,6 +23,8 @@ class SettingsHomeScreen extends StatelessWidget {
           appName: appName,
           androidPackage: androidPackage,
         )),
+        title: EzConfig.l10n.ssPageTitle,
+        showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(

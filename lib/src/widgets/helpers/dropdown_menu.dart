@@ -137,7 +137,6 @@ class EzDropdownMenu<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double iSize = iconSize ?? EzConfig.iconSize;
-    late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     late final double buttonOpacity = EzConfig.get(
         EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
@@ -145,8 +144,8 @@ class EzDropdownMenu<T> extends StatelessWidget {
     late final Color buttonBackground = buttonOpacity < 1.0
         ? (buttonOpacity < 0.01)
             ? Colors.transparent
-            : colorScheme.surface.withValues(alpha: buttonOpacity)
-        : colorScheme.surface;
+            : EzConfig.colors.surface.withValues(alpha: buttonOpacity)
+        : EzConfig.colors.surface;
 
     return IconButtonTheme(
       data: IconButtonThemeData(

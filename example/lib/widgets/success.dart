@@ -10,9 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SuccessHeader extends StatelessWidget {
-  /// [ThemeData.textTheme] passthrough
-  final TextTheme textTheme;
-
   /// Core message to display... under 'Success'
   /// Used in an [Flexible] wrapped [EzText]
   /// Provide [message] or [richMessage]
@@ -25,7 +22,6 @@ class SuccessHeader extends StatelessWidget {
   /// header [Widget] for a successful run
   const SuccessHeader({
     super.key,
-    required this.textTheme,
     this.message,
     this.richMessage,
   }) : assert((message == null) != (richMessage == null),
@@ -40,7 +36,7 @@ class SuccessHeader extends StatelessWidget {
           Flexible(
             child: EzText(
               EzConfig.l10n.gSuccessExl,
-              style: textTheme.headlineLarge,
+              style: EzConfig.styles.headlineLarge,
               textAlign: TextAlign.center,
             ),
           ),
@@ -52,7 +48,7 @@ class SuccessHeader extends StatelessWidget {
               : Flexible(
                   child: EzText(
                     message!,
-                    style: ezSubTitleStyle(textTheme),
+                    style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                   ),
                 ),

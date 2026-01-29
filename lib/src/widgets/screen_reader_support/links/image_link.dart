@@ -111,7 +111,7 @@ class EzImageLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color focusColor =
-        Theme.of(context).colorScheme.primary.withValues(alpha: focusOpacity);
+        EzConfig.colors.primary.withValues(alpha: focusOpacity);
 
     final Image child = Image(
       image: image,

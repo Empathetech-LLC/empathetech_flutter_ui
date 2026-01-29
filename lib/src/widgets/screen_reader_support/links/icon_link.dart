@@ -80,20 +80,18 @@ class _EzIconLinkState extends State<EzIconLink> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final ThemeData theme = Theme.of(context);
-
-    final Color textColor = widget.textColor ?? theme.colorScheme.onSurface;
+    final Color textColor = widget.textColor ?? EzConfig.colors.onSurface;
 
     TextStyle? textStyle =
-        (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
+        (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
       color: textColor,
       decoration: TextDecoration.none,
-      decorationColor: widget.decorationColor ?? theme.colorScheme.primary,
+      decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       padding: widget.padding,
-      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+      overlayColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     // Define custom functions //

@@ -16,13 +16,13 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: EzConfig.l10n.tsPageTitle,
-        showSettings: false,
-        body: EzScreen(EzTextSettings(
+        EzScreen(EzTextSettings(
           target: target,
           appName: appName,
           androidPackage: androidPackage,
         )),
+        title: EzConfig.l10n.tsPageTitle,
+        showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
           EzConfigFAB(

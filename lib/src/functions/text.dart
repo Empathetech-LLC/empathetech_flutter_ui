@@ -10,6 +10,9 @@ import 'package:flutter/services.dart';
 
 // Helpers //
 
+/// 404 [EzConfig.l10n].gError}
+String ez404() => '404 ${EzConfig.l10n.gError}';
+
 /// Returns the soon-to-be rendered [Size] of [text] via a [TextPainter]
 Size ezTextSize(
   String text, {
@@ -28,11 +31,11 @@ Size ezTextSize(
 
 /// [SystemChrome.setApplicationSwitcherDescription] wrapper
 /// Sets the title of the tab on web and the title of the window on desktop
-void ezWindowNamer(BuildContext context, String title) =>
+void ezWindowNamer(String title) =>
     SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
-        primaryColor: Theme.of(context).primaryColor.toARGB32(),
+        primaryColor: EzConfig.colors.primary.toARGB32(),
       ),
     );
 
@@ -114,12 +117,12 @@ String ezTitleToClass(String name) => name.replaceAll(RegExp(r'\s'), '');
 // Getters //
 
 /// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? ezSubHeadingStyle(TextTheme textTheme) =>
-    textTheme.headlineLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+TextStyle? ezSubHeadingStyle() => EzConfig.styles.headlineLarge
+    ?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
 
 /// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? ezSubTitleStyle(TextTheme textTheme) =>
-    textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+TextStyle? ezSubTitleStyle() => EzConfig.styles.bodyLarge
+    ?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
 
 // Setters //
 

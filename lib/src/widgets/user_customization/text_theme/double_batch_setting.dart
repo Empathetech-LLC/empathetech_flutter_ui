@@ -100,10 +100,6 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     // Return the build //
 
     return Tooltip(
@@ -119,7 +115,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
                     Icons.remove,
-                    color: colorScheme.outline,
+                    color: EzConfig.colors.outline,
                   ),
                 )
               : EzIconButton(
@@ -201,7 +197,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
             child: Icon(
               Icons.text_fields_sharp,
               size: iconSize ?? titleProvider.value.fontSize,
-              color: colorScheme.onSurface,
+              color: EzConfig.colors.onSurface,
             ),
           ),
           EzConfig.rowMargin,
@@ -214,7 +210,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
                     Icons.add,
-                    color: colorScheme.outline,
+                    color: EzConfig.colors.outline,
                   ),
                 )
               : EzIconButton(

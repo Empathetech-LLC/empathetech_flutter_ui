@@ -113,9 +113,9 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, EzConfig.l10n.csPageTitle);
+  void initState() {
+    super.initState();
+    ezWindowNamer(EzConfig.l10n.csPageTitle);
   }
 
   @override
@@ -141,13 +141,13 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                     .gEditingTheme(EzConfig.isDark ? darkString : lightString),
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
-                style: Theme.of(context).textTheme.labelLarge,
+                style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
                 EzConfig.l10n
                     .gEditingTheme(EzConfig.isDark ? darkString : lightString),
-                style: Theme.of(context).textTheme.labelLarge,
+                style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
         EzConfig.margin,
@@ -372,7 +372,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     return fullList
         .where((String element) => !currSet.contains(element))
         .map<Widget>((String configKey) {
-      final Color liveColor = getLiveColor(context, configKey);
+      final Color liveColor = getLiveColor(configKey);
 
       return Padding(
         padding: EzInsets.wrap(EzConfig.spacing),
@@ -399,8 +399,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                  color: Theme.of(context).colorScheme.primaryContainer),
+              border: Border.all(color: EzConfig.colors.primaryContainer),
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,
@@ -480,7 +479,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
                     // Tutorial link
                     EzLink(
                       EzConfig.l10n.gHowThisWorks,
-                      style: Theme.of(context).textTheme.labelLarge!,
+                      style: EzConfig.styles.labelLarge!,
                       textAlign: TextAlign.center,
                       url: Uri.parse(
                           'https://m3.material.io/styles/color/roles'),

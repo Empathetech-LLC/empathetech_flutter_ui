@@ -57,7 +57,7 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
         size: Size(size, size),
         painter: _CountdownTimerPainter(
           progress: _animation.value,
-          color: widget.color ?? Theme.of(context).colorScheme.secondary,
+          color: widget.color ?? EzConfig.colors.secondary,
         ),
       ),
     );

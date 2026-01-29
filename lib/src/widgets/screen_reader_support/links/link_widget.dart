@@ -49,7 +49,7 @@ class EzLinkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color focusColor =
-        Theme.of(context).colorScheme.primary.withValues(alpha: focusOpacity);
+        EzConfig.colors.primary.withValues(alpha: focusOpacity);
 
     return Tooltip(
       message: tooltip,

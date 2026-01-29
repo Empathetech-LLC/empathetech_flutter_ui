@@ -20,9 +20,6 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
     final String iconSizeKey =
         EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey;
 
@@ -37,7 +34,10 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
               await EzConfig.setDouble(iconSizeKey, defaultIconSize);
               widget.redraw();
             },
-            child: EzText(EzConfig.l10n.tsIconSize, style: textTheme.bodyLarge),
+            child: EzText(
+              EzConfig.l10n.tsIconSize,
+              style: EzConfig.styles.bodyLarge,
+            ),
           ),
         ),
         EzTextBackground(
@@ -62,7 +62,7 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       tooltip: EzConfig.l10n.gMinimum,
                       icon: Icon(
                         Icons.remove,
-                        color: colorScheme.outline,
+                        color: EzConfig.colors.outline,
                       ),
                       iconSize: iconSize,
                     ),
@@ -78,7 +78,7 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                 child: Icon(
                   Icons.sync_alt,
                   size: iconSize,
-                  color: colorScheme.onSurface,
+                  color: EzConfig.colors.onSurface,
                 ),
               ),
               EzMargin(vertical: false),
@@ -101,7 +101,7 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       tooltip: EzConfig.l10n.gMaximum,
                       icon: Icon(
                         Icons.add,
-                        color: colorScheme.outline,
+                        color: EzConfig.colors.outline,
                       ),
                       iconSize: iconSize,
                     ),

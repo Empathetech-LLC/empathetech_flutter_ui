@@ -696,148 +696,146 @@ String getColorName(String key) {
 }
 
 /// Get the live [ColorScheme] value of [key]
-Color getLiveColor(BuildContext context, String key) {
-  final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
+Color getLiveColor(String key) {
   switch (key) {
     case lightPrimaryKey:
     case darkPrimaryKey:
-      return colorScheme.primary;
+      return EzConfig.colors.primary;
     case lightOnPrimaryKey:
     case darkOnPrimaryKey:
-      return colorScheme.onPrimary;
+      return EzConfig.colors.onPrimary;
     case lightPrimaryContainerKey:
     case darkPrimaryContainerKey:
-      return colorScheme.onPrimaryContainer;
+      return EzConfig.colors.onPrimaryContainer;
     case lightOnPrimaryContainerKey:
     case darkOnPrimaryContainerKey:
-      return colorScheme.onPrimaryContainer;
+      return EzConfig.colors.onPrimaryContainer;
     case lightPrimaryFixedKey:
     case darkPrimaryFixedKey:
-      return colorScheme.primaryFixed;
+      return EzConfig.colors.primaryFixed;
     case lightPrimaryFixedDimKey:
     case darkPrimaryFixedDimKey:
-      return colorScheme.primaryFixedDim;
+      return EzConfig.colors.primaryFixedDim;
     case lightOnPrimaryFixedKey:
     case darkOnPrimaryFixedKey:
-      return colorScheme.onPrimaryFixed;
+      return EzConfig.colors.onPrimaryFixed;
     case lightOnPrimaryFixedVariantKey:
     case darkOnPrimaryFixedVariantKey:
-      return colorScheme.onPrimaryFixedVariant;
+      return EzConfig.colors.onPrimaryFixedVariant;
     case lightSecondaryKey:
     case darkSecondaryKey:
-      return colorScheme.secondary;
+      return EzConfig.colors.secondary;
     case lightOnSecondaryKey:
     case darkOnSecondaryKey:
-      return colorScheme.onSecondary;
+      return EzConfig.colors.onSecondary;
     case lightSecondaryContainerKey:
     case darkSecondaryContainerKey:
-      return colorScheme.secondaryContainer;
+      return EzConfig.colors.secondaryContainer;
     case lightOnSecondaryContainerKey:
     case darkOnSecondaryContainerKey:
-      return colorScheme.onSecondaryContainer;
+      return EzConfig.colors.onSecondaryContainer;
     case lightSecondaryFixedKey:
     case darkSecondaryFixedKey:
-      return colorScheme.secondaryFixed;
+      return EzConfig.colors.secondaryFixed;
     case lightSecondaryFixedDimKey:
     case darkSecondaryFixedDimKey:
-      return colorScheme.secondaryFixedDim;
+      return EzConfig.colors.secondaryFixedDim;
     case lightOnSecondaryFixedKey:
     case darkOnSecondaryFixedKey:
-      return colorScheme.onSecondaryFixed;
+      return EzConfig.colors.onSecondaryFixed;
     case lightOnSecondaryFixedVariantKey:
     case darkOnSecondaryFixedVariantKey:
-      return colorScheme.onSecondaryFixedVariant;
+      return EzConfig.colors.onSecondaryFixedVariant;
     case lightTertiaryKey:
     case darkTertiaryKey:
-      return colorScheme.tertiary;
+      return EzConfig.colors.tertiary;
     case lightOnTertiaryKey:
     case darkOnTertiaryKey:
-      return colorScheme.onTertiary;
+      return EzConfig.colors.onTertiary;
     case lightTertiaryContainerKey:
     case darkTertiaryContainerKey:
-      return colorScheme.tertiaryContainer;
+      return EzConfig.colors.tertiaryContainer;
     case lightOnTertiaryContainerKey:
     case darkOnTertiaryContainerKey:
-      return colorScheme.onTertiaryContainer;
+      return EzConfig.colors.onTertiaryContainer;
     case lightTertiaryFixedKey:
     case darkTertiaryFixedKey:
-      return colorScheme.tertiaryFixed;
+      return EzConfig.colors.tertiaryFixed;
     case lightTertiaryFixedDimKey:
     case darkTertiaryFixedDimKey:
-      return colorScheme.tertiaryFixedDim;
+      return EzConfig.colors.tertiaryFixedDim;
     case lightOnTertiaryFixedKey:
     case darkOnTertiaryFixedKey:
-      return colorScheme.onTertiaryFixed;
+      return EzConfig.colors.onTertiaryFixed;
     case lightOnTertiaryFixedVariantKey:
     case darkOnTertiaryFixedVariantKey:
-      return colorScheme.onTertiaryFixedVariant;
+      return EzConfig.colors.onTertiaryFixedVariant;
     case lightErrorKey:
     case darkErrorKey:
-      return colorScheme.error;
+      return EzConfig.colors.error;
     case lightOnErrorKey:
     case darkOnErrorKey:
-      return colorScheme.onError;
+      return EzConfig.colors.onError;
     case lightErrorContainerKey:
     case darkErrorContainerKey:
-      return colorScheme.errorContainer;
+      return EzConfig.colors.errorContainer;
     case lightOnErrorContainerKey:
     case darkOnErrorContainerKey:
-      return colorScheme.onErrorContainer;
+      return EzConfig.colors.onErrorContainer;
     case lightOutlineKey:
     case darkOutlineKey:
-      return colorScheme.outline;
+      return EzConfig.colors.outline;
     case lightOutlineVariantKey:
     case darkOutlineVariantKey:
-      return colorScheme.outlineVariant;
+      return EzConfig.colors.outlineVariant;
     case lightSurfaceKey:
     case darkSurfaceKey:
-      return colorScheme.surface;
+      return EzConfig.colors.surface;
     case lightOnSurfaceKey:
     case darkOnSurfaceKey:
-      return colorScheme.onSurface;
+      return EzConfig.colors.onSurface;
     case lightSurfaceDimKey:
     case darkSurfaceDimKey:
-      return colorScheme.surfaceDim;
+      return EzConfig.colors.surfaceDim;
     case lightSurfaceBrightKey:
     case darkSurfaceBrightKey:
-      return colorScheme.surfaceBright;
+      return EzConfig.colors.surfaceBright;
     case lightSurfaceContainerLowestKey:
     case darkSurfaceContainerLowestKey:
-      return colorScheme.surfaceContainerLowest;
+      return EzConfig.colors.surfaceContainerLowest;
     case lightSurfaceContainerLowKey:
     case darkSurfaceContainerLowKey:
-      return colorScheme.surfaceContainerLow;
+      return EzConfig.colors.surfaceContainerLow;
     case lightSurfaceContainerKey:
     case darkSurfaceContainerKey:
-      return colorScheme.surfaceContainer;
+      return EzConfig.colors.surfaceContainer;
     case lightSurfaceContainerHighKey:
     case darkSurfaceContainerHighKey:
-      return colorScheme.surfaceContainerHigh;
+      return EzConfig.colors.surfaceContainerHigh;
     case lightSurfaceContainerHighestKey:
     case darkSurfaceContainerHighestKey:
-      return colorScheme.surfaceContainerHighest;
+      return EzConfig.colors.surfaceContainerHighest;
     case lightOnSurfaceVariantKey:
     case darkOnSurfaceVariantKey:
-      return colorScheme.onSurfaceVariant;
+      return EzConfig.colors.onSurfaceVariant;
     case lightInverseSurfaceKey:
     case darkInverseSurfaceKey:
-      return colorScheme.inverseSurface;
+      return EzConfig.colors.inverseSurface;
     case lightOnInverseSurfaceKey:
     case darkOnInverseSurfaceKey:
-      return colorScheme.onInverseSurface;
+      return EzConfig.colors.onInverseSurface;
     case lightInversePrimaryKey:
     case darkInversePrimaryKey:
-      return colorScheme.inversePrimary;
+      return EzConfig.colors.inversePrimary;
     case lightScrimKey:
     case darkScrimKey:
-      return colorScheme.scrim;
+      return EzConfig.colors.scrim;
     case lightShadowKey:
     case darkShadowKey:
-      return colorScheme.shadow;
+      return EzConfig.colors.shadow;
     case lightSurfaceTintKey:
     case darkSurfaceTintKey:
-      return colorScheme.surfaceTint;
+      return EzConfig.colors.surfaceTint;
     default:
       return Colors.transparent;
   }

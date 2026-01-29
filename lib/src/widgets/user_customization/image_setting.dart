@@ -129,16 +129,13 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// First-layer [ElevatedButton.onPressed]
   /// Opens an options modal and updates the state accordingly
-  Future<void> activateSetting(
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) async {
+  Future<void> activateSetting() async {
     String? newPath = await ezModal<String?>(
       context: context,
       builder: (BuildContext mContext) => StatefulBuilder(
         builder: (_, StateSetter setModal) => EzScrollView(
           mainAxisSize: MainAxisSize.min,
-          children: sourceOptions(colorScheme, textTheme, mContext, setModal),
+          children: sourceOptions(mContext, setModal),
         ),
       ),
     );
@@ -152,11 +149,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         !kIsWeb &&
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
-        final Future<dynamic> Function(
-          String path,
-          ColorScheme colorScheme,
-          TextTheme textTheme,
-        ) toDo = await showDialog(
+        final Future<dynamic> Function(String path) toDo = await showDialog(
           context: context,
           builder: (BuildContext dContext) {
             void useFull() => Navigator.of(dContext).pop((_, __) async => true);
@@ -178,7 +171,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           },
         );
 
-        final dynamic result = await toDo(newPath, colorScheme, textTheme);
+        final dynamic result = await toDo(newPath);
         switch (result.runtimeType) {
           case const (bool):
             break;
@@ -193,8 +186,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
     if (!isInt && widget.showFitOption) {
-      final bool canceled =
-          (await chooseFit(newPath, colorScheme, textTheme) == null);
+      final bool canceled = (await chooseFit(newPath) == null);
       if (canceled) return;
     }
 
@@ -247,12 +239,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Build the list of [ImageSource] options
-  List<Widget> sourceOptions(
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-    BuildContext mContext,
-    StateSetter setModal,
-  ) {
+  List<Widget> sourceOptions(BuildContext mContext, StateSetter setModal) {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
@@ -402,7 +389,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             final int? pathARGB =
                 (currPath == null) ? null : int.tryParse(currPath!);
             Color currColor = pathARGB == null
-                ? colorScheme.surfaceContainer
+                ? EzConfig.colors.surfaceContainer
                 : Color(pathARGB);
 
             await ezColorPicker(
@@ -511,11 +498,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Opens a preview modal for choosing the desired [BoxFit]
-  Future<bool?> chooseFit(
-    String path,
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) {
+  Future<bool?> chooseFit(String path) {
     final double width = widthOf(context) * 0.25;
     final double height = heightOf(context) * 0.25;
 
@@ -528,7 +511,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             children: <Widget>[
               Text(
                 EzConfig.l10n.dsFit,
-                style: textTheme.titleLarge,
+                style: EzConfig.styles.titleLarge,
                 textAlign: TextAlign.center,
               ),
               EzConfig.margin,
@@ -550,8 +533,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                     fitPreview(
@@ -560,8 +541,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                     fitPreview(
@@ -570,8 +549,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                     fitPreview(
@@ -580,8 +557,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                     fitPreview(
@@ -590,8 +565,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                     fitPreview(
@@ -600,8 +573,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                     fitPreview(
@@ -610,8 +581,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: width,
                       height: height,
                       setModal: fitState,
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
                     ),
                     EzConfig.rowSpacer,
                   ],
@@ -627,7 +596,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   EzTextButton(
                     onPressed: () => Navigator.of(fitContext).pop(null),
                     text: EzConfig.l10n.gCancel,
-                    textStyle: textTheme.bodyLarge,
+                    textStyle: EzConfig.styles.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
                   EzConfig.rowSpacer,
@@ -647,8 +616,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                     text: selectedFit == null
                         ? EzConfig.l10n.gSkip
                         : EzConfig.l10n.gApply,
-                    textStyle: textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.primary,
+                    textStyle: EzConfig.styles.bodyLarge?.copyWith(
+                      color: EzConfig.colors.primary,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -670,15 +639,14 @@ class _ImageSettingState extends State<EzImageSetting> {
     required double width,
     required double height,
     required StateSetter setModal,
-    required ColorScheme colorScheme,
-    required TextTheme textTheme,
   }) {
     final double scaleMargin = EzConfig.marginVal * 0.25;
 
     final String name = fit.name;
 
     final double toolbarHeight =
-        ezTextSize(name, style: textTheme.bodyLarge, context: context).height +
+        ezTextSize(name, style: EzConfig.styles.bodyLarge, context: context)
+                .height +
             scaleMargin;
 
     return Column(
@@ -698,7 +666,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 width: width,
                 height: height,
                 decoration: BoxDecoration(
-                  border: Border.all(color: colorScheme.onSurface),
+                  border: Border.all(color: EzConfig.colors.onSurface),
                   borderRadius: ezRoundEdge,
                 ),
                 child: Column(
@@ -707,12 +675,12 @@ class _ImageSettingState extends State<EzImageSetting> {
                       height: toolbarHeight,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: colorScheme.surface,
+                        color: EzConfig.colors.surface,
                         borderRadius: textFieldRadius,
                       ),
                       child: Text(
                         name,
-                        style: textTheme.bodyLarge,
+                        style: EzConfig.styles.bodyLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -737,8 +705,6 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
     final int? pathARGB = (currPath == null) ? null : int.tryParse(currPath!);
 
     return Semantics(
@@ -757,14 +723,14 @@ class _ImageSettingState extends State<EzImageSetting> {
               inProgress = true;
               fromLocal = false;
             });
-            await activateSetting(colorScheme, textTheme);
+            await activateSetting();
             setState(() => inProgress = false);
           },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: colorScheme.onSurface),
+              border: Border.all(color: EzConfig.colors.onSurface),
             ),
             child: CircleAvatar(
               radius: EzConfig.iconSize + EzConfig.padding,
@@ -776,13 +742,13 @@ class _ImageSettingState extends State<EzImageSetting> {
                   : ezImageProvider(currPath!),
               backgroundColor:
                   (pathARGB != null) ? Color(pathARGB) : Colors.transparent,
-              foregroundColor: colorScheme.onSurface,
+              foregroundColor: EzConfig.colors.onSurface,
               child: inProgress
                   ? const CircularProgressIndicator()
                   : (currPath == null || currPath == noImageValue)
                       ? EzIcon(
                           Icons.edit,
-                          color: colorScheme.primary,
+                          color: EzConfig.colors.primary,
                         )
                       : null,
             ),

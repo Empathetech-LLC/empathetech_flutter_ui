@@ -38,7 +38,7 @@ class EzConfig {
   /// [EzConfig] key : value runtime [Type] map
   final Map<String, Type> _typeMap;
 
-  /// Allows [EzConfig] setters to call [EzConfigProvider.rebuild]
+  /// Allows for [EzConfigProvider.rebuild] and hosts caches for [ThemeMode] aware [EzConfig] values
   EzConfigProvider? _provider;
 
   /// Private instance
@@ -66,8 +66,9 @@ class EzConfig {
 
   /// [assetPaths] => provide the [AssetImage] paths for this app
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
+  /// [localeFallback] => provide a fallback [Locale] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [l10nFallback] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
-  /// [preferences] => provide a [SharedPreferencesAsync] instance
+  /// [preferences] => provide a [SharedPreferencesWithCache] instance
   /// [provider] => Set by [EzConfigurableApp], recommended to leave null unless you are not using [EzConfigurableApp]
   factory EzConfig.init({
     required Set<String> assetPaths,
@@ -178,6 +179,20 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Whether the active [ThemeMode] is [Brightness.dark]
   static bool get isDark => provider.isDark;
 
+  /// Current, [ThemeMode] aware, [ColorScheme]
+  static ColorScheme get colorScheme => provider.theme.colorScheme;
+
+  /// Current, [ThemeMode] aware, [ColorScheme]
+  /// [colorScheme] alias
+  static ColorScheme get colors => provider.theme.colorScheme;
+
+  /// Current, [ThemeMode] aware, [TextTheme]
+  static TextTheme get textTheme => provider.theme.textTheme;
+
+  /// Current, [ThemeMode] aware, [TextTheme]
+  /// [textTheme] alias
+  static TextTheme get styles => provider.theme.textTheme;
+
   /// Theme aware alias
   static int get animDur => provider.design.animDur;
 
@@ -212,6 +227,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Theme aware alias
   static double get iconSize => provider.text.iconSize;
+
+  static EzAppCache? get appCache => provider.appCache;
 
   // Core //
 

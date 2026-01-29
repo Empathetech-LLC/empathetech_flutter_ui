@@ -46,21 +46,17 @@ class _EzCLIState extends State<EzCLI> {
 
   final TextEditingController cmdController = TextEditingController();
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    // Return the build //
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Title
         EzText(
           'CLI',
-          style: textTheme.titleLarge,
+          style: EzConfig.styles.titleLarge,
           textAlign: TextAlign.center,
         ),
 

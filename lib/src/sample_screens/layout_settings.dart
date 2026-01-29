@@ -67,9 +67,9 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, EzConfig.l10n.lsPageTitle);
+  void initState() {
+    super.initState();
+    ezWindowNamer(EzConfig.l10n.lsPageTitle);
   }
 
   // Return the build //

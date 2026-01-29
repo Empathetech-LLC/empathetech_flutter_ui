@@ -131,9 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, appName);
+  void initState() {
+    super.initState();
+    ezWindowNamer(appName);
   }
 
   @override
@@ -141,86 +141,12 @@ class _HomeScreenState extends State<HomeScreen> {
     // Gather the contextual theme data //
 
     final Lang l10n = Lang.of(context)!;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+    final TextStyle? subTitle = ezSubTitleStyle();
 
     // Return the build //
 
     return OpenUIScaffold(
-      title: l10n.csPageTitle,
-      onUpload: (EAGConfig config) async {
-        // Disable buttons
-        setState(() => canGen = false);
-
-        // Gather everything
-        nameController.text = config.appName;
-        namePreview = config.appName;
-        validName = true;
-
-        pubController.text = config.publisherName;
-        pubPreview = config.publisherName;
-
-        descriptionController.text = config.appDescription;
-
-        domainController.text = config.domainName;
-        if (config.domainName == 'com.example') exampleDomain = true;
-
-        colorSettings = config.colorSettings;
-        designSettings = config.designSettings;
-        layoutSettings = config.layoutSettings;
-        textSettings = config.textSettings;
-
-        await EzConfig.loadConfig(config.appDefaults);
-
-        if (config.flutterPath != null &&
-            isMac &&
-            await Directory(config.flutterPath!).exists()) {
-          flutterPathControl.text = config.flutterPath!;
-        }
-
-        if (config.workPath != null &&
-            await Directory(config.workPath!).exists()) {
-          workPathControl.text = config.workPath!;
-        }
-
-        config.copyright == null
-            ? removeCopyright = true
-            : copyrightController.text = config.copyright!;
-
-        if (config.license.contains('GNU General Public License')) {
-          license = gnuKey;
-        } else if (config.license.contains('MIT License')) {
-          license = mitKey;
-        } else if (config.license.contains('ISC License')) {
-          license = iscKey;
-        } else if (config.license.contains('Apache License')) {
-          license = apacheKey;
-        } else if (config.license.contains('Mozilla Public License')) {
-          license = mozillaKey;
-        } else if (config.license.contains('free and unencumbered')) {
-          license = unlicenseKey;
-        } else if (config.license.contains('WHAT THE FU')) {
-          license = dwtfywKey;
-        } else {
-          license = gnuKey;
-        }
-
-        config.l10nConfig == null
-            ? removeL10n = true
-            : l10nController.text = config.l10nConfig!;
-
-        config.analysisOptions == null
-            ? removeAnalysis = true
-            : analysisController.text = config.analysisOptions!;
-
-        config.vsCodeConfig == null
-            ? removeVSC = true
-            : vscController.text = config.vsCodeConfig!;
-
-        // Enable buttons
-        setState(() => canGen = true);
-      },
-      body: EzScreen(
+      EzScreen(
         EzScrollView(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -236,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
                   EzPlainText(text: ezTitleToSnake(l10n.csNameTip)),
                 ],
-                style: textTheme.bodyLarge,
+                style: EzConfig.styles.bodyLarge,
               ),
               controller: nameController,
               validator: (String? entry) => validateAppName(
@@ -302,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csDomainName,
-                    style: textTheme.titleLarge,
+                    style: EzConfig.styles.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -355,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csInclude,
-                    style: textTheme.titleLarge,
+                    style: EzConfig.styles.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -455,7 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Flexible(
                         child: EzText(
                           l10n.csFlutterPath,
-                          style: textTheme.titleLarge,
+                          style: EzConfig.styles.titleLarge,
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -541,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csAdvanced,
-                    style: textTheme.titleLarge,
+                    style: EzConfig.styles.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -587,7 +513,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Title
                         EzText(
                           l10n.csOutputPath,
-                          style: textTheme.bodyLarge?.copyWith(
+                          style: EzConfig.styles.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.start,
@@ -873,6 +799,79 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         alignment: Alignment.topLeft,
       ),
+      title: l10n.csPageTitle,
+      onUpload: (EAGConfig config) async {
+        // Disable buttons
+        setState(() => canGen = false);
+
+        // Gather everything
+        nameController.text = config.appName;
+        namePreview = config.appName;
+        validName = true;
+
+        pubController.text = config.publisherName;
+        pubPreview = config.publisherName;
+
+        descriptionController.text = config.appDescription;
+
+        domainController.text = config.domainName;
+        if (config.domainName == 'com.example') exampleDomain = true;
+
+        colorSettings = config.colorSettings;
+        designSettings = config.designSettings;
+        layoutSettings = config.layoutSettings;
+        textSettings = config.textSettings;
+
+        await EzConfig.loadConfig(config.appDefaults);
+
+        if (config.flutterPath != null &&
+            isMac &&
+            await Directory(config.flutterPath!).exists()) {
+          flutterPathControl.text = config.flutterPath!;
+        }
+
+        if (config.workPath != null &&
+            await Directory(config.workPath!).exists()) {
+          workPathControl.text = config.workPath!;
+        }
+
+        config.copyright == null
+            ? removeCopyright = true
+            : copyrightController.text = config.copyright!;
+
+        if (config.license.contains('GNU General Public License')) {
+          license = gnuKey;
+        } else if (config.license.contains('MIT License')) {
+          license = mitKey;
+        } else if (config.license.contains('ISC License')) {
+          license = iscKey;
+        } else if (config.license.contains('Apache License')) {
+          license = apacheKey;
+        } else if (config.license.contains('Mozilla Public License')) {
+          license = mozillaKey;
+        } else if (config.license.contains('free and unencumbered')) {
+          license = unlicenseKey;
+        } else if (config.license.contains('WHAT THE FU')) {
+          license = dwtfywKey;
+        } else {
+          license = gnuKey;
+        }
+
+        config.l10nConfig == null
+            ? removeL10n = true
+            : l10nController.text = config.l10nConfig!;
+
+        config.analysisOptions == null
+            ? removeAnalysis = true
+            : analysisController.text = config.analysisOptions!;
+
+        config.vsCodeConfig == null
+            ? removeVSC = true
+            : vscController.text = config.vsCodeConfig!;
+
+        // Enable buttons
+        setState(() => canGen = true);
+      },
       fabs: <Widget>[
         EzConfig.spacer,
         ResetFAB(
@@ -1049,7 +1048,7 @@ class _BasicField extends StatelessWidget {
             Flexible(
               child: EzText(
                 title,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: EzConfig.styles.titleLarge,
                 textAlign: TextAlign.start,
               ),
             ),

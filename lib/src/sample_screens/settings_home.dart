@@ -113,9 +113,9 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, EzConfig.l10n.ssPageTitle);
+  void initState() {
+    super.initState();
+    ezWindowNamer(EzConfig.l10n.ssPageTitle);
   }
 
   // Define custom functions //

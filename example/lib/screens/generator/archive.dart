@@ -59,8 +59,6 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   }
 
   Widget header(Lang l10n) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -71,7 +69,6 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
       case GeneratorState.successful:
         return Center(
           child: SuccessHeader(
-            textTheme: textTheme,
             richMessage: EzRichText(
               <InlineSpan>[
                 EzPlainText(
@@ -84,7 +81,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
                     appName,
-                    style: ezSubTitleStyle(textTheme),
+                    style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),
                     hint: EzConfig.l10n.gOpenUIReleases,
@@ -92,18 +89,13 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                   EzPlainText(text: l10n.asToGen(widget.config.appName)),
                 ]
               ],
-              style: ezSubTitleStyle(textTheme),
+              style: ezSubTitleStyle(),
               textAlign: TextAlign.center,
             ),
           ),
         );
       case GeneratorState.failed:
-        return Center(
-          child: FailureHeader(
-            textTheme: textTheme,
-            message: failureMessage,
-          ),
-        );
+        return Center(child: FailureHeader(message: failureMessage));
     }
   }
 
@@ -118,13 +110,13 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   // Return the build //
 
   @override
-  Widget build(_) {
+  Widget build(BuildContext context) {
     final Lang l10n = Lang.of(context)!;
 
     return OpenUIScaffold(
+      EzScreen(header(l10n), alignment: Alignment.center),
       title: l10n.asPageTitle,
       running: genState == GeneratorState.running,
-      body: EzScreen(header(l10n), alignment: Alignment.center),
     );
   }
 }

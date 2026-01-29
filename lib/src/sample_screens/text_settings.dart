@@ -200,17 +200,13 @@ class _TextSettingsState extends State<_TextSettings>
   @override
   void initState() {
     super.initState();
+    ezWindowNamer(EzConfig.l10n.tsPageTitle);
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, EzConfig.l10n.tsPageTitle);
-  }
-
-  @override
   void didChangePlatformBrightness() {
+    // TODO: test if this can be removed entirely. if not, it surely can be improved.
     super.didChangePlatformBrightness();
 
     final String key =
@@ -378,19 +374,17 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    late final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
-    late final EdgeInsets wrapPadding = EdgeInsets.only(
+    final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
+    final EdgeInsets wrapPadding = EdgeInsets.only(
       top: EzConfig.spacing,
       left: EzConfig.spacing / 2,
       right: EzConfig.spacing / 2,
     );
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color surface = colorScheme.surface;
-
     // Return the build //
 
-    Color backgroundColor = surface.withValues(alpha: backOpacity);
+    Color backgroundColor =
+        EzConfig.colors.surface.withValues(alpha: backOpacity);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -557,7 +551,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               onChanged: (double value) {
                 setState(() {
                   backOpacity = value;
-                  backgroundColor = surface.withValues(alpha: backOpacity);
+                  backgroundColor =
+                      EzConfig.colors.surface.withValues(alpha: backOpacity);
                 });
               },
               onChangeEnd: (double value) async {
@@ -752,7 +747,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     final Widget fontSizeIcon = EzTextBackground(
       Icon(
         Icons.text_fields_sharp,
-        color: Theme.of(context).colorScheme.onSurface,
+        color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
       borderRadius: textFieldRadius,
@@ -984,7 +979,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     final Widget letterSpacingIcon = EzTextBackground(
       Icon(
         Icons.horizontal_distribute_sharp,
-        color: Theme.of(context).colorScheme.onSurface,
+        color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
       borderRadius: textFieldRadius,
@@ -1071,7 +1066,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     final Widget wordSpacingIcon = EzTextBackground(
       Icon(
         Icons.space_bar_sharp,
-        color: Theme.of(context).colorScheme.onSurface,
+        color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
       borderRadius: textFieldRadius,
@@ -1156,7 +1151,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     final Widget lineHeightIcon = EzTextBackground(
       Icon(
         Icons.format_line_spacing_sharp,
-        color: Theme.of(context).colorScheme.onSurface,
+        color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
       borderRadius: textFieldRadius,

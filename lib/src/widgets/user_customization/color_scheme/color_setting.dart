@@ -40,7 +40,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   late final int? _prefsValue = EzConfig.get(widget.configKey);
 
   late Color currColor = (_prefsValue == null)
-      ? getLiveColor(context, widget.configKey)
+      ? getLiveColor(widget.configKey)
       : Color(_prefsValue);
 
   // Define custom functions //
@@ -82,7 +82,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Find the recommended contrast color for the background
       final int? backgroundColorValue = EzConfig.get(backgroundKey);
       final Color backgroundColor = (backgroundColorValue == null)
-          ? getLiveColor(context, backgroundKey)
+          ? getLiveColor(backgroundKey)
           : Color(backgroundColorValue);
 
       final int recommended = getTextColor(backgroundColor).toARGB32();
@@ -228,16 +228,12 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
         );
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
     final double iconRadius = EzConfig.iconSize / 2;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     final String label = getColorName(widget.configKey);
-
-    // Return the build //
 
     return Semantics(
       label: label,
@@ -253,12 +249,12 @@ class _ColorSettingState extends State<EzColorSetting> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: colorScheme.primaryContainer),
+              border: Border.all(color: EzConfig.colors.primaryContainer),
             ),
             child: currColor == Colors.transparent
                 ? CircleAvatar(
-                    backgroundColor: colorScheme.surface,
-                    foregroundColor: colorScheme.onSurface,
+                    backgroundColor: EzConfig.colors.surface,
+                    foregroundColor: EzConfig.colors.onSurface,
                     radius: iconRadius + EzConfig.padding,
                     child: EzIcon(Icons.visibility_off),
                   )

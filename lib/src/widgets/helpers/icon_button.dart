@@ -140,7 +140,6 @@ class EzIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double iSize = iconSize ?? EzConfig.iconSize;
-    late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     late final double buttonOpacity = EzConfig.get(
         EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
@@ -157,18 +156,18 @@ class EzIconButton extends StatelessWidget {
     late final Color buttonBackground = calcButton
         ? clearButton
             ? Colors.transparent
-            : colorScheme.surface.withValues(alpha: buttonOpacity)
-        : colorScheme.surface;
+            : EzConfig.colors.surface.withValues(alpha: buttonOpacity)
+        : EzConfig.colors.surface;
     late final Color enabledOutline = calcOutline
         ? clearOutline
             ? Colors.transparent
-            : colorScheme.primaryContainer.withValues(alpha: outlineOpacity)
-        : colorScheme.primaryContainer;
+            : EzConfig.colors.primaryContainer.withValues(alpha: outlineOpacity)
+        : EzConfig.colors.primaryContainer;
     late final Color disabledOutline = calcOutline
         ? clearOutline
             ? Colors.transparent
-            : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
-        : colorScheme.outlineVariant;
+            : EzConfig.colors.outlineVariant.withValues(alpha: outlineOpacity)
+        : EzConfig.colors.outlineVariant;
 
     late final ButtonStyle buttonStyle = style ??
         ((enabled && !fauxDisabled)
@@ -179,8 +178,8 @@ class EzIconButton extends StatelessWidget {
               )
             : IconButton.styleFrom(
                 backgroundColor: buttonBackground,
-                foregroundColor: colorScheme.outline,
-                overlayColor: colorScheme.outline,
+                foregroundColor: EzConfig.colors.outline,
+                overlayColor: EzConfig.colors.outline,
                 shadowColor: Colors.transparent,
                 side: BorderSide(color: disabledOutline),
                 iconSize: iSize,

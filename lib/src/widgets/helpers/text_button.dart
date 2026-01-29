@@ -81,10 +81,10 @@ class _EzTextButtonState extends State<EzTextButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final Color primary = Theme.of(context).colorScheme.primary;
+    final Color primary = EzConfig.colors.primary;
 
     TextStyle? textStyle =
-        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
       decorationColor: widget.decorationColor ?? primary,
     );
 
@@ -196,10 +196,10 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final Color primary = Theme.of(context).colorScheme.primary;
+    final Color primary = EzConfig.colors.primary;
 
     TextStyle? textStyle =
-        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
       decorationColor: widget.decorationColor ?? primary,
     );
 

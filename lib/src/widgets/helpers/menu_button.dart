@@ -101,10 +101,10 @@ class _EzMenuButtonState extends State<EzMenuButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final Color primary = Theme.of(context).colorScheme.primary;
+    final Color primary = EzConfig.colors.primary;
 
     TextStyle? textStyle =
-        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
       decorationColor: widget.decorationColor ?? primary,
     );
 

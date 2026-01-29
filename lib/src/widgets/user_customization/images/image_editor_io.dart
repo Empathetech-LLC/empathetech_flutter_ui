@@ -87,10 +87,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
               EzText(
                 name,
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(color: color),
+                style: EzConfig.styles.labelLarge?.copyWith(color: color),
               ),
             ],
           ),
@@ -122,13 +119,11 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     final Widget vertDiv = SizedBox(
       height: EzConfig.iconSize + EzConfig.padding,
       child: VerticalDivider(
         width: EzConfig.spacing * 2,
-        color: colorScheme.secondary,
+        color: EzConfig.colors.secondary,
       ),
     );
 
@@ -171,7 +166,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
               // Drag
               keyIcon(
                 icon: Icons.touch_app,
-                color: colorScheme.outline,
+                color: EzConfig.colors.outline,
                 name: EzConfig.l10n.dsDrag,
                 tooltip: EzConfig.l10n.dsDragHint,
               ),
@@ -180,7 +175,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
               // Swipe
               keyIcon(
                 icon: Icons.swipe,
-                color: colorScheme.outline,
+                color: EzConfig.colors.outline,
                 name: EzConfig.l10n.dsSwipe,
                 tooltip: EzConfig.l10n.dsSwipeHint,
               ),
@@ -189,7 +184,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
               // Scroll
               keyIcon(
                 icon: Icons.mouse,
-                color: colorScheme.outline,
+                color: EzConfig.colors.outline,
                 name: EzConfig.l10n.dsScroll,
                 tooltip: EzConfig.l10n.dsScrollHint,
               ),
@@ -198,7 +193,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
               // Pinch
               keyIcon(
                 icon: Icons.pinch,
-                color: colorScheme.outline,
+                color: EzConfig.colors.outline,
                 name: EzConfig.l10n.dsPinch,
                 tooltip: EzConfig.l10n.dsPinchHint,
               ),

@@ -5,6 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class EzLink extends StatefulWidget {
   /// The [TextButton.child] will be [Text] with [text] and all provided styling
@@ -83,11 +84,10 @@ class _EzLinkState extends State<EzLink> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final ThemeData theme = Theme.of(context);
-    final Color textColor = widget.textColor ?? theme.colorScheme.primary;
+    final Color textColor = widget.textColor ?? EzConfig.colors.primary;
 
     TextStyle? textStyle =
-        (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
+        (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
       color: textColor,
       decoration: TextDecoration.none,
       decorationColor: widget.decorationColor ?? textColor,
@@ -98,7 +98,7 @@ class _EzLinkState extends State<EzLink> {
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: VisualDensity.compact,
       minimumSize: Size.zero,
-      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+      overlayColor: widget.decorationColor ?? EzConfig.colors.primary,
       backgroundColor: widget.backgroundColor,
     );
 

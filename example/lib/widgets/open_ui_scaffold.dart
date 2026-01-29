@@ -31,13 +31,13 @@ class OpenUIScaffold extends StatelessWidget {
   final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
-  const OpenUIScaffold({
+  const OpenUIScaffold(
+    this.body, {
     super.key,
     this.title = appName,
     this.running = false,
     this.showSettings = true,
     this.onUpload,
-    required this.body,
     this.fabs,
   });
 

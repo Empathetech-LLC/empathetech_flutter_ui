@@ -224,7 +224,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   //           GoTransitionRoute(
   //             transition: GoTransitions.zoom,
   //             builder: (_) => Scaffold(
-  //               backgroundColor: Theme.of(context).colorScheme.surface,
+  //               backgroundColor: EzConfig.colors.surface,
   //               body: EzVideoPlayer(
   //                 controller: widget.controller,
   //                 aspectRatio: widget.aspectRatio,
@@ -326,15 +326,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             : (3 * EzConfig.marginVal +
                 2 * (EzConfig.iconSize + EzConfig.padding));
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color iconColor = widget.iconColor ?? colorScheme.primary;
+    final Color iconColor = widget.iconColor ?? EzConfig.colors.primary;
 
-    final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? labelStyle =
-        textTheme.labelLarge?.copyWith(color: widget.textColor);
+        EzConfig.styles.labelLarge?.copyWith(color: widget.textColor);
 
     final SliderThemeData sliderTheme = SliderThemeData(
-      activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
+      activeTrackColor: widget.sliderColor ?? EzConfig.colors.secondary,
       inactiveTrackColor:
           widget.sliderBufferColor ?? widget.textColor.withValues(alpha: 0.5),
       thumbColor: iconColor,
@@ -427,7 +425,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       maxHeight: widget.maxHeight,
                       maxWidth: widget.maxWidth,
                     ),
-                    color: widget.backgroundColor ?? colorScheme.surface,
+                    color: widget.backgroundColor ?? EzConfig.colors.surface,
                     child: AspectRatio(
                       aspectRatio: widget.aspectRatio,
                       child: VideoPlayer(widget.controller),
@@ -450,13 +448,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           EzText(
                             '${(value.volume * 100).toStringAsFixed(0)}%',
                             style: switch (captionStyle) {
-                              4 => textTheme.displayLarge
+                              4 => EzConfig.styles.displayLarge
                                   ?.copyWith(color: widget.textColor),
-                              3 => textTheme.headlineLarge
+                              3 => EzConfig.styles.headlineLarge
                                   ?.copyWith(color: widget.textColor),
-                              2 => textTheme.titleLarge
+                              2 => EzConfig.styles.titleLarge
                                   ?.copyWith(color: widget.textColor),
-                              1 => textTheme.bodyLarge
+                              1 => EzConfig.styles.bodyLarge
                                   ?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
@@ -523,13 +521,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           child: EzText(
                             value.caption.text,
                             style: switch (captionStyle) {
-                              4 => textTheme.displayLarge
+                              4 => EzConfig.styles.displayLarge
                                   ?.copyWith(color: widget.textColor),
-                              3 => textTheme.headlineLarge
+                              3 => EzConfig.styles.headlineLarge
                                   ?.copyWith(color: widget.textColor),
-                              2 => textTheme.titleLarge
+                              2 => EzConfig.styles.titleLarge
                                   ?.copyWith(color: widget.textColor),
-                              1 => textTheme.bodyLarge
+                              1 => EzConfig.styles.bodyLarge
                                   ?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
@@ -824,41 +822,43 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             '${EzConfig.l10n.gCaptions}\n${EzConfig.l10n.gCaptionsHint}',
                                         color: showCaptions
                                             ? iconColor
-                                            : colorScheme.outline,
+                                            : EzConfig.colors.outline,
                                         icon: const Icon(Icons.subtitles),
                                       ),
                                       menuChildren: <Widget>[
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsDisplay,
-                                          textStyle: textTheme.displayLarge,
+                                          textStyle:
+                                              EzConfig.styles.displayLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 4),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsHeadline,
-                                          textStyle: textTheme.headlineLarge,
+                                          textStyle:
+                                              EzConfig.styles.headlineLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 3),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsTitle,
-                                          textStyle: textTheme.titleLarge,
+                                          textStyle: EzConfig.styles.titleLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 2),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsBody,
-                                          textStyle: textTheme.bodyLarge,
+                                          textStyle: EzConfig.styles.bodyLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 1),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsLabel,
-                                          textStyle: textTheme.labelLarge,
+                                          textStyle: EzConfig.styles.labelLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 0),

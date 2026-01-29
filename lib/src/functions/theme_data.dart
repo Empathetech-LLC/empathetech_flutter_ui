@@ -34,10 +34,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final double iconSize =
       isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
 
-  final TextTheme textTheme = ezTextTheme(
-    colorScheme.onSurface,
-    isDark: isDark,
-  );
+  final TextTheme textTheme =
+      ezTextTheme(colorScheme.onSurface, isDark: isDark);
 
   // Buttons //
 

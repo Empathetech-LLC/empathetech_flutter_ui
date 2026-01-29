@@ -70,7 +70,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final Size sizeLimit = ezTextSize(
     widget.sizingString,
-    style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
+    style: widget.style ?? EzConfig.styles.bodyLarge,
     context: context,
   );
 
@@ -91,12 +91,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     controller.text = currValue.toString();
   }
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Return the build //
-
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     return Tooltip(
       message: widget.tooltip,
       child: Column(
@@ -128,7 +126,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         tooltip: EzConfig.l10n.gMinimum,
                         icon: Icon(
                           Icons.remove,
-                          color: colorScheme.outline,
+                          color: EzConfig.colors.outline,
                         ),
                       ),
                 EzConfig.rowMargin,
@@ -143,7 +141,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 decoration: const BoxDecoration(borderRadius: ezRoundEdge),
                 child: TextFormField(
                   controller: controller,
-                  style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
+                  style: widget.style ?? EzConfig.styles.bodyLarge,
                   textAlign: TextAlign.center,
                   textAlignVertical: TextAlignVertical.top,
                   maxLines: 1,
@@ -214,7 +212,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         tooltip: EzConfig.l10n.gMaximum,
                         icon: Icon(
                           Icons.add,
-                          color: colorScheme.outline,
+                          color: EzConfig.colors.outline,
                         ),
                       ),
               ],

@@ -47,7 +47,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
                 header,
                 Text(
                   message ?? EzConfig.l10n.gMachineTranslated,
-                  style: style ?? Theme.of(context).textTheme.labelLarge,
+                  style: style ?? EzConfig.styles.labelLarge,
                   textAlign: textAlign,
                 ),
                 footer,

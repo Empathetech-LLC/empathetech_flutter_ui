@@ -130,12 +130,12 @@ class EzMaterialAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? baseStyle = style ?? Theme.of(context).textTheme.bodyLarge;
+    final TextStyle? baseStyle = style ?? EzConfig.styles.bodyLarge;
 
     final TextStyle? textStyle = isDefaultAction
         ? baseStyle?.copyWith(fontWeight: FontWeight.bold)
         : isDestructiveAction
-            ? baseStyle?.copyWith(color: Theme.of(context).colorScheme.error)
+            ? baseStyle?.copyWith(color: EzConfig.colors.error)
             : baseStyle;
 
     return EzTextButton(

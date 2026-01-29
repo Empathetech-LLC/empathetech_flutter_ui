@@ -38,18 +38,18 @@ class EzTextBackground extends StatelessWidget {
     this.backgroundColor,
   });
 
-  Color _color(BuildContext context, double percent) {
+  Color _color(double percent) {
     if (backgroundColor != null) {
       return backgroundColor!;
     }
 
     late final Color baseColor;
     if (useSurface == null) {
-      baseColor = Theme.of(context).colorScheme.surfaceDim;
+      baseColor = EzConfig.colors.surfaceDim;
     } else if (useSurface!) {
-      baseColor = Theme.of(context).colorScheme.surface;
+      baseColor = EzConfig.colors.surface;
     } else {
-      baseColor = Theme.of(context).colorScheme.surfaceContainer;
+      baseColor = EzConfig.colors.surfaceContainer;
     }
 
     return baseColor.withValues(alpha: percent);
@@ -59,12 +59,9 @@ class EzTextBackground extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         padding: margin ?? EzInsets.wrap(EzConfig.marginVal),
         decoration: BoxDecoration(
-          color: _color(
-            context,
-            EzConfig.get(EzConfig.isDark
-                ? darkTextBackgroundOpacityKey
-                : lightTextBackgroundOpacityKey),
-          ),
+          color: _color(EzConfig.get(EzConfig.isDark
+              ? darkTextBackgroundOpacityKey
+              : lightTextBackgroundOpacityKey)),
           borderRadius: borderRadius ?? ezRoundEdge,
         ),
         child: text,
@@ -148,7 +145,7 @@ class EzText extends StatelessWidget {
     return EzTextBackground(
       Text(
         data,
-        style: style ?? Theme.of(context).textTheme.bodyLarge,
+        style: style ?? EzConfig.styles.bodyLarge,
         strutStyle: strutStyle,
         textAlign: textAlign,
         textDirection: textDirection,
@@ -188,7 +185,7 @@ class EzNewLine extends StatelessWidget {
     return ExcludeSemantics(
       child: Text(
         '',
-        style: style ?? Theme.of(context).textTheme.bodyLarge,
+        style: style ?? EzConfig.styles.bodyLarge,
         textAlign: textAlign ?? TextAlign.start,
       ),
     );

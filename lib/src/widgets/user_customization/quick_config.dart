@@ -82,7 +82,7 @@ class EzQuickConfig extends StatelessWidget {
                 children: <Widget>[
                   // Theme toggle
                   EzSwitchPair(
-                    text: 'Update both theme modes', // TODO: l10n
+                    text: EzConfig.l10n.ssUpdateBoth,
                     value: updateBoth,
                     onChanged: (bool? choice) {
                       if (choice == null) return;

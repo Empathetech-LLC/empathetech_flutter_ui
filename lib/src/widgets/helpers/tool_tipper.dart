@@ -88,7 +88,7 @@ class EzToolTipper extends StatelessWidget {
           richMessage: richMessage,
           child: EzIcon(
             Icons.help_outline,
-            color: Theme.of(context).colorScheme.outline,
+            color: EzConfig.colors.outline,
           ),
         ),
       ),

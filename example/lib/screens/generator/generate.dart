@@ -77,7 +77,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// Is by beginning
   Future<void> genStuff() async {
     final Lang l10n = Lang.of(context)!;
-    final TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
+    final TextStyle? subTitle = ezSubTitleStyle();
 
     await ezCmd(
       '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
@@ -331,7 +331,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         : onFailure(l10n.gsPartialSuccess);
   }
 
-  Widget header(Lang l10n, TextTheme textTheme, TextStyle? subTitle) {
+  Widget header(Lang l10n) {
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -348,14 +348,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SuccessHeader(
-                  textTheme: textTheme,
                   message:
                       '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
                 ),
                 EzConfig.separator,
                 RunOption(
                   projDir: projDir,
-                  style: subTitle,
+                  style: ezSubTitleStyle(),
                   emulate: () async {
                     if (genState == GeneratorState.running) return;
 
@@ -388,7 +387,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FailureHeader(
-                  textTheme: textTheme,
                   message: failureMessage,
                   richMessage: richFailureMessage,
                 ),
@@ -397,12 +395,12 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   DeleteOption(
                     appName: widget.config.appName,
                     dir: workDir,
-                    style: subTitle,
+                    style: ezSubTitleStyle(),
                   ),
                 ],
                 if (showDelete == null) ...<Widget>[
                   EzConfig.spacer,
-                  LinkOption(subTitle),
+                  LinkOption(ezSubTitleStyle()),
                 ],
               ],
             ),
@@ -424,14 +422,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
   @override
   Widget build(_) {
     final Lang l10n = Lang.of(context)!;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
     return OpenUIScaffold(
-      title: l10n.gsPageTitle,
-      running: genState == GeneratorState.running,
-      body: EzScreen(EzScrollView(children: <Widget>[
-        header(l10n, textTheme, subTitle),
+      EzScreen(EzScrollView(children: <Widget>[
+        header(l10n),
         EzConfig.divider,
 
         // Console output //
@@ -442,7 +436,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
           children: <Widget>[
             EzText(
               l10n.gsConsole,
-              style: textTheme.titleLarge,
+              style: EzConfig.styles.titleLarge,
               textAlign: TextAlign.center,
             ),
             EzMargin(vertical: false),
@@ -467,7 +461,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             ),
             padding: EdgeInsets.all(EzConfig.marginVal),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceDim,
+              color: EzConfig.colors.surfaceDim,
               borderRadius: ezRoundEdge,
             ),
             child: ValueListenableBuilder<String>(
@@ -476,7 +470,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 child: Text(
                   value,
-                  style: textTheme.bodyLarge,
+                  style: EzConfig.styles.bodyLarge,
                   textAlign: TextAlign.start,
                 ),
               ),
@@ -485,6 +479,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
         ),
         EzConfig.separator,
       ])),
+      title: l10n.gsPageTitle,
+      running: genState == GeneratorState.running,
     );
   }
 }

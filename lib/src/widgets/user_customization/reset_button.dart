@@ -84,7 +84,7 @@ class EzResetButton extends StatelessWidget {
             as double) <
         0.50;
     late final Color crucialSurface =
-        Theme.of(context).colorScheme.surface.withValues(alpha: 0.50);
+        EzConfig.colors.surface.withValues(alpha: 0.50);
 
     // Return the build //
 

@@ -81,7 +81,7 @@ double ezDropdownWidth({
     ezTextSize(
       getLongest(entries),
       context: context,
-      style: Theme.of(context).textTheme.bodyLarge,
+      style: EzConfig.styles.bodyLarge,
     ).width +
     EzConfig.padding +
     max(EzConfig.padding + EzConfig.iconSize, kMinInteractiveDimension);

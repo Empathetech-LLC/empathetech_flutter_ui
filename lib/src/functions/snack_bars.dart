@@ -70,8 +70,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
 
   final double toastMargin = margin ?? EzConfig.marginVal;
 
-  late final TextStyle? bodyStyle = Theme.of(context).textTheme.bodyLarge;
-  late final Color primary = Theme.of(context).colorScheme.primary;
+  late final TextStyle? bodyStyle = EzConfig.styles.bodyLarge;
+  late final Color primary = EzConfig.colors.primary;
 
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -82,7 +82,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       action: action,
       actionOverflowThreshold: actionOverflowThreshold,
       showCloseIcon: showCloseIcon ?? true,
-      closeIconColor: closeIconColor ?? Theme.of(context).colorScheme.primary,
+      closeIconColor: closeIconColor ?? EzConfig.colors.primary,
       animation: animation,
       onVisible: onVisible,
       dismissDirection: dismissDirection ?? DismissDirection.down,
