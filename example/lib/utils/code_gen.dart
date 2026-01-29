@@ -718,7 +718,7 @@ class ${classCaseAppName}Cache extends EzAppCache {
   Locale _locale;
   Lang _l10n;
 
-  ${classCaseAppName}Cache({required Locale locale, required $l10nClass l10n})
+  ${classCaseAppName}Cache(Locale locale, $l10nClass l10n)
       : _locale = locale,
         _l10n = l10n;
 
