@@ -693,6 +693,12 @@ abstract class EFUILang {
   /// **'Activate to show presets'**
   String get ssLoadPresetHint;
 
+  /// No description provided for @ssUpdateBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Update both theme modes'**
+  String get ssUpdateBoth;
+
   /// No description provided for @ssBigButtons.
   ///
   /// In en, this message translates to:

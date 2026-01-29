@@ -127,6 +127,7 @@
 
   "ssLoadPreset": "Load preset",
   "ssLoadPresetHint": "Activate to show presets",
+  "ssUpdateBoth": "Update both theme modes",
   "ssBigButtons": "Big buttons",
   "ssHighVisibility": "High visibility",
   "ssVideoGame": "Video game",

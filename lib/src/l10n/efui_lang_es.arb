@@ -127,6 +127,7 @@
 
   "ssLoadPreset": "Cargar preajuste",
   "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
+  "ssUpdateBoth": "Actualizar ambos modos de tema",
   "ssBigButtons": "Botones grandes",
   "ssHighVisibility": "Alta visibilidad",
   "ssVideoGame": "Videojuego",

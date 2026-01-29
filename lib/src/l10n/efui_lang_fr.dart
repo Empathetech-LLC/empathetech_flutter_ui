@@ -325,6 +325,9 @@ class EFUILangFr extends EFUILang {
   String get ssLoadPresetHint => 'Activer pour afficher les préréglages';
 
   @override
+  String get ssUpdateBoth => 'Mettre à jour les deux modes de thème';
+
+  @override
   String get ssBigButtons => 'Gros boutons';
 
   @override

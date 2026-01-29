@@ -326,6 +326,9 @@ class EFUILangEs extends EFUILang {
   String get ssLoadPresetHint => 'Activar para mostrar ajustes preestablecidos';
 
   @override
+  String get ssUpdateBoth => 'Actualizar ambos modos de tema';
+
+  @override
   String get ssBigButtons => 'Botones grandes';
 
   @override

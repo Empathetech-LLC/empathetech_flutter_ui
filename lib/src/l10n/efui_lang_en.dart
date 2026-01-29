@@ -324,6 +324,9 @@ class EFUILangEn extends EFUILang {
   String get ssLoadPresetHint => 'Activate to show presets';
 
   @override
+  String get ssUpdateBoth => 'Update both theme modes';
+
+  @override
   String get ssBigButtons => 'Big buttons';
 
   @override
@@ -971,6 +974,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssLoadPresetHint => 'Activate to show presets';
+
+  @override
+  String get ssUpdateBoth => 'Update both theme modes';
 
   @override
   String get ssBigButtons => 'Big buttons';
