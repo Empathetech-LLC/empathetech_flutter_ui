@@ -197,8 +197,8 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Rebuilds the apps [ThemeData] and updates the config caches
   /// Then calls [redraw] with [onComplete]
-  /// HIGHLY recommended to wrap [Scaffold] Widgets in a [Consumer] for [EzConfigProvider]
-  /// Simply set the [Scaffold.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed] and all [EzConfig] updates will be live!
+  /// It is highly recommended to wrap [EzAdaptiveParent] Widgets in a [Consumer] for [EzConfigProvider]
+  /// Simply set [EzAdaptiveParent.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed], and all [EzConfig] updates will be live!
   Future<void> rebuild({void Function()? onComplete}) async {
     _buildThemeMode();
     _buildThemeData();
@@ -207,8 +207,8 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Randomizes the [seed] and notifies listeners
   /// Optionally calls [onComplete] after notifying
-  /// HIGHLY recommended to wrap [Scaffold] Widgets in a [Consumer] for [EzConfigProvider]
-  /// Simply set the [Scaffold.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed] and all [EzConfig] updates will be live!
+  /// It is highly recommended to wrap [EzAdaptiveParent] Widgets in a [Consumer] for [EzConfigProvider]
+  /// Simply set [EzAdaptiveParent.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed], and all [EzConfig] updates will be live!
   Future<void> redraw({void Function()? onComplete}) async {
     _seed = Random().nextInt(rMax);
     if (_appCache != null) await _appCache.redraw();
@@ -256,7 +256,8 @@ class EzLayoutCache {
 
   /// Theme aware tracker for frequently used layout values...
   /// Margin, padding, and spacing
-  /// Config values and default Widgets
+  /// Both their [EzConfig] values and default [Widget]s
+  /// ...and hideScroll
   EzLayoutCache({
     required this.marginVal,
     required this.padding,
@@ -275,7 +276,6 @@ class EzTextCache {
   final double iconSize;
 
   /// Theme aware tracker for frequently used text values...
-  /// Margin, padding, and spacing
   /// Icon size
   EzTextCache({required this.iconSize});
 }
