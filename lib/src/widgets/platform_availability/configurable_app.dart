@@ -91,7 +91,7 @@ class _AppDrawerState extends State<_AppDrawer> with WidgetsBindingObserver {
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    config.toggleTheme(); // Send platform brightness change to EzConfigProvider
+    config.setThemeMode();
   }
 
   // Return the build //

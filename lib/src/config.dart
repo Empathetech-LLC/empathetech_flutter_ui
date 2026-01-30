@@ -285,12 +285,10 @@ Must be one of [int, bool, double, String, List<String>]''');
   //* Setters *//
 
   static bool initProvider(EzConfigProvider configProvider) {
-    if (_instance == null) {
-      return false;
-    } else {
-      _instance!._provider = configProvider;
-      return true;
-    }
+    if (_instance == null) return false;
+
+    if (_instance!._provider == null) _instance!._provider = configProvider;
+    return true;
   }
 
   /// Set the EzConfig [key] to [value] with type [bool]
@@ -307,7 +305,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._provider!.rebuild(onComplete: onNotify);
+        await _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -330,7 +328,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._provider!.rebuild(onComplete: onNotify);
+        await _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -353,7 +351,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._provider!.rebuild(onComplete: onNotify);
+        await _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -376,7 +374,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._provider!.rebuild(onComplete: onNotify);
+        await _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -399,7 +397,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       if (!storageOnly) _instance!._prefs[key] = value;
 
       if (notifyTheme) {
-        _instance!._provider!.rebuild(onComplete: onNotify);
+        await _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -452,13 +450,10 @@ Must be one of [int, bool, double, String, List<String>]''');
     bool notifyTheme = false,
     void Function()? onNotify,
   }) async {
-    for (final MapEntry<String, dynamic> entry in config.entries) {
-      // Check filter
-      if (filter != null && filter.contains(entry.key)) {
-        ezLog('Filtering [${entry.key}]');
-        continue;
-      }
+    final Set<MapEntry<String, dynamic>> entries = config.entries.toSet();
+    if (filter != null) entries.removeAll(filter);
 
+    for (final MapEntry<String, dynamic> entry in entries) {
       // Check type
       final dynamic expectedType = _instance!._typeMap[entry.key];
       if (expectedType == null) {
@@ -511,7 +506,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._provider!.rebuild(onComplete: onNotify);
+      await _instance!._provider!.rebuild(onComplete: onNotify);
     }
   }
 
@@ -828,7 +823,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
     }
 
-    _instance!._provider!.rebuild(onComplete: onNotify);
+    await _instance!._provider!.rebuild(onComplete: onNotify);
   }
 
   //* Removers *//
@@ -853,7 +848,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
 
       if (notifyTheme) {
-        _instance!._provider!.rebuild(onComplete: onNotify);
+        await _instance!._provider!.rebuild(onComplete: onNotify);
       }
       return true;
     } catch (e) {
@@ -884,7 +879,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._provider!.rebuild(onComplete: onNotify);
+      await _instance!._provider!.rebuild(onComplete: onNotify);
     }
     return success;
   }
@@ -910,7 +905,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (notifyTheme) {
-      _instance!._provider!.rebuild(onComplete: onNotify);
+      await _instance!._provider!.rebuild(onComplete: onNotify);
     }
     return success;
   }
