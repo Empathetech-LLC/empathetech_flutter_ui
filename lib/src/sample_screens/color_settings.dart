@@ -315,8 +315,7 @@ class _AdvancedColorSettings extends StatefulWidget {
   State<_AdvancedColorSettings> createState() => _AdvancedColorSettingsState();
 }
 
-class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
-    with WidgetsBindingObserver {
+class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   // Define the build data //
 
   late final List<String> defaultList = widget.defaultList;
@@ -415,23 +414,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
     }).toList();
   }
 
-  // Init //
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    super.didChangePlatformBrightness();
-    if (modalOpen) {
-      Navigator.of(context).pop();
-      modalOpen = false;
-    }
-  }
-
   // Return the build //
 
   @override
@@ -511,11 +493,5 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 }

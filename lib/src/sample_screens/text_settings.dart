@@ -175,8 +175,7 @@ class _TextSettings extends StatefulWidget {
   State<_TextSettings> createState() => _TextSettingsState();
 }
 
-class _TextSettingsState extends State<_TextSettings>
-    with WidgetsBindingObserver {
+class _TextSettingsState extends State<_TextSettings> {
   // Define the build data //
 
   late final EzDisplayStyleProvider displayProvider =
@@ -201,23 +200,6 @@ class _TextSettingsState extends State<_TextSettings>
   void initState() {
     super.initState();
     ezWindowNamer(EzConfig.l10n.tsPageTitle);
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    // TODO: test if this can be removed entirely. if not, it surely can be improved.
-    super.didChangePlatformBrightness();
-
-    final String key =
-        isDarkTheme(context) ? darkOnSurfaceKey : lightOnSurfaceKey;
-    final Color color = Color(EzConfig.get(key));
-
-    displayProvider.redraw(color);
-    headlineProvider.redraw(color);
-    titleProvider.redraw(color);
-    bodyProvider.redraw(color);
-    labelProvider.redraw(color);
   }
 
   // Return the build //
@@ -305,12 +287,6 @@ class _TextSettingsState extends State<_TextSettings>
           ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 }
 
