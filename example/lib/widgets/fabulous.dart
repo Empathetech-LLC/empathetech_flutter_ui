@@ -9,6 +9,17 @@ import 'package:efui_bios/efui_bios.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+/// Track version updates
+const Widget updater = EzUpdaterFAB(
+  appVersion: '3.0.0',
+  versionSource:
+      'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
+  gPlay:
+      'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+  appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
+  github: 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
+);
+
 class ResetFAB extends StatelessWidget {
   /// Function to execute with 'Builder values' and 'Both' options
   final void Function() clearForms;

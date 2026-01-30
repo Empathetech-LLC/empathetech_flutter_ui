@@ -71,6 +71,7 @@ class OpenUIScaffold extends StatelessWidget {
         builder: (_, EzConfigProvider provider, __) => SelectionArea(
           child: Scaffold(
             key: ValueKey<int>(provider.seed),
+
             // AppBar
             appBar: PreferredSize(
               preferredSize: Size(double.infinity, toolbarHeight),
@@ -104,20 +105,7 @@ class OpenUIScaffold extends StatelessWidget {
             // FAB
             floatingActionButton: Column(
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const EzUpdaterFAB(
-                  appVersion: '3.0.0',
-                  versionSource:
-                      'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
-                  gPlay:
-                      'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
-                  appStore:
-                      'https://apps.apple.com/us/app/open-ui/id6499560244',
-                  github:
-                      'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
-                ),
-                if (fabs != null) ...fabs!
-              ],
+              children: <Widget>[updater, if (fabs != null) ...fabs!],
             ),
             floatingActionButtonLocation: EzConfig.isLefty
                 ? FloatingActionButtonLocation.startFloat
