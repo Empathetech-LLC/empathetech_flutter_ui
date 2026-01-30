@@ -911,6 +911,7 @@ class _HomeScreenState extends State<HomeScreen> {
             removeVSC = false;
             vscController.text = vscDefault;
           }),
+          // onNotify: () => setState(() {}), does work, but only for one problem. there is potentially a deeper fix
         ),
       ],
     );
