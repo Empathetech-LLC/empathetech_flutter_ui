@@ -66,12 +66,11 @@ class OpenUIScaffold extends StatelessWidget {
 
     // Return the build //
 
-    return EzAdaptiveParent(
-      small: Consumer<EzConfigProvider>(
-        builder: (_, EzConfigProvider provider, __) => SelectionArea(
+    return Consumer<EzConfigProvider>(
+      builder: (_, EzConfigProvider provider, __) => EzAdaptiveParent(
+        key: ValueKey<int>(provider.seed),
+        small: SelectionArea(
           child: Scaffold(
-            key: ValueKey<int>(provider.seed),
-
             // AppBar
             appBar: PreferredSize(
               preferredSize: Size(double.infinity, toolbarHeight),
