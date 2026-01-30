@@ -100,13 +100,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   // Define the build data //
 
   final bool strictMobile = !kIsWeb && isMobile();
-  int redraw = 0;
-
-  double iconSize = EzConfig.iconSize;
-
-  // Define custom functions //
-
-  void drawState() => setState(() => redraw = Random().nextInt(rMax));
 
   // Init //
 
@@ -149,7 +142,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Animation duration
         if (widget.includeAnimation) ...<Widget>[
           EzElevatedIconButton(
-            // TODO: make the icon size a fab save and make these into classes
             onPressed: () async {
               double animDuration = EzConfig.animDur.toDouble();
               final double backup = animDuration;
@@ -162,10 +154,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     children: <Widget>[
                       // Preview
                       SizedBox(
-                        height: iconSize * 3,
+                        height: EzConfig.iconSize * 3,
                         child: _AnimationPreview(
                           duration: animDuration.toInt(),
-                          iconSize: iconSize,
+                          iconSize: EzConfig.iconSize,
                         ),
                       ),
                       EzConfig.spacer,
@@ -178,31 +170,23 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
-                        child: SliderTheme(
-                          data: SliderThemeData(
-                            thumbShape: RoundSliderThumbShape(
-                              enabledThumbRadius: iconSize / 2,
-                              disabledThumbRadius: iconSize / 2,
-                            ),
-                          ),
-                          child: Slider(
-                            value: animDuration,
-                            min: minAnimationDuration.toDouble(),
-                            max: maxAnimationDuration.toDouble(),
-                            divisions: 20,
-                            label: animDuration.toStringAsFixed(0),
-                            onChanged: (double value) =>
-                                setModal(() => animDuration = value),
-                            onChangeEnd: (double value) => EzConfig.isDark
-                                ? EzConfig.setInt(
-                                    darkAnimationDurationKey,
-                                    value.toInt(),
-                                  )
-                                : EzConfig.setInt(
-                                    lightAnimationDurationKey,
-                                    value.toInt(),
-                                  ),
-                          ),
+                        child: Slider(
+                          value: animDuration,
+                          min: minAnimationDuration.toDouble(),
+                          max: maxAnimationDuration.toDouble(),
+                          divisions: 20,
+                          label: animDuration.toStringAsFixed(0),
+                          onChanged: (double value) =>
+                              setModal(() => animDuration = value),
+                          onChangeEnd: (double value) => EzConfig.isDark
+                              ? EzConfig.setInt(
+                                  darkAnimationDurationKey,
+                                  value.toInt(),
+                                )
+                              : EzConfig.setInt(
+                                  lightAnimationDurationKey,
+                                  value.toInt(),
+                                ),
                         ),
                       ),
                       EzConfig.spacer,
@@ -233,11 +217,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 ),
               );
 
-              if (animDuration != backup) EzConfig.provider.rebuild();
+              if (animDuration != backup) await EzConfig.provider.rebuild();
             },
             label: EzConfig.l10n.dsAnimDuration,
             icon: const Icon(Icons.timer_outlined),
-            style: ElevatedButton.styleFrom(iconSize: iconSize),
           ),
           EzConfig.spacer,
         ],
@@ -321,23 +304,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           Padding(
                             padding: EzInsets.wrap(EzConfig.spacing),
                             child: Transform.scale(
-                              scale: max(
-                                1.0,
-                                EzConfig.isDark
-                                    ? max(
-                                        iconSize /
-                                            EzConfig.getDefault(
-                                                darkIconSizeKey),
-                                        EzConfig.padding /
-                                            EzConfig.getDefault(darkPaddingKey))
-                                    : max(
-                                        iconSize /
-                                            EzConfig.getDefault(
-                                                lightIconSizeKey),
-                                        EzConfig.padding /
-                                            EzConfig.getDefault(
-                                                lightPaddingKey)),
-                              ),
+                              scale: ezIconRatio(),
                               child: Switch(
                                 value: dummyBool,
                                 onChanged: (bool v) =>
@@ -360,30 +327,22 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
-                        child: SliderTheme(
-                          data: SliderThemeData(
-                            thumbShape: RoundSliderThumbShape(
-                              enabledThumbRadius: iconSize / 2,
-                              disabledThumbRadius: iconSize / 2,
-                            ),
-                          ),
-                          child: Slider(
-                            // Slider values
-                            value: buttonOpacity,
-                            min: minOpacity,
-                            max: maxOpacity,
-                            divisions: 20,
-                            label: buttonOpacity.toStringAsFixed(2),
+                        child: Slider(
+                          // Slider values
+                          value: buttonOpacity,
+                          min: minOpacity,
+                          max: maxOpacity,
+                          divisions: 20,
+                          label: buttonOpacity.toStringAsFixed(2),
 
-                            // Slider functions
-                            onChanged: (double value) =>
-                                setModal(() => buttonOpacity = value),
-                            onChangeEnd: (double value) => EzConfig.setDouble(
-                              EzConfig.isDark
-                                  ? darkButtonOpacityKey
-                                  : lightButtonOpacityKey,
-                              value,
-                            ),
+                          // Slider functions
+                          onChanged: (double value) =>
+                              setModal(() => buttonOpacity = value),
+                          onChangeEnd: (double value) => EzConfig.setDouble(
+                            EzConfig.isDark
+                                ? darkButtonOpacityKey
+                                : lightButtonOpacityKey,
+                            value,
                           ),
                         ),
                       ),
@@ -395,30 +354,22 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: ScreenSize.small.size),
-                        child: SliderTheme(
-                          data: SliderThemeData(
-                            thumbShape: RoundSliderThumbShape(
-                              enabledThumbRadius: iconSize / 2,
-                              disabledThumbRadius: iconSize / 2,
-                            ),
-                          ),
-                          child: Slider(
-                            // Slider values
-                            value: outlineOpacity,
-                            min: minOpacity,
-                            max: maxOpacity,
-                            divisions: 20,
-                            label: outlineOpacity.toStringAsFixed(2),
+                        child: Slider(
+                          // Slider values
+                          value: outlineOpacity,
+                          min: minOpacity,
+                          max: maxOpacity,
+                          divisions: 20,
+                          label: outlineOpacity.toStringAsFixed(2),
 
-                            // Slider functions
-                            onChanged: (double value) =>
-                                setModal(() => outlineOpacity = value),
-                            onChangeEnd: (double value) => EzConfig.setDouble(
-                              EzConfig.isDark
-                                  ? darkButtonOutlineOpacityKey
-                                  : lightButtonOutlineOpacityKey,
-                              value,
-                            ),
+                          // Slider functions
+                          onChanged: (double value) =>
+                              setModal(() => outlineOpacity = value),
+                          onChangeEnd: (double value) => EzConfig.setDouble(
+                            EzConfig.isDark
+                                ? darkButtonOutlineOpacityKey
+                                : lightButtonOutlineOpacityKey,
+                            value,
                           ),
                         ),
                       ),
@@ -461,7 +412,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ),
           label: EzConfig.l10n.dsButtonOpacity,
           icon: const Icon(Icons.opacity),
-          style: ElevatedButton.styleFrom(iconSize: iconSize),
         ),
         (widget.includeScroll || widget.includeIconSize)
             ? EzConfig.divider
@@ -470,16 +420,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Scrollbar toggle
         if (widget.includeScroll) ...<Widget>[
           EzSwitchPair(
-            key: ValueKey<String>('scroll_$redraw'),
             valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
-            scale: iconSize / defaultIconSize,
             text: EzConfig.l10n.lsScroll,
           ),
           EzConfig.spacer,
         ],
 
         // Icon size
-        if (widget.includeIconSize) EzIconSizeSetting(redraw: drawState),
+        if (widget.includeIconSize) const EzIconSizeSetting(),
 
         // After background
         if (widget.afterDesign != null) ...widget.afterDesign!,
@@ -487,7 +435,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Reset button
         widget.resetSpacer,
         EzResetButton(
-          key: ValueKey<String>('reset_$redraw'),
           dialogTitle: EzConfig.l10n.dsResetAll(themeProfile),
           onConfirm: () async {
             if (EzConfig.isDark) {
@@ -513,10 +460,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 await EzConfig.removeKeys(widget.resetExtraLight!);
               }
             }
-
-            iconSize = defaultIconSize;
-
-            drawState();
             widget.onReset?.call();
           },
           resetSkip: widget.resetSkip,
