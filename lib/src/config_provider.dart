@@ -7,6 +7,7 @@ import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EzConfigProvider extends ChangeNotifier {
   // Construct //
