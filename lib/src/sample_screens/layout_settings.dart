@@ -5,7 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzLayoutSettings extends StatefulWidget {
@@ -60,10 +59,6 @@ class EzLayoutSettings extends StatefulWidget {
 }
 
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
-  // Define the build data //
-
-  late int redraw = 0;
-
   // Set the page title //
 
   @override
@@ -75,131 +70,124 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) => EzScrollView(
-        children: <Widget>[
-          EzHeader(),
+  Widget build(BuildContext context) {
+    return EzScrollView(
+      children: <Widget>[
+        EzHeader(),
 
-          // Before layout
-          if (widget.beforeLayout != null) ...widget.beforeLayout!,
+        // Before layout
+        if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
-          // Main //
-          ...EzConfig.isDark
-              ? <Widget>[
-                  // Margin
-                  EzLayoutSetting(
-                    key: ValueKey<String>('margin_$redraw'),
-                    configKey: darkMarginKey,
-                    type: EzLayoutSettingType.margin,
-                    min: minMargin,
-                    max: maxMargin,
-                    steps: 6,
-                    decimals: 1,
-                  ),
-                  EzConfig.spacer,
+        // Main //
+        ...EzConfig.isDark
+            ? <Widget>[
+                // Margin
+                const EzLayoutSetting(
+                  configKey: darkMarginKey,
+                  type: EzLayoutSettingType.margin,
+                  min: minMargin,
+                  max: maxMargin,
+                  steps: 6,
+                  decimals: 1,
+                ),
+                EzConfig.spacer,
 
-                  // Padding
-                  EzLayoutSetting(
-                    key: ValueKey<String>('padding_$redraw'),
-                    configKey: darkPaddingKey,
-                    type: EzLayoutSettingType.padding,
-                    min: minPadding,
-                    max: maxPadding,
-                    steps: 12,
-                    decimals: 1,
-                  ),
-                  EzConfig.spacer,
+                // Padding
+                const EzLayoutSetting(
+                  configKey: darkPaddingKey,
+                  type: EzLayoutSettingType.padding,
+                  min: minPadding,
+                  max: maxPadding,
+                  steps: 12,
+                  decimals: 1,
+                ),
+                EzConfig.spacer,
 
-                  // Spacing
-                  EzLayoutSetting(
-                    key: ValueKey<String>('spacing_$redraw'),
-                    configKey: darkSpacingKey,
-                    type: EzLayoutSettingType.spacing,
-                    min: minSpacing,
-                    max: maxSpacing,
-                    steps: 13,
-                    decimals: 0,
-                  ),
-                  EzConfig.separator,
+                // Spacing
+                const EzLayoutSetting(
+                  configKey: darkSpacingKey,
+                  type: EzLayoutSettingType.spacing,
+                  min: minSpacing,
+                  max: maxSpacing,
+                  steps: 13,
+                  decimals: 0,
+                ),
+                EzConfig.separator,
 
-                  // Hide scroll
-                  EzSwitchPair(
-                    key: ValueKey<String>('scroll_$redraw'),
-                    text: EzConfig.l10n.lsScroll,
-                    valueKey: darkHideScrollKey,
-                  ),
-                ]
-              : <Widget>[
-                  // Margin
-                  EzLayoutSetting(
-                    key: ValueKey<String>('margin_$redraw'),
-                    configKey: lightMarginKey,
-                    type: EzLayoutSettingType.margin,
-                    min: minMargin,
-                    max: maxMargin,
-                    steps: 6,
-                    decimals: 1,
-                  ),
-                  EzConfig.spacer,
+                // Hide scroll
+                EzSwitchPair(
+                  text: EzConfig.l10n.lsScroll,
+                  valueKey: darkHideScrollKey,
+                ),
+              ]
+            : <Widget>[
+                // Margin
+                const EzLayoutSetting(
+                  configKey: lightMarginKey,
+                  type: EzLayoutSettingType.margin,
+                  min: minMargin,
+                  max: maxMargin,
+                  steps: 6,
+                  decimals: 1,
+                ),
+                EzConfig.spacer,
 
-                  // Padding
-                  EzLayoutSetting(
-                    key: ValueKey<String>('padding_$redraw'),
-                    configKey: lightPaddingKey,
-                    type: EzLayoutSettingType.padding,
-                    min: minPadding,
-                    max: maxPadding,
-                    steps: 12,
-                    decimals: 1,
-                  ),
-                  EzConfig.spacer,
+                // Padding
+                const EzLayoutSetting(
+                  configKey: lightPaddingKey,
+                  type: EzLayoutSettingType.padding,
+                  min: minPadding,
+                  max: maxPadding,
+                  steps: 12,
+                  decimals: 1,
+                ),
+                EzConfig.spacer,
 
-                  // Spacing
-                  EzLayoutSetting(
-                    key: ValueKey<String>('spacing_$redraw'),
-                    configKey: lightSpacingKey,
-                    type: EzLayoutSettingType.spacing,
-                    min: minSpacing,
-                    max: maxSpacing,
-                    steps: 13,
-                    decimals: 0,
-                  ),
-                  EzConfig.separator,
+                // Spacing
+                const EzLayoutSetting(
+                  configKey: lightSpacingKey,
+                  type: EzLayoutSettingType.spacing,
+                  min: minSpacing,
+                  max: maxSpacing,
+                  steps: 13,
+                  decimals: 0,
+                ),
+                EzConfig.separator,
 
-                  // Hide scroll
-                  EzSwitchPair(
-                    key: ValueKey<String>('scroll_$redraw'),
-                    text: EzConfig.l10n.lsScroll,
-                    valueKey: lightHideScrollKey,
-                  ),
-                ],
+                // Hide scroll
+                EzSwitchPair(
+                  text: EzConfig.l10n.lsScroll,
+                  valueKey: lightHideScrollKey,
+                ),
+              ],
 
-          // After layout
-          if (widget.afterLayout != null) ...widget.afterLayout!,
+        // After layout
+        if (widget.afterLayout != null) ...widget.afterLayout!,
 
-          // Local reset all
-          widget.resetSpacer,
-          EzResetButton(
-            dialogTitle: EzConfig.l10n.lsResetAll,
-            onConfirm: () async {
-              if (EzConfig.isDark) {
-                await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
-                if (widget.resetExtraDark != null) {
-                  await EzConfig.removeKeys(widget.resetExtraDark!);
-                }
-              } else {
-                await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
-                if (widget.resetExtraLight != null) {
-                  await EzConfig.removeKeys(widget.resetExtraLight!);
-                }
+        // Local reset all
+        widget.resetSpacer,
+        EzResetButton(
+          dialogTitle: EzConfig.l10n.lsResetAll,
+          onConfirm: () async {
+            if (EzConfig.isDark) {
+              await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
+              if (widget.resetExtraDark != null) {
+                await EzConfig.removeKeys(widget.resetExtraDark!);
               }
-              setState(() => redraw = Random().nextInt(rMax));
-            },
-            resetSkip: widget.resetSkip,
-            saveSkip: widget.saveSkip,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-          ),
-          EzConfig.separator,
-        ],
-      );
+            } else {
+              await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
+              if (widget.resetExtraLight != null) {
+                await EzConfig.removeKeys(widget.resetExtraLight!);
+              }
+            }
+          },
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
+        ),
+        EzConfig.separator,
+      ],
+    );
+  }
 }

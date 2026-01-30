@@ -75,7 +75,7 @@ class EzTextSettings extends StatelessWidget {
     required this.appName,
     this.androidPackage,
     this.resetSkip,
-    this.saveSkip,
+    this.saveSkip, // THIS CAN PROBABLY BE A CACHE THING, NOT A PROVIDER THING
 
     // Quick
     this.showOnSurface = true,
@@ -110,7 +110,7 @@ class EzTextSettings extends StatelessWidget {
           ),
         ],
         child: _TextSettings(
-          //Shared
+          // Shared
           target: target,
           resetSpacer: resetSpacer,
           extraDark: resetExtraDark,
@@ -544,7 +544,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ],
 
         // Icon size
-        EzIconSizeSetting(redraw: () => setState(() {})),
+        const EzIconSizeSetting(),
 
         // Optional additional settings
         if (widget.moreQuickFooterSettings != null)
@@ -573,7 +573,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               }
             }
 
-            EzConfig.provider.rebuild();
+            await EzConfig.provider.rebuild();
           },
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
