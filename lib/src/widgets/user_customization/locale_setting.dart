@@ -134,6 +134,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                           padding: EzInsets.wrap(EzConfig.spacing),
                           child: EzElevatedIconButton(
                             onPressed: () async {
+                              // Check for no change
+                              if (locale == EzConfig.locale) {
+                                Navigator.of(mContext).pop();
+                                return;
+                              }
+
                               // Gather && set data
                               final List<String> localeData = <String>[
                                 locale.languageCode

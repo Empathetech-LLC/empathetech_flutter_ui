@@ -28,8 +28,6 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Define the build data //
 
-  ThemeMode themeMode = EzConfig.themeMode;
-
   final List<DropdownMenuEntry<ThemeMode>> entries =
       <DropdownMenuEntry<ThemeMode>>[
     DropdownMenuEntry<ThemeMode>(
@@ -64,28 +62,22 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
               .toList(),
           dropdownMenuEntries: entries,
           enableSearch: false,
-          initialSelection: themeMode,
+          initialSelection: EzConfig.themeMode,
           onSelected: (ThemeMode? choice) async {
+            if (choice == null || choice == EzConfig.themeMode) return;
+
             switch (choice) {
-              case ThemeMode.system:
-                await EzConfig.remove(isDarkThemeKey);
-                setState(() => themeMode = ThemeMode.system);
-                break;
-
-              case ThemeMode.light:
-                await EzConfig.setBool(isDarkThemeKey, false);
-                setState(() => themeMode = ThemeMode.light);
-                break;
-
               case ThemeMode.dark:
                 await EzConfig.setBool(isDarkThemeKey, true);
-                setState(() => themeMode = ThemeMode.dark);
                 break;
-
-              default:
-                return;
+              case ThemeMode.light:
+                await EzConfig.setBool(isDarkThemeKey, false);
+                break;
+              case ThemeMode.system:
+                await EzConfig.remove(isDarkThemeKey);
+                break;
             }
-            EzConfig.provider.buildThemeMode();
+            await EzConfig.provider.buildThemeMode();
           },
         ),
       ],

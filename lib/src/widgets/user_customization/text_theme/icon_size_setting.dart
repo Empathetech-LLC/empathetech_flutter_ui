@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class EzIconSizeSetting extends StatefulWidget {
-  final void Function() redraw;
-
-  const EzIconSizeSetting({super.key, required this.redraw});
+  const EzIconSizeSetting({super.key});
 
   @override
   State<EzIconSizeSetting> createState() => _EzIconSizeSettingState();
@@ -32,7 +30,6 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
             onLongPress: () async {
               iconSize = defaultIconSize;
               await EzConfig.setDouble(iconSizeKey, defaultIconSize);
-              widget.redraw();
             },
             child: EzText(
               EzConfig.l10n.tsIconSize,
@@ -50,7 +47,6 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       onPressed: () async {
                         iconSize -= iconDelta;
                         await EzConfig.setDouble(iconSizeKey, iconSize);
-                        widget.redraw();
                       },
                       tooltip:
                           '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
@@ -73,7 +69,6 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                 onLongPress: () async {
                   iconSize = defaultIconSize;
                   await EzConfig.setDouble(iconSizeKey, defaultIconSize);
-                  widget.redraw();
                 },
                 child: Icon(
                   Icons.sync_alt,
@@ -89,7 +84,6 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       onPressed: () async {
                         iconSize += iconDelta;
                         await EzConfig.setDouble(iconSizeKey, iconSize);
-                        widget.redraw();
                       },
                       tooltip:
                           '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
