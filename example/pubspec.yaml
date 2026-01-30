@@ -23,7 +23,6 @@ dependencies:
   file_saver: ^0.2.14
   flutter_localized_locales: ^2.0.5
   line_icons: ^2.0.3
-  provider: ^6.1.5+1
   xml: ^6.6.1
 
   # Empathetech
