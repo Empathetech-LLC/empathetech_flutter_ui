@@ -70,10 +70,10 @@ class EzQuickConfig extends StatelessWidget {
           context: context,
           builder: (BuildContext mContext) => StatefulBuilder(
             builder: (_, StateSetter setModal) {
-              void onComplete() {
+              Future<void> onComplete() async {
                 Navigator.of(mContext).pop();
                 if (notifyTheme) {
-                  EzConfig.provider.rebuild(onComplete: onNotify);
+                  await EzConfig.provider.rebuild(onComplete: onNotify);
                 }
               }
 
@@ -158,7 +158,7 @@ class EzQuickConfig extends StatelessWidget {
 class EzBigButtonsConfig extends StatelessWidget {
   /// Only runs if you're using the full widget
   /// Calling [onPressed] does not trigger [onComplete]
-  final void Function()? onComplete;
+  final Future<void> Function()? onComplete;
 
   /// null updates both themes
   /// Quantum computing
@@ -215,7 +215,7 @@ class EzBigButtonsConfig extends StatelessWidget {
         ),
         onPressed: () async {
           await onPressed(isDark: isDark);
-          onComplete?.call();
+          await onComplete?.call();
         },
         text: EzConfig.l10n.ssBigButtons,
       );
@@ -224,7 +224,7 @@ class EzBigButtonsConfig extends StatelessWidget {
 class EzHighVisibilityConfig extends StatelessWidget {
   /// Only runs if you're using the full widget
   /// Calling [onPressed] does not trigger [onComplete]
-  final void Function()? onComplete;
+  final Future<void> Function()? onComplete;
 
   /// null updates both themes
   /// Quantum computing
@@ -448,7 +448,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
             ),
       onPressed: () async {
         await onPressed(isDark: isDark);
-        onComplete?.call();
+        await onComplete?.call();
       },
       text: EzConfig.l10n.ssHighVisibility,
       textStyle: localBody,
@@ -459,7 +459,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 class EzVideoGameConfig extends StatelessWidget {
   /// Only runs if you're using the full widget
   /// Calling [onPressed] does not trigger [onComplete]
-  final void Function()? onComplete;
+  final Future<void> Function()? onComplete;
 
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets [ezColorScheme] with [Brightness.dark]
@@ -590,7 +590,7 @@ class EzVideoGameConfig extends StatelessWidget {
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
-        if (confirmed) onComplete?.call();
+        if (confirmed) await onComplete?.call();
       },
       text: EzConfig.l10n.ssVideoGame,
       textStyle: localBody,
@@ -603,7 +603,7 @@ const Color chalkboardGreen = Color(0xFF264941);
 class EzChalkboardConfig extends StatelessWidget {
   /// Only runs if you're using the full widget
   /// Calling [onPressed] does not trigger [onComplete]
-  final void Function()? onComplete;
+  final Future<void> Function()? onComplete;
 
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets a [ColorScheme] similar to [ezHighContrastDark], but with a chalkboard surface (0xFF264941) and [empathSand] accents
@@ -765,7 +765,7 @@ class EzChalkboardConfig extends StatelessWidget {
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
-        if (confirmed) onComplete?.call();
+        if (confirmed) await onComplete?.call();
       },
       text: EzConfig.l10n.ssChalkboard,
       textStyle: localBody,
@@ -776,7 +776,7 @@ class EzChalkboardConfig extends StatelessWidget {
 class EzFancyPantsConfig extends StatelessWidget {
   /// Only runs if you're using the full widget
   /// Calling [onPressed] does not trigger [onComplete]
-  final void Function()? onComplete;
+  final Future<void> Function()? onComplete;
 
   /// null updates both themes
   /// Quantum computing
@@ -939,7 +939,7 @@ class EzFancyPantsConfig extends StatelessWidget {
             ),
       onPressed: () async {
         await onPressed(isDark: isDark);
-        onComplete?.call();
+        await onComplete?.call();
       },
       text: EzConfig.l10n.ssFancyPants,
       textStyle: localBody,
