@@ -53,13 +53,47 @@ class EzConfigurableApp extends StatelessWidget {
           isDark: isDarkTheme(context),
           appCache: appCache,
         ),
-        child: _AppDrawer(
+        child: _DevXLayer(
           localizationsDelegates: localizationsDelegates,
           supportedLocales: supportedLocales,
           appName: appName,
           routerConfig: routerConfig,
         ),
       );
+}
+
+class _DevXLayer extends StatelessWidget {
+  /// LocaleNamesLocalizationsDelegate(), etc.
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+
+  /// Languages/locales the app supports
+  final Iterable<Locale> supportedLocales;
+
+  /// App name (window title, etc.)
+  final String appName;
+
+  /// Router/page config
+  final RouterConfig<Object>? routerConfig;
+
+  /// A [Widget] layer that may seem redundant, but it makes developers lives a whole lot easier
+  const _DevXLayer({
+    required this.localizationsDelegates,
+    required this.supportedLocales,
+    required this.appName,
+    required this.routerConfig,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    EzConfig.initProvider(Provider.of<EzConfigProvider>(context));
+
+    return _AppDrawer(
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
+      appName: appName,
+      routerConfig: routerConfig,
+    );
+  }
 }
 
 class _AppDrawer extends StatefulWidget {
@@ -91,30 +125,25 @@ class _AppDrawerState extends State<_AppDrawer> with WidgetsBindingObserver {
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    config.setThemeMode();
+    EzConfig.setThemeMode();
   }
 
   // Return the build //
 
-  late final EzConfigProvider config = Provider.of<EzConfigProvider>(context);
-
   @override
-  Widget build(BuildContext context) {
-    // Sets once, then auto success
-    EzConfig.initProvider(config);
-
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: widget.localizationsDelegates,
-      supportedLocales: widget.supportedLocales,
-      locale: EzConfig.locale,
-      title: widget.appName,
-      themeMode: config.themeMode,
-      darkTheme: config.darkTheme,
-      theme: config.lightTheme,
-      routerConfig: widget.routerConfig,
-    );
-  }
+  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider config, __) => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: widget.localizationsDelegates,
+          supportedLocales: widget.supportedLocales,
+          locale: config.locale,
+          title: widget.appName,
+          themeMode: config.themeMode,
+          darkTheme: config.darkTheme,
+          theme: config.lightTheme,
+          routerConfig: widget.routerConfig,
+        ),
+      );
 
   @override
   void dispose() {

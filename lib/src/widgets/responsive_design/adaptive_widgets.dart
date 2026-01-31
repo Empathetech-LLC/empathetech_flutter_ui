@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 // Enum declaration //
 
@@ -75,17 +74,14 @@ class EzAdaptiveParent extends StatelessWidget {
   /// Will be added to all [ScreenSize] calculations
   final double offset;
 
-  /// Enables real-time responses to screen space changes.
-  /// If a [Widget] is not provided, the next smaller size will be used.
-  /// It is highly recommended to wrap this in a [Consumer] for [EzConfigProvider].
-  /// Simply set [key] to a [ValueKey] of the consumed [EzConfigProvider.seed], and all [EzConfig] updates will be live!
-  const EzAdaptiveParent({
-    super.key,
+  /// Enables real-time responses to screen space changes
+  /// If a [Widget] is not provided, the next smaller size will be used
+  EzAdaptiveParent({
     required this.small,
     this.medium,
     this.large,
     this.offset = 0.0,
-  });
+  }) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) {

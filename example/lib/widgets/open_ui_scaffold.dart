@@ -7,7 +7,6 @@ import './export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
@@ -66,53 +65,50 @@ class OpenUIScaffold extends StatelessWidget {
 
     // Return the build //
 
-    return Consumer<EzConfigProvider>(
-      builder: (_, EzConfigProvider provider, __) => EzAdaptiveParent(
-        key: ValueKey<int>(provider.seed),
-        small: SelectionArea(
-          child: Scaffold(
-            // AppBar
-            appBar: PreferredSize(
-              preferredSize: Size(double.infinity, toolbarHeight),
-              child: AppBar(
-                excludeHeaderSemantics: true,
-                toolbarHeight: toolbarHeight,
+    return EzAdaptiveParent(
+      small: SelectionArea(
+        child: Scaffold(
+          // AppBar
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, toolbarHeight),
+            child: AppBar(
+              excludeHeaderSemantics: true,
+              toolbarHeight: toolbarHeight,
 
-                // Leading (aka left)
-                leading: running
+              // Leading (aka left)
+              leading: running
+                  ? const SizedBox.shrink()
+                  : (EzConfig.isLefty ? options : const EzBackAction()),
+              leadingWidth: toolbarHeight,
+
+              // Title
+              title: Text(title, textAlign: TextAlign.center),
+              centerTitle: true,
+              titleSpacing: 0,
+
+              // Actions (aka trailing aka right)
+              actions: <Widget>[
+                running
                     ? const SizedBox.shrink()
-                    : (EzConfig.isLefty ? options : const EzBackAction()),
-                leadingWidth: toolbarHeight,
-
-                // Title
-                title: Text(title, textAlign: TextAlign.center),
-                centerTitle: true,
-                titleSpacing: 0,
-
-                // Actions (aka trailing aka right)
-                actions: <Widget>[
-                  running
-                      ? const SizedBox.shrink()
-                      : (EzConfig.isLefty ? const EzBackAction() : options)
-                ],
-              ),
+                    : (EzConfig.isLefty ? const EzBackAction() : options)
+              ],
             ),
-
-            // Body
-            body: body,
-
-            // FAB
-            floatingActionButton: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[updater, if (fabs != null) ...fabs!],
-            ),
-            floatingActionButtonLocation: EzConfig.isLefty
-                ? FloatingActionButtonLocation.startFloat
-                : FloatingActionButtonLocation.endFloat,
-
-            // Prevents the keyboard from pushing the body up
-            resizeToAvoidBottomInset: false,
           ),
+
+          // Body
+          body: body,
+
+          // FAB
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[updater, if (fabs != null) ...fabs!],
+          ),
+          floatingActionButtonLocation: EzConfig.isLefty
+              ? FloatingActionButtonLocation.startFloat
+              : FloatingActionButtonLocation.endFloat,
+
+          // Prevents the keyboard from pushing the body up
+          resizeToAvoidBottomInset: false,
         ),
       ),
     );

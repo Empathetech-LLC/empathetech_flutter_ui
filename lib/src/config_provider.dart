@@ -7,7 +7,6 @@ import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class EzConfigProvider extends ChangeNotifier {
   // Construct //
@@ -197,8 +196,6 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Rebuilds the apps [ThemeData] and updates the config caches
   /// Then calls [redraw] with [onComplete]
-  /// It is highly recommended to wrap [EzAdaptiveParent] Widgets in a [Consumer] for [EzConfigProvider]
-  /// Simply set [EzAdaptiveParent.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed], and all [EzConfig] updates will be live!
   Future<void> rebuild({void Function()? onComplete}) async {
     _buildThemeMode();
     _buildThemeData();
@@ -207,8 +204,6 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Randomizes the [seed] and notifies listeners
   /// Optionally calls [onComplete] after notifying
-  /// It is highly recommended to wrap [EzAdaptiveParent] Widgets in a [Consumer] for [EzConfigProvider]
-  /// Simply set [EzAdaptiveParent.key] to an int [ValueKey] of the consumed [EzConfigProvider.seed], and all [EzConfig] updates will be live!
   Future<void> redraw({void Function()? onComplete}) async {
     _seed = Random().nextInt(rMax);
     if (_appCache != null) await _appCache.redraw();
@@ -281,7 +276,7 @@ class EzTextCache {
 }
 
 abstract class EzAppCache {
-  /// Will run on any [EzConfig] redraw
+  /// Will run on every call to [EzConfigProvider.redraw]
   /// AKA when [EzConfig.seed] changes
   Future<void> redraw();
 }

@@ -304,9 +304,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setBool(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) {
-        await _instance!._provider!.rebuild(onComplete: onNotify);
-      }
+      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting bool [$key]...\n$e');
@@ -327,9 +325,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setInt(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) {
-        await _instance!._provider!.rebuild(onComplete: onNotify);
-      }
+      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting int [$key]...\n$e');
@@ -350,9 +346,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setDouble(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) {
-        await _instance!._provider!.rebuild(onComplete: onNotify);
-      }
+      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting double [$key]...\n$e');
@@ -373,9 +367,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setString(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) {
-        await _instance!._provider!.rebuild(onComplete: onNotify);
-      }
+      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting String [$key]...\n$e');
@@ -396,9 +388,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setStringList(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) {
-        await _instance!._provider!.rebuild(onComplete: onNotify);
-      }
+      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting String List [$key]...\n$e');
@@ -505,9 +495,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
     }
 
-    if (notifyTheme) {
-      await _instance!._provider!.rebuild(onComplete: onNotify);
-    }
+    if (notifyTheme) await provider.rebuild(onComplete: onNotify);
   }
 
   /// Create a pseudo-random config that follows the default vibe
@@ -823,7 +811,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
     }
 
-    await _instance!._provider!.rebuild(onComplete: onNotify);
+    await provider.rebuild(onComplete: onNotify);
   }
 
   //* Removers *//
@@ -847,9 +835,7 @@ Must be one of [int, bool, double, String, List<String>]''');
             : _instance!._prefs.remove(key);
       }
 
-      if (notifyTheme) {
-        await _instance!._provider!.rebuild(onComplete: onNotify);
-      }
+      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error removing key [$key]...\n$e');
@@ -878,9 +864,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       );
     }
 
-    if (notifyTheme) {
-      await _instance!._provider!.rebuild(onComplete: onNotify);
-    }
+    if (notifyTheme) await provider.rebuild(onComplete: onNotify);
     return success;
   }
 
@@ -904,9 +888,11 @@ Must be one of [int, bool, double, String, List<String>]''');
       );
     }
 
-    if (notifyTheme) {
-      await _instance!._provider!.rebuild(onComplete: onNotify);
-    }
+    if (notifyTheme) await provider.rebuild(onComplete: onNotify);
     return success;
   }
+
+  /// Only call this if you are sure
+  /// Used by the [didChangePlatformBrightness] handler in [EzConfigurableApp]
+  static Future<void> setThemeMode() => provider.setThemeMode();
 }
