@@ -108,7 +108,7 @@ class EzConfigProvider extends ChangeNotifier {
 
   // Get //
 
-  /// Track [redraw] and [rebuild] (randomized on each call)
+  /// Track [redrawUI] and [rebuildUI] (randomized on each call)
   int get seed => _seed;
 
   /// Current [TargetPlatform]
@@ -153,7 +153,23 @@ class EzConfigProvider extends ChangeNotifier {
 
   // Set //
 
-  /// Reconfigure [ThemeMode] et al. from storage and [redraw] with [onComplete]
+  /// Set the apps [Locale] from storage and load corresponding localizations
+  Future<void> rebuildLocale({void Function()? onComplete}) async {
+    final (Locale, EFUILang) result = await ezStoredL10n();
+    _locale = result.$1;
+    _l10n = result.$2;
+
+    final bool newLTR = !rtlLanguageCodes.contains(_locale.languageCode);
+
+    if (newLTR == _ltr) {
+      await redrawUI(onComplete: onComplete);
+    } else {
+      _ltr = newLTR;
+      await rebuildUI(onComplete: onComplete);
+    }
+  }
+
+  /// Reconfigure [ThemeMode] et al. from storage and [redrawUI] with [onComplete]
   Future<void> rebuildThemeMode({void Function()? onComplete}) async {
     final ThemeMode newMode = _buildThemeMode();
 
@@ -175,46 +191,30 @@ class EzConfigProvider extends ChangeNotifier {
         _currTheme = _lightTheme;
     }
 
-    await redraw(onComplete: onComplete);
-  }
-
-  /// Set the apps [Locale] from storage and load corresponding localizations
-  Future<void> buildLocale({void Function()? onComplete}) async {
-    final (Locale, EFUILang) result = await ezStoredL10n();
-    _locale = result.$1;
-    _l10n = result.$2;
-
-    final bool newLTR = !rtlLanguageCodes.contains(_locale.languageCode);
-
-    if (newLTR == _ltr) {
-      await redraw(onComplete: onComplete);
-    } else {
-      _ltr = newLTR;
-      await rebuild(onComplete: onComplete);
-    }
+    await redrawUI(onComplete: onComplete);
   }
 
   /// Rebuilds the apps [ThemeData] and updates the config caches
-  /// Then calls [redraw] with [onComplete]
-  Future<void> rebuild({void Function()? onComplete}) async {
+  /// Then calls [redrawUI] with [onComplete]
+  Future<void> rebuildUI({void Function()? onComplete}) async {
     _buildThemeMode();
     _buildThemeData();
-    await redraw(onComplete: onComplete);
+    await redrawUI(onComplete: onComplete);
   }
 
   /// Randomizes the [seed] and notifies listeners
   /// Optionally calls [onComplete] after notifying
-  Future<void> redraw({void Function()? onComplete}) async {
+  Future<void> redrawUI({void Function()? onComplete}) async {
     _seed = Random().nextInt(rMax);
-    if (_appCache != null) await _appCache.redraw();
+    if (_appCache != null) await _appCache.rebuild();
     notifyListeners();
     onComplete?.call();
   }
 
-  /// Trigger [redraw] with [onComplete] if/when the [ThemeMode] brightness changes
+  /// Trigger [redrawUI] with [onComplete] if/when the [ThemeMode] brightness changes
   /// Nothing happens if the core brightness is unchanged
-  /// Example: System Dark -> Explicit Dark --> redraw/onComplete are NOT called
-  Future<void> setThemeMode({void Function()? onComplete}) async {
+  /// Example: System Dark -> Explicit Dark --> redrawUI/onComplete are NOT called
+  Future<void> redrawTheme({void Function()? onComplete}) async {
     final bool newIsDark =
         (WidgetsBinding.instance.platformDispatcher.platformBrightness ==
             Brightness.dark);
@@ -222,7 +222,7 @@ class EzConfigProvider extends ChangeNotifier {
     if (newIsDark != _isDark) {
       _isDark = newIsDark;
       _currTheme = newIsDark ? _darkTheme : _lightTheme;
-      await redraw(onComplete: onComplete);
+      await redrawUI(onComplete: onComplete);
     }
   }
 }
@@ -276,7 +276,7 @@ class EzTextCache {
 }
 
 abstract class EzAppCache {
-  /// Will run on every call to [EzConfigProvider.redraw]
+  /// Will run on every call to [EzConfigProvider.redrawUI]
   /// AKA when [EzConfig.seed] changes
-  Future<void> redraw();
+  Future<void> rebuild();
 }
