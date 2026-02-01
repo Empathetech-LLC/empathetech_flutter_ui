@@ -891,8 +891,4 @@ Must be one of [int, bool, double, String, List<String>]''');
     if (notifyTheme) await provider.rebuild(onComplete: onNotify);
     return success;
   }
-
-  /// Only call this if you are sure
-  /// Used by the [didChangePlatformBrightness] handler in [EzConfigurableApp]
-  static Future<void> setThemeMode() => provider.setThemeMode();
 }

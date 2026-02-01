@@ -154,7 +154,7 @@ class EzConfigProvider extends ChangeNotifier {
   // Set //
 
   /// Reconfigure [ThemeMode] et al. from storage and [redraw] with [onComplete]
-  Future<void> buildThemeMode({void Function()? onComplete}) async {
+  Future<void> rebuildThemeMode({void Function()? onComplete}) async {
     final ThemeMode newMode = _buildThemeMode();
 
     switch (newMode) {
