@@ -77,7 +77,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
                 await EzConfig.remove(isDarkThemeKey);
                 break;
             }
-            await EzConfig.provider.buildThemeMode();
+            await EzConfig.provider.rebuildThemeMode();
           },
         ),
       ],
