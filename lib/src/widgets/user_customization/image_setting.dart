@@ -151,24 +151,24 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (mounted) {
         final Future<dynamic> Function(String path) toDo = await showDialog(
           context: context,
-          builder: (BuildContext dContext) {
-            void useFull() => Navigator.of(dContext).pop((_, __) async => true);
-            void crop() => Navigator.of(dContext).pop(editImage);
-            void cancel() => Navigator.of(dContext).pop((_, __) async => null);
-
-            return EzAlertDialog(
-              title: Text(EzConfig.l10n.dsUseFull, textAlign: TextAlign.center),
-              actions: <EzMaterialAction>[
-                EzMaterialAction(text: EzConfig.l10n.gYes, onPressed: useFull),
-                EzMaterialAction(text: EzConfig.l10n.dsCrop, onPressed: crop),
-                EzMaterialAction(
-                  text: EzConfig.l10n.gCancel,
-                  onPressed: cancel,
-                ),
-              ],
-              needsClose: false,
-            );
-          },
+          builder: (BuildContext dContext) => EzAlertDialog(
+            title: Text(EzConfig.l10n.dsUseFull, textAlign: TextAlign.center),
+            actions: <EzMaterialAction>[
+              EzMaterialAction(
+                text: EzConfig.l10n.gYes,
+                onPressed: () => Navigator.of(dContext).pop((_) async => true),
+              ),
+              EzMaterialAction(
+                text: EzConfig.l10n.dsCrop,
+                onPressed: () => Navigator.of(dContext).pop(editImage),
+              ),
+              EzMaterialAction(
+                text: EzConfig.l10n.gCancel,
+                onPressed: () => Navigator.of(dContext).pop((_) async => null),
+              ),
+            ],
+            needsClose: false,
+          ),
         );
 
         final dynamic result = await toDo(newPath);
@@ -178,6 +178,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           case const (String):
             newPath = result;
             selectedFit = BoxFit.contain;
+            break;
           default:
             return;
         }
@@ -480,7 +481,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Opens [EzImageEditor] and overrides the image as necessary
-  Future<String?> editImage(String path, ThemeData theme) async {
+  Future<String?> editImage(String path) async {
     final String? editResult = await ezModal<String?>(
       context: context,
       enableDrag: false,
