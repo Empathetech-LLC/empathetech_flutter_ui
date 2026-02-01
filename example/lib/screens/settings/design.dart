@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class DesignSettingsScreen extends StatelessWidget {
-  const DesignSettingsScreen({super.key});
+  DesignSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(

@@ -12,7 +12,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ErrorScreen extends StatefulWidget {
   final GoException? error;
 
-  const ErrorScreen(this.error, {super.key});
+  ErrorScreen(this.error) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<ErrorScreen> createState() => _ErrorScreenState();

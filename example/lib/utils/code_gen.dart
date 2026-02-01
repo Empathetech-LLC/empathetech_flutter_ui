@@ -549,14 +549,14 @@ class $classCaseAppName extends StatelessWidget {
             path: homePath,
             name: homePath,
             pageBuilder: (BuildContext context, GoRouterState state) =>
-                ezPageBuilder(context, state, const HomeScreen()),
+                ezPageBuilder(context, state, HomeScreen()),
             routes: <RouteBase>[
               // Settings home
               GoRoute(
                 path: settingsHomePath,
                 name: settingsHomePath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state, const SettingsHomeScreen()),
+                    ezPageBuilder(context, state, SettingsHomeScreen()),
                 routes: <RouteBase>[
                   ${config.colorSettings ? '''// Color settings
                   GoRoute(
@@ -564,7 +564,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: colorSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                            context, state, const ColorSettingsScreen()),
+                            context, state, ColorSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzCSType.quick.path,
@@ -574,7 +574,7 @@ class $classCaseAppName extends StatelessWidget {
                                 ezPageBuilder(
                           context,
                           state,
-                          const ColorSettingsScreen(target: EzCSType.quick),
+                          ColorSettingsScreen(target: EzCSType.quick),
                         ),
                       ),
                       GoRoute(
@@ -585,7 +585,7 @@ class $classCaseAppName extends StatelessWidget {
                                 ezPageBuilder(
                           context,
                           state,
-                          const ColorSettingsScreen(target: EzCSType.advanced),
+                          ColorSettingsScreen(target: EzCSType.advanced),
                         ),
                       ),
                     ],
@@ -597,7 +597,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: designSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                            context, state, const DesignSettingsScreen()),
+                            context, state, DesignSettingsScreen()),
                   ),''' : ''}
                   ${config.layoutSettings ? '''
                   // Layout settings
@@ -606,7 +606,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: layoutSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                            context, state, const LayoutSettingsScreen()),
+                            context, state, LayoutSettingsScreen()),
                   ),''' : ''}
                   ${config.textSettings ? '''
                   // Text settings
@@ -615,7 +615,7 @@ class $classCaseAppName extends StatelessWidget {
                     name: textSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
-                            context, state, const TextSettingsScreen()),
+                            context, state, TextSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzTSType.quick.path,
@@ -625,7 +625,7 @@ class $classCaseAppName extends StatelessWidget {
                                 ezPageBuilder(
                           context,
                           state,
-                          const TextSettingsScreen(target: EzTSType.quick),
+                          TextSettingsScreen(target: EzTSType.quick),
                         ),
                       ),
                       GoRoute(
@@ -636,7 +636,7 @@ class $classCaseAppName extends StatelessWidget {
                                 ezPageBuilder(
                           context,
                           state,
-                          const TextSettingsScreen(target: EzTSType.advanced),
+                          TextSettingsScreen(target: EzTSType.advanced),
                         ),
                       ),
                     ],
@@ -966,7 +966,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ErrorScreen extends StatefulWidget {
   final GoException? error;
 
-  const ErrorScreen(this.error, {super.key});
+  ErrorScreen(this.error) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<ErrorScreen> createState() => _ErrorScreenState();
@@ -1026,7 +1026,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen():super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -1091,7 +1091,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SettingsHomeScreen extends StatelessWidget {
-  const SettingsHomeScreen({super.key});
+  SettingsHomeScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
@@ -1133,7 +1133,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ColorSettingsScreen extends StatelessWidget {
   final EzCSType? target;
 
-  const ColorSettingsScreen({super.key, this.target});
+  ColorSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
@@ -1171,7 +1171,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class DesignSettingsScreen extends StatelessWidget {
-  const DesignSettingsScreen({super.key});
+  DesignSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
@@ -1208,7 +1208,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class LayoutSettingsScreen extends StatelessWidget {
-  const LayoutSettingsScreen({super.key});
+  LayoutSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
@@ -1247,7 +1247,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class TextSettingsScreen extends StatelessWidget {
   final EzTSType? target;
 
-  const TextSettingsScreen({super.key, this.target});
+  TextSettingsScreen(this.target) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(

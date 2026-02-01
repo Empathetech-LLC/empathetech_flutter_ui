@@ -15,7 +15,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class GenerateScreen extends StatefulWidget {
   final EAGConfig config;
 
-  const GenerateScreen({super.key, required this.config});
+  GenerateScreen(this.config) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<GenerateScreen> createState() => _GenerateScreenState();

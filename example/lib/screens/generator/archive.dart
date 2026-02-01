@@ -15,7 +15,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ArchiveScreen extends StatefulWidget {
   final EAGConfig config;
 
-  const ArchiveScreen({super.key, required this.config});
+  ArchiveScreen(this.config) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<ArchiveScreen> createState() => _ArchiveScreenState();

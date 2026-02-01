@@ -12,7 +12,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ColorSettingsScreen extends StatelessWidget {
   final EzCSType? target;
 
-  const ColorSettingsScreen({super.key, this.target});
+  ColorSettingsScreen({this.target}) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
