@@ -74,13 +74,13 @@ class EzConfigRandomizer extends StatelessWidget {
                 ),
             actions: ezActionPair(
               context: context,
-              onConfirm: () {
+              onConfirm: () async {
                 if (onConfirm == null) {
-                  EzConfig.randomize();
+                  await EzConfig.randomize();
                 } else {
                   onConfirm!.call();
                 }
-                Navigator.of(dContext).pop();
+                if (dContext.mounted) Navigator.of(dContext).pop();
               },
               confirmIsDestructive: true,
               onDeny: () {
