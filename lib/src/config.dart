@@ -11,7 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//* Constructor(s) *//
+// There are few (if any) null checks in EzConfig
+// EFUI won't work at all (immediate runtime failure) if EzConfig isn't properly initialized, so they're moot
+
+//* Config constructor(s) *//
 
 class EzConfig {
   /// [AssetImage] paths for the app
@@ -152,86 +155,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     return _instance!;
   }
 
-  //* Getters *//
-  // w/out null checks
-  // EFUI won't work at all if EzConfig isn't initialized, so they're moot
-
-  // Provider //
-
-  /// Active [EzConfigProvider]
-  static EzConfigProvider get provider => _instance!._provider!;
-
-  /// Current [TargetPlatform]
-  static TargetPlatform get platform => provider.platform;
-
-  /// Tracks major changes to the config
-  static int get seed => provider.seed;
-
-  /// Active [Locale]
-  static Locale get locale => provider.locale;
-
-  /// EFUI localizations
-  static EFUILang get l10n => provider.l10n;
-
-  /// Whether the active [Locale] is a left-to-right language
-  static bool get isLTR => provider.isLTR;
-
-  /// Active [ThemeMode]
-  static ThemeMode get themeMode => provider.themeMode;
-
-  /// Whether the active [ThemeMode] is [Brightness.dark]
-  static bool get isDark => provider.isDark;
-
-  /// Current, [ThemeMode] aware, [ColorScheme]
-  static ColorScheme get colorScheme => provider.theme.colorScheme;
-
-  /// Current, [ThemeMode] aware, [ColorScheme]
-  /// [colorScheme] alias
-  static ColorScheme get colors => provider.theme.colorScheme;
-
-  /// Current, [ThemeMode] aware, [TextTheme]
-  static TextTheme get textTheme => provider.theme.textTheme;
-
-  /// Current, [ThemeMode] aware, [TextTheme]
-  /// [textTheme] alias
-  static TextTheme get styles => provider.theme.textTheme;
-
-  /// Theme aware alias
-  static int get animDur => provider.design.animDur;
-
-  /// Theme aware alias
-  static double get marginVal => provider.layout.marginVal;
-
-  /// Theme aware alias
-  static double get padding => provider.layout.padding;
-
-  /// Theme aware alias
-  static double get spacing => provider.layout.spacing;
-
-  /// Theme aware alias
-  static EzMargin get margin => provider.layout.margin;
-
-  /// Theme aware alias
-  static EzMargin get rowMargin => provider.layout.rowMargin;
-
-  /// Theme aware alias
-  static EzSpacer get spacer => provider.layout.spacer;
-
-  /// Theme aware alias
-  static EzSpacer get rowSpacer => provider.layout.rowSpacer;
-
-  /// Theme aware alias
-  static EzSeparator get separator => provider.layout.separator;
-
-  /// Theme aware alias
-  static EzDivider get divider => provider.layout.divider;
-
-  static bool get hideScroll => provider.layout.hideScroll;
-
-  /// Theme aware alias
-  static double get iconSize => provider.text.iconSize;
-
-  static EzAppCache? get appCache => provider.appCache;
+  //* Config getters *//
 
   // Core //
 
@@ -304,7 +228,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setBool(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting bool [$key]...\n$e');
@@ -325,7 +249,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setInt(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting int [$key]...\n$e');
@@ -346,7 +270,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setDouble(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting double [$key]...\n$e');
@@ -367,7 +291,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setString(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting String [$key]...\n$e');
@@ -388,7 +312,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._preferences.setStringList(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
 
-      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting String List [$key]...\n$e');
@@ -495,7 +419,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
     }
 
-    if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+    if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
   }
 
   /// Create a pseudo-random config that follows the default vibe
@@ -811,7 +735,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
     }
 
-    await provider.rebuild(onComplete: onNotify);
+    await _provPoint.rebuildUI(onComplete: onNotify);
   }
 
   //* Removers *//
@@ -835,7 +759,7 @@ Must be one of [int, bool, double, String, List<String>]''');
             : _instance!._prefs.remove(key);
       }
 
-      if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error removing key [$key]...\n$e');
@@ -864,7 +788,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       );
     }
 
-    if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+    if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
     return success;
   }
 
@@ -888,7 +812,103 @@ Must be one of [int, bool, double, String, List<String>]''');
       );
     }
 
-    if (notifyTheme) await provider.rebuild(onComplete: onNotify);
+    if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
     return success;
   }
+
+  //* Provider aliases *//
+  // Getters //
+
+  /// Active [EzConfigProvider]
+  /// "Internal" use only; easier to have all pointers in one place
+  static EzConfigProvider get _provPoint => _instance!._provider!;
+
+  /// Current [TargetPlatform]
+  static TargetPlatform get platform => _provPoint.platform;
+
+  /// Tracks major changes to the config
+  static int get seed => _provPoint.seed;
+
+  /// Active [Locale]
+  static Locale get locale => _provPoint.locale;
+
+  /// EFUI localizations
+  static EFUILang get l10n => _provPoint.l10n;
+
+  /// Whether the active [Locale] is a left-to-right language
+  static bool get isLTR => _provPoint.isLTR;
+
+  /// Active [ThemeMode]
+  static ThemeMode get themeMode => _provPoint.themeMode;
+
+  /// Whether the active [ThemeMode] is [Brightness.dark]
+  static bool get isDark => _provPoint.isDark;
+
+  /// Current, [ThemeMode] aware, [ColorScheme]
+  static ColorScheme get colorScheme => _provPoint.theme.colorScheme;
+
+  /// Current, [ThemeMode] aware, [ColorScheme]
+  /// [colorScheme] alias
+  static ColorScheme get colors => _provPoint.theme.colorScheme;
+
+  /// Current, [ThemeMode] aware, [TextTheme]
+  static TextTheme get textTheme => _provPoint.theme.textTheme;
+
+  /// Current, [ThemeMode] aware, [TextTheme]
+  /// [textTheme] alias
+  static TextTheme get styles => _provPoint.theme.textTheme;
+
+  /// Theme aware alias
+  static int get animDur => _provPoint.design.animDur;
+
+  /// Theme aware alias
+  static double get marginVal => _provPoint.layout.marginVal;
+
+  /// Theme aware alias
+  static double get padding => _provPoint.layout.padding;
+
+  /// Theme aware alias
+  static double get spacing => _provPoint.layout.spacing;
+
+  /// Theme aware alias
+  static EzMargin get margin => _provPoint.layout.margin;
+
+  /// Theme aware alias
+  static EzMargin get rowMargin => _provPoint.layout.rowMargin;
+
+  /// Theme aware alias
+  static EzSpacer get spacer => _provPoint.layout.spacer;
+
+  /// Theme aware alias
+  static EzSpacer get rowSpacer => _provPoint.layout.rowSpacer;
+
+  /// Theme aware alias
+  static EzSeparator get separator => _provPoint.layout.separator;
+
+  /// Theme aware alias
+  static EzDivider get divider => _provPoint.layout.divider;
+
+  static bool get hideScroll => _provPoint.layout.hideScroll;
+
+  /// Theme aware alias
+  static double get iconSize => _provPoint.text.iconSize;
+
+  static EzAppCache? get appCache => _provPoint.appCache;
+
+  // Setters //
+
+  static Future<void> rebuildLocale({void Function()? onComplete}) =>
+      _provPoint.rebuildLocale(onComplete: onComplete);
+
+  static Future<void> rebuildThemeMode({void Function()? onComplete}) =>
+      _provPoint.rebuildThemeMode(onComplete: onComplete);
+
+  static Future<void> rebuildUI({void Function()? onComplete}) =>
+      _provPoint.rebuildUI(onComplete: onComplete);
+
+  static Future<void> redrawUI({void Function()? onComplete}) =>
+      _provPoint.redrawUI(onComplete: onComplete);
+
+  static Future<void> redrawTheme({void Function()? onComplete}) =>
+      _provPoint.redrawTheme(onComplete: onComplete);
 }
