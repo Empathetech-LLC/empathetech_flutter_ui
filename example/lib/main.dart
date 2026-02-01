@@ -76,7 +76,7 @@ class OpenUI extends StatelessWidget {
             path: homePath,
             name: homePath,
             pageBuilder: (BuildContext context, GoRouterState state) =>
-                ezPageBuilder(context, state, const HomeScreen()),
+                ezPageBuilder(context, state, HomeScreen()),
             routes: <RouteBase>[
               // Generate app
               GoRoute(
@@ -84,7 +84,7 @@ class OpenUI extends StatelessWidget {
                 name: generateScreenPath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
                     ezPageBuilder(context, state,
-                        GenerateScreen(config: (state.extra as EAGConfig))),
+                        GenerateScreen((state.extra as EAGConfig))),
               ),
 
               // Archive config
@@ -93,7 +93,7 @@ class OpenUI extends StatelessWidget {
                 name: archiveScreenPath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
                     ezPageBuilder(context, state,
-                        ArchiveScreen(config: (state.extra as EAGConfig))),
+                        ArchiveScreen((state.extra as EAGConfig))),
               ),
 
               // Settings home
@@ -101,37 +101,30 @@ class OpenUI extends StatelessWidget {
                 path: settingsHomePath,
                 name: settingsHomePath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state, const SettingsHomeScreen()),
+                    ezPageBuilder(context, state, SettingsHomeScreen()),
                 routes: <RouteBase>[
                   // Color settings
                   GoRoute(
                     path: colorSettingsPath,
                     name: colorSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, const ColorSettingsScreen()),
+                        ezPageBuilder(context, state, ColorSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzCSType.quick.path,
                         name: EzCSType.quick.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          const ColorSettingsScreen(target: EzCSType.quick),
-                        ),
+                        pageBuilder: (BuildContext context,
+                                GoRouterState state) =>
+                            ezPageBuilder(context, state,
+                                ColorSettingsScreen(target: EzCSType.quick)),
                       ),
                       GoRoute(
                         path: EzCSType.advanced.path,
                         name: EzCSType.advanced.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          const ColorSettingsScreen(target: EzCSType.advanced),
-                        ),
+                        pageBuilder: (BuildContext context,
+                                GoRouterState state) =>
+                            ezPageBuilder(context, state,
+                                ColorSettingsScreen(target: EzCSType.advanced)),
                       ),
                     ],
                   ),
@@ -141,8 +134,7 @@ class OpenUI extends StatelessWidget {
                     path: designSettingsPath,
                     name: designSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, const DesignSettingsScreen()),
+                        ezPageBuilder(context, state, DesignSettingsScreen()),
                   ),
 
                   // Layout settings
@@ -150,8 +142,7 @@ class OpenUI extends StatelessWidget {
                     path: layoutSettingsPath,
                     name: layoutSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, const LayoutSettingsScreen()),
+                        ezPageBuilder(context, state, LayoutSettingsScreen()),
                   ),
 
                   // Text settings
@@ -159,30 +150,23 @@ class OpenUI extends StatelessWidget {
                     path: textSettingsPath,
                     name: textSettingsPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, const TextSettingsScreen()),
+                        ezPageBuilder(context, state, TextSettingsScreen()),
                     routes: <RouteBase>[
                       GoRoute(
                         path: EzTSType.quick.path,
                         name: EzTSType.quick.name,
                         pageBuilder:
                             (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          const TextSettingsScreen(target: EzTSType.quick),
-                        ),
+                                ezPageBuilder(context, state,
+                                    TextSettingsScreen(target: EzTSType.quick)),
                       ),
                       GoRoute(
                         path: EzTSType.advanced.path,
                         name: EzTSType.advanced.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          const TextSettingsScreen(target: EzTSType.advanced),
-                        ),
+                        pageBuilder: (BuildContext context,
+                                GoRouterState state) =>
+                            ezPageBuilder(context, state,
+                                TextSettingsScreen(target: EzTSType.advanced)),
                       ),
                     ],
                   ),
