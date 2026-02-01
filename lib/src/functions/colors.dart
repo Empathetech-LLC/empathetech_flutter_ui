@@ -516,9 +516,7 @@ Future<void> storeColorScheme({
     );
   }
 
-  if (notifyTheme) {
-    await EzConfig.provider.rebuild(onComplete: onNotify);
-  }
+  if (notifyTheme) await EzConfig.rebuildUI(onComplete: onNotify);
 }
 
 /// Generates a [ColorScheme] based on the image found at [path]

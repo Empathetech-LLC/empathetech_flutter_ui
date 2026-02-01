@@ -231,10 +231,10 @@ class _ImageSettingState extends State<EzImageSetting> {
           widget.updateTheme == Brightness.light
               ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
               : await EzConfig.setString(darkColorSchemeImageKey, newPath);
-          await EzConfig.provider.rebuild();
+          await EzConfig.rebuildUI();
         }
       } else {
-        await EzConfig.provider.redraw();
+        await EzConfig.redrawUI();
       }
     }
   }

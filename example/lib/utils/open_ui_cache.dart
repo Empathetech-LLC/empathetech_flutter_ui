@@ -25,7 +25,7 @@ class OpenUICache extends EzAppCache {
   // Set //
 
   @override
-  Future<void> redraw() async {
+  Future<void> rebuild() async {
     if (_locale != EzConfig.locale) {
       _l10n = await Lang.delegate.load(EzConfig.locale);
       _locale = EzConfig.locale;

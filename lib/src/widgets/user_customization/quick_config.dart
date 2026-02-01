@@ -72,9 +72,7 @@ class EzQuickConfig extends StatelessWidget {
             builder: (_, StateSetter setModal) {
               Future<void> onComplete() async {
                 Navigator.of(mContext).pop();
-                if (notifyTheme) {
-                  await EzConfig.provider.rebuild(onComplete: onNotify);
-                }
+                if (notifyTheme) await EzConfig.rebuildUI(onComplete: onNotify);
               }
 
               return EzScrollView(

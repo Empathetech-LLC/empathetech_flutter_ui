@@ -119,7 +119,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                   colorScheme: light,
                   brightness: Brightness.light,
                 );
-          await EzConfig.provider.rebuild();
+          await EzConfig.rebuildUI();
         },
         icon: Icon(
           Icons.contrast,

@@ -211,7 +211,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
-                  await EzConfig.provider.rebuild();
+                  await EzConfig.rebuildUI();
                 },
               )
             : EzResetButton(
@@ -228,7 +228,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
-                  await EzConfig.provider.rebuild();
+                  await EzConfig.rebuildUI();
                 },
               ),
         EzConfig.separator,

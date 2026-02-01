@@ -217,7 +217,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 ),
               );
 
-              if (animDuration != backup) await EzConfig.provider.rebuild();
+              if (animDuration != backup) await EzConfig.rebuildUI();
             },
             label: EzConfig.l10n.dsAnimDuration,
             icon: const Icon(Icons.timer_outlined),

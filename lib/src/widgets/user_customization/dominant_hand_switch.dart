@@ -64,8 +64,8 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
             if (makeLeft == null || makeLeft == isLefty) return;
 
             await EzConfig.setBool(isLeftyKey, makeLeft);
-            await EzConfig.provider
-                .redraw(onComplete: () => setState(() => isLefty = makeLeft));
+            await EzConfig.redrawUI(
+                onComplete: () => setState(() => isLefty = makeLeft));
           },
         ),
       ],

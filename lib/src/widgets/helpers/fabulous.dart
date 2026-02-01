@@ -274,7 +274,7 @@ class EzRebuildFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
-        onPressed: () => EzConfig.provider.rebuild(onComplete: onComplete),
+        onPressed: () => EzConfig.rebuildUI(onComplete: onComplete),
         tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
         child: EzIcon(icon ?? Icons.check),
       );

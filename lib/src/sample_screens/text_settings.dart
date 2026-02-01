@@ -573,7 +573,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               }
             }
 
-            await EzConfig.provider.rebuild();
+            await EzConfig.rebuildUI();
           },
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
