@@ -68,8 +68,8 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         await EzConfig.reset();
-                        if (dContext.mounted) Navigator.of(dContext).pop();
                         await EzConfig.rebuildUI(onComplete);
+                        if (dContext.mounted) Navigator.of(dContext).pop();
                       },
                       text: l10n.csResetApp,
                       isDestructiveAction: true,
@@ -80,8 +80,8 @@ class ResetFAB extends StatelessWidget {
                       onPressed: () async {
                         clearForms();
                         await EzConfig.reset();
-                        if (dContext.mounted) Navigator.of(dContext).pop();
                         await EzConfig.rebuildUI(onComplete);
+                        if (dContext.mounted) Navigator.of(dContext).pop();
                       },
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,
