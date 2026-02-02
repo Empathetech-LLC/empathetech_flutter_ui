@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
+  /// [EzConfig.randomize] passthrough
+  final void Function() onComplete;
+
   /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.ssRandom]
   final String? label;
@@ -30,17 +33,9 @@ class EzConfigRandomizer extends StatelessWidget {
   /// [ezRichUndoWarning] passthrough
   final Set<String>? saveSkip;
 
-  /// What happens when the user choses to randomize
-  /// Defaults to [EzConfig.randomize]
-  /// DO NOT include a pop() for the dialog, this is included automatically
-  final void Function()? onConfirm;
-
-  /// What happens when the user choses not to reset
-  /// DO NOT include a pop() for the dialog, this is included automatically
-  final void Function()? onDeny;
-
   /// [EzElevatedIconButton] for randomizing [EzConfig]
-  const EzConfigRandomizer({
+  const EzConfigRandomizer(
+    this.onComplete, {
     super.key,
     this.label,
     this.dialogTitle,
@@ -48,8 +43,6 @@ class EzConfigRandomizer extends StatelessWidget {
     this.appName,
     this.androidPackage,
     this.saveSkip,
-    this.onConfirm,
-    this.onDeny,
   }) : assert((appName == null) != (dialogContent == null),
             'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
 
@@ -75,22 +68,12 @@ class EzConfigRandomizer extends StatelessWidget {
             actions: ezActionPair(
               context: context,
               onConfirm: () async {
-                if (onConfirm == null) {
-                  await EzConfig.randomize();
-                } else {
-                  onConfirm!.call();
-                }
+                await EzConfig.randomize();
+                await EzConfig.rebuildUI(onComplete);
                 if (dContext.mounted) Navigator.of(dContext).pop();
               },
               confirmIsDestructive: true,
-              onDeny: () {
-                if (onDeny == null) {
-                  doNothing();
-                } else {
-                  onDeny!.call();
-                }
-                Navigator.of(dContext).pop();
-              },
+              onDeny: () => Navigator.of(dContext).pop(),
             ),
             needsClose: false,
           ),
