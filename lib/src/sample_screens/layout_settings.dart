@@ -167,6 +167,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         // Local reset all
         widget.resetSpacer,
         EzResetButton(
+          () => setState(() {}),
           dialogTitle: EzConfig.l10n.lsResetAll,
           onConfirm: () async {
             if (EzConfig.isDark) {

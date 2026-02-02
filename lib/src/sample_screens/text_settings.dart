@@ -553,6 +553,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         // Reset all
         widget.resetSpacer,
         EzResetButton(
+          () => setState(() {}),
           dialogTitle: EzConfig.l10n.tsResetAll,
           onConfirm: () async {
             if (setBoth || EzConfig.isDark) {
@@ -572,8 +573,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 EzConfig.removeKeys(widget.extraLight!);
               }
             }
-
-            await EzConfig.rebuildUI();
           },
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
@@ -1422,6 +1421,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         // Reset all
         widget.resetSpacer,
         EzResetButton(
+          () => setState(() {}),
           dialogTitle: EzConfig.l10n.tsResetAll,
           onConfirm: () async {
             final Set<String> textKeys = allTextKeys.keys.toSet();

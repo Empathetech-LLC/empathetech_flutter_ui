@@ -259,22 +259,22 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 }
 
 class EzRebuildFAB extends StatelessWidget {
-  /// [EzConfig.provider] passthrough
-  final void Function()? onComplete;
+  /// [EzConfig.rebuildUI] passthrough
+  final void Function() onComplete;
 
   /// Optional override, defaults to 'Apply changes'
   final String? tooltip;
 
-  /// Optional override, defaults to [PlatformIcons.checkMark]
+  /// Optional override, defaults to [Icons.check]
   final IconData? icon;
 
   /// [FloatingActionButton] that rebuilds the app when pressed
-  const EzRebuildFAB({super.key, this.onComplete, this.tooltip, this.icon});
+  const EzRebuildFAB(this.onComplete, {super.key, this.tooltip, this.icon});
 
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
-        onPressed: () => EzConfig.rebuildUI(onComplete: onComplete),
+        onPressed: () => EzConfig.rebuildUI(onComplete),
         tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
         child: EzIcon(icon ?? Icons.check),
       );

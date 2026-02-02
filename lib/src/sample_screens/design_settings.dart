@@ -53,8 +53,8 @@ class EzDesignSettings extends StatefulWidget {
   /// [lightDesignKeys], [lightHideScrollKey], [lightIconSizeKey] are included by default
   final Set<String>? resetExtraLight;
 
-  /// Optional callback for when a local reset is confirmed
-  final void Function()? onReset;
+  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
+  final void Function() onRedraw;
 
   /// [EzResetButton.appName] passthrough
   final String appName;
@@ -84,7 +84,7 @@ class EzDesignSettings extends StatefulWidget {
     this.resetSpacer = const EzDivider(),
     this.resetExtraDark,
     this.resetExtraLight,
-    this.onReset,
+    required this.onRedraw,
     required this.appName,
     this.androidPackage,
     this.resetSkip,
@@ -217,7 +217,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 ),
               );
 
-              if (animDuration != backup) await EzConfig.rebuildUI();
+              if (animDuration != backup) {
+                await EzConfig.rebuildUI(widget.onRedraw);
+              }
             },
             label: EzConfig.l10n.dsAnimDuration,
             icon: const Icon(Icons.timer_outlined),
@@ -233,6 +235,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             mainAxisSize: MainAxisSize.min,
             child: EzConfig.isDark
                 ? EzImageSetting(
+                    widget.onRedraw,
                     key: UniqueKey(),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
@@ -240,6 +243,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
+                    widget.onRedraw,
                     key: UniqueKey(),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
@@ -435,6 +439,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Reset button
         widget.resetSpacer,
         EzResetButton(
+          widget.onRedraw,
           dialogTitle: EzConfig.l10n.dsResetAll(themeProfile),
           onConfirm: () async {
             if (EzConfig.isDark) {
@@ -460,7 +465,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 await EzConfig.removeKeys(widget.resetExtraLight!);
               }
             }
-            widget.onReset?.call();
           },
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,

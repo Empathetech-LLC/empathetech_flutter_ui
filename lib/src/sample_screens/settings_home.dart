@@ -120,6 +120,8 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
   // Define custom functions //
 
+  void redraw() => setState(() {});
+
   List<Widget> navButtons() {
     final List<Widget> buttons = <Widget>[];
     const Widget navIcon = Icon(Icons.navigate_next);
@@ -213,15 +215,16 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           EzHeader(),
 
           // Right/left
-          const EzDominantHandSwitch(),
+          EzDominantHandSwitch(redraw),
           EzConfig.spacer,
 
           // Theme mode
-          const EzThemeModeSwitch(),
+          EzThemeModeSwitch(redraw),
           EzConfig.spacer,
 
           // Language
           EzLocaleSetting(
+            redraw,
             skip: widget.skipLocales ?? <Locale>{english},
             protest: widget.protest,
             inDistress: widget.inDistress,
@@ -237,13 +240,14 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           // Quick config
           if (widget.quickConfigSpacer != null) ...<Widget>[
             widget.quickConfigSpacer!,
-            const EzQuickConfig(),
+            EzQuickConfig(redraw),
           ],
 
           // Feeling lucky
           if (widget.randomSpacer != null) ...<Widget>[
             widget.randomSpacer!,
             EzConfigRandomizer(
+              redraw,
               appName: widget.appName,
               androidPackage: widget.androidPackage,
               saveSkip: widget.saveSkip,
@@ -253,6 +257,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           // Reset button
           widget.resetSpacer,
           EzResetButton(
+            redraw,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
             resetSkip: widget.resetSkip,
