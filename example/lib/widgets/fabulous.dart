@@ -24,14 +24,14 @@ class ResetFAB extends StatelessWidget {
   /// Function to execute with 'Builder values' and 'Both' options
   final void Function() clearForms;
 
-  /// [EzConfig.reset] onNotify passthrough
-  //final void Function() onNotify;
+  /// [EzConfig.reset] passthrough
+  final void Function() onComplete;
 
   /// Opens an [EzAlertDialog] for resetting the form fields, app settings, both, or none
   const ResetFAB({
-    required this.clearForms,
-    // required this.onNotify,
     super.key,
+    required this.clearForms,
+    required this.onComplete,
   });
 
   @override
@@ -56,11 +56,9 @@ class ResetFAB extends StatelessWidget {
                   actions: <Widget>[
                     // Builder/forms
                     EzMaterialAction(
-                      onPressed: () async {
+                      onPressed: () {
                         clearForms();
-                        if (dContext.mounted) {
-                          Navigator.of(dContext).pop();
-                        }
+                        Navigator.of(dContext).pop();
                       },
                       text: l10n.csResetBuilder,
                       isDefaultAction: true,
@@ -69,13 +67,9 @@ class ResetFAB extends StatelessWidget {
                     // App settings
                     EzMaterialAction(
                       onPressed: () async {
-                        await EzConfig.reset(
-                          notifyTheme: true,
-                          // onNotify: onNotify,
-                        );
-                        if (dContext.mounted) {
-                          Navigator.of(dContext).pop();
-                        }
+                        await EzConfig.reset();
+                        if (dContext.mounted) Navigator.of(dContext).pop();
+                        await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetApp,
                       isDestructiveAction: true,
@@ -85,13 +79,9 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
-                        await EzConfig.reset(
-                          notifyTheme: true,
-                          // onNotify: onNotify,
-                        );
-                        if (dContext.mounted) {
-                          Navigator.of(dContext).pop();
-                        }
+                        await EzConfig.reset();
+                        if (dContext.mounted) Navigator.of(dContext).pop();
+                        await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,

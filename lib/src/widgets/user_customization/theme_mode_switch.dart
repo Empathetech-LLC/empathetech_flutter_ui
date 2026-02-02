@@ -8,6 +8,9 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
+  /// [EzConfig.rebuildThemeMode] passthrough
+  final void Function() onComplete;
+
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
@@ -15,7 +18,8 @@ class EzThemeModeSwitch extends StatefulWidget {
   final Color? backgroundColor;
 
   /// Standardized tool for changing the [ThemeMode]
-  const EzThemeModeSwitch({
+  const EzThemeModeSwitch(
+    this.onComplete, {
     super.key,
     this.labelStyle,
     this.backgroundColor,
@@ -77,7 +81,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
                 await EzConfig.remove(isDarkThemeKey);
                 break;
             }
-            await EzConfig.rebuildThemeMode();
+            await EzConfig.rebuildThemeMode(widget.onComplete);
           },
         ),
       ],
