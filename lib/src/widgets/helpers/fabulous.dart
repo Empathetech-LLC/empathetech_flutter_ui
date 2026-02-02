@@ -262,6 +262,9 @@ class EzRebuildFAB extends StatelessWidget {
   /// [EzConfig.rebuildUI] passthrough
   final void Function() onComplete;
 
+  /// If true, calls [EzConfig.redrawUI] instead of [EzConfig.rebuildUI]
+  final bool justDraw;
+
   /// Optional override, defaults to 'Apply changes'
   final String? tooltip;
 
@@ -269,12 +272,20 @@ class EzRebuildFAB extends StatelessWidget {
   final IconData? icon;
 
   /// [FloatingActionButton] that rebuilds the app when pressed
-  const EzRebuildFAB(this.onComplete, {super.key, this.tooltip, this.icon});
+  const EzRebuildFAB(
+    this.onComplete, {
+    super.key,
+    this.justDraw = false,
+    this.tooltip,
+    this.icon,
+  });
 
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
-        onPressed: () => EzConfig.rebuildUI(onComplete),
+        onPressed: () => justDraw
+            ? EzConfig.redrawUI(onComplete)
+            : EzConfig.rebuildUI(onComplete),
         tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
         child: EzIcon(icon ?? Icons.check),
       );
