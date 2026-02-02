@@ -221,14 +221,10 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     bool value, {
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     try {
       await _instance!._preferences.setBool(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
-
-      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting bool [$key]...\n$e');
@@ -242,14 +238,10 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     int value, {
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     try {
       await _instance!._preferences.setInt(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
-
-      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting int [$key]...\n$e');
@@ -263,14 +255,10 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     double value, {
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     try {
       await _instance!._preferences.setDouble(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
-
-      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting double [$key]...\n$e');
@@ -284,14 +272,10 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     String value, {
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     try {
       await _instance!._preferences.setString(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
-
-      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting String [$key]...\n$e');
@@ -305,14 +289,10 @@ Must be one of [int, bool, double, String, List<String>]''');
     String key,
     List<String> value, {
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     try {
       await _instance!._preferences.setStringList(key, value);
       if (!storageOnly) _instance!._prefs[key] = value;
-
-      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error setting String List [$key]...\n$e');
@@ -361,8 +341,6 @@ Must be one of [int, bool, double, String, List<String>]''');
     Map<String, dynamic> config, {
     Set<String>? filter,
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     final Set<MapEntry<String, dynamic>> entries = config.entries.toSet();
     if (filter != null) entries.removeAll(filter);
@@ -418,18 +396,13 @@ Must be one of [int, bool, double, String, List<String>]''');
           break;
       }
     }
-
-    if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
   }
 
   /// Create a pseudo-random config that follows the default vibe
   /// i.e. a triadic [ColorScheme] that should be highly legible
   /// Doubles are limited to half and/or twice their default values'
   /// There is an optional [shiny] chance (1 in 4096) to change the [Locale]
-  static Future<void> randomize({
-    bool shiny = true,
-    void Function()? onNotify,
-  }) async {
+  static Future<void> randomize({bool shiny = true}) async {
     // Define data //
 
     final Random random = Random();
@@ -442,24 +415,8 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Lefty
     await setBool(isLeftyKey, random.nextBool());
 
-    // Leave theme as-is, don't wanna light blast peeps at night
-
-    // Locale
-    if (shiny && random.nextInt(4096) == 376) {
-      final List<Locale> trimmedLocales =
-          List<Locale>.from(EFUILang.supportedLocales);
-      trimmedLocales.remove(locale);
-
-      final Locale randomLocale =
-          trimmedLocales.elementAt(random.nextInt(trimmedLocales.length));
-
-      final List<String> localeData = <String>[randomLocale.languageCode];
-      if (randomLocale.countryCode != null) {
-        localeData.add(randomLocale.countryCode!);
-      }
-
-      await setStringList(appLocaleKey, localeData);
-    }
+    // Leave ThemeMode as-is, don't wanna light blast peeps at night
+    // Locale too, don't want them to get lost
 
     // Update color settings //
 
@@ -495,8 +452,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     if (isDark) {
       // Create a pseudo-random ColorScheme that follows the default vibe
-      await storeColorScheme(
-        colorScheme: ColorScheme.fromSeed(
+      await loadColorScheme(
+        ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: primary,
           primary: primary,
@@ -517,7 +474,7 @@ Must be one of [int, bool, double, String, List<String>]''');
           onSurface: Colors.white,
           surfaceTint: Colors.transparent,
         ),
-        brightness: Brightness.dark,
+        Brightness.dark,
       );
 
       // Update design settings //
@@ -615,8 +572,8 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setDouble(darkIconSizeKey, defaultIconSize * getScalar());
     } else {
       // Create a pseudo-random ColorScheme that follows the default vibe
-      await storeColorScheme(
-        colorScheme: ColorScheme.fromSeed(
+      await loadColorScheme(
+        ColorScheme.fromSeed(
           brightness: Brightness.light,
           seedColor: primary,
           primary: primary,
@@ -637,7 +594,7 @@ Must be one of [int, bool, double, String, List<String>]''');
           onSurface: Colors.black,
           surfaceTint: Colors.transparent,
         ),
-        brightness: Brightness.light,
+        Brightness.light,
       );
 
       // Update design settings //
@@ -734,8 +691,6 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
     }
-
-    await _provPoint.rebuildUI(onComplete: onNotify);
   }
 
   //* Removers *//
@@ -744,12 +699,11 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// When [reset] is true, the default value is restored (if present)
   /// By default, both the live and [SharedPreferencesAsync] values are modified
   /// Setting [storageOnly] to true will make [reset] moot
+
   static Future<bool> remove(
     String key, {
     bool reset = true,
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     try {
       await _instance!._preferences.remove(key);
@@ -759,7 +713,6 @@ Must be one of [int, bool, double, String, List<String>]''');
             : _instance!._prefs.remove(key);
       }
 
-      if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
       return true;
     } catch (e) {
       ezLog('Error removing key [$key]...\n$e');
@@ -776,8 +729,6 @@ Must be one of [int, bool, double, String, List<String>]''');
     Set<String> keys, {
     bool reset = true,
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     bool success = true;
     for (final String key in keys) {
@@ -788,17 +739,15 @@ Must be one of [int, bool, double, String, List<String>]''');
       );
     }
 
-    if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
     return success;
   }
 
-  /// [removeKeys], all
+  /// [removeKeys], all (except those in [skip])
+  /// [skip] defaults to [appLocaleKey]
   static Future<bool> reset({
     Set<String>? skip = const <String>{appLocaleKey},
     bool reset = true,
     bool storageOnly = false,
-    bool notifyTheme = false,
-    void Function()? onNotify,
   }) async {
     final List<String> keys = List<String>.from(_instance!._prefs.keys);
 
@@ -812,7 +761,6 @@ Must be one of [int, bool, double, String, List<String>]''');
       );
     }
 
-    if (notifyTheme) await _provPoint.rebuildUI(onComplete: onNotify);
     return success;
   }
 
@@ -888,6 +836,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Theme aware alias
   static EzDivider get divider => _provPoint.layout.divider;
 
+  /// Theme aware alias
   static bool get hideScroll => _provPoint.layout.hideScroll;
 
   /// Theme aware alias
@@ -897,18 +846,33 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   // Setters //
 
-  static Future<void> rebuildLocale({void Function()? onComplete}) =>
-      _provPoint.rebuildLocale(onComplete: onComplete);
+  /// Set the apps [Locale] from storage and load corresponding localizations
+  /// If unsure, we recommend [onComplete] to be setState((){})
+  /// Or [doNothing] for [StatelessWidget]s
+  static Future<void> rebuildLocale(void Function() onComplete) =>
+      _provPoint.rebuildLocale(onComplete);
 
-  static Future<void> rebuildThemeMode({void Function()? onComplete}) =>
-      _provPoint.rebuildThemeMode(onComplete: onComplete);
+  /// Reconfigure [ThemeMode] et al. from storage and [redrawUI] with [onComplete]
+  /// If unsure, we recommend [onComplete] to be setState((){})
+  /// Or [doNothing] for [StatelessWidget]s
+  static Future<void> rebuildThemeMode(void Function() onComplete) =>
+      _provPoint.rebuildThemeMode(onComplete);
 
-  static Future<void> rebuildUI({void Function()? onComplete}) =>
-      _provPoint.rebuildUI(onComplete: onComplete);
+  /// Rebuilds the apps [ThemeMode], [ThemeData], and updates the config caches
+  /// Then calls [redrawUI] with [onComplete]
+  /// If unsure, we recommend [onComplete] to be setState((){})
+  /// Or [doNothing] for [StatelessWidget]s
+  static Future<void> rebuildUI(void Function() onComplete) =>
+      _provPoint.rebuildUI(onComplete);
 
-  static Future<void> redrawUI({void Function()? onComplete}) =>
-      _provPoint.redrawUI(onComplete: onComplete);
+  /// Randomizes the [seed] and notifies listeners
+  /// Optionally calls [onComplete] after notifying
+  /// If unsure, we recommend [onComplete] to be setState((){})
+  /// Or [doNothing] for [StatelessWidget]s
+  static Future<void> redrawUI(void Function() onComplete) =>
+      _provPoint.redrawUI(onComplete);
 
-  static Future<void> redrawTheme({void Function()? onComplete}) =>
-      _provPoint.redrawTheme(onComplete: onComplete);
+  /// Trigger [redrawUI] if/when the [ThemeMode] brightness changes
+  /// Used in [EzConfigurableApp], not normally called manually
+  static Future<void> redrawTheme() => _provPoint.redrawTheme();
 }
