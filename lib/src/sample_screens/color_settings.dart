@@ -199,6 +199,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         widget.resetSpacer,
         EzConfig.isDark
             ? EzResetButton(
+                () => setState(() {}),
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(darkString),
@@ -211,10 +212,10 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
-                  await EzConfig.rebuildUI();
                 },
               )
             : EzResetButton(
+                () => setState(() {}),
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
                 dialogTitle: EzConfig.l10n.csResetAll(lightString),
@@ -228,7 +229,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                   }
 
                   setState(() => currList = List<String>.from(defaultList));
-                  await EzConfig.rebuildUI();
                 },
               ),
         EzConfig.separator,
@@ -251,8 +251,7 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  late final String fromImageLabel = EzConfig.l10n.csSchemeBase;
-  late final String fromImageHint = EzConfig.l10n.csFromImage;
+  void redraw() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
@@ -271,20 +270,20 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           if (widget.quickHeader != null) ...widget.quickHeader!,
 
           // MonoChrome
-          const EzMonoChromeColorsSetting(),
+          EzMonoChromeColorsSetting(redraw),
           EzConfig.spacer,
 
           // From image
           Semantics(
-            label: fromImageLabel.replaceAll('\n', ' '),
+            label: EzConfig.l10n.csSchemeBase.replaceAll('\n', ' '),
             value: EzConfig.l10n.gOptional,
             button: true,
-            hint: fromImageHint,
+            hint: EzConfig.l10n.csFromImage,
             child: ExcludeSemantics(
               child: EzImageSetting(
-                key: UniqueKey(),
+                redraw,
                 configKey: fromImageKey,
-                label: fromImageLabel,
+                label: EzConfig.l10n.csSchemeBase,
                 updateTheme: brightness,
                 updateThemeOption: false,
                 showEditor: false,

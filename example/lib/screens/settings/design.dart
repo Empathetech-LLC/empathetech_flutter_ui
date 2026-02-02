@@ -15,6 +15,7 @@ class DesignSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
         const EzScreen(EzDesignSettings(
+          onRedraw: doNothing,
           appName: appName,
           androidPackage: androidPackage,
         )),

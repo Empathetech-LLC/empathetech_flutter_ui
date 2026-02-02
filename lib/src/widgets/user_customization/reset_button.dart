@@ -44,9 +44,9 @@ class EzResetButton extends StatelessWidget {
   /// Moot if [onConfirm] is provided
   final bool notifyTheme;
 
-  /// [EzConfigProvider.rebuild] passthrough
+  /// [EzConfig.rebuildUI] passthrough
   /// Moot if [onConfirm] is provided
-  final void Function()? onNotify;
+  final void Function() onComplete;
 
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
@@ -58,7 +58,8 @@ class EzResetButton extends StatelessWidget {
   final void Function()? onDeny;
 
   /// [EzElevatedIconButton] for clearing user settings
-  const EzResetButton({
+  const EzResetButton(
+    this.onComplete, {
     super.key,
     this.style,
     this.label,
@@ -70,7 +71,6 @@ class EzResetButton extends StatelessWidget {
     this.resetSkip,
     this.storageOnly = false,
     this.notifyTheme = true,
-    this.onNotify,
     this.onConfirm,
     this.onDeny,
   });
@@ -116,12 +116,11 @@ class EzResetButton extends StatelessWidget {
                 await EzConfig.reset(
                   skip: resetSkip,
                   storageOnly: storageOnly,
-                  notifyTheme: notifyTheme,
-                  onNotify: onNotify,
                 );
               } else {
                 onConfirm!.call();
               }
+              await EzConfig.rebuildUI(onComplete);
               if (dContext.mounted) Navigator.of(dContext).pop();
             },
             confirmIsDestructive: true,

@@ -14,6 +14,9 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EzImageSetting extends StatefulWidget {
+  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
+  final void Function() onComplete;
+
   /// [EzConfig] key whose value is being updated
   final String configKey;
 
@@ -59,7 +62,8 @@ class EzImageSetting extends StatefulWidget {
   final bool showFitOption;
 
   /// [EzElevatedIconButton] for updating the image at [configKey]'s path
-  const EzImageSetting({
+  const EzImageSetting(
+    this.onComplete, {
     super.key,
     required this.configKey,
     required this.label,
@@ -215,10 +219,8 @@ class _ImageSettingState extends State<EzImageSetting> {
 
       // Update the theme (conditionally)
       if (!isInt && widget.updateTheme != null && updateTheme) {
-        final String result = await storeImageColorScheme(
-          brightness: widget.updateTheme!,
-          path: newPath,
-        );
+        final String result =
+            await loadImageColorScheme(newPath, widget.updateTheme!);
 
         if (result != success && mounted) {
           await ezLogAlert(
@@ -228,13 +230,13 @@ class _ImageSettingState extends State<EzImageSetting> {
                 '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
           );
         } else {
-          widget.updateTheme == Brightness.light
-              ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
-              : await EzConfig.setString(darkColorSchemeImageKey, newPath);
-          await EzConfig.rebuildUI();
+          widget.updateTheme == Brightness.dark
+              ? await EzConfig.setString(darkColorSchemeImageKey, newPath)
+              : await EzConfig.setString(lightColorSchemeImageKey, newPath);
+          await EzConfig.rebuildUI(widget.onComplete);
         }
       } else {
-        await EzConfig.redrawUI();
+        await EzConfig.redrawUI(widget.onComplete);
       }
     }
   }

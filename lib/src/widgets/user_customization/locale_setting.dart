@@ -11,6 +11,9 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
+  /// [EzConfig.rebuildLocale] passthrough
+  final void Function() onComplete;
+
   /// Override [EFUILang.supportedLocales] default
   final List<Locale>? locales;
 
@@ -26,7 +29,8 @@ class EzLocaleSetting extends StatefulWidget {
 
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
-  const EzLocaleSetting({
+  const EzLocaleSetting(
+    this.onComplete, {
     super.key,
     this.locales,
     this.skip,
@@ -156,7 +160,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                               if (mContext.mounted) {
                                 Navigator.of(mContext).pop();
                               }
-                              await EzConfig.rebuildLocale();
+                              await EzConfig.rebuildLocale(widget.onComplete);
                             },
                             icon: flag(
                               locale,
