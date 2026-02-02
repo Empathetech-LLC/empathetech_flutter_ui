@@ -127,18 +127,17 @@ ColorScheme ezColorScheme(Brightness brightness) {
         );
 }
 
-/// Store the passed [ColorScheme] in [EzConfig.prefs]
-Future<void> storeColorScheme({
-  required ColorScheme colorScheme,
-  required Brightness? brightness,
-  bool notifyTheme = false,
-  void Function()? onNotify,
-}) async {
+/// Store the passed [ColorScheme] in [EzConfig]
+/// When [brightness] is null, both dark and light color schemes are updated
+Future<void> loadColorScheme(
+  ColorScheme colorScheme,
+  Brightness? brightness,
+) async {
   if (brightness == null || brightness == Brightness.dark) {
-    await EzConfig.removeKeys(
-      darkColorKeys.keys.toSet(),
-    );
+    // Reset
+    await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
+    // Rebuild
     await EzConfig.setInt(
       darkPrimaryKey,
       colorScheme.primary.toARGB32(),
@@ -326,10 +325,10 @@ Future<void> storeColorScheme({
   }
 
   if (brightness == null || brightness == Brightness.light) {
-    await EzConfig.removeKeys(
-      lightColorKeys.keys.toSet(),
-    );
+    // Reset
+    await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
+    // Rebuild
     await EzConfig.setInt(
       lightPrimaryKey,
       colorScheme.primary.toARGB32(),
@@ -515,35 +514,41 @@ Future<void> storeColorScheme({
       colorScheme.surfaceTint.toARGB32(),
     );
   }
-
-  if (notifyTheme) await EzConfig.rebuildUI(onComplete: onNotify);
 }
 
 /// Generates a [ColorScheme] based on the image found at [path]
 /// Then stores the values in [EzConfig]
-Future<String> storeImageColorScheme({
-  required String path,
-  required Brightness brightness,
-  bool notifyTheme = false,
-  void Function()? onNotify,
-}) async {
-  late final ColorScheme colorScheme;
-
+/// When [brightness] is null, both dark and light color schemes are updated
+Future<String> loadImageColorScheme(String path, Brightness? brightness) async {
   try {
-    colorScheme = await ColorScheme.fromImageProvider(
-      provider: ezImageProvider(path),
-      brightness: brightness,
-    );
+    if (brightness == null) {
+      loadColorScheme(
+        await ColorScheme.fromImageProvider(
+          provider: ezImageProvider(path),
+          brightness: Brightness.dark,
+        ),
+        Brightness.dark,
+      );
+      loadColorScheme(
+        await ColorScheme.fromImageProvider(
+          provider: ezImageProvider(path),
+          brightness: Brightness.light,
+        ),
+        Brightness.light,
+      );
+    } else {
+      loadColorScheme(
+        await ColorScheme.fromImageProvider(
+          provider: ezImageProvider(path),
+          brightness: brightness,
+        ),
+        brightness,
+      );
+    }
   } catch (e) {
     return e.toString();
   }
 
-  await storeColorScheme(
-    colorScheme: colorScheme,
-    brightness: brightness,
-    notifyTheme: notifyTheme,
-    onNotify: onNotify,
-  );
   return success;
 }
 
