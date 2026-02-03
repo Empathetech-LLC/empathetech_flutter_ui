@@ -3,7 +3,36 @@
  * See LICENSE for distribution and usage details.
  */
 
-// BTS //
+import 'package:flutter/material.dart';
+
+//* Assets *//
+
+// For config //
+
+/// assets/nebula-jeremy-muller.jpg
+/// https://www.pexels.com/@jmueller/
+const String nebulaPath = 'assets/nebula-jeremy-muller.jpg';
+
+/// [nebulaPath]
+const Set<String> efuiAssetPaths = <String>{nebulaPath};
+
+/// [nebulaPath]
+const Map<String, String> efuiAssetCredits = <String, String>{
+  nebulaPath: 'https://www.pexels.com/@jmueller/',
+};
+
+// For use //
+
+/// [AssetImage] for [nebulaPath]
+const AssetImage nebulaAsset =
+    AssetImage(nebulaPath, package: 'empathetech_flutter_ui');
+
+/// [nebulaPath]
+const Map<String, AssetImage> efuiImageLookup = <String, AssetImage>{
+  nebulaPath: nebulaAsset,
+};
+
+//* BTS *//
 
 /// /
 const String homePath = '/';
@@ -14,7 +43,7 @@ const String success = 'SUCCESS';
 /// example.com/image.jpg
 const String webImgHint = 'example.com/image.jpg';
 
-// Theme Data //
+//* Theme Data *//
 
 /// Fit
 const String boxFitSuffix = 'Fit';
@@ -46,7 +75,10 @@ const double selectionOpacity = 0.25;
 /// 1:1 looks foggy
 const double shadowMod = 0.333;
 
-// Localization //
+/// 0xFF264941
+const Color chalkboardGreen = Color(0xFF264941);
+
+//* Localization *//
 
 /// Non-conclusive set containing...
 /// ar, fa, he, ur

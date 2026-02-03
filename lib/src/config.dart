@@ -41,7 +41,7 @@ class EzConfig {
   /// [EzConfig] key : value runtime [Type] map
   final Map<String, Type> _typeMap;
 
-  /// Allows for [EzConfigProvider.rebuild] and hosts caches for [ThemeMode] aware [EzConfig] values
+  /// Allows for [EzConfigProvider.rebuildUI] and hosts caches for [ThemeMode] aware [EzConfig] values
   EzConfigProvider? _provider;
 
   /// Private instance
@@ -142,7 +142,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       // Build the EzConfig instance //
 
       _instance = EzConfig._(
-        assetPaths: assetPaths,
+        assetPaths: <String>{...assetPaths, ...efuiAssetPaths},
         defaults: defaults,
         localeFallback: localeFallback,
         l10nFallback: l10nFallback,
