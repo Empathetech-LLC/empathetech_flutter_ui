@@ -13,16 +13,17 @@ class TryTip extends StatelessWidget {
   const TryTip({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: EzConfig.l10n.ssTryMe,
-      excludeFromSemantics: true,
-      child: child,
-    );
-  }
+  Widget build(BuildContext context) => Tooltip(
+        message: EzConfig.l10n.ssTryMe,
+        excludeFromSemantics: true,
+        child: child,
+      );
 }
 
 class EzQuickConfig extends StatelessWidget {
+  /// [EzConfigProvider.rebuildUI] passthrough
+  final void Function() onComplete;
+
   /// Toggle the [EzBigButtonsConfig]
   final bool bigButtons;
 
@@ -38,22 +39,15 @@ class EzQuickConfig extends StatelessWidget {
   /// Toggle the [EzFancyPantsConfig]
   final bool fancyPants;
 
-  /// Whether to notify [EzConfigProvider]
-  final bool notifyTheme;
-
-  /// [EzConfigProvider.rebuild] passthrough
-  final void Function()? onNotify;
-
   /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
-  const EzQuickConfig({
+  const EzQuickConfig(
+    this.onComplete, {
     super.key,
     this.bigButtons = true,
     this.highVisibility = true,
     this.videoGame = true,
     this.chalkboard = true,
     this.fancyPants = true,
-    this.notifyTheme = true,
-    this.onNotify,
   });
 
   // Return the build //
@@ -70,9 +64,9 @@ class EzQuickConfig extends StatelessWidget {
           context: context,
           builder: (BuildContext mContext) => StatefulBuilder(
             builder: (_, StateSetter setModal) {
-              Future<void> onComplete() async {
-                Navigator.of(mContext).pop();
-                if (notifyTheme) await EzConfig.rebuildUI(onComplete: onNotify);
+              Future<void> cleanRebuild() async {
+                await EzConfig.rebuildUI(onComplete);
+                if (mContext.mounted) Navigator.of(mContext).pop();
               }
 
               return EzScrollView(
@@ -100,8 +94,8 @@ class EzQuickConfig extends StatelessWidget {
                         Padding(
                           padding: wrapPadding,
                           child: EzBigButtonsConfig(
-                            onComplete: onComplete,
-                            isDark: updateBoth ? null : EzConfig.isDark,
+                            updateBoth ? null : EzConfig.isDark,
+                            cleanRebuild,
                           ),
                         ),
 
@@ -110,8 +104,8 @@ class EzQuickConfig extends StatelessWidget {
                         Padding(
                           padding: wrapPadding,
                           child: EzHighVisibilityConfig(
-                            onComplete: onComplete,
-                            isDark: updateBoth ? null : EzConfig.isDark,
+                            updateBoth ? null : EzConfig.isDark,
+                            cleanRebuild,
                           ),
                         ),
 
@@ -119,14 +113,14 @@ class EzQuickConfig extends StatelessWidget {
                       if (videoGame)
                         Padding(
                           padding: wrapPadding,
-                          child: EzVideoGameConfig(onComplete: onComplete),
+                          child: EzVideoGameConfig(cleanRebuild),
                         ),
 
                       // Chalkboard
                       if (chalkboard)
                         Padding(
                           padding: wrapPadding,
-                          child: EzChalkboardConfig(onComplete: onComplete),
+                          child: EzChalkboardConfig(cleanRebuild),
                         ),
 
                       // Fancy pants
@@ -134,8 +128,8 @@ class EzQuickConfig extends StatelessWidget {
                         Padding(
                           padding: wrapPadding,
                           child: EzFancyPantsConfig(
-                            onComplete: onComplete,
-                            isDark: updateBoth ? null : EzConfig.isDark,
+                            updateBoth ? null : EzConfig.isDark,
+                            cleanRebuild,
                           ),
                         ),
                     ],
@@ -154,27 +148,22 @@ class EzQuickConfig extends StatelessWidget {
 }
 
 class EzBigButtonsConfig extends StatelessWidget {
-  /// Only runs if you're using the full widget
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function()? onComplete;
-
   /// null updates both themes
   /// Quantum computing
   final bool? isDark;
 
+  /// Only runs if you're using the rendered [Widget]
+  /// Calling [onPressed] does not trigger [onComplete]
+  final Future<void> Function() onComplete;
+
   /// Only modifies the layout settings and icon size
   /// Slight bump to all layout values, for easier tapping
-  const EzBigButtonsConfig({super.key, this.onComplete, required this.isDark});
+  const EzBigButtonsConfig(this.isDark, this.onComplete, {super.key});
 
   /// null updates both themes
   /// Quantum computing
-  static Future<void> onPressed({required bool? isDark}) async {
+  static Future<void> onPressed(bool? isDark) async {
     if (isDark == null || isDark == true) {
-      // Conditionally update text
-      if (EzConfig.iconSize < 25.0) {
-        await EzConfig.setDouble(darkIconSizeKey, 25.0);
-      }
-
       // Update layout
       await EzConfig.setDouble(darkMarginKey, 12.5);
       if (isMobile()) {
@@ -185,14 +174,14 @@ class EzBigButtonsConfig extends StatelessWidget {
         await EzConfig.setDouble(darkSpacingKey, 40.0);
       }
       await EzConfig.setBool(darkHideScrollKey, false);
+
+      // Conditionally update text
+      if (EzConfig.iconSize < 25.0) {
+        await EzConfig.setDouble(darkIconSizeKey, 25.0);
+      }
     }
 
     if (isDark == null || isDark == false) {
-      // Conditionally update text
-      if (EzConfig.iconSize < 25.0) {
-        await EzConfig.setDouble(lightIconSizeKey, 25.0);
-      }
-
       // Update layout
       await EzConfig.setDouble(lightMarginKey, 12.5);
       if (isMobile()) {
@@ -203,6 +192,11 @@ class EzBigButtonsConfig extends StatelessWidget {
         await EzConfig.setDouble(lightSpacingKey, 40.0);
       }
       await EzConfig.setBool(lightHideScrollKey, false);
+
+      // Conditionally update text
+      if (EzConfig.iconSize < 25.0) {
+        await EzConfig.setDouble(lightIconSizeKey, 25.0);
+      }
     }
   }
 
@@ -212,32 +206,28 @@ class EzBigButtonsConfig extends StatelessWidget {
           padding: EdgeInsets.all(isMobile() ? 22.5 : 25.0),
         ),
         onPressed: () async {
-          await onPressed(isDark: isDark);
-          await onComplete?.call();
+          await onPressed(isDark);
+          await onComplete();
         },
         text: EzConfig.l10n.ssBigButtons,
       );
 }
 
 class EzHighVisibilityConfig extends StatelessWidget {
-  /// Only runs if you're using the full widget
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function()? onComplete;
-
   /// null updates both themes
   /// Quantum computing
   final bool? isDark;
 
+  /// Only runs if you're using the rendered [Widget]
+  /// Calling [onPressed] does not trigger [onComplete]
+  final Future<void> Function() onComplete;
+
   /// Resets the current config and applies the [ezHighContrastLight] | [ezHighContrastDark] color scheme
   /// With text theme built with [atkinsonHyperlegible] and is slightly larger than the default
   /// Spacing is also increased, but not as much as [EzBigButtonsConfig]
-  const EzHighVisibilityConfig({
-    super.key,
-    this.onComplete,
-    required this.isDark,
-  });
+  const EzHighVisibilityConfig(this.isDark, this.onComplete, {super.key});
 
-  static Future<void> onPressed({required bool? isDark}) async {
+  static Future<void> onPressed(bool? isDark) async {
     if (isDark == null || isDark == true) {
       // Reset //
 
@@ -248,10 +238,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Update colors //
 
-      await storeColorScheme(
-        colorScheme: ezHighContrastDark,
-        brightness: Brightness.dark,
-      );
+      await loadColorScheme(ezHighContrastDark, Brightness.dark);
 
       // Update layout //
 
@@ -331,10 +318,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Update colors //
 
-      await storeColorScheme(
-        colorScheme: ezHighContrastLight,
-        brightness: Brightness.light,
-      );
+      await loadColorScheme(ezHighContrastLight, Brightness.light);
 
       // Update layout //
 
@@ -445,8 +429,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
               padding: EdgeInsets.all(isMobile() ? 17.5 : 20.0),
             ),
       onPressed: () async {
-        await onPressed(isDark: isDark);
-        await onComplete?.call();
+        await onPressed(isDark);
+        await onComplete();
       },
       text: EzConfig.l10n.ssHighVisibility,
       textStyle: localBody,
@@ -455,15 +439,15 @@ class EzHighVisibilityConfig extends StatelessWidget {
 }
 
 class EzVideoGameConfig extends StatelessWidget {
-  /// Only runs if you're using the full widget
+  /// Only runs if you're using the rendered [Widget]
   /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function()? onComplete;
+  final Future<void> Function() onComplete;
 
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets [ezColorScheme] with [Brightness.dark]
   /// Slightly increases the layout spacing
   /// Sets the [TextTheme] to a [pressStart2P] based theme
-  const EzVideoGameConfig({super.key, this.onComplete});
+  const EzVideoGameConfig(this.onComplete, {super.key});
 
   static Future<bool> onPressed(BuildContext context) async {
     final bool onMobile = isMobile();
@@ -492,6 +476,7 @@ class EzVideoGameConfig extends StatelessWidget {
     }
 
     // Reset //
+    // TODO: add a gif
 
     await EzConfig.removeKeys(darkColorKeys.keys.toSet());
     await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
@@ -501,10 +486,7 @@ class EzVideoGameConfig extends StatelessWidget {
     // Update colors //
 
     if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
-    await storeColorScheme(
-      colorScheme: ezColorScheme(Brightness.dark),
-      brightness: Brightness.dark,
-    );
+    await loadColorScheme(ezColorScheme(Brightness.dark), Brightness.dark);
 
     // Update design //
 
@@ -588,7 +570,7 @@ class EzVideoGameConfig extends StatelessWidget {
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
-        if (confirmed) await onComplete?.call();
+        if (confirmed) await onComplete();
       },
       text: EzConfig.l10n.ssVideoGame,
       textStyle: localBody,
@@ -599,14 +581,14 @@ class EzVideoGameConfig extends StatelessWidget {
 const Color chalkboardGreen = Color(0xFF264941);
 
 class EzChalkboardConfig extends StatelessWidget {
-  /// Only runs if you're using the full widget
+  /// Only runs if you're using the rendered [Widget]
   /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function()? onComplete;
+  final Future<void> Function() onComplete;
 
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets a [ColorScheme] similar to [ezHighContrastDark], but with a chalkboard surface (0xFF264941) and [empathSand] accents
   /// Has default design and layout settings, but a [fingerPaint] based [TextTheme]
-  const EzChalkboardConfig({super.key, this.onComplete});
+  const EzChalkboardConfig(this.onComplete, {super.key});
 
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not dark, show a warning dialog
@@ -642,8 +624,8 @@ class EzChalkboardConfig extends StatelessWidget {
     // Update colors //
 
     if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
-    await storeColorScheme(
-      colorScheme: const ColorScheme(
+    await loadColorScheme(
+      const ColorScheme(
         brightness: Brightness.dark,
         // Primary
         primary: empathSand,
@@ -703,7 +685,7 @@ class EzChalkboardConfig extends StatelessWidget {
         inversePrimary: empathSand,
         surfaceTint: Colors.transparent,
       ),
-      brightness: Brightness.dark,
+      Brightness.dark,
     );
 
     // Update text //
@@ -763,7 +745,7 @@ class EzChalkboardConfig extends StatelessWidget {
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
-        if (confirmed) await onComplete?.call();
+        if (confirmed) await onComplete();
       },
       text: EzConfig.l10n.ssChalkboard,
       textStyle: localBody,
@@ -772,19 +754,19 @@ class EzChalkboardConfig extends StatelessWidget {
 }
 
 class EzFancyPantsConfig extends StatelessWidget {
-  /// Only runs if you're using the full widget
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function()? onComplete;
-
   /// null updates both themes
   /// Quantum computing
   final bool? isDark;
+
+  /// Only runs if you're using the rendered [Widget]
+  /// Calling [onPressed] does not trigger [onComplete]
+  final Future<void> Function() onComplete;
 
   /// Reset the current config
   /// Applies a [ezColorScheme] with the primary and secondary colors swapped (primary is always [empathSand])
   /// Slightly decreases the padding and sets an [alexBrush] based [TextTheme]
   /// Otherwise default
-  const EzFancyPantsConfig({super.key, this.onComplete, required this.isDark});
+  const EzFancyPantsConfig(this.isDark, this.onComplete, {super.key});
 
   static Future<void> onPressed({required bool? isDark}) async {
     if (isDark == null || isDark == true) {
@@ -937,7 +919,7 @@ class EzFancyPantsConfig extends StatelessWidget {
             ),
       onPressed: () async {
         await onPressed(isDark: isDark);
-        await onComplete?.call();
+        await onComplete();
       },
       text: EzConfig.l10n.ssFancyPants,
       textStyle: localBody,
