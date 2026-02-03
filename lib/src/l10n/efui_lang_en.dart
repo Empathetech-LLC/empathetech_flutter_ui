@@ -333,13 +333,10 @@ class EFUILangEn extends EFUILang {
   String get ssHighVisibility => 'High visibility';
 
   @override
-  String get ssVideoGame => 'Video game';
-
-  @override
   String get ssChalkboard => 'Chalkboard';
 
   @override
-  String get ssFancyPants => 'Fancy pants';
+  String get ssNebula => 'Nebula';
 
   @override
   String get ssDarkOnly =>
@@ -985,13 +982,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssHighVisibility => 'High visibility';
 
   @override
-  String get ssVideoGame => 'Video game';
-
-  @override
   String get ssChalkboard => 'Chalkboard';
 
   @override
-  String get ssFancyPants => 'Fancy pants';
+  String get ssNebula => 'Nebula';
 
   @override
   String get ssDarkOnly =>

@@ -335,13 +335,10 @@ class EFUILangEs extends EFUILang {
   String get ssHighVisibility => 'Alta visibilidad';
 
   @override
-  String get ssVideoGame => 'Videojuego';
-
-  @override
   String get ssChalkboard => 'Pizarra';
 
   @override
-  String get ssFancyPants => 'Pantalones elegantes';
+  String get ssNebula => 'Nebulosa';
 
   @override
   String get ssDarkOnly =>

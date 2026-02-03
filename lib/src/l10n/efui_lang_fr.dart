@@ -334,13 +334,10 @@ class EFUILangFr extends EFUILang {
   String get ssHighVisibility => 'Haute visibilité';
 
   @override
-  String get ssVideoGame => 'Mode jeu';
-
-  @override
   String get ssChalkboard => 'Tableau noir';
 
   @override
-  String get ssFancyPants => 'Pantalons élégants';
+  String get ssNebula => 'Nébuleuse';
 
   @override
   String get ssDarkOnly =>

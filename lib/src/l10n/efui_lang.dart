@@ -711,23 +711,17 @@ abstract class EFUILang {
   /// **'High visibility'**
   String get ssHighVisibility;
 
-  /// No description provided for @ssVideoGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Video game'**
-  String get ssVideoGame;
-
   /// No description provided for @ssChalkboard.
   ///
   /// In en, this message translates to:
   /// **'Chalkboard'**
   String get ssChalkboard;
 
-  /// No description provided for @ssFancyPants.
+  /// No description provided for @ssNebula.
   ///
   /// In en, this message translates to:
-  /// **'Fancy pants'**
-  String get ssFancyPants;
+  /// **'Nebula'**
+  String get ssNebula;
 
   /// No description provided for @ssDarkOnly.
   ///
