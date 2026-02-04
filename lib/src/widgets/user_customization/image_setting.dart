@@ -535,6 +535,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.contain,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -543,6 +544,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.cover,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -551,6 +553,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.fill,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -559,6 +562,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.fitWidth,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -567,6 +571,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.fitHeight,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -575,6 +580,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.none,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -583,6 +589,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       fit: BoxFit.scaleDown,
                       width: width,
                       height: height,
+                      modalContext: fitContext,
                       setModal: fitState,
                     ),
                     EzConfig.rowSpacer,
@@ -641,16 +648,17 @@ class _ImageSettingState extends State<EzImageSetting> {
     required BoxFit fit,
     required double width,
     required double height,
+    required BuildContext modalContext,
     required StateSetter setModal,
   }) {
     final double scaleMargin = EzConfig.marginVal * 0.25;
 
     final String name = fit.name;
 
-    final double toolbarHeight =
-        ezTextSize(name, style: EzConfig.styles.bodyLarge, context: context)
-                .height +
-            scaleMargin;
+    final double toolbarHeight = ezTextSize(name,
+                style: EzConfig.styles.bodyLarge, context: modalContext)
+            .height +
+        scaleMargin;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
