@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzResetButton extends StatelessWidget {
@@ -76,68 +77,57 @@ class EzResetButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    late final bool useCrucial = (EzConfig.get(
-                EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey)
-            as double) <
-        0.50;
-    late final Color crucialSurface =
-        EzConfig.colors.surface.withValues(alpha: 0.50);
-
-    // Return the build //
-
-    return EzElevatedIconButton(
-      // EzResetButton can at most be 50% transparent
-      // If a user accidentally borks their UI, they should be able to see the reset button
-      style: (style == null)
-          ? useCrucial
-              ? ElevatedButton.styleFrom(backgroundColor: crucialSurface)
-              : null
-          : style,
-      onPressed: () => showDialog(
-        context: context,
-        builder: (BuildContext dContext) => EzAlertDialog(
-          title: Text(
-            dialogTitle ?? EzConfig.l10n.ssResetAll,
-            textAlign: TextAlign.center,
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        style: style ??
+            ElevatedButton.styleFrom(
+              backgroundColor: EzConfig.colors.surface.withValues(
+                  alpha: max(
+                      EzConfig.get(EzConfig.isDark
+                          ? darkButtonOpacityKey
+                          : lightButtonOpacityKey),
+                      focusOpacity)),
+            ),
+        onPressed: () => showDialog(
+          context: context,
+          builder: (BuildContext dContext) => EzAlertDialog(
+            title: Text(
+              dialogTitle ?? EzConfig.l10n.ssResetAll,
+              textAlign: TextAlign.center,
+            ),
+            content: dialogContent ??
+                ezRichUndoWarning(
+                  context,
+                  appName: appName,
+                  androidPackage: androidPackage,
+                ),
+            actions: ezActionPair(
+              context: context,
+              onConfirm: () async {
+                if (onConfirm == null) {
+                  await EzConfig.reset(
+                    skip: resetSkip,
+                    storageOnly: storageOnly,
+                  );
+                } else {
+                  onConfirm!.call();
+                }
+                await EzConfig.rebuildUI(onComplete);
+                if (dContext.mounted) Navigator.of(dContext).pop();
+              },
+              confirmIsDestructive: true,
+              onDeny: () {
+                if (onDeny == null) {
+                  doNothing();
+                } else {
+                  onDeny!.call();
+                }
+                Navigator.of(dContext).pop();
+              },
+            ),
+            needsClose: false,
           ),
-          content: dialogContent ??
-              ezRichUndoWarning(
-                context,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
-          actions: ezActionPair(
-            context: context,
-            onConfirm: () async {
-              if (onConfirm == null) {
-                await EzConfig.reset(
-                  skip: resetSkip,
-                  storageOnly: storageOnly,
-                );
-              } else {
-                onConfirm!.call();
-              }
-              await EzConfig.rebuildUI(onComplete);
-              if (dContext.mounted) Navigator.of(dContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              if (onDeny == null) {
-                doNothing();
-              } else {
-                onDeny!.call();
-              }
-              Navigator.of(dContext).pop();
-            },
-          ),
-          needsClose: false,
         ),
-      ),
-      icon: const Icon(Icons.refresh),
-      label: label ?? EzConfig.l10n.gResetAll,
-    );
-  }
+        icon: const Icon(Icons.refresh),
+        label: label ?? EzConfig.l10n.gResetAll,
+      );
 }
