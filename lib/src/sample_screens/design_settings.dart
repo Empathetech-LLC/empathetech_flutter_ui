@@ -281,7 +281,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       .withValues(alpha: outlineOpacity);
 
                   Color trackColor = EzConfig.colors.surface
-                      .withValues(alpha: max(crucialOT, buttonOpacity));
+                      .withValues(alpha: max(focusOpacity, buttonOpacity));
                   WidgetStatePropertyAll<Color> trackOutline =
                       WidgetStatePropertyAll<Color>(buttonOutline);
 
@@ -399,7 +399,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                 .withValues(alpha: outlineOpacity);
 
                             trackColor = EzConfig.colors.surface.withValues(
-                                alpha: max(crucialOT, buttonOpacity));
+                                alpha: max(focusOpacity, buttonOpacity));
                             trackOutline =
                                 WidgetStatePropertyAll<Color>(buttonOutline);
                           });
