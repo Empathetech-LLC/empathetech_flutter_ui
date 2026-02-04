@@ -7,6 +7,7 @@ import './export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
@@ -66,9 +67,9 @@ class OpenUIScaffold extends StatelessWidget {
     // Return the build //
 
     return EzAdaptiveParent(
-      small: SelectionArea(
-        child: Scaffold(
-          // AppBar
+      small: Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider config, __) => Scaffold(
+          key: ValueKey<int>(config.seed),
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, toolbarHeight),
             child: AppBar(
@@ -94,11 +95,7 @@ class OpenUIScaffold extends StatelessWidget {
               ],
             ),
           ),
-
-          // Body
           body: body,
-
-          // FAB
           floatingActionButton: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[updater, if (fabs != null) ...fabs!],
@@ -106,8 +103,6 @@ class OpenUIScaffold extends StatelessWidget {
           floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
-
-          // Prevents the keyboard from pushing the body up
           resizeToAvoidBottomInset: false,
         ),
       ),
