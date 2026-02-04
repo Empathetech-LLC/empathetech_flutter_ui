@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 
 // For config //
 
-/// assets/nebula-jeremy-muller.jpg
+/// assets/nebula-jeremy-müller.jpg
 /// https://www.pexels.com/@jmueller/
-const String nebulaPath = 'assets/nebula-jeremy-muller.jpg';
+const String nebulaPath = 'assets/nebula-jeremy-müller.jpg';
 
 /// [nebulaPath]
 const Set<String> efuiAssetPaths = <String>{nebulaPath};
