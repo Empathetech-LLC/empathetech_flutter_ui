@@ -184,7 +184,8 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    late final Color hover = EzConfig.colors.secondary.withValues(alpha: 0.5);
+    late final Color arrowColor =
+        EzConfig.colors.secondary.withValues(alpha: 0.5);
 
     late final Widget core = Scrollbar(
       controller: controller,
@@ -268,7 +269,8 @@ class _EzScrollViewState extends State<EzScrollView> {
                             right: 0,
                             top: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(Icons.arrow_upward, color: hover),
+                              child:
+                                  EzIcon(Icons.arrow_upward, color: arrowColor),
                             ),
                           )
                         : Positioned(
@@ -276,7 +278,8 @@ class _EzScrollViewState extends State<EzScrollView> {
                             top: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(Icons.chevron_left, color: hover),
+                              child:
+                                  EzIcon(Icons.chevron_left, color: arrowColor),
                             ),
                           ),
 
@@ -288,7 +291,8 @@ class _EzScrollViewState extends State<EzScrollView> {
                             right: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(Icons.arrow_downward, color: hover),
+                              child: EzIcon(Icons.arrow_downward,
+                                  color: arrowColor),
                             ),
                           )
                         : Positioned(
@@ -296,7 +300,8 @@ class _EzScrollViewState extends State<EzScrollView> {
                             top: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(Icons.chevron_right, color: hover),
+                              child: EzIcon(Icons.chevron_right,
+                                  color: arrowColor),
                             ),
                           ),
                 ],
