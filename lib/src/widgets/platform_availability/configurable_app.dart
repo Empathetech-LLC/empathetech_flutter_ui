@@ -50,7 +50,7 @@ class EzConfigurableApp extends StatelessWidget {
         create: (_) => EzConfigProvider(
           locale: locale,
           el10n: el10n,
-          isDark: isDarkTheme(context),
+          isDark: EzConfig.get(isDarkThemeKey) ?? isDarkTheme(context),
           appCache: appCache,
         ),
         child: _DevXLayer(
