@@ -45,8 +45,9 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       colorScheme.surface.withValues(alpha: buttonOpacity);
   final Color primaryButtonBackground =
       colorScheme.primary.withValues(alpha: buttonOpacity);
-  final Color buttonShadow =
-      colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod);
+  final Color buttonShadow = buttonOpacity < 1.0
+      ? colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod)
+      : colorScheme.shadow;
 
   final double crucialButtonOpacity = max(buttonOpacity, focusOpacity);
 
@@ -89,8 +90,12 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final double crucialTextBackgroundOpacity =
       max(textBackgroundOpacity, focusOpacity);
 
-  final Color crucialTextBackgroundColor =
-      colorScheme.surface.withValues(alpha: crucialTextBackgroundOpacity);
+  final Color inputBackgroundColor = colorScheme.surface
+      .withValues(alpha: max(buttonOpacity, crucialTextBackgroundOpacity));
+  final Color crucialTextShadow = crucialTextBackgroundOpacity < 1.0
+      ? colorScheme.shadow
+          .withValues(alpha: crucialTextBackgroundOpacity * shadowMod)
+      : colorScheme.shadow;
 
   //* Return the ThemeData *//
 
@@ -153,8 +158,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     cardTheme: CardThemeData(
       color: colorScheme.surfaceDim
           .withValues(alpha: crucialTextBackgroundOpacity),
-      shadowColor: colorScheme.shadow
-          .withValues(alpha: crucialTextBackgroundOpacity * shadowMod),
+      shadowColor: crucialTextShadow,
       margin: EdgeInsets.zero,
     ),
 
@@ -306,7 +310,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: crucialTextBackgroundColor,
+      fillColor: inputBackgroundColor,
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,
