@@ -647,7 +647,6 @@ class EzNebulaConfig extends StatelessWidget {
 
     // Update colors //
 
-    // TODO: batch set
     await EzConfig.setInt(darkPrimaryKey, empathSandHex);
     await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
     await EzConfig.setInt(darkOnPrimaryKey, blackHex);
