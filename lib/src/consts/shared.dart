@@ -43,41 +43,6 @@ const String success = 'SUCCESS';
 /// example.com/image.jpg
 const String webImgHint = 'example.com/image.jpg';
 
-//* Theme Data *//
-
-/// Fit
-const String boxFitSuffix = 'Fit';
-
-/// Crucial opacity threshold; some things are too important to be broken by user settings
-/// 0.25
-const double crucialOT = 0.25;
-
-/// 0.12
-const double focusOpacity = 0.12;
-
-/// 0.08
-const double highlightOpacity = 0.08;
-
-/// Allows for app images whose default is an asset to be "null"
-const String noImageValue = 'noImage';
-
-/// 255
-const int rMax = 255;
-
-/// -55.55
-const String sampleString = '55.55';
-
-/// 0.25
-const double selectionOpacity = 0.25;
-
-/// 0.333
-/// Shadow opacity should be "faster" than surface
-/// 1:1 looks foggy
-const double shadowMod = 0.333;
-
-/// 0xFF264941
-const Color chalkboardGreen = Color(0xFF264941);
-
 //* Localization *//
 
 /// Non-conclusive set containing...
@@ -88,3 +53,37 @@ const Set<String> rtlLanguageCodes = <String>{
   'he', // Hebrew
   'ur', // Urdu
 };
+
+//* Theme Data *//
+
+/// Fit
+const String boxFitSuffix = 'Fit';
+
+/// Opacity for highlight effects; on hover, on focus, etc
+/// Doubles as opacity minimum for crucial elements
+/// Some things are too important to be broken by user settings
+/// 0.12
+const double focusOpacity = 0.125;
+
+/// Allows for app images whose default is an asset to be "null"
+const String noImageValue = 'noImage';
+
+/// Ein bit und nicht mehr
+/// 255
+const int rMax = 255;
+
+/// Sample string for sizing double input boxes
+/// -55.55
+const String sampleString = '55.55';
+
+/// Opacity for text selection highlighting
+/// 0.25
+const double selectionOpacity = 0.25;
+
+/// 0.333
+/// Shadow opacity should be "faster" than surface
+/// 1:1 looks foggy
+const double shadowMod = 0.333;
+
+/// 0xFF264941
+const Color chalkboardGreen = Color(0xFF264941);
