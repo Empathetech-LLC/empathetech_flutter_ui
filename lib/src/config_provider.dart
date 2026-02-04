@@ -178,6 +178,14 @@ class EzConfigProvider extends ChangeNotifier {
     final ThemeMode newMode = _buildThemeMode();
 
     switch (newMode) {
+      case ThemeMode.dark:
+        _isDark = true;
+        _currTheme = _darkTheme;
+        break;
+      case ThemeMode.light:
+        _isDark = false;
+        _currTheme = _lightTheme;
+        break;
       case ThemeMode.system:
         if (WidgetsBinding.instance.platformDispatcher.platformBrightness ==
             Brightness.dark) {
@@ -187,12 +195,7 @@ class EzConfigProvider extends ChangeNotifier {
           _isDark = false;
           _currTheme = _lightTheme;
         }
-      case ThemeMode.dark:
-        _isDark = true;
-        _currTheme = _darkTheme;
-      case ThemeMode.light:
-        _isDark = false;
-        _currTheme = _lightTheme;
+        break;
     }
 
     await redrawUI(onComplete);
@@ -203,8 +206,24 @@ class EzConfigProvider extends ChangeNotifier {
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
   Future<void> rebuildUI(void Function() onComplete) async {
-    _buildThemeMode();
+    final ThemeMode newMode = _buildThemeMode();
+
+    switch (newMode) {
+      case ThemeMode.dark:
+        _isDark = true;
+        break;
+      case ThemeMode.light:
+        _isDark = false;
+        break;
+      case ThemeMode.system:
+        WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark
+            ? _isDark = true
+            : _isDark = false;
+        break;
+    }
     _buildThemeData();
+
     await redrawUI(onComplete);
   }
 
