@@ -645,6 +645,7 @@ class EzNebulaConfig extends StatelessWidget {
 
     if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
     await loadColorScheme(ezColorScheme(Brightness.dark), Brightness.dark);
+    await EzConfig.setInt(darkSurfaceKey, empathPurpleHex);
 
     // Update design //
 
@@ -652,6 +653,8 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.setString(darkBackgroundImageKey, nebulaPath);
     await EzConfig.setString(
         '$darkBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
+    await EzConfig.setDouble(darkButtonOpacityKey, 0.25);
+    await EzConfig.setDouble(darkButtonOutlineOpacityKey, 0.25);
 
     // Update layout //
 
@@ -696,6 +699,9 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.setDouble(darkLabelFontSizeKey, 12.0);
     await EzConfig.setBool(darkLabelBoldedKey, false);
     await EzConfig.setBool(darkLabelItalicizedKey, false);
+
+    // Background opacity
+    await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.25);
 
     // Icons
     if (!onMobile) await EzConfig.setDouble(darkIconSizeKey, 22.0);
