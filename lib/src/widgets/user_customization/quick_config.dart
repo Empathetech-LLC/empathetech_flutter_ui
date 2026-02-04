@@ -53,12 +53,12 @@ class EzQuickConfig extends StatelessWidget {
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
 
     return EzElevatedIconButton(
-      onPressed: () async {
-        bool updateBoth = false;
+      onPressed: () => ezModal(
+        context: context,
+        builder: (BuildContext mContext) {
+          bool updateBoth = false;
 
-        await ezModal(
-          context: context,
-          builder: (BuildContext mContext) => StatefulBuilder(
+          return StatefulBuilder(
             builder: (_, StateSetter setModal) {
               Future<void> cleanRebuild() async {
                 await EzConfig.rebuildUI(onComplete);
@@ -70,6 +70,7 @@ class EzQuickConfig extends StatelessWidget {
                 children: <Widget>[
                   // Theme toggle
                   EzSwitchPair(
+                    key: ValueKey<bool>(updateBoth),
                     text: EzConfig.l10n.ssUpdateBoth,
                     value: updateBoth,
                     onChanged: (bool? choice) {
@@ -109,14 +110,14 @@ class EzQuickConfig extends StatelessWidget {
                       if (chalkboard)
                         Padding(
                           padding: wrapPadding,
-                          child: EzChalkboardConfig(cleanRebuild),
+                          child: EzChalkboardConfig(updateBoth, cleanRebuild),
                         ),
 
                       // Nebula
                       if (nebula)
                         Padding(
                           padding: wrapPadding,
-                          child: EzNebulaConfig(cleanRebuild),
+                          child: EzNebulaConfig(updateBoth, cleanRebuild),
                         ),
                     ],
                   ),
@@ -124,9 +125,9 @@ class EzQuickConfig extends StatelessWidget {
                 ],
               );
             },
-          ),
-        );
-      },
+          );
+        },
+      ),
       icon: const Icon(Icons.edit),
       label: EzConfig.l10n.ssLoadPreset,
     );
@@ -425,6 +426,9 @@ class EzHighVisibilityConfig extends StatelessWidget {
 }
 
 class EzChalkboardConfig extends StatelessWidget {
+  /// When true, skips the "This is a dark theme only..." dialog
+  final bool autoConfirm;
+
   /// Only runs if you're using the rendered [Widget]
   /// Calling [onPressed] does not trigger [onComplete]
   final Future<void> Function() onComplete;
@@ -432,11 +436,12 @@ class EzChalkboardConfig extends StatelessWidget {
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets a [ColorScheme] similar to [ezHighContrastDark], but with a [chalkboardGreen] surface and [empathSand] accents
   /// Has default design and layout settings, but a [fingerPaint] based [TextTheme]
-  const EzChalkboardConfig(this.onComplete, {super.key});
+  const EzChalkboardConfig(this.autoConfirm, this.onComplete, {super.key});
 
-  static Future<bool> onPressed(BuildContext context) async {
+  /// When true, skips the "This is a dark theme only..." dialog
+  static Future<bool> onPressed(BuildContext context, bool autoConfirm) async {
     // If the current theme is not dark, show a warning dialog
-    if (EzConfig.themeMode != ThemeMode.dark) {
+    if (!autoConfirm || EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
         context: context,
         builder: (BuildContext dContext) => EzAlertDialog(
@@ -591,7 +596,7 @@ class EzChalkboardConfig extends StatelessWidget {
         ),
       ),
       onPressed: () async {
-        final bool confirmed = await onPressed(context);
+        final bool confirmed = await onPressed(context, autoConfirm);
         if (confirmed) await onComplete();
       },
       text: EzConfig.l10n.ssChalkboard,
@@ -601,16 +606,20 @@ class EzChalkboardConfig extends StatelessWidget {
 }
 
 class EzNebulaConfig extends StatelessWidget {
+  /// When true, skips the "This is a dark theme only..." dialog
+  final bool autoConfirm;
+
   /// Only runs if you're using the rendered [Widget]
   /// Calling [onPressed] does not trigger [onComplete]
   final Future<void> Function() onComplete;
 
   /// Dark theme only config, will set [ThemeMode.dark]
-  const EzNebulaConfig(this.onComplete, {super.key});
+  const EzNebulaConfig(this.autoConfirm, this.onComplete, {super.key});
 
   static const double nebulaOpacity = 0.25;
 
-  static Future<bool> onPressed(BuildContext context) async {
+  /// When true, skips the "This is a dark theme only..." dialog
+  static Future<bool> onPressed(BuildContext context, bool autoConfirm) async {
     // If the current theme is not dark, show a warning dialog
     if (EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
@@ -725,7 +734,7 @@ class EzNebulaConfig extends StatelessWidget {
           textStyle: localBody,
         ),
         onPressed: () async {
-          final bool confirmed = await onPressed(context);
+          final bool confirmed = await onPressed(context, autoConfirm);
           if (confirmed) await onComplete();
         },
         text: EzConfig.l10n.ssNebula,
