@@ -6,6 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // Enum declaration //
 
@@ -63,25 +64,30 @@ class EzScreenSize extends InheritedWidget {
 
 class EzAdaptiveParent extends StatelessWidget {
   /// Think phone thoughts
-  final Widget small;
+  /// Should be tracking [EzConfigProvider.seed] for redraws/rebuilds
+  final Consumer<EzConfigProvider> small;
 
   /// Think tablet thoughts
-  final Widget? medium;
+  /// Should be tracking [EzConfigProvider.seed] for redraws/rebuilds
+  final Consumer<EzConfigProvider>? medium;
 
   /// Think desktop thoughts
-  final Widget? large;
+  /// Should be tracking [EzConfigProvider.seed] for redraws/rebuilds
+  final Consumer<EzConfigProvider>? large;
 
   /// Will be added to all [ScreenSize] calculations
   final double offset;
 
   /// Enables real-time responses to screen space changes
   /// If a [Widget] is not provided, the next smaller size will be used
-  EzAdaptiveParent({
+  /// The provided [Widget]s are wrapped in a [SelectionArea], no need to add one yourself
+  const EzAdaptiveParent({
+    super.key,
     required this.small,
     this.medium,
     this.large,
     this.offset = 0.0,
-  }) : super(key: ValueKey<int>(EzConfig.seed));
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +107,7 @@ class EzAdaptiveParent extends StatelessWidget {
       child = large ?? medium ?? small;
     }
 
-    return EzScreenSize(screenSize: size, child: child);
+    return EzScreenSize(screenSize: size, child: SelectionArea(child: child));
   }
 }
 
