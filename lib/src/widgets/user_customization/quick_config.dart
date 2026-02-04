@@ -436,7 +436,7 @@ class EzChalkboardConfig extends StatelessWidget {
 
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not dark, show a warning dialog
-    if (!EzConfig.isDark) {
+    if (EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
         context: context,
         builder: (BuildContext dContext) => EzAlertDialog(
@@ -465,9 +465,12 @@ class EzChalkboardConfig extends StatelessWidget {
     await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
     await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
+    // Update theme mode //
+
+    await EzConfig.setBool(isDarkThemeKey, true);
+
     // Update colors //
 
-    if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
     await loadColorScheme(
       const ColorScheme(
         brightness: Brightness.dark,
@@ -605,14 +608,14 @@ class EzNebulaConfig extends StatelessWidget {
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets [ezColorScheme] with [Brightness.dark]
   /// Slightly increases the layout spacing
-  /// Sets the [TextTheme] to a [pressStart2P] based theme
+  /// Sets the [TextTheme] to a [sourceCodePro] based theme
   const EzNebulaConfig(this.onComplete, {super.key});
 
   static Future<bool> onPressed(BuildContext context) async {
     final bool onMobile = isMobile();
 
     // If the current theme is not dark, show a warning dialog
-    if (!EzConfig.isDark) {
+    if (EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
         context: context,
         builder: (BuildContext dContext) => EzAlertDialog(
@@ -641,9 +644,12 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
     await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
+    // Update theme mode //
+
+    await EzConfig.setBool(isDarkThemeKey, true);
+
     // Update colors //
 
-    if (!EzConfig.isDark) await EzConfig.setBool(isDarkThemeKey, true);
     await loadColorScheme(ezColorScheme(Brightness.dark), Brightness.dark);
     await EzConfig.setInt(darkSurfaceKey, empathPurpleHex);
 
@@ -671,31 +677,31 @@ class EzNebulaConfig extends StatelessWidget {
     // Update text //
 
     // Display
-    await EzConfig.setString(darkDisplayFontFamilyKey, pressStart2P);
+    await EzConfig.setString(darkDisplayFontFamilyKey, sourceCodePro);
     await EzConfig.setDouble(darkDisplayFontSizeKey, 30.0);
     await EzConfig.setBool(darkDisplayBoldedKey, false);
     await EzConfig.setBool(darkDisplayItalicizedKey, false);
 
     // Headline
-    await EzConfig.setString(darkHeadlineFontFamilyKey, pressStart2P);
+    await EzConfig.setString(darkHeadlineFontFamilyKey, sourceCodePro);
     await EzConfig.setDouble(darkHeadlineFontSizeKey, 24.0);
     await EzConfig.setBool(darkHeadlineBoldedKey, false);
     await EzConfig.setBool(darkHeadlineItalicizedKey, false);
 
     // Title
-    await EzConfig.setString(darkTitleFontFamilyKey, pressStart2P);
+    await EzConfig.setString(darkTitleFontFamilyKey, sourceCodePro);
     await EzConfig.setDouble(darkTitleFontSizeKey, 18.0);
     await EzConfig.setBool(darkTitleBoldedKey, false);
     await EzConfig.setBool(darkTitleItalicizedKey, false);
 
     // Body
-    await EzConfig.setString(darkBodyFontFamilyKey, pressStart2P);
+    await EzConfig.setString(darkBodyFontFamilyKey, sourceCodePro);
     await EzConfig.setDouble(darkBodyFontSizeKey, 14.0);
     await EzConfig.setBool(darkBodyBoldedKey, false);
     await EzConfig.setBool(darkBodyItalicizedKey, false);
 
     // Label
-    await EzConfig.setString(darkLabelFontFamilyKey, pressStart2P);
+    await EzConfig.setString(darkLabelFontFamilyKey, sourceCodePro);
     await EzConfig.setDouble(darkLabelFontSizeKey, 12.0);
     await EzConfig.setBool(darkLabelBoldedKey, false);
     await EzConfig.setBool(darkLabelItalicizedKey, false);
@@ -722,7 +728,7 @@ class EzNebulaConfig extends StatelessWidget {
         letterSpacing: defaultLetterSpacing,
         wordSpacing: defaultWordSpacing,
       ),
-      gFont: pressStart2P,
+      gFont: sourceCodePro,
     );
 
     return EzElevatedButton(
