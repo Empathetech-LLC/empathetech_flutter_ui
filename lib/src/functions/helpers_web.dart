@@ -6,20 +6,6 @@
 import 'package:web/web.dart';
 import 'package:flutter/material.dart';
 
-/// Checks the [window]'s userAgent for Apple devices
-bool cupertinoCheck() {
-  final String userAgent = window.navigator.userAgent;
-
-  if (userAgent.contains('iPhone') ||
-      userAgent.contains('Mac OS') ||
-      userAgent.contains('iPad') ||
-      userAgent.contains('iPod')) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 /// Checks the [window]'s userAgent for mobile devices
 bool mobileCheck() {
   final String userAgent = window.navigator.userAgent;
@@ -28,20 +14,6 @@ bool mobileCheck() {
       userAgent.contains('iPhone') ||
       userAgent.contains('iPad') ||
       userAgent.contains('iPod')) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-/// Checks the [window]'s userAgent for desktop devices
-/// Fuchsia is not included
-bool desktopCheck() {
-  final String userAgent = window.navigator.userAgent;
-
-  if (userAgent.contains('Mac OS') ||
-      userAgent.contains('Windows') ||
-      userAgent.contains('Linux')) {
     return true;
   } else {
     return false;
@@ -70,7 +42,7 @@ TargetPlatform getHostPlatform() {
 }
 
 /// Request/exit a fullscreen window
-Future<void> toggleFullscreen(dynamic _, bool isFull) async {
+Future<void> toggleFullscreen(bool isFull) async {
   if (isFull) {
     document.exitFullscreen();
   } else {
