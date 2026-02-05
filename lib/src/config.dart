@@ -744,23 +744,29 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// [removeKeys], all (except those in [skip])
   /// [skip] defaults to [appLocaleKey]
-  static Future<bool> reset({
+  static Future<bool> reset(
+    bool bothThemes, {
     Set<String>? skip = const <String>{appLocaleKey},
     bool reset = true,
     bool storageOnly = false,
   }) async {
-    final List<String> keys = List<String>.from(_instance!._prefs.keys);
+    final Set<String> keys = Set<String>.from(_instance!._prefs.keys);
+    if (skip != null) keys.removeAll(skip);
+
+    if (!bothThemes) {
+      EzConfig.isDark
+          ? keys.removeWhere((String key) => key.startsWith('light'))
+          : keys.removeWhere((String key) => key.startsWith('dark'));
+    }
 
     bool success = true;
     for (final String key in keys) {
-      if (skip?.contains(key) ?? false) continue;
       success &= await remove(
         key,
         reset: reset,
         storageOnly: storageOnly,
       );
     }
-
     return success;
   }
 
