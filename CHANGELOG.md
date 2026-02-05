@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [11.0.0] - 2026-01-XX
+## [11.0.0] - 2026-02-XX
 ### Added
 - appName and androidPackage parameters to all sample settings screen constructions
   - For EzUpdater and/or config saving/loading
