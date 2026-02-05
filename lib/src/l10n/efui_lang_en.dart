@@ -383,6 +383,9 @@ class EFUILangEn extends EFUILang {
   String get ssResetAll => 'Reset all settings?';
 
   @override
+  String get ssResetBoth => 'Reset both theme modes';
+
+  @override
   String get csPageTitle => 'Color settings';
 
   @override
@@ -1030,6 +1033,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssResetAll => 'Reset all settings?';
+
+  @override
+  String get ssResetBoth => 'Reset both theme modes';
 
   @override
   String get csPageTitle => 'Color settings';

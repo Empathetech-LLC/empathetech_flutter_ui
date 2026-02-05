@@ -795,6 +795,12 @@ abstract class EFUILang {
   /// **'Reset all settings?'**
   String get ssResetAll;
 
+  /// No description provided for @ssResetBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset both theme modes'**
+  String get ssResetBoth;
+
   /// No description provided for @csPageTitle.
   ///
   /// In en, this message translates to:

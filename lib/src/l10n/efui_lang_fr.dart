@@ -384,6 +384,9 @@ class EFUILangFr extends EFUILang {
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';
 
   @override
+  String get ssResetBoth => 'Réinitialiser les deux modes de thème';
+
+  @override
   String get csPageTitle => 'Paramètres de couleur';
 
   @override

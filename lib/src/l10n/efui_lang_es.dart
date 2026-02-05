@@ -385,6 +385,9 @@ class EFUILangEs extends EFUILang {
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
+  String get ssResetBoth => 'Restablecer ambos modos de tema';
+
+  @override
   String get csPageTitle => 'Configuración de color';
 
   @override
