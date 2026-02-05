@@ -53,7 +53,7 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   sourceCodePro: GoogleFonts.sourceCodePro(),
 };
 
-/// Passes [starter] to the [gFont]'s [GoogleFonts.textStyle] param
+/// Passes [starter] to the [gFont]'s textStyle param
 /// Returns [starter] if [gFont] is not found/supported
 TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
   switch (gFont) {

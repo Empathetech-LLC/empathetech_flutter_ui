@@ -338,7 +338,7 @@ const double maxFontHeight = 2.0;
 
 //** Maps **//
 
-/// Empathetech [EzConfig.defaults] base to build from
+/// Empathetech [EzConfig] defaults
 /// For open source consumers: this is Empathetech LLC's config
 /// You have permission to modify this code
 /// You do not have permission to use this config in your app
@@ -443,6 +443,8 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   // Light
   lightMarginKey: defaultMargin,
   // ditto
+
+  // hideScroll defined in mobile/desktop configs
 
   // Text settings //
   // Selector
@@ -587,7 +589,7 @@ const Map<String, Object> empathDesktopConfig = <String, Object>{
   lightHideScrollKey: false,
 };
 
-/// [EzConfig.defaults] set to all recommended max values
+/// [EzConfig] set to all recommended max values
 /// -- ATTENTION --
 /// Open source do NOT have permission to use this config in production apps
 /// Also, this is intended for testing anyway
@@ -667,7 +669,7 @@ final Map<String, Object> empathMaxConfig = <String, Object>{
   lightIconSizeKey: maxIconSize,
 };
 
-/// [EzConfig.defaults] set to all recommended min values
+/// [EzConfig] set to all recommended min values
 /// -- ATTENTION --
 /// Open source do NOT have permission to use this config in production apps
 /// Also, this is intended for testing anyway
