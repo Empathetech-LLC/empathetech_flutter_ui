@@ -16,28 +16,19 @@ double snackWidth({
   TextStyle? style,
   double? margin,
   bool showCloseIcon = true,
-}) {
-  final TextStyle? snackStyle =
-      style ?? Theme.of(context).snackBarTheme.contentTextStyle;
-
-  final double snackMargin = margin ?? EzConfig.marginVal;
-  final double countDownSize = EzConfig.iconSize * 1.5;
-
-  final double closeIconSize = showCloseIcon
-      ? (Theme.of(context)
-                  .iconButtonTheme
-                  .style
-                  ?.iconSize
-                  ?.resolve(<WidgetState>{WidgetState.selected}) ??
-              0) +
-          EzConfig.spacing
-      : 0;
-
-  return ezTextSize(message, context: context, style: snackStyle).width +
-      countDownSize +
-      closeIconSize +
-      (snackMargin * 3);
-}
+}) =>
+    // Text width
+    ezTextSize(
+      message,
+      context: context,
+      style: style ?? Theme.of(context).snackBarTheme.contentTextStyle,
+    ).width +
+    // Countdown width
+    (EzConfig.iconSize * 1.5) +
+    // Close width
+    (showCloseIcon ? (EzConfig.iconSize + EzConfig.spacing) : 0) +
+    // Margin(s) width
+    ((margin ?? EzConfig.marginVal) * 3);
 
 /// Standardized [SnackBar] with an [EzCountdownTimer]
 /// Most parameters are available, but [SnackBar.padding], [SnackBar.width], [SnackBar.content], and [SnackBar.duration] are controlled
@@ -63,15 +54,12 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   double? margin,
   Duration? duration,
 }) {
+  final double toastMargin = margin ?? EzConfig.marginVal;
+
   late final Duration readingTime = (undo == null)
       ? ezReadingTime(message)
       : ezReadingTime(message) + const Duration(seconds: 1);
-  late final Duration toastLength = duration ?? readingTime;
-
-  final double toastMargin = margin ?? EzConfig.marginVal;
-
-  late final TextStyle? bodyStyle = EzConfig.styles.bodyLarge;
-  late final Color primary = EzConfig.colors.primary;
+  final Duration toastLength = duration ?? readingTime;
 
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -108,7 +96,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
             EzSpacer(space: toastMargin, vertical: false),
             EzTextButton(
               text: undoMessage ?? EzConfig.l10n.gUndo,
-              textStyle: bodyStyle?.copyWith(color: primary),
+              textStyle: EzConfig.styles.bodyLarge
+                  ?.copyWith(color: EzConfig.colors.primary),
               onPressed: () async {
                 await undo();
                 if (context.mounted) {
