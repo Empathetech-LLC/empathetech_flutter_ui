@@ -143,7 +143,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Current theme reminder
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n.gEditingTheme(resetString),
+                EzConfig.l10n.gEditingTheme(
+                    resetString), // TODO: efficient plural and better fab dialog
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
                 style: EzConfig.styles.labelLarge,
