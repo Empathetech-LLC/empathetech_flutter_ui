@@ -36,16 +36,9 @@ String archivePath({required String? androidPackage, required String appName}) {
 /// Alias exists for [kIsWeb] support
 TargetPlatform getBasePlatform() => getHostPlatform();
 
-/// Alias exists for [kIsWeb] support
-bool isApple() => cupertinoCheck();
-
 /// Alias for [MediaQuery] brightness check
 bool isDarkTheme(BuildContext context) =>
     MediaQuery.of(context).platformBrightness == Brightness.dark;
-
-/// Alias exists for [kIsWeb] support
-/// [isMobile] is preferred; technically more efficient
-bool isDesktop() => desktopCheck();
 
 /// Alias exists for [kIsWeb] support
 bool isMobile() => mobileCheck();
@@ -85,7 +78,7 @@ double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 
 //* Custom functions *//
 
-/// [Duration] with milliseconds set to [EzConfig.animDuration]
+/// [Duration] with milliseconds set to [EzConfig.animDur]
 /// Provide [mod] to adjust the duration, relative to the base value
 Duration ezAnimDuration({double mod = 1.0}) =>
     Duration(milliseconds: (EzConfig.animDur * mod).toInt());
@@ -127,8 +120,8 @@ Future<void> ezConfigLoader(BuildContext context) async {
 }
 
 /// [TargetPlatform] aware helper that will request/exit a fullscreen window
-Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
-    toggleFullscreen(platform, isFull);
+/// Alias exists for [kIsWeb] support
+Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
 
 /// Scale Widgets based on IconSize
 /// For Widgets that don't do it automatically, like [Radio] and [Checkbox]
