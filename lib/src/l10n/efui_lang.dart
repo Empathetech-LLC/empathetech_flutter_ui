@@ -267,6 +267,12 @@ abstract class EFUILang {
   /// **'System'**
   String get gSystem;
 
+  /// No description provided for @gBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get gBoth;
+
   /// No description provided for @gEditing.
   ///
   /// In en, this message translates to:

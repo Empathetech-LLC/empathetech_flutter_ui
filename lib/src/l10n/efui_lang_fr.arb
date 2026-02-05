@@ -34,6 +34,7 @@
   "gDark": "Sombre",
   "gLight": "Clair",
   "gSystem": "Système",
+  "gBoth": "Les deux",
 
   "gEditing": "Modification : ",
   "gEditingTheme": "Modification : Thème {themeType}",

@@ -93,6 +93,9 @@ class EFUILangEn extends EFUILang {
   String get gSystem => 'System';
 
   @override
+  String get gBoth => 'Both';
+
+  @override
   String get gEditing => 'Editing: ';
 
   @override
@@ -743,6 +746,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gSystem => 'System';
+
+  @override
+  String get gBoth => 'Both';
 
   @override
   String get gEditing => 'Editing: ';

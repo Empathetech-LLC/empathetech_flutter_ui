@@ -93,6 +93,9 @@ class EFUILangFr extends EFUILang {
   String get gSystem => 'Système';
 
   @override
+  String get gBoth => 'Les deux';
+
+  @override
   String get gEditing => 'Modification : ';
 
   @override
