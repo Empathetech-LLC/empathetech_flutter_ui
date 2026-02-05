@@ -23,17 +23,6 @@ export 'src/consts/shared.dart';
 
 // Functions //
 
-// General
-export 'src/functions/cmd.dart';
-export 'src/functions/colors.dart';
-export 'src/functions/dialogs.dart';
-export 'src/functions/helpers.dart';
-export 'src/functions/images.dart';
-export 'src/functions/modal.dart';
-export 'src/functions/snack_bars.dart';
-export 'src/functions/text.dart';
-export 'src/functions/theme_data.dart';
-
 // Testing (general)
 export 'src/functions/testing/consts.dart';
 export 'src/functions/testing/utils.dart';
@@ -44,6 +33,17 @@ export 'src/functions/testing/widgets/image_setting.dart';
 export 'src/functions/testing/widgets/locale_setting.dart';
 export 'src/functions/testing/widgets/reset_button.dart';
 export 'src/functions/testing/widgets/theme_mode_switch.dart';
+
+// General
+export 'src/functions/cmd.dart';
+export 'src/functions/colors.dart';
+export 'src/functions/dialogs.dart';
+export 'src/functions/helpers.dart';
+export 'src/functions/images.dart';
+export 'src/functions/modal.dart';
+export 'src/functions/snack_bars.dart';
+export 'src/functions/text.dart';
+export 'src/functions/theme_data.dart';
 
 // EzConfig.l10n //
 
@@ -97,8 +97,8 @@ export 'src/widgets/responsive_design/transitions.dart';
 export 'src/widgets/screen_reader_support/links/elevated_link.dart';
 export 'src/widgets/screen_reader_support/links/fab_link.dart';
 export 'src/widgets/screen_reader_support/links/icon_link.dart';
-export 'src/widgets/screen_reader_support/links/inline_link.dart';
 export 'src/widgets/screen_reader_support/links/image_link.dart';
+export 'src/widgets/screen_reader_support/links/inline_link.dart';
 export 'src/widgets/screen_reader_support/links/link_widget.dart';
 export 'src/widgets/screen_reader_support/links/link.dart';
 export 'src/widgets/screen_reader_support/links/menu_link.dart';
