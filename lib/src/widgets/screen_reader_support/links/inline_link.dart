@@ -58,10 +58,7 @@ class EzInlineLink extends WidgetSpan {
     required this.hint,
     this.tooltip,
     this.richLabel, // Not used here, but in EzRichText
-
-    // WidgetSpan
-    super.alignment = PlaceholderAlignment.baseline,
-    super.baseline = TextBaseline.alphabetic,
+    super.alignment = PlaceholderAlignment.middle,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
