@@ -11,6 +11,9 @@ class EzColorSettings extends StatefulWidget {
   /// Optional starting [EzCSType] target
   final EzCSType? target;
 
+  /// When true, updates both dark and light theme settings simultaneously
+  final bool updateBoth;
+
   /// If provided, the "Editing: X theme" text will be a link with this callback
   final void Function()? themeLink;
 
@@ -61,6 +64,7 @@ class EzColorSettings extends StatefulWidget {
     // Shared
     super.key,
     this.target,
+    required this.updateBoth,
     this.themeLink,
     this.resetSpacer = const EzSeparator(),
     this.resetExtraDark,
@@ -107,9 +111,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           ? EzCSType.advanced
           : EzCSType.quick);
 
-  late final String darkString = EzConfig.l10n.gDark.toLowerCase();
-  late final String lightString = EzConfig.l10n.gLight.toLowerCase();
-
   // Set the page title //
 
   @override
@@ -130,6 +131,11 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     List<String> currList =
         EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
+    final String resetString = (widget.updateBoth
+            ? EzConfig.l10n.gBoth
+            : (EzConfig.isDark ? EzConfig.l10n.gDark : EzConfig.l10n.gLight))
+        .toLowerCase();
+
     // Return the build //
 
     return EzScrollView(
@@ -137,16 +143,14 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Current theme reminder
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n
-                    .gEditingTheme(EzConfig.isDark ? darkString : lightString),
+                EzConfig.l10n.gEditingTheme(resetString),
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
-                EzConfig.l10n
-                    .gEditingTheme(EzConfig.isDark ? darkString : lightString),
+                EzConfig.l10n.gEditingTheme(resetString),
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -202,7 +206,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 () => setState(() {}),
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
-                dialogTitle: EzConfig.l10n.csResetAll(darkString),
+                dialogTitle: EzConfig.l10n.csResetAll(resetString),
                 resetSkip: widget.resetSkip,
                 onConfirm: () async {
                   await EzConfig.removeKeys(darkColorKeys.keys.toSet());
@@ -218,7 +222,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 () => setState(() {}),
                 androidPackage: widget.androidPackage,
                 appName: widget.appName,
-                dialogTitle: EzConfig.l10n.csResetAll(lightString),
+                dialogTitle: EzConfig.l10n.csResetAll(resetString),
                 resetSkip: widget.resetSkip,
                 saveSkip: widget.saveSkip,
                 onConfirm: () async {
