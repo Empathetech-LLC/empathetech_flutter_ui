@@ -250,7 +250,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     // From camera
     // Only works on mobile
-    if (!kIsWeb && isMobile()) {
+    if (!kIsWeb && EzConfig.onMobile) {
       options.add(Padding(
         padding: wrapPadding,
         child: EzElevatedIconButton(

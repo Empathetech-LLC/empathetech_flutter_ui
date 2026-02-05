@@ -99,7 +99,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
   // Define the build data //
 
-  final bool strictMobile = !kIsWeb && isMobile();
+  final bool strictMobile = !kIsWeb && EzConfig.onMobile;
 
   // Init //
 

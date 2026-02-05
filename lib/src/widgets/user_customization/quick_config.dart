@@ -153,7 +153,7 @@ class EzBigButtonsConfig extends StatelessWidget {
     if (isDark == null || isDark == true) {
       // Update layout
       await EzConfig.setDouble(darkMarginKey, 12.5);
-      if (isMobile()) {
+      if (EzConfig.onMobile) {
         await EzConfig.setDouble(darkPaddingKey, 22.5);
         await EzConfig.setDouble(darkSpacingKey, 35.0);
       } else {
@@ -171,7 +171,7 @@ class EzBigButtonsConfig extends StatelessWidget {
     if (isDark == null || isDark == false) {
       // Update layout
       await EzConfig.setDouble(lightMarginKey, 12.5);
-      if (isMobile()) {
+      if (EzConfig.onMobile) {
         await EzConfig.setDouble(lightPaddingKey, 22.5);
         await EzConfig.setDouble(lightSpacingKey, 35.0);
       } else {
@@ -190,7 +190,7 @@ class EzBigButtonsConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.all(isMobile() ? 22.5 : 25.0),
+          padding: EdgeInsets.all(EzConfig.onMobile ? 22.5 : 25.0),
         ),
         onPressed: () async {
           await onPressed(isDark);
@@ -230,7 +230,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       // Update layout //
 
       await EzConfig.setDouble(darkMarginKey, 12.5);
-      if (isMobile()) {
+      if (EzConfig.onMobile) {
         await EzConfig.setDouble(darkPaddingKey, 17.5);
         await EzConfig.setDouble(darkSpacingKey, 30.0);
       } else {
@@ -310,7 +310,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       // Update layout //
 
       await EzConfig.setDouble(lightMarginKey, 12.5);
-      if (isMobile()) {
+      if (EzConfig.onMobile) {
         await EzConfig.setDouble(lightPaddingKey, 17.5);
         await EzConfig.setDouble(lightSpacingKey, 30.0);
       } else {
@@ -403,7 +403,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
               overlayColor: Colors.white,
               side: const BorderSide(color: darkOutline),
               textStyle: localBody,
-              padding: EdgeInsets.all(isMobile() ? 17.5 : 20.0),
+              padding: EdgeInsets.all(EzConfig.onMobile ? 17.5 : 20.0),
             )
           : ElevatedButton.styleFrom(
               backgroundColor: lightSurface,
@@ -413,7 +413,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
               overlayColor: Colors.black,
               side: const BorderSide(color: lightOutline),
               textStyle: localBody,
-              padding: EdgeInsets.all(isMobile() ? 17.5 : 20.0),
+              padding: EdgeInsets.all(EzConfig.onMobile ? 17.5 : 20.0),
             ),
       onPressed: () async {
         await onPressed(isDark);
@@ -592,7 +592,7 @@ class EzChalkboardConfig extends StatelessWidget {
         side: const BorderSide(color: chalkboardGreen),
         textStyle: localBody,
         padding: EdgeInsets.all(
-          isMobile() ? defaultMobilePadding : defaultDesktopPadding,
+          EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding,
         ),
       ),
       onPressed: () async {

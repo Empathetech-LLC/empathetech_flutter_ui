@@ -229,10 +229,7 @@ Future<void> _testNetwork(
   ezLog('Apply w/ valid URL');
   await tester.enterText(find.byType(TextFormField), getRandomURL(imageURLs));
   await ezTouchText(tester, EzConfig.l10n.gApply);
-  expect(
-    find.byIcon(isApple() ? CupertinoIcons.pencil : Icons.edit),
-    findsNothing,
-  );
+  expect(find.byIcon(Icons.edit), findsNothing);
 }
 
 /// Provide a [List] of [imageURLs] and one will be returned at random

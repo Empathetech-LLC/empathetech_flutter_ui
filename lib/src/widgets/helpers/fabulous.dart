@@ -154,7 +154,7 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 
   /// Check for Open UI updates (Desktop only)
   void checkVersion() async {
-    if (isMobile()) return;
+    if (EzConfig.onMobile) return;
 
     final http.Response response =
         await http.get(Uri.parse(widget.versionSource));

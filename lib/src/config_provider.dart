@@ -12,6 +12,7 @@ class EzConfigProvider extends ChangeNotifier {
   // Construct //
 
   final TargetPlatform _platform;
+  final bool _onMobile;
   int _seed;
 
   late Locale _locale;
@@ -36,6 +37,7 @@ class EzConfigProvider extends ChangeNotifier {
     required bool isDark,
     EzAppCache? appCache,
   })  : _platform = getBasePlatform(),
+        _onMobile = isMobile(),
         _seed = Random().nextInt(rMax),
         _locale = locale,
         _l10n = el10n,
@@ -113,6 +115,9 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Current [TargetPlatform]
   TargetPlatform get platform => _platform;
+
+  /// Whether the app is running on a mobile device
+  bool get onMobile => _onMobile;
 
   /// Current language for the app
   Locale get locale => _locale;

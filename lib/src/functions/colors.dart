@@ -20,7 +20,6 @@ Color getTextColor(Color background) {
 ColorScheme ezColorScheme(Brightness brightness) {
   Color? getColor(String key) {
     final int? value = EzConfig.get(key);
-
     return (value == null) ? null : Color(value);
   }
 

@@ -138,10 +138,6 @@ class EzVideoPlayer extends StatefulWidget {
 }
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
-  // Gather the fixed theme data //
-
-  late final bool onMobile = isMobile();
-
   // Define the build data //
 
   late final int videoLength = widget.controller.value.duration.inMilliseconds;
@@ -174,7 +170,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Define custom functions //
 
   void handleMobileHover() {
-    if (!onMobile) return;
+    if (!EzConfig.onMobile) return;
 
     mobileHover?.cancel();
     if (!hovering) setState(() => hovering = true);
@@ -230,7 +226,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case EzButtonVis.auto:
         if (hovering ||
             subMenuControl.isOpen ||
-            ((onMobile || widget.showOnPause) && !isPlaying)) {
+            ((EzConfig.onMobile || widget.showOnPause) && !isPlaying)) {
           return true;
         } else {
           return false;
@@ -430,7 +426,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: ExcludeSemantics(
                     child: GestureDetector(
                       onTap: () async {
-                        if (onMobile) {
+                        if (EzConfig.onMobile) {
                           mobileHover?.cancel();
 
                           hovering
@@ -500,7 +496,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   top: 0,
                   bottom: 0,
                   child: Visibility(
-                    visible: (onMobile && hovering) ||
+                    visible: (EzConfig.onMobile && hovering) ||
                         (!value.isPlaying &&
                             (value.isCompleted ||
                                 value.position.inSeconds < 1)),
@@ -555,7 +551,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                   value: pComplete(value.position),
                                   onChangeStart: (_) async {
                                     await pause();
-                                    if (onMobile) mobileHover?.cancel();
+                                    if (EzConfig.onMobile) {
+                                      mobileHover?.cancel();
+                                    }
                                   },
                                   onChanged: (double value) =>
                                       widget.controller.seekTo(findP(value)),
@@ -656,7 +654,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                         child: Slider(
                                           value: value.volume,
                                           onChangeStart: (_) {
-                                            if (onMobile) mobileHover?.cancel();
+                                            if (EzConfig.onMobile) {
+                                              mobileHover?.cancel();
+                                            }
                                           },
                                           onChanged: (double value) => widget
                                               .controller

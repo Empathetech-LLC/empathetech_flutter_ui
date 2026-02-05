@@ -402,7 +402,6 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// i.e. a triadic [ColorScheme] that should be legible
   static Future<void> randomize() async {
     final Random random = Random();
-    final bool onMobile = isMobile();
 
     double getScalar() => (random.nextDouble() * 1.5) + 0.5;
 
@@ -787,6 +786,9 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Current [TargetPlatform]
   static TargetPlatform get platform => _provPoint.platform;
+
+  /// Whether the app is running on a mobile device
+  static bool get onMobile => _provPoint.onMobile;
 
   /// Tracks major changes to the config
   static int get seed => _provPoint.seed;
