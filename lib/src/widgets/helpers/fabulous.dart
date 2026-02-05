@@ -77,36 +77,26 @@ class EzConfigFAB extends StatelessWidget {
   }
 }
 
-class EzSettingsDupeFAB extends StatefulWidget {
-  final void Function(bool) onSwitch;
+class EzSettingsDupeFAB extends StatelessWidget {
+  final bool dupe;
+  final void Function() onPressed;
 
-  /// Toggle-able [FloatingActionButton] for updating both light and dark theme settings simultaneously
-  const EzSettingsDupeFAB({super.key, required this.onSwitch});
-
-  @override
-  State<EzSettingsDupeFAB> createState() => _EzSettingsDupeFABState();
-}
-
-class _EzSettingsDupeFABState extends State<EzSettingsDupeFAB> {
-  bool isDuplicating = false;
+  /// [FloatingActionButton] for updating both light and dark theme settings simultaneously
+  const EzSettingsDupeFAB(this.dupe, this.onPressed, {super.key});
 
   @override
-  Widget build(BuildContext context) => isDuplicating
+  Widget build(BuildContext context) => dupe
       ? FloatingActionButton(
-          onPressed: () {
-            setState(() => isDuplicating = false);
-            widget.onSwitch(false);
-          },
-          foregroundColor: EzConfig.colors.secondary,
+          onPressed: onPressed,
           backgroundColor: EzConfig.colors.primary,
+          foregroundColor: EzConfig.colors.onPrimary,
+          child: EzIcon(Icons.brightness_medium),
         )
       : FloatingActionButton(
-          onPressed: () {
-            setState(() => isDuplicating = true);
-            widget.onSwitch(true);
-          },
-          foregroundColor: EzConfig.colors.outline,
+          onPressed: onPressed,
           backgroundColor: EzConfig.colors.surface,
+          foregroundColor: EzConfig.colors.outline,
+          child: EzIcon(Icons.brightness_medium),
         );
 }
 
