@@ -130,7 +130,6 @@ That, and/or donate via one of the many options we provide.
 
 As your app grows, use [EFUI](https://github.com/Empathetech-LLC/empathetech_flutter_ui) to keep things Ez
 
-* [Platform availability](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/platform_availability): Platform responsive `Widget`s that will help along the way
 * [Responsive design](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/responsive_design): `Widget`s that aid in building responsive UI/UX
 * [Screen reader support](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/screen_reader_support): `Widget`s with streamlined `Semantics`
 * [User customization](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/helpers): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
@@ -171,7 +170,7 @@ If you have a dream that wants to be made a reality, try Open UI!
       readout: readout,
     );
 
-    // Spanish
+    // Spanish TODO: translate this lmao
     final File esFile = File('$dir/$localeDir/README.es.md');
     await esFile.writeAsString('''# $appName
 
@@ -221,7 +220,6 @@ That, and/or donate via one of the many options we provide.
 
 As your app grows, use [EFUI](https://github.com/Empathetech-LLC/empathetech_flutter_ui) to keep things Ez
 
-* [Platform availability](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/platform_availability): Platform responsive `Widget`s that will help along the way
 * [Responsive design](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/responsive_design): `Widget`s that aid in building responsive UI/UX
 * [Screen reader support](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/screen_reader_support): `Widget`s with streamlined `Semantics`
 * [User customization](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/helpers): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
@@ -251,7 +249,7 @@ It is free and open source, maintained by [Empathetech LLC](https://www.empathet
 If you have a dream that wants to be made a reality, try Open UI!
 ''');
 
-    // French
+    // French TODO: translate this lmao
     final File frFile = File('$dir/$localeDir/README.fr.md');
     await frFile.writeAsString('''# $appName
 
@@ -301,7 +299,6 @@ That, and/or donate via one of the many options we provide.
 
 As your app grows, use [EFUI](https://github.com/Empathetech-LLC/empathetech_flutter_ui) to keep things Ez
 
-* [Platform availability](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/platform_availability): Platform responsive `Widget`s that will help along the way
 * [Responsive design](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/responsive_design): `Widget`s that aid in building responsive UI/UX
 * [Screen reader support](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/screen_reader_support): `Widget`s with streamlined `Semantics`
 * [User customization](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/helpers): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
