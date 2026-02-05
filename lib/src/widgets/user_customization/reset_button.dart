@@ -91,7 +91,7 @@ class EzResetButton extends StatelessWidget {
       onPressed: () => showDialog(
         context: context,
         builder: (BuildContext dContext) {
-          bool resetBoth = false;
+          bool resetBoth = true;
 
           return StatefulBuilder(
             builder: (_, StateSetter setDialog) => EzAlertDialog(
@@ -128,6 +128,7 @@ class EzResetButton extends StatelessWidget {
                 onConfirm: () async {
                   if (onConfirm == null) {
                     await EzConfig.reset(
+                      resetBoth,
                       skip: resetSkip,
                       storageOnly: storageOnly,
                     );
