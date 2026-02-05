@@ -77,57 +77,83 @@ class EzResetButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => EzElevatedIconButton(
-        style: style ??
-            ElevatedButton.styleFrom(
-              backgroundColor: EzConfig.colors.surface.withValues(
-                  alpha: max(
-                      EzConfig.get(EzConfig.isDark
-                          ? darkButtonOpacityKey
-                          : lightButtonOpacityKey),
-                      focusOpacity)),
-            ),
-        onPressed: () => showDialog(
-          context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(
-            title: Text(
-              dialogTitle ?? EzConfig.l10n.ssResetAll,
-              textAlign: TextAlign.center,
-            ),
-            content: dialogContent ??
-                ezRichUndoWarning(
-                  context,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-            actions: ezActionPair(
-              context: context,
-              onConfirm: () async {
-                if (onConfirm == null) {
-                  await EzConfig.reset(
-                    skip: resetSkip,
-                    storageOnly: storageOnly,
-                  );
-                } else {
-                  onConfirm!.call();
-                }
-                await EzConfig.rebuildUI(onComplete);
-                if (dContext.mounted) Navigator.of(dContext).pop();
-              },
-              confirmIsDestructive: true,
-              onDeny: () {
-                if (onDeny == null) {
-                  doNothing();
-                } else {
-                  onDeny!.call();
-                }
-                Navigator.of(dContext).pop();
-              },
-            ),
-            needsClose: false,
+  Widget build(BuildContext context) {
+    return EzElevatedIconButton(
+      style: style ??
+          ElevatedButton.styleFrom(
+            backgroundColor: EzConfig.colors.surface.withValues(
+                alpha: max(
+                    EzConfig.get(EzConfig.isDark
+                        ? darkButtonOpacityKey
+                        : lightButtonOpacityKey),
+                    focusOpacity)),
           ),
-        ),
-        icon: const Icon(Icons.refresh),
-        label: label ?? EzConfig.l10n.gResetAll,
-      );
+      onPressed: () => showDialog(
+        context: context,
+        builder: (BuildContext dContext) {
+          bool resetBoth = false;
+
+          return StatefulBuilder(
+            builder: (_, StateSetter setDialog) => EzAlertDialog(
+              title: Text(
+                dialogTitle ?? EzConfig.l10n.ssResetAll,
+                textAlign: TextAlign.center,
+              ),
+              content: dialogContent,
+              contents: (dialogContent == null)
+                  ? <Widget>[
+                      // Reset both themes option
+                      EzSwitchPair(
+                        key: ValueKey<bool>(resetBoth),
+                        text: EzConfig.l10n.ssUpdateBoth,
+                        value: resetBoth,
+                        onChanged: (bool? choice) {
+                          if (choice == null) return;
+                          setDialog(() => resetBoth = choice);
+                        },
+                      ),
+                      EzConfig.spacer,
+
+                      // Undo warning/save option
+                      ezRichUndoWarning(
+                        context,
+                        standalone: false,
+                        appName: appName,
+                        androidPackage: androidPackage,
+                      )
+                    ]
+                  : null,
+              actions: ezActionPair(
+                context: context,
+                onConfirm: () async {
+                  if (onConfirm == null) {
+                    await EzConfig.reset(
+                      skip: resetSkip,
+                      storageOnly: storageOnly,
+                    );
+                  } else {
+                    onConfirm!.call();
+                  }
+                  await EzConfig.rebuildUI(onComplete);
+                  if (dContext.mounted) Navigator.of(dContext).pop();
+                },
+                confirmIsDestructive: true,
+                onDeny: () {
+                  if (onDeny == null) {
+                    doNothing();
+                  } else {
+                    onDeny!.call();
+                  }
+                  Navigator.of(dContext).pop();
+                },
+              ),
+              needsClose: false,
+            ),
+          );
+        },
+      ),
+      icon: const Icon(Icons.refresh),
+      label: label ?? EzConfig.l10n.gResetAll,
+    );
+  }
 }
