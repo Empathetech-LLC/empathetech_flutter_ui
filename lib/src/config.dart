@@ -399,12 +399,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Create a pseudo-random config that follows the default vibe
-  /// i.e. a triadic [ColorScheme] that should be highly legible
-  /// Doubles are limited to half and/or twice their default values'
-  /// There is an optional [shiny] chance (1 in 4096) to change the [Locale]
-  static Future<void> randomize({bool shiny = true}) async {
-    // Define data //
-
+  /// i.e. a triadic [ColorScheme] that should be legible
+  static Future<void> randomize() async {
     final Random random = Random();
     final bool onMobile = isMobile();
 
@@ -418,7 +414,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Leave ThemeMode as-is, don't wanna light blast peeps at night
     // Locale too, don't want them to get lost
 
-    // Update color settings //
+    // Define (shared) seed ColorScheme //
 
     // Define random seed
     final Color primary = Color.fromRGBO(
@@ -451,7 +447,8 @@ Must be one of [int, bool, double, String, List<String>]''');
     final Color onTertiary = getTextColor(tertiary);
 
     if (isDark) {
-      // Create a pseudo-random ColorScheme that follows the default vibe
+      // Update color settings //
+
       await loadColorScheme(
         ColorScheme.fromSeed(
           brightness: Brightness.dark,
@@ -479,7 +476,12 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       // Update design settings //
 
-      await setInt(darkAnimationDurationKey, random.nextInt(500) + 250);
+      await setInt(darkAnimationDurationKey, random.nextInt(1000));
+      await setString(
+          darkTransitionTypeKey,
+          EzPageTransition
+              .values[random.nextInt(EzPageTransition.values.length)].value);
+      await setBool(darkTransitionFadeKey, random.nextBool());
 
       await setDouble(darkButtonOpacityKey, random.nextDouble());
       await setDouble(darkButtonOutlineOpacityKey, random.nextDouble());
@@ -571,7 +573,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       await setDouble(darkIconSizeKey, defaultIconSize * getScalar());
     } else {
-      // Create a pseudo-random ColorScheme that follows the default vibe
+      // Update color settings //
+
       await loadColorScheme(
         ColorScheme.fromSeed(
           brightness: Brightness.light,
@@ -599,7 +602,12 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       // Update design settings //
 
-      await setInt(lightAnimationDurationKey, random.nextInt(500) + 250);
+      await setInt(lightAnimationDurationKey, random.nextInt(1000));
+      await setString(
+          lightTransitionTypeKey,
+          EzPageTransition
+              .values[random.nextInt(EzPageTransition.values.length)].value);
+      await setBool(lightTransitionFadeKey, random.nextBool());
 
       await setDouble(lightButtonOpacityKey, random.nextDouble());
       await setDouble(lightButtonOutlineOpacityKey, random.nextDouble());
