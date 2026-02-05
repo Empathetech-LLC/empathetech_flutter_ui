@@ -5,8 +5,9 @@
 
 // Core //
 
-export 'src/config.dart';
 export 'src/config_provider.dart';
+export 'src/config.dart';
+export 'src/configurable_app.dart';
 
 // Constants //
 
@@ -60,6 +61,8 @@ export 'src/sample_screens/text_settings.dart';
 // Widgets //
 
 // Helpers
+export 'src/widgets/helpers/alert_dialog.dart';
+export 'src/widgets/helpers/back_action.dart';
 export 'src/widgets/helpers/checkbox.dart';
 export 'src/widgets/helpers/cli.dart';
 export 'src/widgets/helpers/countdown_timer.dart';
@@ -80,11 +83,6 @@ export 'src/widgets/helpers/tutorial.dart';
 export 'src/widgets/helpers/undo_text.dart';
 export 'src/widgets/helpers/video_player.dart';
 export 'src/widgets/helpers/warning.dart';
-
-// Platform availability
-export 'src/widgets/platform_availability/alert_dialog.dart';
-export 'src/widgets/platform_availability/back_action.dart';
-export 'src/widgets/platform_availability/configurable_app.dart';
 
 // Responsive design
 export 'src/widgets/responsive_design/adaptive_widgets.dart';
