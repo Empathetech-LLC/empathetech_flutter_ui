@@ -441,7 +441,7 @@ class EzChalkboardConfig extends StatelessWidget {
   /// When true, skips the "This is a dark theme only..." dialog
   static Future<bool> onPressed(BuildContext context, bool autoConfirm) async {
     // If the current theme is not dark, show a warning dialog
-    if (!autoConfirm || EzConfig.themeMode != ThemeMode.dark) {
+    if (!autoConfirm && EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
         context: context,
         builder: (BuildContext dContext) => EzAlertDialog(
@@ -621,7 +621,7 @@ class EzNebulaConfig extends StatelessWidget {
   /// When true, skips the "This is a dark theme only..." dialog
   static Future<bool> onPressed(BuildContext context, bool autoConfirm) async {
     // If the current theme is not dark, show a warning dialog
-    if (EzConfig.themeMode != ThemeMode.dark) {
+    if (!autoConfirm && EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
         context: context,
         builder: (BuildContext dContext) => EzAlertDialog(
