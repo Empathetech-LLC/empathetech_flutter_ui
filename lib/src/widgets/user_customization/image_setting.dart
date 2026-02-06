@@ -261,10 +261,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
       }
     }
-
-    updateTheme
-        ? await EzConfig.rebuildUI(widget.onComplete)
-        : await EzConfig.redrawUI(widget.onComplete);
   }
 
   /// Build the list of [ImageSource] options
@@ -761,7 +757,16 @@ class _ImageSettingState extends State<EzImageSetting> {
               fromLocal = false;
             });
             await activateSetting();
-            setState(() => inProgress = false);
+
+            updateTheme
+                ? await EzConfig.rebuildUI(() {
+                    widget.onComplete();
+                    setState(() => inProgress = false);
+                  })
+                : await EzConfig.redrawUI(() {
+                    widget.onComplete();
+                    setState(() => inProgress = false);
+                  });
           },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
