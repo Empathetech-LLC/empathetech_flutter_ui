@@ -12,6 +12,11 @@ class EzResetButton extends StatelessWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onComplete;
 
+  /// Whether to reset both themes, or just the current theme
+  /// When null, the dialog will have a switch for the user to choose
+  /// Provide a value to remove the switch
+  final bool? resetBoth;
+
   /// When true, [EzConfig.redrawUI] will be called instead of [EzConfig.rebuildUI]
   final bool justDraw;
 
@@ -64,6 +69,7 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton(
     this.onComplete, {
     super.key,
+    this.resetBoth,
     this.justDraw = false,
     this.style,
     this.label,
@@ -93,7 +99,7 @@ class EzResetButton extends StatelessWidget {
         onPressed: () => showDialog(
           context: context,
           builder: (BuildContext dContext) {
-            bool resetBoth = true;
+            bool both = resetBoth ?? true;
 
             return StatefulBuilder(
               builder: (_, StateSetter setDialog) => EzAlertDialog(
@@ -104,17 +110,19 @@ class EzResetButton extends StatelessWidget {
                 content: dialogContent,
                 contents: (dialogContent == null)
                     ? <Widget>[
-                        // Reset both themes option
-                        EzSwitchPair(
-                          key: ValueKey<bool>(resetBoth),
-                          text: EzConfig.l10n.ssUpdateBoth,
-                          value: resetBoth,
-                          onChanged: (bool? choice) {
-                            if (choice == null) return;
-                            setDialog(() => resetBoth = choice);
-                          },
-                        ),
-                        EzConfig.spacer,
+                        if (resetBoth == null) ...<Widget>[
+                          // Reset both themes option
+                          EzSwitchPair(
+                            key: ValueKey<bool>(both),
+                            text: EzConfig.l10n.ssUpdateBoth,
+                            value: both,
+                            onChanged: (bool? choice) {
+                              if (choice == null) return;
+                              setDialog(() => both = choice);
+                            },
+                          ),
+                          EzConfig.spacer,
+                        ],
 
                         // Undo warning/save option
                         ezRichUndoWarning(
@@ -130,7 +138,7 @@ class EzResetButton extends StatelessWidget {
                   onConfirm: () async {
                     if (onConfirm == null) {
                       await EzConfig.reset(
-                        resetBoth,
+                        both,
                         skip: resetSkip,
                         storageOnly: storageOnly,
                       );
