@@ -45,46 +45,44 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
-      reverseHands: true,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Label
-        EzText(
-          EzConfig.l10n.ssThemeMode,
-          style: widget.labelStyle,
-          textAlign: TextAlign.center,
-        ),
-        EzConfig.margin,
+  Widget build(BuildContext context) => EzScrollView(
+        scrollDirection: Axis.horizontal,
+        reverseHands: true,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Label
+          EzText(
+            EzConfig.l10n.ssThemeMode,
+            style: widget.labelStyle,
+            textAlign: TextAlign.center,
+          ),
+          EzConfig.margin,
 
-        // Button
-        EzDropdownMenu<ThemeMode>(
-          widthEntries: entries
-              .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
-              .toList(),
-          dropdownMenuEntries: entries,
-          enableSearch: false,
-          initialSelection: EzConfig.themeMode,
-          onSelected: (ThemeMode? choice) async {
-            if (choice == null || choice == EzConfig.themeMode) return;
+          // Button
+          EzDropdownMenu<ThemeMode>(
+            widthEntries: entries
+                .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
+                .toList(),
+            dropdownMenuEntries: entries,
+            enableSearch: false,
+            initialSelection: EzConfig.themeMode,
+            onSelected: (ThemeMode? choice) async {
+              if (choice == null || choice == EzConfig.themeMode) return;
 
-            switch (choice) {
-              case ThemeMode.dark:
-                await EzConfig.setBool(isDarkThemeKey, true);
-                break;
-              case ThemeMode.light:
-                await EzConfig.setBool(isDarkThemeKey, false);
-                break;
-              case ThemeMode.system:
-                await EzConfig.remove(isDarkThemeKey);
-                break;
-            }
-            await EzConfig.rebuildThemeMode(widget.onComplete);
-          },
-        ),
-      ],
-    );
-  }
+              switch (choice) {
+                case ThemeMode.dark:
+                  await EzConfig.setBool(isDarkThemeKey, true);
+                  break;
+                case ThemeMode.light:
+                  await EzConfig.setBool(isDarkThemeKey, false);
+                  break;
+                case ThemeMode.system:
+                  await EzConfig.remove(isDarkThemeKey);
+                  break;
+              }
+              await EzConfig.rebuildThemeMode(widget.onComplete);
+            },
+          ),
+        ],
+      );
 }
