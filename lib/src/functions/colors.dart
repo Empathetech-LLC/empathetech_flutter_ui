@@ -521,14 +521,14 @@ Future<void> loadColorScheme(
 Future<String> loadImageColorScheme(String path, Brightness? brightness) async {
   try {
     if (brightness == null) {
-      loadColorScheme(
+      await loadColorScheme(
         await ColorScheme.fromImageProvider(
           provider: ezImageProvider(path),
           brightness: Brightness.dark,
         ),
         Brightness.dark,
       );
-      loadColorScheme(
+      await loadColorScheme(
         await ColorScheme.fromImageProvider(
           provider: ezImageProvider(path),
           brightness: Brightness.light,
@@ -536,7 +536,7 @@ Future<String> loadImageColorScheme(String path, Brightness? brightness) async {
         Brightness.light,
       );
     } else {
-      loadColorScheme(
+      await loadColorScheme(
         await ColorScheme.fromImageProvider(
           provider: ezImageProvider(path),
           brightness: brightness,
