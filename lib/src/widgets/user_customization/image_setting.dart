@@ -687,7 +687,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: EzConfig.colors.surface,
-                        borderRadius: textFieldRadius,
+                        borderRadius: ezTextFieldRadius,
                       ),
                       child: Text(
                         name,

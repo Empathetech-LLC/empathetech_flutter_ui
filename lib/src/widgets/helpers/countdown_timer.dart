@@ -78,14 +78,14 @@ class _CountdownTimerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Offset center = Offset(size.width / 2, size.height / 2);
-    final double radius = size.width / 2;
-
     final Paint foregroundPaint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
     canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
+      Rect.fromCircle(
+        center: Offset(size.width / 2, size.height / 2),
+        radius: size.width / 2,
+      ),
       -math.pi / 2,
       2 * -math.pi * progress,
       true,

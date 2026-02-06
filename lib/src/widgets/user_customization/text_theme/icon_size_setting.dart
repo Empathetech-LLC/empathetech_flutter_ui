@@ -101,7 +101,7 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                     ),
             ],
           ),
-          borderRadius: ezPillShape,
+          borderRadius: ezPillEdge,
         ),
       ],
     );
