@@ -12,7 +12,7 @@ class EzTextBackground extends StatelessWidget {
   /// Doesn't have to be [Text]
   final Widget text;
 
-  /// Defaults to [EzInsets.wrap] with [marginKey]
+  /// Defaults to [EzInsets.wrap] with [EzConfig.marginVal]
   final EdgeInsets? margin;
 
   /// Defaults to [ezRoundEdge]
@@ -141,27 +141,25 @@ class EzText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzTextBackground(
-      Text(
-        data,
-        style: style ?? EzConfig.styles.bodyLarge,
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
-        maxLines: maxLines,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      ),
-      useSurface: useSurface,
-      backgroundColor: backgroundColor,
-    );
-  }
+  Widget build(BuildContext context) => EzTextBackground(
+        Text(
+          data,
+          style: style ?? EzConfig.styles.bodyLarge,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          locale: locale,
+          softWrap: softWrap,
+          overflow: overflow,
+          maxLines: maxLines,
+          semanticsLabel: semanticsLabel,
+          textWidthBasis: textWidthBasis,
+          textHeightBehavior: textHeightBehavior,
+          selectionColor: selectionColor,
+        ),
+        useSurface: useSurface,
+        backgroundColor: backgroundColor,
+      );
 }
 
 class EzNewLine extends StatelessWidget {
@@ -174,29 +172,14 @@ class EzNewLine extends StatelessWidget {
   final TextAlign? textAlign;
 
   /// Quick wrapper for creating a [TextStyle]d blank line
-  const EzNewLine({
-    super.key,
-    this.style,
-    this.textAlign,
-  });
+  const EzNewLine({super.key, this.style, this.textAlign});
 
   @override
-  Widget build(BuildContext context) {
-    return ExcludeSemantics(
-      child: Text(
-        '',
-        style: style ?? EzConfig.styles.bodyLarge,
-        textAlign: textAlign ?? TextAlign.start,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ExcludeSemantics(
+        child: Text(
+          '',
+          style: style ?? EzConfig.styles.bodyLarge,
+          textAlign: textAlign ?? TextAlign.start,
+        ),
+      );
 }
-
-/// [TextTheme.bodyLarge] line with [TextAlign.start]
-const Widget ezStartLine = EzNewLine();
-
-/// [TextTheme.bodyLarge] line with [TextAlign.center]
-const Widget ezCenterLine = EzNewLine(textAlign: TextAlign.center);
-
-/// [TextTheme.bodyLarge] line with [TextAlign.end]
-const Widget ezEndLine = EzNewLine(textAlign: TextAlign.end);
