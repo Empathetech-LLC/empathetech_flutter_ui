@@ -202,40 +202,37 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
         // Reset button
         widget.resetSpacer,
-        EzConfig.isDark
-            ? EzResetButton(
-                () => setState(() {}),
-                androidPackage: widget.androidPackage,
-                appName: widget.appName,
-                dialogTitle: EzConfig.l10n.csResetAll(resetString),
-                resetSkip: widget.resetSkip,
-                onConfirm: () async {
-                  await EzConfig.removeKeys(darkColorKeys.keys.toSet());
-
-                  if (widget.resetExtraDark != null) {
-                    await EzConfig.removeKeys(widget.resetExtraDark!);
-                  }
-
-                  setState(() => currList = List<String>.from(defaultList));
-                },
-              )
-            : EzResetButton(
-                () => setState(() {}),
-                androidPackage: widget.androidPackage,
-                appName: widget.appName,
-                dialogTitle: EzConfig.l10n.csResetAll(resetString),
-                resetSkip: widget.resetSkip,
-                saveSkip: widget.saveSkip,
-                onConfirm: () async {
-                  await EzConfig.removeKeys(lightColorKeys.keys.toSet());
-
-                  if (widget.resetExtraLight != null) {
-                    await EzConfig.removeKeys(widget.resetExtraLight!);
-                  }
-
-                  setState(() => currList = List<String>.from(defaultList));
-                },
-              ),
+        EzResetButton(
+          () => setState(() {}),
+          androidPackage: widget.androidPackage,
+          appName: widget.appName,
+          dialogTitle: EzConfig.l10n.csResetAll(resetString),
+          resetSkip: widget.resetSkip,
+          onConfirm: () async {
+            if (widget.updateBoth) {
+              await EzConfig.removeKeys(allColorKeys.keys.toSet());
+              if (widget.resetExtraDark != null) {
+                await EzConfig.removeKeys(widget.resetExtraDark!);
+              }
+              if (widget.resetExtraLight != null) {
+                await EzConfig.removeKeys(widget.resetExtraLight!);
+              }
+            } else {
+              if (EzConfig.isDark) {
+                await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+                if (widget.resetExtraDark != null) {
+                  await EzConfig.removeKeys(widget.resetExtraDark!);
+                }
+              } else {
+                await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+                if (widget.resetExtraLight != null) {
+                  await EzConfig.removeKeys(widget.resetExtraLight!);
+                }
+              }
+            }
+            setState(() => currList = List<String>.from(defaultList));
+          },
+        ),
         EzConfig.separator,
       ],
     );
