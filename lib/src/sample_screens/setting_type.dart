@@ -3,30 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
-/// Text setting types
-/// [quick] || [advanced]
-enum EzTSType { quick, advanced }
+// Shared //
 
-/// [EzTSType] path name
-extension TSConfig on EzTSType {
-  String get path {
-    switch (this) {
-      case EzTSType.quick:
-        return 'quick';
-      case EzTSType.advanced:
-        return 'advanced';
-    }
-  }
+const String _quick = 'quick';
+const String _advanced = 'advanced';
 
-  String get name {
-    switch (this) {
-      case EzTSType.quick:
-        return 'quick_text_settings';
-      case EzTSType.advanced:
-        return 'advanced_text_settings';
-    }
-  }
-}
+// Color //
 
 /// Color setting types
 /// [quick] || [advanced]
@@ -37,9 +19,9 @@ extension CSConfig on EzCSType {
   String get path {
     switch (this) {
       case EzCSType.quick:
-        return 'quick';
+        return _quick;
       case EzCSType.advanced:
-        return 'advanced';
+        return _advanced;
     }
   }
 
@@ -49,6 +31,33 @@ extension CSConfig on EzCSType {
         return 'quick_color_settings';
       case EzCSType.advanced:
         return 'advanced_color_settings';
+    }
+  }
+}
+
+// Text //
+
+/// Text setting types
+/// [quick] || [advanced]
+enum EzTSType { quick, advanced }
+
+/// [EzTSType] path name
+extension TSConfig on EzTSType {
+  String get path {
+    switch (this) {
+      case EzTSType.quick:
+        return _quick;
+      case EzTSType.advanced:
+        return _advanced;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case EzTSType.quick:
+        return 'quick_text_settings';
+      case EzTSType.advanced:
+        return 'advanced_text_settings';
     }
   }
 }
