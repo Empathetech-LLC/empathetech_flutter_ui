@@ -236,19 +236,17 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             child: EzConfig.isDark
                 ? EzImageSetting(
                     widget.onRedraw,
-                    key: UniqueKey(),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
                     label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                    updateTheme: Brightness.dark,
+                    updateBrightness: Brightness.dark,
                   )
                 : EzImageSetting(
                     widget.onRedraw,
-                    key: UniqueKey(),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
                     label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                    updateTheme: Brightness.light,
+                    updateBrightness: Brightness.light,
                   ),
           ),
           EzConfig.spacer,
