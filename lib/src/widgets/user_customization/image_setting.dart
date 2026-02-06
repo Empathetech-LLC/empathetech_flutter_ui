@@ -25,7 +25,7 @@ class EzImageSetting extends StatefulWidget {
 
   /// [EzElevatedButton.style] passthrough
   /// If provided, recommended to include the default settings...
-  ///   padding: EdgeInsets.all(padding * 0.75),
+  ///   padding: EdgeInsets.all(EzConfig.padding * 0.75),
   final ButtonStyle? style;
 
   /// If true, opens an [ezColorPicker] for the user, and saves the hex value (string) as the image path
@@ -33,24 +33,23 @@ class EzImageSetting extends StatefulWidget {
 
   /// Effectively whether the image is nullable
   /// true is recommended
-  /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
+  /// Note: if there is no default value for [configKey], the reset option will not appear
   final bool allowClear;
 
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on long press
   final String? credits;
 
-  /// For [ColorScheme.fromImageProvider]
-  /// If provided and [updateThemeOption] is true, the user will have the final say
-  /// If provided and [updateThemeOption] is false, it will be automatic
-  /// If null, no theme will be updated
-  final Brightness? updateTheme;
+  /// null will display a choice to the user
+  final bool? allowThemeUpdate;
 
-  /// Whether the update theme checkbox && message should be displayed
-  final bool updateThemeOption;
+  /// null updates both theme modes
+  /// [allowThemeUpdate] takes precedence/must be true
+  /// Parameter is required to avoid accidental double updates
+  final Brightness? updateBrightness;
 
   /// Whether the [EzImageEditor] should be displayed upon successful image selection
-  /// By current design, [AssetImage]s cannot be edited/will be skipped
+  /// [AssetImage]s cannot be edited/will be skipped
   final bool showEditor;
 
   /// Optional default [BoxFit] for the image
@@ -71,8 +70,8 @@ class EzImageSetting extends StatefulWidget {
     this.allowSolidColor = false,
     this.allowClear = true,
     this.credits,
-    this.updateTheme,
-    this.updateThemeOption = true,
+    this.allowThemeUpdate,
+    required this.updateBrightness,
     this.showEditor = true,
     this.defaultFit,
     this.showFitOption = true,
@@ -89,7 +88,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   bool inProgress = false;
 
   bool fromLocal = false;
-  late bool updateTheme = (widget.updateTheme != null);
+  late bool updateTheme = widget.allowThemeUpdate ?? false;
   late BoxFit? selectedFit = widget.defaultFit;
 
   late final TextEditingController urlController = TextEditingController();
@@ -97,20 +96,15 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Define custom widgets && functions //
 
   /// Open an [EzAlertDialog] with the [Image]s source information
-  Future<dynamic>? showCredits() {
-    final bool hasChanged = currPath != EzConfig.getDefault(widget.configKey);
-    final bool showCredits = !hasChanged && (widget.credits != null);
-
-    return showCredits
-        ? showDialog(
-            context: context,
-            builder: (_) => EzAlertDialog(
-              title: Text(EzConfig.l10n.gCreditTo, textAlign: TextAlign.center),
-              content: Text(widget.credits!, textAlign: TextAlign.center),
-            ),
-          )
-        : null;
-  }
+  Future<dynamic>? showCredits() => (widget.credits == null)
+      ? null
+      : showDialog(
+          context: context,
+          builder: (_) => EzAlertDialog(
+            title: Text(EzConfig.l10n.gCreditTo, textAlign: TextAlign.center),
+            content: Text(widget.credits!, textAlign: TextAlign.center),
+          ),
+        );
 
   /// Cleanup any custom [File]s
   Future<void> fileCleanup() async {
@@ -125,15 +119,15 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Validate a URL
-  String? validateUrl(String? value) {
-    return (value == null || value.isEmpty || !ezUrlCheck(value))
-        ? EzConfig.l10n.gValidURL
-        : null;
-  }
+  String? validateUrl(String? value) =>
+      (value == null || value.isEmpty || !ezUrlCheck(value))
+          ? EzConfig.l10n.gValidURL
+          : null;
 
   /// First-layer [ElevatedButton.onPressed]
   /// Opens an options modal and updates the state accordingly
   Future<void> activateSetting() async {
+    // Get an image (path) from the user
     String? newPath = await ezModal<String?>(
       context: context,
       builder: (BuildContext mContext) => StatefulBuilder(
@@ -143,10 +137,14 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       ),
     );
+
+    // Check for exit/cancel
     if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+
+    // Check if a color was chosen
     final bool isInt = (int.tryParse(newPath) != null);
 
-    // Choose fit and/or edit image
+    // Edit image (when applicable)
     if (!isInt &&
         fromLocal &&
         widget.showEditor &&
@@ -187,9 +185,11 @@ class _ImageSettingState extends State<EzImageSetting> {
             return;
         }
       }
+      // Re-check exit/cancel
+      if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
     }
 
-    if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+    // Choose fit (when applicable)
     if (!isInt && widget.showFitOption) {
       final bool canceled = (await chooseFit(newPath) == null);
       if (canceled) return;
@@ -199,46 +199,70 @@ class _ImageSettingState extends State<EzImageSetting> {
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
       if (mounted) ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
-    } else {
-      currPath = newPath;
+      return;
+    }
+    currPath = newPath;
 
-      // If there is little/no text background opacity, set it to 50%
-      // It will be more annoying to have to turn it down, than turn it up without being able to read
-      if (widget.updateTheme == Brightness.dark) {
+    // Update the theme (conditionally)
+    if (!isInt && updateTheme) {
+      // Dark
+      if (widget.updateBrightness == null ||
+          widget.updateBrightness == Brightness.dark) {
+        // If there is little/no text background opacity, set it to 50%
+        // Better to have to turn it down than up, they'll be a lot of images where people suddenly won't be able to read
         final double? opacity = EzConfig.get(darkTextBackgroundOpacityKey);
         if (opacity == null || opacity <= 0.05) {
           await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.50);
         }
+
+        final String result =
+            await loadImageColorScheme(newPath, Brightness.dark);
+
+        if (result == success) {
+          await EzConfig.setString(darkColorSchemeImageKey, newPath);
+        } else {
+          if (mounted) {
+            await ezLogAlert(
+              context,
+              title: EzConfig.l10n.dsImgGetFailed,
+              message:
+                  '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
+            );
+          }
+        }
       }
-      if (widget.updateTheme == Brightness.light) {
+
+      // Light
+      if (widget.updateBrightness == null ||
+          widget.updateBrightness == Brightness.light) {
+        // If there is little/no text background opacity, set it to 50%
+        // Better to have to turn it down than up, they'll be a lot of images where people suddenly won't be able to read
         final double? opacity = EzConfig.get(lightTextBackgroundOpacityKey);
         if (opacity == null || opacity <= 0.05) {
           await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.50);
         }
-      }
 
-      // Update the theme (conditionally)
-      if (!isInt && widget.updateTheme != null && updateTheme) {
         final String result =
-            await loadImageColorScheme(newPath, widget.updateTheme!);
+            await loadImageColorScheme(newPath, Brightness.light);
 
-        if (result != success && mounted) {
-          await ezLogAlert(
-            context,
-            title: EzConfig.l10n.dsImgGetFailed,
-            message:
-                '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
-          );
+        if (result == success) {
+          await EzConfig.setString(lightColorSchemeImageKey, newPath);
         } else {
-          widget.updateTheme == Brightness.dark
-              ? await EzConfig.setString(darkColorSchemeImageKey, newPath)
-              : await EzConfig.setString(lightColorSchemeImageKey, newPath);
-          await EzConfig.rebuildUI(widget.onComplete);
+          if (mounted) {
+            await ezLogAlert(
+              context,
+              title: EzConfig.l10n.dsImgGetFailed,
+              message:
+                  '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
+            );
+          }
         }
-      } else {
-        await EzConfig.redrawUI(widget.onComplete);
       }
     }
+
+    updateTheme
+        ? await EzConfig.rebuildUI(widget.onComplete)
+        : await EzConfig.redrawUI(widget.onComplete);
   }
 
   /// Build the list of [ImageSource] options
@@ -464,7 +488,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         crossAxisAlignment: WrapCrossAlignment.center,
         children: options,
       ),
-      if (widget.updateTheme != null && widget.updateThemeOption)
+      if (widget.allowThemeUpdate == null)
         Padding(
           padding: EdgeInsets.symmetric(vertical: EzConfig.spacing / 2),
           child: EzSwitchPair(
@@ -472,8 +496,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             text: EzConfig.l10n.dsUseForColors,
             value: updateTheme,
             onChanged: (bool? choice) {
-              updateTheme = (choice == null) ? false : choice;
-              setModal(() {});
+              if (choice == null) return;
+              setModal(() => updateTheme = choice);
               setState(() {});
             },
           ),
