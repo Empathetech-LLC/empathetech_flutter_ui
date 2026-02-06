@@ -43,7 +43,6 @@ class EzWarning extends StatelessWidget {
     final Color alertColor = iconColor ?? EzConfig.colors.secondary;
 
     final TextStyle? tStyle = titleStyle ?? EzConfig.styles.titleLarge;
-    final TextStyle? bStyle = bodyStyle ?? EzConfig.styles.bodyLarge;
 
     // Return the build //
 
@@ -91,7 +90,11 @@ class EzWarning extends StatelessWidget {
                 EzConfig.spacer,
 
                 // Body
-                Text(body, style: bStyle, textAlign: TextAlign.center),
+                Text(
+                  body,
+                  style: bodyStyle ?? EzConfig.styles.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
