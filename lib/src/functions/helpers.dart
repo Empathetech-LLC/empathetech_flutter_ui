@@ -119,6 +119,20 @@ Future<void> ezConfigLoader(BuildContext context) async {
   }
 }
 
+/// Returns an appropriate width for a [DropdownMenu]
+double ezDropdownWidth({
+  required BuildContext context,
+  required List<String> entries,
+}) =>
+    2 * EzConfig.marginVal +
+    ezTextSize(
+      getLongest(entries),
+      context: context,
+      style: EzConfig.styles.bodyLarge,
+    ).width +
+    EzConfig.padding +
+    max(EzConfig.padding + EzConfig.iconSize, kMinInteractiveDimension);
+
 /// [TargetPlatform] aware helper that will request/exit a fullscreen window
 /// Alias exists for [kIsWeb] support
 Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
@@ -179,6 +193,17 @@ Future<(Locale, EFUILang)> ezStoredL10n() async {
   }
 
   return (locale, el10n);
+}
+
+/// threeQs = [widthOf] context * 0.75
+/// min: threeQs, max: min(threeQs, [ScreenSize.small])
+BoxConstraints ezTextFieldConstraints(BuildContext context) {
+  final double threeQs = widthOf(context) * 0.75;
+
+  return BoxConstraints(
+    minWidth: min(threeQs, ScreenSize.small.size),
+    maxWidth: min(threeQs, ScreenSize.small.size),
+  );
 }
 
 /// Calculate a recommended [AppBar.toolbarHeight]
@@ -363,6 +388,10 @@ Duration ezReadingTime(String passage) {
   final int words = passage.split(' ').length;
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
+
+/// Returns the longest [String] in [list]
+String getLongest(List<String> list) =>
+    list.reduce((String a, String b) => a.length > b.length ? a : b);
 
 /// Returns whether an app was installed from the Google Play Store
 /// Theoretically works on all platforms, but only relevant for Android
