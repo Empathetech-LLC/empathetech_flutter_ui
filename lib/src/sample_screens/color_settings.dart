@@ -203,7 +203,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Reset button
         widget.resetSpacer,
         EzResetButton(
-          () => setState(() {}),
+          () => setState(() => currList = List<String>.from(defaultList)),
           androidPackage: widget.androidPackage,
           appName: widget.appName,
           dialogTitle: EzConfig.l10n.csResetAll(resetString),
@@ -231,7 +231,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
                 }
               }
             }
-            setState(() => currList = List<String>.from(defaultList));
           },
         ),
         EzConfig.separator,
