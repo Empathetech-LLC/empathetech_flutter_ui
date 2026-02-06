@@ -70,7 +70,7 @@ class EzConfigProvider extends ChangeNotifier {
 
     if (_isDark) {
       // Build new caches
-      _design = EzDesignCache(animDur: EzConfig.get(darkAnimationDurationKey));
+      _design = EzDesignCache(EzConfig.get(darkAnimationDurationKey));
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(darkMarginKey),
         padding: EzConfig.get(darkPaddingKey),
@@ -83,13 +83,18 @@ class EzConfigProvider extends ChangeNotifier {
         divider: const EzDivider(),
         hideScroll: EzConfig.get(darkHideScrollKey),
       );
-      _text = EzTextCache(iconSize: EzConfig.get(darkIconSizeKey));
+      _text = EzTextCache(
+        EzConfig.get(darkIconSizeKey),
+        startLine: const EzNewLine(textAlign: TextAlign.start),
+        centerLine: const EzNewLine(),
+        endLine: const EzNewLine(textAlign: TextAlign.end),
+      );
 
       // Update the curr theme pointer
       _currTheme = _darkTheme;
     } else {
       // Ditto
-      _design = EzDesignCache(animDur: EzConfig.get(lightAnimationDurationKey));
+      _design = EzDesignCache(EzConfig.get(lightAnimationDurationKey));
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(lightMarginKey),
         padding: EzConfig.get(lightPaddingKey),
@@ -102,7 +107,12 @@ class EzConfigProvider extends ChangeNotifier {
         divider: const EzDivider(),
         hideScroll: EzConfig.get(lightHideScrollKey),
       );
-      _text = EzTextCache(iconSize: EzConfig.get(lightIconSizeKey));
+      _text = EzTextCache(
+        EzConfig.get(lightIconSizeKey),
+        startLine: const EzNewLine(textAlign: TextAlign.start),
+        centerLine: const EzNewLine(),
+        endLine: const EzNewLine(textAlign: TextAlign.end),
+      );
 
       _currTheme = _lightTheme;
     }
@@ -264,7 +274,7 @@ class EzDesignCache {
 
   /// Theme aware tracker for frequently used design values...
   /// Animation duration
-  EzDesignCache({required this.animDur});
+  EzDesignCache(this.animDur);
 }
 
 class EzLayoutCache {
@@ -302,9 +312,18 @@ class EzLayoutCache {
 class EzTextCache {
   final double iconSize;
 
+  final EzNewLine startLine;
+  final EzNewLine centerLine;
+  final EzNewLine endLine;
+
   /// Theme aware tracker for frequently used text values...
-  /// Icon size
-  EzTextCache({required this.iconSize});
+  /// Icon size, frequently used [EzNewLine]s
+  EzTextCache(
+    this.iconSize, {
+    required this.startLine,
+    required this.centerLine,
+    required this.endLine,
+  });
 }
 
 abstract class EzAppCache {
