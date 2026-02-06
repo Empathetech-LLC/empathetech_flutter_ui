@@ -190,12 +190,12 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Core settings
         if (currentTab == EzCSType.quick)
           _QuickColorSettings(
+            widget.updateBoth,
             quickHeader: widget.quickHeader,
             quickFooter: widget.quickFooter,
           )
         else
           _AdvancedColorSettings(
-            key: UniqueKey(),
             defaultList: defaultList,
             currList: currList,
           ),
@@ -207,6 +207,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           androidPackage: widget.androidPackage,
           appName: widget.appName,
           dialogTitle: EzConfig.l10n.csResetAll(resetString),
+          resetBoth: widget.updateBoth,
           resetSkip: widget.resetSkip,
           onConfirm: () async {
             if (widget.updateBoth) {
@@ -240,10 +241,12 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 }
 
 class _QuickColorSettings extends StatefulWidget {
+  final bool updateBoth;
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
 
-  const _QuickColorSettings({
+  const _QuickColorSettings(
+    this.updateBoth, {
     required this.quickHeader,
     required this.quickFooter,
   });
@@ -256,50 +259,47 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   void redraw() => setState(() {});
 
   @override
-  Widget build(BuildContext context) {
-    final Brightness brightness =
-        EzConfig.isDark ? Brightness.dark : Brightness.light;
-    final String fromImageKey =
-        EzConfig.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
-
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
-      startCentered: true,
-      mainAxisSize: MainAxisSize.min,
-      child: Column(
+  Widget build(BuildContext context) => EzScrollView(
+        scrollDirection: Axis.horizontal,
+        startCentered: true,
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          if (widget.quickHeader != null) ...widget.quickHeader!,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (widget.quickHeader != null) ...widget.quickHeader!,
 
-          // MonoChrome
-          EzMonoChromeColorsSetting(redraw),
-          EzConfig.spacer,
+            // MonoChrome
+            EzMonoChromeColorsSetting(redraw),
+            EzConfig.spacer,
 
-          // From image
-          Semantics(
-            label: EzConfig.l10n.csSchemeBase.replaceAll('\n', ' '),
-            value: EzConfig.l10n.gOptional,
-            button: true,
-            hint: EzConfig.l10n.csFromImage,
-            child: ExcludeSemantics(
-              child: EzImageSetting(
-                redraw,
-                configKey: fromImageKey,
-                label: EzConfig.l10n.csSchemeBase,
-                updateTheme: brightness,
-                updateThemeOption: false,
-                showEditor: false,
-                showFitOption: false,
+            // From image
+            Semantics(
+              label: EzConfig.l10n.csSchemeBase.replaceAll('\n', ' '),
+              value: EzConfig.l10n.gOptional,
+              button: true,
+              hint: EzConfig.l10n.csFromImage,
+              child: ExcludeSemantics(
+                child: EzImageSetting(
+                  redraw,
+                  configKey: EzConfig.isDark
+                      ? darkColorSchemeImageKey
+                      : lightColorSchemeImageKey,
+                  label: EzConfig.l10n.csSchemeBase,
+                  allowThemeUpdate: true,
+                  updateBrightness: widget.updateBoth
+                      ? null
+                      : (EzConfig.isDark ? Brightness.dark : Brightness.light),
+                  showEditor: false,
+                  showFitOption: false,
+                ),
               ),
             ),
-          ),
 
-          // Additional settings
-          if (widget.quickFooter != null) ...widget.quickFooter!,
-        ],
-      ),
-    );
-  }
+            // Additional settings
+            if (widget.quickFooter != null) ...widget.quickFooter!,
+          ],
+        ),
+      );
 }
 
 class _AdvancedColorSettings extends StatefulWidget {
@@ -307,7 +307,6 @@ class _AdvancedColorSettings extends StatefulWidget {
   final List<String> currList;
 
   const _AdvancedColorSettings({
-    super.key,
     required this.defaultList,
     required this.currList,
   });
