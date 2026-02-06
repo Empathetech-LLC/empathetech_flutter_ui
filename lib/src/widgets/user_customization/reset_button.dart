@@ -59,7 +59,7 @@ class EzResetButton extends StatelessWidget {
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
   /// DO NOT include a pop() for the dialog, this is included automatically
-  final void Function()? onConfirm;
+  final Future<void> Function()? onConfirm;
 
   /// What happens when the user choses not to reset
   /// DO NOT include a pop() for the dialog, this is included automatically
@@ -143,7 +143,7 @@ class EzResetButton extends StatelessWidget {
                         storageOnly: storageOnly,
                       );
                     } else {
-                      onConfirm!.call();
+                      await onConfirm!.call();
                     }
                     justDraw
                         ? await EzConfig.redrawUI(onComplete)
