@@ -420,7 +420,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   iconSize: iconSize,
                 ),
                 backgroundColor: backgroundColor,
-                borderRadius: ezPillShape,
+                borderRadius: ezPillEdge,
               ),
             ),
           ],
@@ -725,7 +725,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
-      borderRadius: textFieldRadius,
+      borderRadius: ezTextFieldRadius,
     );
 
     return <EzTextSettingType, Widget>{
@@ -957,7 +957,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
-      borderRadius: textFieldRadius,
+      borderRadius: ezTextFieldRadius,
     );
 
     return <EzTextSettingType, EzFontDoubleSetting>{
@@ -1044,7 +1044,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
-      borderRadius: textFieldRadius,
+      borderRadius: ezTextFieldRadius,
     );
 
     return <EzTextSettingType, EzFontDoubleSetting>{
@@ -1129,7 +1129,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         color: EzConfig.colors.onSurface,
         size: widget.labelProvider.value.fontSize,
       ),
-      borderRadius: textFieldRadius,
+      borderRadius: ezTextFieldRadius,
     );
 
     return <EzTextSettingType, EzFontDoubleSetting>{
@@ -1315,7 +1315,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           ),
           useSurface: true,
           margin: colMargin,
-          borderRadius: ezPillShape,
+          borderRadius: ezPillEdge,
         ),
         EzConfig.spacer,
 
@@ -1341,7 +1341,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           ),
           useSurface: true,
           margin: colMargin,
-          borderRadius: ezPillShape,
+          borderRadius: ezPillEdge,
         ),
         EzConfig.spacer,
 
@@ -1365,7 +1365,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           ),
           useSurface: true,
           margin: colMargin,
-          borderRadius: ezPillShape,
+          borderRadius: ezPillEdge,
         ),
         EzConfig.spacer,
 
@@ -1390,7 +1390,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           ),
           useSurface: true,
           margin: colMargin,
-          borderRadius: ezPillShape,
+          borderRadius: ezPillEdge,
         ),
         EzConfig.spacer,
 
@@ -1415,7 +1415,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           ),
           useSurface: true,
           margin: colMargin,
-          borderRadius: ezPillShape,
+          borderRadius: ezPillEdge,
         ),
 
         // Reset all
