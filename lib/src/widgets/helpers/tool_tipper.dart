@@ -25,11 +25,9 @@ class EzToolTipper extends StatelessWidget {
     final GlobalKey<TooltipState> key = GlobalKey<TooltipState>();
     bool isTooltipVisible = false;
 
-    final String help = EzConfig.l10n.gHelp;
-
     return EzTextBackground(
       Semantics(
-        label: help,
+        label: EzConfig.l10n.gHelp,
         button: true,
         onTap: () async {
           if (isTooltipVisible) {
@@ -38,7 +36,7 @@ class EzToolTipper extends StatelessWidget {
             key.currentState?.ensureTooltipVisible();
 
             // Wait for auto-announcement to finish
-            await Future<void>.delayed(ezReadingTime(help));
+            await Future<void>.delayed(ezReadingTime(EzConfig.l10n.gHelp));
             String message = this.message ?? '';
 
             if (richMessage != null) {
@@ -93,7 +91,7 @@ class EzToolTipper extends StatelessWidget {
         ),
       ),
       useSurface: true,
-      borderRadius: ezPillShape,
+      borderRadius: ezPillEdge,
     );
   }
 }

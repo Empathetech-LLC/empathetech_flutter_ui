@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzIcon extends Icon {
-  /// [Icon] wrapper that responds to [EzConfig]s [iconSizeKey]
+  /// [Icon] wrapper that responds to [EzConfig.iconSize]
   /// [ThemeData.iconTheme] does not seem to be consumed properly at time of writing
   /// Jan 2025
   EzIcon(
@@ -29,7 +29,7 @@ class EzIcon extends Icon {
 
 class EzIconButton extends StatelessWidget {
   /// [IconButton.iconSize] passthrough
-  /// Defaults to [EzConfig.get]s [iconSizeKey]
+  /// Defaults to [EzConfig.iconSize]
   final double? iconSize;
 
   /// [IconButton.visualDensity] passthrough

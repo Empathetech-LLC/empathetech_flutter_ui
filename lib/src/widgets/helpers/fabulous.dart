@@ -44,37 +44,35 @@ class EzConfigFAB extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return MenuAnchor(
-      builder: (_, MenuController controller, __) {
-        return FloatingActionButton(
-          heroTag: 'config_fab',
-          tooltip: EzConfig.l10n.ssConfigTip,
-          onPressed: () =>
-              (controller.isOpen) ? controller.close() : controller.open(),
-          child: EzIcon(Icons.save),
-        );
-      },
-      menuChildren: <Widget>[
-        // Save config
-        EzMenuButton(
-          label: EzConfig.l10n.ssSaveConfig,
-          onPressed: () => EzConfig.saveConfig(
-            context,
-            appName: appName,
-            androidPackage: androidPackage,
-            skip: skip,
+  Widget build(BuildContext context) => MenuAnchor(
+        builder: (_, MenuController controller, __) {
+          return FloatingActionButton(
+            heroTag: 'config_fab',
+            tooltip: EzConfig.l10n.ssConfigTip,
+            onPressed: () =>
+                (controller.isOpen) ? controller.close() : controller.open(),
+            child: EzIcon(Icons.save),
+          );
+        },
+        menuChildren: <Widget>[
+          // Save config
+          EzMenuButton(
+            label: EzConfig.l10n.ssSaveConfig,
+            onPressed: () => EzConfig.saveConfig(
+              context,
+              appName: appName,
+              androidPackage: androidPackage,
+              skip: skip,
+            ),
           ),
-        ),
 
-        // Load config
-        EzMenuButton(
-          label: EzConfig.l10n.ssLoadConfig,
-          onPressed: () => ezConfigLoader(context),
-        ),
-      ],
-    );
-  }
+          // Load config
+          EzMenuButton(
+            label: EzConfig.l10n.ssLoadConfig,
+            onPressed: () => ezConfigLoader(context),
+          ),
+        ],
+      );
 }
 
 class EzSettingsDupeFAB extends StatelessWidget {
