@@ -81,11 +81,9 @@ class _EzTextButtonState extends State<EzTextButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final Color primary = EzConfig.colors.primary;
-
     TextStyle? textStyle =
         (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
-      decorationColor: widget.decorationColor ?? primary,
+      decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     void addUnderline(bool addIt) {
@@ -196,11 +194,9 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final Color primary = EzConfig.colors.primary;
-
     TextStyle? textStyle =
         (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
-      decorationColor: widget.decorationColor ?? primary,
+      decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     void addUnderline(bool addIt) {

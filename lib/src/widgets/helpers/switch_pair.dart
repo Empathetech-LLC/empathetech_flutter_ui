@@ -95,7 +95,7 @@ class EzSwitchPair extends StatefulWidget {
   /// Pairs with [valueKey]
   final void Function(bool?)? onChangedCallback;
 
-  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  /// Defaults to [ezIconRatio]
   final double? scale;
 
   /// [Switch.activeThumbColor] passthrough
