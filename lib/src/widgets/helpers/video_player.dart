@@ -77,14 +77,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// Playback speed
   final double speed;
 
-  /// Fullscreen button visibility
-  // final EzButtonVis fullScreenVis;
-
-  /// Whether the video is in fullscreen mode
-  /// Recommended to leave as false to start
-  /// Navigating to the fullscreen page is made much simpler with this as a parameter
-  // final bool isFullscreen;
-
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
   /// Only for desktop (and desktop Web), is always true for mobile (and mobile Web)
   final bool showOnPause;
@@ -124,9 +116,6 @@ class EzVideoPlayer extends StatefulWidget {
     this.textColor = Colors.white,
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
-    // this.fullScreenVis = EzButtonVis.auto,
-    // this.isFullscreen = false,
-    // required this.platform,
     this.showOnPause = false,
     this.mobileDelay = 3,
     this.autoPlay = true,
@@ -159,13 +148,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           widget.volumeVis == EzButtonVis.alwaysOn ||
           widget.timeLabelVis == EzButtonVis.alwaysOn ||
           widget.speedVis == EzButtonVis.alwaysOn;
-  // || widget.fullScreenVis == EzButtonVis.alwaysOn;
   late final bool noControls = widget.timeSliderVis == EzButtonVis.alwaysOff &&
       widget.playVis == EzButtonVis.alwaysOff &&
       widget.volumeVis == EzButtonVis.alwaysOff &&
       widget.timeLabelVis == EzButtonVis.alwaysOff &&
       widget.speedVis == EzButtonVis.alwaysOff;
-  // && widget.fullScreenVis == EzButtonVis.alwaysOff;
 
   // Define custom functions //
 
@@ -341,19 +328,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     return KeyEventResult.ignored;
                   }
 
-                // // F -> fullscreen toggle
-                // case LogicalKeyboardKey.keyF:
-                //   toggleFullscreen();
-                //   return KeyEventResult.handled;
-
-                // // Esc -> exit fullscreen
-                // case LogicalKeyboardKey.escape:
-                //   if (widget.isFullscreen) {
-                //     toggleFullscreen();
-                //     return KeyEventResult.handled;
-                //   } else {
-                //     return KeyEventResult.ignored;
-                //   }
                 default:
                   return KeyEventResult.ignored;
               }
@@ -821,22 +795,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                     ),
                                   ),
                                 ),
-
-                                // // Fullscreen
-                                // Visibility(
-                                //   visible: showControl(widget.fullScreenVis),
-                                //   child: Padding(
-                                //     padding: EdgeInsets.only(right: EzConfig.spacing),
-                                //     child: EzIconButton(
-                                //       onPressed: toggleFullscreen,
-                                //       tooltip: EzConfig.l10n.gFullScreen,
-                                //       color: iconColor,
-                                //       icon: Icon(widget.isFullscreen
-                                //           ? Icons.fullscreenExit
-                                //           : Icons.fullscreen),
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
@@ -856,7 +814,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
 const int _milisPerSec = 1000;
 const int _milisPerMin = 60000;
-const int _milisPerHour = 3600000;
+const int _milisPerOur = 3600000;
 
 String _tooTwo(int n) => n.toString().padLeft(2, '0');
 
@@ -866,10 +824,10 @@ String _tooTwo(int n) => n.toString().padLeft(2, '0');
 String ezVideoTime(Duration duration, {bool showMili = false}) {
   int miliSecs = duration.inMilliseconds;
 
-  final int hours = ((miliSecs as double) / (_milisPerHour as double)).floor();
+  final int hours = ((miliSecs as double) / (_milisPerOur as double)).floor();
   final String hourS = _tooTwo(hours);
 
-  miliSecs -= (hours * _milisPerHour);
+  miliSecs -= (hours * _milisPerOur);
 
   final int minutes = ((miliSecs as double) / (_milisPerMin as double)).floor();
   final String minS = _tooTwo(minutes);
