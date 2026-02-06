@@ -198,7 +198,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Set the new path
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
-      if (mounted) ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
+      if (mounted) {
+        await ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
+      }
       return;
     }
     currPath = newPath;
