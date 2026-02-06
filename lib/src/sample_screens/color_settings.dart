@@ -269,7 +269,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
             if (widget.quickHeader != null) ...widget.quickHeader!,
 
             // MonoChrome
-            EzMonoChromeColorsSetting(redraw),
+            EzMonoChromeColorsSetting(redraw, both: widget.updateBoth),
             EzConfig.spacer,
 
             // From image
@@ -318,15 +318,12 @@ class _AdvancedColorSettings extends StatefulWidget {
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   // Define the build data //
 
-  late final List<String> defaultList = widget.defaultList;
-  late final Set<String> defaultSet = defaultList.toSet();
-
   late final List<String> currList = widget.currList;
-  bool modalOpen = false;
+  late final Set<String> defaultSet = widget.defaultList.toSet();
 
   // Define custom Widgets //
 
-  /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
+  /// Returns the color keys the user is tracking
   List<Widget> dynamicColorSettings(String userColorsKey) {
     final List<Widget> toReturn = <Widget>[];
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
@@ -362,7 +359,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
     return toReturn;
   }
 
-  /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
+  /// Returns the color keys the user is NOT tracking
   List<Widget> getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
     final List<String> fullList =
@@ -451,7 +448,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         EzTextIconButton(
           onPressed: () async {
             // Show modal
-            modalOpen = true;
             await ezModal(
               context: context,
               builder: (_) => StatefulBuilder(
@@ -481,7 +477,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                 ),
               ),
             );
-            modalOpen = false;
 
             // Save changes
             await EzConfig.setStringList(userColorsKey, currList);
