@@ -22,7 +22,7 @@
   "csInclude": "Inclure",
   "csEasy": "Facile à changer plus tard",
 
-  "csGenApp": "Lorsque vous générez {app_name} l'actuel ",
+  "csGenApp": "Lorsque vous générez {app_name}, l'actuel ",
   "csTheApp": "l'application",
   "csTheConfig": "la configuration",
   "csSetColors": " (sauf les images) deviendra la configuration par défaut pour {app_name}.\n\nIl est recommandé de définir un schéma de couleurs personnalisé. Si vous avez besoin d'aide pour en construire un, essayez de commencer ",

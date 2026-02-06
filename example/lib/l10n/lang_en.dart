@@ -63,7 +63,7 @@ class LangEn extends Lang {
 
   @override
   String csGenApp(Object app_name) {
-    return 'When you generate $app_name the current ';
+    return 'When you generate $app_name, the current ';
   }
 
   @override
@@ -279,7 +279,7 @@ class LangEnUs extends LangEn {
 
   @override
   String csGenApp(Object app_name) {
-    return 'When you generate $app_name the current ';
+    return 'When you generate $app_name, the current ';
   }
 
   @override

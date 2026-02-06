@@ -204,7 +204,7 @@ abstract class Lang {
   /// No description provided for @csGenApp.
   ///
   /// In en, this message translates to:
-  /// **'When you generate {app_name} the current '**
+  /// **'When you generate {app_name}, the current '**
   String csGenApp(Object app_name);
 
   /// No description provided for @csTheApp.

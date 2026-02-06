@@ -22,7 +22,7 @@
   "csInclude": "Include",
   "csEasy": "Easy to change later",
 
-  "csGenApp": "When you generate {app_name} the current ",
+  "csGenApp": "When you generate {app_name}, the current ",
   "csTheApp": "the app",
   "csTheConfig": "the config",
   "csSetColors": " (except images) will become the default config for {app_name}.\n\nIt is recommended to set a custom color scheme. If you need help building one, try starting ",

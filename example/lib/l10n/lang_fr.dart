@@ -63,7 +63,7 @@ class LangFr extends Lang {
 
   @override
   String csGenApp(Object app_name) {
-    return 'Lorsque vous générez $app_name l\'actuel ';
+    return 'Lorsque vous générez $app_name, l\'actuel ';
   }
 
   @override
