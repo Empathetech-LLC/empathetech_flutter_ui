@@ -858,6 +858,15 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Theme aware alias
   static double get iconSize => _provPoint.text.iconSize;
 
+  /// Theme aware alias
+  static EzNewLine get startLine => _provPoint.text.startLine;
+
+  /// Theme aware alias
+  static EzNewLine get centerLine => _provPoint.text.centerLine;
+
+  /// Theme aware alias
+  static EzNewLine get endLine => _provPoint.text.endLine;
+
   static EzAppCache? get appCache => _provPoint.appCache;
 
   // Setters //
