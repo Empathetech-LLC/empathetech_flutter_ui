@@ -83,7 +83,7 @@ class EzElevatedButton extends StatefulWidget {
 
 class _EzElevatedButtonState extends State<EzElevatedButton> {
   @override
-  Widget build(_) {
+  Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
     final Color decorationColor = widget.decorationColor ??

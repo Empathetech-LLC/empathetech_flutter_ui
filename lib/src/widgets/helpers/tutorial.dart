@@ -46,45 +46,41 @@ class EzTutorial extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Return the build //
+  Widget build(BuildContext context) => Positioned(
+        top: top,
+        bottom: bottom,
+        left: left,
+        right: right,
+        child: SelectionArea(
+          child: AlertDialog(
+            // Title
+            title: Text(title, textAlign: TextAlign.center),
+            titlePadding: EdgeInsets.symmetric(
+              horizontal: EzConfig.marginVal,
+              vertical: EzConfig.spacing / 2,
+            ),
 
-    return Positioned(
-      top: top,
-      bottom: bottom,
-      left: left,
-      right: right,
-      child: SelectionArea(
-        child: AlertDialog(
-          // Title
-          title: Text(title, textAlign: TextAlign.center),
-          titlePadding: EdgeInsets.symmetric(
-            horizontal: EzConfig.marginVal,
-            vertical: EzConfig.spacing / 2,
+            // Content
+            content: Text(content, textAlign: TextAlign.center),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: EzConfig.marginVal,
+              vertical: EzConfig.spacing / 2,
+            ),
+
+            // Actions
+            actions: <Widget>[
+              EzMaterialAction(text: acceptMessage, onPressed: onAccept)
+            ],
+            actionsAlignment: EzConfig.isLefty
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.end,
+
+            // General
+            iconPadding: EdgeInsets.zero,
+            buttonPadding: EdgeInsets.zero,
+            insetPadding: EdgeInsets.all(EzConfig.marginVal),
+            actionsPadding: EzInsets.wrap(EzConfig.spacing),
           ),
-
-          // Content
-          content: Text(content, textAlign: TextAlign.center),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: EzConfig.marginVal,
-            vertical: EzConfig.spacing / 2,
-          ),
-
-          // Actions
-          actions: <Widget>[
-            EzMaterialAction(text: acceptMessage, onPressed: onAccept)
-          ],
-          actionsAlignment: EzConfig.isLefty
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.end,
-
-          // General
-          iconPadding: EdgeInsets.zero,
-          buttonPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.all(EzConfig.marginVal),
-          actionsPadding: EzInsets.wrap(EzConfig.spacing),
         ),
-      ),
-    );
-  }
+      );
 }

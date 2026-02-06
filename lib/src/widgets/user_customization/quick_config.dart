@@ -721,7 +721,7 @@ class EzNebulaConfig extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: darkSurfaceContainer,
-        borderRadius: ezPillShape,
+        borderRadius: ezPillEdge,
       ),
       child: EzElevatedButton(
         style: ElevatedButton.styleFrom(

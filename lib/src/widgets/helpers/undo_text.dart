@@ -16,11 +16,15 @@ Widget ezRichUndoWarning(
   String? androidPackage,
   Set<String>? skip,
 }) {
-  final TextStyle? style = EzConfig.styles.bodyLarge;
-
   final EzRichText text = EzRichText(
     <InlineSpan>[
-      EzPlainText(text: EzConfig.l10n.gUndoWarn1, style: style),
+      // Cannot be undone
+      EzPlainText(
+        text: EzConfig.l10n.gUndoWarn1,
+        style: EzConfig.styles.bodyLarge,
+      ),
+
+      // Save link
       EzInlineLink(
         EzConfig.l10n.gSave,
         onTap: () => EzConfig.saveConfig(
@@ -30,13 +34,18 @@ Widget ezRichUndoWarning(
           skip: skip,
         ),
         hint: EzConfig.l10n.gSaveHint,
-        style: style,
+        style: EzConfig.styles.bodyLarge,
         textAlign: TextAlign.center,
       ),
-      EzPlainText(text: EzConfig.l10n.gUndoWarn2, style: style),
+
+      // Can restore manually
+      EzPlainText(
+        text: EzConfig.l10n.gUndoWarn2,
+        style: EzConfig.styles.bodyLarge,
+      ),
     ],
     textBackground: false,
-    style: style,
+    style: EzConfig.styles.bodyLarge,
     textAlign: TextAlign.center,
   );
 
@@ -45,7 +54,7 @@ Widget ezRichUndoWarning(
           width: ezTextSize(
             EzConfig.l10n.gSave + EzConfig.l10n.gUndoWarn2,
             context: context,
-            style: style,
+            style: EzConfig.styles.bodyLarge,
           ).width,
           child: text,
         )

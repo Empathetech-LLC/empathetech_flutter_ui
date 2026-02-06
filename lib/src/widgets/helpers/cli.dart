@@ -49,42 +49,41 @@ class _EzCLIState extends State<EzCLI> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Title
-        EzText(
-          'CLI',
-          style: EzConfig.styles.titleLarge,
-          textAlign: TextAlign.center,
-        ),
-
-        // Field
-        ConstrainedBox(
-          constraints: ezTextFieldConstraints(context),
-          child: TextFormField(
-            controller: cmdController,
-            textAlign: TextAlign.start,
-            maxLines: 1,
-            decoration: const InputDecoration(hintText: 'echo "Hello, World!"'),
-            onFieldSubmitted: (String value) async {
-              await ezCmd(
-                value,
-                dir: widget.dir,
-                onSuccess: widget.onSuccess,
-                onFailure: widget.onFailure,
-                onError: widget.onError,
-                debug: widget.debug,
-                readout: widget.readout,
-              );
-              cmdController.clear();
-            },
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Title
+          EzText(
+            'CLI',
+            style: EzConfig.styles.titleLarge,
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
-    );
-  }
+
+          // Field
+          ConstrainedBox(
+            constraints: ezTextFieldConstraints(context),
+            child: TextFormField(
+              controller: cmdController,
+              textAlign: TextAlign.start,
+              maxLines: 1,
+              decoration:
+                  const InputDecoration(hintText: 'echo "Hello, World!"'),
+              onFieldSubmitted: (String value) async {
+                await ezCmd(
+                  value,
+                  dir: widget.dir,
+                  onSuccess: widget.onSuccess,
+                  onFailure: widget.onFailure,
+                  onError: widget.onError,
+                  debug: widget.debug,
+                  readout: widget.readout,
+                );
+                cmdController.clear();
+              },
+            ),
+          ),
+        ],
+      );
 
   @override
   void dispose() {
