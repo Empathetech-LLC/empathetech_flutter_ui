@@ -535,7 +535,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String dsReset(Object themeType) {
-    return 'Reset $themeType design settings?';
+    return 'Reset $themeType design?';
   }
 
   @override
@@ -1191,7 +1191,7 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String dsReset(Object themeType) {
-    return 'Reset $themeType design settings?';
+    return 'Reset $themeType design?';
   }
 
   @override

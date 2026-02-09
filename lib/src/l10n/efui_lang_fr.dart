@@ -539,7 +539,7 @@ class EFUILangFr extends EFUILang {
 
   @override
   String dsReset(Object themeType) {
-    return 'Réinitialiser les paramètres de conception du thème $themeType ?';
+    return 'Réinitialiser le désign de $themeType ?';
   }
 
   @override

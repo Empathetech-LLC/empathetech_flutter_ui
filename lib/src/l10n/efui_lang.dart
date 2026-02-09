@@ -1092,7 +1092,7 @@ abstract class EFUILang {
   /// No description provided for @dsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset {themeType} design settings?'**
+  /// **'Reset {themeType} design?'**
   String dsReset(Object themeType);
 
   /// No description provided for @lsPageTitle.

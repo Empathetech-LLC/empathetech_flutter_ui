@@ -216,7 +216,7 @@
   "dsRotateLeft": "Tourner à gauche",
   "dsRotateRight": "Tourner à droite",
 
-  "dsReset": "Réinitialiser les paramètres de conception du thème {themeType} ?",
+  "dsReset": "Réinitialiser le désign de {themeType} ?",
 
 
 

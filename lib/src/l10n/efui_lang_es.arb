@@ -216,7 +216,7 @@
   "dsRotateLeft": "Girar a la izquierda",
   "dsRotateRight": "Girar a la derecha",
 
-  "dsReset": "¿Restablecer las configuraciones de diseño de {themeType}?",
+  "dsReset": "¿Restablecer el diseño de {themeType}?",
 
 
 
