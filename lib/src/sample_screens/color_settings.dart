@@ -139,7 +139,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         .toLowerCase();
 
     final String resetString = (widget.updateBoth
-            ? EzConfig.l10n.gBothThemes
+            ? "${EzConfig.l10n.gBothThemes}'"
             : EzConfig.isDark
                 ? EzConfig.l10n.gDarkTheme
                 : EzConfig.l10n.gLightTheme)

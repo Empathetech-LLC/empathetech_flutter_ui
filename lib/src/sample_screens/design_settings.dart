@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class EzDesignSettings extends StatefulWidget {
+  /// When true, updates both dark and light theme settings simultaneously
+  final bool updateBoth;
+
   /// If provided, the "Editing: X theme" text will be a link with this callback
   final void Function()? themeLink;
 
@@ -72,6 +75,7 @@ class EzDesignSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
+    this.updateBoth = false,
     this.themeLink,
     this.beforeDesign,
     this.includeAnimation = true,
@@ -114,9 +118,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final String themeProfile = EzConfig.isDark
-        ? EzConfig.l10n.gDark.toLowerCase()
-        : EzConfig.l10n.gLight.toLowerCase();
+    final String themeString = (widget.updateBoth
+            ? EzConfig.l10n.gBothThemes
+            : EzConfig.isDark
+                ? EzConfig.l10n.gDarkTheme
+                : EzConfig.l10n.gLightTheme)
+        .toLowerCase();
 
     // Return the build //
 
@@ -124,14 +131,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       children: <Widget>[
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n.gEditingTheme(themeProfile),
+                EzConfig.l10n.gEditing + themeString,
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
-                EzConfig.l10n.gEditingTheme(themeProfile),
+                EzConfig.l10n.gEditing + themeString,
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -438,7 +445,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         widget.resetSpacer,
         EzResetButton(
           widget.onRedraw,
-          dialogTitle: EzConfig.l10n.dsResetAll(themeProfile),
+          dialogTitle: EzConfig.l10n
+              .dsReset(widget.updateBoth ? "$themeString'" : themeString),
           onConfirm: () async {
             if (EzConfig.isDark) {
               await EzConfig.removeKeys(<String>{
