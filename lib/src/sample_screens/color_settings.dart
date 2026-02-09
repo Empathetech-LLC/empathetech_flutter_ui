@@ -131,9 +131,11 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     List<String> currList =
         EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
-    final String resetString = (widget.updateBoth
-            ? EzConfig.l10n.gBoth
-            : (EzConfig.isDark ? EzConfig.l10n.gDark : EzConfig.l10n.gLight))
+    final String themeString = (widget.updateBoth
+            ? EzConfig.l10n.gBothThemes
+            : EzConfig.isDark
+                ? EzConfig.l10n.gDarkTheme
+                : EzConfig.l10n.gLightTheme)
         .toLowerCase();
 
     // Return the build //
@@ -143,15 +145,14 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Current theme reminder
         (widget.themeLink != null)
             ? EzLink(
-                EzConfig.l10n.gEditingTheme(
-                    resetString), // TODO: efficient plural and better fab dialog
+                EzConfig.l10n.gEditing + themeString,
                 onTap: widget.themeLink,
                 hint: EzConfig.l10n.gEditingThemeHint,
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               )
             : EzText(
-                EzConfig.l10n.gEditingTheme(resetString),
+                EzConfig.l10n.gEditing + themeString,
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -206,7 +207,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           () => setState(() => currList = List<String>.from(defaultList)),
           androidPackage: widget.androidPackage,
           appName: widget.appName,
-          dialogTitle: EzConfig.l10n.csResetAll(resetString),
+          dialogTitle: EzConfig.l10n.csReset(themeString),
           resetBoth: widget.updateBoth,
           resetSkip: widget.resetSkip,
           onConfirm: () async {
