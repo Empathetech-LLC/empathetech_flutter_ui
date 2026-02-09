@@ -534,8 +534,8 @@ class EFUILangEn extends EFUILang {
   String get dsRotateRight => 'Rotate right';
 
   @override
-  String dsResetAll(Object themeType) {
-    return 'Reset all global and $themeType theme design settings?';
+  String dsReset(Object themeType) {
+    return 'Reset $themeType design settings?';
   }
 
   @override
@@ -1190,8 +1190,8 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsRotateRight => 'Rotate right';
 
   @override
-  String dsResetAll(Object themeType) {
-    return 'Reset all global and $themeType theme design settings?';
+  String dsReset(Object themeType) {
+    return 'Reset $themeType design settings?';
   }
 
   @override

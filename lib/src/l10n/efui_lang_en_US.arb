@@ -216,7 +216,7 @@
   "dsRotateLeft": "Rotate left",
   "dsRotateRight": "Rotate right",
 
-  "dsResetAll": "Reset all global and {themeType} theme design settings?",
+  "dsReset": "Reset {themeType} design settings?",
 
 
 

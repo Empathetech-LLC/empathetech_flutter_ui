@@ -25,11 +25,11 @@ Future<void> testResetButton(
       break;
     case RBType.color:
       await ezFindText(
-          tester, EzConfig.l10n.csResetAll(EzConfig.l10n.gDark.toLowerCase()));
+          tester, EzConfig.l10n.csReset(EzConfig.l10n.gDark.toLowerCase()));
       break;
     case RBType.design:
       await ezFindText(
-          tester, EzConfig.l10n.dsResetAll(EzConfig.l10n.gDark.toLowerCase()));
+          tester, EzConfig.l10n.dsReset(EzConfig.l10n.gDark.toLowerCase()));
       break;
     case RBType.layout:
       await ezFindText(tester, EzConfig.l10n.lsResetAll);

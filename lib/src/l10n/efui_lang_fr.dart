@@ -538,8 +538,8 @@ class EFUILangFr extends EFUILang {
   String get dsRotateRight => 'Tourner à droite';
 
   @override
-  String dsResetAll(Object themeType) {
-    return 'Réinitialiser tous les paramètres de conception globaux et du thème $themeType ?';
+  String dsReset(Object themeType) {
+    return 'Réinitialiser les paramètres de conception du thème $themeType ?';
   }
 
   @override

@@ -1089,11 +1089,11 @@ abstract class EFUILang {
   /// **'Rotate right'**
   String get dsRotateRight;
 
-  /// No description provided for @dsResetAll.
+  /// No description provided for @dsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all global and {themeType} theme design settings?'**
-  String dsResetAll(Object themeType);
+  /// **'Reset {themeType} design settings?'**
+  String dsReset(Object themeType);
 
   /// No description provided for @lsPageTitle.
   ///
