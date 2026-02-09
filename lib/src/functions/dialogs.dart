@@ -78,13 +78,13 @@ Future<dynamic> ezColorPicker(
           confirmMsg: confirmMsg ?? EzConfig.l10n.gApply,
           onConfirm: () {
             onConfirm();
-            Navigator.of(dContext).pop();
+            if (dContext.mounted) Navigator.of(dContext).pop();
           },
           confirmIsDestructive: true,
           denyMsg: denyMsg ?? EzConfig.l10n.gCancel,
           onDeny: () {
             onDeny();
-            Navigator.of(dContext).pop();
+            if (dContext.mounted) Navigator.of(dContext).pop();
           },
         ),
         needsClose: false,

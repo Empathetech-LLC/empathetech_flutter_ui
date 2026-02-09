@@ -148,7 +148,6 @@ class EzResetButton extends StatelessWidget {
                     justDraw
                         ? await EzConfig.redrawUI(onComplete)
                         : await EzConfig.rebuildUI(onComplete);
-                    if (dContext.mounted) Navigator.of(dContext).pop();
                   },
                   confirmIsDestructive: true,
                   onDeny: () {
@@ -157,7 +156,7 @@ class EzResetButton extends StatelessWidget {
                     } else {
                       onDeny!.call();
                     }
-                    Navigator.of(dContext).pop();
+                    if (dContext.mounted) Navigator.of(dContext).pop();
                   },
                 ),
                 needsClose: false,

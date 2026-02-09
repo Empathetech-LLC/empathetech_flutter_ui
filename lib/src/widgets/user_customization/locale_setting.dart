@@ -157,9 +157,6 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                               );
 
                               // Refresh the UI
-                              if (mContext.mounted) {
-                                Navigator.of(mContext).pop();
-                              }
                               await EzConfig.rebuildLocale(widget.onComplete);
                             },
                             icon: flag(

@@ -111,10 +111,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             confirmMsg: EzConfig.l10n.csUseCustom,
             onConfirm: () async {
               final dynamic chosen = await openColorPicker(context);
-
-              if (dContext.mounted) {
-                Navigator.of(dContext).pop(chosen);
-              }
+              if (dContext.mounted) Navigator.of(dContext).pop(chosen);
             },
             confirmIsDestructive: true,
             denyMsg: EzConfig.l10n.gYes,
@@ -123,10 +120,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               // Update the user's configKey
               currColor = Color(recommended);
               await EzConfig.setInt(widget.configKey, recommended);
-
-              if (dContext.mounted) {
-                Navigator.of(dContext).pop(recommended);
-              }
+              if (dContext.mounted) Navigator.of(dContext).pop(recommended);
             },
           ),
         ),

@@ -60,10 +60,7 @@ class EzQuickConfig extends StatelessWidget {
 
           return StatefulBuilder(
             builder: (_, StateSetter setModal) {
-              Future<void> cleanRebuild() async {
-                await EzConfig.rebuildUI(onComplete);
-                if (mContext.mounted) Navigator.of(mContext).pop();
-              }
+              Future<void> cleanRebuild() => EzConfig.rebuildUI(onComplete);
 
               return EzScrollView(
                 mainAxisSize: MainAxisSize.min,

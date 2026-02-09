@@ -70,7 +70,6 @@ class EzConfigRandomizer extends StatelessWidget {
               onConfirm: () async {
                 await EzConfig.randomize();
                 await EzConfig.rebuildUI(onComplete);
-                if (dContext.mounted) Navigator.of(dContext).pop();
               },
               confirmIsDestructive: true,
               onDeny: () => Navigator.of(dContext).pop(),
