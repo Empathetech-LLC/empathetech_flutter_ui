@@ -445,8 +445,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         widget.resetSpacer,
         EzResetButton(
           widget.onRedraw,
-          dialogTitle: EzConfig.l10n
-              .dsReset(widget.updateBoth ? "$themeString'" : themeString),
+          dialogTitle: EzConfig.l10n.dsReset(widget.updateBoth &&
+                  EzConfig.locale.languageCode == english.languageCode
+              ? "$themeString'"
+              : themeString),
           onConfirm: () async {
             if (EzConfig.isDark) {
               await EzConfig.removeKeys(<String>{
