@@ -36,6 +36,7 @@ const Map<String, AssetImage> efuiImageLookup = <String, AssetImage>{
 
 /// A *required* [NavigatorState] key for your router config
 /// UI redraws/rebuilds assume it is present
+/// If you're migrating your existing app to EFUI, please find and replace any current navigator state key with this one
 final GlobalKey<NavigatorState> ezRootNav = GlobalKey<NavigatorState>();
 
 /// /
