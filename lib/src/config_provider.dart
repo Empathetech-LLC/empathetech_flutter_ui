@@ -247,6 +247,7 @@ class EzConfigProvider extends ChangeNotifier {
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
   Future<void> redrawUI(void Function() onComplete) async {
+    ezCloseAll();
     _seed = Random().nextInt(rMax);
     if (_appCache != null) await _appCache.rebuild();
     notifyListeners();
