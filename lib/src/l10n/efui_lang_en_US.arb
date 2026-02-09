@@ -172,7 +172,7 @@
   "csFromImage": "A color scheme will be generated from the image.",
   "csColorScheme": "color scheme",
 
-  "csReset": "Reset {themeType}' colors?",
+  "csReset": "Reset {themeType} colors?",
 
 
 
@@ -216,7 +216,7 @@
   "dsRotateLeft": "Rotate left",
   "dsRotateRight": "Rotate right",
 
-  "dsReset": "Reset {themeType}' design settings?",
+  "dsReset": "Reset {themeType} design settings?",
 
 
 
