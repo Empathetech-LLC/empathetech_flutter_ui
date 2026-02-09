@@ -888,7 +888,7 @@ abstract class EFUILang {
   /// No description provided for @csReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset {themeType} colors?'**
+  /// **'Reset {themeType}\' colors?'**
   String csReset(Object themeType);
 
   /// No description provided for @dsPageTitle.
@@ -1092,7 +1092,7 @@ abstract class EFUILang {
   /// No description provided for @dsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset {themeType} design settings?'**
+  /// **'Reset {themeType}\' design settings?'**
   String dsReset(Object themeType);
 
   /// No description provided for @lsPageTitle.

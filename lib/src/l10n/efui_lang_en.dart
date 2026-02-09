@@ -428,7 +428,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String csReset(Object themeType) {
-    return 'Reset $themeType colors?';
+    return 'Reset $themeType\' colors?';
   }
 
   @override
@@ -535,7 +535,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String dsReset(Object themeType) {
-    return 'Reset $themeType design settings?';
+    return 'Reset $themeType\' design settings?';
   }
 
   @override
@@ -1084,7 +1084,7 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String csReset(Object themeType) {
-    return 'Reset $themeType colors?';
+    return 'Reset $themeType\' colors?';
   }
 
   @override
@@ -1191,7 +1191,7 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String dsReset(Object themeType) {
-    return 'Reset $themeType design settings?';
+    return 'Reset $themeType\' design settings?';
   }
 
   @override
