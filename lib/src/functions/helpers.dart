@@ -119,6 +119,20 @@ Future<void> ezConfigLoader(BuildContext context) async {
   }
 }
 
+/// Meant to be paired with [EzConfig.rebuildUI]s onComplete callback
+/// Close any open modals or dialogs, [then] evaluate the 'local' onComplete
+void ezCloseAll(void Function() then) {
+  final NavigatorState? state = ezRootNav.currentState;
+  if (state == null) return;
+
+  // Check if we can pop to avoid errors
+  if (state.canPop()) {
+    state.popUntil((Route<dynamic> route) => route is PageRoute<dynamic>);
+  }
+
+  then();
+}
+
 /// Returns an appropriate width for a [DropdownMenu]
 double ezDropdownWidth({
   required BuildContext context,
