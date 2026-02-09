@@ -28,11 +28,11 @@ And, here are some (unaffiliated) videos you might find helpful.
 
 ### <br>Integrating EFUI with existing projects 
 
-Is no longer recommended. Since 11.0.0, EFUI enables live configuration. Every aspect of an app's theme can be updated on the fly, no restarts required.<br>It's pretty darn efficient too.
+No longer has a formal guide. Since 11.0.0, EFUI enables live configuration. Every aspect of an app's theme can be updated on the fly, no restarts required.<br>It's pretty darn efficient too.
 
 However, there is a significant amount of setup/initialization code required to get it working.<br>EFUI consumers have nothing to worry about: there's very little to do to get yourself 11.0.0 ready.<br>However, the setup is no longer optional.
 
-To accommodate the reduced wiggle room, 11.0.0 also reduced the number of external dependencies.<br>EFUI is as vanilla Flutter as possible. After you get your starter kit from Open UI, it should be happy hacking.
+To accommodate the reduced wiggle room, 11.0.0 also reduced the number of external dependencies.<br>EFUI is as vanilla Flutter as possible. After you get your starter kit from Open UI, it should be happy hacking. Whether you're starting something new, or putting on some background noise and getting ready for a copy/paste session.
 
 # <br>Contributing
 ## Vibes

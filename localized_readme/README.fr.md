@@ -30,11 +30,11 @@ Et voici quelques vidéos (non affiliées) que vous pourriez trouver utiles.
 
 ### <br>Intégration d'EFUI avec des projets existants 
 
-N'est plus recommandée. Depuis la version 11.0.0, EFUI permet la configuration en direct (live configuration). Chaque aspect du thème d'une application peut être mis à jour à la volée, sans redémarrage nécessaire.<br>C'est aussi sacrément efficace.
+Il n'y a plus de guide formel. Depuis la version 11.0.0, EFUI permet une configuration en direct. Chaque aspect du thème d'une application peut être mis à jour à la volée, sans redémarrage requis.
 
 Cependant, une quantité importante de code de configuration/initialisation est requise pour le faire fonctionner.<br>Les utilisateurs d'EFUI n'ont rien à craindre : il y a très peu à faire pour se préparer à la version 11.0.0.<br>Toutefois, la configuration n'est plus optionnelle.
 
-Pour s'adapter à la marge de manœuvre réduite, la version 11.0.0 a également réduit le nombre de dépendances externes.<br>EFUI est aussi proche du Flutter "vanilla" que possible. Une fois que vous avez récupéré votre kit de démarrage via Open UI, il ne vous reste plus qu'à coder joyeusement (happy hacking).
+Pour s'adapter à la marge de manœuvre réduite, la version 11.0.0 a également réduit le nombre de dépendances externes.<br>EFUI est aussi proche du Flutter "vanilla" que possible. Une fois que vous avez récupéré votre kit de démarrage via Open UI, il ne vous reste plus qu'à coder joyeusement (happy hacking). Que vous commenciez quelque chose de nouveau ou que vous mettiez un peu de musique d'ambiance et que vous vous prépariez pour une session de copier-coller.
 
 # <br>Contribution
 ## Vibes

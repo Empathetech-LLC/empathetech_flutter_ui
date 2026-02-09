@@ -30,11 +30,11 @@ Y aquí hay algunos videos (no afiliados) que podrías encontrar útiles.
 
 ### <br>Integración de EFUI con proyectos existentes
 
-Ya no se recomienda. Desde la versión 11.0.0, EFUI habilita la configuración en tiempo real. Cada aspecto del tema de una aplicación se puede actualizar sobre la marcha, sin necesidad de reiniciar.<br>También es bastante eficiente.
+Ya no cuenta con una guía formal. Desde la versión 11.0.0, EFUI permite la configuración en vivo. Cada aspecto del tema de una aplicación se puede actualizar sobre la marcha, sin necesidad de reiniciar.
 
 Sin embargo, se requiere una cantidad significativa de código de configuración/inicialización para que funcione.<br>Los consumidores de EFUI no tienen nada de qué preocuparse: hay muy poco que hacer para estar listo para la versión 11.0.0.<br>Sin embargo, la configuración ya no es opcional.
 
-Para acomodar el margen de maniobra reducido, la versión 11.0.0 también redujo la cantidad de dependencias externas.<br>EFUI es tan "vanilla Flutter" (Flutter puro) como es posible. Después de obtener tu kit de inicio de Open UI, debería ser todo programar y disfrutar.
+Para acomodar el margen de maniobra reducido, la versión 11.0.0 también redujo la cantidad de dependencias externas.<br>EFUI es tan "vanilla Flutter" (Flutter puro) como es posible. Después de obtener tu kit de inicio de Open UI, debería ser todo programar y disfrutar. Ya sea que estés empezando algo nuevo o que simplemente quieras poner algo de música de fondo y prepararte para una sesión de copiar y pegar.
 
 # <br>Contribuir
 ## Vibras
