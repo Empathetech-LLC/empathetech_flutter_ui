@@ -899,5 +899,6 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Trigger [redrawUI] if/when the [ThemeMode] brightness changes
   /// Used in [EzConfigurableApp], not normally called manually
+  /// For that reason, there is no passthrough for [redrawUI]
   static Future<void> redrawTheme() => _provPoint.redrawTheme();
 }
