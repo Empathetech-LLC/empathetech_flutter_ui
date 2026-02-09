@@ -9,8 +9,15 @@ import '../../widgets/export.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class DesignSettingsScreen extends StatelessWidget {
+class DesignSettingsScreen extends StatefulWidget {
   DesignSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
+
+  @override
+  State<DesignSettingsScreen> createState() => _DesignSettingsScreenState();
+}
+
+class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
+  bool updateBoth = false;
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
@@ -23,10 +30,9 @@ class DesignSettingsScreen extends StatelessWidget {
         showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
-          EzConfigFAB(
-            context,
-            appName: appName,
-            androidPackage: androidPackage,
+          EzSettingsDupeFAB(
+            updateBoth,
+            () => setState(() => updateBoth = !updateBoth),
           ),
         ],
       );
