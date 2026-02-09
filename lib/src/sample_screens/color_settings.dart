@@ -315,19 +315,15 @@ class _AdvancedColorSettings extends StatefulWidget {
 }
 
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
-  // Define the build data //
-
-  late final List<String> currList = widget.currList;
-  late final Set<String> defaultSet = widget.defaultList.toSet();
-
   // Define custom Widgets //
 
   /// Returns the color keys the user is tracking
   List<Widget> dynamicColorSettings(String userColorsKey) {
-    final List<Widget> toReturn = <Widget>[];
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
+    final List<Widget> toReturn = <Widget>[];
 
-    for (final String key in currList) {
+    final Set<String> defaultSet = widget.defaultList.toSet();
+    for (final String key in widget.currList) {
       if (defaultSet.contains(key)) {
         // Non-removable buttons
         toReturn.add(
@@ -345,8 +341,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               key: ValueKey<String>(key),
               configKey: key,
               onRemove: () async {
-                currList.remove(key);
-                await EzConfig.setStringList(userColorsKey, currList);
+                widget.currList.remove(key);
+                await EzConfig.setStringList(userColorsKey, widget.currList);
                 setState(() {});
               },
             )),
@@ -360,7 +356,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   /// Returns the color keys the user is NOT tracking
   List<Widget> getUntrackedColors(StateSetter setModalState) {
-    final Set<String> currSet = currList.toSet();
+    final Set<String> currSet = widget.currList.toSet();
     final List<String> fullList =
         EzConfig.isDark ? darkColorOrder : lightColorOrder;
 
@@ -379,14 +375,14 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           onPressed: () {
             final int newColorIndex = fullList.indexOf(configKey);
 
-            int insertAt = currList.length;
-            for (int i = 0; i < currList.length; i++) {
-              if (fullList.indexOf(currList[i]) > newColorIndex) {
+            int insertAt = widget.currList.length;
+            for (int i = 0; i < widget.currList.length; i++) {
+              if (fullList.indexOf(widget.currList[i]) > newColorIndex) {
                 insertAt = i;
                 break;
               }
             }
-            currList.insert(insertAt, configKey);
+            widget.currList.insert(insertAt, configKey);
 
             setState(() {});
             setModalState(() {});
@@ -478,7 +474,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             );
 
             // Save changes
-            await EzConfig.setStringList(userColorsKey, currList);
+            await EzConfig.setStringList(userColorsKey, widget.currList);
           },
           style:
               TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.marginVal)),
