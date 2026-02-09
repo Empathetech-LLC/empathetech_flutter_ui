@@ -93,15 +93,16 @@ class EFUILangEs extends EFUILang {
   String get gSystem => 'Sistema';
 
   @override
-  String get gBoth => 'Ambos';
+  String get gDarkTheme => 'Tema oscuro';
+
+  @override
+  String get gLightTheme => 'Tema claro';
+
+  @override
+  String get gBothThemes => 'Ambos temas';
 
   @override
   String get gEditing => 'Editando: ';
-
-  @override
-  String gEditingTheme(Object themeType) {
-    return 'Editando: tema $themeType';
-  }
 
   @override
   String get gEditingThemeHint => 'Abrir la configuración del tema del sistema';
@@ -429,8 +430,8 @@ class EFUILangEs extends EFUILang {
   String get csColorScheme => 'esquema de color';
 
   @override
-  String csResetAll(Object themeType) {
-    return 'Restablecer todos los esquemas de colores de $themeType?';
+  String csReset(Object themeType) {
+    return 'Restablecer los colores de $themeType?';
   }
 
   @override

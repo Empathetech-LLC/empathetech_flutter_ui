@@ -93,15 +93,16 @@ class EFUILangEn extends EFUILang {
   String get gSystem => 'System';
 
   @override
-  String get gBoth => 'Both';
+  String get gDarkTheme => 'Dark theme';
+
+  @override
+  String get gLightTheme => 'Light theme';
+
+  @override
+  String get gBothThemes => 'Both themes';
 
   @override
   String get gEditing => 'Editing: ';
-
-  @override
-  String gEditingTheme(Object themeType) {
-    return 'Editing: $themeType theme';
-  }
 
   @override
   String get gEditingThemeHint => 'Open the system theme settings';
@@ -426,8 +427,8 @@ class EFUILangEn extends EFUILang {
   String get csColorScheme => 'color scheme';
 
   @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
+  String csReset(Object themeType) {
+    return 'Reset $themeType colors?';
   }
 
   @override
@@ -748,15 +749,16 @@ class EFUILangEnUs extends EFUILangEn {
   String get gSystem => 'System';
 
   @override
-  String get gBoth => 'Both';
+  String get gDarkTheme => 'Dark theme';
+
+  @override
+  String get gLightTheme => 'Light theme';
+
+  @override
+  String get gBothThemes => 'Both themes';
 
   @override
   String get gEditing => 'Editing: ';
-
-  @override
-  String gEditingTheme(Object themeType) {
-    return 'Editing: $themeType theme';
-  }
 
   @override
   String get gEditingThemeHint => 'Open the system theme settings';
@@ -1081,8 +1083,8 @@ class EFUILangEnUs extends EFUILangEn {
   String get csColorScheme => 'color scheme';
 
   @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
+  String csReset(Object themeType) {
+    return 'Reset $themeType colors?';
   }
 
   @override

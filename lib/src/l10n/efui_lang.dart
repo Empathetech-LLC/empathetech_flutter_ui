@@ -267,23 +267,29 @@ abstract class EFUILang {
   /// **'System'**
   String get gSystem;
 
-  /// No description provided for @gBoth.
+  /// No description provided for @gDarkTheme.
   ///
   /// In en, this message translates to:
-  /// **'Both'**
-  String get gBoth;
+  /// **'Dark theme'**
+  String get gDarkTheme;
+
+  /// No description provided for @gLightTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light theme'**
+  String get gLightTheme;
+
+  /// No description provided for @gBothThemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Both themes'**
+  String get gBothThemes;
 
   /// No description provided for @gEditing.
   ///
   /// In en, this message translates to:
   /// **'Editing: '**
   String get gEditing;
-
-  /// No description provided for @gEditingTheme.
-  ///
-  /// In en, this message translates to:
-  /// **'Editing: {themeType} theme'**
-  String gEditingTheme(Object themeType);
 
   /// No description provided for @gEditingThemeHint.
   ///
@@ -879,11 +885,11 @@ abstract class EFUILang {
   /// **'color scheme'**
   String get csColorScheme;
 
-  /// No description provided for @csResetAll.
+  /// No description provided for @csReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
+  /// **'Reset {themeType} colors?'**
+  String csReset(Object themeType);
 
   /// No description provided for @dsPageTitle.
   ///

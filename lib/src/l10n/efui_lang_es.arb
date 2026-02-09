@@ -34,10 +34,12 @@
   "gDark": "Oscuro",
   "gLight": "Claro",
   "gSystem": "Sistema",
-  "gBoth": "Ambos",
+
+  "gDarkTheme": "Tema oscuro",
+  "gLightTheme": "Tema claro",
+  "gBothThemes": "Ambos temas",
 
   "gEditing": "Editando: ",
-  "gEditingTheme": "Editando: tema {themeType}",
   "gEditingThemeHint": "Abrir la configuración del tema del sistema",
 
   "gLeft": "Izquierda",
@@ -170,7 +172,7 @@
   "csFromImage": "Se generará un esquema de color a partir de la imagen.",
   "csColorScheme": "esquema de color",
 
-  "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
+  "csReset": "Restablecer los colores de {themeType}?",
 
 
 
