@@ -34,6 +34,10 @@ const Map<String, AssetImage> efuiImageLookup = <String, AssetImage>{
 
 //* BTS *//
 
+/// A *required* [NavigatorState] key for your router config
+/// UI redraws/rebuilds assume it is present
+final GlobalKey<NavigatorState> ezRootNav = GlobalKey<NavigatorState>();
+
 /// /
 const String homePath = '/';
 

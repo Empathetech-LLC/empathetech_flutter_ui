@@ -538,6 +538,7 @@ class $classCaseAppName extends StatelessWidget {
       el10n: storedEFUILang,
       appCache: ${classCaseAppName}Cache(storedLocale, storedLang),""" : ''}appName: appName,
       routerConfig: GoRouter(
+        navigatorKey: ezRootNav,
         initialLocation: homePath,
         errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
         routes: <RouteBase>[
