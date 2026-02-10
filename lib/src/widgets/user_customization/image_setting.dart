@@ -126,7 +126,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// First-layer [ElevatedButton.onPressed]
   /// Opens an options modal and updates the state accordingly
-  Future<void> activateSetting() async {
+  Future<bool> activateSetting() async {
     // Get an image (path) from the user
     String? newPath = await ezModal<String?>(
       context: context,
@@ -139,7 +139,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     );
 
     // Check for exit/cancel
-    if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+    if (newPath == null || newPath.isEmpty || newPath == noImageValue) {
+      return false;
+    }
 
     // Check if a color was chosen
     final bool isInt = (int.tryParse(newPath) != null);
@@ -182,17 +184,19 @@ class _ImageSettingState extends State<EzImageSetting> {
             selectedFit = BoxFit.contain;
             break;
           default:
-            return;
+            return false;
         }
       }
       // Re-check exit/cancel
-      if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+      if (newPath == null || newPath.isEmpty || newPath == noImageValue) {
+        return false;
+      }
     }
 
     // Choose fit (when applicable)
     if (!isInt && widget.showFitOption) {
       final bool canceled = (await chooseFit(newPath) == null);
-      if (canceled) return;
+      if (canceled) return false;
     }
 
     // Set the new path
@@ -201,7 +205,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (mounted) {
         await ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
       }
-      return;
+      return false;
     }
     currPath = newPath;
 
@@ -261,6 +265,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
       }
     }
+    return true;
   }
 
   /// Build the list of [ImageSource] options
@@ -756,17 +761,14 @@ class _ImageSettingState extends State<EzImageSetting> {
               inProgress = true;
               fromLocal = false;
             });
-            await activateSetting();
+            final bool changed = await activateSetting();
 
-            updateTheme
-                ? await EzConfig.rebuildUI(() {
-                    widget.onComplete();
-                    setState(() => inProgress = false);
-                  })
-                : await EzConfig.redrawUI(() {
-                    widget.onComplete();
-                    setState(() => inProgress = false);
-                  });
+            if (changed) {
+              updateTheme
+                  ? await EzConfig.rebuildUI(widget.onComplete)
+                  : await EzConfig.redrawUI(widget.onComplete);
+            }
+            setState(() => inProgress = false);
           },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
