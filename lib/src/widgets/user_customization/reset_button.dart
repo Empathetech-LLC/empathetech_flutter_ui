@@ -15,6 +15,7 @@ class EzResetButton extends StatelessWidget {
   /// Whether to reset both themes, or just the current theme
   /// When null, the dialog will have a switch for the user to choose
   /// Provide a value to remove the switch
+  /// When [onConfirm] is provided, [resetBoth] is purely cosmetic (above)
   final bool? resetBoth;
 
   /// When true, [EzConfig.redrawUI] will be called instead of [EzConfig.rebuildUI]
@@ -58,11 +59,11 @@ class EzResetButton extends StatelessWidget {
 
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
-  /// DO NOT include a pop() for the dialog, this is included automatically
+  /// DO NOT include an [EzConfig.rebuildUI] or [Navigator.pop], these are included automatically
   final Future<void> Function()? onConfirm;
 
   /// What happens when the user choses not to reset
-  /// DO NOT include a pop() for the dialog, this is included automatically
+  /// DO NOT include a [Navigator.pop], it is included automatically
   final void Function()? onDeny;
 
   /// [EzElevatedIconButton] for clearing user settings
