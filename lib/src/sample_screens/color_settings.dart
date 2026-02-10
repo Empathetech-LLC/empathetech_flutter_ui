@@ -11,6 +11,9 @@ class EzColorSettings extends StatefulWidget {
   /// Optional starting [EzCSType] target
   final EzCSType? target;
 
+  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
+  final void Function() onUpdate;
+
   /// When true, updates both dark and light theme settings simultaneously
   final bool updateBoth;
 
@@ -64,6 +67,7 @@ class EzColorSettings extends StatefulWidget {
     // Shared
     super.key,
     this.target,
+    required this.onUpdate,
     required this.updateBoth,
     this.themeLink,
     this.resetSpacer = const EzSeparator(),
@@ -200,7 +204,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Core settings
         if (currentTab == EzCSType.quick)
           _QuickColorSettings(
-            widget.updateBoth,
+            onUpdate: widget.onUpdate,
+            updateBoth: widget.updateBoth,
             quickHeader: widget.quickHeader,
             quickFooter: widget.quickFooter,
           )
@@ -213,7 +218,10 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Reset button
         widget.resetSpacer,
         EzResetButton(
-          () => setState(() => currList = List<String>.from(defaultList)),
+          () {
+            setState(() => currList = List<String>.from(defaultList));
+            widget.onUpdate();
+          },
           androidPackage: widget.androidPackage,
           appName: widget.appName,
           dialogTitle: EzConfig.l10n.csReset(resetString),
@@ -250,12 +258,15 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 }
 
 class _QuickColorSettings extends StatefulWidget {
+  final void Function() onUpdate;
   final bool updateBoth;
+
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
 
-  const _QuickColorSettings(
-    this.updateBoth, {
+  const _QuickColorSettings({
+    required this.onUpdate,
+    required this.updateBoth,
     required this.quickHeader,
     required this.quickFooter,
   });
@@ -265,7 +276,10 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  void redraw() => setState(() {});
+  void redraw() {
+    setState(() {});
+    widget.onUpdate();
+  }
 
   @override
   Widget build(BuildContext context) => EzScrollView(
