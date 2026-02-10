@@ -82,18 +82,18 @@ class EzSwitchPair extends StatefulWidget {
   /// [EzConfig] key to provide to [Switch.value]
   /// And update in [Switch.onChanged]
   /// Provide [valueKey] OR [value]
-  /// Optionally provide [onChangedCallback]
+  /// Optionally provide [afterChanged]
   final String? valueKey;
 
   /// [Switch.onChanged] passthrough
-  /// Provide [onChanged] OR [onChangedCallback]
+  /// Provide [onChanged] OR [afterChanged]
   /// Pairs with [value]
   final void Function(bool?)? onChanged;
 
   /// If you want to do more than just update [valueKey] in [Switch.onChanged]
-  /// Provide [onChangedCallback] OR [onChanged]
+  /// Provide [afterChanged] OR [onChanged]
   /// Pairs with [valueKey]
-  final void Function(bool?)? onChangedCallback;
+  final void Function(bool?)? afterChanged;
 
   /// Defaults to [ezIconRatio]
   final double? scale;
@@ -160,7 +160,7 @@ class EzSwitchPair extends StatefulWidget {
 
   /// [EzRow] with flexible [EzText] and a [Switch]
   /// Provide the traditional [value] and [onChanged]
-  /// Or and EzConfig optimized [valueKey] and optional [onChangedCallback]
+  /// Or and EzConfig optimized [valueKey] and optional [afterChanged]
   const EzSwitchPair({
     super.key,
     // Row
@@ -192,7 +192,7 @@ class EzSwitchPair extends StatefulWidget {
     this.valueKey,
     this.onChanged,
     this.canChange,
-    this.onChangedCallback,
+    this.afterChanged,
     this.scale,
     this.activeThumbColor,
     this.activeTrackColor,
@@ -221,9 +221,9 @@ class EzSwitchPair extends StatefulWidget {
         assert((valueKey == null) != (onChanged == null),
             'Cannot use onChanged with valueKey'),
         assert(
-            ((onChangedCallback == null) && (value == null) ||
-                ((onChangedCallback == null) != (value == null))),
-            'Cannot use onChangedCallback with value');
+            ((afterChanged == null) && (value == null) ||
+                ((afterChanged == null) != (value == null))),
+            'Cannot use afterChanged with value');
 
   @override
   State<EzSwitchPair> createState() => _EzSwitchPairState();
@@ -250,7 +250,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
         await EzConfig.setBool(widget.valueKey!, choice);
         setState(() => value = choice);
 
-        widget.onChangedCallback?.call(choice);
+        widget.afterChanged?.call(choice);
       };
 
   // Return the build //
