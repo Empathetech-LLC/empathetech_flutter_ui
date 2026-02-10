@@ -120,6 +120,7 @@ class EzTextSettings extends StatelessWidget {
         child: _TextSettings(
           // Shared
           target: target,
+          updateBoth: updateBoth,
           resetSpacer: resetSpacer,
           extraDark: resetExtraDark,
           extraLight: resetExtraLight,
@@ -144,6 +145,7 @@ class EzTextSettings extends StatelessWidget {
 class _TextSettings extends StatefulWidget {
   // Shared
   final EzTSType? target;
+  final bool updateBoth;
   final Widget resetSpacer;
   final Set<String>? extraDark;
   final Set<String>? extraLight;
@@ -164,6 +166,7 @@ class _TextSettings extends StatefulWidget {
 
   const _TextSettings({
     required this.target,
+    required this.updateBoth,
     required this.resetSpacer,
     required this.extraDark,
     required this.extraLight,
@@ -250,6 +253,8 @@ class _TextSettingsState extends State<_TextSettings> {
         // Settings
         if (currentTab == EzTSType.quick)
           _QuickTextSettings(
+            updateBoth: widget.updateBoth,
+
             // Providers
             displayProvider: displayProvider,
             headlineProvider: headlineProvider,
@@ -299,6 +304,8 @@ class _TextSettingsState extends State<_TextSettings> {
 }
 
 class _QuickTextSettings extends StatefulWidget {
+  final bool updateBoth;
+
   // Providers
   final EzDisplayStyleProvider displayProvider;
   final EzHeadlineStyleProvider headlineProvider;
@@ -322,6 +329,7 @@ class _QuickTextSettings extends StatefulWidget {
   final Set<String>? saveSkip;
 
   const _QuickTextSettings({
+    required this.updateBoth,
     required this.displayProvider,
     required this.headlineProvider,
     required this.titleProvider,
@@ -552,7 +560,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ],
 
         // Icon size
-        const EzIconSizeSetting(),
+        EzIconSizeSetting(updateBoth: widget.updateBoth),
 
         // Optional additional settings
         if (widget.moreQuickFooterSettings != null)
