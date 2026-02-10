@@ -275,6 +275,8 @@ class EzRebuildFAB extends StatelessWidget {
             ? EzConfig.redrawUI(onComplete)
             : EzConfig.rebuildUI(onComplete),
         tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
-        child: EzIcon(icon ?? Icons.check),
+        backgroundColor: EzConfig.colors.secondary,
+        foregroundColor: EzConfig.colors.onSecondary,
+        child: EzIcon(icon ?? Icons.build),
       );
 }
