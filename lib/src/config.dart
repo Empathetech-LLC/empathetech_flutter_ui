@@ -793,6 +793,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Tracks major changes to the config
   static int get seed => _provPoint.seed;
 
+  static bool get needsRebuild => _provPoint.needsRebuild;
+
   /// Active [Locale]
   static Locale get locale => _provPoint.locale;
 

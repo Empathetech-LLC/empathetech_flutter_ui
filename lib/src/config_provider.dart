@@ -14,6 +14,7 @@ class EzConfigProvider extends ChangeNotifier {
   final TargetPlatform _platform;
   final bool _onMobile;
   int _seed;
+  bool _needsRebuild;
 
   late Locale _locale;
   late EFUILang _l10n;
@@ -39,6 +40,7 @@ class EzConfigProvider extends ChangeNotifier {
   })  : _platform = getBasePlatform(),
         _onMobile = isMobile(),
         _seed = Random().nextInt(rMax),
+        _needsRebuild = false,
         _locale = locale,
         _l10n = el10n,
         _ltr = !rtlLanguageCodes.contains(locale.languageCode),
@@ -123,6 +125,8 @@ class EzConfigProvider extends ChangeNotifier {
   /// Track [redrawUI] and [rebuildUI] (randomized on each call)
   int get seed => _seed;
 
+  bool get needsRebuild => _needsRebuild;
+
   /// Current [TargetPlatform]
   TargetPlatform get platform => _platform;
 
@@ -167,6 +171,8 @@ class EzConfigProvider extends ChangeNotifier {
   ThemeData get lightTheme => _lightTheme;
 
   // Set //
+
+  void pingRebuild() => _needsRebuild = true;
 
   /// Set the apps [Locale] from storage and load corresponding localizations
   /// If unsure, we recommend [onComplete] to be setState((){})
@@ -240,6 +246,7 @@ class EzConfigProvider extends ChangeNotifier {
     _buildThemeData();
 
     await redrawUI(onComplete);
+    _needsRebuild = false;
   }
 
   /// Randomizes the [seed] and notifies listeners
