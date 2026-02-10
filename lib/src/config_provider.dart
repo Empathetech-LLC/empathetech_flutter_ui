@@ -176,7 +176,12 @@ class EzConfigProvider extends ChangeNotifier {
   // Set //
 
   /// Set [needsRebuild] to [status]
-  void pingRebuild(bool status) => _needsRebuild = status;
+  void pingRebuild(bool status) {
+    if (_needsRebuild != status) {
+      _needsRebuild = status;
+      notifyListeners();
+    }
+  }
 
   /// Set the apps [Locale] from storage and load corresponding localizations
   /// If unsure, we recommend [onComplete] to be setState((){})
@@ -249,8 +254,8 @@ class EzConfigProvider extends ChangeNotifier {
     }
     _buildThemeData();
 
-    await redrawUI(onComplete);
     _needsRebuild = false;
+    await redrawUI(onComplete);
   }
 
   /// Randomizes the [seed] and notifies listeners
