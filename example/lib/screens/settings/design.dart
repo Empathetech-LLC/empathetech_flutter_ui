@@ -21,8 +21,9 @@ class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        const EzScreen(EzDesignSettings(
-          onRedraw: doNothing,
+        EzScreen(EzDesignSettings(
+          onUpdate: () => setState(() {}),
+          updateBoth: updateBoth,
           appName: appName,
           androidPackage: androidPackage,
         )),
