@@ -873,6 +873,11 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   // Setters //
 
+  /// Set [needsRebuild] to [status]
+  /// /// Some settings would be too expensive to rebuild on every change, so they update locally and [pingRebuild]
+  /// Example: [EzIconSizeSetting]
+  static void pingRebuild(bool status) => _provPoint.pingRebuild(status);
+
   /// Set the apps [Locale] from storage and load corresponding localizations
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s

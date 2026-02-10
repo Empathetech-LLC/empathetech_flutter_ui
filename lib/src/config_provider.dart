@@ -125,6 +125,9 @@ class EzConfigProvider extends ChangeNotifier {
   /// Track [redrawUI] and [rebuildUI] (randomized on each call)
   int get seed => _seed;
 
+  /// Toggleable bool for alerting the user to rebuild the UI
+  /// Some settings would be too expensive to rebuild on every change, so they update locally and [pingRebuild]
+  /// Example: [EzIconSizeSetting]
   bool get needsRebuild => _needsRebuild;
 
   /// Current [TargetPlatform]
@@ -172,7 +175,8 @@ class EzConfigProvider extends ChangeNotifier {
 
   // Set //
 
-  void pingRebuild() => _needsRebuild = true;
+  /// Set [needsRebuild] to [status]
+  void pingRebuild(bool status) => _needsRebuild = status;
 
   /// Set the apps [Locale] from storage and load corresponding localizations
   /// If unsure, we recommend [onComplete] to be setState((){})
