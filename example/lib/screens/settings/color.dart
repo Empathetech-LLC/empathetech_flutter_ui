@@ -25,6 +25,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   Widget build(BuildContext context) => OpenUIScaffold(
         EzScreen(EzColorSettings(
           target: widget.target,
+          onUpdate: () => setState(() {}),
           updateBoth: updateBoth,
           appName: appName,
           androidPackage: androidPackage,
