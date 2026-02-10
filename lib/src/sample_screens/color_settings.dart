@@ -219,8 +219,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         widget.resetSpacer,
         EzResetButton(
           () {
-            setState(() => currList = List<String>.from(defaultList));
             widget.onUpdate();
+            setState(() => currList = List<String>.from(defaultList));
           },
           androidPackage: widget.androidPackage,
           appName: widget.appName,
@@ -277,8 +277,8 @@ class _QuickColorSettings extends StatefulWidget {
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
   void redraw() {
-    setState(() {});
     widget.onUpdate();
+    setState(() {});
   }
 
   @override
