@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class EzDesignSettings extends StatefulWidget {
+  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
+  final void Function() onUpdate;
+
   /// When true, updates both dark and light theme settings simultaneously
   final bool updateBoth;
 
@@ -56,9 +59,6 @@ class EzDesignSettings extends StatefulWidget {
   /// [lightDesignKeys], [lightHideScrollKey], [lightIconSizeKey] are included by default
   final Set<String>? resetExtraLight;
 
-  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
-  final void Function() onRedraw;
-
   /// [EzResetButton.appName] passthrough
   final String appName;
 
@@ -75,6 +75,7 @@ class EzDesignSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
+    required this.onUpdate,
     this.updateBoth = false,
     this.themeLink,
     this.beforeDesign,
@@ -88,7 +89,6 @@ class EzDesignSettings extends StatefulWidget {
     this.resetSpacer = const EzDivider(),
     this.resetExtraDark,
     this.resetExtraLight,
-    required this.onRedraw,
     required this.appName,
     this.androidPackage,
     this.resetSkip,
@@ -225,7 +225,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               );
 
               if (animDuration != backup) {
-                await EzConfig.rebuildUI(widget.onRedraw);
+                await EzConfig.rebuildUI(widget.onUpdate);
               }
             },
             label: EzConfig.l10n.dsAnimDuration,
@@ -242,14 +242,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             mainAxisSize: MainAxisSize.min,
             child: EzConfig.isDark
                 ? EzImageSetting(
-                    widget.onRedraw,
+                    widget.onUpdate,
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
                     label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
                     updateBrightness: Brightness.dark,
                   )
                 : EzImageSetting(
-                    widget.onRedraw,
+                    widget.onUpdate,
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
                     label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
@@ -444,7 +444,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         // Reset button
         widget.resetSpacer,
         EzResetButton(
-          widget.onRedraw,
+          widget.onUpdate,
           dialogTitle: EzConfig.l10n.dsReset(widget.updateBoth &&
                   EzConfig.locale.languageCode == english.languageCode
               ? "$themeString'"
