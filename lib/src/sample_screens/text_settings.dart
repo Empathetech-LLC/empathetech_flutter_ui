@@ -15,6 +15,12 @@ class EzTextSettings extends StatelessWidget {
   /// Optional starting [EzTSType] target
   final EzTSType? target;
 
+  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
+  final void Function() onUpdate;
+
+  /// When true, updates both dark and light theme settings simultaneously
+  final bool updateBoth;
+
   /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
 
@@ -69,6 +75,8 @@ class EzTextSettings extends StatelessWidget {
     // Shared
     super.key,
     this.target,
+    required this.onUpdate,
+    this.updateBoth = false,
     this.resetSpacer = const EzSeparator(),
     this.resetExtraDark,
     this.resetExtraLight,

@@ -8,6 +8,12 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzLayoutSettings extends StatefulWidget {
+  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
+  final void Function() onUpdate;
+
+  /// When true, updates both dark and light theme settings simultaneously
+  final bool updateBoth;
+
   /// Optional additional settings, before the main settings
   /// BYO spacers
   final List<Widget>? beforeLayout;
@@ -43,6 +49,8 @@ class EzLayoutSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzLayoutSettings({
     super.key,
+    required this.onUpdate,
+    this.updateBoth = false,
     this.beforeLayout,
     this.afterLayout,
     this.resetSpacer = const EzSeparator(),
