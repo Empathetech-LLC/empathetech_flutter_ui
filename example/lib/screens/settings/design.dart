@@ -30,6 +30,10 @@ class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
         title: EzConfig.l10n.dsPageTitle,
         showSettings: false,
         fabs: <Widget>[
+          if (EzConfig.needsRebuild) ...<Widget>[
+            EzConfig.spacer,
+            EzRebuildFAB(() => setState(() {})),
+          ],
           EzConfig.spacer,
           EzSettingsDupeFAB(
             updateBoth,
