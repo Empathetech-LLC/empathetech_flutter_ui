@@ -110,14 +110,6 @@ class _ColorSettingState extends State<EzColorSetting> {
         ],
         actions: <EzMaterialAction>[
           EzMaterialAction(
-            text: EzConfig.l10n.csUseCustom,
-            onPressed: () async {
-              final dynamic chosen = await openColorPicker(context);
-              if (dContext.mounted) Navigator.of(dContext).pop(chosen);
-            },
-            isDestructiveAction: true,
-          ),
-          EzMaterialAction(
             text: EzConfig.l10n.gYes,
             onPressed: () async {
               // Update the user's configKey
@@ -127,61 +119,65 @@ class _ColorSettingState extends State<EzColorSetting> {
             },
             isDefaultAction: true,
           ),
+          EzMaterialAction(
+            text: EzConfig.l10n.csUseCustom,
+            onPressed: () async {
+              final dynamic chosen = await openColorPicker(context);
+              if (dContext.mounted) Navigator.of(dContext).pop(chosen);
+            },
+            isDestructiveAction: true,
+          ),
         ],
       ),
     );
   }
 
-  /// Opens an [EzAlertDialog] for resetting the [widget.configKey] to default
-  /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
+  /// Opens an [EzAlertDialog] for resetting [configKey] to default
+  /// If there is no default value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
-  Future<dynamic> reset(BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext dContext) {
-        final int? resetValue = EzConfig.getDefault(widget.configKey);
-        final String currColorLabel =
-            currColor.toARGB32().toRadixString(16).toUpperCase().substring(2);
+  Future<dynamic> reset(BuildContext context) => showDialog(
+        context: context,
+        builder: (BuildContext dContext) {
+          final int? resetValue = EzConfig.getDefault(widget.configKey);
+          final String currColorLabel =
+              currColor.toARGB32().toRadixString(16).toUpperCase().substring(2);
 
-        void onConfirm() async {
-          // Remove the user's configKey and reset the current state
-          await EzConfig.remove(widget.configKey);
-          if (resetValue != null) currColor = Color(resetValue);
-          setState(() {});
-
-          if (dContext.mounted) Navigator.of(dContext).pop();
-        }
-
-        void onDeny() => Navigator.of(dContext).pop();
-
-        return EzAlertDialog(
-          title: Text(
-            EzConfig.l10n.gResetValue(
-              getColorName(widget.configKey).toLowerCase(),
+          return EzAlertDialog(
+            title: Text(
+              EzConfig.l10n
+                  .gResetValue(getColorName(widget.configKey).toLowerCase()),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          contents: <Widget>[
-            Text(EzConfig.l10n.csCurrVal, textAlign: TextAlign.center),
-            EzConfig.margin,
-            EzTextIconButton(
-              onPressed: () =>
-                  Clipboard.setData(ClipboardData(text: currColorLabel)),
-              icon: const Icon(Icons.copy),
-              label: currColorLabel,
+            contents: <Widget>[
+              // Label
+              Text(EzConfig.l10n.csCurrVal, textAlign: TextAlign.center),
+              EzConfig.margin,
+
+              // Copy-able value
+              EzTextIconButton(
+                onPressed: () =>
+                    Clipboard.setData(ClipboardData(text: currColorLabel)),
+                icon: const Icon(Icons.copy),
+                label: currColorLabel,
+              ),
+            ],
+            actions: ezActionPair(
+              context: context,
+              onConfirm: () async {
+                // Remove the user's configKey and reset the current state
+                await EzConfig.remove(widget.configKey);
+                if (resetValue != null) currColor = Color(resetValue);
+                setState(() {});
+
+                if (dContext.mounted) Navigator.of(dContext).pop();
+              },
+              confirmIsDestructive: true,
+              onDeny: () => Navigator.of(dContext).pop(),
             ),
-          ],
-          actions: ezActionPair(
-            context: context,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
-          needsClose: false,
-        );
-      },
-    );
-  }
+            needsClose: false,
+          );
+        },
+      );
 
   /// Opens an [EzAlertDialog] with the all optional actions
   /// Currently: remove from list and reset to default
