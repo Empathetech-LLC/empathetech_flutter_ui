@@ -22,7 +22,7 @@ class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
 
   @override
   Widget build(BuildContext context) => Consumer<EzConfigProvider>(
-        builder: (_, EzConfigProvider config, __) => (OpenUIScaffold(
+        builder: (_, EzConfigProvider config, __) => OpenUIScaffold(
           EzScreen(EzDesignSettings(
             onUpdate: () => setState(() {}),
             updateBoth: updateBoth,
@@ -42,6 +42,6 @@ class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
               () => setState(() => updateBoth = !updateBoth),
             ),
           ],
-        )),
+        ),
       );
 }
