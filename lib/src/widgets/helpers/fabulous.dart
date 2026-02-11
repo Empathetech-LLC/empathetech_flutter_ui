@@ -86,12 +86,16 @@ class EzSettingsDupeFAB extends StatelessWidget {
   Widget build(BuildContext context) => dupe
       ? FloatingActionButton(
           onPressed: onPressed,
+          tooltip: EzConfig.isDark
+              ? EzConfig.l10n.ssUpdateDark
+              : EzConfig.l10n.ssUpdateLight,
           backgroundColor: EzConfig.colors.primary,
           foregroundColor: EzConfig.colors.onPrimary,
           child: EzIcon(Icons.brightness_medium),
         )
       : FloatingActionButton(
           onPressed: onPressed,
+          tooltip: EzConfig.l10n.ssUpdateBoth,
           backgroundColor: EzConfig.colors.surface,
           foregroundColor: EzConfig.colors.outline,
           child: EzIcon(Icons.brightness_medium),
