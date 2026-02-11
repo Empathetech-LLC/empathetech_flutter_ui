@@ -11,19 +11,18 @@ class EzBoldSetting extends StatefulWidget {
   /// The [EzConfig] whose value is being updated
   final String configKey;
 
+  /// An alt to updateBoth
+  final String? mirrorKey;
+
   /// Optional callback to live update the [TextStyle] on your UI
   final void Function(bool bold) notifierCallback;
-
-  /// Optional override
-  /// Defaults to [ThemeData.iconButtonTheme]s value
-  final double? size;
 
   /// Standardized tool for toggling [FontWeight.bold] in the [TextStyle.fontWeight] that matches [configKey]
   const EzBoldSetting({
     super.key,
     required this.configKey,
+    this.mirrorKey,
     required this.notifierCallback,
-    this.size,
   });
 
   @override
@@ -39,11 +38,13 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
         onPressed: () async {
           isBold = !isBold;
           await EzConfig.setBool(widget.configKey, isBold);
+          if (widget.mirrorKey != null) {
+            await EzConfig.setBool(widget.mirrorKey!, isBold);
+          }
           widget.notifierCallback(isBold);
           setState(() {});
         },
         tooltip: EzConfig.l10n.tsBold,
-        iconSize: widget.size,
         icon: const Icon(Icons.format_bold_outlined),
       );
 }
