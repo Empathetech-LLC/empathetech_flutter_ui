@@ -12,7 +12,7 @@ class EzMarginSetting extends StatefulWidget {
   final void Function() onUpdate;
 
   /// Whether to update both themes
-  final bool setBoth;
+  final bool updateBoth;
 
   /// Smallest value that can be set
   final double min;
@@ -36,7 +36,7 @@ class EzMarginSetting extends StatefulWidget {
   const EzMarginSetting({
     super.key,
     required this.onUpdate,
-    required this.setBoth,
+    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -83,7 +83,8 @@ class _LayoutSettingState extends State<EzMarginSetting> {
         await ezModal(
           context: context,
           builder: (_) => StatefulBuilder(
-            builder: (_, StateSetter setModal) => EzScrollView(
+            builder: (BuildContext modalContext, StateSetter setModal) =>
+                EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
@@ -123,8 +124,8 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         EzSpacer(space: currValue),
                         Container(
                           color: EzConfig.colors.onSurface,
-                          height: heightOf(context) * 0.25,
-                          width: widthOf(context) * 0.25,
+                          height: heightOf(modalContext) * 0.25,
+                          width: widthOf(modalContext) * 0.25,
                           child: Container(
                             decoration: BoxDecoration(
                               color: EzConfig.colors.surface,
@@ -161,7 +162,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
-                      if (widget.setBoth) {
+                      if (widget.updateBoth) {
                         await EzConfig.setDouble(
                             EzConfig.isDark ? lightMarginKey : darkMarginKey,
                             value);
@@ -179,7 +180,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                 EzElevatedIconButton(
                   onPressed: () async {
                     await EzConfig.remove(configKey);
-                    if (widget.setBoth) {
+                    if (widget.updateBoth) {
                       await EzConfig.remove(
                           EzConfig.isDark ? lightMarginKey : darkMarginKey);
                     }

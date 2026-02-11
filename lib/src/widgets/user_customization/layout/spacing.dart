@@ -12,7 +12,7 @@ class EzSpacingSetting extends StatefulWidget {
   final void Function() onUpdate;
 
   /// Whether to update both themes
-  final bool setBoth;
+  final bool updateBoth;
 
   /// Smallest value that can be set
   final double min;
@@ -36,7 +36,7 @@ class EzSpacingSetting extends StatefulWidget {
   const EzSpacingSetting({
     super.key,
     required this.onUpdate,
-    required this.setBoth,
+    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -50,136 +50,32 @@ class EzSpacingSetting extends StatefulWidget {
 }
 
 class _LayoutSettingState extends State<EzSpacingSetting> {
-  // Define the build data //
+  // Define custom functions //
 
-  late double currValue = EzConfig.get(widget.configKey);
-  late final double defaultValue = EzConfig.getDefault(widget.configKey);
-
-  // Define build functions //
-
-  /// Return the preview Widget(s) for the passed [EzSpacingSettingType]
-  List<Widget> buildPreview(BuildContext context) {
-    final String valString = currValue.toStringAsFixed(widget.decimals);
-
-    switch (widget.type) {
-      // Margin
-      case EzSpacingSettingType.margin:
-        late final String? backgroundImagePath = EzConfig.get(
-            EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
-
-        late final BoxFit? backgroundImageFit = boxFitLib[EzConfig.get(
-            EzConfig.isDark
-                ? '$darkBackgroundImageKey$boxFitSuffix'
-                : '$lightBackgroundImageKey$boxFitSuffix')];
-
-        return <Widget>[
-          EzConfig.spacer,
-          EzTextBackground(
-            Text(
-              valString,
-              style: widget.bodyStyle ??
-                  EzConfig.styles.bodyLarge
-                      ?.copyWith(color: EzConfig.colors.surface),
-              textAlign: TextAlign.center,
-            ),
-            margin: EzInsets.wrap(currValue),
-            backgroundColor: EzConfig.colors.onSurface,
-          ),
-          EzSpacer(space: currValue),
-          Container(
-            color: EzConfig.colors.onSurface,
-            height: heightOf(context) * 0.25,
-            width: widthOf(context) * 0.25,
-            child: Container(
-              decoration: BoxDecoration(
-                color: EzConfig.colors.surface,
-                image: (backgroundImagePath == null ||
-                        backgroundImagePath == noImageValue)
-                    ? null
-                    : DecorationImage(
-                        image: ezImageProvider(backgroundImagePath),
-                        fit: backgroundImageFit,
-                      ),
-              ),
-              margin: EdgeInsets.all(currValue * 0.25),
-            ),
-          ),
-          EzConfig.spacer,
-        ];
-
-      // Padding
-      case EzSpacingSettingType.padding:
-        return <Widget>[
-          EzConfig.spacer,
-
-          // Live label && preview
-          EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            scrollDirection: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              EzElevatedButton(
-                enabled: false,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(currValue),
-                ),
-                text: EzConfig.l10n.gCurrently,
-              ),
-              const EzSpacer(vertical: false),
-              EzElevatedButton(
-                enabled: false,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(currValue),
-                  shape: const CircleBorder(),
-                ),
-                text: valString,
-              ),
-            ],
-          ),
-
-          EzConfig.spacer,
-        ];
-
-      // Spacing
-      case EzSpacingSettingType.spacing:
-        return <Widget>[
-          // Preview 1
-          EzSpacer(space: currValue),
-
-          // Label
-          EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            scrollDirection: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              EzElevatedButton(enabled: false, text: EzConfig.l10n.gCurrently),
-              EzSpacer(space: currValue, vertical: false),
-              EzElevatedButton(
-                enabled: false,
-                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
-                text: valString,
-              ),
-            ],
-          ),
-
-          // Preview 2
-          EzSpacer(space: currValue),
-        ];
-    }
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
   }
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final String label = ezLstName(context, widget.type);
+    // Gather the contextual theme data //
+
+    final String configKey = EzConfig.isDark ? darkSpacingKey : lightSpacingKey;
+    final double defaultValue = EzConfig.getDefault(configKey);
+
+    double currValue = EzConfig.get(configKey);
+
+    // Return the build //
 
     return EzElevatedIconButton(
-      onPressed: () => ezModal(
-        context: context,
-        builder: (_) => StatefulBuilder(
-          builder: (_, StateSetter setModal) {
-            return EzScrollView(
+      onPressed: () async {
+        final double backup = currValue;
+
+        await ezModal(
+          context: context,
+          builder: (_) => StatefulBuilder(
+            builder: (_, StateSetter setModal) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
@@ -187,7 +83,7 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                   button: false,
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
-                    label,
+                    EzConfig.l10n.lsSpacing,
                     currValue.toStringAsFixed(widget.decimals),
                   ),
                   child: ExcludeSemantics(
@@ -197,14 +93,33 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                       children: <Widget>[
                         // Title
                         Text(
-                          label,
+                          EzConfig.l10n.lsSpacing,
                           style:
                               widget.titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
 
                         // Preview
-                        ...buildPreview(context),
+                        EzSpacer(space: currValue),
+
+                        EzScrollView(
+                          mainAxisSize: MainAxisSize.min,
+                          scrollDirection: Axis.horizontal,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            EzElevatedButton(
+                                enabled: false, text: EzConfig.l10n.gCurrently),
+                            EzSpacer(space: currValue, vertical: false),
+                            EzElevatedButton(
+                              enabled: false,
+                              style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder()),
+                              text: currValue.toStringAsFixed(widget.decimals),
+                            ),
+                          ],
+                        ),
+
+                        EzSpacer(space: currValue),
                       ],
                     ),
                   ),
@@ -223,8 +138,14 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                     // Slider functions
                     onChanged: (double value) =>
                         setModal(() => currValue = value),
-                    onChangeEnd: (double value) =>
-                        EzConfig.setDouble(widget.configKey, value),
+                    onChangeEnd: (double value) {
+                      EzConfig.setDouble(configKey, value);
+                      if (widget.updateBoth) {
+                        EzConfig.setDouble(
+                            EzConfig.isDark ? lightSpacingKey : darkSpacingKey,
+                            value);
+                      }
+                    },
 
                     // Slider semantics
                     semanticFormatterCallback: (double value) =>
@@ -236,7 +157,11 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                 // Reset button
                 EzElevatedIconButton(
                   onPressed: () async {
-                    await EzConfig.remove(widget.configKey);
+                    await EzConfig.remove(configKey);
+                    if (widget.updateBoth) {
+                      await EzConfig.remove(
+                          EzConfig.isDark ? lightSpacingKey : darkSpacingKey);
+                    }
                     setModal(() => currValue = defaultValue);
                   },
                   icon: const Icon(Icons.refresh),
@@ -245,12 +170,16 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                 ),
                 EzSpacer(space: EzConfig.spacing * 1.5),
               ],
-            );
-          },
-        ),
-      ),
-      icon: ezLstIcon(widget.type),
-      label: label,
+            ),
+          ),
+        );
+
+        if (currValue != backup) {
+          await EzConfig.rebuildUI(redraw);
+        }
+      },
+      icon: const Icon(Icons.space_bar),
+      label: EzConfig.l10n.lsSpacing,
     );
   }
 }

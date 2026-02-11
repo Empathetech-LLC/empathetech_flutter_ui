@@ -12,7 +12,7 @@ class EzPaddingSetting extends StatefulWidget {
   final void Function() onUpdate;
 
   /// Whether to update both themes
-  final bool setBoth;
+  final bool updateBoth;
 
   /// Smallest value that can be set
   final double min;
@@ -36,7 +36,7 @@ class EzPaddingSetting extends StatefulWidget {
   const EzPaddingSetting({
     super.key,
     required this.onUpdate,
-    required this.setBoth,
+    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -50,136 +50,32 @@ class EzPaddingSetting extends StatefulWidget {
 }
 
 class _LayoutSettingState extends State<EzPaddingSetting> {
-  // Define the build data //
+  // Define custom functions //
 
-  late double currValue = EzConfig.get(widget.configKey);
-  late final double defaultValue = EzConfig.getDefault(widget.configKey);
-
-  // Define build functions //
-
-  /// Return the preview Widget(s) for the passed [EzPaddingSettingType]
-  List<Widget> buildPreview(BuildContext context) {
-    final String valString = currValue.toStringAsFixed(widget.decimals);
-
-    switch (widget.type) {
-      // Margin
-      case EzPaddingSettingType.margin:
-        late final String? backgroundImagePath = EzConfig.get(
-            EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
-
-        late final BoxFit? backgroundImageFit = boxFitLib[EzConfig.get(
-            EzConfig.isDark
-                ? '$darkBackgroundImageKey$boxFitSuffix'
-                : '$lightBackgroundImageKey$boxFitSuffix')];
-
-        return <Widget>[
-          EzConfig.spacer,
-          EzTextBackground(
-            Text(
-              valString,
-              style: widget.bodyStyle ??
-                  EzConfig.styles.bodyLarge
-                      ?.copyWith(color: EzConfig.colors.surface),
-              textAlign: TextAlign.center,
-            ),
-            margin: EzInsets.wrap(currValue),
-            backgroundColor: EzConfig.colors.onSurface,
-          ),
-          EzSpacer(space: currValue),
-          Container(
-            color: EzConfig.colors.onSurface,
-            height: heightOf(context) * 0.25,
-            width: widthOf(context) * 0.25,
-            child: Container(
-              decoration: BoxDecoration(
-                color: EzConfig.colors.surface,
-                image: (backgroundImagePath == null ||
-                        backgroundImagePath == noImageValue)
-                    ? null
-                    : DecorationImage(
-                        image: ezImageProvider(backgroundImagePath),
-                        fit: backgroundImageFit,
-                      ),
-              ),
-              margin: EdgeInsets.all(currValue * 0.25),
-            ),
-          ),
-          EzConfig.spacer,
-        ];
-
-      // Padding
-      case EzPaddingSettingType.padding:
-        return <Widget>[
-          EzConfig.spacer,
-
-          // Live label && preview
-          EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            scrollDirection: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              EzElevatedButton(
-                enabled: false,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(currValue),
-                ),
-                text: EzConfig.l10n.gCurrently,
-              ),
-              const EzSpacer(vertical: false),
-              EzElevatedButton(
-                enabled: false,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(currValue),
-                  shape: const CircleBorder(),
-                ),
-                text: valString,
-              ),
-            ],
-          ),
-
-          EzConfig.spacer,
-        ];
-
-      // Spacing
-      case EzPaddingSettingType.spacing:
-        return <Widget>[
-          // Preview 1
-          EzSpacer(space: currValue),
-
-          // Label
-          EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            scrollDirection: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              EzElevatedButton(enabled: false, text: EzConfig.l10n.gCurrently),
-              EzSpacer(space: currValue, vertical: false),
-              EzElevatedButton(
-                enabled: false,
-                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
-                text: valString,
-              ),
-            ],
-          ),
-
-          // Preview 2
-          EzSpacer(space: currValue),
-        ];
-    }
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
   }
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final String label = ezLstName(context, widget.type);
+    // Gather the contextual theme data //
+
+    final String configKey = EzConfig.isDark ? darkPaddingKey : lightPaddingKey;
+    final double defaultValue = EzConfig.getDefault(configKey);
+
+    double currValue = EzConfig.get(configKey);
+
+    // Return the build //
 
     return EzElevatedIconButton(
-      onPressed: () => ezModal(
-        context: context,
-        builder: (_) => StatefulBuilder(
-          builder: (_, StateSetter setModal) {
-            return EzScrollView(
+      onPressed: () async {
+        final double backup = currValue;
+
+        await ezModal(
+          context: context,
+          builder: (_) => StatefulBuilder(
+            builder: (_, StateSetter setModal) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
@@ -187,7 +83,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                   button: false,
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
-                    label,
+                    EzConfig.l10n.lsPadding,
                     currValue.toStringAsFixed(widget.decimals),
                   ),
                   child: ExcludeSemantics(
@@ -197,14 +93,38 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                       children: <Widget>[
                         // Title
                         Text(
-                          label,
+                          EzConfig.l10n.lsPadding,
                           style:
                               widget.titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
 
                         // Preview
-                        ...buildPreview(context),
+                        EzConfig.spacer,
+                        EzScrollView(
+                          mainAxisSize: MainAxisSize.min,
+                          scrollDirection: Axis.horizontal,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            EzElevatedButton(
+                              enabled: false,
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(currValue),
+                              ),
+                              text: EzConfig.l10n.gCurrently,
+                            ),
+                            const EzSpacer(vertical: false),
+                            EzElevatedButton(
+                              enabled: false,
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(currValue),
+                                shape: const CircleBorder(),
+                              ),
+                              text: currValue.toStringAsFixed(widget.decimals),
+                            ),
+                          ],
+                        ),
+                        EzConfig.spacer,
                       ],
                     ),
                   ),
@@ -223,8 +143,14 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                     // Slider functions
                     onChanged: (double value) =>
                         setModal(() => currValue = value),
-                    onChangeEnd: (double value) =>
-                        EzConfig.setDouble(widget.configKey, value),
+                    onChangeEnd: (double value) async {
+                      await EzConfig.setDouble(configKey, value);
+                      if (widget.updateBoth) {
+                        await EzConfig.setDouble(
+                            EzConfig.isDark ? lightPaddingKey : darkPaddingKey,
+                            value);
+                      }
+                    },
 
                     // Slider semantics
                     semanticFormatterCallback: (double value) =>
@@ -236,7 +162,11 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                 // Reset button
                 EzElevatedIconButton(
                   onPressed: () async {
-                    await EzConfig.remove(widget.configKey);
+                    await EzConfig.remove(configKey);
+                    if (widget.updateBoth) {
+                      await EzConfig.remove(
+                          EzConfig.isDark ? lightPaddingKey : darkPaddingKey);
+                    }
                     setModal(() => currValue = defaultValue);
                   },
                   icon: const Icon(Icons.refresh),
@@ -245,12 +175,16 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                 ),
                 EzSpacer(space: EzConfig.spacing * 1.5),
               ],
-            );
-          },
-        ),
-      ),
-      icon: ezLstIcon(widget.type),
-      label: label,
+            ),
+          ),
+        );
+
+        if (currValue != backup) {
+          await EzConfig.rebuildUI(redraw);
+        }
+      },
+      icon: const Icon(Icons.padding),
+      label: EzConfig.l10n.lsPadding,
     );
   }
 }
