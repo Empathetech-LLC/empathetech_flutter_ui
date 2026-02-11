@@ -128,9 +128,12 @@
   "ssLanguage": "Language",
   "ssLangHint": "Activate to change the app language",
 
+  "ssUpdateDark": "Update dark theme",
+  "ssUpdateLight": "Update light theme",
+  "ssUpdateBoth": "Update both theme modes",
+
   "ssLoadPreset": "Load preset",
   "ssLoadPresetHint": "Activate to show presets",
-  "ssUpdateBoth": "Update both theme modes",
   "ssBigButtons": "Big buttons",
   "ssHighVisibility": "High visibility",
   "ssChalkboard": "Chalkboard",

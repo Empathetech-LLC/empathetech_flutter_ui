@@ -693,6 +693,24 @@ abstract class EFUILang {
   /// **'Activate to change the app language'**
   String get ssLangHint;
 
+  /// No description provided for @ssUpdateDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Update dark theme'**
+  String get ssUpdateDark;
+
+  /// No description provided for @ssUpdateLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Update light theme'**
+  String get ssUpdateLight;
+
+  /// No description provided for @ssUpdateBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Update both theme modes'**
+  String get ssUpdateBoth;
+
   /// No description provided for @ssLoadPreset.
   ///
   /// In en, this message translates to:
@@ -704,12 +722,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Activate to show presets'**
   String get ssLoadPresetHint;
-
-  /// No description provided for @ssUpdateBoth.
-  ///
-  /// In en, this message translates to:
-  /// **'Update both theme modes'**
-  String get ssUpdateBoth;
 
   /// No description provided for @ssBigButtons.
   ///

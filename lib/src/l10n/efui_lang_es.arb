@@ -128,9 +128,12 @@
   "ssLanguage": "Idioma",
   "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
+  "ssUpdateDark": "Actualizar tema oscuro",
+  "ssUpdateLight": "Actualizar tema claro",
+  "ssUpdateBoth": "Actualizar ambos modos de tema",
+
   "ssLoadPreset": "Cargar preajuste",
   "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
-  "ssUpdateBoth": "Actualizar ambos modos de tema",
   "ssBigButtons": "Botones grandes",
   "ssHighVisibility": "Alta visibilidad",
   "ssChalkboard": "Pizarra",

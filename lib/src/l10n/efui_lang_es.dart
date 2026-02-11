@@ -324,13 +324,19 @@ class EFUILangEs extends EFUILang {
   String get ssLangHint => 'Activar para cambiar el idioma de la aplicación';
 
   @override
+  String get ssUpdateDark => 'Actualizar tema oscuro';
+
+  @override
+  String get ssUpdateLight => 'Actualizar tema claro';
+
+  @override
+  String get ssUpdateBoth => 'Actualizar ambos modos de tema';
+
+  @override
   String get ssLoadPreset => 'Cargar preajuste';
 
   @override
   String get ssLoadPresetHint => 'Activar para mostrar ajustes preestablecidos';
-
-  @override
-  String get ssUpdateBoth => 'Actualizar ambos modos de tema';
 
   @override
   String get ssBigButtons => 'Botones grandes';

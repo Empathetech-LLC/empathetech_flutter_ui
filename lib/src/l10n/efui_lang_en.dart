@@ -322,13 +322,19 @@ class EFUILangEn extends EFUILang {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
+  String get ssUpdateDark => 'Update dark theme';
+
+  @override
+  String get ssUpdateLight => 'Update light theme';
+
+  @override
+  String get ssUpdateBoth => 'Update both theme modes';
+
+  @override
   String get ssLoadPreset => 'Load preset';
 
   @override
   String get ssLoadPresetHint => 'Activate to show presets';
-
-  @override
-  String get ssUpdateBoth => 'Update both theme modes';
 
   @override
   String get ssBigButtons => 'Big buttons';
@@ -980,13 +986,19 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
+  String get ssUpdateDark => 'Update dark theme';
+
+  @override
+  String get ssUpdateLight => 'Update light theme';
+
+  @override
+  String get ssUpdateBoth => 'Update both theme modes';
+
+  @override
   String get ssLoadPreset => 'Load preset';
 
   @override
   String get ssLoadPresetHint => 'Activate to show presets';
-
-  @override
-  String get ssUpdateBoth => 'Update both theme modes';
 
   @override
   String get ssBigButtons => 'Big buttons';
