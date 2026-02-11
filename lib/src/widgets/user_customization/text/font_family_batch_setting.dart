@@ -8,10 +8,27 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
+  /// Whether both theme modes should be updated
+  final bool updateBoth;
+
+  /// Requires the provider to be in the widget tree/context
+  /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzDisplayStyleProvider displayProvider;
+
+  /// Requires the provider to be in the widget tree/context
+  /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzHeadlineStyleProvider headlineProvider;
+
+  /// Requires the provider to be in the widget tree/context
+  /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzTitleStyleProvider titleProvider;
+
+  /// Requires the provider to be in the widget tree/context
+  /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzBodyStyleProvider bodyProvider;
+
+  /// Requires the provider to be in the widget tree/context
+  /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzLabelStyleProvider labelProvider;
 
   /// Optional [EzDropdownMenu.iconSize] passthrough
@@ -20,6 +37,7 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
   /// Standardized tool for updating the 5 [TextStyle.fontFamily]s
   const EzFontFamilyBatchSetting({
     super.key,
+    required this.updateBoth,
     required this.displayProvider,
     required this.headlineProvider,
     required this.titleProvider,
@@ -36,137 +54,101 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
 class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   // Define the build data //
 
-  late Map<String, String?> currFonts = EzConfig.isDark
-      ? <String, String?>{
-          darkDisplayFontFamilyKey:
-              widget.displayProvider.value.fontFamily == null
-                  ? null
-                  : ezClassToCamel(
-                      ezFirstWord(widget.displayProvider.value.fontFamily!)),
-          darkHeadlineFontFamilyKey:
-              widget.headlineProvider.value.fontFamily == null
-                  ? null
-                  : ezClassToCamel(
-                      ezFirstWord(widget.headlineProvider.value.fontFamily!)),
-          darkTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
-              ? null
-              : ezClassToCamel(
-                  ezFirstWord(widget.titleProvider.value.fontFamily!)),
-          darkBodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
-              ? null
-              : ezClassToCamel(
-                  ezFirstWord(widget.bodyProvider.value.fontFamily!)),
-          darkLabelFontFamilyKey: widget.labelProvider.value.fontFamily == null
-              ? null
-              : ezClassToCamel(
-                  ezFirstWord(widget.labelProvider.value.fontFamily!)),
-        }
-      : <String, String?>{
-          lightDisplayFontFamilyKey:
-              widget.displayProvider.value.fontFamily == null
-                  ? null
-                  : ezClassToCamel(
-                      ezFirstWord(widget.displayProvider.value.fontFamily!)),
-          lightHeadlineFontFamilyKey:
-              widget.headlineProvider.value.fontFamily == null
-                  ? null
-                  : ezClassToCamel(
-                      ezFirstWord(widget.headlineProvider.value.fontFamily!)),
-          lightTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
-              ? null
-              : ezClassToCamel(
-                  ezFirstWord(widget.titleProvider.value.fontFamily!)),
-          lightBodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
-              ? null
-              : ezClassToCamel(
-                  ezFirstWord(widget.bodyProvider.value.fontFamily!)),
-          lightLabelFontFamilyKey: widget.labelProvider.value.fontFamily == null
-              ? null
-              : ezClassToCamel(
-                  ezFirstWord(widget.labelProvider.value.fontFamily!)),
-        };
+  late final Map<String, String?> darkFonts = <String, String?>{
+    darkDisplayFontFamilyKey: widget.displayProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.displayProvider.value.fontFamily!)),
+    darkHeadlineFontFamilyKey: widget.headlineProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(
+            ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+    darkTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.titleProvider.value.fontFamily!)),
+    darkBodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.bodyProvider.value.fontFamily!)),
+    darkLabelFontFamilyKey: widget.labelProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.labelProvider.value.fontFamily!)),
+  };
+  late final Map<String, String?> lightFonts = <String, String?>{
+    lightDisplayFontFamilyKey: widget.displayProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.displayProvider.value.fontFamily!)),
+    lightHeadlineFontFamilyKey: widget.headlineProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(
+            ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+    lightTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.titleProvider.value.fontFamily!)),
+    lightBodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.bodyProvider.value.fontFamily!)),
+    lightLabelFontFamilyKey: widget.labelProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(widget.labelProvider.value.fontFamily!)),
+  };
 
-  late bool isUniform =
-      currFonts.values.every((String? font) => font == currFonts.values.first);
+  // Init //
 
-  late String? currFontFamily = isUniform ? currFonts.values.first : null;
+  String? currFontFamily;
+  bool isUniform = false;
 
-  // Define button functions //
+  @override
+  void initState() {
+    super.initState();
 
-  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
-  late final List<DropdownMenuEntry<String>> entries = googleStyles.entries.map(
-    (MapEntry<String, TextStyle> entry) {
-      return DropdownMenuEntry<String>(
-        value: entry.key,
-        label: ezCamelToTitle(entry.key),
-        style: TextButton.styleFrom(textStyle: entry.value),
-      );
-    },
-  ).toList();
-
-  /// Only activated if the user has already edited the font families in the advanced settings, and the changes aren't uniform
-  // Confirm that the user wants to continue with batch editing, which will force uniformity
-  Future<bool> confirmBatchOverride() async {
-    return await showDialog(
-      context: context,
-      builder: (BuildContext dContext) => EzAlertDialog(
-        title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
-        content: Text(
-          EzConfig.l10n.tsBatchOverride(EzConfig.l10n.tsFontFamily),
-          textAlign: TextAlign.center,
-        ),
-        actions: ezActionPair(
-          context: context,
-          onConfirm: () => Navigator.of(dContext).pop(true),
-          confirmIsDestructive: true,
-          onDeny: () => Navigator.of(dContext).pop(false),
-        ),
-        needsClose: false,
-      ),
-    );
+    final Map<String, String?> currFonts =
+        EzConfig.isDark ? darkFonts : lightFonts;
+    isUniform = currFonts.values
+        .every((String? font) => font == currFonts.values.first);
+    if (isUniform) currFontFamily = currFonts.values.first;
   }
 
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: EzConfig.l10n.tsFontFamily,
-      child: EzDropdownMenu<String>(
-        widthEntries: <String>[fingerPaint],
-        iconSize: widget.iconSize,
-        textStyle: widget.bodyProvider.value,
-        dropdownMenuEntries: entries,
-        enableSearch: false,
-        initialSelection: currFontFamily,
-        onSelected: (String? fontFamily) async {
-          if (fontFamily == null) return;
+  Widget build(BuildContext context) => Tooltip(
+        message: EzConfig.l10n.tsFontFamily,
+        child: EzDropdownMenu<String>(
+          widthEntries: <String>[fingerPaint],
+          iconSize: widget.iconSize,
+          textStyle: widget.bodyProvider.value,
+          dropdownMenuEntries: googleStyles.entries
+              .map((MapEntry<String, TextStyle> entry) =>
+                  DropdownMenuEntry<String>(
+                    value: entry.key,
+                    label: ezCamelToTitle(entry.key),
+                    style: TextButton.styleFrom(textStyle: entry.value),
+                  ))
+              .toList(),
+          enableSearch: false,
+          initialSelection: currFontFamily,
+          onSelected: (String? fontFamily) async {
+            if (fontFamily == null) return;
 
-          if (!isUniform) {
-            final bool override = await confirmBatchOverride();
-
-            if (override) {
+            if (!isUniform) {
               isUniform = true;
-            } else {
-              return;
             }
-          }
+            currFontFamily = fontFamily;
 
-          currFontFamily = fontFamily;
+            final Map<String, String?> currFonts = widget.updateBoth
+                ? <String, String?>{...darkFonts, ...lightFonts}
+                : (EzConfig.isDark ? darkFonts : lightFonts);
 
-          for (final String key in currFonts.keys) {
-            await EzConfig.setString(key, fontFamily);
-          }
+            for (final String key in currFonts.keys) {
+              await EzConfig.setString(key, fontFamily);
+            }
+            widget.displayProvider.fuse(fontFamily);
+            widget.headlineProvider.fuse(fontFamily);
+            widget.titleProvider.fuse(fontFamily);
+            widget.bodyProvider.fuse(fontFamily);
+            widget.labelProvider.fuse(fontFamily);
 
-          widget.displayProvider.fuse(fontFamily);
-          widget.headlineProvider.fuse(fontFamily);
-          widget.titleProvider.fuse(fontFamily);
-          widget.bodyProvider.fuse(fontFamily);
-          widget.labelProvider.fuse(fontFamily);
-
-          setState(() {});
-        },
-      ),
-    );
-  }
+            setState(() {});
+          },
+        ),
+      );
 }
