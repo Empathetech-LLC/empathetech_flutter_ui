@@ -53,7 +53,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       startColor: backup,
       onColorChange: (Color chosenColor) =>
           setState(() => currColor = chosenColor),
-      onConfirm: () => EzConfig.setInt(widget.configKey, currColor.toARGB32()),
+      onConfirm: () {
+        EzConfig.setInt(widget.configKey, currColor.toARGB32());
+        widget.onUpdate?.call(currColor);
+      },
       onDeny: () => setState(() => currColor = backup),
     );
   }
@@ -115,6 +118,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               // Update the user's configKey
               await EzConfig.setInt(widget.configKey, recommended);
               setState(() => currColor = Color(recommended));
+              widget.onUpdate?.call(currColor);
               if (dContext.mounted) Navigator.of(dContext).pop(recommended);
             },
             isDefaultAction: true,
@@ -168,7 +172,9 @@ class _ColorSettingState extends State<EzColorSetting> {
                 await EzConfig.remove(widget.configKey);
                 if (resetValue != null) currColor = Color(resetValue);
                 setState(() {});
-
+                widget.onUpdate?.call(resetValue != null
+                    ? Color(resetValue)
+                    : getLiveColor(widget.configKey));
                 if (dContext.mounted) Navigator.of(dContext).pop();
               },
               confirmIsDestructive: true,
