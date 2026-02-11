@@ -360,7 +360,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late double backOpacity = EzConfig.get(widget.opacityKey);
   late double iconSize = EzConfig.iconSize;
 
-  bool setBoth = false;
+  bool updateBoth = false;
 
   @override
   Widget build(BuildContext context) {
@@ -432,7 +432,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   titleProvider: widget.titleProvider,
                   bodyProvider: widget.bodyProvider,
                   labelProvider: widget.labelProvider,
-                  isDark: setBoth ? null : EzConfig.isDark,
+                  isDark: updateBoth ? null : EzConfig.isDark,
                   iconSize: iconSize,
                 ),
                 backgroundColor: backgroundColor,
@@ -572,7 +572,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           () => setState(() {}),
           dialogTitle: EzConfig.l10n.tsResetAll,
           onConfirm: () async {
-            if (setBoth || EzConfig.isDark) {
+            if (updateBoth || EzConfig.isDark) {
               EzConfig.removeKeys(darkTextKeys.keys.toSet());
               EzConfig.remove(darkOnSurfaceKey);
 
@@ -581,7 +581,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               }
             }
 
-            if (setBoth || !EzConfig.isDark) {
+            if (updateBoth || !EzConfig.isDark) {
               EzConfig.removeKeys(lightTextKeys.keys.toSet());
               EzConfig.remove(lightOnSurfaceKey);
 
