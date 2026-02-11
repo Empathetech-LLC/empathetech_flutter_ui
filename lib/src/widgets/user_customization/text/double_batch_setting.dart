@@ -7,7 +7,26 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+const List<String> _darkKeys = <String>[
+  darkDisplayFontSizeKey,
+  darkHeadlineFontSizeKey,
+  darkTitleFontSizeKey,
+  darkBodyFontSizeKey,
+  darkLabelFontSizeKey,
+];
+
+const List<String> _lightKeys = <String>[
+  lightDisplayFontSizeKey,
+  lightHeadlineFontSizeKey,
+  lightTitleFontSizeKey,
+  lightBodyFontSizeKey,
+  lightLabelFontSizeKey,
+];
+
 class EzFontDoubleBatchSetting extends StatelessWidget {
+  /// Whether both theme modes should be updated
+  final bool updateBoth;
+
   /// Required for max/min awareness
   final EzDisplayStyleProvider displayProvider;
 
@@ -23,48 +42,24 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   /// Required for max/min awareness
   final EzLabelStyleProvider labelProvider;
 
-  /// Null will update both theme modes
-  /// Quantum computing
-  final bool? isDark;
-
   /// Amount to scale on each click
   final double delta;
-
-  /// Defaults to [EzTitleStyleProvider.value]s [TextStyle.fontSize]
-  final double? iconSize;
 
   /// Must have each iteration of [EzTextStyleProvider] in this parent's widget tree
   /// Updates all [TextStyle.fontSize]s at once by [delta]
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
   EzFontDoubleBatchSetting({
     super.key,
+    required this.updateBoth,
     required this.displayProvider,
     required this.headlineProvider,
     required this.titleProvider,
     required this.bodyProvider,
     required this.labelProvider,
-    required this.isDark,
     this.delta = 0.1,
-    this.iconSize,
   });
 
   // Define the build data //
-
-  static const List<String> darkKeys = <String>[
-    darkDisplayFontSizeKey,
-    darkHeadlineFontSizeKey,
-    darkTitleFontSizeKey,
-    darkBodyFontSizeKey,
-    darkLabelFontSizeKey,
-  ];
-
-  static const List<String> lightKeys = <String>[
-    lightDisplayFontSizeKey,
-    lightHeadlineFontSizeKey,
-    lightTitleFontSizeKey,
-    lightBodyFontSizeKey,
-    lightLabelFontSizeKey,
-  ];
 
   final bool atMax = fontSizeMaxes.entries.every(
     (MapEntry<String, double> max) => max.value == EzConfig.get(max.key),
@@ -98,9 +93,11 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
     }
   }
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Return the build //
+    final double? iconSize = titleProvider.value.fontSize;
 
     return Tooltip(
       message: EzConfig.l10n.tsFontSize,
@@ -112,7 +109,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
               ? EzIconButton(
                   enabled: false,
                   tooltip: EzConfig.l10n.gMinimum,
-                  iconSize: iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize,
                   icon: Icon(
                     Icons.remove,
                     color: EzConfig.colors.outline,
@@ -120,8 +117,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    if (isDark == null || isDark == true) {
-                      for (final String key in darkKeys) {
+                    if (updateBoth || EzConfig.isDark) {
+                      for (final String key in _darkKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
 
@@ -143,8 +140,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    if (isDark == null || isDark == false) {
-                      for (final String key in lightKeys) {
+                    if (updateBoth || !EzConfig.isDark) {
+                      for (final String key in _lightKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
 
@@ -168,7 +165,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   },
                   tooltip:
                       '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
-                  iconSize: iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize,
                   icon: const Icon(Icons.remove),
                 ),
           EzConfig.rowMargin,
@@ -176,8 +173,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
           // Core
           GestureDetector(
             onLongPress: () async {
-              if (isDark == null || isDark == true) {
-                for (final String key in darkKeys) {
+              if (updateBoth || EzConfig.isDark) {
+                for (final String key in _darkKeys) {
                   final EzTextStyleProvider provider = providerFromKey(key);
 
                   await EzConfig.setDouble(key, fontSizeDefaults[key]!);
@@ -185,8 +182,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 }
               }
 
-              if (isDark == null || isDark == false) {
-                for (final String key in lightKeys) {
+              if (updateBoth || !EzConfig.isDark) {
+                for (final String key in _lightKeys) {
                   final EzTextStyleProvider provider = providerFromKey(key);
 
                   await EzConfig.setDouble(key, fontSizeDefaults[key]!);
@@ -196,7 +193,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
             },
             child: Icon(
               Icons.text_fields_sharp,
-              size: iconSize ?? titleProvider.value.fontSize,
+              size: iconSize,
               color: EzConfig.colors.onSurface,
             ),
           ),
@@ -207,7 +204,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
               ? EzIconButton(
                   enabled: false,
                   tooltip: EzConfig.l10n.gMaximum,
-                  iconSize: iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize,
                   icon: Icon(
                     Icons.add,
                     color: EzConfig.colors.outline,
@@ -215,8 +212,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    if (isDark == null || isDark == true) {
-                      for (final String key in darkKeys) {
+                    if (updateBoth || EzConfig.isDark) {
+                      for (final String key in _darkKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
 
@@ -238,8 +235,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    if (isDark == null || isDark == false) {
-                      for (final String key in lightKeys) {
+                    if (updateBoth || !EzConfig.isDark) {
+                      for (final String key in _lightKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
 
@@ -263,7 +260,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   },
                   tooltip:
                       '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
-                  iconSize: iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize,
                   icon: const Icon(Icons.add),
                 ),
         ],
