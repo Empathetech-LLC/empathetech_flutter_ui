@@ -1335,11 +1335,11 @@ abstract class EFUILang {
   /// **' Not too big, not too small?'**
   String get tsLabelP2;
 
-  /// No description provided for @tsResetAll.
+  /// No description provided for @tsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all text settings?'**
-  String get tsResetAll;
+  /// **'Reset {themeType} text styles?'**
+  String tsReset(Object themeType);
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

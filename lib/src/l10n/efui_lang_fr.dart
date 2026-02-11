@@ -669,5 +669,7 @@ class EFUILangFr extends EFUILang {
   String get tsLabelP2 => ' Ni trop gros, ni trop petits ?';
 
   @override
-  String get tsResetAll => 'Réinitialiser tous les paramètres de texte ?';
+  String tsReset(Object themeType) {
+    return 'Réinitialiser les styles de texte de $themeType ?';
+  }
 }

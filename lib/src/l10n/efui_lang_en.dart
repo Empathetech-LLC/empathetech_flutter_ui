@@ -665,7 +665,9 @@ class EFUILangEn extends EFUILang {
   String get tsLabelP2 => ' Not too big, not too small?';
 
   @override
-  String get tsResetAll => 'Reset all text settings?';
+  String tsReset(Object themeType) {
+    return 'Reset $themeType text styles?';
+  }
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -1329,5 +1331,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get tsLabelP2 => ' Not too big, not too small?';
 
   @override
-  String get tsResetAll => 'Reset all text settings?';
+  String tsReset(Object themeType) {
+    return 'Reset $themeType text styles?';
+  }
 }

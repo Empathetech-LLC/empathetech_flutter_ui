@@ -274,5 +274,5 @@
   "tsLabelLink": "the labels?",
   "tsLabelP2": " Not too big, not too small?",
 
-  "tsResetAll": "Reset all text settings?"
+  "tsReset": "Reset {themeType} text styles?"
 }
