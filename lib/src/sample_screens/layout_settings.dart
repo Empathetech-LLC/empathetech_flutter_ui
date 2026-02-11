@@ -112,7 +112,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
-        EzConfig.spacer,
+        EzConfig.margin,
 
         if (widget.beforeLayout != null) ...widget.beforeLayout!,
 

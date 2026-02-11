@@ -142,7 +142,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
-        EzConfig.spacer,
+        EzConfig.margin,
 
         if (widget.beforeDesign != null) ...widget.beforeDesign!,
 
