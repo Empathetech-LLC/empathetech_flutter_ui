@@ -11,19 +11,18 @@ class EzUnderlineSetting extends StatefulWidget {
   /// The [EzConfig] whose value is being updated
   final String configKey;
 
+  /// An alt to updateBoth
+  final String? mirrorKey;
+
   /// Optional callback to live update the [TextStyle] on your UI
   final void Function(bool underline) notifierCallback;
-
-  /// Optional override
-  /// Defaults to [ThemeData.iconButtonTheme]s value
-  final double? size;
 
   /// Standardized tool for toggling [TextDecoration.underline] in the [TextStyle.decoration] that matches [configKey]
   const EzUnderlineSetting({
     super.key,
     required this.configKey,
+    this.mirrorKey,
     required this.notifierCallback,
-    this.size,
   });
 
   @override
@@ -39,11 +38,13 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
         onPressed: () async {
           isUnderlined = !isUnderlined;
           await EzConfig.setBool(widget.configKey, isUnderlined);
+          if (widget.mirrorKey != null) {
+            await EzConfig.setBool(widget.mirrorKey!, isUnderlined);
+          }
           widget.notifierCallback(isUnderlined);
           setState(() {});
         },
         tooltip: EzConfig.l10n.tsUnderline,
-        iconSize: widget.size,
         icon: const Icon(Icons.format_underline),
       );
 }
