@@ -37,11 +37,9 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Define the build data //
 
-  late final int? _prefsValue = EzConfig.get(widget.configKey);
-
-  late Color currColor = (_prefsValue == null)
+  late Color currColor = (EzConfig.get(widget.configKey) == null)
       ? getLiveColor(widget.configKey)
-      : Color(_prefsValue);
+      : Color(EzConfig.get(widget.configKey));
 
   // Define custom functions //
 
@@ -65,67 +63,73 @@ class _ColorSettingState extends State<EzColorSetting> {
   Future<dynamic> changeColor(BuildContext context) {
     if (!widget.configKey.contains(textColorPrefix)) {
       // Base color //
-
       // Just open a color picker
+
       return openColorPicker(context);
-    } else {
-      // 'on' (aka text) color //
-      final String backgroundKey = widget.configKey.replaceAll(
-        textColorPrefix,
-        '',
-      );
+    }
+    // 'on' (aka text) color //
 
-      // Find the recommended contrast color for the background
-      final int? backgroundColorValue = EzConfig.get(backgroundKey);
-      final Color backgroundColor = (backgroundColorValue == null)
-          ? getLiveColor(backgroundKey)
-          : Color(backgroundColorValue);
+    // Get its background pair
+    final String backgroundKey = widget.configKey.replaceAll(
+      textColorPrefix,
+      '',
+    );
 
-      final int recommended = getTextColor(backgroundColor).toARGB32();
+    // Find the recommended contrast color for the background
+    final int? backgroundColorValue = EzConfig.get(backgroundKey);
+    final Color backgroundColor = (backgroundColorValue == null)
+        ? getLiveColor(backgroundKey)
+        : Color(backgroundColorValue);
 
-      // Just open a color picker if the value is already what's recommended
-      if (recommended == currColor.toARGB32()) return openColorPicker(context);
+    final int recommended = getTextColor(backgroundColor).toARGB32();
 
-      return showDialog(
-        context: context,
-        builder: (BuildContext dContext) => EzAlertDialog(
-          title: Text(
-            EzConfig.l10n.csRecommended,
-            textAlign: TextAlign.center,
-          ),
-          // Recommended color preview
-          contents: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: backgroundColor),
-              ),
-              child: CircleAvatar(
-                backgroundColor: Color(recommended),
-                radius: (EzConfig.iconSize / 2) + EzConfig.padding,
-              ),
+    // Just open a color picker if the value is already what's recommended
+    if (recommended == currColor.toARGB32()) return openColorPicker(context);
+
+    // Otherwise, let the user choose...
+    // Recommended, custom, or cancel (close)
+    return showDialog(
+      context: context,
+      builder: (BuildContext dContext) => EzAlertDialog(
+        title: Text(
+          EzConfig.l10n.csRecommended,
+          textAlign: TextAlign.center,
+        ),
+        // Recommended color preview
+        contents: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: backgroundColor),
             ),
-          ],
-          actions: ezActionPair(
-            context: context,
-            confirmMsg: EzConfig.l10n.csUseCustom,
-            onConfirm: () async {
+            child: CircleAvatar(
+              backgroundColor: Color(recommended),
+              radius: (EzConfig.iconSize / 2) + EzConfig.padding,
+            ),
+          ),
+        ],
+        actions: <EzMaterialAction>[
+          EzMaterialAction(
+            text: EzConfig.l10n.csUseCustom,
+            onPressed: () async {
               final dynamic chosen = await openColorPicker(context);
               if (dContext.mounted) Navigator.of(dContext).pop(chosen);
             },
-            confirmIsDestructive: true,
-            denyMsg: EzConfig.l10n.gYes,
-            denyIsDefault: true,
-            onDeny: () async {
+            isDestructiveAction: true,
+          ),
+          EzMaterialAction(
+            text: EzConfig.l10n.gYes,
+            onPressed: () async {
               // Update the user's configKey
-              currColor = Color(recommended);
               await EzConfig.setInt(widget.configKey, recommended);
+              setState(() => currColor = Color(recommended));
               if (dContext.mounted) Navigator.of(dContext).pop(recommended);
             },
+            isDefaultAction: true,
           ),
-        ),
-      );
-    }
+        ],
+      ),
+    );
   }
 
   /// Opens an [EzAlertDialog] for resetting the [widget.configKey] to default
