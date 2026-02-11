@@ -19,6 +19,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   final double initialValue;
 
   /// Only relevant if [plusMinus] is true
+  /// Absolute amount to scale on each click
   final double delta;
 
   /// Optionally include plus/minus buttons surrounding the [TextFormField]
