@@ -162,6 +162,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                         }
                       }
                     }
+
+                    EzConfig.pingRebuild(true);
                   },
                   tooltip:
                       '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
@@ -190,6 +192,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                   provider.resize(fontSizeDefaults[key]!);
                 }
               }
+
+              EzConfig.pingRebuild(true);
             },
             child: Icon(
               Icons.text_fields_sharp,
@@ -257,6 +261,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                         }
                       }
                     }
+
+                    EzConfig.pingRebuild(true);
                   },
                   tooltip:
                       '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',

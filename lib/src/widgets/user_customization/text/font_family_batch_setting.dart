@@ -142,6 +142,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             widget.bodyProvider.fuse(fontFamily);
             widget.labelProvider.fuse(fontFamily);
 
+            EzConfig.pingRebuild(true);
             setState(() {});
           },
         ),
