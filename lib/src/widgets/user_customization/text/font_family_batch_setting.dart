@@ -31,9 +31,6 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
   /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzLabelStyleProvider labelProvider;
 
-  /// Optional [EzDropdownMenu.iconSize] passthrough
-  final double? iconSize;
-
   /// Standardized tool for updating the 5 [TextStyle.fontFamily]s
   const EzFontFamilyBatchSetting({
     super.key,
@@ -43,7 +40,6 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
     required this.titleProvider,
     required this.bodyProvider,
     required this.labelProvider,
-    this.iconSize,
   });
 
   @override
@@ -114,7 +110,6 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
         message: EzConfig.l10n.tsFontFamily,
         child: EzDropdownMenu<String>(
           widthEntries: <String>[fingerPaint],
-          iconSize: widget.iconSize,
           textStyle: widget.bodyProvider.value,
           dropdownMenuEntries: googleStyles.entries
               .map((MapEntry<String, TextStyle> entry) =>
