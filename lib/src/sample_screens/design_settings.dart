@@ -474,7 +474,15 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         if (widget.includeScroll) ...<Widget>[
           EzSwitchPair(
             valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
-            afterChanged: (_) => EzConfig.redrawUI(redraw),
+            afterChanged: (bool? value) async {
+              if (value == null) return;
+              if (widget.updateBoth) {
+                await EzConfig.setBool(
+                    EzConfig.isDark ? lightHideScrollKey : darkHideScrollKey,
+                    value);
+              }
+              await EzConfig.redrawUI(redraw);
+            },
             text: EzConfig.l10n.lsScroll,
           ),
           EzConfig.spacer,

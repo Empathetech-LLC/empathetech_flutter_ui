@@ -3,9 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
-import 'images/image_editor_io.dart'
-    if (dart.library.html) 'images/image_editor_web.dart';
+import '../../../../empathetech_flutter_ui.dart';
+import './image_editor_io.dart'
+    if (dart.library.html) './image_editor_web.dart';
 
 import 'dart:io';
 import 'dart:async';

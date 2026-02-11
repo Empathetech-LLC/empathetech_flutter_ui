@@ -3,44 +3,16 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// Enumerator for selecting which piece of the layout is being updated
-/// This will determine the preview [Widget]s
-enum EzLayoutSettingType { margin, padding, spacing }
+class EzSpacingSetting extends StatefulWidget {
+  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
+  final void Function() onUpdate;
 
-/// Get human readable name for [settingType]
-String ezLstName(BuildContext context, EzLayoutSettingType settingType) {
-  switch (settingType) {
-    case EzLayoutSettingType.margin:
-      return EzConfig.l10n.lsMargin;
-    case EzLayoutSettingType.padding:
-      return EzConfig.l10n.lsPadding;
-    case EzLayoutSettingType.spacing:
-      return EzConfig.l10n.lsSpacing;
-  }
-}
-
-/// Get the [Icon] for [settingType]
-Icon ezLstIcon(EzLayoutSettingType settingType) {
-  switch (settingType) {
-    case EzLayoutSettingType.margin:
-      return EzIcon(Icons.margin);
-    case EzLayoutSettingType.padding:
-      return EzIcon(Icons.padding);
-    case EzLayoutSettingType.spacing:
-      return EzIcon(Icons.space_bar);
-  }
-}
-
-class EzLayoutSetting extends StatefulWidget {
-  /// The [EzConfig] key whose value is being updated
-  final String configKey;
-
-  /// enum for determining the preview Widget(s)
-  final EzLayoutSettingType type;
+  /// Whether to update both themes
+  final bool setBoth;
 
   /// Smallest value that can be set
   final double min;
@@ -60,12 +32,11 @@ class EzLayoutSetting extends StatefulWidget {
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? bodyStyle;
 
-  /// Standardized [EzElevatedIconButton] for updating layout values in [EzConfig]
-  /// Supports all [EzLayoutSettingType]s
-  const EzLayoutSetting({
+  /// An easy to use spacing setting
+  const EzSpacingSetting({
     super.key,
-    required this.configKey,
-    required this.type,
+    required this.onUpdate,
+    required this.setBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -75,10 +46,10 @@ class EzLayoutSetting extends StatefulWidget {
   });
 
   @override
-  State<EzLayoutSetting> createState() => _LayoutSettingState();
+  State<EzSpacingSetting> createState() => _LayoutSettingState();
 }
 
-class _LayoutSettingState extends State<EzLayoutSetting> {
+class _LayoutSettingState extends State<EzSpacingSetting> {
   // Define the build data //
 
   late double currValue = EzConfig.get(widget.configKey);
@@ -86,13 +57,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   // Define build functions //
 
-  /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
+  /// Return the preview Widget(s) for the passed [EzSpacingSettingType]
   List<Widget> buildPreview(BuildContext context) {
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
       // Margin
-      case EzLayoutSettingType.margin:
+      case EzSpacingSettingType.margin:
         late final String? backgroundImagePath = EzConfig.get(
             EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
 
@@ -137,7 +108,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ];
 
       // Padding
-      case EzLayoutSettingType.padding:
+      case EzSpacingSettingType.padding:
         return <Widget>[
           EzConfig.spacer,
 
@@ -170,7 +141,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ];
 
       // Spacing
-      case EzLayoutSettingType.spacing:
+      case EzSpacingSettingType.spacing:
         return <Widget>[
           // Preview 1
           EzSpacer(space: currValue),

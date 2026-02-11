@@ -75,6 +75,11 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
     ezWindowNamer(EzConfig.l10n.lsPageTitle);
   }
 
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
+  }
+
   // Return the build //
 
   @override
@@ -163,6 +168,22 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                 EzConfig.separator,
 
                 // Hide scroll
+                EzSwitchPair(
+                  valueKey:
+                      EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
+                  afterChanged: (bool? value) async {
+                    if (value == null) return;
+                    if (widget.updateBoth) {
+                      await EzConfig.setBool(
+                          EzConfig.isDark
+                              ? lightHideScrollKey
+                              : darkHideScrollKey,
+                          value);
+                    }
+                    await EzConfig.redrawUI(redraw);
+                  },
+                  text: EzConfig.l10n.lsScroll,
+                ),
                 EzSwitchPair(
                   text: EzConfig.l10n.lsScroll,
                   valueKey: lightHideScrollKey,
