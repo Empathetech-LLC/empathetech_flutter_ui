@@ -42,11 +42,11 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   /// Required for max/min awareness
   final EzLabelStyleProvider labelProvider;
 
-  /// Amount to scale on each click
+  /// Amount to scale (relative to the default value) on each click
   final double delta;
 
   /// Must have each iteration of [EzTextStyleProvider] in this parent's widget tree
-  /// Updates all [TextStyle.fontSize]s at once by [delta]
+  /// Updates all [TextStyle.fontSize]s at once by [delta], calculated individually based on each [TextStyle.fontSize]s default value
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
   EzFontDoubleBatchSetting({
     super.key,
@@ -93,6 +93,15 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
     }
   }
 
+  bool rebuildCheck() =>
+      EzConfig.styles.displayLarge?.fontSize !=
+          displayProvider.value.fontSize ||
+      EzConfig.styles.headlineLarge?.fontSize !=
+          headlineProvider.value.fontSize ||
+      EzConfig.styles.titleLarge?.fontSize != titleProvider.value.fontSize ||
+      EzConfig.styles.bodyLarge?.fontSize != bodyProvider.value.fontSize ||
+      EzConfig.styles.labelLarge?.fontSize != labelProvider.value.fontSize;
+
   // Return the build //
 
   @override
@@ -126,7 +135,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                             provider.value.fontSize ?? EzConfig.get(key);
 
                         if (currSize != fontSizeMins[key]) {
-                          final double newSize = currSize * (1 - delta);
+                          final double newSize =
+                              currSize - (fontSizeDefaults[key]! * delta);
                           final double sizeLimit = fontSizeMins[key]!;
 
                           if (newSize >= sizeLimit) {
@@ -149,7 +159,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                             provider.value.fontSize ?? EzConfig.get(key);
 
                         if (currSize != fontSizeMins[key]) {
-                          final double newSize = currSize * (1 - delta);
+                          final double newSize =
+                              currSize - (fontSizeDefaults[key]! * delta);
                           final double sizeLimit = fontSizeMins[key]!;
 
                           if (newSize >= sizeLimit) {
@@ -163,7 +174,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    EzConfig.pingRebuild(true);
+                    EzConfig.pingRebuild(rebuildCheck());
                   },
                   tooltip:
                       '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
@@ -193,7 +204,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 }
               }
 
-              EzConfig.pingRebuild(true);
+              EzConfig.pingRebuild(rebuildCheck());
             },
             child: Icon(
               Icons.text_fields_sharp,
@@ -225,7 +236,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                             provider.value.fontSize ?? EzConfig.get(key);
 
                         if (currSize != fontSizeMaxes[key]) {
-                          final double newSize = currSize * (1 + delta);
+                          final double newSize =
+                              currSize + (fontSizeDefaults[key]! * delta);
                           final double sizeLimit = fontSizeMaxes[key]!;
 
                           if (newSize <= sizeLimit) {
@@ -248,7 +260,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                             provider.value.fontSize ?? EzConfig.get(key);
 
                         if (currSize != fontSizeMaxes[key]) {
-                          final double newSize = currSize * (1 + delta);
+                          final double newSize =
+                              currSize + (fontSizeDefaults[key]! * delta);
                           final double sizeLimit = fontSizeMaxes[key]!;
 
                           if (newSize <= sizeLimit) {
@@ -262,7 +275,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    EzConfig.pingRebuild(true);
+                    EzConfig.pingRebuild(rebuildCheck());
                   },
                   tooltip:
                       '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
