@@ -12,6 +12,9 @@ class EzFontFamilySetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
   final String configKey;
 
+  /// An alt to updateBoth
+  final String? mirrorKey;
+
   /// [Provider] tracking the [TextStyle] to be updated
   /// [EzFontFamilySetting] uses [EzTextStyleProvider.fuse]
   final EzTextStyleProvider provider;
@@ -28,6 +31,7 @@ class EzFontFamilySetting extends StatefulWidget {
   const EzFontFamilySetting({
     super.key,
     required this.configKey,
+    this.mirrorKey,
     required this.provider,
     required this.baseStyle,
     this.tooltip,
@@ -38,48 +42,43 @@ class EzFontFamilySetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
-  // Define the build data  //
+  // Return the build //
 
   late String? currFontFamily = widget.provider.value.fontFamily == null
       ? null
       : ezClassToCamel(ezFirstWord(widget.provider.value.fontFamily!));
 
-  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
-  late final List<DropdownMenuEntry<String>> entries =
-      googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
-    return DropdownMenuEntry<String>(
-      value: entry.key,
-      label: ezCamelToTitle(entry.key),
-      style: TextButton.styleFrom(textStyle: entry.value),
-    );
-  }).toList();
-
-  // Return the build //
-
   @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: widget.tooltip ?? EzConfig.l10n.tsFontFamily,
-      child: EzDropdownMenu<String>(
-        widthEntries: <String>[fingerPaint],
-        textStyle: fuseWithGFont(
-          starter: widget.baseStyle,
-          gFont: currFontFamily ?? EzConfig.get(widget.configKey),
+  Widget build(BuildContext context) => Tooltip(
+        message: widget.tooltip ?? EzConfig.l10n.tsFontFamily,
+        child: EzDropdownMenu<String>(
+          widthEntries: <String>[fingerPaint],
+          textStyle: fuseWithGFont(
+            starter: widget.baseStyle,
+            gFont: currFontFamily ?? EzConfig.get(widget.configKey),
+          ),
+          dropdownMenuEntries:
+              googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
+            return DropdownMenuEntry<String>(
+              value: entry.key,
+              label: ezCamelToTitle(entry.key),
+              style: TextButton.styleFrom(textStyle: entry.value),
+            );
+          }).toList(),
+          enableSearch: false,
+          initialSelection: currFontFamily,
+          onSelected: (String? fontFamily) async {
+            if (fontFamily == null) return;
+            currFontFamily = fontFamily;
+
+            await EzConfig.setString(widget.configKey, fontFamily);
+            if (widget.mirrorKey != null) {
+              await EzConfig.setString(widget.mirrorKey!, fontFamily);
+            }
+
+            widget.provider.fuse(fontFamily);
+            setState(() {});
+          },
         ),
-        dropdownMenuEntries: entries,
-        enableSearch: false,
-        initialSelection: currFontFamily,
-        onSelected: (String? fontFamily) async {
-          if (fontFamily == null) return;
-          currFontFamily = fontFamily;
-
-          await EzConfig.setString(widget.configKey, fontFamily);
-
-          widget.provider.fuse(fontFamily);
-
-          setState(() {});
-        },
-      ),
-    );
-  }
+      );
 }
