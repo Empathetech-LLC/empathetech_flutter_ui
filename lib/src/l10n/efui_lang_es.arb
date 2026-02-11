@@ -228,7 +228,7 @@
 
   "lsScroll": "Ocultar las barras de desplazamiento",
 
-  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
+  "lsReset": "¿Restablecer el esquema de {themeType}?",
 
 
 

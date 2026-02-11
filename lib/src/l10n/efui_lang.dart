@@ -1125,11 +1125,11 @@ abstract class EFUILang {
   /// **'Hide scrollbars'**
   String get lsScroll;
 
-  /// No description provided for @lsResetAll.
+  /// No description provided for @lsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all layout settings?'**
-  String get lsResetAll;
+  /// **'Reset {themeType} layout?'**
+  String lsReset(Object themeType);
 
   /// No description provided for @tsPageTitle.
   ///

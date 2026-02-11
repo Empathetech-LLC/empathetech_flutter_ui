@@ -539,7 +539,7 @@ class EFUILangFr extends EFUILang {
 
   @override
   String dsReset(Object themeType) {
-    return 'Réinitialiser le désign de $themeType ?';
+    return 'Réinitialiser le design de $themeType ?';
   }
 
   @override
@@ -558,8 +558,9 @@ class EFUILangFr extends EFUILang {
   String get lsScroll => 'Masquer les barres de défilement';
 
   @override
-  String get lsResetAll =>
-      'Réinitialiser tous les paramètres de mise en page ?';
+  String lsReset(Object themeType) {
+    return 'Réinitialiser la mise en page du $themeType ?';
+  }
 
   @override
   String get tsPageTitle => 'Paramètres de texte';

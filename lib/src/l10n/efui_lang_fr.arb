@@ -216,7 +216,7 @@
   "dsRotateLeft": "Tourner à gauche",
   "dsRotateRight": "Tourner à droite",
 
-  "dsReset": "Réinitialiser le désign de {themeType} ?",
+  "dsReset": "Réinitialiser le design de {themeType} ?",
 
 
 
@@ -228,7 +228,7 @@
 
   "lsScroll": "Masquer les barres de défilement",
 
-  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
+  "lsReset": "Réinitialiser la mise en page du {themeType} ?",
 
 
 

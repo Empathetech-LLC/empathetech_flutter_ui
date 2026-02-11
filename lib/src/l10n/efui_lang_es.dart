@@ -558,7 +558,9 @@ class EFUILangEs extends EFUILang {
   String get lsScroll => 'Ocultar las barras de desplazamiento';
 
   @override
-  String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
+  String lsReset(Object themeType) {
+    return '¿Restablecer el esquema de $themeType?';
+  }
 
   @override
   String get tsPageTitle => 'Configuración del texto';

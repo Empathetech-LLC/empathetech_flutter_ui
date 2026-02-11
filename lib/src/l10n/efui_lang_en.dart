@@ -554,7 +554,9 @@ class EFUILangEn extends EFUILang {
   String get lsScroll => 'Hide scrollbars';
 
   @override
-  String get lsResetAll => 'Reset all layout settings?';
+  String lsReset(Object themeType) {
+    return 'Reset $themeType layout?';
+  }
 
   @override
   String get tsPageTitle => 'Text settings';
@@ -1210,7 +1212,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get lsScroll => 'Hide scrollbars';
 
   @override
-  String get lsResetAll => 'Reset all layout settings?';
+  String lsReset(Object themeType) {
+    return 'Reset $themeType layout?';
+  }
 
   @override
   String get tsPageTitle => 'Text settings';

@@ -228,7 +228,7 @@
 
   "lsScroll": "Hide scrollbars",
 
-  "lsResetAll": "Reset all layout settings?",
+  "lsReset": "Reset {themeType} layout?",
 
 
 
