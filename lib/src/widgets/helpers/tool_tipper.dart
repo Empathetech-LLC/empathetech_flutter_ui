@@ -77,7 +77,6 @@ class EzToolTipper extends StatelessWidget {
           isTooltipVisible = !isTooltipVisible;
         },
         child: Tooltip(
-          key: key,
           waitDuration: Duration.zero,
           triggerMode: TooltipTriggerMode.tap,
           enableTapToDismiss: false,
