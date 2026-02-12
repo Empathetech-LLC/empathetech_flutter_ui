@@ -941,6 +941,9 @@ class CreoleWidgetsLocalizations extends WidgetsLocalizations {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
+  String get radioButtonUnselectedLabel => 'Pa chwazi';
+
+  @override
   String get reorderItemUp => 'Monte';
 
   @override
