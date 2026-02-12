@@ -140,6 +140,7 @@ export 'src/widgets/user_customization/text/font_family_setting.dart';
 export 'src/widgets/user_customization/text/icon_size_setting.dart';
 export 'src/widgets/user_customization/text/italic_setting.dart';
 export 'src/widgets/user_customization/text/providers.dart';
+export 'src/widgets/user_customization/text/type_enum.dart';
 export 'src/widgets/user_customization/text/underline_setting.dart';
 
 // Global
