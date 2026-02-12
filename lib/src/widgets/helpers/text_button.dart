@@ -144,7 +144,7 @@ class EzTextIconButton extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// [TextButton.autofocus] passthrough
-  final bool? autofocus;
+  final bool autofocus;
 
   /// [TextButton.clipBehavior] passthrough
   final Clip? clipBehavior;
@@ -176,7 +176,7 @@ class EzTextIconButton extends StatefulWidget {
     this.decorationColor,
     this.style,
     this.focusNode,
-    this.autofocus,
+    this.autofocus = false,
     this.clipBehavior,
     this.statesController,
     required this.icon,

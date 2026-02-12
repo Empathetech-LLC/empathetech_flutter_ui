@@ -164,7 +164,7 @@ class EzElevatedIconButton extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// [ElevatedButton.autofocus] passthrough
-  final bool? autofocus;
+  final bool autofocus;
 
   /// [ElevatedButton.clipBehavior] passthrough
   final Clip? clipBehavior;
@@ -199,7 +199,7 @@ class EzElevatedIconButton extends StatefulWidget {
     this.decorationColor,
     this.style,
     this.focusNode,
-    this.autofocus,
+    this.autofocus = false,
     this.clipBehavior,
     this.statesController,
     required this.icon,
