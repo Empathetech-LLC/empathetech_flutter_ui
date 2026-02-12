@@ -149,7 +149,6 @@ class EzDropdownMenu<T> extends StatelessWidget {
         ),
       ),
       child: DropdownMenu<T>(
-        key: key,
         enabled: enabled,
         width: width ??
             (widthEntries == null
