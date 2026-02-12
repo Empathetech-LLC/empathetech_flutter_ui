@@ -8,20 +8,20 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzBoldSetting extends StatefulWidget {
-  /// The [EzConfig] whose value is being updated
-  final String configKey;
+  /// Which [TextStyle] to update
+  final EzTextSettingType type;
 
-  /// An alt to updateBoth
-  final String? mirrorKey;
-
-  /// Optional callback to live update the [TextStyle] on your UI
+  /// Callback to live update the [TextStyle] on your UI
   final void Function(bool bold) notifierCallback;
 
-  /// Standardized tool for toggling [FontWeight.bold] in the [TextStyle.fontWeight] that matches [configKey]
+  /// Whether both [ThemeMode]s should be updated
+  final bool updateBoth;
+
+  /// Standardized tool for toggling [FontWeight.bold] in the [TextStyle.fontWeight] that matches [type]
   const EzBoldSetting({
-    super.key,
-    required this.configKey,
-    this.mirrorKey,
+    required super.key,
+    required this.type,
+    required this.updateBoth,
     required this.notifierCallback,
   });
 
@@ -30,18 +30,24 @@ class EzBoldSetting extends StatefulWidget {
 }
 
 class _EzBoldSettingState extends State<EzBoldSetting> {
-  late bool isBold = EzConfig.get(widget.configKey) ?? false;
+  late bool isBold = EzConfig.get(widget.type.boldKey) ?? false;
 
   @override
   Widget build(BuildContext context) => EzIconButton(
         fauxDisabled: !isBold,
         onPressed: () async {
           isBold = !isBold;
-          await EzConfig.setBool(widget.configKey, isBold);
-          if (widget.mirrorKey != null) {
-            await EzConfig.setBool(widget.mirrorKey!, isBold);
+
+          await EzConfig.setBool(widget.type.boldKey, isBold);
+          if (widget.updateBoth) {
+            await EzConfig.setBool(widget.type.boldMirror, isBold);
           }
+
           widget.notifierCallback(isBold);
+          if (context.mounted) {
+            EzConfig.pingRebuild(isBold == widget.type.liveBold(context));
+          }
+
           setState(() {});
         },
         tooltip: EzConfig.l10n.tsBold,

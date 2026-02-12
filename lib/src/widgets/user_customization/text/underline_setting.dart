@@ -8,20 +8,20 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzUnderlineSetting extends StatefulWidget {
-  /// The [EzConfig] whose value is being updated
-  final String configKey;
+  /// Which [TextStyle] to update
+  final EzTextSettingType type;
 
-  /// An alt to updateBoth
-  final String? mirrorKey;
-
-  /// Optional callback to live update the [TextStyle] on your UI
+  /// Callback to live update the [TextStyle] on your UI
   final void Function(bool underline) notifierCallback;
 
-  /// Standardized tool for toggling [TextDecoration.underline] in the [TextStyle.decoration] that matches [configKey]
+  /// Whether both [ThemeMode]s should be updated
+  final bool updateBoth;
+
+  /// Standardized tool for toggling [TextDecoration.underline] in the [TextStyle.decoration] that matches [type]
   const EzUnderlineSetting({
-    super.key,
-    required this.configKey,
-    this.mirrorKey,
+    required super.key,
+    required this.type,
+    required this.updateBoth,
     required this.notifierCallback,
   });
 
@@ -30,18 +30,25 @@ class EzUnderlineSetting extends StatefulWidget {
 }
 
 class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
-  late bool isUnderlined = EzConfig.get(widget.configKey) ?? false;
+  late bool isUnderlined = EzConfig.get(widget.type.underlineKey) ?? false;
 
   @override
   Widget build(BuildContext context) => EzIconButton(
         fauxDisabled: !isUnderlined,
         onPressed: () async {
           isUnderlined = !isUnderlined;
-          await EzConfig.setBool(widget.configKey, isUnderlined);
-          if (widget.mirrorKey != null) {
-            await EzConfig.setBool(widget.mirrorKey!, isUnderlined);
+
+          await EzConfig.setBool(widget.type.underlineKey, isUnderlined);
+          if (widget.updateBoth) {
+            await EzConfig.setBool(widget.type.underlineMirror, isUnderlined);
           }
+
           widget.notifierCallback(isUnderlined);
+          if (context.mounted) {
+            EzConfig.pingRebuild(
+                isUnderlined == widget.type.liveUnderline(context));
+          }
+
           setState(() {});
         },
         tooltip: EzConfig.l10n.tsUnderline,

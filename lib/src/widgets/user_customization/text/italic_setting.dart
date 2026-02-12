@@ -8,20 +8,20 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzItalicSetting extends StatefulWidget {
-  /// The [EzConfig] whose value is being updated
-  final String configKey;
+  /// Which [TextStyle] to update
+  final EzTextSettingType type;
 
-  /// An alt to updateBoth
-  final String? mirrorKey;
-
-  /// Optional callback to live update the [TextStyle] on your UI
+  /// Callback to live update the [TextStyle] on your UI
   final void Function(bool italic) notifierCallback;
 
-  /// Standardized tool for toggling [FontStyle.italic] in the [TextStyle.fontStyle] that matches [configKey]
+  /// Whether both [ThemeMode]s should be updated
+  final bool updateBoth;
+
+  /// Standardized tool for toggling [FontStyle.italic] in the [TextStyle.fontStyle] that matches [type]
   const EzItalicSetting({
-    super.key,
-    required this.configKey,
-    this.mirrorKey,
+    required super.key,
+    required this.type,
+    required this.updateBoth,
     required this.notifierCallback,
   });
 
@@ -30,18 +30,24 @@ class EzItalicSetting extends StatefulWidget {
 }
 
 class _EzItalicSettingState extends State<EzItalicSetting> {
-  late bool isItalic = EzConfig.get(widget.configKey) ?? false;
+  late bool isItalic = EzConfig.get(widget.type.italicKey) ?? false;
 
   @override
   Widget build(BuildContext context) => EzIconButton(
         fauxDisabled: !isItalic,
         onPressed: () async {
           isItalic = !isItalic;
-          await EzConfig.setBool(widget.configKey, isItalic);
-          if (widget.mirrorKey != null) {
-            await EzConfig.setBool(widget.mirrorKey!, isItalic);
+
+          await EzConfig.setBool(widget.type.italicKey, isItalic);
+          if (widget.updateBoth) {
+            await EzConfig.setBool(widget.type.italicMirror, isItalic);
           }
+
           widget.notifierCallback(isItalic);
+          if (context.mounted) {
+            EzConfig.pingRebuild(isItalic == widget.type.liveItalic(context));
+          }
+
           setState(() {});
         },
         tooltip: EzConfig.l10n.tsItalic,
