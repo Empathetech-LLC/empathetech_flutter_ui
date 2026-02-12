@@ -6,77 +6,73 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class EzFontFamilySetting extends StatefulWidget {
-  /// The [EzConfig] key whose value is being updated
-  final String configKey;
+class EzFontSetting extends StatefulWidget {
+  /// Which [TextStyle] to update
+  final EzTextSettingType type;
 
-  /// An alt to updateBoth
-  final String? mirrorKey;
+  /// Callback to live update the [TextStyle] on your UI
+  final void Function(String font) notifierCallback;
 
-  /// [Provider] tracking the [TextStyle] to be updated
-  /// [EzFontFamilySetting] uses [EzTextStyleProvider.fuse]
-  final EzTextStyleProvider provider;
-
-  /// [Tooltip.message] passthrough
-  final String? tooltip;
+  /// Whether both [ThemeMode]s should be updated
+  final bool updateBoth;
 
   /// Base [TextStyle] for the [DropdownMenu]
   /// Will be provided to [fuseWithGFont] alongside the current selection
   final TextStyle baseStyle;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey] and [provider] combo
-  /// [EzFontFamilySetting] options are built from [googleStyles]
-  const EzFontFamilySetting({
-    super.key,
-    required this.configKey,
-    this.mirrorKey,
-    required this.provider,
+  /// Standardized tool for updating the [TextStyle.fontFamily] that matches [type]
+  /// [EzFontSetting] options are built from [googleStyles]
+  const EzFontSetting({
+    required super.key,
+    required this.type,
     required this.baseStyle,
-    this.tooltip,
+    required this.updateBoth,
+    required this.notifierCallback,
   });
 
   @override
-  State<EzFontFamilySetting> createState() => _FontFamilySettingState();
+  State<EzFontSetting> createState() => _FontSettingState();
 }
 
-class _FontFamilySettingState extends State<EzFontFamilySetting> {
-  // Return the build //
-
-  late String? currFontFamily = widget.provider.value.fontFamily == null
+class _FontSettingState extends State<EzFontSetting> {
+  late String? currFont = EzConfig.get(widget.type.fontKey) == null
       ? null
-      : ezClassToCamel(ezFirstWord(widget.provider.value.fontFamily!));
+      : ezClassToCamel(ezFirstWord(EzConfig.get(widget.type.fontKey)));
 
   @override
   Widget build(BuildContext context) => Tooltip(
-        message: widget.tooltip ?? EzConfig.l10n.tsFontFamily,
+        message: EzConfig.l10n.tsFontFamily,
         child: EzDropdownMenu<String>(
           widthEntries: <String>[fingerPaint],
           textStyle: fuseWithGFont(
             starter: widget.baseStyle,
-            gFont: currFontFamily ?? EzConfig.get(widget.configKey),
+            gFont: currFont ?? EzConfig.get(widget.type.fontKey),
           ),
-          dropdownMenuEntries:
-              googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
-            return DropdownMenuEntry<String>(
-              value: entry.key,
-              label: ezCamelToTitle(entry.key),
-              style: TextButton.styleFrom(textStyle: entry.value),
-            );
-          }).toList(),
+          dropdownMenuEntries: googleStyles.entries
+              .map((MapEntry<String, TextStyle> entry) =>
+                  DropdownMenuEntry<String>(
+                    value: entry.key,
+                    label: ezCamelToTitle(entry.key),
+                    style: TextButton.styleFrom(textStyle: entry.value),
+                  ))
+              .toList(),
           enableSearch: false,
-          initialSelection: currFontFamily,
-          onSelected: (String? fontFamily) async {
-            if (fontFamily == null) return;
-            currFontFamily = fontFamily;
+          initialSelection: currFont,
+          onSelected: (String? font) async {
+            if (font == null) return;
+            currFont = font;
 
-            await EzConfig.setString(widget.configKey, fontFamily);
-            if (widget.mirrorKey != null) {
-              await EzConfig.setString(widget.mirrorKey!, fontFamily);
+            await EzConfig.setString(widget.type.fontKey, font);
+            if (widget.updateBoth) {
+              await EzConfig.setString(widget.type.fontMirror, font);
             }
 
-            widget.provider.fuse(fontFamily);
+            widget.notifierCallback(font);
+            if (context.mounted) {
+              EzConfig.pingRebuild(font == widget.type.liveFont(context));
+            }
+
             setState(() {});
           },
         ),
