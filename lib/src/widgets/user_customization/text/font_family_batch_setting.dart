@@ -89,7 +89,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   // Init //
 
-  String? currFontFamily;
+  String? currFont;
   bool isUniform = false;
 
   @override
@@ -100,7 +100,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
         EzConfig.isDark ? darkFonts : lightFonts;
     isUniform = currFonts.values
         .every((String? font) => font == currFonts.values.first);
-    if (isUniform) currFontFamily = currFonts.values.first;
+    if (isUniform) currFont = currFonts.values.first;
   }
 
   // Return the build //
@@ -120,14 +120,14 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
                   ))
               .toList(),
           enableSearch: false,
-          initialSelection: currFontFamily,
+          initialSelection: currFont,
           onSelected: (String? fontFamily) async {
             if (fontFamily == null) return;
 
             if (!isUniform) {
               isUniform = true;
             }
-            currFontFamily = fontFamily;
+            currFont = fontFamily;
 
             final Map<String, String?> currFonts = widget.updateBoth
                 ? <String, String?>{...darkFonts, ...lightFonts}
