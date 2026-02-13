@@ -94,13 +94,11 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   }
 
   bool rebuildCheck() =>
-      EzConfig.styles.displayLarge?.fontSize !=
-          displayProvider.value.fontSize ||
-      EzConfig.styles.headlineLarge?.fontSize !=
-          headlineProvider.value.fontSize ||
-      EzConfig.styles.titleLarge?.fontSize != titleProvider.value.fontSize ||
-      EzConfig.styles.bodyLarge?.fontSize != bodyProvider.value.fontSize ||
-      EzConfig.styles.labelLarge?.fontSize != labelProvider.value.fontSize;
+      EzConfig.styles.displayLarge != displayProvider.value ||
+      EzConfig.styles.headlineLarge != headlineProvider.value ||
+      EzConfig.styles.titleLarge != titleProvider.value ||
+      EzConfig.styles.bodyLarge != bodyProvider.value ||
+      EzConfig.styles.labelLarge != labelProvider.value;
 
   // Return the build //
 
