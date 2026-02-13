@@ -45,7 +45,7 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
 
           widget.notifierCallback(isItalic);
           if (context.mounted) {
-            EzConfig.pingRebuild(isItalic != widget.type.liveItalic(context));
+            EzConfig.pingRebuild(widget.type.rebuildCheck(context));
           }
 
           setState(() {});

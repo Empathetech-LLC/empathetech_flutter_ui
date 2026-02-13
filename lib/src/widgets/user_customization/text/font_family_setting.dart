@@ -11,9 +11,6 @@ class EzFontSetting extends StatefulWidget {
   /// Which [TextStyle] to update
   final EzTextSettingType type;
 
-  /// Callback to live update the [TextStyle] on your UI
-  final void Function(String font) notifierCallback;
-
   /// Whether both [ThemeMode]s should be updated
   final bool updateBoth;
 
@@ -21,13 +18,16 @@ class EzFontSetting extends StatefulWidget {
   /// Will be provided to [fuseWithGFont] alongside the current selection
   final TextStyle baseStyle;
 
+  /// Callback to live update the [TextStyle] on your UI
+  final void Function(String font) notifierCallback;
+
   /// Standardized tool for updating the [TextStyle.fontFamily] that matches [type]
   /// [EzFontSetting] options are built from [googleStyles]
   const EzFontSetting({
     required super.key,
     required this.type,
-    required this.baseStyle,
     required this.updateBoth,
+    required this.baseStyle,
     required this.notifierCallback,
   });
 
@@ -70,7 +70,7 @@ class _FontSettingState extends State<EzFontSetting> {
 
             widget.notifierCallback(font);
             if (context.mounted) {
-              EzConfig.pingRebuild(font != widget.type.liveFont(context));
+              EzConfig.pingRebuild(widget.type.rebuildCheck(context));
             }
 
             setState(() {});
