@@ -6,7 +6,6 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum EzTextSettingType { display, headline, title, body, label }
@@ -185,28 +184,6 @@ extension EzTSTConfig on EzTextSettingType {
         return EzConfig.isDark
             ? lightLabelUnderlinedKey
             : darkLabelUnderlinedKey;
-    }
-  }
-
-  // Shared //
-
-  bool rebuildCheck(BuildContext context) {
-    switch (this) {
-      case EzTextSettingType.display:
-        return EzConfig.styles.displayLarge !=
-            Provider.of<EzDisplayStyleProvider>(context, listen: false).value;
-      case EzTextSettingType.headline:
-        return EzConfig.styles.headlineLarge !=
-            Provider.of<EzHeadlineStyleProvider>(context, listen: false).value;
-      case EzTextSettingType.title:
-        return EzConfig.styles.titleLarge !=
-            Provider.of<EzTitleStyleProvider>(context, listen: false).value;
-      case EzTextSettingType.body:
-        return EzConfig.styles.bodyLarge !=
-            Provider.of<EzBodyStyleProvider>(context, listen: false).value;
-      case EzTextSettingType.label:
-        return EzConfig.styles.labelLarge !=
-            Provider.of<EzLabelStyleProvider>(context, listen: false).value;
     }
   }
 }
