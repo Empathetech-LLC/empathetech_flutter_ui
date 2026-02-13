@@ -6,6 +6,7 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum EzTextSettingType { display, headline, title, body, label }
@@ -40,26 +41,6 @@ extension EzTSTConfig on EzTextSettingType {
         return EzConfig.isDark ? lightBodyBoldedKey : darkBodyBoldedKey;
       case EzTextSettingType.label:
         return EzConfig.isDark ? lightLabelBoldedKey : darkLabelBoldedKey;
-    }
-  }
-
-  bool liveBold(BuildContext context) {
-    switch (this) {
-      case EzTextSettingType.display:
-        return Theme.of(context).textTheme.displayLarge?.fontWeight ==
-            FontWeight.bold;
-      case EzTextSettingType.headline:
-        return Theme.of(context).textTheme.headlineLarge?.fontWeight ==
-            FontWeight.bold;
-      case EzTextSettingType.title:
-        return Theme.of(context).textTheme.titleLarge?.fontWeight ==
-            FontWeight.bold;
-      case EzTextSettingType.body:
-        return Theme.of(context).textTheme.bodyLarge?.fontWeight ==
-            FontWeight.bold;
-      case EzTextSettingType.label:
-        return Theme.of(context).textTheme.labelLarge?.fontWeight ==
-            FontWeight.bold;
     }
   }
 
@@ -111,21 +92,6 @@ extension EzTSTConfig on EzTextSettingType {
     }
   }
 
-  String? liveFont(BuildContext context) {
-    switch (this) {
-      case EzTextSettingType.display:
-        return Theme.of(context).textTheme.displayLarge?.fontFamily;
-      case EzTextSettingType.headline:
-        return Theme.of(context).textTheme.headlineLarge?.fontFamily;
-      case EzTextSettingType.title:
-        return Theme.of(context).textTheme.titleLarge?.fontFamily;
-      case EzTextSettingType.body:
-        return Theme.of(context).textTheme.bodyLarge?.fontFamily;
-      case EzTextSettingType.label:
-        return Theme.of(context).textTheme.labelLarge?.fontFamily;
-    }
-  }
-
   // Italic/style //
 
   String get italicKey {
@@ -171,26 +137,6 @@ extension EzTSTConfig on EzTextSettingType {
         return EzConfig.isDark
             ? lightLabelItalicizedKey
             : darkLabelItalicizedKey;
-    }
-  }
-
-  bool liveItalic(BuildContext context) {
-    switch (this) {
-      case EzTextSettingType.display:
-        return Theme.of(context).textTheme.displayLarge?.fontStyle ==
-            FontStyle.italic;
-      case EzTextSettingType.headline:
-        return Theme.of(context).textTheme.headlineLarge?.fontStyle ==
-            FontStyle.italic;
-      case EzTextSettingType.title:
-        return Theme.of(context).textTheme.titleLarge?.fontStyle ==
-            FontStyle.italic;
-      case EzTextSettingType.body:
-        return Theme.of(context).textTheme.bodyLarge?.fontStyle ==
-            FontStyle.italic;
-      case EzTextSettingType.label:
-        return Theme.of(context).textTheme.labelLarge?.fontStyle ==
-            FontStyle.italic;
     }
   }
 
@@ -242,23 +188,25 @@ extension EzTSTConfig on EzTextSettingType {
     }
   }
 
-  bool liveUnderline(BuildContext context) {
+  // Shared //
+
+  bool rebuildCheck(BuildContext context) {
     switch (this) {
       case EzTextSettingType.display:
-        return Theme.of(context).textTheme.displayLarge?.decoration ==
-            TextDecoration.underline;
+        return EzConfig.styles.displayLarge !=
+            Provider.of<EzDisplayStyleProvider>(context, listen: false).value;
       case EzTextSettingType.headline:
-        return Theme.of(context).textTheme.headlineLarge?.decoration ==
-            TextDecoration.underline;
+        return EzConfig.styles.headlineLarge !=
+            Provider.of<EzHeadlineStyleProvider>(context, listen: false).value;
       case EzTextSettingType.title:
-        return Theme.of(context).textTheme.titleLarge?.decoration ==
-            TextDecoration.underline;
+        return EzConfig.styles.titleLarge !=
+            Provider.of<EzTitleStyleProvider>(context, listen: false).value;
       case EzTextSettingType.body:
-        return Theme.of(context).textTheme.bodyLarge?.decoration ==
-            TextDecoration.underline;
+        return EzConfig.styles.bodyLarge !=
+            Provider.of<EzBodyStyleProvider>(context, listen: false).value;
       case EzTextSettingType.label:
-        return Theme.of(context).textTheme.labelLarge?.decoration ==
-            TextDecoration.underline;
+        return EzConfig.styles.labelLarge !=
+            Provider.of<EzLabelStyleProvider>(context, listen: false).value;
     }
   }
 }
