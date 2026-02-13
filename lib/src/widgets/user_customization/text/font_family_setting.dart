@@ -70,7 +70,7 @@ class _FontSettingState extends State<EzFontSetting> {
 
             widget.notifierCallback(font);
             if (context.mounted) {
-              EzConfig.pingRebuild(font == widget.type.liveFont(context));
+              EzConfig.pingRebuild(font != widget.type.liveFont(context));
             }
 
             setState(() {});

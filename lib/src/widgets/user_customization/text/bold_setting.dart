@@ -45,7 +45,7 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
 
           widget.notifierCallback(isBold);
           if (context.mounted) {
-            EzConfig.pingRebuild(isBold == widget.type.liveBold(context));
+            EzConfig.pingRebuild(isBold != widget.type.liveBold(context));
           }
 
           setState(() {});

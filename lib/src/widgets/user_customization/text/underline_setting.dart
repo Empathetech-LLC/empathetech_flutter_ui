@@ -46,7 +46,7 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
           widget.notifierCallback(isUnderlined);
           if (context.mounted) {
             EzConfig.pingRebuild(
-                isUnderlined == widget.type.liveUnderline(context));
+                isUnderlined != widget.type.liveUnderline(context));
           }
 
           setState(() {});
