@@ -988,7 +988,7 @@ class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
             appName: appName,
             androidPackage: androidPackage,
           )),
-          title: EzConfig.l10n.dsPageTitle,
+          title: config.l10n.dsPageTitle,
           showSettings: false,
           fabs: <Widget>[
             if (config.needsRebuild) ...<Widget>[
