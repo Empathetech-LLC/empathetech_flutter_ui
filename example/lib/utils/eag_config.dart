@@ -43,7 +43,7 @@ class EAGConfig {
   final String? workPath;
   final String? copyright;
   final String license;
-  final String? l10nConfig;
+  final String l10nConfig;
   final String? analysisOptions;
   final String? vsCodeConfig;
 
@@ -61,7 +61,7 @@ class EAGConfig {
     this.workPath,
     this.copyright,
     required this.license,
-    this.l10nConfig,
+    required this.l10nConfig,
     this.analysisOptions,
     this.vsCodeConfig,
   });
@@ -81,7 +81,7 @@ class EAGConfig {
       workPath: json[workPathKey] as String?,
       copyright: json[copyrightKey] as String?,
       license: json[licenseKey] as String,
-      l10nConfig: json[l10nConfigKey] as String?,
+      l10nConfig: json[l10nConfigKey] as String,
       analysisOptions: json[analysisOptionsKey] as String?,
       vsCodeConfig: json[vsCodeConfigKey] as String?,
     );
