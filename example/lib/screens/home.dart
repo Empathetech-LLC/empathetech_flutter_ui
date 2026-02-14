@@ -24,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Define the build data //
 
-  late final bool isDesktop = kIsWeb
+  final bool isDesktop = kIsWeb
       ? false
       : (EzConfig.platform == TargetPlatform.linux ||
           EzConfig.platform == TargetPlatform.macOS ||
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define custom functions //
 
   /// Validate the code gen file path (Desktop only)
-  Future<bool> checkPath(Lang l10n, TextEditingController controller) async {
+  Future<bool> checkPath(TextEditingController controller) async {
     if (await Directory(controller.text).exists()) return true;
 
     final String badPath = l10n.csBadPath;
@@ -135,12 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
     ezWindowNamer(appName);
   }
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Return the build //
-
-    final TextStyle? subTitle = ezSubTitleStyle();
-
     return OpenUIScaffold(
       EzScreen(
         EzScrollView(
@@ -340,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 EzInlineLink(
                   EzConfig.l10n.ssPageTitle.toLowerCase(),
-                  style: subTitle,
+                  style: ezSubTitleStyle(),
                   textAlign: TextAlign.start,
                   onTap: () => context.goNamed(settingsHomePath),
                   hint: EzConfig.l10n.ssNavHint,
@@ -350,13 +348,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         .csSetColors(validName ? namePreview : l10n.csYourApp)),
                 EzInlineLink(
                   l10n.csHere,
-                  style: subTitle,
+                  style: ezSubTitleStyle(),
                   textAlign: TextAlign.start,
                   url: Uri.parse('https://www.canva.com/colors/color-wheel/'),
                   hint: l10n.csHereHint,
                 ),
               ],
-              style: subTitle,
+              style: ezSubTitleStyle(),
               textAlign: TextAlign.start,
             ),
             EzConfig.divider,
@@ -644,10 +642,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             validateDomain(domainController.text) == null) &&
                         descriptionController.text.isNotEmpty &&
                         (!isDesktop ||
-                            ((!isMac ||
-                                    await checkPath(
-                                        l10n, flutterPathControl)) &&
-                                await checkPath(l10n, workPathControl))) &&
+                            ((!isMac || await checkPath(flutterPathControl)) &&
+                                await checkPath(workPathControl))) &&
                         context.mounted) {
                       context.goNamed(
                         archiveScreenPath,
@@ -681,8 +677,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             description: descriptionController.text,
                             year: currentYear.toString(),
                           ),
-                          l10nConfig:
-                              l10nController.text, // TODO: what if empty?
+                          l10nConfig: l10nController.text,
                           analysisOptions: (removeAnalysis ||
                                   analysisController.text.isEmpty)
                               ? null
@@ -718,9 +713,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           (exampleDomain ||
                               validateDomain(domainController.text) == null) &&
                           descriptionController.text.isNotEmpty &&
-                          (!isMac ||
-                              await checkPath(l10n, flutterPathControl)) &&
-                          await checkPath(l10n, workPathControl) &&
+                          (!isMac || await checkPath(flutterPathControl)) &&
+                          await checkPath(workPathControl) &&
                           context.mounted) {
                         context.goNamed(
                           generateScreenPath,
@@ -1021,44 +1015,42 @@ class _BasicField extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // Title
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Flexible(
-              child: EzText(
-                title,
-                style: EzConfig.styles.titleLarge,
-                textAlign: TextAlign.start,
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          // Title
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Flexible(
+                child: EzText(
+                  title,
+                  style: EzConfig.styles.titleLarge,
+                  textAlign: TextAlign.start,
+                ),
               ),
-            ),
-            if (tip != null)
-              tip.runtimeType == String
-                  ? EzToolTipper(message: tip)
-                  : EzToolTipper(richMessage: tip),
-          ],
-        ),
-
-        // Field
-        ConstrainedBox(
-          constraints: ezTextFieldConstraints(context),
-          child: TextFormField(
-            controller: controller,
-            textAlign: TextAlign.start,
-            maxLines: 1,
-            validator: validator,
-            autovalidateMode: AutovalidateMode.onUnfocus,
-            decoration: InputDecoration(hintText: hintText),
+              if (tip != null)
+                tip.runtimeType == String
+                    ? EzToolTipper(message: tip)
+                    : EzToolTipper(richMessage: tip),
+            ],
           ),
-        ),
-      ],
-    );
-  }
+
+          // Field
+          ConstrainedBox(
+            constraints: ezTextFieldConstraints(context),
+            child: TextFormField(
+              controller: controller,
+              textAlign: TextAlign.start,
+              maxLines: 1,
+              validator: validator,
+              autovalidateMode: AutovalidateMode.onUnfocus,
+              decoration: InputDecoration(hintText: hintText),
+            ),
+          ),
+        ],
+      );
 }
 
 class _AdvancedSettingsField extends StatelessWidget {
@@ -1195,22 +1187,23 @@ class _LicensePicker extends StatelessWidget {
     required this.onChanged,
   });
 
+  static const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
+  static const String chooseALicense = 'https://choosealicense.com/';
+
+  Widget radio({required String title, required String value}) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          EzTextButton(
+            text: title,
+            textAlign: TextAlign.center,
+            onPressed: () => onChanged(value),
+          ),
+          ExcludeSemantics(child: EzRadio<String>(value: value)),
+        ],
+      );
+
   @override
   Widget build(BuildContext context) {
-    Widget radio({required String title, required String value}) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            EzTextButton(
-              text: title,
-              textAlign: TextAlign.center,
-              onPressed: () => onChanged(value),
-            ),
-            ExcludeSemantics(child: EzRadio<String>(value: value)),
-          ],
-        );
-
-    const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
-
     final Widget hideButton = Semantics(
       label: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
       button: true,
@@ -1223,7 +1216,6 @@ class _LicensePicker extends StatelessWidget {
       ),
     );
 
-    const String chooseALicense = 'https://choosealicense.com/';
     final Widget tip = EzToolTipper(
       richMessage: EzInlineLink(
         chooseALicense,
