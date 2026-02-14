@@ -182,16 +182,17 @@ class _EzScrollViewState extends State<EzScrollView> {
   Widget build(BuildContext context) {
     // Define the contextual build data //
 
-    final bool hideScroll =
-        EzConfig.hideScroll || (widget.thumbVisibility == false);
+    final bool showScroll = (widget.thumbVisibility == null)
+        ? !EzConfig.hideScroll
+        : widget.thumbVisibility!;
 
     final Color arrowColor = EzConfig.colors.secondary.withValues(alpha: 0.5);
 
     final Widget core = Scrollbar(
       controller: controller,
-      thumbVisibility: hideScroll ? false : widget.thumbVisibility,
-      thickness: hideScroll ? 0.0 : widget.thickness,
-      radius: hideScroll ? Radius.zero : widget.radius,
+      thumbVisibility: showScroll,
+      thickness: showScroll ? widget.thickness : 0.0,
+      radius: showScroll ? widget.radius : Radius.zero,
       notificationPredicate: widget.notificationPredicate,
       scrollbarOrientation: widget.scrollbarOrientation,
       child: SingleChildScrollView(
