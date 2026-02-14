@@ -201,7 +201,7 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(darkDisplayItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(darkDisplayUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -218,7 +218,7 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(lightDisplayItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(lightDisplayUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -248,7 +248,7 @@ TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(darkDisplayItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(darkDisplayUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -265,7 +265,7 @@ TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(lightDisplayItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(lightDisplayUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -295,7 +295,7 @@ TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(darkHeadlineItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(darkHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -312,7 +312,7 @@ TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(lightHeadlineItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(lightHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -342,7 +342,7 @@ TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(darkHeadlineItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(darkHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -359,7 +359,7 @@ TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(lightHeadlineItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(lightHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -389,7 +389,7 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(darkTitleItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(darkTitleUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -406,7 +406,7 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(lightTitleItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(lightTitleUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -436,7 +436,7 @@ TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(darkTitleItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(darkTitleUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -453,7 +453,7 @@ TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(lightTitleItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(lightTitleUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -483,7 +483,7 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(darkBodyItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(darkBodyUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -500,7 +500,7 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(lightBodyItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(lightBodyUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -530,7 +530,7 @@ TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(darkBodyItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(darkBodyUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -547,7 +547,7 @@ TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(lightBodyItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(lightBodyUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -577,7 +577,7 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(darkLabelItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(darkLabelUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -594,7 +594,7 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.get(lightLabelItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.get(lightLabelUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -624,7 +624,7 @@ TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(darkLabelItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(darkLabelUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -641,7 +641,7 @@ TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
               : FontWeight.normal,
           fontStyle: EzConfig.getDefault(lightLabelItalicizedKey) == true
               ? FontStyle.italic
-              : null,
+              : FontStyle.normal,
           decoration: EzConfig.getDefault(lightLabelUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
