@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [11.0.0] - 2026-02-XX
+## [11.0.0] - 2026-02-14
 ### Added
 - appName and androidPackage parameters to all sample settings screen constructions
   - For EzUpdater and/or config saving/loading
@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
   - Package was discontinued
   - Until further notice, EFUI will be Material only
 - BetterFeedback integration
-  - Can absolutely DIY
+  - Can absolutely still DIY
   - Goal is to simplify EFUI powered apps, especially with the new theme provider layer(s)
 
 ### Updated
@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
   - EzAppProvider -> EzConfigurableApp
   - Privatized EzConfig fields, added lots of getters/setters
   - Common spacers should now be access via EzConfig.[spacer,separator,margin,...] (previously ezSpacer, ezSeparator, ezMargin...)
-- Flutter 3.38.X
+- Flutter 3.41.X
 - Simplified/shortened the human translations pending message to "Machine translated"
 
 ## [10.2.0] - 2025-10-20
