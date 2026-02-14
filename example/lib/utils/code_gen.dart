@@ -469,7 +469,7 @@ class $classCaseAppName extends StatelessWidget {
 
     // utils //
 
-    // consts.dart
+    // setup consts/config dump
     String configString() {
       String result = '{';
 
@@ -502,7 +502,7 @@ class $classCaseAppName extends StatelessWidget {
       return '$result}';
     }
 
-    // consts
+    // write consts
     await File('$dir/lib/utils/consts.dart').writeAsString("""$copyright
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
