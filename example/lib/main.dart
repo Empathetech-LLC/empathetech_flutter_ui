@@ -14,13 +14,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
-  // Setup the app //
+  // Configure the app //
 
   WidgetsFlutterBinding.ensureInitialized();
-
   await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-
-  // Initialize EzConfig //
 
   EzConfig.init(
     assetPaths: <String>{},
@@ -37,9 +34,12 @@ void main() async {
   // Run the app //
 
   final (Locale storedLocale, EFUILang storedEFUILang) = await ezStoredL10n();
-  final Lang storedLang = await Lang.delegate.load(storedLocale);
 
-  runApp(OpenUI(storedLocale, storedEFUILang, storedLang));
+  runApp(OpenUI(
+    storedLocale,
+    storedEFUILang,
+    await Lang.delegate.load(storedLocale),
+  ));
 }
 
 class OpenUI extends StatelessWidget {
