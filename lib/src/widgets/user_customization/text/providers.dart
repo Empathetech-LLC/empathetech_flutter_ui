@@ -97,7 +97,7 @@ class EzHeadlineStyleProvider extends EzTextStyleProvider {
 
 class EzTitleStyleProvider extends EzTextStyleProvider {
   /// [EzTextStyleProvider] for [ezTitleStyle]s values
-  EzTitleStyleProvider(Color? color) : super(ezTitleStyle(color));
+  EzTitleStyleProvider() : super(ezTitleStyle(null));
 
   /// Reset via [ezDefaultTitleStyle]
   void reset() {
@@ -108,7 +108,7 @@ class EzTitleStyleProvider extends EzTextStyleProvider {
 
 class EzBodyStyleProvider extends EzTextStyleProvider {
   /// [EzTextStyleProvider] for [ezBodyStyle]s values
-  EzBodyStyleProvider(Color? color) : super(ezBodyStyle(color));
+  EzBodyStyleProvider() : super(ezBodyStyle(null));
 
   /// Reset via [ezDefaultBodyStyle]
   void reset() {
@@ -119,7 +119,7 @@ class EzBodyStyleProvider extends EzTextStyleProvider {
 
 class EzLabelStyleProvider extends EzTextStyleProvider {
   /// [EzTextStyleProvider] for [ezLabelStyle]s values
-  EzLabelStyleProvider(Color? color) : super(ezLabelStyle(color));
+  EzLabelStyleProvider() : super(ezLabelStyle(null));
 
   /// Reset via [ezDefaultLabelStyle]
   void reset() {
