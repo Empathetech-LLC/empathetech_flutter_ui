@@ -299,13 +299,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
-  // Setup the app //
+  // Configure the app //
 
   WidgetsFlutterBinding.ensureInitialized();
-
   await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-
-  // Initialize EzConfig //
 
   EzConfig.init(
     assetPaths: <String>{},
@@ -607,43 +604,38 @@ import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SettingsButton extends StatelessWidget {
-  final BuildContext parentContext;
-
   /// [EzMenuButton] for opening the settings
-  const SettingsButton(this.parentContext, {super.key});
+  const SettingsButton({super.key});
 
   @override
   Widget build(BuildContext context) => EzMenuButton(
-        onPressed: () => parentContext.goNamed(settingsHomePath),
+        onPressed: () => context.goNamed(settingsHomePath),
         icon: EzIcon(Icons.settings),
         label: EzConfig.l10n.ssPageTitle,
       );
 }
 
 class EFUICredits extends StatelessWidget {
-  final BuildContext parentContext;
-
   /// [EzMenuButton] for opening Open UI's product page
   /// Honor system: keep a version of this in your app
   /// Remove iff appropriate contributions have been made to Empathetech LLC
   /// https://www.empathetech.net/#/contribute
-  const EFUICredits(this.parentContext, {super.key});
+  const EFUICredits({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String label = EzConfig.isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
-    final String tip = EzConfig.l10n.gOpenEmpathetech;
-    final String settings = EzConfig.l10n.ssPageTitle;
+    final String label =
+        EzConfig.isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
 
     return Tooltip(
-      message: tip,
+      message: EzConfig.l10n.gOpenEmpathetech,
       excludeFromSemantics: true,
       child: EzMenuLink(
         uri: Uri.parse('https://www.empathetech.net/#/products/open-ui'),
         icon: EzIcon(Icons.settings),
         label: label,
         semanticsLabel:
-          '\${EzConfig.isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
+            '\${EzConfig.isLefty ? '\${EzConfig.l10n.ssPageTitle} \$label' : '\$label \${EzConfig.l10n.ssPageTitle}'}. \${EzConfig.l10n.gOpenEmpathetech}',
       ),
     );
   }
@@ -700,7 +692,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
         icon: Icon(Icons.more_vert, semanticLabel: EzConfig.l10n.gOptions),
       ),
       menuChildren: <Widget>[
-        (showSettings) ? SettingsButton(context) : EFUICredits(context),
+        (showSettings) ? const SettingsButton() : const EFUICredits(),
       ],
     );
 
@@ -726,7 +718,9 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
               titleSpacing: 0,
 
               // Actions (aka trailing aka right)
-              actions: <Widget>[EzConfig.isLefty ? const EzBackAction() : options],
+              actions: <Widget>[
+                EzConfig.isLefty ? const EzBackAction() : options,
+              ],
             ),
           ),
           body: body,
@@ -848,34 +842,32 @@ class _HomeScreenState extends State<HomeScreen> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return ${classCaseAppName}Scaffold(
-      EzScreen(
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                l10n.hsCounterLabel,
-                style: ezSubTitleStyle(),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                count.toString(),
-                style: EzConfig.styles.headlineLarge,
-                textAlign: TextAlign.center,
-              ),
-            ],
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        EzScreen(
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  l10n.hsCounterLabel,
+                  style: ezSubTitleStyle(),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  count.toString(),
+                  style: EzConfig.styles.headlineLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      title: appName,
-      fabs: <Widget>[
-        EzConfig.spacer,
-        CountFAB(() => setState(() => count += 1)),
-      ],
-    );
-  }
+        title: appName,
+        fabs: <Widget>[
+          EzConfig.spacer,
+          CountFAB(() => setState(() => count += 1)),
+        ],
+      );
 }
 """);
 
@@ -928,15 +920,24 @@ import '../../widgets/export.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class ColorSettingsScreen extends StatelessWidget {
+class ColorSettingsScreen extends StatefulWidget {
   final EzCSType? target;
 
-  ColorSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
+  ColorSettingsScreen({this.target}) : super(key: ValueKey<int>(EzConfig.seed));
+
+  @override
+  State<ColorSettingsScreen> createState() => _ColorSettingsScreenState();
+}
+
+class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
+  bool updateBoth = false;
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         EzScreen(EzColorSettings(
-          target: target,
+          target: widget.target,
+          onUpdate: () => setState(() {}),
+          updateBoth: updateBoth,
           appName: appName,
           androidPackage: androidPackage,
         )),
@@ -944,10 +945,9 @@ class ColorSettingsScreen extends StatelessWidget {
         showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
-          EzConfigFAB(
-            context,
-            appName: appName,
-            androidPackage: androidPackage,
+          EzSettingsDupeFAB(
+            updateBoth,
+            () => setState(() => updateBoth = !updateBoth),
           ),
         ],
       );
@@ -964,27 +964,42 @@ import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class DesignSettingsScreen extends StatelessWidget {
+class DesignSettingsScreen extends StatefulWidget {
   DesignSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        const EzScreen(EzDesignSettings(
-          appName: appName,
-          androidPackage: androidPackage,
-        )),
-        title: EzConfig.l10n.dsPageTitle,
-        showSettings: false,
-        fabs: <Widget>[
-          EzConfig.spacer,
-          EzConfigFAB(
-            context,
+  State<DesignSettingsScreen> createState() => _DesignSettingsScreenState();
+}
+
+class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
+  bool updateBoth = false;
+
+  @override
+  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
+          EzScreen(EzDesignSettings(
+            onUpdate: () => setState(() {}),
+            updateBoth: updateBoth,
             appName: appName,
             androidPackage: androidPackage,
-          ),
-        ],
+          )),
+          title: EzConfig.l10n.dsPageTitle,
+          showSettings: false,
+          fabs: <Widget>[
+            if (config.needsRebuild) ...<Widget>[
+              config.layout.spacer,
+              EzRebuildFAB(() => setState(() {})),
+            ],
+            config.layout.spacer,
+            EzSettingsDupeFAB(
+              updateBoth,
+              () => setState(() => updateBoth = !updateBoth),
+            ),
+          ],
+        ),
       );
 }
 """);
@@ -1001,12 +1016,21 @@ import '../../widgets/export.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class LayoutSettingsScreen extends StatelessWidget {
+class LayoutSettingsScreen extends StatefulWidget {
   LayoutSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
+  State<LayoutSettingsScreen> createState() => _LayoutSettingsScreenState();
+}
+
+class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
+  bool updateBoth = false;
+
+  @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        const EzScreen(EzLayoutSettings(
+        EzScreen(EzLayoutSettings(
+          onUpdate: () => setState(() {}),
+          updateBoth: updateBoth,
           appName: appName,
           androidPackage: androidPackage,
         )),
@@ -1014,10 +1038,9 @@ class LayoutSettingsScreen extends StatelessWidget {
         showSettings: false,
         fabs: <Widget>[
           EzConfig.spacer,
-          EzConfigFAB(
-            context,
-            appName: appName,
-            androidPackage: androidPackage,
+          EzSettingsDupeFAB(
+            updateBoth,
+            () => setState(() => updateBoth = !updateBoth),
           ),
         ],
       );
@@ -1034,30 +1057,45 @@ import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class TextSettingsScreen extends StatelessWidget {
+class TextSettingsScreen extends StatefulWidget {
   final EzTSType? target;
 
-  TextSettingsScreen(this.target) : super(key: ValueKey<int>(EzConfig.seed));
+  TextSettingsScreen({this.target}) : super(key: ValueKey<int>(EzConfig.seed));
+  
+  @override
+  State<TextSettingsScreen> createState() => _TextSettingsScreenState();
+}
+
+class _TextSettingsScreenState extends State<TextSettingsScreen> {
+  bool updateBoth = false;
 
   @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        EzScreen(EzTextSettings(
-          target: target,
-          appName: appName,
-          androidPackage: androidPackage,
-        )),
-        title: EzConfig.l10n.tsPageTitle,
-        showSettings: false,
-        fabs: <Widget>[
-          EzConfig.spacer,
-          EzConfigFAB(
-            context,
+  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
+          EzScreen(EzTextSettings(
+            target: widget.target,
+            onUpdate: () => setState(() {}),
+            updateBoth: updateBoth,
             appName: appName,
             androidPackage: androidPackage,
-          ),
-        ],
+          )),
+          title: config.l10n.tsPageTitle,
+          showSettings: false,
+          fabs: <Widget>[
+            if (config.needsRebuild) ...<Widget>[
+              config.layout.spacer,
+              EzRebuildFAB(() => setState(() {})),
+            ],
+            config.layout.spacer,
+            EzSettingsDupeFAB(
+              updateBoth,
+              () => setState(() => updateBoth = !updateBoth),
+            ),
+          ],
+        ),
       );
 }
 """);
