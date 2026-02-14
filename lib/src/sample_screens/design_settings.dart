@@ -490,7 +490,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Icon size
         if (widget.includeIconSize)
-          EzIconSizeSetting(updateBoth: widget.updateBoth),
+          EzIconSizeSetting(updateBoth: widget.updateBoth, fullCheck: false),
 
         // After background
         if (widget.afterDesign != null) ...widget.afterDesign!,
