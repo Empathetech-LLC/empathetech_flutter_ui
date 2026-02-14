@@ -83,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String license = gnuKey;
 
   bool showL10n = false;
-  bool removeL10n = false;
   // Default at the bottom of the Class
   final TextEditingController l10nController =
       TextEditingController(text: l10nDefault);
@@ -595,9 +594,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     controller: l10nController,
                     visible: showL10n,
                     onHide: () => setState(() => showL10n = !showL10n),
-                    removed: removeL10n,
-                    onRemove: () => setState(() => removeL10n = true),
-                    onRestore: () => setState(() => removeL10n = false),
+                    removed: false,
+                    onRemove: null,
+                    onRestore: null,
                   ),
                   EzConfig.spacer,
 
@@ -683,9 +682,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             year: currentYear.toString(),
                           ),
                           l10nConfig:
-                              (removeL10n || l10nController.text.isEmpty)
-                                  ? null
-                                  : l10nController.text,
+                              l10nController.text, // TODO: what if empty?
                           analysisOptions: (removeAnalysis ||
                                   analysisController.text.isEmpty)
                               ? null
@@ -757,10 +754,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               description: descriptionController.text,
                               year: currentYear.toString(),
                             ),
-                            l10nConfig:
-                                (removeL10n || l10nController.text.isEmpty)
-                                    ? null
-                                    : l10nController.text,
+                            l10nConfig: l10nController.text,
                             analysisOptions: (removeAnalysis ||
                                     analysisController.text.isEmpty)
                                 ? null
@@ -850,9 +844,7 @@ class _HomeScreenState extends State<HomeScreen> {
           license = gnuKey;
         }
 
-        config.l10nConfig == null
-            ? removeL10n = true
-            : l10nController.text = config.l10nConfig!;
+        l10nController.text = config.l10nConfig;
 
         config.analysisOptions == null
             ? removeAnalysis = true
@@ -900,7 +892,6 @@ class _HomeScreenState extends State<HomeScreen> {
             license = gnuKey;
 
             showL10n = false;
-            removeL10n = false;
             l10nController.text = l10nDefault;
 
             showAnalysis = false;
