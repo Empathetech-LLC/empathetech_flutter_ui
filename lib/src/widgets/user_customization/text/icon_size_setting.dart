@@ -40,7 +40,9 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                 if (widget.updateBoth || !EzConfig.isDark) {
                   await EzConfig.remove(lightIconSizeKey);
                 }
+
                 setState(() => iconSize = defaultIconSize);
+
                 if (widget.fullCheck && context.mounted) {
                   EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
                       ezTextRebuildCheck(context));
@@ -70,11 +72,16 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                             await EzConfig.setDouble(
                                 lightIconSizeKey, iconSize);
                           }
+
                           setState(() {});
-                          EzConfig.pingRebuild(
-                              widget.fullCheck && context.mounted
-                                  ? ezTextRebuildCheck(context)
-                                  : iconSize != EzConfig.iconSize);
+
+                          if (widget.fullCheck && context.mounted) {
+                            EzConfig.pingRebuild(
+                                iconSize != EzConfig.iconSize ||
+                                    ezTextRebuildCheck(context));
+                          } else {
+                            EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                          }
                         },
                         tooltip:
                             '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
@@ -101,10 +108,15 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                     if (widget.updateBoth || !EzConfig.isDark) {
                       await EzConfig.remove(lightIconSizeKey);
                     }
+
                     setState(() => iconSize = defaultIconSize);
-                    EzConfig.pingRebuild(widget.fullCheck && context.mounted
-                        ? ezTextRebuildCheck(context)
-                        : iconSize != EzConfig.iconSize);
+
+                    if (widget.fullCheck && context.mounted) {
+                      EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
+                          ezTextRebuildCheck(context));
+                    } else {
+                      EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                    }
                   },
                   child: Icon(
                     Icons.sync_alt,
@@ -126,11 +138,16 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                             await EzConfig.setDouble(
                                 lightIconSizeKey, iconSize);
                           }
+
                           setState(() {});
-                          EzConfig.pingRebuild(
-                              widget.fullCheck && context.mounted
-                                  ? ezTextRebuildCheck(context)
-                                  : iconSize != EzConfig.iconSize);
+
+                          if (widget.fullCheck && context.mounted) {
+                            EzConfig.pingRebuild(
+                                iconSize != EzConfig.iconSize ||
+                                    ezTextRebuildCheck(context));
+                          } else {
+                            EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                          }
                         },
                         tooltip:
                             '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
