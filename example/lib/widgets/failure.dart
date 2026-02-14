@@ -82,12 +82,15 @@ class DeleteOption extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Would you like to...
           EzText(
             l10n.rsWouldYou,
             style: style,
             textAlign: TextAlign.center,
           ),
           EzConfig.spacer,
+
+          // Wipe it
           EzElevatedIconButton(
             onPressed: () => ezCmd(
               EzConfig.platform == TargetPlatform.windows
@@ -116,6 +119,8 @@ class DeleteOption extends StatelessWidget {
             label: l10n.rsWipe,
           ),
           EzConfig.spacer,
+
+          // Leave
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.arrow_back),
@@ -124,9 +129,6 @@ class DeleteOption extends StatelessWidget {
         ],
       );
 }
-
-/// https://docs.flutter.dev/get-started/install
-const String installFlutter = 'https://docs.flutter.dev/get-started/install';
 
 class LinkOption extends StatelessWidget {
   /// [TextStyle] for 'would you like to...'
