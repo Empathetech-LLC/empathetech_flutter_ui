@@ -9,14 +9,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-// Consts //
+//* Consts *//
 
 const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
 
 // Defaults taken from...
 // https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
 
-// Sub-string getters //
+//* Sub-string getters *//
 
 /// Copyright notice for the top of code files
 String genCopyright(EAGConfig config) =>
@@ -54,7 +54,7 @@ String l10nDelegates(EAGConfig config) =>
 String l10nDelegateHandler(EAGConfig config) =>
     '\n          ...${l10nDelegates(config)},';
 
-// Code generation //
+//* Code generation *//
 
 /// Slightly modified from the standard template README
 Future<void> genREADME({
@@ -65,10 +65,9 @@ Future<void> genREADME({
   required ValueNotifier<String> readout,
 }) async {
   final String appName = ezSnakeToTitle(config.appName);
+
   try {
-    // English
-    final File enFile = File('$dir/README.md');
-    await enFile.writeAsString('''# $appName
+    await File('$dir/README.md').writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -118,7 +117,8 @@ As your app grows, use [EFUI](https://github.com/Empathetech-LLC/empathetech_flu
 
 * [Responsive design](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/responsive_design): `Widget`s that aid in building responsive UI/UX
 * [Screen reader support](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/screen_reader_support): `Widget`s with streamlined `Semantics`
-* [User customization](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/helpers): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
+* [User customization](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/user_customization): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
+* [Helpers](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/helpers): Lots of other `Widget`s and functions to make your life Ez, but don't squarely fit into the above categories
 
 ### <br>Localization
 
@@ -141,8 +141,6 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 $appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
-
-If you have a dream that wants to be made a reality, try Open UI!
 ''');
   } catch (e) {
     onFailure(e.toString());
@@ -160,12 +158,15 @@ Future<void> genVersionTracking({
   required ValueNotifier<String> readout,
 }) async {
   try {
-    final File version = File('$dir/APP_VERSION');
-    await version.writeAsString('1.0.0');
+    // APP_VERSION //
+
+    await File('$dir/APP_VERSION').writeAsString('1.0.0');
+
+    // CHANGELOG.md //
 
     final DateTime now = DateTime.now();
-    final File changelog = File('$dir/CHANGELOG.md');
-    await changelog.writeAsString('''# Changelog
+
+    await File('$dir/CHANGELOG.md').writeAsString('''# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -195,8 +196,7 @@ Future<void> genLicense({
   required ValueNotifier<String> readout,
 }) async {
   try {
-    final File file = File('$dir/LICENSE');
-    await file.writeAsString(config.license);
+    await File('$dir/LICENSE').writeAsString(config.license);
   } catch (e) {
     onFailure(e.toString());
   }
@@ -213,8 +213,7 @@ Future<void> genPubspec({
   required ValueNotifier<String> readout,
 }) async {
   try {
-    final File file = File('$dir/pubspec.yaml');
-    await file.writeAsString('''name: ${config.appName}
+    await File('$dir/pubspec.yaml').writeAsString('''name: ${config.appName}
 description: "${config.appDescription}"
 version: 1.0.0
 publish_to: 'none'
@@ -231,14 +230,15 @@ dependencies:
   # Flutter (Google)
   go_router: ^14.8.1
   intl: ^0.20.2
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.4
 
   # Community
   empathetech_flutter_ui: ^11.0.0
   flutter_localized_locales: ^2.0.5
+  provider: ^6.1.5+1
 
 dev_dependencies:
-  dependency_validator: ^5.0.2
+  dependency_validator: ^5.0.4
   flutter_lints: ^6.0.0
 
 flutter:
@@ -261,19 +261,16 @@ Future<void> genLib({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  // Useful substrings //
+  // Setup //
 
   final String camelCaseAppName = ezSnakeToCamel(config.appName);
   final String classCaseAppName = ezSnakeToClass(config.appName);
   final String titleCaseAppName = ezSnakeToTitle(config.appName);
 
   final String copyright = genCopyright(config);
+  final String l10nClass = l10nClassName(config);
 
-  final String? l10nClass = l10nClassName(config);
-
-  //* Make it so *//
-
-  // Directories //
+  // Create directories //
 
   await ezCmd(
     EzConfig.platform == TargetPlatform.windows
@@ -285,12 +282,11 @@ Future<void> genLib({
     readout: readout,
   );
 
-  // Files //
+  // Write files //
 
   // main.dart
   try {
-    final File dartMain = File('$dir/lib/main.dart');
-    await dartMain.writeAsString("""$copyright
+    await File('$dir/lib/main.dart').writeAsString("""$copyright
 
 import './screens/export.dart';
 import './utils/export.dart';
@@ -506,8 +502,8 @@ class $classCaseAppName extends StatelessWidget {
       return '$result}';
     }
 
-    final File utilsConsts = File('$dir/lib/utils/consts.dart');
-    await utilsConsts.writeAsString("""$copyright
+    // consts
+    await File('$dir/lib/utils/consts.dart').writeAsString("""$copyright
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -521,9 +517,9 @@ const String androidPackage = '${config.domainName}.${config.appName}';
 const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
 """);
 
-    // APP_cache.dart
-    final File appCache = File('$dir/lib/utils/${config.appName}_cache.dart');
-    await appCache.writeAsString("""$copyright
+    // ${APP}_cache.dart
+    await File('$dir/lib/utils/${config.appName}_cache.dart')
+        .writeAsString("""$copyright
 
 import './export.dart';
 
@@ -559,20 +555,18 @@ Lang get l10n => (EzConfig.appCache! as ${classCaseAppName}Cache).l10n;
 """);
 
     // export.dart
-    final File utilsExport = File('$dir/lib/utils/export.dart');
-    await utilsExport.writeAsString("""$copyright
+    await File('$dir/lib/utils/export.dart').writeAsString("""$copyright
 
 export 'consts.dart';
 export '${config.appName}_cache.dart';
 
-export '../l10n/${ezClassToSnake(l10nClass!)}.dart';
+export '../l10n/${ezClassToSnake(l10nClass)}.dart';
 """);
 
     // widgets //
 
     // fabulous.dart
-    final File fabulous = File('$dir/lib/widgets/fabulous.dart');
-    await fabulous.writeAsString("""$copyright
+    await File('$dir/lib/widgets/fabulous.dart').writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -604,8 +598,7 @@ const Widget updater = EzUpdaterFAB(
 """);
 
     // menu_buttons.dart
-    final File menuButtons = File('$dir/lib/widgets/menu_buttons.dart');
-    await menuButtons.writeAsString("""$copyright
+    await File('$dir/lib/widgets/menu_buttons.dart').writeAsString("""$copyright
 
 import '../screens/export.dart';
 
@@ -658,10 +651,8 @@ class EFUICredits extends StatelessWidget {
 """);
 
     // scaffold file
-    final File scaffoldWidget = File(
-      '$dir/lib/widgets/${config.appName}_scaffold.dart',
-    );
-    await scaffoldWidget.writeAsString("""$copyright
+    await File('$dir/lib/widgets/${config.appName}_scaffold.dart')
+        .writeAsString("""$copyright
 
 import '../utils/export.dart';
 import './export.dart';
@@ -755,8 +746,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 """);
 
     // export.dart
-    final File widgetsExport = File('$dir/lib/widgets/export.dart');
-    await widgetsExport.writeAsString("""$copyright
+    await File('$dir/lib/widgets/export.dart').writeAsString("""$copyright
 
 export 'fabulous.dart';
 export 'menu_buttons.dart';
@@ -766,8 +756,7 @@ export '${config.appName}_scaffold.dart';
     // screens //
 
     // error.dart
-    final File errorScreen = File('$dir/lib/screens/error.dart');
-    await errorScreen.writeAsString("""$copyright
+    await File('$dir/lib/screens/error.dart').writeAsString("""$copyright
 
 import '../widgets/export.dart';
 
@@ -828,8 +817,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 """);
 
     // home_screen.dart
-    final File homeScreen = File('$dir/lib/screens/home.dart');
-    await homeScreen.writeAsString("""$copyright
+    await File('$dir/lib/screens/home.dart').writeAsString("""$copyright
 
 import '../utils/export.dart';
 import '../widgets/export.dart';
@@ -892,8 +880,8 @@ class _HomeScreenState extends State<HomeScreen> {
 """);
 
     // home.dart
-    final File settingsHome = File('$dir/lib/screens/settings/home.dart');
-    await settingsHome.writeAsString("""$copyright
+    await File('$dir/lib/screens/settings/home.dart')
+        .writeAsString("""$copyright
 
 import '../../screens/export.dart';
 import '../../utils/export.dart';
@@ -931,10 +919,8 @@ class SettingsHomeScreen extends StatelessWidget {
 
     // Color settings?
     if (config.colorSettings) {
-      final File colorSettings = File(
-        '$dir/lib/screens/settings/color.dart',
-      );
-      await colorSettings.writeAsString("""$copyright
+      await File('$dir/lib/screens/settings/color.dart')
+          .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -971,10 +957,8 @@ class ColorSettingsScreen extends StatelessWidget {
 
     // Design settings?
     if (config.designSettings) {
-      final File designSettings = File(
-        '$dir/lib/screens/settings/design.dart',
-      );
-      await designSettings.writeAsString("""$copyright
+      await File('$dir/lib/screens/settings/design.dart')
+          .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -1008,10 +992,8 @@ class DesignSettingsScreen extends StatelessWidget {
 
     // Layout settings?
     if (config.layoutSettings) {
-      final File layoutSettings = File(
-        '$dir/lib/screens/settings/layout.dart',
-      );
-      await layoutSettings.writeAsString("""$copyright
+      await File('$dir/lib/screens/settings/layout.dart')
+          .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -1045,10 +1027,8 @@ class LayoutSettingsScreen extends StatelessWidget {
 
     // Text settings?
     if (config.textSettings) {
-      final File textSettings = File(
-        '$dir/lib/screens/settings/text.dart',
-      );
-      await textSettings.writeAsString("""$copyright
+      await File('$dir/lib/screens/settings/text.dart')
+          .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -1084,8 +1064,7 @@ class TextSettingsScreen extends StatelessWidget {
     }
 
     // export.dart
-    final File screensExport = File('$dir/lib/screens/export.dart');
-    await screensExport.writeAsString("""$copyright
+    await File('$dir/lib/screens/export.dart').writeAsString("""$copyright
 
 // Exports //
 
@@ -1149,8 +1128,7 @@ Future<void> genL10n({
 
   // Make files
   try {
-    final File english = File('$dir/$arbPath/${snakeName}_en.arb');
-    await english.writeAsString('''{
+    await File('$dir/$arbPath/${snakeName}_en.arb').writeAsString('''{
   "@@locale": "en",
 
 
@@ -1158,8 +1136,7 @@ Future<void> genL10n({
   "hsCounterLabel": "You have pushed the button this many times:"
 }''');
 
-    final File spanish = File('$dir/$arbPath/${snakeName}_es.arb');
-    await spanish.writeAsString('''{
+    await File('$dir/$arbPath/${snakeName}_es.arb').writeAsString('''{
   "@@locale": "es",
 
 
@@ -1167,8 +1144,7 @@ Future<void> genL10n({
   "hsCounterLabel": "Has pulsado el botón muchas veces:"
 }''');
 
-    final File french = File('$dir/$arbPath/${snakeName}_fr.arb');
-    await french.writeAsString('''{
+    await File('$dir/$arbPath/${snakeName}_fr.arb').writeAsString('''{
   "@@locale": "fr",
 
 
@@ -1176,8 +1152,7 @@ Future<void> genL10n({
   "hsCounterLabel": "Vous avez appuyé sur le bouton autant de fois que cela :"
 }''');
 
-    final File l10nConfig = File('$dir/l10n.yaml');
-    await l10nConfig.writeAsString(config.l10nConfig);
+    await File('$dir/l10n.yaml').writeAsString(config.l10nConfig);
   } catch (e) {
     onFailure(e.toString());
   }
@@ -1196,8 +1171,8 @@ Future<void> genAnalysis({
   if (config.analysisOptions == null) return;
 
   try {
-    final File file = File('$dir/analysis_options.yaml');
-    await file.writeAsString(config.analysisOptions!);
+    await File('$dir/analysis_options.yaml')
+        .writeAsString(config.analysisOptions!);
   } catch (e) {
     onFailure(e.toString());
   }
@@ -1229,8 +1204,7 @@ Future<void> genVSCode({
 
   // Make file
   try {
-    final File file = File('$dir/.vscode/launch.json');
-    await file.writeAsString(config.vsCodeConfig!);
+    await File('$dir/.vscode/launch.json').writeAsString(config.vsCodeConfig!);
   } catch (e) {
     onFailure(e.toString());
   }
