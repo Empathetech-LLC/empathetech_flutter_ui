@@ -128,6 +128,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                             }
 
                             widget.notifierCallback(currValue);
+                            if (context.mounted) {
+                              EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                            }
+
                             setState(() {});
                           },
                           tooltip:
@@ -225,6 +229,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                             }
 
                             widget.notifierCallback(currValue);
+                            if (context.mounted) {
+                              EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                            }
+
                             setState(() {});
                           },
                           tooltip:
