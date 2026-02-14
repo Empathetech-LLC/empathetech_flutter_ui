@@ -181,14 +181,12 @@ class _GenerateScreenState extends State<GenerateScreen> {
       readout: readout,
     );
 
-    if (widget.config.l10nConfig != null) {
-      await genL10n(
-        config: widget.config,
-        dir: projDir,
-        onFailure: onFailure,
-        readout: readout,
-      );
-    }
+    await genL10n(
+      config: widget.config,
+      dir: projDir,
+      onFailure: onFailure,
+      readout: readout,
+    );
 
     if (widget.config.analysisOptions != null) {
       await genAnalysis(
@@ -298,19 +296,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ezLog(runResult.stdout, buffer: readout);
       ezLog(runResult.stderr, buffer: readout);
 
-      // (optionally) Generate l10n files //
+      //  Generate l10n files //
 
-      if (widget.config.l10nConfig != null) {
-        ezLog('flutter gen-l10n...', buffer: readout);
-        runResult = await Process.run(
-          '${flutterPath}flutter',
-          <String>['gen-l10n'],
-          runInShell: true,
-          workingDirectory: projDir,
-        );
-        ezLog(runResult.stdout, buffer: readout);
-        ezLog(runResult.stderr, buffer: readout);
-      }
+      ezLog('flutter gen-l10n...', buffer: readout);
+      runResult = await Process.run(
+        '${flutterPath}flutter',
+        <String>['gen-l10n'],
+        runInShell: true,
+        workingDirectory: projDir,
+      );
+      ezLog(runResult.stdout, buffer: readout);
+      ezLog(runResult.stderr, buffer: readout);
     } catch (e) {
       onFailure(e.toString());
     }
