@@ -93,13 +93,6 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
     }
   }
 
-  bool rebuildCheck() =>
-      EzConfig.styles.displayLarge != displayProvider.value ||
-      EzConfig.styles.headlineLarge != headlineProvider.value ||
-      EzConfig.styles.titleLarge != titleProvider.value ||
-      EzConfig.styles.bodyLarge != bodyProvider.value ||
-      EzConfig.styles.labelLarge != labelProvider.value;
-
   // Return the build //
 
   @override
@@ -172,7 +165,9 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    EzConfig.pingRebuild(rebuildCheck());
+                    if (context.mounted) {
+                      EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                    }
                   },
                   tooltip:
                       '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
@@ -202,7 +197,9 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 }
               }
 
-              EzConfig.pingRebuild(rebuildCheck());
+              if (context.mounted) {
+                EzConfig.pingRebuild(ezTextRebuildCheck(context));
+              }
             },
             child: Icon(
               Icons.text_fields_sharp,
@@ -273,7 +270,9 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    EzConfig.pingRebuild(rebuildCheck());
+                    if (context.mounted) {
+                      EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                    }
                   },
                   tooltip:
                       '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
