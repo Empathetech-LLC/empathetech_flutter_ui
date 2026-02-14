@@ -41,9 +41,12 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                   await EzConfig.remove(lightIconSizeKey);
                 }
                 setState(() => iconSize = defaultIconSize);
-                EzConfig.pingRebuild(widget.fullCheck && context.mounted
-                    ? ezTextRebuildCheck(context)
-                    : iconSize != EzConfig.iconSize);
+                if (widget.fullCheck && context.mounted) {
+                  EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
+                      ezTextRebuildCheck(context));
+                } else {
+                  EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                }
               },
               child: EzText(
                 EzConfig.l10n.tsIconSize,
