@@ -604,12 +604,14 @@ import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SettingsButton extends StatelessWidget {
+  final BuildContext parentContext;
+
   /// [EzMenuButton] for opening the settings
-  const SettingsButton({super.key});
+  const SettingsButton(this.parentContext, {super.key});
 
   @override
-  Widget build(BuildContext context) => EzMenuButton(
-        onPressed: () => context.goNamed(settingsHomePath),
+  Widget build(_) => EzMenuButton(
+        onPressed: () => parentContext.goNamed(settingsHomePath),
         icon: EzIcon(Icons.settings),
         label: EzConfig.l10n.ssPageTitle,
       );
@@ -692,7 +694,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
         icon: Icon(Icons.more_vert, semanticLabel: EzConfig.l10n.gOptions),
       ),
       menuChildren: <Widget>[
-        (showSettings) ? const SettingsButton() : const EFUICredits(),
+        (showSettings) ? SettingsButton(context) : const EFUICredits(),
       ],
     );
 
