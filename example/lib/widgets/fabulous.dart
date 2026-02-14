@@ -35,20 +35,18 @@ class ResetFAB extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: EzConfig.l10n.gReset,
-      excludeFromSemantics: true,
-      child: Semantics(
-        label: EzConfig.l10n.gReset,
-        button: true,
-        hint: l10n.csResetHint,
-        child: ExcludeSemantics(
-          child: FloatingActionButton(
-            onPressed: () => showDialog(
-              context: context,
-              builder: (BuildContext dContext) {
-                return EzAlertDialog(
+  Widget build(BuildContext context) => Tooltip(
+        message: EzConfig.l10n.gReset,
+        excludeFromSemantics: true,
+        child: Semantics(
+          label: EzConfig.l10n.gReset,
+          button: true,
+          hint: l10n.csResetHint,
+          child: ExcludeSemantics(
+            child: FloatingActionButton(
+              onPressed: () => showDialog(
+                context: context,
+                builder: (BuildContext dContext) => EzAlertDialog(
                   title: Text(
                     '${EzConfig.l10n.gReset}...',
                     textAlign: TextAlign.center,
@@ -92,15 +90,13 @@ class ResetFAB extends StatelessWidget {
                     ),
                   ],
                   needsClose: false,
-                );
-              },
+                ),
+              ),
+              child: EzIcon(Icons.refresh),
             ),
-            child: EzIcon(Icons.refresh),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 /// When needed, add this an modify the main router
@@ -114,23 +110,21 @@ class MacStoreFAB extends StatelessWidget {
         tooltip: 'EoL',
         onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dContext) {
-            return EzAlertDialog(contents: <Widget>[
-              const Text(
-                '''Good news: Open UI is now an app generator!
+          builder: (BuildContext dContext) => EzAlertDialog(contents: <Widget>[
+            const Text(
+              '''Good news: Open UI is now an app generator!
 
 Bad news: the new features cannot be supported on the App Store.
 
 The full (free and open source) app generator can be downloaded from the ''',
-                textAlign: TextAlign.center,
-              ),
-              EzLink(
-                'GitHub releases',
-                url: Uri.parse(openUIReleases),
-                hint: openUIReleases,
-              ),
-            ]);
-          },
+              textAlign: TextAlign.center,
+            ),
+            EzLink(
+              'GitHub releases',
+              url: Uri.parse(openUIReleases),
+              hint: openUIReleases,
+            ),
+          ]),
         ),
         backgroundColor: EzConfig.colors.secondary,
         foregroundColor: EzConfig.colors.onSecondary,

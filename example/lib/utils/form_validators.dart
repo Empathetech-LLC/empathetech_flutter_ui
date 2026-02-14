@@ -13,12 +13,10 @@ String? validateAppName({
   Function? onSuccess,
   Function? onFailure,
 }) {
-  final RegExp pattern = RegExp(r'^[a-z0-9_]+$');
-
   if (value == null || value.isEmpty) {
     onFailure?.call();
     return '${EzConfig.l10n.gRequired}; ${l10n.csInvalidName.toLowerCase()}';
-  } else if (!pattern.hasMatch(value)) {
+  } else if (!appNamePattern.hasMatch(value)) {
     onFailure?.call();
     return l10n.csInvalidName;
   } else {
@@ -29,11 +27,9 @@ String? validateAppName({
 
 /// Validates name.extension domains
 String? validateDomain(String? value) {
-  final RegExp pattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
-
   if (value == null || value.isEmpty) {
     return '${EzConfig.l10n.gRequired}; ${l10n.csInvalidName}';
-  } else if (!pattern.hasMatch(value)) {
+  } else if (!domainPattern.hasMatch(value)) {
     return l10n.csInvalidDomain;
   } else {
     return null;

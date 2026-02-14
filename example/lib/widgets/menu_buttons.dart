@@ -69,16 +69,12 @@ class OpenSourceButton extends StatelessWidget {
   const OpenSourceButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final String text = EzConfig.l10n.gOpenSource;
-
-    return EzMenuLink(
-      uri: Uri.parse(
-        'https://github.com/Empathetech-LLC/empathetech_flutter_ui',
-      ),
-      icon: EzIcon(LineIcons.github),
-      label: text,
-      semanticsLabel: '$text: ${EzConfig.l10n.gEFUISourceHint}',
-    );
-  }
+  Widget build(BuildContext context) => EzMenuLink(
+        uri: Uri.parse(
+            'https://github.com/Empathetech-LLC/empathetech_flutter_ui'),
+        icon: EzIcon(LineIcons.github),
+        label: EzConfig.l10n.gOpenSource,
+        semanticsLabel:
+            '${EzConfig.l10n.gOpenSource}: ${EzConfig.l10n.gEFUISourceHint}',
+      );
 }
