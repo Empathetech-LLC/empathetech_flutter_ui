@@ -182,54 +182,54 @@ class _EzScrollViewState extends State<EzScrollView> {
   Widget build(BuildContext context) {
     // Define the contextual build data //
 
-    final bool showScroll = (widget.thumbVisibility == null)
-        ? !EzConfig.hideScroll
-        : widget.thumbVisibility!;
-
     final Color arrowColor = EzConfig.colors.secondary.withValues(alpha: 0.5);
 
-    final Widget core = Scrollbar(
+    Widget core = SingleChildScrollView(
+      scrollDirection: widget.scrollDirection,
+      reverse: widget.reverse,
+      padding: widget.padding,
+      primary: widget.primary,
+      physics: widget.physics,
       controller: controller,
-      thumbVisibility: showScroll,
-      thickness: showScroll ? widget.thickness : 0.0,
-      radius: showScroll ? widget.radius : Radius.zero,
-      notificationPredicate: widget.notificationPredicate,
-      scrollbarOrientation: widget.scrollbarOrientation,
-      child: SingleChildScrollView(
-        scrollDirection: widget.scrollDirection,
-        reverse: widget.reverse,
-        padding: widget.padding,
-        primary: widget.primary,
-        physics: widget.physics,
-        controller: controller,
-        dragStartBehavior: widget.dragStartBehavior,
-        clipBehavior: widget.clipBehavior,
-        restorationId: widget.restorationId,
-        keyboardDismissBehavior: widget.keyboardDismissBehavior,
-        child: (widget.child != null)
-            ? widget.child!
-            : (widget.scrollDirection == Axis.vertical)
-                ? Column(
-                    mainAxisSize: widget.mainAxisSize,
-                    mainAxisAlignment: widget.mainAxisAlignment,
-                    crossAxisAlignment: widget.crossAxisAlignment,
-                    textDirection: widget.textDirection,
-                    verticalDirection: widget.verticalDirection,
-                    textBaseline: widget.textBaseline,
-                    children: widget.children!,
-                  )
-                : EzRow(
-                    mainAxisSize: widget.mainAxisSize,
-                    mainAxisAlignment: widget.mainAxisAlignment,
-                    crossAxisAlignment: widget.crossAxisAlignment,
-                    textDirection: widget.textDirection,
-                    verticalDirection: widget.verticalDirection,
-                    textBaseline: widget.textBaseline,
-                    reverseHands: widget.reverseHands,
-                    children: widget.children!,
-                  ),
-      ),
+      dragStartBehavior: widget.dragStartBehavior,
+      clipBehavior: widget.clipBehavior,
+      restorationId: widget.restorationId,
+      keyboardDismissBehavior: widget.keyboardDismissBehavior,
+      child: (widget.child != null)
+          ? widget.child!
+          : (widget.scrollDirection == Axis.vertical)
+              ? Column(
+                  mainAxisSize: widget.mainAxisSize,
+                  mainAxisAlignment: widget.mainAxisAlignment,
+                  crossAxisAlignment: widget.crossAxisAlignment,
+                  textDirection: widget.textDirection,
+                  verticalDirection: widget.verticalDirection,
+                  textBaseline: widget.textBaseline,
+                  children: widget.children!,
+                )
+              : EzRow(
+                  mainAxisSize: widget.mainAxisSize,
+                  mainAxisAlignment: widget.mainAxisAlignment,
+                  crossAxisAlignment: widget.crossAxisAlignment,
+                  textDirection: widget.textDirection,
+                  verticalDirection: widget.verticalDirection,
+                  textBaseline: widget.textBaseline,
+                  reverseHands: widget.reverseHands,
+                  children: widget.children!,
+                ),
     );
+
+    if (widget.thumbVisibility ?? !EzConfig.hideScroll) {
+      core = Scrollbar(
+        controller: controller,
+        thumbVisibility: true,
+        thickness: widget.thickness,
+        radius: widget.radius,
+        notificationPredicate: widget.notificationPredicate,
+        scrollbarOrientation: widget.scrollbarOrientation,
+        child: core,
+      );
+    }
 
     // Return the build //
 
