@@ -140,8 +140,6 @@ class _EzScrollViewState extends State<EzScrollView> {
   // Define the build data //
 
   late final ScrollController controller;
-  late final bool hideScroll =
-      EzConfig.hideScroll || (widget.thumbVisibility == false);
 
   bool canScrollUp = false;
   bool canScrollDown = false;
@@ -180,14 +178,16 @@ class _EzScrollViewState extends State<EzScrollView> {
     }
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
-    late final Color arrowColor =
-        EzConfig.colors.secondary.withValues(alpha: 0.5);
+    // Define the contextual build data //
 
-    late final Widget core = Scrollbar(
+    final bool hideScroll =
+        EzConfig.hideScroll || (widget.thumbVisibility == false);
+
+    final Color arrowColor = EzConfig.colors.secondary.withValues(alpha: 0.5);
+
+    final Widget core = Scrollbar(
       controller: controller,
       thumbVisibility: hideScroll ? false : widget.thumbVisibility,
       thickness: hideScroll ? 0.0 : widget.thickness,
@@ -229,6 +229,8 @@ class _EzScrollViewState extends State<EzScrollView> {
                   ),
       ),
     );
+
+    // Return the build //
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
