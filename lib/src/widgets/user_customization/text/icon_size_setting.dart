@@ -10,7 +10,14 @@ class EzIconSizeSetting extends StatefulWidget {
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final bool updateBoth;
 
-  const EzIconSizeSetting({super.key, required this.updateBoth});
+  /// Set to false when using this outside of [EzTextSettings]
+  final bool fullCheck;
+
+  const EzIconSizeSetting({
+    super.key,
+    required this.updateBoth,
+    this.fullCheck = true,
+  });
 
   @override
   State<EzIconSizeSetting> createState() => _EzIconSizeSettingState();
@@ -34,7 +41,9 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                   await EzConfig.remove(lightIconSizeKey);
                 }
                 setState(() => iconSize = defaultIconSize);
-                EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                EzConfig.pingRebuild(widget.fullCheck && context.mounted
+                    ? ezTextRebuildCheck(context)
+                    : iconSize != EzConfig.iconSize);
               },
               child: EzText(
                 EzConfig.l10n.tsIconSize,
@@ -59,7 +68,10 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                                 lightIconSizeKey, iconSize);
                           }
                           setState(() {});
-                          EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                          EzConfig.pingRebuild(
+                              widget.fullCheck && context.mounted
+                                  ? ezTextRebuildCheck(context)
+                                  : iconSize != EzConfig.iconSize);
                         },
                         tooltip:
                             '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
@@ -87,7 +99,9 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       await EzConfig.remove(lightIconSizeKey);
                     }
                     setState(() => iconSize = defaultIconSize);
-                    EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                    EzConfig.pingRebuild(widget.fullCheck && context.mounted
+                        ? ezTextRebuildCheck(context)
+                        : iconSize != EzConfig.iconSize);
                   },
                   child: Icon(
                     Icons.sync_alt,
@@ -110,7 +124,10 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                                 lightIconSizeKey, iconSize);
                           }
                           setState(() {});
-                          EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                          EzConfig.pingRebuild(
+                              widget.fullCheck && context.mounted
+                                  ? ezTextRebuildCheck(context)
+                                  : iconSize != EzConfig.iconSize);
                         },
                         tooltip:
                             '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
