@@ -202,6 +202,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                       }
 
                       widget.notifierCallback(doubleVal);
+                      if (context.mounted) {
+                        EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                      }
+
                       setState(() {});
                     },
                   ),
