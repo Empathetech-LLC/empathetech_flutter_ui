@@ -24,14 +24,14 @@ class GenerateScreen extends StatefulWidget {
 class _GenerateScreenState extends State<GenerateScreen> {
   // Define the build data //
 
+  final bool isWindows = EzConfig.platform == TargetPlatform.windows;
   GeneratorState genState = GeneratorState.running;
+
   String? failureMessage;
   EzRichText? richFailureMessage;
 
   /// Quantum supremacy achieved
   bool? showDelete = true;
-
-  late final bool isWindows = EzConfig.platform == TargetPlatform.windows;
 
   String device() {
     switch (EzConfig.platform) {
@@ -63,64 +63,55 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   // Define custom functions //
 
-  void onFailure(String message) {
-    setState(() {
-      failureMessage = message;
-      genState = GeneratorState.failed;
-    });
-
-    // Exit any further processing
-    return;
-  }
+  void onFailure(String message) => setState(() {
+        failureMessage = message;
+        genState = GeneratorState.failed;
+      });
 
   /// The only way to begin
   /// Is by beginning
-  Future<void> genStuff() async {
-    final TextStyle? subTitle = ezSubTitleStyle();
-
-    await ezCmd(
-      '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
-      dir: workDir,
-      onSuccess: () => delStuff(l10n),
-      onFailure: (String message) {
-        if (message.contains('not permitted') &&
-            EzConfig.platform == TargetPlatform.macOS) {
-          setState(() {
-            showDelete = false;
-            richFailureMessage = EzRichText(
-              <InlineSpan>[
-                EzPlainText(text: l10n.gsNeedPermission),
-                EzPlainText(text: '\n\n${l10n.gsSeeNBelieve}'),
-                EzInlineLink(
-                  l10n.csHere,
-                  style: subTitle,
-                  textAlign: TextAlign.center,
-                  url: Uri.parse(
-                      'https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/example/lib/screens/generator/generate.dart'),
-                  hint: l10n.gsSeeNBelieveHint,
-                ),
-              ],
-              style: subTitle,
-              textAlign: TextAlign.center,
-            );
-            genState = GeneratorState.failed;
-          });
-        } else if (message.contains('command not found')) {
-          setState(() {
-            showDelete = null;
-            failureMessage = l10n.gsNotInstalled;
-            genState = GeneratorState.failed;
-          });
-        } else {
-          onFailure(message);
-        }
-      },
-      readout: readout,
-    );
-  }
+  Future<void> genStuff() => ezCmd(
+        '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
+        dir: workDir,
+        onSuccess: () => rmUnused(l10n),
+        onFailure: (String message) {
+          if (message.contains('not permitted') &&
+              EzConfig.platform == TargetPlatform.macOS) {
+            setState(() {
+              showDelete = false;
+              richFailureMessage = EzRichText(
+                <InlineSpan>[
+                  EzPlainText(text: l10n.gsNeedPermission),
+                  EzPlainText(text: '\n\n${l10n.gsSeeNBelieve}'),
+                  EzInlineLink(
+                    l10n.csHere,
+                    style: ezSubTitleStyle(),
+                    textAlign: TextAlign.center,
+                    url: Uri.parse(
+                        'https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/example/lib/screens/generator/generate.dart'),
+                    hint: l10n.gsSeeNBelieveHint,
+                  ),
+                ],
+                style: ezSubTitleStyle(),
+                textAlign: TextAlign.center,
+              );
+              genState = GeneratorState.failed;
+            });
+          } else if (message.contains('command not found')) {
+            setState(() {
+              showDelete = null;
+              failureMessage = l10n.gsNotInstalled;
+              genState = GeneratorState.failed;
+            });
+          } else {
+            onFailure(message);
+          }
+        },
+        readout: readout,
+      );
 
   /// Runs immediately after a successful [genStuff]
-  Future<void> delStuff(Lang l10n) async {
+  Future<void> rmUnused(Lang l10n) async {
     const String files =
         'analysis_options.yaml pubspec.lock pubspec.yaml README.md';
     const String dirs = 'lib test';
@@ -144,7 +135,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     );
   }
 
-  /// Runs immediately after a successful [delStuff]
+  /// Runs immediately after a successful [rmUnused]
   Future<void> addStuff(Lang l10n) async {
     await genREADME(
       config: widget.config,
@@ -258,7 +249,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       // Make sure packages are in order //
 
-      ezLog('flutter clean...', buffer: readout);
+      ezLog('clean...', buffer: readout);
       runResult = await Process.run(
         '${flutterPath}flutter',
         <String>['clean'],
@@ -268,7 +259,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ezLog(runResult.stdout, buffer: readout);
       ezLog(runResult.stderr, buffer: readout);
 
-      ezLog('flutter upgrade...', buffer: readout);
+      ezLog('pub upgrade...', buffer: readout);
       runResult = await Process.run(
         '${flutterPath}flutter',
         <String>[
@@ -282,7 +273,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ezLog(runResult.stdout, buffer: readout);
       ezLog(runResult.stderr, buffer: readout);
 
-      ezLog('flutter tighten...', buffer: readout);
+      ezLog('pub tighten...', buffer: readout);
       runResult = await Process.run(
         '${flutterPath}flutter',
         <String>[
@@ -298,7 +289,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       //  Generate l10n files //
 
-      ezLog('flutter gen-l10n...', buffer: readout);
+      ezLog('gen-l10n...', buffer: readout);
       runResult = await Process.run(
         '${flutterPath}flutter',
         <String>['gen-l10n'],
@@ -408,65 +399,63 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Return the build //
 
   @override
-  Widget build(_) {
-    return OpenUIScaffold(
-      EzScreen(EzScrollView(children: <Widget>[
-        header(l10n),
-        EzConfig.divider,
+  Widget build(BuildContext context) => OpenUIScaffold(
+        EzScreen(EzScrollView(children: <Widget>[
+          header(l10n),
+          EzConfig.divider,
 
-        // Console output //
+          // Console output //
 
-        // Toggle
-        EzRow(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            EzText(
-              l10n.gsConsole,
-              style: EzConfig.styles.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            EzMargin(vertical: false),
-            EzIconButton(
-              onPressed: () => setState(() => showReadout = !showReadout),
-              icon: Icon(
-                showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+          // Toggle
+          EzRow(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              EzText(
+                l10n.gsConsole,
+                style: EzConfig.styles.titleLarge,
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
-        ),
-        EzConfig.margin,
+              EzMargin(vertical: false),
+              EzIconButton(
+                onPressed: () => setState(() => showReadout = !showReadout),
+                icon: Icon(
+                  showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                ),
+              ),
+            ],
+          ),
+          EzConfig.margin,
 
-        // Readout
-        Visibility(
-          visible: showReadout,
-          child: Container(
-            constraints: BoxConstraints(
-              minWidth: widthOf(context) * 0.667,
-              maxWidth: widthOf(context) * 0.667,
-              maxHeight: heightOf(context) / 2,
-            ),
-            padding: EdgeInsets.all(EzConfig.marginVal),
-            decoration: BoxDecoration(
-              color: EzConfig.colors.surfaceDim,
-              borderRadius: ezRoundEdge,
-            ),
-            child: ValueListenableBuilder<String>(
-              valueListenable: readout,
-              builder: (_, String value, __) => EzScrollView(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                child: Text(
-                  value,
-                  style: EzConfig.styles.bodyLarge,
-                  textAlign: TextAlign.start,
+          // Readout
+          Visibility(
+            visible: showReadout,
+            child: Container(
+              constraints: BoxConstraints(
+                minWidth: widthOf(context) * 0.667,
+                maxWidth: widthOf(context) * 0.667,
+                maxHeight: heightOf(context) / 2,
+              ),
+              padding: EdgeInsets.all(EzConfig.marginVal),
+              decoration: BoxDecoration(
+                color: EzConfig.colors.surfaceDim,
+                borderRadius: ezRoundEdge,
+              ),
+              child: ValueListenableBuilder<String>(
+                valueListenable: readout,
+                builder: (_, String value, __) => EzScrollView(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Text(
+                    value,
+                    style: EzConfig.styles.bodyLarge,
+                    textAlign: TextAlign.start,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        EzConfig.separator,
-      ])),
-      title: l10n.gsPageTitle,
-      running: genState == GeneratorState.running,
-    );
-  }
+          EzConfig.separator,
+        ])),
+        title: l10n.gsPageTitle,
+        running: genState == GeneratorState.running,
+      );
 }

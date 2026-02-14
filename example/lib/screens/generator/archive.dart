@@ -27,7 +27,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   GeneratorState genState = GeneratorState.running;
   String failureMessage = '';
 
-  late final bool isDesktop = EzConfig.platform == TargetPlatform.linux ||
+  final bool isDesktop = EzConfig.platform == TargetPlatform.linux ||
       EzConfig.platform == TargetPlatform.macOS ||
       EzConfig.platform == TargetPlatform.windows;
 
@@ -72,9 +72,10 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
             richMessage: EzRichText(
               <InlineSpan>[
                 EzPlainText(
+                  // Open UI info, open is the one saving a file
                   text: EzConfig.l10n.ssConfigSaved(archivePath(
-                    appName: 'Open UI',
-                    androidPackage: 'net.empathetech.open_ui',
+                    appName: appName,
+                    androidPackage: androidPackage,
                   )),
                 ),
                 if (!isDesktop) ...<InlineSpan>[
