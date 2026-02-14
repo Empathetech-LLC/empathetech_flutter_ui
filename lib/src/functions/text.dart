@@ -7,11 +7,44 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 // Helpers //
 
 /// 404 [EzConfig.l10n].gError}
 String ez404() => '404 ${EzConfig.l10n.gError}';
+
+/// Custom '==' for two [TextStyle]s
+bool ezFitCheck(TextStyle? a, TextStyle? b) {
+  if (a == null && b == null) return true;
+  if ((a == null) != (b == null)) return false;
+
+  return a!.fontFamily == b!.fontFamily &&
+      a.fontSize == b.fontSize &&
+      a.fontWeight == b.fontWeight &&
+      a.fontStyle == b.fontStyle &&
+      a.decoration == b.decoration &&
+      // Allow one color to be null, standard check when both are present
+      (((a.color == null) != (b.color == null)) || a.color == b.color) &&
+      a.letterSpacing == b.letterSpacing &&
+      a.wordSpacing == b.wordSpacing &&
+      a.height == b.height;
+}
+
+/// Only call in [EzTextSettings] context
+/// Or another [context] where the [EzTextStyleProvider]s are in present
+bool ezTextRebuildCheck(BuildContext context) {
+  return !(ezFitCheck(EzConfig.styles.displayLarge,
+          Provider.of<EzDisplayStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.headlineLarge,
+          Provider.of<EzHeadlineStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.titleLarge,
+          Provider.of<EzTitleStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.bodyLarge,
+          Provider.of<EzBodyStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.labelLarge,
+          Provider.of<EzLabelStyleProvider>(context, listen: false).value));
+}
 
 /// Returns the soon-to-be rendered [Size] of [text] via a [TextPainter]
 Size ezTextSize(
@@ -171,7 +204,7 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(darkDisplayUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(darkDisplayFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -188,7 +221,7 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(lightDisplayUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(lightDisplayFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -218,7 +251,7 @@ TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(darkDisplayUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(darkDisplayFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -235,7 +268,7 @@ TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(lightDisplayUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(lightDisplayFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -265,7 +298,7 @@ TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(darkHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(darkHeadlineFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -282,7 +315,7 @@ TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(lightHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(lightHeadlineFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -312,7 +345,7 @@ TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(darkHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(darkHeadlineFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -329,7 +362,7 @@ TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(lightHeadlineUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(lightHeadlineFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -359,7 +392,7 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(darkTitleUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(darkTitleFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -376,7 +409,7 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(lightTitleUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(lightTitleFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -406,7 +439,7 @@ TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(darkTitleUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(darkTitleFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -423,7 +456,7 @@ TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(lightTitleUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(lightTitleFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -453,7 +486,7 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(darkBodyUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(darkBodyFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -470,7 +503,7 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(lightBodyUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(lightBodyFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -500,7 +533,7 @@ TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(darkBodyUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(darkBodyFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -517,7 +550,7 @@ TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(lightBodyUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(lightBodyFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -547,7 +580,7 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(darkLabelUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(darkLabelFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -564,7 +597,7 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.get(lightLabelUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.get(lightLabelFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -594,7 +627,7 @@ TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(darkLabelUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(darkLabelFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
@@ -611,7 +644,7 @@ TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
               : null,
           decoration: EzConfig.getDefault(lightLabelUnderlinedKey) == true
               ? TextDecoration.underline
-              : null,
+              : TextDecoration.none,
           color: color,
           height: EzConfig.getDefault(lightLabelFontHeightKey),
           leadingDistribution: TextLeadingDistribution.even,
