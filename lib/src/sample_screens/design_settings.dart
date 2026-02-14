@@ -481,7 +481,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     EzConfig.isDark ? lightHideScrollKey : darkHideScrollKey,
                     value);
               }
-              await EzConfig.redrawUI(redraw);
+              await EzConfig.rebuildUI(redraw);
             },
             text: EzConfig.l10n.lsScroll,
           ),
