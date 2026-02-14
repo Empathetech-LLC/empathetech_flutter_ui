@@ -13,6 +13,9 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
 
+// Defaults taken from...
+// https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
+
 // Sub-string getters //
 
 /// Copyright notice for the top of code files
@@ -20,53 +23,36 @@ String genCopyright(EAGConfig config) =>
     config.copyright ?? '/* ${config.appName} */';
 
 /// Returns the .arb file directory
-String? getArbDir(EAGConfig config) {
-  if (config.l10nConfig == null) return null;
-
-  final List<String> lines = config.l10nConfig!.split('\n');
-
-  for (final String line in lines) {
+String getArbDir(EAGConfig config) {
+  for (final String line in config.l10nConfig.split('\n')) {
     if (line.contains('arb-dir')) {
       final List<String> parts = line.split(':');
       return parts[1].trim();
     }
   }
 
-  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
   return 'lib/10n';
 }
 
 /// OutputClass name
-String? l10nClassName(EAGConfig config) {
-  if (config.l10nConfig == null) return null;
-
-  final List<String> lines = config.l10nConfig!.split('\n');
-
-  for (final String line in lines) {
+String l10nClassName(EAGConfig config) {
+  for (final String line in config.l10nConfig.split('\n')) {
     if (line.contains('output-class')) {
       final List<String> parts = line.split(':');
       return parts[1].trim();
     }
   }
 
-  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
   return 'AppLocalizations';
 }
 
 /// [l10nClassName].localizationsDelegates
-String? l10nDelegates(EAGConfig config) {
-  final String? name = l10nClassName(config);
-  if (name == null) return null;
-
-  return '$name.localizationsDelegates';
-}
+String l10nDelegates(EAGConfig config) =>
+    '${l10nClassName(config)}.localizationsDelegates';
 
 /// \n...[l10nDelegates],\n
-String l10nDelegateHandler(EAGConfig config) {
-  final String? delegate = l10nDelegates(config);
-
-  return delegate == null ? '' : '\n          ...$delegate,';
-}
+String l10nDelegateHandler(EAGConfig config) =>
+    '\n          ...${l10nDelegates(config)},';
 
 // Code generation //
 
@@ -134,7 +120,7 @@ As your app grows, use [EFUI](https://github.com/Empathetech-LLC/empathetech_flu
 * [Screen reader support](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/screen_reader_support): `Widget`s with streamlined `Semantics`
 * [User customization](https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/lib/src/widgets/helpers): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
 
-${config.l10nConfig != null ? '''### <br>Localization
+### <br>Localization
 
 aka translation. Add new text to the language files in ${getArbDir(config)} and reference them in the dart code with `${l10nClassName(config)}`
 
@@ -143,7 +129,7 @@ There is a step between: after editing the .arb files, run
 flutter gen-l10n
 ``` 
 to generate the new aliases.
-''' : ''}
+
 ### <br>Integration testing
 
 Has been setup along with a basic runner script; `integration_test/run_int_tests.sh`
@@ -339,14 +325,17 @@ void main() async {
 
   // Run the app //
   
-  ${config.l10nConfig != null ? """final (Locale storedLocale, EFUILang storedEFUILang) = await ezStoredL10n();
-  final $l10nClass storedLang = await $l10nClass.delegate.load(storedLocale);
+  final (Locale storedLocale, EFUILang storedEFUILang) = await ezStoredL10n();
 
-  runApp($classCaseAppName(storedLocale, storedEFUILang, storedLang));""" : 'runApp(const $classCaseAppName());'}
+  runApp($classCaseAppName(
+    storedLocale,
+    storedEFUILang,
+    await $l10nClass.delegate.load(storedLocale),
+  ));
 }
 
 class $classCaseAppName extends StatelessWidget {
-  ${config.l10nConfig != null ? """final Locale storedLocale;
+  final Locale storedLocale;
   final EFUILang storedEFUILang;
   final $l10nClass storedLang;
   
@@ -355,7 +344,7 @@ class $classCaseAppName extends StatelessWidget {
     this.storedEFUILang,
     this.storedLang, {
     super.key,
-  });""" : 'const $classCaseAppName({super.key});'}
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -364,10 +353,11 @@ class $classCaseAppName extends StatelessWidget {
         const LocaleNamesLocalizationsDelegate(),
         ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
       },
-      supportedLocales: ${l10nClass ?? 'EFUILang'}.supportedLocales,
-      ${config.l10nConfig != null ? """locale: storedLocale,
+      supportedLocales: $l10nClass.supportedLocales,
+      locale: storedLocale,
       el10n: storedEFUILang,
-      appCache: ${classCaseAppName}Cache(storedLocale, storedLang),""" : ''}appName: appName,
+      appCache: ${classCaseAppName}Cache(storedLocale, storedLang),
+      appName: appName,
       routerConfig: GoRouter(
         navigatorKey: ezRootNav,
         initialLocation: homePath,
@@ -532,9 +522,8 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
 """);
 
     // APP_cache.dart
-    if (config.l10nConfig != null) {
-      final File appCache = File('$dir/lib/utils/${config.appName}_cache.dart');
-      await appCache.writeAsString("""$copyright
+    final File appCache = File('$dir/lib/utils/${config.appName}_cache.dart');
+    await appCache.writeAsString("""$copyright
 
 import './export.dart';
 
@@ -568,16 +557,15 @@ class ${classCaseAppName}Cache extends EzAppCache {
 
 Lang get l10n => (EzConfig.appCache! as ${classCaseAppName}Cache).l10n;
 """);
-    }
 
     // export.dart
     final File utilsExport = File('$dir/lib/utils/export.dart');
     await utilsExport.writeAsString("""$copyright
 
 export 'consts.dart';
-${config.l10nConfig != null ? """export '${config.appName}_cache.dart';
+export '${config.appName}_cache.dart';
 
-export '../l10n/${ezClassToSnake(l10nClass!)}.dart'""" : ''};
+export '../l10n/${ezClassToSnake(l10nClass!)}.dart';
 """);
 
     // widgets //
@@ -880,7 +868,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                ${config.l10nConfig != null ? 'l10n.hsCounterLabel' : 'You have pushed the button this many times:'},
+                l10n.hsCounterLabel,
                 style: ezSubTitleStyle(),
                 textAlign: TextAlign.center,
               ),
@@ -1143,14 +1131,12 @@ Future<void> genL10n({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  if (config.l10nConfig == null) return;
-
   // Gather setup //
 
-  final String snakeName = ezClassToSnake(l10nClassName(config)!);
+  final String snakeName = ezClassToSnake(l10nClassName(config));
   final String arbPath = EzConfig.platform == TargetPlatform.windows
-      ? getArbDir(config)!.replaceAll('/', '\\')
-      : getArbDir(config)!;
+      ? getArbDir(config).replaceAll('/', '\\')
+      : getArbDir(config);
 
   // Make dir
   await ezCmd(
@@ -1191,7 +1177,7 @@ Future<void> genL10n({
 }''');
 
     final File l10nConfig = File('$dir/l10n.yaml');
-    await l10nConfig.writeAsString(config.l10nConfig!);
+    await l10nConfig.writeAsString(config.l10nConfig);
   } catch (e) {
     onFailure(e.toString());
   }
