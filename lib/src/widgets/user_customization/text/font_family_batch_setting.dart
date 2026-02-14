@@ -142,13 +142,9 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             widget.bodyProvider.fuse(fontFamily);
             widget.labelProvider.fuse(fontFamily);
 
-            EzConfig.pingRebuild(
-                EzConfig.styles.displayLarge != widget.displayProvider.value ||
-                    EzConfig.styles.headlineLarge !=
-                        widget.headlineProvider.value ||
-                    EzConfig.styles.titleLarge != widget.titleProvider.value ||
-                    EzConfig.styles.bodyLarge != widget.bodyProvider.value ||
-                    EzConfig.styles.labelLarge != widget.labelProvider.value);
+            if (context.mounted) {
+              EzConfig.pingRebuild(ezTextRebuildCheck(context));
+            }
             setState(() {});
           },
         ),
