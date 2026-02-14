@@ -235,6 +235,7 @@ class _EzScrollViewState extends State<EzScrollView> {
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
+        scrollbars: widget.thumbVisibility ?? !EzConfig.hideScroll,
         dragDevices: widget.scrollDirection == Axis.vertical
             ? <PointerDeviceKind>{
                 PointerDeviceKind.invertedStylus,
