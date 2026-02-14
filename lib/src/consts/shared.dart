@@ -79,7 +79,7 @@ const int rMax = 255;
 
 /// Sample string for sizing double input boxes
 /// -55.55
-const String sampleString = '55.55';
+const String sampleString = '-55.55';
 
 /// Opacity for text selection highlighting
 /// 0.25
