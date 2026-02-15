@@ -130,17 +130,13 @@ flutter gen-l10n
 ``` 
 to generate the new aliases.
 
-### <br>Integration testing
-
-Has been setup along with a basic runner script; `integration_test/run_int_tests.sh`
-
-<br>P.S. `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend (re)moving them if this project is going to be made public.
-
 ## <br>Credits
 
 $appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
+
+<br>**P.S.** `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend (re)moving them if this project is going to be made public.
 ''');
   } catch (e) {
     onFailure(e.toString());
