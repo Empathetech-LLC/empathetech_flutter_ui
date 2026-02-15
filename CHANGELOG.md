@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [11.0.0] - 2026-02-15
+### Added
+- appName and androidPackage parameters to all sample settings screen constructions
+  - For EzUpdater and/or config saving/loading
+- Undo passthrough to ezSnackBar
+- Save config link to randomize and reset buttons
+  - Toggle-able in Widget, included in sample settings screens
+- Solid color option to EzImageSetting
+
+### Removed
+- ezL10n function, now use EzConfig.l10n
+- Flutter Platform Widgets (and iOS styling with it)
+  - Package was discontinued
+  - Until further notice, EFUI will be Material only
+- BetterFeedback integration
+  - Can absolutely still DIY
+  - Goal is to simplify EFUI powered apps, especially with the new theme provider layer(s)
+
+### Updated
+- !! EzConfig/settings updates are fully live now !!
+  - EzConfig.set can optionally redraw the UI immediately
+    - Default false for performance
+      - All sample settings screens have appropriate instances set true (ImageSettings, for example)
+      - Sample settings screens also have a new EzApplyFAB that appears when changes are made
+  - EzConfig.init has breaking changes (see docs, minor break)
+  - EzConfig.getLocale -> getStoredLocale
+  - EzAppProvider -> EzConfigurableApp
+  - Privatized EzConfig fields, added lots of getters/setters
+  - Common spacers should now be access via EzConfig.[spacer,separator,margin,...] (previously ezSpacer, ezSeparator, ezMargin...)
+- Flutter 3.41.X
+- Simplified/shortened the human translations pending message to "Machine translated"
+
 ## [10.2.0] - 2025-10-20
 ### Added
 - Shared consts for default spacers (eSpacer, ezMargin, ezSeparator...)
@@ -143,10 +175,10 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Localization strategy
   - EzConfig now requires a fallback
-    - Example: `fallbackLang: await EFUILang.delegate.load(americanEnglish),`
+    - Example: `l10nFallback: await EFUILang.delegate.load(americanEnglish),`
     - Enables all things EFUI to continue working in apps that have unsupported Locales
       - If calling EFUILang in your code, here is the updated recommendation:
-        - `late final EFUILang el10n = ezL10n(context);`
+        - ``
   - Updated EzLocaleSetting for the new strategy
   - Added skip parameter to EzLocaleSetting
 - Improved EzConfig.init() efficiency

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -70,21 +70,23 @@ class EzScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EdgeInsetsGeometry screenMargin =
-        margin ?? EdgeInsets.all(EzConfig.get(marginKey));
+        margin ?? EdgeInsets.all(EzConfig.marginVal);
 
     Decoration? buildDecoration() {
       if (!useImageDecoration) return null;
 
-      final String decorationKey = isDarkTheme(context)
-          ? darkDecorationImageKey
-          : lightDecorationImageKey;
+      final String decorationKey =
+          EzConfig.isDark ? darkDecorationImageKey : lightDecorationImageKey;
       final String? imagePath = EzConfig.get(decorationKey);
 
       if (imagePath == null || imagePath == noImageValue) {
         return null;
       } else {
+        final int? isColor = int.tryParse(imagePath);
+        if (isColor != null) return BoxDecoration(color: Color(isColor));
+
         final BoxFit? fit =
-            ezFitFromName(EzConfig.get('$decorationKey$boxFitSuffix'));
+            boxFitLib[EzConfig.get('$decorationKey$boxFitSuffix')];
 
         return BoxDecoration(
           image: DecorationImage(image: ezImageProvider(imagePath), fit: fit),

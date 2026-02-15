@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -11,11 +11,12 @@ export 'home.dart';
 export 'generator/generate.dart';
 export 'generator/archive.dart';
 
-export 'settings/settings_home.dart';
-export 'settings/color_settings.dart';
-export 'settings/design_settings.dart';
-export 'settings/layout_settings.dart';
-export 'settings/text_settings.dart';
+export 'settings/home.dart';
+
+export 'settings/color.dart';
+export 'settings/design.dart';
+export 'settings/layout.dart';
+export 'settings/text.dart';
 
 // Route names //
 

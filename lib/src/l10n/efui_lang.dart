@@ -105,6 +105,12 @@ abstract class EFUILang {
   /// **'Apply'**
   String get gApply;
 
+  /// No description provided for @gApplyChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply changes'**
+  String get gApplyChanges;
+
   /// No description provided for @gContinue.
   ///
   /// In en, this message translates to:
@@ -122,6 +128,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open'**
   String get gOpen;
+
+  /// No description provided for @gOpenLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Open link'**
+  String get gOpenLink;
 
   /// No description provided for @gSuccess.
   ///
@@ -189,6 +201,18 @@ abstract class EFUILang {
   /// **'Back'**
   String get gBack;
 
+  /// No description provided for @gUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get gUndo;
+
+  /// No description provided for @gRedo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get gRedo;
+
   /// No description provided for @gCancel.
   ///
   /// In en, this message translates to:
@@ -243,17 +267,35 @@ abstract class EFUILang {
   /// **'System'**
   String get gSystem;
 
+  /// No description provided for @gDarkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark theme'**
+  String get gDarkTheme;
+
+  /// No description provided for @gLightTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light theme'**
+  String get gLightTheme;
+
+  /// No description provided for @gBothThemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Both themes'**
+  String get gBothThemes;
+
   /// No description provided for @gEditing.
   ///
   /// In en, this message translates to:
   /// **'Editing: '**
   String get gEditing;
 
-  /// No description provided for @gEditingTheme.
+  /// No description provided for @gEditingThemeHint.
   ///
   /// In en, this message translates to:
-  /// **'Editing: {themeType} theme'**
-  String gEditingTheme(Object themeType);
+  /// **'Open the system theme settings'**
+  String get gEditingThemeHint;
 
   /// No description provided for @gLeft.
   ///
@@ -381,17 +423,35 @@ abstract class EFUILang {
   /// **'Open helpful documentation'**
   String get gHowThisWorksHint;
 
-  /// No description provided for @gTranslationsPending.
+  /// No description provided for @gMachineTranslated.
   ///
   /// In en, this message translates to:
-  /// **'Translations pending human review'**
-  String get gTranslationsPending;
+  /// **'Machine translated'**
+  String get gMachineTranslated;
 
   /// No description provided for @gUpdates.
   ///
   /// In en, this message translates to:
   /// **'Updates available'**
   String get gUpdates;
+
+  /// No description provided for @gHardRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Please hard refresh the page...\nCtrl + Shift + R'**
+  String get gHardRefresh;
+
+  /// No description provided for @gHardRefreshMac.
+  ///
+  /// In en, this message translates to:
+  /// **'Please hard refresh the page...\nCommand + Shift + R'**
+  String get gHardRefreshMac;
+
+  /// No description provided for @gHardRefreshMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Please refresh the page in the browser menu.'**
+  String get gHardRefreshMobile;
 
   /// No description provided for @gEnterURL.
   ///
@@ -531,11 +591,29 @@ abstract class EFUILang {
   /// **'Reset all'**
   String get gResetAll;
 
-  /// No description provided for @gUndoWarn.
+  /// No description provided for @gUndoWarn1.
   ///
   /// In en, this message translates to:
-  /// **'Cannot be undone'**
-  String get gUndoWarn;
+  /// **'Cannot be undone automatically.\n'**
+  String get gUndoWarn1;
+
+  /// No description provided for @gSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get gSave;
+
+  /// No description provided for @gSaveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to save a JSON config file.'**
+  String get gSaveHint;
+
+  /// No description provided for @gUndoWarn2.
+  ///
+  /// In en, this message translates to:
+  /// **' your current config to restore it manually.'**
+  String get gUndoWarn2;
 
   /// No description provided for @gCreditTo.
   ///
@@ -615,6 +693,24 @@ abstract class EFUILang {
   /// **'Activate to change the app language'**
   String get ssLangHint;
 
+  /// No description provided for @ssUpdateDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Update dark theme'**
+  String get ssUpdateDark;
+
+  /// No description provided for @ssUpdateLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Update light theme'**
+  String get ssUpdateLight;
+
+  /// No description provided for @ssUpdateBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Update both theme modes'**
+  String get ssUpdateBoth;
+
   /// No description provided for @ssLoadPreset.
   ///
   /// In en, this message translates to:
@@ -639,23 +735,17 @@ abstract class EFUILang {
   /// **'High visibility'**
   String get ssHighVisibility;
 
-  /// No description provided for @ssVideoGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Video game'**
-  String get ssVideoGame;
-
   /// No description provided for @ssChalkboard.
   ///
   /// In en, this message translates to:
   /// **'Chalkboard'**
   String get ssChalkboard;
 
-  /// No description provided for @ssFancyPants.
+  /// No description provided for @ssNebula.
   ///
   /// In en, this message translates to:
-  /// **'Fancy pants'**
-  String get ssFancyPants;
+  /// **'Nebula'**
+  String get ssNebula;
 
   /// No description provided for @ssDarkOnly.
   ///
@@ -729,6 +819,12 @@ abstract class EFUILang {
   /// **'Reset all settings?'**
   String get ssResetAll;
 
+  /// No description provided for @ssResetBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset both theme modes'**
+  String get ssResetBoth;
+
   /// No description provided for @csPageTitle.
   ///
   /// In en, this message translates to:
@@ -801,11 +897,11 @@ abstract class EFUILang {
   /// **'color scheme'**
   String get csColorScheme;
 
-  /// No description provided for @csResetAll.
+  /// No description provided for @csReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
+  /// **'Reset {themeType} colors?'**
+  String csReset(Object themeType);
 
   /// No description provided for @dsPageTitle.
   ///
@@ -878,6 +974,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'From URL'**
   String get dsFromNetwork;
+
+  /// No description provided for @dsSolidColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Solid color'**
+  String get dsSolidColor;
 
   /// No description provided for @dsResetIt.
   ///
@@ -999,23 +1101,11 @@ abstract class EFUILang {
   /// **'Rotate right'**
   String get dsRotateRight;
 
-  /// No description provided for @dsUndo.
+  /// No description provided for @dsReset.
   ///
   /// In en, this message translates to:
-  /// **'Undo'**
-  String get dsUndo;
-
-  /// No description provided for @dsRedo.
-  ///
-  /// In en, this message translates to:
-  /// **'Redo'**
-  String get dsRedo;
-
-  /// No description provided for @dsResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all global and {themeType} theme design settings?'**
-  String dsResetAll(Object themeType);
+  /// **'Reset {themeType} design?'**
+  String dsReset(Object themeType);
 
   /// No description provided for @lsPageTitle.
   ///
@@ -1047,11 +1137,11 @@ abstract class EFUILang {
   /// **'Hide scrollbars'**
   String get lsScroll;
 
-  /// No description provided for @lsResetAll.
+  /// No description provided for @lsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all layout settings?'**
-  String get lsResetAll;
+  /// **'Reset {themeType} layout?'**
+  String lsReset(Object themeType);
 
   /// No description provided for @tsPageTitle.
   ///
@@ -1245,11 +1335,11 @@ abstract class EFUILang {
   /// **' Not too big, not too small?'**
   String get tsLabelP2;
 
-  /// No description provided for @tsResetAll.
+  /// No description provided for @tsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset all text settings?'**
-  String get tsResetAll;
+  /// **'Reset {themeType} text styles?'**
+  String tsReset(Object themeType);
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

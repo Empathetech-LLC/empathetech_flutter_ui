@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -16,29 +16,19 @@ double snackWidth({
   TextStyle? style,
   double? margin,
   bool showCloseIcon = true,
-}) {
-  final TextStyle? snackStyle =
-      style ?? Theme.of(context).snackBarTheme.contentTextStyle;
-
-  final double snackMargin = margin ?? EzConfig.get(marginKey);
-
-  final double countDownSize = EzConfig.get(iconSizeKey) * 1.5;
-
-  final double closeIconSize = showCloseIcon
-      ? (Theme.of(context)
-                  .iconButtonTheme
-                  .style
-                  ?.iconSize
-                  ?.resolve(<WidgetState>{WidgetState.selected}) ??
-              0) +
-          EzConfig.get(spacingKey)
-      : 0;
-
-  return ezTextSize(message, context: context, style: snackStyle).width +
-      countDownSize +
-      closeIconSize +
-      (snackMargin * 3);
-}
+}) =>
+    // Text width
+    ezTextSize(
+      message,
+      context: context,
+      style: style ?? Theme.of(context).snackBarTheme.contentTextStyle,
+    ).width +
+    // Countdown width
+    (EzConfig.iconSize * 1.5) +
+    // Close width
+    (showCloseIcon ? (EzConfig.iconSize + EzConfig.spacing) : 0) +
+    // Margin(s) width
+    ((margin ?? EzConfig.marginVal) * 3);
 
 /// Standardized [SnackBar] with an [EzCountdownTimer]
 /// Most parameters are available, but [SnackBar.padding], [SnackBar.width], [SnackBar.content], and [SnackBar.duration] are controlled
@@ -59,11 +49,17 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   Clip clipBehavior = Clip.hardEdge,
   required BuildContext context,
   required String message,
+  Future<void> Function()? undo,
+  String? undoMessage,
   double? margin,
   Duration? duration,
 }) {
-  final Duration toastLength = duration ?? ezReadingTime(message);
-  final double toastMargin = margin ?? EzConfig.get(marginKey);
+  final double toastMargin = margin ?? EzConfig.marginVal;
+
+  late final Duration readingTime = (undo == null)
+      ? ezReadingTime(message)
+      : ezReadingTime(message) + const Duration(seconds: 1);
+  final Duration toastLength = duration ?? readingTime;
 
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -74,7 +70,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       action: action,
       actionOverflowThreshold: actionOverflowThreshold,
       showCloseIcon: showCloseIcon ?? true,
-      closeIconColor: closeIconColor ?? Theme.of(context).colorScheme.primary,
+      closeIconColor: closeIconColor ?? EzConfig.colors.primary,
       animation: animation,
       onVisible: onVisible,
       dismissDirection: dismissDirection ?? DismissDirection.down,
@@ -92,9 +88,30 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       content: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          // Text
           Flexible(child: Text(message, textAlign: TextAlign.center)),
+
+          // Undo (conditional)
+          if (undo != null) ...<Widget>[
+            EzSpacer(space: toastMargin, vertical: false),
+            EzTextButton(
+              text: undoMessage ?? EzConfig.l10n.gUndo,
+              textStyle: EzConfig.styles.bodyLarge
+                  ?.copyWith(color: EzConfig.colors.primary),
+              onPressed: () async {
+                await undo();
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                }
+              },
+            ),
+          ],
+
+          // Timer
           EzSpacer(space: toastMargin, vertical: false),
           EzCountdownTimer(duration: toastLength),
+
+          // Close (inherited, above)
         ],
       ),
       duration: toastLength,

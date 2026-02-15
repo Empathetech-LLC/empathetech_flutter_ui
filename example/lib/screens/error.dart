@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -12,7 +12,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ErrorScreen extends StatefulWidget {
   final GoException? error;
 
-  const ErrorScreen(this.error, {super.key});
+  ErrorScreen(this.error) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<ErrorScreen> createState() => _ErrorScreenState();
@@ -22,48 +22,40 @@ class _ErrorScreenState extends State<ErrorScreen> {
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, '404 ${l10n.gError}');
+  void initState() {
+    super.initState();
+    ezWindowNamer(ez404());
   }
 
   // Return the build //
 
-  late final EFUILang l10n = ezL10n(context);
-
   @override
-  Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return OpenUIScaffold(
-      body: EzScreen(
+  Widget build(BuildContext context) => OpenUIScaffold(EzScreen(
         Center(
           child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                l10n.g404Wonder,
-                style: textTheme.headlineLarge,
+                EzConfig.l10n.g404Wonder,
+                style: EzConfig.styles.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
               Text(
-                l10n.g404,
-                style: ezSubTitleStyle(textTheme),
+                EzConfig.l10n.g404,
+                style: ezSubTitleStyle(),
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
               Text(
-                l10n.g404Note,
-                style: textTheme.labelLarge,
+                EzConfig.l10n.g404Note,
+                style: EzConfig.styles.labelLarge,
                 textAlign: TextAlign.center,
               ),
-              ezSeparator,
+              EzConfig.separator,
             ],
           ),
         ),
         useImageDecoration: false,
-      ),
-    );
-  }
+      ));
 }

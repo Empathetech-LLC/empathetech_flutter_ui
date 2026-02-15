@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,18 +8,20 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzTranslationsPendingNotice extends StatelessWidget {
-  /// Defaults to [EFUILang.gTranslationsPending]
+  /// Defaults to [EFUILang.gMachineTranslated]
   final String? message;
 
   /// Defaults to [TextTheme.labelLarge]
   final TextStyle? style;
 
-  /// Shout-out: [TextAlign.start] >> [TextAlign.left] for LTR
-  /// (&& >> [TextAlign.right] for RTL)
+  /// Shout-out: [TextAlign.start] >> [TextAlign.left] || [TextAlign.right]
   final TextAlign textAlign;
 
   /// Won't appear for this locale
   final Locale defaultLocale;
+
+  /// Spacing widget to place above the message
+  final Widget header;
 
   /// Spacing widget to place below the message
   final Widget footer;
@@ -31,25 +33,24 @@ class EzTranslationsPendingNotice extends StatelessWidget {
     this.style,
     this.textAlign = TextAlign.center,
     this.defaultLocale = english,
-    this.footer = ezSeparator,
+    this.header = const SizedBox.shrink(),
+    this.footer = const EzSeparator(),
   });
 
   @override
-  Widget build(BuildContext context) {
-    final Locale currLocale = EzConfig.getLocale() ?? defaultLocale;
-
-    return (currLocale == defaultLocale)
-        ? const SizedBox.shrink()
-        : Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                message ?? ezL10n(context).gTranslationsPending,
-                style: style ?? Theme.of(context).textTheme.labelLarge,
-                textAlign: textAlign,
-              ),
-              footer,
-            ],
-          );
-  }
+  Widget build(BuildContext context) =>
+      (EzConfig.locale.languageCode == defaultLocale.languageCode)
+          ? const SizedBox.shrink()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                header,
+                Text(
+                  message ?? EzConfig.l10n.gMachineTranslated,
+                  style: style ?? EzConfig.styles.labelLarge,
+                  textAlign: textAlign,
+                ),
+                footer,
+              ],
+            );
 }

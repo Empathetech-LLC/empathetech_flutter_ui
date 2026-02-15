@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzToolTipper extends StatelessWidget {
   /// [Tooltip.message] passthrough
@@ -17,11 +16,8 @@ class EzToolTipper extends StatelessWidget {
   final InlineSpan? richMessage;
 
   /// Classic question mark tool tip
-  const EzToolTipper({
-    super.key,
-    this.message,
-    this.richMessage,
-  }) : assert(((message == null) != (richMessage == null)),
+  const EzToolTipper({super.key, this.message, this.richMessage})
+      : assert(((message == null) != (richMessage == null)),
             'Either message or richMessage must be provided, but not both');
 
   @override
@@ -29,11 +25,9 @@ class EzToolTipper extends StatelessWidget {
     final GlobalKey<TooltipState> key = GlobalKey<TooltipState>();
     bool isTooltipVisible = false;
 
-    final String help = ezL10n(context).gHelp;
-
     return EzTextBackground(
       Semantics(
-        label: help,
+        label: EzConfig.l10n.gHelp,
         button: true,
         onTap: () async {
           if (isTooltipVisible) {
@@ -42,7 +36,7 @@ class EzToolTipper extends StatelessWidget {
             key.currentState?.ensureTooltipVisible();
 
             // Wait for auto-announcement to finish
-            await Future<void>.delayed(ezReadingTime(help));
+            await Future<void>.delayed(ezReadingTime(EzConfig.l10n.gHelp));
             String message = this.message ?? '';
 
             if (richMessage != null) {
@@ -71,16 +65,18 @@ class EzToolTipper extends StatelessWidget {
               }
             }
 
-            SemanticsService.announce(
-              message,
-              TextDirection.ltr,
-              assertiveness: Assertiveness.assertive,
-            );
+            if (context.mounted) {
+              SemanticsService.sendAnnouncement(
+                View.of(context),
+                message,
+                TextDirection.ltr,
+                assertiveness: Assertiveness.assertive,
+              );
+            }
           }
           isTooltipVisible = !isTooltipVisible;
         },
         child: Tooltip(
-          key: key,
           waitDuration: Duration.zero,
           triggerMode: TooltipTriggerMode.tap,
           enableTapToDismiss: false,
@@ -88,13 +84,13 @@ class EzToolTipper extends StatelessWidget {
           message: message,
           richMessage: richMessage,
           child: EzIcon(
-            PlatformIcons(context).helpOutline,
-            color: Theme.of(context).colorScheme.outline,
+            Icons.help_outline,
+            color: EzConfig.colors.outline,
           ),
         ),
       ),
       useSurface: true,
-      borderRadius: ezPillShape,
+      borderRadius: ezPillEdge,
     );
   }
 }

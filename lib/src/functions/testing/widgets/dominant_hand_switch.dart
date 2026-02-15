@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -10,19 +10,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// For integration testing
 /// Test [EzDominantHandSwitch]
-Future<void> testDHSetting(
-  WidgetTester tester, {
-  required EFUILang l10n,
-  required bool isLefty,
-}) async {
+Future<void> testDHSetting(WidgetTester tester) async {
   ezLog('\nTesting dominant hand setting');
   await ezTouch(tester, find.byType(DropdownMenu<bool>).last);
 
-  if (isLefty) {
+  if (EzConfig.isLefty) {
     ezLog('Right hand layout');
 
     // Activate righty layout
-    await ezTouchText(tester, l10n.gRight);
+    await ezTouchText(tester, EzConfig.l10n.gRight);
 
     List<Widget> handButtonsChildren =
         (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -38,7 +34,7 @@ Future<void> testDHSetting(
 
     // Activate lefty layout
     await ezTouch(tester, find.byType(DropdownMenu<bool>).last);
-    await ezTouchText(tester, l10n.gLeft);
+    await ezTouchText(tester, EzConfig.l10n.gLeft);
 
     // Verify lefty layout
     handButtonsChildren =
@@ -51,7 +47,7 @@ Future<void> testDHSetting(
     ezLog('Left hand layout');
 
     // Activate lefty layout
-    await ezTouchText(tester, l10n.gLeft);
+    await ezTouchText(tester, EzConfig.l10n.gLeft);
 
     List<Widget> handButtonsChildren =
         (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -67,7 +63,7 @@ Future<void> testDHSetting(
 
     // Activate righty layout
     await ezTouch(tester, find.byType(DropdownMenu<bool>).last);
-    await ezTouchText(tester, l10n.gRight);
+    await ezTouchText(tester, EzConfig.l10n.gRight);
 
     // Verify righty layout
     handButtonsChildren =

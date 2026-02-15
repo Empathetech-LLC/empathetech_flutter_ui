@@ -1,127 +1,171 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
-  /// [EzElevatedIconButton.label] passthrough
-  /// Defaults to [EFUILang.gResetAll]
-  final String? label;
+  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
+  final void Function() onComplete;
+
+  /// Whether to reset both themes, or just the current theme
+  /// When null, the dialog will have a switch for the user to choose
+  /// Provide a value to remove the switch
+  /// When [onConfirm] is provided, [resetBoth] is purely cosmetic (above)
+  final bool? resetBoth;
+
+  /// When true, [EzConfig.redrawUI] will be called instead of [EzConfig.rebuildUI]
+  final bool justDraw;
 
   /// [EzElevatedIconButton.style] passthrough
   final ButtonStyle? style;
 
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final Set<String>? skip;
+  /// [EzElevatedIconButton.label] passthrough
+  /// Defaults to [EFUILang.gResetAll]
+  final String? label;
+
+  /// [ezRichUndoWarning] passthrough
+  final String appName;
+
+  /// [ezRichUndoWarning] passthrough
+  final String? androidPackage;
+
+  /// [ezRichUndoWarning] passthrough
+  final Set<String>? saveSkip;
+
+  /// Optionally override [EzAlertDialog.content] that shows on click
+  /// Defaults to [ezRichUndoWarning]
+  final Widget? dialogContent;
 
   /// [EzAlertDialog.title] that shows on click
   /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
 
-  /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.gUndoWarn]
-  final String? dialogContent;
+  /// [EzConfig.reset] skip passthrough
+  /// Moot if [onConfirm] is provided
+  final Set<String>? resetSkip;
 
   /// [EzConfig.reset] passthrough
   /// Moot if [onConfirm] is provided
   final bool storageOnly;
 
+  /// Whether to notify [EzConfigProvider] of changes
+  /// Moot if [onConfirm] is provided
+  final bool notifyTheme;
+
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
-  /// DO NOT include a pop() for the dialog, this is included automatically
-  final void Function()? onConfirm;
+  /// DO NOT include an [EzConfig.rebuildUI] or [Navigator.pop], these are included automatically
+  final Future<void> Function()? onConfirm;
 
   /// What happens when the user choses not to reset
-  /// DO NOT include a pop() for the dialog, this is included automatically
+  /// DO NOT include a [Navigator.pop], it is included automatically
   final void Function()? onDeny;
 
   /// [EzElevatedIconButton] for clearing user settings
-  const EzResetButton({
+  const EzResetButton(
+    this.onComplete, {
     super.key,
-    this.label,
+    this.resetBoth,
+    this.justDraw = false,
     this.style,
-    this.skip,
-    this.dialogTitle,
+    this.label,
+    required this.appName,
+    this.androidPackage,
+    this.saveSkip,
     this.dialogContent,
+    this.dialogTitle,
+    this.resetSkip,
     this.storageOnly = false,
+    this.notifyTheme = true,
     this.onConfirm,
     this.onDeny,
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Gather the fixed theme data //
-
-    final EFUILang l10n = ezL10n(context);
-
-    // Gather the dynamic theme data //
-
-    late final bool isDark = isDarkTheme(context);
-    late final bool useCrucial =
-        (EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey)
-                as double) <
-            0.50;
-    late final Color crucialSurface =
-        Theme.of(context).colorScheme.surface.withValues(alpha: 0.50);
-
-    // Return the build //
-
-    return EzElevatedIconButton(
-      // EzResetButton can at most be 50% transparent
-      // If a user accidentally borks their UI, they should be able to see the reset button
-      style: (style == null)
-          ? useCrucial
-              ? ElevatedButton.styleFrom(backgroundColor: crucialSurface)
-              : null
-          : style,
-      onPressed: () => showPlatformDialog(
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        style: style ??
+            ElevatedButton.styleFrom(
+              backgroundColor: EzConfig.colors.surface.withValues(
+                  alpha: max(
+                      EzConfig.get(EzConfig.isDark
+                          ? darkButtonOpacityKey
+                          : lightButtonOpacityKey),
+                      focusOpacity)),
+            ),
+        onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
-            late final List<Widget> materialActions;
-            late final List<Widget> cupertinoActions;
+          builder: (BuildContext dContext) {
+            bool both = resetBoth ?? true;
 
-            final void Function() confirm = onConfirm ??
-                () => EzConfig.reset(
-                      skip: skip,
-                      storageOnly: storageOnly,
-                    );
-            final void Function() deny = onDeny ?? doNothing;
+            return StatefulBuilder(
+              builder: (_, StateSetter setDialog) => EzAlertDialog(
+                title: Text(
+                  dialogTitle ?? EzConfig.l10n.ssResetAll,
+                  textAlign: TextAlign.center,
+                ),
+                content: dialogContent,
+                contents: (dialogContent == null)
+                    ? <Widget>[
+                        if (resetBoth == null) ...<Widget>[
+                          // Reset both themes option
+                          EzSwitchPair(
+                            key: ValueKey<bool>(both),
+                            text: EzConfig.l10n.ssUpdateBoth,
+                            value: both,
+                            onChanged: (bool? choice) {
+                              if (choice == null) return;
+                              setDialog(() => both = choice);
+                            },
+                          ),
+                          EzConfig.spacer,
+                        ],
 
-            (materialActions, cupertinoActions) = ezActionPairs(
-              context: context,
-              onConfirm: () {
-                confirm();
-                Navigator.of(dialogContext).pop();
-              },
-              confirmIsDestructive: true,
-              onDeny: () {
-                deny();
-                Navigator.of(dialogContext).pop();
-              },
-            );
-
-            return EzAlertDialog(
-              title: Text(
-                dialogTitle ?? l10n.ssResetAll,
-                textAlign: TextAlign.center,
+                        // Undo warning/save option
+                        ezRichUndoWarning(
+                          context,
+                          standalone: false,
+                          appName: appName,
+                          androidPackage: androidPackage,
+                        )
+                      ]
+                    : null,
+                actions: ezActionPair(
+                  context: context,
+                  onConfirm: () async {
+                    if (onConfirm == null) {
+                      await EzConfig.reset(
+                        both,
+                        skip: resetSkip,
+                        storageOnly: storageOnly,
+                      );
+                    } else {
+                      await onConfirm!.call();
+                    }
+                    justDraw
+                        ? await EzConfig.redrawUI(onComplete)
+                        : await EzConfig.rebuildUI(onComplete);
+                  },
+                  confirmIsDestructive: true,
+                  onDeny: () {
+                    if (onDeny == null) {
+                      doNothing();
+                    } else {
+                      onDeny!.call();
+                    }
+                    if (dContext.mounted) Navigator.of(dContext).pop();
+                  },
+                ),
+                needsClose: false,
               ),
-              content: Text(
-                dialogContent ?? l10n.gUndoWarn,
-                textAlign: TextAlign.center,
-              ),
-              materialActions: materialActions,
-              cupertinoActions: cupertinoActions,
-              needsClose: false,
             );
-          }),
-      icon: EzIcon(PlatformIcons(context).refresh),
-      label: label ?? l10n.gResetAll,
-    );
-  }
+          },
+        ),
+        icon: const Icon(Icons.refresh),
+        label: label ?? EzConfig.l10n.gResetAll,
+      );
 }

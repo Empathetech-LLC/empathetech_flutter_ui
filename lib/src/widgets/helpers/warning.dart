@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -38,19 +38,15 @@ class EzWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
-    final Color alertColor =
-        iconColor ?? Theme.of(context).colorScheme.secondary;
+    final Color alertColor = iconColor ?? EzConfig.colors.secondary;
 
-    final TextStyle? tStyle =
-        titleStyle ?? Theme.of(context).textTheme.titleLarge;
-    final TextStyle? bStyle =
-        bodyStyle ?? Theme.of(context).textTheme.bodyLarge;
+    final TextStyle? tStyle = titleStyle ?? EzConfig.styles.titleLarge;
 
     // Return the build //
 
-    final String warning = title ?? ezL10n(context).gAttention;
+    final String warning = title ?? EzConfig.l10n.gAttention;
 
     return Semantics(
       label: '$warning: $body',
@@ -58,7 +54,7 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(EzConfig.get(marginKey)),
+            padding: EdgeInsets.all(EzConfig.marginVal),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -74,14 +70,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    ezRowMargin,
+                    EzConfig.rowMargin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    ezRowMargin,
+                    EzConfig.rowMargin,
 
                     // Thing 2
                     Icon(
@@ -91,10 +87,14 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                ezSpacer,
+                EzConfig.spacer,
 
                 // Body
-                Text(body, style: bStyle, textAlign: TextAlign.center),
+                Text(
+                  body,
+                  style: bodyStyle ?? EzConfig.styles.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),

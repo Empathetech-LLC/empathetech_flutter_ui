@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -26,6 +26,7 @@ Future<T?> ezModal<T>({
   bool useSafeArea = true,
   RouteSettings? routeSettings,
   AnimationController? transitionAnimationController,
+  double animMod = 0.667,
   Offset? anchorPoint,
   AnimationStyle? sheetAnimationStyle,
   bool? requestFocus,
@@ -50,7 +51,7 @@ Future<T?> ezModal<T>({
       transitionAnimationController: transitionAnimationController ??
           AnimationController(
             vsync: Navigator.of(context),
-            duration: ezAnimDuration(),
+            duration: ezAnimDuration(mod: animMod),
           ),
       anchorPoint: anchorPoint,
       sheetAnimationStyle: sheetAnimationStyle,

@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -13,7 +13,6 @@ import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SettingsButton extends StatelessWidget {
   final BuildContext parentContext;
@@ -24,8 +23,8 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
-        icon: EzIcon(PlatformIcons(context).settings),
-        label: ezL10n(context).ssPageTitle,
+        icon: EzIcon(Icons.settings),
+        label: EzConfig.l10n.ssPageTitle,
       );
 }
 
@@ -34,11 +33,7 @@ class UploadButton extends StatelessWidget {
   final Future<void> Function(EAGConfig) onUpload;
 
   /// [EzMenuButton] for uploading a config
-  const UploadButton(
-    this.parentContext, {
-    super.key,
-    required this.onUpload,
-  });
+  const UploadButton(this.parentContext, {super.key, required this.onUpload});
 
   @override
   Widget build(BuildContext context) => EzMenuButton(
@@ -59,16 +54,13 @@ class UploadButton extends StatelessWidget {
               await onUpload(config);
             } catch (e) {
               if (context.mounted) {
-                ezSnackBar(
-                  context: context,
-                  message: e.toString(),
-                );
+                ezSnackBar(context: context, message: e.toString());
               }
             }
           }
         },
         icon: EzIcon(Icons.upload),
-        label: ezL10n(context).ssLoadConfig,
+        label: EzConfig.l10n.ssLoadConfig,
       );
 }
 
@@ -77,17 +69,12 @@ class OpenSourceButton extends StatelessWidget {
   const OpenSourceButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final EFUILang l10n = ezL10n(context);
-    final String text = l10n.gOpenSource;
-
-    return EzMenuLink(
-      uri: Uri.parse(
-        'https://github.com/Empathetech-LLC/empathetech_flutter_ui',
-      ),
-      icon: EzIcon(LineIcons.github),
-      label: text,
-      semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
-    );
-  }
+  Widget build(BuildContext context) => EzMenuLink(
+        uri: Uri.parse(
+            'https://github.com/Empathetech-LLC/empathetech_flutter_ui'),
+        icon: EzIcon(LineIcons.github),
+        label: EzConfig.l10n.gOpenSource,
+        semanticsLabel:
+            '${EzConfig.l10n.gOpenSource}: ${EzConfig.l10n.gEFUISourceHint}',
+      );
 }

@@ -12,6 +12,9 @@ class EFUILangFr extends EFUILang {
   String get gApply => 'Appliquer';
 
   @override
+  String get gApplyChanges => 'Appliquer les modifications';
+
+  @override
   String get gContinue => 'Continuer';
 
   @override
@@ -19,6 +22,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gOpen => 'Ouvrir';
+
+  @override
+  String get gOpenLink => 'Ouvrir le lien';
 
   @override
   String get gSuccess => 'Succès';
@@ -54,6 +60,12 @@ class EFUILangFr extends EFUILang {
   String get gBack => 'Retour';
 
   @override
+  String get gUndo => 'Annuler';
+
+  @override
+  String get gRedo => 'Rétablir';
+
+  @override
   String get gCancel => 'Annuler';
 
   @override
@@ -81,12 +93,19 @@ class EFUILangFr extends EFUILang {
   String get gSystem => 'Système';
 
   @override
+  String get gDarkTheme => 'Thème sombre';
+
+  @override
+  String get gLightTheme => 'Thème clair';
+
+  @override
+  String get gBothThemes => 'Les deux thèmes';
+
+  @override
   String get gEditing => 'Modification : ';
 
   @override
-  String gEditingTheme(Object themeType) {
-    return 'Modification : Thème $themeType';
-  }
+  String get gEditingThemeHint => 'Ouvrir les paramètres de thème système';
 
   @override
   String get gLeft => 'Gauche';
@@ -153,11 +172,21 @@ class EFUILangFr extends EFUILang {
   String get gHowThisWorksHint => 'Ouvre la documentation utile';
 
   @override
-  String get gTranslationsPending =>
-      'Traductions en attente de révision humaine';
+  String get gMachineTranslated => 'Traduction automatique';
 
   @override
   String get gUpdates => 'Mises à jour disponibles';
+
+  @override
+  String get gHardRefresh => 'Veuillez rafraîchir la page...\nCtrl + Shift + R';
+
+  @override
+  String get gHardRefreshMac =>
+      'Veuillez rafraîchir la page...\nCommand + Shift + R';
+
+  @override
+  String get gHardRefreshMobile =>
+      'Veuillez actualiser la page dans le menu du navigateur.';
 
   @override
   String get gEnterURL => 'Entrer l\'URL';
@@ -239,7 +268,18 @@ class EFUILangFr extends EFUILang {
   String get gResetAll => 'Tout réinitialiser';
 
   @override
-  String get gUndoWarn => 'Ne peut pas être annulé';
+  String get gUndoWarn1 => 'Impossible d\'annuler automatiquement.\n';
+
+  @override
+  String get gSave => 'Enregistrez';
+
+  @override
+  String get gSaveHint =>
+      'Activez pour enregistrer un fichier de configuration JSON.';
+
+  @override
+  String get gUndoWarn2 =>
+      ' votre configuration actuelle pour la restaurer manuellement.';
 
   @override
   String get gCreditTo => 'Crédits à :';
@@ -283,6 +323,15 @@ class EFUILangFr extends EFUILang {
   String get ssLangHint => 'Activer pour changer la langue de l\'application';
 
   @override
+  String get ssUpdateDark => 'Mettre à jour le thème sombre';
+
+  @override
+  String get ssUpdateLight => 'Mettre à jour le thème clair';
+
+  @override
+  String get ssUpdateBoth => 'Mettre à jour les deux modes de thème';
+
+  @override
   String get ssLoadPreset => 'Charger un préréglage';
 
   @override
@@ -295,13 +344,10 @@ class EFUILangFr extends EFUILang {
   String get ssHighVisibility => 'Haute visibilité';
 
   @override
-  String get ssVideoGame => 'Mode jeu';
-
-  @override
   String get ssChalkboard => 'Tableau noir';
 
   @override
-  String get ssFancyPants => 'Pantalons élégants';
+  String get ssNebula => 'Nébuleuse';
 
   @override
   String get ssDarkOnly =>
@@ -348,6 +394,9 @@ class EFUILangFr extends EFUILang {
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';
 
   @override
+  String get ssResetBoth => 'Réinitialiser les deux modes de thème';
+
+  @override
   String get csPageTitle => 'Paramètres de couleur';
 
   @override
@@ -386,8 +435,8 @@ class EFUILangFr extends EFUILang {
   String get csColorScheme => 'schéma de couleurs';
 
   @override
-  String csResetAll(Object themeType) {
-    return 'Réinitialiser toutes les couleurs du thème $themeType ?';
+  String csReset(Object themeType) {
+    return 'Réinitialiser les couleurs du $themeType ?';
   }
 
   @override
@@ -427,6 +476,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get dsFromNetwork => 'Depuis une URL';
+
+  @override
+  String get dsSolidColor => 'Couleur unie';
 
   @override
   String get dsResetIt => 'Réinitialiser';
@@ -492,14 +544,8 @@ class EFUILangFr extends EFUILang {
   String get dsRotateRight => 'Tourner à droite';
 
   @override
-  String get dsUndo => 'Annuler';
-
-  @override
-  String get dsRedo => 'Rétablir';
-
-  @override
-  String dsResetAll(Object themeType) {
-    return 'Réinitialiser tous les paramètres de conception globaux et du thème $themeType ?';
+  String dsReset(Object themeType) {
+    return 'Réinitialiser le design de $themeType ?';
   }
 
   @override
@@ -518,8 +564,9 @@ class EFUILangFr extends EFUILang {
   String get lsScroll => 'Masquer les barres de défilement';
 
   @override
-  String get lsResetAll =>
-      'Réinitialiser tous les paramètres de mise en page ?';
+  String lsReset(Object themeType) {
+    return 'Réinitialiser la mise en page du $themeType ?';
+  }
 
   @override
   String get tsPageTitle => 'Paramètres de texte';
@@ -622,5 +669,7 @@ class EFUILangFr extends EFUILang {
   String get tsLabelP2 => ' Ni trop gros, ni trop petits ?';
 
   @override
-  String get tsResetAll => 'Réinitialiser tous les paramètres de texte ?';
+  String tsReset(Object themeType) {
+    return 'Réinitialiser les styles de texte de $themeType ?';
+  }
 }

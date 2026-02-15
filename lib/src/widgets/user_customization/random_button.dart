@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,9 +7,11 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
+  /// [EzConfig.randomize] passthrough
+  final void Function() onComplete;
+
   /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.ssRandom]
   final String? label;
@@ -18,77 +20,64 @@ class EzConfigRandomizer extends StatelessWidget {
   /// Defaults to [EFUILang.ssRandomize]
   final String? dialogTitle;
 
-  /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.gUndoWarn]
-  final String? dialogContent;
+  /// Optional override for [EzAlertDialog.content] that shows on click
+  /// Defaults to [ezRichUndoWarning]
+  final Widget? dialogContent;
 
-  /// What happens when the user choses to randomize
-  /// Defaults to [EzConfig.randomize]
-  /// DO NOT include a pop() for the dialog, this is included automatically
-  final void Function()? onConfirm;
+  /// [ezRichUndoWarning] passthrough
+  final String? appName;
 
-  /// What happens when the user choses not to reset
-  /// DO NOT include a pop() for the dialog, this is included automatically
-  final void Function()? onDeny;
+  /// [ezRichUndoWarning] passthrough
+  final String? androidPackage;
+
+  /// [ezRichUndoWarning] passthrough
+  final Set<String>? saveSkip;
 
   /// [EzElevatedIconButton] for randomizing [EzConfig]
-  const EzConfigRandomizer({
+  const EzConfigRandomizer(
+    this.onComplete, {
     super.key,
     this.label,
     this.dialogTitle,
     this.dialogContent,
-    this.onConfirm,
-    this.onDeny,
-  });
+    this.appName,
+    this.androidPackage,
+    this.saveSkip,
+  }) : assert((appName == null) != (dialogContent == null),
+            'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
 
   @override
-  Widget build(BuildContext context) {
-    final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = ezL10n(context);
-
-    return EzElevatedIconButton(
-      onPressed: () => showPlatformDialog(
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dialogContext) {
-            final void Function() confirm =
-                onConfirm ?? () => EzConfig.randomize(isDark);
-            final void Function() deny = onDeny ?? doNothing;
-
-            late final List<Widget> materialActions;
-            late final List<Widget> cupertinoActions;
-
-            (materialActions, cupertinoActions) = ezActionPairs(
+          builder: (BuildContext dContext) => EzAlertDialog(
+            title: Text(
+              dialogTitle ??
+                  EzConfig.l10n.ssRandomize(EzConfig.isDark
+                      ? EzConfig.l10n.gDark.toLowerCase()
+                      : EzConfig.l10n.gLight.toLowerCase()),
+              textAlign: TextAlign.center,
+            ),
+            content: dialogContent ??
+                ezRichUndoWarning(
+                  context,
+                  appName: appName!,
+                  androidPackage: androidPackage,
+                  skip: saveSkip,
+                ),
+            actions: ezActionPair(
               context: context,
-              onConfirm: () {
-                confirm();
-                Navigator.of(dialogContext).pop();
+              onConfirm: () async {
+                await EzConfig.randomize();
+                await EzConfig.rebuildUI(onComplete);
               },
               confirmIsDestructive: true,
-              onDeny: () {
-                deny();
-                Navigator.of(dialogContext).pop();
-              },
-            );
-
-            return EzAlertDialog(
-              title: Text(
-                dialogTitle ??
-                    l10n.ssRandomize(isDark
-                        ? l10n.gDark.toLowerCase()
-                        : l10n.gLight.toLowerCase()),
-                textAlign: TextAlign.center,
-              ),
-              content: Text(
-                dialogContent ?? l10n.gUndoWarn,
-                textAlign: TextAlign.center,
-              ),
-              materialActions: materialActions,
-              cupertinoActions: cupertinoActions,
-              needsClose: false,
-            );
-          }),
-      icon: EzIcon(LineIcons.diceD6),
-      label: label ?? l10n.ssRandom,
-    );
-  }
+              onDeny: () => Navigator.of(dContext).pop(),
+            ),
+            needsClose: false,
+          ),
+        ),
+        icon: const Icon(LineIcons.diceD6),
+        label: label ?? EzConfig.l10n.ssRandom,
+      );
 }

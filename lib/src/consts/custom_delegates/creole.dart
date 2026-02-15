@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,7 +8,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// Shared //
+//* Shared *//
+
+// consts //
 
 const List<String> _shortWeekdays = <String>[
   'Len',
@@ -29,10 +31,6 @@ const List<String> _weekdays = <String>[
   'Samdi',
   'Dimanch',
 ];
-
-String _formatDayPeriod(TimeOfDay timeOfDay) {
-  return timeOfDay.hour < 12 ? 'dimaten' : 'apremidi';
-}
 
 const List<String> _shortMonths = <String>[
   'Jan',
@@ -64,6 +62,12 @@ const List<String> _months = <String>[
   'Desanm',
 ];
 
+// Functions //
+
+String _formatDayPeriod(TimeOfDay timeOfDay) {
+  return timeOfDay.hour < 12 ? 'dimaten' : 'apremidi';
+}
+
 int _getDaysInMonth(int year, int month) {
   if (month == DateTime.february) {
     final bool isLeapYear =
@@ -89,7 +93,22 @@ int _getDaysInMonth(int year, int month) {
   return daysInMonth[month - 1];
 }
 
-// Cupertino //
+//* Cupertino *//
+
+class _CreoleCupertinoLocalizationsDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
+  const _CreoleCupertinoLocalizationsDelegate();
+
+  @override
+  bool isSupported(Locale locale) => locale.languageCode == 'ht';
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) =>
+      CreoleCupertinoLocalizations.load(locale);
+
+  @override
+  bool shouldReload(LocalizationsDelegate<CupertinoLocalizations> old) => false;
+}
 
 class CreoleCupertinoLocalizations implements CupertinoLocalizations {
   const CreoleCupertinoLocalizations();
@@ -100,6 +119,8 @@ class CreoleCupertinoLocalizations implements CupertinoLocalizations {
   static Future<CupertinoLocalizations> load(Locale locale) async {
     return const CreoleCupertinoLocalizations();
   }
+
+  // consts //
 
   @override
   String get alertDialogLabel => 'Alèt';
@@ -120,6 +141,9 @@ class CreoleCupertinoLocalizations implements CupertinoLocalizations {
   String get copyButtonLabel => 'Kopi';
 
   @override
+  String get collapsedHint => 'Elaji';
+
+  @override
   String get cutButtonLabel => 'Koupe';
 
   @override
@@ -128,6 +152,21 @@ class CreoleCupertinoLocalizations implements CupertinoLocalizations {
   @override
   DatePickerDateTimeOrder get datePickerDateTimeOrder =>
       DatePickerDateTimeOrder.date_time_dayPeriod;
+
+  @override
+  String get expandedHint => 'Tonbe';
+
+  @override
+  String get expansionTileCollapsedHint => 'tape de fwa pou elaji';
+
+  @override
+  String get expansionTileCollapsedTapHint => 'Elaji pou plis detay';
+
+  @override
+  String get expansionTileExpandedHint => 'Tape de fwa pou redui';
+
+  @override
+  String get expansionTileExpandedTapHint => 'Redwi';
 
   @override
   String get lookUpButtonLabel => 'Leve tèt ou';
@@ -170,6 +209,8 @@ class CreoleCupertinoLocalizations implements CupertinoLocalizations {
 
   @override
   String get todayLabel => 'Jodi a';
+
+  // Functions //
 
   @override
   String datePickerDayOfMonth(int dayIndex, [int? weekDay]) {
@@ -239,22 +280,22 @@ class CreoleCupertinoLocalizations implements CupertinoLocalizations {
   String timerPickerSecondLabel(int second) => 'segonn';
 }
 
-class _CreoleCupertinoLocalizationsDelegate
-    extends LocalizationsDelegate<CupertinoLocalizations> {
-  const _CreoleCupertinoLocalizationsDelegate();
+//* Material *//
+
+class _CreoleMaterialLocalizationsDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
+  const _CreoleMaterialLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => locale.languageCode == 'ht';
 
   @override
-  Future<CupertinoLocalizations> load(Locale locale) =>
-      CreoleCupertinoLocalizations.load(locale);
+  Future<MaterialLocalizations> load(Locale locale) =>
+      CreoleMaterialLocalizations.load(locale);
 
   @override
-  bool shouldReload(LocalizationsDelegate<CupertinoLocalizations> old) => false;
+  bool shouldReload(LocalizationsDelegate<MaterialLocalizations> old) => false;
 }
-
-// Material //
 
 class CreoleMaterialLocalizations implements MaterialLocalizations {
   const CreoleMaterialLocalizations();
@@ -265,6 +306,8 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
   static Future<MaterialLocalizations> load(Locale locale) async {
     return const CreoleMaterialLocalizations();
   }
+
+  // consts //
 
   @override
   String get alertDialogLabel => 'Alèt';
@@ -671,6 +714,8 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
   @override
   String get viewLicensesButtonLabel => 'Gade lisans yo';
 
+  // Functions //
+
   @override
   String aboutListTileTitle(String applicationName) =>
       'A pwopo $applicationName';
@@ -871,26 +916,32 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
   }
 }
 
-class _CreoleMaterialLocalizationsDelegate
-    extends LocalizationsDelegate<MaterialLocalizations> {
-  const _CreoleMaterialLocalizationsDelegate();
+//* Widgets *//
+
+class CreoleWidgetsLocalizationsDelegate
+    extends LocalizationsDelegate<WidgetsLocalizations> {
+  const CreoleWidgetsLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => locale.languageCode == 'ht';
 
   @override
-  Future<MaterialLocalizations> load(Locale locale) =>
-      CreoleMaterialLocalizations.load(locale);
+  Future<WidgetsLocalizations> load(Locale locale) async {
+    return CreoleWidgetsLocalizations();
+  }
 
   @override
-  bool shouldReload(LocalizationsDelegate<MaterialLocalizations> old) => false;
+  bool shouldReload(LocalizationsDelegate<WidgetsLocalizations> old) => false;
 }
 
-// Widgets //
-
 class CreoleWidgetsLocalizations extends WidgetsLocalizations {
+  // consts //
+
   @override
   TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get radioButtonUnselectedLabel => 'Pa chwazi';
 
   @override
   String get reorderItemUp => 'Monte';
@@ -930,20 +981,4 @@ class CreoleWidgetsLocalizations extends WidgetsLocalizations {
 
   @override
   String get searchWebButtonLabel => 'Rechèch sou entènèt';
-}
-
-class CreoleWidgetsLocalizationsDelegate
-    extends LocalizationsDelegate<WidgetsLocalizations> {
-  const CreoleWidgetsLocalizationsDelegate();
-
-  @override
-  bool isSupported(Locale locale) => locale.languageCode == 'ht';
-
-  @override
-  Future<WidgetsLocalizations> load(Locale locale) async {
-    return CreoleWidgetsLocalizations();
-  }
-
-  @override
-  bool shouldReload(LocalizationsDelegate<WidgetsLocalizations> old) => false;
 }

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -12,7 +12,9 @@ import 'package:image_picker/image_picker.dart';
 /// Returns and [AssetImage], [NetworkImage], or [FileImage] based on the [path]
 ImageProvider ezImageProvider(String path) {
   if (EzConfig.isPathAsset(path)) {
-    return AssetImage(path);
+    return efuiAssetPaths.contains(path)
+        ? efuiImageLookup[path]!
+        : AssetImage(path);
   } else if (ezUrlCheck(path)) {
     return NetworkImage(path);
   } else {
@@ -36,32 +38,9 @@ Future<String?> ezImagePicker({
   } on Exception catch (e) {
     if (context.mounted) {
       final String errorMsg =
-          '${ezL10n(context).dsImgSetFailed}\n${e.toString()}';
+          '${EzConfig.l10n.dsImgSetFailed}\n${e.toString()}';
       await ezLogAlert(context, message: errorMsg);
     }
     return null;
-  }
-}
-
-/// Given a [BoxFit].name, return the associated [BoxFit]
-/// Returns null is [name] is unrecognized
-BoxFit? ezFitFromName(String? name) {
-  switch (name) {
-    case contain:
-      return BoxFit.contain;
-    case cover:
-      return BoxFit.cover;
-    case fill:
-      return BoxFit.fill;
-    case fitWidth:
-      return BoxFit.fitWidth;
-    case fitHeight:
-      return BoxFit.fitHeight;
-    case none:
-      return BoxFit.none;
-    case scaleDown:
-      return BoxFit.scaleDown;
-    default:
-      return null;
   }
 }

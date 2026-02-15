@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,12 +8,8 @@ import '../utils/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SuccessHeader extends StatelessWidget {
-  /// [ThemeData.textTheme] passthrough
-  final TextTheme textTheme;
-
   /// Core message to display... under 'Success'
   /// Used in an [Flexible] wrapped [EzText]
   /// Provide [message] or [richMessage]
@@ -26,7 +22,6 @@ class SuccessHeader extends StatelessWidget {
   /// header [Widget] for a successful run
   const SuccessHeader({
     super.key,
-    required this.textTheme,
     this.message,
     this.richMessage,
   }) : assert((message == null) != (richMessage == null),
@@ -40,12 +35,12 @@ class SuccessHeader extends StatelessWidget {
           // Headline
           Flexible(
             child: EzText(
-              ezL10n(context).gSuccessExl,
-              style: textTheme.headlineLarge,
+              EzConfig.l10n.gSuccessExl,
+              style: EzConfig.styles.headlineLarge,
               textAlign: TextAlign.center,
             ),
           ),
-          ezSpacer,
+          EzConfig.spacer,
 
           // Where to go next
           message == null
@@ -53,7 +48,7 @@ class SuccessHeader extends StatelessWidget {
               : Flexible(
                   child: EzText(
                     message!,
-                    style: ezSubTitleStyle(textTheme),
+                    style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -79,27 +74,24 @@ class RunOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final bool isMac = !kIsWeb && getBasePlatform() == TargetPlatform.macOS;
-
-    return isMac
-        ? const SizedBox.shrink()
-        : Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              EzText(
-                Lang.of(context)!.rsWouldYou,
-                style: style,
-                textAlign: TextAlign.center,
-              ),
-              ezSpacer,
-              EzElevatedIconButton(
-                onPressed: emulate,
-                icon: EzIcon(PlatformIcons(context).playArrowSolid),
-                label: Lang.of(context)!.rsRun,
-              ),
-            ],
-          );
-  }
+  Widget build(BuildContext context) =>
+      (!kIsWeb && EzConfig.platform == TargetPlatform.macOS)
+          ? const SizedBox.shrink()
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                EzText(
+                  l10n.rsWouldYou,
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+                EzConfig.spacer,
+                EzElevatedIconButton(
+                  onPressed: emulate,
+                  icon: const Icon(Icons.play_arrow),
+                  label: l10n.rsRun,
+                ),
+              ],
+            );
 }

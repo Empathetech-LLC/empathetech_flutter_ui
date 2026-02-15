@@ -4,9 +4,11 @@
 
 
   "gApply": "Apply",
+  "gApplyChanges": "Apply changes",
   "gContinue": "Continue",
   "gSkip": "Skip",
   "gOpen": "Open",
+  "gOpenLink": "Open link",
   "gSuccess": "Success",
   "gSuccessExl": "Success!",
   "gYes": "Yes",
@@ -20,6 +22,8 @@
   "gRequired": "Required",
 
   "gBack": "Back",
+  "gUndo": "Undo",
+  "gRedo": "Redo",
   "gCancel": "Cancel",
   "gClose": "Close",
   "gDisabled": "Disabled",
@@ -31,8 +35,12 @@
   "gLight": "Light",
   "gSystem": "System",
 
+  "gDarkTheme": "Dark theme",
+  "gLightTheme": "Light theme",
+  "gBothThemes": "Both themes",
+
   "gEditing": "Editing: ",
-  "gEditingTheme": "Editing: {themeType} theme",
+  "gEditingThemeHint": "Open the system theme settings",
 
   "gLeft": "Left",
   "gRight": "Right",
@@ -61,9 +69,12 @@
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
 
-  "gTranslationsPending": "Translations pending human review",
+  "gMachineTranslated": "Machine translated",
 
   "gUpdates": "Updates available",
+  "gHardRefresh": "Please hard refresh the page...\nCtrl + Shift + R",
+  "gHardRefreshMac": "Please hard refresh the page...\nCommand + Shift + R",
+  "gHardRefreshMobile": "Please refresh the page in the browser menu.",
 
   "gEnterURL": "Enter URL",
   "gValidURL": "Please enter a valid URL",
@@ -93,7 +104,10 @@
   "gResetValue": "Reset {name}?",
   "gResetValueTo": "Reset {name} to {value}",
   "gResetAll": "Reset all",
-  "gUndoWarn": "Cannot be undone",
+  "gUndoWarn1": "Cannot be undone automatically.\n",
+  "gSave": "Save",
+  "gSaveHint": "Activate to save a JSON config file.",
+  "gUndoWarn2": " your current config to restore it manually.",
 
   "gCreditTo": "Credit to:",
   "gCreator": "Creator of",
@@ -114,13 +128,16 @@
   "ssLanguage": "Language",
   "ssLangHint": "Activate to change the app language",
 
+  "ssUpdateDark": "Update dark theme",
+  "ssUpdateLight": "Update light theme",
+  "ssUpdateBoth": "Update both theme modes",
+
   "ssLoadPreset": "Load preset",
   "ssLoadPresetHint": "Activate to show presets",
   "ssBigButtons": "Big buttons",
   "ssHighVisibility": "High visibility",
-  "ssVideoGame": "Video game",
   "ssChalkboard": "Chalkboard",
-  "ssFancyPants": "Fancy pants",
+  "ssNebula": "Nebula",
   "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?",
   "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?",
   "ssApplied": "{config} applied.",
@@ -136,6 +153,7 @@
   "ssLoadConfig": "Load config",
 
   "ssResetAll": "Reset all settings?",
+  "ssResetBoth": "Reset both theme modes",
 
 
 
@@ -157,7 +175,7 @@
   "csFromImage": "A color scheme will be generated from the image.",
   "csColorScheme": "color scheme",
 
-  "csResetAll": "Reset all {themeType} theme colors?",
+  "csReset": "Reset {themeType} colors?",
 
 
 
@@ -176,6 +194,7 @@
   "dsFromFile": "From file",
   "dsFromCamera": "From camera",
   "dsFromNetwork": "From URL",
+  "dsSolidColor": "Solid color",
   "dsResetIt": "Reset it",
   "dsClearIt": "Clear it",
   "dsUseForColors": "Update the app colors using this image",
@@ -199,10 +218,8 @@
   "dsScrollHint": "Scroll to zoom in/out",
   "dsRotateLeft": "Rotate left",
   "dsRotateRight": "Rotate right",
-  "dsUndo": "Undo",
-  "dsRedo": "Redo",
 
-  "dsResetAll": "Reset all global and {themeType} theme design settings?",
+  "dsReset": "Reset {themeType} design?",
 
 
 
@@ -214,7 +231,7 @@
 
   "lsScroll": "Hide scrollbars",
 
-  "lsResetAll": "Reset all layout settings?",
+  "lsReset": "Reset {themeType} layout?",
 
 
 
@@ -257,5 +274,5 @@
   "tsLabelLink": "the labels?",
   "tsLabelP2": " Not too big, not too small?",
 
-  "tsResetAll": "Reset all text settings?"
+  "tsReset": "Reset {themeType} text styles?"
 }

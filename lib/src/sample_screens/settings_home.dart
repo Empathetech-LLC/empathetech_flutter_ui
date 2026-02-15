@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,14 +7,9 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
-  /// Optionally remove the 'Have fun!' part of the settings disclaimer
-  /// There are apps where it's not appropriate
-  final bool notFun;
-
   /// Locales to skip in the [EzLocaleSetting]
   /// Defaults to [english] to not dupe [americanEnglish]
   final Set<Locale>? skipLocales;
@@ -57,6 +52,15 @@ class EzSettingsHome extends StatefulWidget {
   /// BYO leading spacer, trailing spacer will be one of the parameters below
   final List<Widget>? additionalRoutes;
 
+  /// [EzConfig.saveConfig] passthrough
+  final String appName;
+
+  /// [EzConfig.saveConfig] passthrough
+  final String? androidPackage;
+
+  /// [EzConfig.saveConfig] passthrough
+  final Set<String>? saveSkip;
+
   /// Spacer before the [EzQuickConfig]
   /// If null, [EzQuickConfig] will not be included
   final Widget? quickConfigSpacer;
@@ -69,8 +73,8 @@ class EzSettingsHome extends StatefulWidget {
   /// [EzResetButton] is always included
   final Widget resetSpacer;
 
-  /// [EzResetButton.skip] passthrough
-  final Set<String>? skipKeys;
+  /// [EzResetButton.resetSkip] passthrough
+  final Set<String>? resetSkip;
 
   /// Widgets to be added below the [EzResetButton]
   /// BYO leading spacer, trailing is always [EzSeparator]
@@ -81,21 +85,23 @@ class EzSettingsHome extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
-    this.notFun = false,
     this.skipLocales,
     this.protest = false,
     this.inDistress = const <String>{'US'},
-    this.localeSpacer = ezDivider,
+    this.localeSpacer = const EzDivider(),
     this.additionalSettings,
     required this.colorSettingsPath,
     required this.designSettingsPath,
     required this.layoutSettingsPath,
     required this.textSettingsPath,
     this.additionalRoutes,
-    this.quickConfigSpacer = ezDivider,
-    this.randomSpacer = ezSpacer,
-    this.resetSpacer = ezSpacer,
-    this.skipKeys,
+    required this.appName,
+    this.androidPackage,
+    this.saveSkip,
+    this.quickConfigSpacer = const EzDivider(),
+    this.randomSpacer = const EzSpacer(),
+    this.resetSpacer = const EzSpacer(),
+    this.resetSkip,
     this.footer,
   });
 
@@ -104,25 +110,21 @@ class EzSettingsHome extends StatefulWidget {
 }
 
 class _EzSettingsHomeState extends State<EzSettingsHome> {
-  // Gather the fixed theme data //
-
-  late final double spacing = EzConfig.get(spacingKey);
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Set the page title //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    ezWindowNamer(context, l10n.ssPageTitle);
+  void initState() {
+    super.initState();
+    ezWindowNamer(EzConfig.l10n.ssPageTitle);
   }
 
   // Define custom functions //
 
+  void redraw() => setState(() {});
+
   List<Widget> navButtons() {
-    late final Widget navIcon = EzIcon(Icons.navigate_next);
     final List<Widget> buttons = <Widget>[];
+    const Widget navIcon = Icon(Icons.navigate_next);
 
     if (widget.colorSettingsPath != null) {
       ezUrlCheck(widget.colorSettingsPath!)
@@ -131,18 +133,18 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.csPageTitle,
+                label: EzConfig.l10n.csPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.colorSettingsPath!),
               icon: navIcon,
-              label: l10n.csPageTitle,
+              label: EzConfig.l10n.csPageTitle,
             ));
     }
 
     if (widget.designSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(ezSpacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
 
       ezUrlCheck(widget.designSettingsPath!)
           ? buttons.add(Link(
@@ -150,18 +152,18 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.dsPageTitle,
+                label: EzConfig.l10n.dsPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.designSettingsPath!),
               icon: navIcon,
-              label: l10n.dsPageTitle,
+              label: EzConfig.l10n.dsPageTitle,
             ));
     }
 
     if (widget.layoutSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(ezSpacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
 
       ezUrlCheck(widget.layoutSettingsPath!)
           ? buttons.add(Link(
@@ -169,18 +171,18 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.lsPageTitle,
+                label: EzConfig.l10n.lsPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.layoutSettingsPath!),
               icon: navIcon,
-              label: l10n.lsPageTitle,
+              label: EzConfig.l10n.lsPageTitle,
             ));
     }
 
     if (widget.textSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(ezSpacer);
+      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
 
       ezUrlCheck(widget.textSettingsPath!)
           ? buttons.add(Link(
@@ -188,13 +190,13 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               builder: (_, FollowLink? followLink) => EzElevatedIconButton(
                 onPressed: followLink,
                 icon: navIcon,
-                label: l10n.tsPageTitle,
+                label: EzConfig.l10n.tsPageTitle,
               ),
             ))
           : buttons.add(EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.textSettingsPath!),
               icon: navIcon,
-              label: l10n.tsPageTitle,
+              label: EzConfig.l10n.tsPageTitle,
             ));
     }
 
@@ -208,56 +210,63 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return EzScrollView(
-      children: <Widget>[
-        // Restart disclaimer
-        EzWarning(
-            '${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}${widget.notFun ? '' : '\n\n${l10n.ssHaveFun}'}'),
-        ezSeparator,
+  Widget build(BuildContext context) => EzScrollView(
+        children: <Widget>[
+          EzHeader(),
 
-        // Right/left
-        const EzDominantHandSwitch(),
-        ezSpacer,
+          // Right/left
+          EzDominantHandSwitch(redraw),
+          EzConfig.spacer,
 
-        // Theme mode
-        const EzThemeModeSwitch(),
-        ezSpacer,
+          // Theme mode
+          EzThemeModeSwitch(redraw),
+          EzConfig.spacer,
 
-        // Language
-        EzLocaleSetting(
-          skip: widget.skipLocales ?? <Locale>{english},
-          protest: widget.protest,
-          inDistress: widget.inDistress,
-        ),
-        widget.localeSpacer,
+          // Language
+          EzLocaleSetting(
+            redraw,
+            skip: widget.skipLocales ?? <Locale>{english},
+            protest: widget.protest,
+            inDistress: widget.inDistress,
+          ),
+          widget.localeSpacer,
 
-        // Additional settings
-        if (widget.additionalSettings != null) ...widget.additionalSettings!,
+          // Additional settings
+          if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
-        // Navigation buttons
-        ...navButtons(),
+          // Navigation buttons
+          ...navButtons(),
 
-        // Quick config
-        if (widget.quickConfigSpacer != null) ...<Widget>[
-          widget.quickConfigSpacer!,
-          const EzQuickConfig(),
+          // Quick config
+          if (widget.quickConfigSpacer != null) ...<Widget>[
+            widget.quickConfigSpacer!,
+            EzQuickConfig(redraw),
+          ],
+
+          // Feeling lucky
+          if (widget.randomSpacer != null) ...<Widget>[
+            widget.randomSpacer!,
+            EzConfigRandomizer(
+              redraw,
+              appName: widget.appName,
+              androidPackage: widget.androidPackage,
+              saveSkip: widget.saveSkip,
+            ),
+          ],
+
+          // Reset button
+          widget.resetSpacer,
+          EzResetButton(
+            redraw,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
+          ),
+
+          // Footer
+          if (widget.footer != null) ...widget.footer!,
+          EzConfig.separator,
         ],
-
-        // Feeling lucky
-        if (widget.randomSpacer != null) ...<Widget>[
-          widget.randomSpacer!,
-          const EzConfigRandomizer(),
-        ],
-
-        // Reset button
-        widget.resetSpacer,
-        EzResetButton(skip: widget.skipKeys),
-
-        // Footer
-        if (widget.footer != null) ...widget.footer!,
-        ezSeparator,
-      ],
-    );
-  }
+      );
 }

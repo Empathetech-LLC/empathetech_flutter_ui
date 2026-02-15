@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,6 +8,9 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
+  /// [EzConfig.redrawUI] passthrough
+  final void Function() onComplete;
+
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
@@ -15,7 +18,8 @@ class EzDominantHandSwitch extends StatefulWidget {
   final Color? backgroundColor;
 
   /// Standardized tool for updating [EzConfig]s [isLeftyKey]
-  const EzDominantHandSwitch({
+  const EzDominantHandSwitch(
+    this.onComplete, {
     super.key,
     this.labelStyle,
     this.backgroundColor,
@@ -26,52 +30,43 @@ class EzDominantHandSwitch extends StatefulWidget {
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
-  // Gather the fixed theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Define the build data //
 
-  bool isLefty = EzConfig.get(isLeftyKey);
-
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
-    DropdownMenuEntry<bool>(value: false, label: l10n.gRight),
-    DropdownMenuEntry<bool>(value: true, label: l10n.gLeft),
+    DropdownMenuEntry<bool>(value: false, label: EzConfig.l10n.gRight),
+    DropdownMenuEntry<bool>(value: true, label: EzConfig.l10n.gLeft),
   ];
 
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
-      reverseHands: true,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Label
-        EzText(
-          l10n.ssDominantHand,
-          style: widget.labelStyle,
-          textAlign: TextAlign.center,
-        ),
-        ezMargin,
+  Widget build(BuildContext context) => EzScrollView(
+        scrollDirection: Axis.horizontal,
+        reverseHands: true,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Label
+          EzText(
+            EzConfig.l10n.ssDominantHand,
+            style: widget.labelStyle,
+            textAlign: TextAlign.center,
+          ),
+          EzConfig.margin,
 
-        // Button
-        EzDropdownMenu<bool>(
-          widthEntries: entries
-              .map((DropdownMenuEntry<bool> entry) => entry.label)
-              .toList(),
-          dropdownMenuEntries: entries,
-          enableSearch: false,
-          initialSelection: isLefty,
-          onSelected: (bool? makeLeft) async {
-            if (makeLeft == null || makeLeft == isLefty) return;
-
-            await EzConfig.setBool(isLeftyKey, makeLeft);
-            setState(() => isLefty = makeLeft);
-          },
-        ),
-      ],
-    );
-  }
+          // Button
+          EzDropdownMenu<bool>(
+            widthEntries: entries
+                .map((DropdownMenuEntry<bool> entry) => entry.label)
+                .toList(),
+            dropdownMenuEntries: entries,
+            enableSearch: false,
+            initialSelection: EzConfig.isLefty,
+            onSelected: (bool? makeLeft) async {
+              if (makeLeft == null || makeLeft == EzConfig.isLefty) return;
+              await EzConfig.setBool(isLeftyKey, makeLeft);
+              await EzConfig.redrawUI(widget.onComplete);
+            },
+          ),
+        ],
+      );
 }

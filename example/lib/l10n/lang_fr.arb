@@ -19,13 +19,10 @@
   "csDomainName": "Nom de domaine",
   "csDomainTip": "À l'envers, c'est",
   "csInvalidDomain": "'domain.name' seulement; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
-  "csSupportEmail": "Courriel de soutien",
-  "csSupportTip": "Si fourni, le système de commentaires que nous utilisons sera inclus.",
-  "csInvalidEmail": "Courriel invalide",
   "csInclude": "Inclure",
   "csEasy": "Facile à changer plus tard",
 
-  "csGenApp": "Lorsque vous générez {app_name} l'actuel ",
+  "csGenApp": "Lorsque vous générez {app_name}, l'actuel ",
   "csTheApp": "l'application",
   "csTheConfig": "la configuration",
   "csSetColors": " (sauf les images) deviendra la configuration par défaut pour {app_name}.\n\nIl est recommandé de définir un schéma de couleurs personnalisé. Si vous avez besoin d'aide pour en construire un, essayez de commencer ",
@@ -51,7 +48,7 @@
 
   "csGenerate": "Générer l'application",
   "csInvalidFields": "Certains champs sont invalides",
-  "csRequired": "Tous les champs sauf le courriel de soutien sont obligatoires",
+  "csRequired": "Tous les champs sont obligatoires",
 
   "csResetHint": "Activez et confirmez ce qui doit être réinitialisé.",
   "csResetBuilder": "Valeurs du constructeur",

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -49,8 +49,7 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
 
   @override
   Widget build(BuildContext context) {
-    final double size =
-        widget.radius ?? EzConfig.get(iconSizeKey) + EzConfig.get(paddingKey);
+    final double size = widget.radius ?? EzConfig.iconSize + EzConfig.padding;
 
     return AnimatedBuilder(
       animation: _animation,
@@ -58,7 +57,7 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
         size: Size(size, size),
         painter: _CountdownTimerPainter(
           progress: _animation.value,
-          color: widget.color ?? Theme.of(context).colorScheme.secondary,
+          color: widget.color ?? EzConfig.colors.secondary,
         ),
       ),
     );
@@ -79,14 +78,14 @@ class _CountdownTimerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Offset center = Offset(size.width / 2, size.height / 2);
-    final double radius = size.width / 2;
-
     final Paint foregroundPaint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
     canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
+      Rect.fromCircle(
+        center: Offset(size.width / 2, size.height / 2),
+        radius: size.width / 2,
+      ),
       -math.pi / 2,
       2 * -math.pi * progress,
       true,

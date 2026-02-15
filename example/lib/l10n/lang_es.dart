@@ -56,16 +56,6 @@ class LangEs extends Lang {
       '\'domain.name\' solamente; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
 
   @override
-  String get csSupportEmail => 'Correo de soporte';
-
-  @override
-  String get csSupportTip =>
-      'Si se proporciona, se incluirá el sistema de comentarios que utilizamos.';
-
-  @override
-  String get csInvalidEmail => 'Correo no válido';
-
-  @override
   String get csInclude => 'Incluir';
 
   @override
@@ -73,7 +63,7 @@ class LangEs extends Lang {
 
   @override
   String csGenApp(Object app_name) {
-    return 'Cuando generas $app_name el actual ';
+    return 'Cuando generas $app_name, el actual ';
   }
 
   @override
@@ -152,8 +142,7 @@ class LangEs extends Lang {
   String get csInvalidFields => 'Algunos campos son inválidos';
 
   @override
-  String get csRequired =>
-      'Todos los campos excepto el correo de soporte son obligatorios';
+  String get csRequired => 'Todos los campos son obligatorios';
 
   @override
   String get csResetHint => 'Activa y confirma lo que se debe reiniciar.';

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -46,49 +46,44 @@ class _EzCLIState extends State<EzCLI> {
 
   final TextEditingController cmdController = TextEditingController();
 
+  // Return the build //
+
   @override
-  Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
-
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    // Return the build //
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Title
-        EzText(
-          'CLI',
-          style: textTheme.titleLarge,
-          textAlign: TextAlign.center,
-        ),
-
-        // Field
-        ConstrainedBox(
-          constraints: ezTextFieldConstraints(context),
-          child: TextFormField(
-            controller: cmdController,
-            textAlign: TextAlign.start,
-            maxLines: 1,
-            decoration: const InputDecoration(hintText: 'echo "Hello, World!"'),
-            onFieldSubmitted: (String value) async {
-              await ezCmd(
-                value,
-                dir: widget.dir,
-                onSuccess: widget.onSuccess,
-                onFailure: widget.onFailure,
-                onError: widget.onError,
-                debug: widget.debug,
-                readout: widget.readout,
-              );
-              cmdController.clear();
-            },
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Title
+          EzText(
+            'CLI',
+            style: EzConfig.styles.titleLarge,
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
-    );
-  }
+
+          // Field
+          ConstrainedBox(
+            constraints: ezTextFieldConstraints(context),
+            child: TextFormField(
+              controller: cmdController,
+              textAlign: TextAlign.start,
+              maxLines: 1,
+              decoration:
+                  const InputDecoration(hintText: 'echo "Hello, World!"'),
+              onFieldSubmitted: (String value) async {
+                await ezCmd(
+                  value,
+                  dir: widget.dir,
+                  onSuccess: widget.onSuccess,
+                  onFailure: widget.onFailure,
+                  onError: widget.onError,
+                  debug: widget.debug,
+                  readout: widget.readout,
+                );
+                cmdController.clear();
+              },
+            ),
+          ),
+        ],
+      );
 
   @override
   void dispose() {

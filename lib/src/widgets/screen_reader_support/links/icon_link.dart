@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -78,22 +78,20 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
-    final ThemeData theme = Theme.of(context);
-
-    final Color textColor = widget.textColor ?? theme.colorScheme.onSurface;
+    final Color textColor = widget.textColor ?? EzConfig.colors.onSurface;
 
     TextStyle? textStyle =
-        (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
+        (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
       color: textColor,
       decoration: TextDecoration.none,
-      decorationColor: widget.decorationColor ?? theme.colorScheme.primary,
+      decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       padding: widget.padding,
-      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+      overlayColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     // Define custom functions //
@@ -128,7 +126,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                   onHover: (bool isHovering) => underline(isHovering),
                   onFocusChange: (bool hasFocus) => underline(hasFocus),
                   icon: widget.icon,
-                  iconAlignment: (EzConfig.get(isLeftyKey))
+                  iconAlignment: EzConfig.isLefty
                       ? IconAlignment.start
                       : IconAlignment.end,
                   label: text,
@@ -142,7 +140,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                     onHover: (bool isHovering) => underline(isHovering),
                     onFocusChange: (bool hasFocus) => underline(hasFocus),
                     icon: widget.icon,
-                    iconAlignment: (EzConfig.get(isLeftyKey))
+                    iconAlignment: EzConfig.isLefty
                         ? IconAlignment.start
                         : IconAlignment.end,
                     label: text,

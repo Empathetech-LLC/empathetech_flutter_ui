@@ -56,16 +56,6 @@ class LangEn extends Lang {
       '\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
 
   @override
-  String get csSupportEmail => 'Support email';
-
-  @override
-  String get csSupportTip =>
-      'If provided, the feedback system we use will be included.';
-
-  @override
-  String get csInvalidEmail => 'Invalid email';
-
-  @override
   String get csInclude => 'Include';
 
   @override
@@ -73,7 +63,7 @@ class LangEn extends Lang {
 
   @override
   String csGenApp(Object app_name) {
-    return 'When you generate $app_name the current ';
+    return 'When you generate $app_name, the current ';
   }
 
   @override
@@ -147,7 +137,7 @@ class LangEn extends Lang {
   String get csInvalidFields => 'Some fields are invalid';
 
   @override
-  String get csRequired => 'All fields except support email are required';
+  String get csRequired => 'All fields are required';
 
   @override
   String get csResetHint => 'Activate and confirm what should be reset.';
@@ -282,16 +272,6 @@ class LangEnUs extends LangEn {
       '\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
 
   @override
-  String get csSupportEmail => 'Support email';
-
-  @override
-  String get csSupportTip =>
-      'If provided, the feedback system we use will be included.';
-
-  @override
-  String get csInvalidEmail => 'Invalid email';
-
-  @override
   String get csInclude => 'Include';
 
   @override
@@ -299,7 +279,7 @@ class LangEnUs extends LangEn {
 
   @override
   String csGenApp(Object app_name) {
-    return 'When you generate $app_name the current ';
+    return 'When you generate $app_name, the current ';
   }
 
   @override
@@ -373,7 +353,7 @@ class LangEnUs extends LangEn {
   String get csInvalidFields => 'Some fields are invalid';
 
   @override
-  String get csRequired => 'All fields except support email are required';
+  String get csRequired => 'All fields are required';
 
   @override
   String get csResetHint => 'Activate and confirm what should be reset.';

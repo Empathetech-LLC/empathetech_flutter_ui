@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -46,51 +46,41 @@ class EzTutorial extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Gather the fixed theme data //
+  Widget build(BuildContext context) => Positioned(
+        top: top,
+        bottom: bottom,
+        left: left,
+        right: right,
+        child: SelectionArea(
+          child: AlertDialog(
+            // Title
+            title: Text(title, textAlign: TextAlign.center),
+            titlePadding: EdgeInsets.symmetric(
+              horizontal: EzConfig.marginVal,
+              vertical: EzConfig.spacing / 2,
+            ),
 
-    final double margin = EzConfig.get(marginKey);
-    final double spacing = EzConfig.get(spacingKey);
+            // Content
+            content: Text(content, textAlign: TextAlign.center),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: EzConfig.marginVal,
+              vertical: EzConfig.spacing / 2,
+            ),
 
-    final bool isLefty = EzConfig.get(isLeftyKey);
+            // Actions
+            actions: <Widget>[
+              EzMaterialAction(text: acceptMessage, onPressed: onAccept)
+            ],
+            actionsAlignment: EzConfig.isLefty
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.end,
 
-    // Return the build //
-
-    return Positioned(
-      top: top,
-      bottom: bottom,
-      left: left,
-      right: right,
-      child: SelectionArea(
-        child: AlertDialog(
-          // Title
-          title: Text(title, textAlign: TextAlign.center),
-          titlePadding: EdgeInsets.symmetric(
-            horizontal: margin,
-            vertical: spacing / 2,
+            // General
+            iconPadding: EdgeInsets.zero,
+            buttonPadding: EdgeInsets.zero,
+            insetPadding: EdgeInsets.all(EzConfig.marginVal),
+            actionsPadding: EzInsets.wrap(EzConfig.spacing),
           ),
-
-          // Content
-          content: Text(content, textAlign: TextAlign.center),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: margin,
-            vertical: spacing / 2,
-          ),
-
-          // Actions
-          actions: <Widget>[
-            EzMaterialAction(text: acceptMessage, onPressed: onAccept)
-          ],
-          actionsAlignment:
-              isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
-
-          // General
-          iconPadding: EdgeInsets.zero,
-          buttonPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.all(margin),
-          actionsPadding: EzInsets.wrap(spacing),
         ),
-      ),
-    );
-  }
+      );
 }

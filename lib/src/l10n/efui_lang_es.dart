@@ -12,6 +12,9 @@ class EFUILangEs extends EFUILang {
   String get gApply => 'Aplicar';
 
   @override
+  String get gApplyChanges => 'Aplicar cambios';
+
+  @override
   String get gContinue => 'Continuar';
 
   @override
@@ -19,6 +22,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gOpen => 'Abrir';
+
+  @override
+  String get gOpenLink => 'Abrir enlace';
 
   @override
   String get gSuccess => 'Éxito';
@@ -54,6 +60,12 @@ class EFUILangEs extends EFUILang {
   String get gBack => 'Atrás';
 
   @override
+  String get gUndo => 'Deshacer';
+
+  @override
+  String get gRedo => 'Rehacer';
+
+  @override
   String get gCancel => 'Cancelar';
 
   @override
@@ -81,12 +93,19 @@ class EFUILangEs extends EFUILang {
   String get gSystem => 'Sistema';
 
   @override
+  String get gDarkTheme => 'Tema oscuro';
+
+  @override
+  String get gLightTheme => 'Tema claro';
+
+  @override
+  String get gBothThemes => 'Ambos temas';
+
+  @override
   String get gEditing => 'Editando: ';
 
   @override
-  String gEditingTheme(Object themeType) {
-    return 'Editando: tema $themeType';
-  }
+  String get gEditingThemeHint => 'Abrir la configuración del tema del sistema';
 
   @override
   String get gLeft => 'Izquierda';
@@ -153,11 +172,22 @@ class EFUILangEs extends EFUILang {
   String get gHowThisWorksHint => 'Abrir documentación útil';
 
   @override
-  String get gTranslationsPending =>
-      'Traducciones pendientes de revisión humana';
+  String get gMachineTranslated => 'Traducción automática';
 
   @override
   String get gUpdates => 'Actualizaciones disponibles';
+
+  @override
+  String get gHardRefresh =>
+      'Por favor, actualice la página...\nCtrl + Shift + R';
+
+  @override
+  String get gHardRefreshMac =>
+      'Por favor, actualice la página...\nCommand + Shift + R';
+
+  @override
+  String get gHardRefreshMobile =>
+      'Actualice la página en el menú del navegador.';
 
   @override
   String get gEnterURL => 'Inserta el link';
@@ -239,7 +269,18 @@ class EFUILangEs extends EFUILang {
   String get gResetAll => 'Restablecer todo';
 
   @override
-  String get gUndoWarn => 'No se puede deshacer';
+  String get gUndoWarn1 => 'No se puede deshacer automáticamente.\n';
+
+  @override
+  String get gSave => 'Guarde';
+
+  @override
+  String get gSaveHint =>
+      'Activar para guardar un archivo de configuración JSON.';
+
+  @override
+  String get gUndoWarn2 =>
+      ' su configuración actual para restaurarla manualmente.';
 
   @override
   String get gCreditTo => 'Acreditando a:';
@@ -283,6 +324,15 @@ class EFUILangEs extends EFUILang {
   String get ssLangHint => 'Activar para cambiar el idioma de la aplicación';
 
   @override
+  String get ssUpdateDark => 'Actualizar tema oscuro';
+
+  @override
+  String get ssUpdateLight => 'Actualizar tema claro';
+
+  @override
+  String get ssUpdateBoth => 'Actualizar ambos modos de tema';
+
+  @override
   String get ssLoadPreset => 'Cargar preajuste';
 
   @override
@@ -295,13 +345,10 @@ class EFUILangEs extends EFUILang {
   String get ssHighVisibility => 'Alta visibilidad';
 
   @override
-  String get ssVideoGame => 'Videojuego';
-
-  @override
   String get ssChalkboard => 'Pizarra';
 
   @override
-  String get ssFancyPants => 'Pantalones elegantes';
+  String get ssNebula => 'Nebulosa';
 
   @override
   String get ssDarkOnly =>
@@ -348,6 +395,9 @@ class EFUILangEs extends EFUILang {
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
+  String get ssResetBoth => 'Restablecer ambos modos de tema';
+
+  @override
   String get csPageTitle => 'Configuración de color';
 
   @override
@@ -386,8 +436,8 @@ class EFUILangEs extends EFUILang {
   String get csColorScheme => 'esquema de color';
 
   @override
-  String csResetAll(Object themeType) {
-    return 'Restablecer todos los esquemas de colores de $themeType?';
+  String csReset(Object themeType) {
+    return 'Restablecer los colores de $themeType?';
   }
 
   @override
@@ -427,6 +477,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get dsFromNetwork => 'Usando un link';
+
+  @override
+  String get dsSolidColor => 'Color sólido';
 
   @override
   String get dsResetIt => 'Restablecer';
@@ -491,14 +544,8 @@ class EFUILangEs extends EFUILang {
   String get dsRotateRight => 'Girar a la derecha';
 
   @override
-  String get dsUndo => 'Deshacer';
-
-  @override
-  String get dsRedo => 'Rehacer';
-
-  @override
-  String dsResetAll(Object themeType) {
-    return '¿Restablecer todas las configuraciones de diseño globales y de $themeType?';
+  String dsReset(Object themeType) {
+    return '¿Restablecer el diseño de $themeType?';
   }
 
   @override
@@ -517,7 +564,9 @@ class EFUILangEs extends EFUILang {
   String get lsScroll => 'Ocultar las barras de desplazamiento';
 
   @override
-  String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
+  String lsReset(Object themeType) {
+    return '¿Restablecer el esquema de $themeType?';
+  }
 
   @override
   String get tsPageTitle => 'Configuración del texto';
@@ -620,5 +669,7 @@ class EFUILangEs extends EFUILang {
   String get tsLabelP2 => ' ¿No muy grandes, no muy pequeñas?';
 
   @override
-  String get tsResetAll => '¿Restablecer la configuración del texto?';
+  String tsReset(Object themeType) {
+    return '¿Restablecer los estilos de texto de $themeType?';
+  }
 }

@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,6 +7,7 @@ import './export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
@@ -30,26 +31,22 @@ class OpenUIScaffold extends StatelessWidget {
   final List<Widget>? fabs;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
-  const OpenUIScaffold({
+  const OpenUIScaffold(
+    this.body, {
     super.key,
     this.title = appName,
     this.running = false,
     this.showSettings = true,
     this.onUpload,
-    required this.body,
     this.fabs,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Gather the fixed theme data //
+    // Gather the contextual theme data //
 
     final double toolbarHeight =
         ezToolbarHeight(context: context, title: appName);
-
-    final bool isLefty = EzConfig.get(isLeftyKey);
-
-    final EFUILang l10n = ezL10n(context);
 
     // Define custom widgets //
 
@@ -57,38 +54,22 @@ class OpenUIScaffold extends StatelessWidget {
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
-        tooltip: l10n.gOptions,
-        icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
+        tooltip: EzConfig.l10n.gOptions,
+        icon: Icon(Icons.more_vert, semanticLabel: EzConfig.l10n.gOptions),
       ),
       menuChildren: <Widget>[
         if (showSettings) SettingsButton(context),
         if (onUpload != null) UploadButton(context, onUpload: onUpload!),
-        EzFeedbackMenuButton(
-          parentContext: context,
-          appName: appName,
-          supportEmail: 'support@empathetech.net',
-        ),
         const OpenSourceButton(),
       ],
-    );
-
-    const Widget updater = EzUpdaterFAB(
-      appVersion: '2.3.2',
-      versionSource:
-          'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
-      gPlay:
-          'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
-      appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
-      github:
-          'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
     );
 
     // Return the build //
 
     return EzAdaptiveParent(
-      small: SelectionArea(
-        child: Scaffold(
-          // AppBar
+      small: Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider config, __) => Scaffold(
+          key: ValueKey<int>(config.seed),
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, toolbarHeight),
             child: AppBar(
@@ -98,7 +79,7 @@ class OpenUIScaffold extends StatelessWidget {
               // Leading (aka left)
               leading: running
                   ? const SizedBox.shrink()
-                  : (isLefty ? options : const EzBackAction()),
+                  : (EzConfig.isLefty ? options : const EzBackAction()),
               leadingWidth: toolbarHeight,
 
               // Title
@@ -110,24 +91,18 @@ class OpenUIScaffold extends StatelessWidget {
               actions: <Widget>[
                 running
                     ? const SizedBox.shrink()
-                    : (isLefty ? const EzBackAction() : options)
+                    : (EzConfig.isLefty ? const EzBackAction() : options)
               ],
             ),
           ),
-
-          // Body
           body: body,
-
-          // FAB
           floatingActionButton: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[updater, if (fabs != null) ...fabs!],
           ),
-          floatingActionButtonLocation: isLefty
+          floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
-
-          // Prevents the keyboard from pushing the body up
           resizeToAvoidBottomInset: false,
         ),
       ),

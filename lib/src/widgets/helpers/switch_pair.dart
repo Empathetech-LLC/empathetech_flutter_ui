@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -82,20 +82,20 @@ class EzSwitchPair extends StatefulWidget {
   /// [EzConfig] key to provide to [Switch.value]
   /// And update in [Switch.onChanged]
   /// Provide [valueKey] OR [value]
-  /// Optionally provide [onChangedCallback]
+  /// Optionally provide [afterChanged]
   final String? valueKey;
 
   /// [Switch.onChanged] passthrough
-  /// Provide [onChanged] OR [onChangedCallback]
+  /// Provide [onChanged] OR [afterChanged]
   /// Pairs with [value]
   final void Function(bool?)? onChanged;
 
   /// If you want to do more than just update [valueKey] in [Switch.onChanged]
-  /// Provide [onChangedCallback] OR [onChanged]
+  /// Provide [afterChanged] OR [onChanged]
   /// Pairs with [valueKey]
-  final void Function(bool?)? onChangedCallback;
+  final void Function(bool?)? afterChanged;
 
-  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  /// Defaults to [ezIconRatio]
   final double? scale;
 
   /// [Switch.activeThumbColor] passthrough
@@ -160,7 +160,7 @@ class EzSwitchPair extends StatefulWidget {
 
   /// [EzRow] with flexible [EzText] and a [Switch]
   /// Provide the traditional [value] and [onChanged]
-  /// Or and EzConfig optimized [valueKey] and optional [onChangedCallback]
+  /// Or and EzConfig optimized [valueKey] and optional [afterChanged]
   const EzSwitchPair({
     super.key,
     // Row
@@ -192,7 +192,7 @@ class EzSwitchPair extends StatefulWidget {
     this.valueKey,
     this.onChanged,
     this.canChange,
-    this.onChangedCallback,
+    this.afterChanged,
     this.scale,
     this.activeThumbColor,
     this.activeTrackColor,
@@ -221,21 +221,22 @@ class EzSwitchPair extends StatefulWidget {
         assert((valueKey == null) != (onChanged == null),
             'Cannot use onChanged with valueKey'),
         assert(
-            ((onChangedCallback == null) && (value == null) ||
-                ((onChangedCallback == null) != (value == null))),
-            'Cannot use onChangedCallback with value');
+            ((afterChanged == null) && (value == null) ||
+                ((afterChanged == null) != (value == null))),
+            'Cannot use afterChanged with value');
 
   @override
   State<EzSwitchPair> createState() => _EzSwitchPairState();
 }
 
 class _EzSwitchPairState extends State<EzSwitchPair> {
+  // Define the build data //
+
   late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
 
-  late final double margin = EzConfig.get(marginKey);
-  late final double ratio = widget.scale ??
-      max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
-          EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
+  late final double ratio = widget.scale ?? ezIconRatio();
+
+  // Define custom functions //
 
   late final void Function(bool?) onChanged = widget.onChanged ??
       (bool? choice) async {
@@ -249,70 +250,70 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
         await EzConfig.setBool(widget.valueKey!, choice);
         setState(() => value = choice);
 
-        widget.onChangedCallback?.call(choice);
+        widget.afterChanged?.call(choice);
       };
 
+  // Return the build //
+
   @override
-  Widget build(BuildContext context) {
-    return EzRow(
-      reverseHands: widget.reverseHands,
-      mainAxisSize: widget.mainAxisSize,
-      mainAxisAlignment: widget.mainAxisAlignment,
-      crossAxisAlignment: widget.crossAxisAlignment,
-      children: <Widget>[
-        Flexible(
-          child: EzText(
-            widget.text,
-            useSurface: widget.useSurface,
-            style: widget.style,
-            strutStyle: widget.strutStyle,
-            textAlign: widget.textAlign,
-            textDirection: widget.textDirection,
-            locale: widget.locale,
-            softWrap: widget.softWrap,
-            overflow: widget.overflow,
-            textScaler: widget.textScaler,
-            maxLines: widget.maxLines,
-            semanticsLabel: widget.semanticsLabel,
-            textWidthBasis: widget.textWidthBasis,
-            textHeightBehavior: widget.textHeightBehavior,
-            selectionColor: widget.selectionColor,
-            backgroundColor: widget.backgroundColor,
+  Widget build(BuildContext context) => EzRow(
+        reverseHands: widget.reverseHands,
+        mainAxisSize: widget.mainAxisSize,
+        mainAxisAlignment: widget.mainAxisAlignment,
+        crossAxisAlignment: widget.crossAxisAlignment,
+        children: <Widget>[
+          Flexible(
+            child: EzText(
+              widget.text,
+              useSurface: widget.useSurface,
+              style: widget.style,
+              strutStyle: widget.strutStyle,
+              textAlign: widget.textAlign,
+              textDirection: widget.textDirection,
+              locale: widget.locale,
+              softWrap: widget.softWrap,
+              overflow: widget.overflow,
+              textScaler: widget.textScaler,
+              maxLines: widget.maxLines,
+              semanticsLabel: widget.semanticsLabel,
+              textWidthBasis: widget.textWidthBasis,
+              textHeightBehavior: widget.textHeightBehavior,
+              selectionColor: widget.selectionColor,
+              backgroundColor: widget.backgroundColor,
+            ),
           ),
-        ),
-        Transform.scale(
-          scale: max(1.0, ratio),
-          // Could be PlatformSwitch
-          // Dev's opinion: Material switches are better
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeThumbColor: widget.activeThumbColor,
-            activeTrackColor: widget.activeTrackColor,
-            inactiveThumbColor: widget.inactiveThumbColor,
-            inactiveTrackColor: widget.inactiveTrackColor,
-            trackOutlineColor: widget.trackOutlineColor,
-            trackOutlineWidth: widget.trackOutlineWidth,
-            activeThumbImage: widget.activeThumbImage,
-            onActiveThumbImageError: widget.onActiveThumbImageError,
-            inactiveThumbImage: widget.inactiveThumbImage,
-            onInactiveThumbImageError: widget.onInactiveThumbImageError,
-            materialTapTargetSize: widget.materialTapTargetSize,
-            dragStartBehavior: widget.dragStartBehavior,
-            mouseCursor: widget.mouseCursor,
-            focusColor: widget.focusColor,
-            hoverColor: widget.hoverColor,
-            splashRadius: widget.splashRadius,
-            focusNode: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
-            autofocus: widget.autofocus,
-            padding: widget.padding ??
-                (ratio > 1.1
-                    ? EdgeInsets.all(margin * ratio)
-                    : EdgeInsets.symmetric(horizontal: margin)),
+          Transform.scale(
+            scale: max(1.0, ratio),
+            // Could be PlatformSwitch
+            // Dev's opinion: Material switches are better
+            child: Switch(
+              value: value,
+              onChanged: onChanged,
+              activeThumbColor: widget.activeThumbColor,
+              activeTrackColor: widget.activeTrackColor,
+              inactiveThumbColor: widget.inactiveThumbColor,
+              inactiveTrackColor: widget.inactiveTrackColor,
+              trackOutlineColor: widget.trackOutlineColor,
+              trackOutlineWidth: widget.trackOutlineWidth,
+              activeThumbImage: widget.activeThumbImage,
+              onActiveThumbImageError: widget.onActiveThumbImageError,
+              inactiveThumbImage: widget.inactiveThumbImage,
+              onInactiveThumbImageError: widget.onInactiveThumbImageError,
+              materialTapTargetSize: widget.materialTapTargetSize,
+              dragStartBehavior: widget.dragStartBehavior,
+              mouseCursor: widget.mouseCursor,
+              focusColor: widget.focusColor,
+              hoverColor: widget.hoverColor,
+              splashRadius: widget.splashRadius,
+              focusNode: widget.focusNode,
+              onFocusChange: widget.onFocusChange,
+              autofocus: widget.autofocus,
+              padding: widget.padding ??
+                  (ratio > 1.1
+                      ? EdgeInsets.all(EzConfig.marginVal * ratio)
+                      : EdgeInsets.symmetric(horizontal: EzConfig.marginVal)),
+            ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
 }

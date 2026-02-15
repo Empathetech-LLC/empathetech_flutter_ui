@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,12 +7,8 @@ import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class FailureHeader extends StatelessWidget {
-  /// [ThemeData.textTheme] passthrough
-  final TextTheme textTheme;
-
   /// Core [Text] to display... under 'Failure'
   /// Provide [message] OR [richMessage]
   final String? message;
@@ -24,11 +20,12 @@ class FailureHeader extends StatelessWidget {
   /// header [Widget] for a failed run
   const FailureHeader({
     super.key,
-    required this.textTheme,
     this.message,
     this.richMessage,
-  }) : assert((message == null) != (richMessage == null),
-            'Either message or richMessage must be provided, not both');
+  }) : assert(
+          (message == null) != (richMessage == null),
+          'Either message or richMessage must be provided, not both',
+        );
 
   @override
   Widget build(BuildContext context) => Column(
@@ -37,19 +34,19 @@ class FailureHeader extends StatelessWidget {
           // Headline
           Flexible(
             child: EzText(
-              ezL10n(context).gFailure,
-              style: textTheme.headlineLarge,
+              EzConfig.l10n.gFailure,
+              style: EzConfig.styles.headlineLarge,
               textAlign: TextAlign.center,
             ),
           ),
-          ezSpacer,
+          EzConfig.spacer,
 
           // Error message
           message != null
               ? Flexible(
                   child: EzText(
                     message!,
-                    style: ezSubTitleStyle(textTheme),
+                    style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -61,9 +58,6 @@ class FailureHeader extends StatelessWidget {
 class DeleteOption extends StatelessWidget {
   /// Directory that will be rm -rf'd
   final String appName;
-
-  /// Current [TargetPlatform]
-  final TargetPlatform platform;
 
   /// Directory to run the rm command in
   final String dir;
@@ -78,7 +72,6 @@ class DeleteOption extends StatelessWidget {
   const DeleteOption({
     super.key,
     required this.appName,
-    required this.platform,
     required this.dir,
     required this.style,
     this.readout,
@@ -89,22 +82,25 @@ class DeleteOption extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Would you like to...
           EzText(
-            Lang.of(context)!.rsWouldYou,
+            l10n.rsWouldYou,
             style: style,
             textAlign: TextAlign.center,
           ),
-          ezSpacer,
+          EzConfig.spacer,
+
+          // Wipe it
           EzElevatedIconButton(
             onPressed: () => ezCmd(
-              platform == TargetPlatform.windows
+              EzConfig.platform == TargetPlatform.windows
                   ? 'rmdir /s /q $appName'
                   : 'rm -rf $appName',
               dir: dir,
               onSuccess: () async {
                 await ezSnackBar(
                   context: context,
-                  message: Lang.of(context)!.rsNextTime,
+                  message: l10n.rsNextTime,
                 ).closed;
 
                 if (context.mounted) Navigator.of(context).maybePop();
@@ -112,28 +108,27 @@ class DeleteOption extends StatelessWidget {
               onFailure: (String message) async {
                 await ezSnackBar(
                   context: context,
-                  message: Lang.of(context)!.rsAnotherOne,
+                  message: l10n.rsAnotherOne,
                 ).closed;
 
                 if (context.mounted) Navigator.of(context).maybePop();
               },
               readout: readout,
             ),
-            icon: EzIcon(PlatformIcons(context).delete),
-            label: Lang.of(context)!.rsWipe,
+            icon: const Icon(Icons.delete),
+            label: l10n.rsWipe,
           ),
-          ezSpacer,
+          EzConfig.spacer,
+
+          // Leave
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: EzIcon(PlatformIcons(context).back),
-            label: Lang.of(context)!.rsLeave,
+            icon: const Icon(Icons.arrow_back),
+            label: l10n.rsLeave,
           ),
         ],
       );
 }
-
-/// https://docs.flutter.dev/get-started/install
-const String installFlutter = 'https://docs.flutter.dev/get-started/install';
 
 class LinkOption extends StatelessWidget {
   /// [TextStyle] for 'would you like to...'
@@ -143,27 +138,19 @@ class LinkOption extends StatelessWidget {
   const LinkOption(this.style, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final Lang l10n = Lang.of(context)!;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        EzText(
-          l10n.rsWouldYou,
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-        ezSpacer,
-        EzElevatedIconLink(
-          url: Uri.parse(installFlutter),
-          tooltip: installFlutter,
-          hint: l10n.rsInstallHint,
-          icon: EzIcon(Icons.computer),
-          label: l10n.rsInstall,
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          EzText(l10n.rsWouldYou, style: style, textAlign: TextAlign.center),
+          EzConfig.spacer,
+          EzElevatedIconLink(
+            url: Uri.parse(installFlutter),
+            tooltip: installFlutter,
+            hint: l10n.rsInstallHint,
+            icon: const Icon(Icons.computer),
+            label: l10n.rsInstall,
+          ),
+        ],
+      );
 }

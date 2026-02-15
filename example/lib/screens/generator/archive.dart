@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -15,28 +15,21 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class ArchiveScreen extends StatefulWidget {
   final EAGConfig config;
 
-  const ArchiveScreen({super.key, required this.config});
+  ArchiveScreen(this.config) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<ArchiveScreen> createState() => _ArchiveScreenState();
 }
 
 class _ArchiveScreenState extends State<ArchiveScreen> {
-  // Gather the fixed theme data //
-
-  late final EFUILang el10n = ezL10n(context);
-  late final Lang l10n = Lang.of(context)!;
-
   // Define the build data //
 
   GeneratorState genState = GeneratorState.running;
   String failureMessage = '';
 
-  final TargetPlatform platform = getBasePlatform();
-
-  late final bool isDesktop = platform == TargetPlatform.linux ||
-      platform == TargetPlatform.macOS ||
-      platform == TargetPlatform.windows;
+  final bool isDesktop = EzConfig.platform == TargetPlatform.linux ||
+      EzConfig.platform == TargetPlatform.macOS ||
+      EzConfig.platform == TargetPlatform.windows;
 
   // Define custom functions //
 
@@ -60,57 +53,50 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         ? setState(() => genState = GeneratorState.successful)
         : setState(() {
             failureMessage =
-                '${el10n.ssWrongConfigExt} .json...\n\n$savedConfig';
+                '${EzConfig.l10n.ssWrongConfigExt} .json...\n\n$savedConfig';
             genState = GeneratorState.failed;
           });
   }
 
   Widget header() {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EmpathyLoading(semantics: el10n.gLoadingAnim),
+          child: EmpathyLoading(semantics: EzConfig.l10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return Center(
           child: SuccessHeader(
-            textTheme: textTheme,
             richMessage: EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: el10n.ssConfigSaved(archivePath(
-                    appName: 'Open UI',
-                    androidPackage: 'net.empathetech.open_ui',
+                  // Open UI info, open is the one saving a file
+                  text: EzConfig.l10n.ssConfigSaved(archivePath(
+                    appName: appName,
+                    androidPackage: androidPackage,
                   )),
                 ),
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
                     appName,
-                    style: ezSubTitleStyle(textTheme),
+                    style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),
-                    hint: el10n.gOpenUIReleases,
+                    hint: EzConfig.l10n.gOpenUIReleases,
                   ),
                   EzPlainText(text: l10n.asToGen(widget.config.appName)),
                 ]
               ],
-              style: ezSubTitleStyle(textTheme),
+              style: ezSubTitleStyle(),
               textAlign: TextAlign.center,
             ),
           ),
         );
       case GeneratorState.failed:
-        return Center(
-          child: FailureHeader(
-            textTheme: textTheme,
-            message: failureMessage,
-          ),
-        );
+        return Center(child: FailureHeader(message: failureMessage));
     }
   }
 
@@ -125,9 +111,9 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   // Return the build //
 
   @override
-  Widget build(_) => OpenUIScaffold(
+  Widget build(BuildContext context) => OpenUIScaffold(
+        EzScreen(header(), alignment: Alignment.center),
         title: l10n.asPageTitle,
         running: genState == GeneratorState.running,
-        body: EzScreen(header(), alignment: Alignment.center),
       );
 }

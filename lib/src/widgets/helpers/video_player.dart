@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,8 +9,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
-// import 'package:go_transitions/go_transitions.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 enum EzButtonVis { alwaysOff, alwaysOn, auto }
 
@@ -79,18 +77,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// Playback speed
   final double speed;
 
-  /// Fullscreen button visibility
-  // final EzButtonVis fullScreenVis;
-
-  /// Whether the video is in fullscreen mode
-  /// Recommended to leave as false to start
-  /// Navigating to the fullscreen page is made much simpler with this as a parameter
-  // final bool isFullscreen;
-
-  /// The platform the app is running on
-  /// Recommended to use [getBasePlatform]
-  // final TargetPlatform platform;
-
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
   /// Only for desktop (and desktop Web), is always true for mobile (and mobile Web)
   final bool showOnPause;
@@ -130,9 +116,6 @@ class EzVideoPlayer extends StatefulWidget {
     this.textColor = Colors.white,
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
-    // this.fullScreenVis = EzButtonVis.auto,
-    // this.isFullscreen = false,
-    // required this.platform,
     this.showOnPause = false,
     this.mobileDelay = 3,
     this.autoPlay = true,
@@ -144,17 +127,6 @@ class EzVideoPlayer extends StatefulWidget {
 }
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
-  // Gather the fixed theme data //
-
-  late final bool onMobile = isMobile();
-
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-  final double iconSize = EzConfig.get(iconSizeKey);
-
-  late final EFUILang l10n = ezL10n(context);
-
   // Define the build data //
 
   late final int videoLength = widget.controller.value.duration.inMilliseconds;
@@ -176,24 +148,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           widget.volumeVis == EzButtonVis.alwaysOn ||
           widget.timeLabelVis == EzButtonVis.alwaysOn ||
           widget.speedVis == EzButtonVis.alwaysOn;
-  // || widget.fullScreenVis == EzButtonVis.alwaysOn;
   late final bool noControls = widget.timeSliderVis == EzButtonVis.alwaysOff &&
       widget.playVis == EzButtonVis.alwaysOff &&
       widget.volumeVis == EzButtonVis.alwaysOff &&
       widget.timeLabelVis == EzButtonVis.alwaysOff &&
       widget.speedVis == EzButtonVis.alwaysOff;
-  // && widget.fullScreenVis == EzButtonVis.alwaysOff;
-
-  late final double controlsHeight = noControls
-      ? 0
-      : (widget.timeSliderVis == EzButtonVis.alwaysOff)
-          ? (2 * margin + iconSize + padding)
-          : (3 * margin + 2 * (iconSize + padding));
 
   // Define custom functions //
 
   void handleMobileHover() {
-    if (!onMobile) return;
+    if (!EzConfig.onMobile) return;
 
     mobileHover?.cancel();
     if (!hovering) setState(() => hovering = true);
@@ -232,52 +196,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Future<void> skipBackward(VideoPlayerValue value) => widget.controller
       .seekTo(value.position - Duration(seconds: widget.skipTime));
 
-  /// Call [ezFullscreenToggle] and handle [Navigator] updates
-  // Future<void> toggleFullscreen() async {
-  //   await ezFullscreenToggle(widget.platform, widget.isFullscreen);
-  //   if (!mounted) return;
-
-  //   widget.isFullscreen
-  //       ? Navigator.of(context).maybePop()
-  //       : Navigator.of(context).push(
-  //           GoTransitionRoute(
-  //             transition: GoTransitions.zoom,
-  //             builder: (_) => Scaffold(
-  //               backgroundColor: Theme.of(context).colorScheme.surface,
-  //               body: EzVideoPlayer(
-  //                 controller: widget.controller,
-  //                 aspectRatio: widget.aspectRatio,
-  //                 maxHeight: double.infinity,
-  //                 maxWidth: double.infinity,
-  //                 backgroundColor: widget.backgroundColor,
-  //                 semantics: widget.semantics,
-  //                 hasCaptions: widget.hasCaptions,
-  //                 iconColor: widget.iconColor,
-  //                 sliderColor: widget.sliderColor,
-  //                 sliderBufferColor: widget.sliderBufferColor,
-  //                 controlsBackground: widget.controlsBackground,
-  //                 timeSliderVis: widget.timeSliderVis,
-  //                 playVis: widget.playVis,
-  //                 volumeVis: widget.volumeVis,
-  //                 variableVolume: widget.variableVolume,
-  //                 startingVolume: value.volume,
-  //                 timeLabelVis: widget.timeLabelVis,
-  //                 textColor: widget.textColor,
-  //                 speedVis: widget.speedVis,
-  //                 speed: currSpeed,
-  //                 fullScreenVis: widget.fullScreenVis,
-  //                 isFullscreen: true,
-  //                 platform: widget.platform,
-  //                 showOnPause: widget.showOnPause,
-  //                 mobileDelay: widget.mobileDelay,
-  //                 autoPlay: false,
-  //                 autoLoop: widget.autoLoop,
-  //               ),
-  //             ),
-  //           ),
-  //         );
-  // }
-
   void showVolumeLabel() {
     showVolume?.cancel();
     showVolume = Timer(
@@ -295,7 +213,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case EzButtonVis.auto:
         if (hovering ||
             subMenuControl.isOpen ||
-            ((onMobile || widget.showOnPause) && !isPlaying)) {
+            ((EzConfig.onMobile || widget.showOnPause) && !isPlaying)) {
           return true;
         } else {
           return false;
@@ -336,17 +254,22 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Gather the contextual theme data //
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color iconColor = widget.iconColor ?? colorScheme.primary;
+    final double controlsHeight = noControls
+        ? 0
+        : (widget.timeSliderVis == EzButtonVis.alwaysOff)
+            ? (2 * EzConfig.marginVal + EzConfig.iconSize + EzConfig.padding)
+            : (3 * EzConfig.marginVal +
+                2 * (EzConfig.iconSize + EzConfig.padding));
 
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    final Color iconColor = widget.iconColor ?? EzConfig.colors.primary;
+
     final TextStyle? labelStyle =
-        textTheme.labelLarge?.copyWith(color: widget.textColor);
+        EzConfig.styles.labelLarge?.copyWith(color: widget.textColor);
 
     final SliderThemeData sliderTheme = SliderThemeData(
-      activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
+      activeTrackColor: widget.sliderColor ?? EzConfig.colors.secondary,
       inactiveTrackColor:
           widget.sliderBufferColor ?? widget.textColor.withValues(alpha: 0.5),
       thumbColor: iconColor,
@@ -405,19 +328,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     return KeyEventResult.ignored;
                   }
 
-                // // F -> fullscreen toggle
-                // case LogicalKeyboardKey.keyF:
-                //   toggleFullscreen();
-                //   return KeyEventResult.handled;
-
-                // // Esc -> exit fullscreen
-                // case LogicalKeyboardKey.escape:
-                //   if (widget.isFullscreen) {
-                //     toggleFullscreen();
-                //     return KeyEventResult.handled;
-                //   } else {
-                //     return KeyEventResult.ignored;
-                //   }
                 default:
                   return KeyEventResult.ignored;
               }
@@ -439,7 +349,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       maxHeight: widget.maxHeight,
                       maxWidth: widget.maxWidth,
                     ),
-                    color: widget.backgroundColor ?? colorScheme.surface,
+                    color: widget.backgroundColor ?? EzConfig.colors.surface,
                     child: AspectRatio(
                       aspectRatio: widget.aspectRatio,
                       child: VideoPlayer(widget.controller),
@@ -451,7 +361,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 Positioned(
                   left: 0,
                   right: 0,
-                  top: spacing * 2,
+                  top: EzConfig.spacing * 2,
                   child: Visibility(
                     visible: showVolume?.isActive == true,
                     child: ExcludeSemantics(
@@ -462,13 +372,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           EzText(
                             '${(value.volume * 100).toStringAsFixed(0)}%',
                             style: switch (captionStyle) {
-                              4 => textTheme.displayLarge
+                              4 => EzConfig.styles.displayLarge
                                   ?.copyWith(color: widget.textColor),
-                              3 => textTheme.headlineLarge
+                              3 => EzConfig.styles.headlineLarge
                                   ?.copyWith(color: widget.textColor),
-                              2 => textTheme.titleLarge
+                              2 => EzConfig.styles.titleLarge
                                   ?.copyWith(color: widget.textColor),
-                              1 => textTheme.bodyLarge
+                              1 => EzConfig.styles.bodyLarge
                                   ?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
@@ -490,7 +400,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: ExcludeSemantics(
                     child: GestureDetector(
                       onTap: () async {
-                        if (onMobile) {
+                        if (EzConfig.onMobile) {
                           mobileHover?.cancel();
 
                           hovering
@@ -526,7 +436,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             hovering ||
                             subMenuControl.isOpen)
                         ? controlsHeight
-                        : margin,
+                        : EzConfig.marginVal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -535,13 +445,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           child: EzText(
                             value.caption.text,
                             style: switch (captionStyle) {
-                              4 => textTheme.displayLarge
+                              4 => EzConfig.styles.displayLarge
                                   ?.copyWith(color: widget.textColor),
-                              3 => textTheme.headlineLarge
+                              3 => EzConfig.styles.headlineLarge
                                   ?.copyWith(color: widget.textColor),
-                              2 => textTheme.titleLarge
+                              2 => EzConfig.styles.titleLarge
                                   ?.copyWith(color: widget.textColor),
-                              1 => textTheme.bodyLarge
+                              1 => EzConfig.styles.bodyLarge
                                   ?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
@@ -560,7 +470,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   top: 0,
                   bottom: 0,
                   child: Visibility(
-                    visible: (onMobile && hovering) ||
+                    visible: (EzConfig.onMobile && hovering) ||
                         (!value.isPlaying &&
                             (value.isCompleted ||
                                 value.position.inSeconds < 1)),
@@ -570,14 +480,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             ? EzIconButton(
                                 onPressed: pause,
                                 color: iconColor,
-                                icon: Icon(PlatformIcons(context).pause),
+                                icon: const Icon(Icons.pause),
                               )
                             : EzIconButton(
                                 onPressed: () => play(value),
                                 color: iconColor,
                                 icon: Icon(value.isCompleted
                                     ? Icons.replay
-                                    : PlatformIcons(context).playArrow),
+                                    : Icons.play_arrow),
                               ),
                       ),
                     ),
@@ -603,9 +513,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           // Time seeker
                           Visibility(
                             visible: showControl(
-                                widget.timeSliderVis, value.isPlaying),
+                              widget.timeSliderVis,
+                              value.isPlaying,
+                            ),
                             child: SizedBox(
-                              height: iconSize,
+                              height: EzConfig.iconSize,
                               width: double.infinity,
                               child: SliderTheme(
                                 data: sliderTheme,
@@ -613,7 +525,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                   value: pComplete(value.position),
                                   onChangeStart: (_) async {
                                     await pause();
-                                    if (onMobile) mobileHover?.cancel();
+                                    if (EzConfig.onMobile) {
+                                      mobileHover?.cancel();
+                                    }
                                   },
                                   onChanged: (double value) =>
                                       widget.controller.seekTo(findP(value)),
@@ -625,7 +539,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               ),
                             ),
                           ),
-                          ezMargin,
+                          EzConfig.margin,
 
                           // Buttons
                           NotificationListener<ScrollNotification>(
@@ -637,30 +551,32 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               scrollDirection: Axis.horizontal,
                               showScrollHint: true,
                               children: <Widget>[
-                                ezRowSpacer,
+                                const EzSpacer(vertical: false),
 
                                 // Play/pause
                                 Visibility(
                                   visible: showControl(
-                                      widget.playVis, value.isPlaying),
+                                    widget.playVis,
+                                    value.isPlaying,
+                                  ),
                                   child: Padding(
-                                    padding: EdgeInsets.only(right: spacing),
+                                    padding: EdgeInsets.only(
+                                      right: EzConfig.spacing,
+                                    ),
                                     child: value.isPlaying
                                         ? EzIconButton(
                                             onPressed: pause,
-                                            tooltip: l10n.gPause,
+                                            tooltip: EzConfig.l10n.gPause,
                                             color: iconColor,
-                                            icon: Icon(
-                                                PlatformIcons(context).pause),
+                                            icon: const Icon(Icons.pause),
                                           )
                                         : EzIconButton(
                                             onPressed: () => play(value),
-                                            tooltip: l10n.gPlay,
+                                            tooltip: EzConfig.l10n.gPlay,
                                             color: iconColor,
                                             icon: Icon(value.isCompleted
                                                 ? Icons.replay
-                                                : PlatformIcons(context)
-                                                    .playArrow),
+                                                : Icons.play_arrow),
                                           ),
                                   ),
                                 ),
@@ -668,25 +584,27 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 // Volume toggle
                                 Visibility(
                                   visible: showControl(
-                                      widget.volumeVis, value.isPlaying),
+                                    widget.volumeVis,
+                                    value.isPlaying,
+                                  ),
                                   child: Padding(
                                     padding: widget.variableVolume
                                         ? EdgeInsets.zero
-                                        : EdgeInsets.only(right: spacing),
+                                        : EdgeInsets.only(
+                                            right: EzConfig.spacing,
+                                          ),
                                     child: (value.volume == 0.0)
                                         ? EzIconButton(
                                             onPressed: unMute,
-                                            tooltip: l10n.gUnMute,
+                                            tooltip: EzConfig.l10n.gUnMute,
                                             color: iconColor,
-                                            icon: Icon(PlatformIcons(context)
-                                                .volumeMute),
+                                            icon: const Icon(Icons.volume_mute),
                                           )
                                         : EzIconButton(
                                             onPressed: () => mute(value),
-                                            tooltip: l10n.gMute,
+                                            tooltip: EzConfig.l10n.gMute,
                                             color: iconColor,
-                                            icon: Icon(PlatformIcons(context)
-                                                .volumeUp),
+                                            icon: const Icon(Icons.volume_up),
                                           ),
                                   ),
                                 ),
@@ -695,18 +613,24 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 Visibility(
                                   visible: (widget.variableVolume &&
                                       showControl(
-                                          widget.volumeVis, value.isPlaying)),
+                                        widget.volumeVis,
+                                        value.isPlaying,
+                                      )),
                                   child: Padding(
-                                    padding: EdgeInsets.only(right: spacing),
+                                    padding: EdgeInsets.only(
+                                      right: EzConfig.spacing,
+                                    ),
                                     child: SizedBox(
-                                      height: iconSize,
+                                      height: EzConfig.iconSize,
                                       width: 100,
                                       child: SliderTheme(
                                         data: sliderTheme,
                                         child: Slider(
                                           value: value.volume,
                                           onChangeStart: (_) {
-                                            if (onMobile) mobileHover?.cancel();
+                                            if (EzConfig.onMobile) {
+                                              mobileHover?.cancel();
+                                            }
                                           },
                                           onChanged: (double value) => widget
                                               .controller
@@ -722,9 +646,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 // Time label
                                 Visibility(
                                   visible: showControl(
-                                      widget.timeLabelVis, value.isPlaying),
+                                    widget.timeLabelVis,
+                                    value.isPlaying,
+                                  ),
                                   child: Padding(
-                                    padding: EdgeInsets.only(right: spacing),
+                                    padding: EdgeInsets.only(
+                                      right: EzConfig.spacing,
+                                    ),
                                     child: Text(
                                       '${ezVideoTime(value.position)} / ${ezVideoTime(value.duration)}',
                                       style: labelStyle,
@@ -736,9 +664,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 // Playback speed selector
                                 Visibility(
                                   visible: showControl(
-                                      widget.speedVis, value.isPlaying),
+                                    widget.speedVis,
+                                    value.isPlaying,
+                                  ),
                                   child: Padding(
-                                    padding: EdgeInsets.only(right: spacing),
+                                    padding: EdgeInsets.only(
+                                      right: EzConfig.spacing,
+                                    ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
@@ -751,13 +683,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             handleMobileHover();
                                           },
                                           tooltip:
-                                              '${l10n.gDecrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
-                                          icon: Icon(
-                                              PlatformIcons(context).remove),
+                                              '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.gPlaybackSpeed.toLowerCase()}',
+                                          icon: const Icon(Icons.remove),
                                         ),
-                                        ezRowMargin,
+                                        EzMargin(vertical: false),
                                         Tooltip(
-                                          message: l10n.gPlaybackSpeed,
+                                          message: EzConfig.l10n.gPlaybackSpeed,
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             mainAxisAlignment:
@@ -765,9 +696,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             children: <Widget>[
                                               Icon(
                                                 Icons.speed,
-                                                size:
-                                                    EzConfig.get(iconSizeKey) *
-                                                        0.667,
+                                                size: EzConfig.iconSize * 0.667,
                                                 color: widget.textColor,
                                               ),
                                               Text(
@@ -778,7 +707,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             ],
                                           ),
                                         ),
-                                        ezRowMargin,
+                                        EzMargin(vertical: false),
                                         EzIconButton(
                                           enabled: currSpeed < 2.0,
                                           onPressed: () async {
@@ -788,9 +717,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             handleMobileHover();
                                           },
                                           tooltip:
-                                              '${l10n.gIncrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
-                                          icon:
-                                              Icon(PlatformIcons(context).add),
+                                              '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.gPlaybackSpeed.toLowerCase()}',
+                                          icon: const Icon(Icons.add),
                                         ),
                                       ],
                                     ),
@@ -801,9 +729,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 Visibility(
                                   visible: widget.hasCaptions &&
                                       showControl(
-                                          EzButtonVis.auto, value.isPlaying),
+                                        EzButtonVis.auto,
+                                        value.isPlaying,
+                                      ),
                                   child: Padding(
-                                    padding: EdgeInsets.only(right: spacing),
+                                    padding: EdgeInsets.only(
+                                      right: EzConfig.spacing,
+                                    ),
                                     child: MenuAnchor(
                                       controller: subMenuControl,
                                       builder: (_, __, ___) => EzIconButton(
@@ -815,44 +747,46 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             ? subMenuControl.close()
                                             : subMenuControl.open(),
                                         tooltip:
-                                            '${l10n.gCaptions}\n${l10n.gCaptionsHint}',
+                                            '${EzConfig.l10n.gCaptions}\n${EzConfig.l10n.gCaptionsHint}',
                                         color: showCaptions
                                             ? iconColor
-                                            : colorScheme.outline,
+                                            : EzConfig.colors.outline,
                                         icon: const Icon(Icons.subtitles),
                                       ),
                                       menuChildren: <Widget>[
                                         EzMenuButton(
-                                          label: l10n.tsDisplay,
-                                          textStyle: textTheme.displayLarge,
+                                          label: EzConfig.l10n.tsDisplay,
+                                          textStyle:
+                                              EzConfig.styles.displayLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 4),
                                         ),
                                         EzMenuButton(
-                                          label: l10n.tsHeadline,
-                                          textStyle: textTheme.headlineLarge,
+                                          label: EzConfig.l10n.tsHeadline,
+                                          textStyle:
+                                              EzConfig.styles.headlineLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 3),
                                         ),
                                         EzMenuButton(
-                                          label: l10n.tsTitle,
-                                          textStyle: textTheme.titleLarge,
+                                          label: EzConfig.l10n.tsTitle,
+                                          textStyle: EzConfig.styles.titleLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 2),
                                         ),
                                         EzMenuButton(
-                                          label: l10n.tsBody,
-                                          textStyle: textTheme.bodyLarge,
+                                          label: EzConfig.l10n.tsBody,
+                                          textStyle: EzConfig.styles.bodyLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 1),
                                         ),
                                         EzMenuButton(
-                                          label: l10n.tsLabel,
-                                          textStyle: textTheme.labelLarge,
+                                          label: EzConfig.l10n.tsLabel,
+                                          textStyle: EzConfig.styles.labelLarge,
                                           textAlign: TextAlign.center,
                                           onPressed: () =>
                                               setState(() => captionStyle = 0),
@@ -861,22 +795,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                     ),
                                   ),
                                 ),
-
-                                // // Fullscreen
-                                // Visibility(
-                                //   visible: showControl(widget.fullScreenVis),
-                                //   child: Padding(
-                                //     padding: EdgeInsets.only(right: spacing),
-                                //     child: EzIconButton(
-                                //       onPressed: toggleFullscreen,
-                                //       tooltip: l10n.gFullScreen,
-                                //       color: iconColor,
-                                //       icon: Icon(widget.isFullscreen
-                                //           ? PlatformIcons(context).fullscreenExit
-                                //           : PlatformIcons(context).fullscreen),
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
@@ -896,7 +814,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
 const int _milisPerSec = 1000;
 const int _milisPerMin = 60000;
-const int _milisPerHour = 3600000;
+const int _milisPerOur = 3600000;
 
 String _tooTwo(int n) => n.toString().padLeft(2, '0');
 
@@ -906,10 +824,10 @@ String _tooTwo(int n) => n.toString().padLeft(2, '0');
 String ezVideoTime(Duration duration, {bool showMili = false}) {
   int miliSecs = duration.inMilliseconds;
 
-  final int hours = ((miliSecs as double) / (_milisPerHour as double)).floor();
+  final int hours = ((miliSecs as double) / (_milisPerOur as double)).floor();
   final String hourS = _tooTwo(hours);
 
-  miliSecs -= (hours * _milisPerHour);
+  miliSecs -= (hours * _milisPerOur);
 
   final int minutes = ((miliSecs as double) / (_milisPerMin as double)).floor();
   final String minS = _tooTwo(minutes);

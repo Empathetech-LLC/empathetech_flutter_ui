@@ -1,22 +1,15 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:window_manager/window_manager.dart';
-
-/// True if [Platform.isIOS] or [Platform.isMacOS]
-bool cupertinoCheck() => Platform.isIOS || Platform.isMacOS;
 
 /// True if [Platform.isAndroid] or [Platform.isIOS]
 bool mobileCheck() => Platform.isAndroid || Platform.isIOS;
-
-/// True if [Platform.isMacOS], [Platform.isWindows], or [Platform.isLinux]
-/// [Platform.isFuchsia] is currently skipped
-bool desktopCheck() =>
-    Platform.isMacOS || Platform.isWindows || Platform.isLinux;
 
 /// Get the current [TargetPlatform] the slow (and reliable) way
 /// Checking each [Platform].is
@@ -36,8 +29,8 @@ TargetPlatform getHostPlatform() {
 }
 
 /// Request/exit a fullscreen window
-Future<void> toggleFullscreen(TargetPlatform platform, bool isFull) async {
-  switch (platform) {
+Future<void> toggleFullscreen(bool isFull) async {
+  switch (EzConfig.platform) {
     case TargetPlatform.android:
     case TargetPlatform.iOS:
     case TargetPlatform.fuchsia:
@@ -50,9 +43,9 @@ Future<void> toggleFullscreen(TargetPlatform platform, bool isFull) async {
     case TargetPlatform.macOS:
     case TargetPlatform.windows:
       if (isFull) {
-        await windowManager.setFullScreen(true);
+        // REPLACE: await windowManager.setFullScreen(true);
       } else {
-        await windowManager.setFullScreen(false);
+        // REPLACE: await windowManager.setFullScreen(false);
       }
       break;
   }

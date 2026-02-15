@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,7 +7,6 @@ const String appNameKey = 'appName';
 const String publisherNameKey = 'publisherName';
 const String appDescriptionKey = 'appDescription';
 const String domainNameKey = 'domainName';
-const String supportEmailKey = 'supportEmail';
 
 const String colorSettingsKey = 'colorSettings';
 const String designSettingsKey = 'designSettings';
@@ -31,7 +30,6 @@ class EAGConfig {
   final String publisherName;
   final String appDescription;
   final String domainName;
-  final String? supportEmail;
 
   final bool colorSettings;
   final bool designSettings;
@@ -45,7 +43,7 @@ class EAGConfig {
   final String? workPath;
   final String? copyright;
   final String license;
-  final String? l10nConfig;
+  final String l10nConfig;
   final String? analysisOptions;
   final String? vsCodeConfig;
 
@@ -54,7 +52,6 @@ class EAGConfig {
     required this.publisherName,
     required this.appDescription,
     required this.domainName,
-    this.supportEmail,
     required this.colorSettings,
     required this.designSettings,
     required this.layoutSettings,
@@ -64,7 +61,7 @@ class EAGConfig {
     this.workPath,
     this.copyright,
     required this.license,
-    this.l10nConfig,
+    required this.l10nConfig,
     this.analysisOptions,
     this.vsCodeConfig,
   });
@@ -75,7 +72,6 @@ class EAGConfig {
       publisherName: json[publisherNameKey] as String,
       appDescription: json[appDescriptionKey] as String,
       domainName: json[domainNameKey] as String,
-      supportEmail: json[supportEmailKey] as String?,
       colorSettings: json[colorSettingsKey] as bool,
       designSettings: json[designSettingsKey] as bool,
       layoutSettings: json[layoutSettingsKey] as bool,
@@ -85,7 +81,7 @@ class EAGConfig {
       workPath: json[workPathKey] as String?,
       copyright: json[copyrightKey] as String?,
       license: json[licenseKey] as String,
-      l10nConfig: json[l10nConfigKey] as String?,
+      l10nConfig: json[l10nConfigKey] as String,
       analysisOptions: json[analysisOptionsKey] as String?,
       vsCodeConfig: json[vsCodeConfigKey] as String?,
     );
@@ -97,7 +93,6 @@ class EAGConfig {
       publisherNameKey: publisherName,
       appDescriptionKey: appDescription,
       domainNameKey: domainName,
-      supportEmailKey: supportEmail,
       colorSettingsKey: colorSettings,
       designSettingsKey: designSettings,
       layoutSettingsKey: layoutSettings,
@@ -120,7 +115,6 @@ class EAGConfig {
   $publisherNameKey: $publisherName,
   $appDescriptionKey: $appDescription,
   $domainNameKey: $domainName,
-  $supportEmailKey: $supportEmail,
   $colorSettingsKey: $colorSettings,
   $designSettingsKey: $designSettings,
   $layoutSettingsKey: $layoutSettings,

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -58,10 +58,7 @@ class EzInlineLink extends WidgetSpan {
     required this.hint,
     this.tooltip,
     this.richLabel, // Not used here, but in EzRichText
-
-    // WidgetSpan
-    super.alignment = PlaceholderAlignment.baseline,
-    super.baseline = TextBaseline.alphabetic,
+    super.alignment = PlaceholderAlignment.middle,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(

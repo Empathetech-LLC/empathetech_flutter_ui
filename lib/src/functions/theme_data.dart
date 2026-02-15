@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,37 +7,66 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:feedback/feedback.dart';
-
-/// 0.667
-/// Shadow opacity should be "faster" than surface
-/// 1:1 looks... well, foggy
-const double shadowMod = 0.667;
-
-/// Crucial opacity threshold - some things are too important to be broken by user settings
-const double crucialOT = 0.25;
 
 /// Creates a [ThemeData] from [EzConfig] values
-ThemeData ezThemeData(Brightness brightness) {
+ThemeData ezThemeData(Brightness brightness, bool ltr) {
   //* Gather values from EzConfig *//
+
+  final bool isDark = Brightness.dark == brightness;
 
   // Shared //
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
-  final Color highlightColor =
-      colorScheme.primary.withValues(alpha: highlightOpacity);
+  final Color focusColor = colorScheme.primary.withValues(alpha: focusOpacity);
 
-  final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
+  final int animDuration = Brightness.dark == brightness
+      ? EzConfig.get(darkAnimationDurationKey)
+      : EzConfig.get(lightAnimationDurationKey);
 
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
+  final double margin =
+      isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
+  final double padding =
+      isDark ? EzConfig.get(darkPaddingKey) : EzConfig.get(lightPaddingKey);
+  final double spacing =
+      isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
 
-  final int animDuration = EzConfig.get(animationDurationKey);
+  final double iconSize =
+      isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
+
+  final TextTheme textTheme =
+      ezTextTheme(colorScheme.onSurface, isDark: isDark);
+
+  // Buttons //
+
+  final double buttonOpacity =
+      EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+
+  final Color buttonBackground =
+      colorScheme.surface.withValues(alpha: buttonOpacity);
+  final Color primaryButtonBackground =
+      colorScheme.primary.withValues(alpha: buttonOpacity);
+  final Color buttonShadow = buttonOpacity < 1.0
+      ? colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod)
+      : colorScheme.shadow;
+
+  final double crucialButtonOpacity = max(buttonOpacity, focusOpacity);
+
+  final Color crucialButtonBackground =
+      colorScheme.surface.withValues(alpha: crucialButtonOpacity);
+  final Color crucialPrimaryButtonBackground =
+      colorScheme.primary.withValues(alpha: crucialButtonOpacity);
+
+  final double outlineOpacity = EzConfig.get(
+      isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey);
+
+  final Color buttonContainer =
+      colorScheme.primaryContainer.withValues(alpha: outlineOpacity);
+  final Color enabledOutline =
+      colorScheme.outline.withValues(alpha: outlineOpacity);
+  final Color disabledOutline =
+      colorScheme.outlineVariant.withValues(alpha: outlineOpacity);
 
   // Icons //
-
-  final double iconSize = EzConfig.get(iconSizeKey);
 
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
@@ -52,78 +81,21 @@ ThemeData ezThemeData(Brightness brightness) {
 
   // Text //
 
-  final double textOpacity = EzConfig.get(
-    brightness == Brightness.dark
-        ? darkTextBackgroundOpacityKey
-        : lightTextBackgroundOpacityKey,
-  );
-  final bool calcText = textOpacity < 1.0;
+  final double textBackgroundOpacity = EzConfig.get(
+      isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey);
 
-  final Color textSurfaceColor = calcText
-      ? colorScheme.surface.withValues(alpha: textOpacity)
-      : colorScheme.surface;
+  final Color textBackgroundColor =
+      colorScheme.surface.withValues(alpha: textBackgroundOpacity);
 
-  // Buttons //
+  final double crucialTextBackgroundOpacity =
+      max(textBackgroundOpacity, focusOpacity);
 
-  final double buttonOpacity = EzConfig.get(
-    brightness == Brightness.dark
-        ? darkButtonOpacityKey
-        : lightButtonOpacityKey,
-  );
-  final double outlineOpacity = EzConfig.get(
-    brightness == Brightness.dark
-        ? darkButtonOutlineOpacityKey
-        : lightButtonOutlineOpacityKey,
-  );
-
-  final bool calcButton = buttonOpacity < 1.0;
-  final bool calcOutline = outlineOpacity < 1.0;
-
-  final bool clearButton = buttonOpacity < 0.01;
-  final bool clearOutline = outlineOpacity < 0.01;
-
-  final Color buttonBackground = calcButton
-      ? clearButton
-          ? Colors.transparent
-          : colorScheme.surface.withValues(alpha: buttonOpacity)
-      : colorScheme.surface;
-  final Color primaryButtonBackground = calcButton
-      ? clearButton
-          ? Colors.transparent
-          : colorScheme.primary.withValues(alpha: buttonOpacity)
-      : colorScheme.primary;
-  final Color buttonShadow = calcButton
-      ? clearButton
-          ? Colors.transparent
-          : colorScheme.shadow.withValues(alpha: buttonOpacity * shadowMod)
+  final Color inputBackgroundColor = colorScheme.surface
+      .withValues(alpha: max(buttonOpacity, crucialTextBackgroundOpacity));
+  final Color crucialTextShadow = crucialTextBackgroundOpacity < 1.0
+      ? colorScheme.shadow
+          .withValues(alpha: crucialTextBackgroundOpacity * shadowMod)
       : colorScheme.shadow;
-
-  final Color buttonContainer = calcOutline
-      ? clearOutline
-          ? Colors.transparent
-          : colorScheme.primaryContainer.withValues(alpha: outlineOpacity)
-      : colorScheme.primaryContainer;
-  final Color enabledOutline = calcOutline
-      ? clearOutline
-          ? Colors.transparent
-          : colorScheme.outline.withValues(alpha: outlineOpacity)
-      : colorScheme.outline;
-  final Color disabledOutline = calcOutline
-      ? clearOutline
-          ? Colors.transparent
-          : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
-      : colorScheme.outlineVariant;
-
-  // Misc //
-
-  final double crucialOpacity =
-      <double>[buttonOpacity, textOpacity, crucialOT].reduce(max);
-
-  final bool calcCrucial = crucialOpacity < 1.0;
-
-  final Color crucialSurface = calcCrucial
-      ? colorScheme.surface.withValues(alpha: crucialOpacity)
-      : colorScheme.surface;
 
   //* Return the ThemeData *//
 
@@ -138,7 +110,7 @@ ThemeData ezThemeData(Brightness brightness) {
     colorScheme: colorScheme,
 
     dividerColor: colorScheme.secondary,
-    hoverColor: highlightColor,
+    hoverColor: focusColor,
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
 
     // Transitions //
@@ -184,12 +156,9 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Card
     cardTheme: CardThemeData(
-      color: calcCrucial
-          ? colorScheme.surfaceDim.withValues(alpha: crucialOpacity)
-          : colorScheme.surfaceDim,
-      shadowColor: calcCrucial
-          ? colorScheme.shadow.withValues(alpha: crucialOpacity * shadowMod)
-          : colorScheme.shadow,
+      color: colorScheme.surfaceDim
+          .withValues(alpha: crucialTextBackgroundOpacity),
+      shadowColor: crucialTextShadow,
       margin: EdgeInsets.zero,
     ),
 
@@ -205,7 +174,7 @@ ThemeData ezThemeData(Brightness brightness) {
             ? colorScheme.onPrimary
             : null,
       ),
-      overlayColor: WidgetStateProperty.all(highlightColor),
+      overlayColor: WidgetStateProperty.all(focusColor),
       side: BorderSide(color: colorScheme.primary),
     ),
 
@@ -267,21 +236,58 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Expansion tile
+    expansionTileTheme: ltr
+        ? ExpansionTileThemeData(
+            backgroundColor: colorScheme.surface,
+            collapsedBackgroundColor: colorScheme.surfaceContainer,
+            iconColor: colorScheme.primary,
+            collapsedIconColor: colorScheme.primary,
+            tilePadding: EdgeInsets.only(
+              left: margin,
+              right: spacing,
+              top: margin,
+              bottom: margin,
+            ),
+            childrenPadding: EdgeInsets.only(
+              left: margin * 2,
+              right: spacing,
+              bottom: margin,
+            ),
+            expandedAlignment: Alignment.centerLeft,
+          )
+        : ExpansionTileThemeData(
+            backgroundColor: colorScheme.surface,
+            collapsedBackgroundColor: colorScheme.surfaceContainer,
+            iconColor: colorScheme.primary,
+            collapsedIconColor: colorScheme.primary,
+            tilePadding: EdgeInsets.only(
+              left: spacing,
+              right: margin,
+              top: margin,
+              bottom: margin,
+            ),
+            childrenPadding: EdgeInsets.only(
+              left: spacing,
+              right: margin * 2,
+              bottom: margin,
+            ),
+            expandedAlignment: Alignment.centerRight,
+          ),
+
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: calcCrucial
-          ? colorScheme.primary.withValues(alpha: crucialOpacity)
-          : colorScheme.primary,
+      backgroundColor: crucialPrimaryButtonBackground,
       foregroundColor: colorScheme.onPrimary,
-      hoverColor: highlightColor,
+      hoverColor: focusColor,
       extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
       iconSize: iconSize,
       sizeConstraints: BoxConstraints(
-        minWidth: (iconSize / 2) + (padding * 2),
-        maxWidth: (iconSize / 2) + (padding * 2),
-        minHeight: (iconSize / 2) + (padding * 2),
-        maxHeight: (iconSize / 2) + (padding * 2),
+        minWidth: (iconSize * 1.25) + padding,
+        maxWidth: (iconSize * 1.25) + padding,
+        minHeight: (iconSize * 1.25) + padding,
+        maxHeight: (iconSize * 1.25) + padding,
       ),
     ),
 
@@ -289,9 +295,8 @@ ThemeData ezThemeData(Brightness brightness) {
     // EzIconButtons are styled for page content
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        backgroundColor: calcButton
-            ? colorScheme.surfaceDim.withValues(alpha: buttonOpacity)
-            : colorScheme.surfaceDim,
+        backgroundColor:
+            colorScheme.surfaceDim.withValues(alpha: buttonOpacity),
         foregroundColor: colorScheme.primary,
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
@@ -305,7 +310,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: crucialSurface,
+      fillColor: inputBackgroundColor,
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,
@@ -365,9 +370,8 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Radio button
-    radioTheme: RadioThemeData(
-      overlayColor: WidgetStateProperty.all(highlightColor),
-    ),
+    radioTheme:
+        RadioThemeData(overlayColor: WidgetStateProperty.all(focusColor)),
 
     // Slider
     sliderTheme: SliderThemeData(
@@ -412,15 +416,15 @@ ThemeData ezThemeData(Brightness brightness) {
             ? colorScheme.primary
             : colorScheme.outline,
       ),
-      trackColor: WidgetStateProperty.all(crucialSurface),
+      trackColor: WidgetStateProperty.all(crucialButtonBackground),
       trackOutlineColor: WidgetStateProperty.all(buttonContainer),
-      overlayColor: WidgetStateProperty.all(highlightColor),
+      overlayColor: WidgetStateProperty.all(focusColor),
     ),
 
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: textSurfaceColor,
+        backgroundColor: textBackgroundColor,
         foregroundColor: colorScheme.onSurface,
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
@@ -448,29 +452,3 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
   );
 }
-
-/// For open source consumers: this is Empathetech LLC's feedback theme
-/// You have permission to modify this code
-/// You do not have permission to use this theme in your app
-final FeedbackThemeData empathFeedbackDark = FeedbackThemeData(
-  background: Colors.grey,
-  feedbackSheetColor: Colors.black,
-  activeFeedbackModeColor: empathEucalyptus,
-  bottomSheetDescriptionStyle: ezBodyStyle(Colors.white),
-  bottomSheetTextInputStyle: ezBodyStyle(Colors.white),
-  sheetIsDraggable: true,
-  dragHandleColor: Colors.white,
-);
-
-/// For open source consumers: this is Empathetech LLC's feedback theme
-/// You have permission to modify this code
-/// You do not have permission to use this theme in your app
-final FeedbackThemeData empathFeedbackLight = FeedbackThemeData(
-  background: Colors.grey,
-  feedbackSheetColor: Colors.white,
-  activeFeedbackModeColor: empathPurple,
-  bottomSheetDescriptionStyle: ezBodyStyle(Colors.black),
-  bottomSheetTextInputStyle: ezBodyStyle(Colors.black),
-  sheetIsDraggable: true,
-  dragHandleColor: Colors.black,
-);

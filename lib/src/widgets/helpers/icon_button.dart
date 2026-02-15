@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzIcon extends Icon {
-  /// [Icon] wrapper that responds to [EzConfig]s [iconSizeKey]
+  /// [Icon] wrapper that responds to [EzConfig.iconSize]
   /// [ThemeData.iconTheme] does not seem to be consumed properly at time of writing
   /// Jan 2025
   EzIcon(
@@ -24,12 +24,12 @@ class EzIcon extends Icon {
     super.textDirection,
     super.applyTextScaling,
     super.blendMode,
-  }) : super(size: EzConfig.get(iconSizeKey));
+  }) : super(size: EzConfig.iconSize);
 }
 
 class EzIconButton extends StatelessWidget {
   /// [IconButton.iconSize] passthrough
-  /// Defaults to [EzConfig.get]s [iconSizeKey]
+  /// Defaults to [EzConfig.iconSize]
   final double? iconSize;
 
   /// [IconButton.visualDensity] passthrough
@@ -139,55 +139,39 @@ class EzIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double savedIconSized = EzConfig.get(iconSizeKey);
-    late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    late final bool isDark = isDarkTheme(context);
+    final double iSize = iconSize ?? EzConfig.iconSize;
 
-    late final double buttonOpacity =
-        EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
-    late final double outlineOpacity = EzConfig.get(
-        isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey);
+    late final double buttonOpacity = EzConfig.get(
+        EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+    late final double outlineOpacity = EzConfig.get(EzConfig.isDark
+        ? darkButtonOutlineOpacityKey
+        : lightButtonOutlineOpacityKey);
 
-    late final bool calcButton = buttonOpacity < 1.0;
-    late final bool calcOutline = outlineOpacity < 1.0;
-
-    late final bool clearButton = buttonOpacity < 0.01;
-    late final bool clearOutline = outlineOpacity < 0.01;
-
-    late final Color buttonBackground = calcButton
-        ? clearButton
-            ? Colors.transparent
-            : colorScheme.surface.withValues(alpha: buttonOpacity)
-        : colorScheme.surface;
-    late final Color enabledOutline = calcOutline
-        ? clearOutline
-            ? Colors.transparent
-            : colorScheme.primaryContainer.withValues(alpha: outlineOpacity)
-        : colorScheme.primaryContainer;
-    late final Color disabledOutline = calcOutline
-        ? clearOutline
-            ? Colors.transparent
-            : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
-        : colorScheme.outlineVariant;
+    late final Color buttonBackground =
+        EzConfig.colors.surface.withValues(alpha: buttonOpacity);
+    late final Color enabledOutline =
+        EzConfig.colors.primaryContainer.withValues(alpha: outlineOpacity);
+    late final Color disabledOutline =
+        EzConfig.colors.outlineVariant.withValues(alpha: outlineOpacity);
 
     late final ButtonStyle buttonStyle = style ??
         ((enabled && !fauxDisabled)
             ? IconButton.styleFrom(
                 backgroundColor: buttonBackground,
                 side: BorderSide(color: enabledOutline),
-                iconSize: iconSize ?? savedIconSized,
+                iconSize: iSize,
               )
             : IconButton.styleFrom(
                 backgroundColor: buttonBackground,
-                foregroundColor: colorScheme.outline,
-                overlayColor: colorScheme.outline,
+                foregroundColor: EzConfig.colors.outline,
+                overlayColor: EzConfig.colors.outline,
                 shadowColor: Colors.transparent,
                 side: BorderSide(color: disabledOutline),
-                iconSize: iconSize ?? savedIconSized,
+                iconSize: iSize,
               ));
 
     return IconButton(
-      iconSize: iconSize ?? savedIconSized,
+      iconSize: iSize,
       visualDensity: visualDensity,
       padding: padding,
       alignment: alignment,

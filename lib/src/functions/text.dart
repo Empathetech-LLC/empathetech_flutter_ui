@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,8 +7,44 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 // Helpers //
+
+/// 404 [EzConfig.l10n].gError}
+String ez404() => '404 ${EzConfig.l10n.gError}';
+
+/// Custom '==' for two [TextStyle]s
+bool ezFitCheck(TextStyle? a, TextStyle? b) {
+  if (a == null && b == null) return true;
+  if ((a == null) != (b == null)) return false;
+
+  return a!.fontFamily == b!.fontFamily &&
+      a.fontSize == b.fontSize &&
+      a.fontWeight == b.fontWeight &&
+      a.fontStyle == b.fontStyle &&
+      a.decoration == b.decoration &&
+      // Allow one color to be null, standard check when both are present
+      (((a.color == null) != (b.color == null)) || a.color == b.color) &&
+      a.letterSpacing == b.letterSpacing &&
+      a.wordSpacing == b.wordSpacing &&
+      a.height == b.height;
+}
+
+/// Only call in [EzTextSettings] context
+/// Or another [context] where the [EzTextStyleProvider]s are in present
+bool ezTextRebuildCheck(BuildContext context) {
+  return !(ezFitCheck(EzConfig.styles.displayLarge,
+          Provider.of<EzDisplayStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.headlineLarge,
+          Provider.of<EzHeadlineStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.titleLarge,
+          Provider.of<EzTitleStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.bodyLarge,
+          Provider.of<EzBodyStyleProvider>(context, listen: false).value) &&
+      ezFitCheck(EzConfig.styles.labelLarge,
+          Provider.of<EzLabelStyleProvider>(context, listen: false).value));
+}
 
 /// Returns the soon-to-be rendered [Size] of [text] via a [TextPainter]
 Size ezTextSize(
@@ -28,11 +64,11 @@ Size ezTextSize(
 
 /// [SystemChrome.setApplicationSwitcherDescription] wrapper
 /// Sets the title of the tab on web and the title of the window on desktop
-void ezWindowNamer(BuildContext context, String title) =>
+void ezWindowNamer(String title) =>
     SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
-        primaryColor: Theme.of(context).primaryColor.toARGB32(),
+        primaryColor: EzConfig.colors.primary.toARGB32(),
       ),
     );
 
@@ -114,12 +150,12 @@ String ezTitleToClass(String name) => name.replaceAll(RegExp(r'\s'), '');
 // Getters //
 
 /// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? ezSubHeadingStyle(TextTheme textTheme) =>
-    textTheme.headlineLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+TextStyle? ezSubHeadingStyle() => EzConfig.styles.headlineLarge
+    ?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
 
 /// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? ezSubTitleStyle(TextTheme textTheme) =>
-    textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+TextStyle? ezSubTitleStyle() => EzConfig.styles.bodyLarge
+    ?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
 
 // Setters //
 
@@ -127,12 +163,12 @@ TextStyle? ezSubTitleStyle(TextTheme textTheme) =>
 /// https://m3.material.io/styles/typography/type-scale-tokens
 /// Each variant triplet (large, medium, small) are identical
 /// 15 different options would be overload for users... 5 makes much more sense
-TextTheme ezTextTheme(Color? color) {
-  final TextStyle display = ezDisplayStyle(color);
-  final TextStyle headline = ezHeadlineStyle(color);
-  final TextStyle title = ezTitleStyle(color);
-  final TextStyle body = ezBodyStyle(color);
-  final TextStyle label = ezLabelStyle(color);
+TextTheme ezTextTheme(Color? color, {bool? isDark}) {
+  final TextStyle display = ezDisplayStyle(color, isDark: isDark);
+  final TextStyle headline = ezHeadlineStyle(color, isDark: isDark);
+  final TextStyle title = ezTitleStyle(color, isDark: isDark);
+  final TextStyle body = ezBodyStyle(color, isDark: isDark);
+  final TextStyle label = ezLabelStyle(color, isDark: isDark);
 
   return TextTheme(
     displayLarge: display,
@@ -153,257 +189,472 @@ TextTheme ezTextTheme(Color? color) {
   );
 }
 
-/// Builds [TextTheme.displayLarge] w/ values from [EzConfig.prefs]
-TextStyle ezDisplayStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.get(displayFontSizeKey),
-    fontWeight: EzConfig.get(displayBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle:
-        EzConfig.get(displayItalicizedKey) == true ? FontStyle.italic : null,
-    decoration: EzConfig.get(displayUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.get(displayFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.get(displayLetterSpacingKey),
-    wordSpacing: EzConfig.get(displayWordSpacingKey),
-  );
+/// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.get(darkDisplayFontSizeKey),
+          fontWeight: EzConfig.get(darkDisplayBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(darkDisplayItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(darkDisplayUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(darkDisplayFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(darkDisplayLetterSpacingKey),
+          wordSpacing: EzConfig.get(darkDisplayWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.get(lightDisplayFontSizeKey),
+          fontWeight: EzConfig.get(lightDisplayBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(lightDisplayItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(lightDisplayUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(lightDisplayFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(lightDisplayLetterSpacingKey),
+          wordSpacing: EzConfig.get(lightDisplayWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(displayFontFamilyKey),
+    gFont: EzConfig.get(
+        useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
   );
 }
 
-/// Builds [TextTheme.displayLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultDisplayStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.getDefault(displayFontSizeKey),
-    fontWeight: EzConfig.getDefault(displayBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(displayItalicizedKey) == true
-        ? FontStyle.italic
-        : null,
-    decoration: EzConfig.getDefault(displayUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.getDefault(displayFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.getDefault(displayLetterSpacingKey),
-    wordSpacing: EzConfig.getDefault(displayWordSpacingKey),
-  );
+/// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.getDefault(darkDisplayFontSizeKey),
+          fontWeight: EzConfig.getDefault(darkDisplayBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(darkDisplayItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(darkDisplayUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(darkDisplayFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(darkDisplayLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(darkDisplayWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.getDefault(lightDisplayFontSizeKey),
+          fontWeight: EzConfig.getDefault(lightDisplayBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(lightDisplayItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(lightDisplayUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(lightDisplayFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(lightDisplayLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(lightDisplayWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(displayFontFamilyKey),
+    gFont: EzConfig.getDefault(
+        useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.prefs]
-TextStyle ezHeadlineStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.get(headlineFontSizeKey),
-    fontWeight: EzConfig.get(headlineBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle:
-        EzConfig.get(headlineItalicizedKey) == true ? FontStyle.italic : null,
-    decoration: EzConfig.get(headlineUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.get(headlineFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.get(headlineLetterSpacingKey),
-    wordSpacing: EzConfig.get(headlineWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.get(darkHeadlineFontSizeKey),
+          fontWeight: EzConfig.get(darkHeadlineBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(darkHeadlineItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(darkHeadlineUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(darkHeadlineFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(darkHeadlineLetterSpacingKey),
+          wordSpacing: EzConfig.get(darkHeadlineWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.get(lightHeadlineFontSizeKey),
+          fontWeight: EzConfig.get(lightHeadlineBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(lightHeadlineItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(lightHeadlineUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(lightHeadlineFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(lightHeadlineLetterSpacingKey),
+          wordSpacing: EzConfig.get(lightHeadlineWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(headlineFontFamilyKey),
+    gFont: EzConfig.get(
+        useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultHeadlineStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.getDefault(headlineFontSizeKey),
-    fontWeight: EzConfig.getDefault(headlineBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(headlineItalicizedKey) == true
-        ? FontStyle.italic
-        : null,
-    decoration: EzConfig.getDefault(headlineUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.getDefault(headlineFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.getDefault(headlineLetterSpacingKey),
-    wordSpacing: EzConfig.getDefault(headlineWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.getDefault(darkHeadlineFontSizeKey),
+          fontWeight: EzConfig.getDefault(darkHeadlineBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(darkHeadlineItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(darkHeadlineUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(darkHeadlineFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(darkHeadlineLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(darkHeadlineWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.getDefault(lightHeadlineFontSizeKey),
+          fontWeight: EzConfig.getDefault(lightHeadlineBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(lightHeadlineItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(lightHeadlineUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(lightHeadlineFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(lightHeadlineLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(lightHeadlineWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(headlineFontFamilyKey),
+    gFont: EzConfig.getDefault(
+        useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.prefs]
-TextStyle ezTitleStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.get(titleFontSizeKey),
-    fontWeight: EzConfig.get(titleBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle:
-        EzConfig.get(titleItalicizedKey) == true ? FontStyle.italic : null,
-    decoration: EzConfig.get(titleUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.get(titleFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.get(titleLetterSpacingKey),
-    wordSpacing: EzConfig.get(titleWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.get(darkTitleFontSizeKey),
+          fontWeight: EzConfig.get(darkTitleBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(darkTitleItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(darkTitleUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(darkTitleFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(darkTitleLetterSpacingKey),
+          wordSpacing: EzConfig.get(darkTitleWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.get(lightTitleFontSizeKey),
+          fontWeight: EzConfig.get(lightTitleBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(lightTitleItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(lightTitleUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(lightTitleFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(lightTitleLetterSpacingKey),
+          wordSpacing: EzConfig.get(lightTitleWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(titleFontFamilyKey),
+    gFont: EzConfig.get(
+        useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultTitleStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.getDefault(titleFontSizeKey),
-    fontWeight: EzConfig.getDefault(titleBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(titleItalicizedKey) == true
-        ? FontStyle.italic
-        : null,
-    decoration: EzConfig.getDefault(titleUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.getDefault(titleFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.getDefault(titleLetterSpacingKey),
-    wordSpacing: EzConfig.getDefault(titleWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.getDefault(darkTitleFontSizeKey),
+          fontWeight: EzConfig.getDefault(darkTitleBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(darkTitleItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(darkTitleUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(darkTitleFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(darkTitleLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(darkTitleWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.getDefault(lightTitleFontSizeKey),
+          fontWeight: EzConfig.getDefault(lightTitleBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(lightTitleItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(lightTitleUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(lightTitleFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(lightTitleLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(lightTitleWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(titleFontFamilyKey),
+    gFont: EzConfig.getDefault(
+        useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.prefs]
-TextStyle ezBodyStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.get(bodyFontSizeKey),
-    fontWeight: EzConfig.get(bodyBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle:
-        EzConfig.get(bodyItalicizedKey) == true ? FontStyle.italic : null,
-    decoration: EzConfig.get(bodyUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.get(bodyFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.get(bodyLetterSpacingKey),
-    wordSpacing: EzConfig.get(bodyWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.get(darkBodyFontSizeKey),
+          fontWeight: EzConfig.get(darkBodyBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(darkBodyItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(darkBodyUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(darkBodyFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(darkBodyLetterSpacingKey),
+          wordSpacing: EzConfig.get(darkBodyWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.get(lightBodyFontSizeKey),
+          fontWeight: EzConfig.get(lightBodyBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(lightBodyItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(lightBodyUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(lightBodyFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(lightBodyLetterSpacingKey),
+          wordSpacing: EzConfig.get(lightBodyWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(bodyFontFamilyKey),
+    gFont:
+        EzConfig.get(useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultBodyStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.getDefault(bodyFontSizeKey),
-    fontWeight: EzConfig.getDefault(bodyBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(bodyItalicizedKey) == true
-        ? FontStyle.italic
-        : null,
-    decoration: EzConfig.getDefault(bodyUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.getDefault(bodyFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.getDefault(bodyLetterSpacingKey),
-    wordSpacing: EzConfig.getDefault(bodyWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.getDefault(darkBodyFontSizeKey),
+          fontWeight: EzConfig.getDefault(darkBodyBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(darkBodyItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(darkBodyUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(darkBodyFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(darkBodyLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(darkBodyWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.getDefault(lightBodyFontSizeKey),
+          fontWeight: EzConfig.getDefault(lightBodyBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(lightBodyItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(lightBodyUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(lightBodyFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(lightBodyLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(lightBodyWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(bodyFontFamilyKey),
+    gFont: EzConfig.getDefault(
+        useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.prefs]
-TextStyle ezLabelStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.get(labelFontSizeKey),
-    fontWeight: EzConfig.get(labelBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle:
-        EzConfig.get(labelItalicizedKey) == true ? FontStyle.italic : null,
-    decoration: EzConfig.get(labelUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.get(labelFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.get(labelLetterSpacingKey),
-    wordSpacing: EzConfig.get(labelWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.get(darkLabelFontSizeKey),
+          fontWeight: EzConfig.get(darkLabelBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(darkLabelItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(darkLabelUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(darkLabelFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(darkLabelLetterSpacingKey),
+          wordSpacing: EzConfig.get(darkLabelWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.get(lightLabelFontSizeKey),
+          fontWeight: EzConfig.get(lightLabelBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.get(lightLabelItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.get(lightLabelUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.get(lightLabelFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.get(lightLabelLetterSpacingKey),
+          wordSpacing: EzConfig.get(lightLabelWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(labelFontFamilyKey),
+    gFont: EzConfig.get(
+        useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.defaults]
-TextStyle ezDefaultLabelStyle(Color? color) {
-  final TextStyle starter = TextStyle(
-    fontSize: EzConfig.getDefault(labelFontSizeKey),
-    fontWeight: EzConfig.getDefault(labelBoldedKey) == true
-        ? FontWeight.bold
-        : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(labelItalicizedKey) == true
-        ? FontStyle.italic
-        : null,
-    decoration: EzConfig.getDefault(labelUnderlinedKey) == true
-        ? TextDecoration.underline
-        : null,
-    color: color,
-    height: EzConfig.getDefault(labelFontHeightKey),
-    leadingDistribution: TextLeadingDistribution.even,
-    letterSpacing: EzConfig.getDefault(labelLetterSpacingKey),
-    wordSpacing: EzConfig.getDefault(labelWordSpacingKey),
-  );
+/// Provide [isDark] if you are calling this before [EzConfig.initProvider]
+TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
+  final bool useDark = isDark ?? EzConfig.isDark;
+  final TextStyle starter = useDark
+      ? TextStyle(
+          fontSize: EzConfig.getDefault(darkLabelFontSizeKey),
+          fontWeight: EzConfig.getDefault(darkLabelBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(darkLabelItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(darkLabelUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(darkLabelFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(darkLabelLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(darkLabelWordSpacingKey),
+        )
+      : TextStyle(
+          fontSize: EzConfig.getDefault(lightLabelFontSizeKey),
+          fontWeight: EzConfig.getDefault(lightLabelBoldedKey) == true
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontStyle: EzConfig.getDefault(lightLabelItalicizedKey) == true
+              ? FontStyle.italic
+              : FontStyle.normal,
+          decoration: EzConfig.getDefault(lightLabelUnderlinedKey) == true
+              ? TextDecoration.underline
+              : TextDecoration.none,
+          color: color,
+          height: EzConfig.getDefault(lightLabelFontHeightKey),
+          leadingDistribution: TextLeadingDistribution.even,
+          letterSpacing: EzConfig.getDefault(lightLabelLetterSpacingKey),
+          wordSpacing: EzConfig.getDefault(lightLabelWordSpacingKey),
+        );
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(labelFontFamilyKey),
+    gFont: EzConfig.getDefault(
+        useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
   );
 }

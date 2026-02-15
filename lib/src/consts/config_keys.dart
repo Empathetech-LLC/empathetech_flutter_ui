@@ -1,7 +1,9 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+
+import '../../empathetech_flutter_ui.dart';
 
 //* Global (home) settings' keys *//
 
@@ -12,7 +14,7 @@ const String isDarkThemeKey = 'isDarkTheme';
 const String appLocaleKey = 'appLocale';
 
 ///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
-const Map<String, Type> globalKeys = <String, Type>{
+const Map<String, Type> allGlobalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   appLocaleKey: List<String>,
@@ -422,267 +424,357 @@ const String csSurfaceTint = 'Surface tint';
 
 //* Design settings' keys *//
 
-// Global settings //
-
-const String animationDurationKey = 'animationDuration';
-
-/// [animationDurationKey]
-const Map<String, Type> globalDesignKeys = <String, Type>{
-  animationDurationKey: int,
-};
-
 // Dark theme //
 
+const String darkAnimationDurationKey = 'darkAnimationDuration';
+const String darkTransitionTypeKey = 'darkTransitionType';
+const String darkTransitionFadeKey = 'darkTransitionFade';
 const String darkBackgroundImageKey = 'darkBackgroundImage';
-
-/// [darkBackgroundImageKey] && w/ [boxFitSuffix]
-const Map<String, Type> darkImageKeys = <String, Type>{
-  darkBackgroundImageKey: String,
-  '$darkBackgroundImageKey$boxFitSuffix': String,
-};
-
 const String darkButtonOpacityKey = 'darkButtonOpacity';
 const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
 
-/// [darkImageKeys]
-/// && [darkButtonOpacityKey], [darkButtonOutlineOpacityKey]
+/// Animation, background, && button opacity keys
 const Map<String, Type> darkDesignKeys = <String, Type>{
-  ...darkImageKeys,
+  darkAnimationDurationKey: int,
+  darkTransitionTypeKey: String,
+  darkTransitionFadeKey: bool,
+  darkBackgroundImageKey: String,
+  '$darkBackgroundImageKey$boxFitSuffix': String,
   darkButtonOpacityKey: double,
   darkButtonOutlineOpacityKey: double,
 };
 
 // Light theme //
 
+const String lightAnimationDurationKey = 'lightAnimationDuration';
+const String lightTransitionTypeKey = 'lightTransitionType';
+const String lightTransitionFadeKey = 'lightTransitionFade';
 const String lightBackgroundImageKey = 'lightBackgroundImage';
-
-/// [lightBackgroundImageKey] && w/ [boxFitSuffix]
-const Map<String, Type> lightImageKeys = <String, Type>{
-  lightBackgroundImageKey: String,
-  '$lightBackgroundImageKey$boxFitSuffix': String,
-};
-
 const String lightButtonOpacityKey = 'lightButtonOpacity';
 const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
 
-/// [lightImageKeys]
-/// && [lightButtonOpacityKey], [lightButtonOutlineOpacityKey]
+/// Animation, background, && button opacity keys
 const Map<String, Type> lightDesignKeys = <String, Type>{
-  ...lightImageKeys,
+  lightAnimationDurationKey: int,
+  lightTransitionTypeKey: String,
+  lightTransitionFadeKey: bool,
+  lightBackgroundImageKey: String,
+  '$lightBackgroundImageKey$boxFitSuffix': String,
   lightButtonOpacityKey: double,
   lightButtonOutlineOpacityKey: double,
 };
 
 // Shared //
 
-/// [darkImageKeys] && [lightImageKeys]
-const Map<String, Type> allImageKeys = <String, Type>{
-  ...darkImageKeys,
-  ...lightImageKeys,
-};
-
-/// [globalDesignKeys], [darkDesignKeys], && [lightDesignKeys]
+/// [darkDesignKeys], && [lightDesignKeys]
 const Map<String, Type> allDesignKeys = <String, Type>{
-  ...globalDesignKeys,
   ...darkDesignKeys,
   ...lightDesignKeys,
 };
 
-//* Design settings' values *//
-
-// Image values //
-
-/// Allows for app images whose default is an asset to be "null"
-const String noImageValue = 'noImage';
-
-/// Fit
-const String boxFitSuffix = 'Fit';
-
-/// contain
-const String contain = 'contain';
-
-/// cover
-const String cover = 'cover';
-
-/// fill
-const String fill = 'fill';
-
-/// fitWidth
-const String fitWidth = 'fitWidth';
-
-/// fitHeight
-const String fitHeight = 'fitHeight';
-
-/// none
-const String none = 'none';
-
-/// scaleDown
-const String scaleDown = 'scaleDown';
-
 //* Layout settings' keys *//
 
-const String marginKey = 'margin';
-const String paddingKey = 'padding';
-const String spacingKey = 'spacing';
+// Dark theme //
 
-const String hideScrollKey = 'hideScroll';
+const String darkMarginKey = 'darkMargin';
+const String darkPaddingKey = 'darkPadding';
+const String darkSpacingKey = 'darkSpacing';
 
-/// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
+const String darkHideScrollKey = 'darkHideScroll';
+
+/// [margin, padding, spacing, hideScroll]
+const Map<String, Type> darkLayoutKeys = <String, Type>{
+  darkMarginKey: double,
+  darkPaddingKey: double,
+  darkSpacingKey: double,
+  darkHideScrollKey: bool,
+};
+
+// Light theme //
+
+const String lightMarginKey = 'lightMargin';
+const String lightPaddingKey = 'lightPadding';
+const String lightSpacingKey = 'lightSpacing';
+
+const String lightHideScrollKey = 'lightHideScroll';
+
+/// [margin, padding, spacing, hideScroll]
+const Map<String, Type> lightLayoutKeys = <String, Type>{
+  lightMarginKey: double,
+  lightPaddingKey: double,
+  lightSpacingKey: double,
+  lightHideScrollKey: bool,
+};
+
+// Shared //
+
+/// [dark, light]
+///                X
+/// [margin, padding, spacing, hideScroll]
 const Map<String, Type> allLayoutKeys = <String, Type>{
-  marginKey: double,
-  paddingKey: double,
-  spacingKey: double,
-  hideScrollKey: bool,
+  ...darkLayoutKeys,
+  ...lightLayoutKeys,
 };
 
 //* Text settings' keys *//
 
+// Dark theme //
+
 // Display
-const String displayFontFamilyKey = 'displayFontFamily';
-const String displayFontSizeKey = 'displayFontSize';
-const String displayBoldedKey = 'displayBolded';
-const String displayItalicizedKey = 'displayItalicized';
-const String displayUnderlinedKey = 'displayUnderlined';
-const String displayLetterSpacingKey = 'displayLetterSpacing';
-const String displayWordSpacingKey = 'displayWordSpacing';
-const String displayFontHeightKey = 'displayFontHeight';
+const String darkDisplayFontFamilyKey = 'darkDisplayFontFamily';
+const String darkDisplayFontSizeKey = 'darkDisplayFontSize';
+const String darkDisplayBoldedKey = 'darkDisplayBolded';
+const String darkDisplayItalicizedKey = 'darkDisplayItalicized';
+const String darkDisplayUnderlinedKey = 'darkDisplayUnderlined';
+const String darkDisplayLetterSpacingKey = 'darkDisplayLetterSpacing';
+const String darkDisplayWordSpacingKey = 'darkDisplayWordSpacing';
+const String darkDisplayFontHeightKey = 'darkDisplayFontHeight';
 
 // Headline
-const String headlineFontFamilyKey = 'headlineFontFamily';
-const String headlineFontSizeKey = 'headlineFontSize';
-const String headlineBoldedKey = 'headlineBolded';
-const String headlineItalicizedKey = 'headlineItalicized';
-const String headlineUnderlinedKey = 'headlineUnderlined';
-const String headlineLetterSpacingKey = 'headlineLetterSpacing';
-const String headlineWordSpacingKey = 'headlineWordSpacing';
-const String headlineFontHeightKey = 'headlineFontHeight';
+const String darkHeadlineFontFamilyKey = 'darkHeadlineFontFamily';
+const String darkHeadlineFontSizeKey = 'darkHeadlineFontSize';
+const String darkHeadlineBoldedKey = 'darkHeadlineBolded';
+const String darkHeadlineItalicizedKey = 'darkHeadlineItalicized';
+const String darkHeadlineUnderlinedKey = 'darkHeadlineUnderlined';
+const String darkHeadlineLetterSpacingKey = 'darkHeadlineLetterSpacing';
+const String darkHeadlineWordSpacingKey = 'darkHeadlineWordSpacing';
+const String darkHeadlineFontHeightKey = 'darkHeadlineFontHeight';
 
 // Title
-const String titleFontFamilyKey = 'titleFontFamily';
-const String titleFontSizeKey = 'titleFontSize';
-const String titleBoldedKey = 'titleBolded';
-const String titleItalicizedKey = 'titleItalicized';
-const String titleUnderlinedKey = 'titleUnderlined';
-const String titleLetterSpacingKey = 'titleLetterSpacing';
-const String titleWordSpacingKey = 'titleWordSpacing';
-const String titleFontHeightKey = 'titleFontHeight';
+const String darkTitleFontFamilyKey = 'darkTitleFontFamily';
+const String darkTitleFontSizeKey = 'darkTitleFontSize';
+const String darkTitleBoldedKey = 'darkTitleBolded';
+const String darkTitleItalicizedKey = 'darkTitleItalicized';
+const String darkTitleUnderlinedKey = 'darkTitleUnderlined';
+const String darkTitleLetterSpacingKey = 'darkTitleLetterSpacing';
+const String darkTitleWordSpacingKey = 'darkTitleWordSpacing';
+const String darkTitleFontHeightKey = 'darkTitleFontHeight';
 
 // Body
-const String bodyFontFamilyKey = 'bodyFontFamily';
-const String bodyFontSizeKey = 'bodyFontSize';
-const String bodyBoldedKey = 'bodyBolded';
-const String bodyItalicizedKey = 'bodyItalicized';
-const String bodyUnderlinedKey = 'bodyUnderlined';
-const String bodyLetterSpacingKey = 'bodyLetterSpacing';
-const String bodyWordSpacingKey = 'bodyWordSpacing';
-const String bodyFontHeightKey = 'bodyFontHeight';
+const String darkBodyFontFamilyKey = 'darkBodyFontFamily';
+const String darkBodyFontSizeKey = 'darkBodyFontSize';
+const String darkBodyBoldedKey = 'darkBodyBolded';
+const String darkBodyItalicizedKey = 'darkBodyItalicized';
+const String darkBodyUnderlinedKey = 'darkBodyUnderlined';
+const String darkBodyLetterSpacingKey = 'darkBodyLetterSpacing';
+const String darkBodyWordSpacingKey = 'darkBodyWordSpacing';
+const String darkBodyFontHeightKey = 'darkBodyFontHeight';
 
 // Label
-const String labelFontFamilyKey = 'labelFontFamily';
-const String labelFontSizeKey = 'labelFontSize';
-const String labelBoldedKey = 'labelBolded';
-const String labelItalicizedKey = 'labelItalicized';
-const String labelUnderlinedKey = 'labelUnderlined';
-const String labelLetterSpacingKey = 'labelLetterSpacing';
-const String labelWordSpacingKey = 'labelWordSpacing';
-const String labelFontHeightKey = 'labelFontHeight';
+const String darkLabelFontFamilyKey = 'darkLabelFontFamily';
+const String darkLabelFontSizeKey = 'darkLabelFontSize';
+const String darkLabelBoldedKey = 'darkLabelBolded';
+const String darkLabelItalicizedKey = 'darkLabelItalicized';
+const String darkLabelUnderlinedKey = 'darkLabelUnderlined';
+const String darkLabelLetterSpacingKey = 'darkLabelLetterSpacing';
+const String darkLabelWordSpacingKey = 'darkLabelWordSpacing';
+const String darkLabelFontHeightKey = 'darkLabelFontHeight';
 
-// Background opacity
+// etc
 const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
-const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
-
-// Icons
-const String iconSizeKey = 'iconSize';
-
-// Selector
-const String advancedTextKey = 'advancedText';
+const String darkIconSizeKey = 'darkIconSize';
 
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
 /// &&
-/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
-const Map<String, Type> allTextKeys = <String, Type>{
+/// [backgroundOpacity, iconSize]
+const Map<String, Type> darkTextKeys = <String, Type>{
   // Display
-  displayFontFamilyKey: String,
-  displayFontSizeKey: double,
-  displayBoldedKey: bool,
-  displayItalicizedKey: bool,
-  displayUnderlinedKey: bool,
-  displayLetterSpacingKey: double,
-  displayWordSpacingKey: double,
-  displayFontHeightKey: double,
+  darkDisplayFontFamilyKey: String,
+  darkDisplayFontSizeKey: double,
+  darkDisplayBoldedKey: bool,
+  darkDisplayItalicizedKey: bool,
+  darkDisplayUnderlinedKey: bool,
+  darkDisplayLetterSpacingKey: double,
+  darkDisplayWordSpacingKey: double,
+  darkDisplayFontHeightKey: double,
 
   // Headline
-  headlineFontFamilyKey: String,
-  headlineFontSizeKey: double,
-  headlineBoldedKey: bool,
-  headlineItalicizedKey: bool,
-  headlineUnderlinedKey: bool,
-  headlineLetterSpacingKey: double,
-  headlineWordSpacingKey: double,
-  headlineFontHeightKey: double,
+  darkHeadlineFontFamilyKey: String,
+  darkHeadlineFontSizeKey: double,
+  darkHeadlineBoldedKey: bool,
+  darkHeadlineItalicizedKey: bool,
+  darkHeadlineUnderlinedKey: bool,
+  darkHeadlineLetterSpacingKey: double,
+  darkHeadlineWordSpacingKey: double,
+  darkHeadlineFontHeightKey: double,
 
   // Title
-  titleFontFamilyKey: String,
-  titleFontSizeKey: double,
-  titleBoldedKey: bool,
-  titleItalicizedKey: bool,
-  titleUnderlinedKey: bool,
-  titleLetterSpacingKey: double,
-  titleWordSpacingKey: double,
-  titleFontHeightKey: double,
+  darkTitleFontFamilyKey: String,
+  darkTitleFontSizeKey: double,
+  darkTitleBoldedKey: bool,
+  darkTitleItalicizedKey: bool,
+  darkTitleUnderlinedKey: bool,
+  darkTitleLetterSpacingKey: double,
+  darkTitleWordSpacingKey: double,
+  darkTitleFontHeightKey: double,
 
   // Body
-  bodyFontFamilyKey: String,
-  bodyFontSizeKey: double,
-  bodyBoldedKey: bool,
-  bodyItalicizedKey: bool,
-  bodyUnderlinedKey: bool,
-  bodyLetterSpacingKey: double,
-  bodyWordSpacingKey: double,
-  bodyFontHeightKey: double,
+  darkBodyFontFamilyKey: String,
+  darkBodyFontSizeKey: double,
+  darkBodyBoldedKey: bool,
+  darkBodyItalicizedKey: bool,
+  darkBodyUnderlinedKey: bool,
+  darkBodyLetterSpacingKey: double,
+  darkBodyWordSpacingKey: double,
+  darkBodyFontHeightKey: double,
 
   // Label
-  labelFontFamilyKey: String,
-  labelFontSizeKey: double,
-  labelBoldedKey: bool,
-  labelItalicizedKey: bool,
-  labelUnderlinedKey: bool,
-  labelLetterSpacingKey: double,
-  labelWordSpacingKey: double,
-  labelFontHeightKey: double,
+  darkLabelFontFamilyKey: String,
+  darkLabelFontSizeKey: double,
+  darkLabelBoldedKey: bool,
+  darkLabelItalicizedKey: bool,
+  darkLabelUnderlinedKey: bool,
+  darkLabelLetterSpacingKey: double,
+  darkLabelWordSpacingKey: double,
+  darkLabelFontHeightKey: double,
 
-  // Background opacity
+  // etc
   darkTextBackgroundOpacityKey: double,
-  lightTextBackgroundOpacityKey: double,
-
-  // Icons
-  iconSizeKey: double,
-
-  // Selector
-  advancedTextKey: bool,
+  darkIconSizeKey: double,
 };
 
-//* Text settings' values *//
+// Light theme //
 
-/// bold
-const String bold = 'bold';
+// Display
+const String lightDisplayFontFamilyKey = 'lightDisplayFontFamily';
+const String lightDisplayFontSizeKey = 'lightDisplayFontSize';
+const String lightDisplayBoldedKey = 'lightDisplayBolded';
+const String lightDisplayItalicizedKey = 'lightDisplayItalicized';
+const String lightDisplayUnderlinedKey = 'lightDisplayUnderlined';
+const String lightDisplayLetterSpacingKey = 'lightDisplayLetterSpacing';
+const String lightDisplayWordSpacingKey = 'lightDisplayWordSpacing';
+const String lightDisplayFontHeightKey = 'lightDisplayFontHeight';
 
-/// italic
-const String italic = 'italic';
+// Headline
+const String lightHeadlineFontFamilyKey = 'lightHeadlineFontFamily';
+const String lightHeadlineFontSizeKey = 'lightHeadlineFontSize';
+const String lightHeadlineBoldedKey = 'lightHeadlineBolded';
+const String lightHeadlineItalicizedKey = 'lightHeadlineItalicized';
+const String lightHeadlineUnderlinedKey = 'lightHeadlineUnderlined';
+const String lightHeadlineLetterSpacingKey = 'lightHeadlineLetterSpacing';
+const String lightHeadlineWordSpacingKey = 'lightHeadlineWordSpacing';
+const String lightHeadlineFontHeightKey = 'lightHeadlineFontHeight';
 
-/// underlined
-const String underlined = 'underlined';
+// Title
+const String lightTitleFontFamilyKey = 'lightTitleFontFamily';
+const String lightTitleFontSizeKey = 'lightTitleFontSize';
+const String lightTitleBoldedKey = 'lightTitleBolded';
+const String lightTitleItalicizedKey = 'lightTitleItalicized';
+const String lightTitleUnderlinedKey = 'lightTitleUnderlined';
+const String lightTitleLetterSpacingKey = 'lightTitleLetterSpacing';
+const String lightTitleWordSpacingKey = 'lightTitleWordSpacing';
+const String lightTitleFontHeightKey = 'lightTitleFontHeight';
 
-/// -55.55
-const String sampleString = '55.55';
+// Body
+const String lightBodyFontFamilyKey = 'lightBodyFontFamily';
+const String lightBodyFontSizeKey = 'lightBodyFontSize';
+const String lightBodyBoldedKey = 'lightBodyBolded';
+const String lightBodyItalicizedKey = 'lightBodyItalicized';
+const String lightBodyUnderlinedKey = 'lightBodyUnderlined';
+const String lightBodyLetterSpacingKey = 'lightBodyLetterSpacing';
+const String lightBodyWordSpacingKey = 'lightBodyWordSpacing';
+const String lightBodyFontHeightKey = 'lightBodyFontHeight';
+
+// Label
+const String lightLabelFontFamilyKey = 'lightLabelFontFamily';
+const String lightLabelFontSizeKey = 'lightLabelFontSize';
+const String lightLabelBoldedKey = 'lightLabelBolded';
+const String lightLabelItalicizedKey = 'lightLabelItalicized';
+const String lightLabelUnderlinedKey = 'lightLabelUnderlined';
+const String lightLabelLetterSpacingKey = 'lightLabelLetterSpacing';
+const String lightLabelWordSpacingKey = 'lightLabelWordSpacing';
+const String lightLabelFontHeightKey = 'lightLabelFontHeight';
+
+// etc
+const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
+const String lightIconSizeKey = 'lightIconSize';
+
+/// [display, headline, title, body, label]
+///                 X
+/// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
+/// &&
+/// [backgroundOpacity, iconSize]
+const Map<String, Type> lightTextKeys = <String, Type>{
+  // Display
+  lightDisplayFontFamilyKey: String,
+  lightDisplayFontSizeKey: double,
+  lightDisplayBoldedKey: bool,
+  lightDisplayItalicizedKey: bool,
+  lightDisplayUnderlinedKey: bool,
+  lightDisplayLetterSpacingKey: double,
+  lightDisplayWordSpacingKey: double,
+  lightDisplayFontHeightKey: double,
+
+  // Headline
+  lightHeadlineFontFamilyKey: String,
+  lightHeadlineFontSizeKey: double,
+  lightHeadlineBoldedKey: bool,
+  lightHeadlineItalicizedKey: bool,
+  lightHeadlineUnderlinedKey: bool,
+  lightHeadlineLetterSpacingKey: double,
+  lightHeadlineWordSpacingKey: double,
+  lightHeadlineFontHeightKey: double,
+
+  // Title
+  lightTitleFontFamilyKey: String,
+  lightTitleFontSizeKey: double,
+  lightTitleBoldedKey: bool,
+  lightTitleItalicizedKey: bool,
+  lightTitleUnderlinedKey: bool,
+  lightTitleLetterSpacingKey: double,
+  lightTitleWordSpacingKey: double,
+  lightTitleFontHeightKey: double,
+
+  // Body
+  lightBodyFontFamilyKey: String,
+  lightBodyFontSizeKey: double,
+  lightBodyBoldedKey: bool,
+  lightBodyItalicizedKey: bool,
+  lightBodyUnderlinedKey: bool,
+  lightBodyLetterSpacingKey: double,
+  lightBodyWordSpacingKey: double,
+  lightBodyFontHeightKey: double,
+
+  // Label
+  lightLabelFontFamilyKey: String,
+  lightLabelFontSizeKey: double,
+  lightLabelBoldedKey: bool,
+  lightLabelItalicizedKey: bool,
+  lightLabelUnderlinedKey: bool,
+  lightLabelLetterSpacingKey: double,
+  lightLabelWordSpacingKey: double,
+  lightLabelFontHeightKey: double,
+
+  // etc
+  lightTextBackgroundOpacityKey: double,
+  lightIconSizeKey: double,
+};
+
+// Shared //
+
+const String advancedTextKey = 'advancedText';
+
+/// [light, dark]
+///                 X
+/// [[display, headline, title, body, label]
+///                 X
+/// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
+/// &&
+/// [backgroundOpacity, iconSize]]
+/// ...&& the selector
+const Map<String, Type> allTextKeys = <String, Type>{
+  advancedTextKey: bool,
+  ...darkTextKeys,
+  ...lightTextKeys,
+};
 
 //* Global trackers *//
 
-/// [globalKeys], [allTextKeys], [allLayoutKeys], [allColorKeys], [allImageKeys]
-const Map<String, Type> allKeys = <String, Type>{
-  ...globalKeys,
+/// [allGlobalKeys], [allTextKeys], [allLayoutKeys], [allColorKeys], [allImageKeys]
+const Map<String, Type> allEZConfigKeys = <String, Type>{
+  ...allGlobalKeys,
   ...allColorKeys,
   ...allDesignKeys,
   ...allLayoutKeys,

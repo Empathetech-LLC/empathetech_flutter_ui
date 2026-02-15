@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -136,28 +136,19 @@ class EzDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double? savedIconSize = EzConfig.get(iconSizeKey);
-    late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    late final double buttonOpacity = EzConfig.get(
-      isDarkTheme(context) ? darkButtonOpacityKey : lightButtonOpacityKey,
-    );
-
-    late final Color buttonBackground = buttonOpacity < 1.0
-        ? (buttonOpacity < 0.01)
-            ? Colors.transparent
-            : colorScheme.surface.withValues(alpha: buttonOpacity)
-        : colorScheme.surface;
+    final double iSize = iconSize ?? EzConfig.iconSize;
 
     return IconButtonTheme(
       data: IconButtonThemeData(
         style: IconButton.styleFrom(
-          backgroundColor: buttonBackground,
-          iconSize: iconSize ?? savedIconSize,
+          backgroundColor: EzConfig.colors.surface.withValues(
+              alpha: EzConfig.get(EzConfig.isDark
+                  ? darkButtonOpacityKey
+                  : lightButtonOpacityKey)),
+          iconSize: iSize,
         ),
       ),
       child: DropdownMenu<T>(
-        key: key,
         enabled: enabled,
         width: width ??
             (widthEntries == null
@@ -165,14 +156,13 @@ class EzDropdownMenu<T> extends StatelessWidget {
                 : ezDropdownWidth(context: context, entries: widthEntries!)),
         menuHeight: menuHeight,
         leadingIcon: leadingIcon,
-        trailingIcon: trailingIcon ??
-            Icon(Icons.arrow_drop_down, size: iconSize ?? savedIconSize),
+        trailingIcon: trailingIcon ?? Icon(Icons.arrow_drop_down, size: iSize),
         label: label,
         hintText: hintText,
         helperText: helperText,
         errorText: errorText,
-        selectedTrailingIcon: selectedTrailingIcon ??
-            Icon(Icons.arrow_drop_up, size: iconSize ?? savedIconSize),
+        selectedTrailingIcon:
+            selectedTrailingIcon ?? Icon(Icons.arrow_drop_up, size: iSize),
         enableFilter: enableFilter,
         enableSearch: enableSearch,
         keyboardType: keyboardType,

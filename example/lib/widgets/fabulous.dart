@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,119 +8,95 @@ import 'package:efui_bios/efui_bios.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+/// Track version updates
+const Widget updater = EzUpdaterFAB(
+  appVersion: '3.0.0',
+  versionSource:
+      'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
+  gPlay:
+      'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+  appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
+  github: 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
+);
 
 class ResetFAB extends StatelessWidget {
   /// Function to execute with 'Builder values' and 'Both' options
   final void Function() clearForms;
 
+  /// [EzConfig.reset] passthrough
+  final void Function() onComplete;
+
   /// Opens an [EzAlertDialog] for resetting the form fields, app settings, both, or none
-  const ResetFAB({required this.clearForms, super.key});
+  const ResetFAB({
+    super.key,
+    required this.clearForms,
+    required this.onComplete,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final EFUILang el10n = ezL10n(context);
-    final Lang l10n = Lang.of(context)!;
+  Widget build(BuildContext context) => Tooltip(
+        message: EzConfig.l10n.gReset,
+        excludeFromSemantics: true,
+        child: Semantics(
+          label: EzConfig.l10n.gReset,
+          button: true,
+          hint: l10n.csResetHint,
+          child: ExcludeSemantics(
+            child: FloatingActionButton(
+              onPressed: () => showDialog(
+                context: context,
+                builder: (BuildContext dContext) => EzAlertDialog(
+                  title: Text(
+                    '${EzConfig.l10n.gReset}...',
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: <Widget>[
+                    // Builder/forms
+                    EzMaterialAction(
+                      onPressed: () {
+                        clearForms();
+                        Navigator.of(dContext).pop();
+                      },
+                      text: l10n.csResetBuilder,
+                      isDefaultAction: true,
+                    ),
 
-    return Tooltip(
-      message: el10n.gReset,
-      excludeFromSemantics: true,
-      child: Semantics(
-        label: el10n.gReset,
-        button: true,
-        hint: l10n.csResetHint,
-        child: ExcludeSemantics(
-          child: FloatingActionButton(
-            onPressed: () => showPlatformDialog(
-              context: context,
-              builder: (BuildContext alertContext) {
-                return EzAlertDialog(
-                  title:
-                      Text('${el10n.gReset}...', textAlign: TextAlign.center),
-                  materialActions: <Widget>[
+                    // App settings
                     EzMaterialAction(
                       onPressed: () async {
-                        clearForms();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
-                        }
-                      },
-                      text: l10n.csResetBuilder,
-                      isDefaultAction: true,
-                    ),
-                    EzMaterialAction(
-                      onPressed: () async {
-                        await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
-                        }
+                        await EzConfig.reset(true);
+                        await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetApp,
                       isDestructiveAction: true,
                     ),
+
+                    // Both
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
-                        await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
-                        }
+                        await EzConfig.reset(true);
+                        await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,
                     ),
+
+                    // None
                     EzMaterialAction(
-                      onPressed: () => Navigator.of(alertContext).pop(),
-                      text: l10n.csResetNothing,
-                    ),
-                  ],
-                  cupertinoActions: <EzCupertinoAction>[
-                    EzCupertinoAction(
-                      onPressed: () async {
-                        clearForms();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
-                        }
-                      },
-                      text: l10n.csResetBuilder,
-                      isDefaultAction: true,
-                    ),
-                    EzCupertinoAction(
-                      onPressed: () async {
-                        await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
-                        }
-                      },
-                      text: l10n.csResetApp,
-                      isDestructiveAction: true,
-                    ),
-                    EzCupertinoAction(
-                      onPressed: () async {
-                        clearForms();
-                        await EzConfig.reset();
-                        if (alertContext.mounted) {
-                          Navigator.of(alertContext).pop();
-                        }
-                      },
-                      text: l10n.csResetBoth,
-                      isDestructiveAction: true,
-                    ),
-                    EzCupertinoAction(
-                      onPressed: () => Navigator.of(alertContext).pop(),
+                      onPressed: () => Navigator.of(dContext).pop(),
                       text: l10n.csResetNothing,
                     ),
                   ],
                   needsClose: false,
-                );
-              },
+                ),
+              ),
+              child: EzIcon(Icons.refresh),
             ),
-            child: EzIcon(PlatformIcons(context).refresh),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 /// When needed, add this an modify the main router
@@ -132,28 +108,26 @@ class MacStoreFAB extends StatelessWidget {
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'macStore',
         tooltip: 'EoL',
-        onPressed: () => showPlatformDialog(
+        onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext alertContext) {
-            return EzAlertDialog(contents: <Widget>[
-              const Text(
-                '''Good news: Open UI is now an app generator!
+          builder: (BuildContext dContext) => EzAlertDialog(contents: <Widget>[
+            const Text(
+              '''Good news: Open UI is now an app generator!
 
 Bad news: the new features cannot be supported on the App Store.
 
 The full (free and open source) app generator can be downloaded from the ''',
-                textAlign: TextAlign.center,
-              ),
-              EzLink(
-                'GitHub releases',
-                url: Uri.parse(openUIReleases),
-                hint: openUIReleases,
-              )
-            ]);
-          },
+              textAlign: TextAlign.center,
+            ),
+            EzLink(
+              'GitHub releases',
+              url: Uri.parse(openUIReleases),
+              hint: openUIReleases,
+            ),
+          ]),
         ),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        foregroundColor: Theme.of(context).colorScheme.onSecondary,
+        backgroundColor: EzConfig.colors.secondary,
+        foregroundColor: EzConfig.colors.onSecondary,
         child: EzIcon(Icons.update),
       );
 }

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -79,13 +79,11 @@ class EzTextButton extends StatefulWidget {
 class _EzTextButtonState extends State<EzTextButton> {
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
-
-    final Color primary = Theme.of(context).colorScheme.primary;
+    // Gather the contextual theme data //
 
     TextStyle? textStyle =
-        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-      decorationColor: widget.decorationColor ?? primary,
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
+      decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     void addUnderline(bool addIt) {
@@ -146,7 +144,7 @@ class EzTextIconButton extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// [TextButton.autofocus] passthrough
-  final bool? autofocus;
+  final bool autofocus;
 
   /// [TextButton.clipBehavior] passthrough
   final Clip? clipBehavior;
@@ -178,7 +176,7 @@ class EzTextIconButton extends StatefulWidget {
     this.decorationColor,
     this.style,
     this.focusNode,
-    this.autofocus,
+    this.autofocus = false,
     this.clipBehavior,
     this.statesController,
     required this.icon,
@@ -192,19 +190,13 @@ class EzTextIconButton extends StatefulWidget {
 }
 
 class _EzTextIconButtonState extends State<EzTextIconButton> {
-  // Gather the fixed theme data //
-
-  final bool isLefty = EzConfig.get(isLeftyKey);
-
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
-
-    final Color primary = Theme.of(context).colorScheme.primary;
+    // Gather the contextual theme data //
 
     TextStyle? textStyle =
-        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-      decorationColor: widget.decorationColor ?? primary,
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
+      decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
     void addUnderline(bool addIt) {
@@ -233,7 +225,7 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
       clipBehavior: widget.clipBehavior,
       statesController: widget.statesController,
       icon: widget.icon,
-      iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
+      iconAlignment: EzConfig.isLefty ? IconAlignment.start : IconAlignment.end,
       label: Text(widget.label, style: textStyle, textAlign: widget.textAlign),
     );
   }

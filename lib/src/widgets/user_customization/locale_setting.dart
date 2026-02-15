@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -11,6 +11,9 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
+  /// [EzConfig.rebuildLocale] passthrough
+  final void Function() onComplete;
+
   /// Override [EFUILang.supportedLocales] default
   final List<Locale>? locales;
 
@@ -26,7 +29,8 @@ class EzLocaleSetting extends StatefulWidget {
 
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
-  const EzLocaleSetting({
+  const EzLocaleSetting(
+    this.onComplete, {
     super.key,
     this.locales,
     this.skip,
@@ -39,20 +43,15 @@ class EzLocaleSetting extends StatefulWidget {
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
-  // Gather the fixed theme data //
-
-  final double iconSize = EzConfig.get(iconSizeKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-
-  // Gather the build data  //
-
-  late EFUILang l10n = ezL10n(context);
+  // Define the build data  //
 
   late final List<Locale> locales;
-  late Locale currLocale = Localizations.localeOf(context);
 
-  Widget flag(Locale lang) {
+  Widget flag(
+    Locale lang, {
+    required double iconSize,
+    required double padding,
+  }) {
     late final Widget flag;
 
     // Fix language code != flag code
@@ -87,14 +86,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         : flag;
   }
 
-  // Create custom functions //
+  // Define custom functions //
 
-  String localeName(Locale locale) {
-    final String? supported =
-        LocaleNames.of(context)!.nameOf(locale.languageCode);
-
-    if (supported != null) return supported;
-
+  String manualNames(Locale locale) {
     switch (locale) {
       case filipino:
         return 'Filipino';
@@ -124,14 +118,14 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: l10n.ssLanguage,
+      label: EzConfig.l10n.ssLanguage,
       button: true,
-      hint: l10n.ssLangHint,
+      hint: EzConfig.l10n.ssLangHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           onPressed: () => ezModal(
             context: context,
-            builder: (BuildContext modalContext) => EzScrollView(
+            builder: (BuildContext mContext) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Wrap(
@@ -141,51 +135,54 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                   children: locales
                       .map(
                         (Locale locale) => Padding(
-                          padding: EzInsets.wrap(spacing),
+                          padding: EzInsets.wrap(EzConfig.spacing),
                           child: EzElevatedIconButton(
                             onPressed: () async {
-                              // Gather data
+                              // Check for no change
+                              if (locale == EzConfig.locale) {
+                                Navigator.of(mContext).pop();
+                                return;
+                              }
+
+                              // Gather && set data
                               final List<String> localeData = <String>[
-                                locale.languageCode,
+                                locale.languageCode
                               ];
                               if (locale.countryCode != null) {
                                 localeData.add(locale.countryCode!);
                               }
-
-                              // Set data
                               await EzConfig.setStringList(
                                 appLocaleKey,
                                 localeData,
                               );
-                              currLocale = locale;
 
-                              try {
-                                l10n = await EFUILang.delegate.load(locale);
-                              } catch (_) {
-                                l10n = EzConfig.l10nFallback;
-                              }
-
-                              setState(() {});
-
-                              // Close modal
-                              if (modalContext.mounted) {
-                                Navigator.of(modalContext).pop(locale);
-                              }
+                              // Refresh the UI
+                              await EzConfig.rebuildLocale(widget.onComplete);
                             },
-                            icon: flag(locale),
-                            label: localeName(locale),
+                            icon: flag(
+                              locale,
+                              iconSize: EzConfig.iconSize,
+                              padding: EzConfig.padding,
+                            ),
+                            label: LocaleNames.of(mContext)
+                                    ?.nameOf(locale.languageCode) ??
+                                manualNames(locale),
                             labelPadding: false,
                           ),
                         ),
                       )
                       .toList(),
                 ),
-                ezSpacer,
+                EzConfig.spacer,
               ],
             ),
           ),
-          icon: flag(currLocale),
-          label: l10n.ssLanguage,
+          icon: flag(
+            EzConfig.locale,
+            iconSize: EzConfig.iconSize,
+            padding: EzConfig.padding,
+          ),
+          label: EzConfig.l10n.ssLanguage,
           labelPadding: false,
         ),
       ),

@@ -4,9 +4,11 @@
 
 
   "gApply": "Appliquer",
+  "gApplyChanges": "Appliquer les modifications",
   "gContinue": "Continuer",
   "gSkip": "Passer",
   "gOpen": "Ouvrir",
+  "gOpenLink": "Ouvrir le lien",
   "gSuccess": "Succès",
   "gSuccessExl": "Succès !",
   "gYes": "Oui",
@@ -20,6 +22,8 @@
   "gRequired": "Requis",
 
   "gBack": "Retour",
+  "gUndo": "Annuler",
+  "gRedo": "Rétablir",
   "gCancel": "Annuler",
   "gClose": "Fermer",
   "gDisabled": "Désactivé",
@@ -31,8 +35,12 @@
   "gLight": "Clair",
   "gSystem": "Système",
 
+  "gDarkTheme": "Thème sombre",
+  "gLightTheme": "Thème clair",
+  "gBothThemes": "Les deux thèmes",
+
   "gEditing": "Modification : ",
-  "gEditingTheme": "Modification : Thème {themeType}",
+  "gEditingThemeHint": "Ouvrir les paramètres de thème système",
 
   "gLeft": "Gauche",
   "gRight": "Droite",
@@ -61,9 +69,12 @@
   "gHowThisWorks": "Comment ça marche",
   "gHowThisWorksHint": "Ouvre la documentation utile",
 
-  "gTranslationsPending": "Traductions en attente de révision humaine",
+  "gMachineTranslated": "Traduction automatique",
 
   "gUpdates": "Mises à jour disponibles",
+  "gHardRefresh": "Veuillez rafraîchir la page...\nCtrl + Shift + R",
+  "gHardRefreshMac": "Veuillez rafraîchir la page...\nCommand + Shift + R",
+  "gHardRefreshMobile": "Veuillez actualiser la page dans le menu du navigateur.",
 
   "gEnterURL": "Entrer l'URL",
   "gValidURL": "Veuillez saisir une URL valide",
@@ -93,7 +104,10 @@
   "gResetValue": "Réinitialiser {name} ?",
   "gResetValueTo": "Réinitialiser {name} à {value}",
   "gResetAll": "Tout réinitialiser",
-  "gUndoWarn": "Ne peut pas être annulé",
+  "gUndoWarn1": "Impossible d'annuler automatiquement.\n",
+  "gSave": "Enregistrez",
+  "gSaveHint": "Activez pour enregistrer un fichier de configuration JSON.",
+  "gUndoWarn2": " votre configuration actuelle pour la restaurer manuellement.",
 
   "gCreditTo": "Crédits à :",
   "gCreator": "Créateur de",
@@ -113,14 +127,17 @@
 
   "ssLanguage": "Langue",
   "ssLangHint": "Activer pour changer la langue de l'application",
-  
+
+  "ssUpdateDark": "Mettre à jour le thème sombre",
+  "ssUpdateLight": "Mettre à jour le thème clair",
+  "ssUpdateBoth": "Mettre à jour les deux modes de thème",
+
   "ssLoadPreset": "Charger un préréglage",
   "ssLoadPresetHint": "Activer pour afficher les préréglages",
   "ssBigButtons": "Gros boutons",
   "ssHighVisibility": "Haute visibilité",
-  "ssVideoGame": "Mode jeu",
   "ssChalkboard": "Tableau noir",
-  "ssFancyPants": "Pantalons élégants",
+  "ssNebula": "Nébuleuse",
   "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\nContinuer ?",
   "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\nContinuer ?",
   "ssApplied": "{config} appliqué.",
@@ -136,6 +153,7 @@
   "ssWrongConfigExt": "Le fichier n'a pas été enregistré comme ",
 
   "ssResetAll": "Réinitialiser tous les paramètres ?",
+  "ssResetBoth": "Réinitialiser les deux modes de thème",
 
 
 
@@ -157,7 +175,7 @@
   "csFromImage": "Un schéma de couleurs sera généré à partir de l'image.",
   "csColorScheme": "schéma de couleurs",
 
-  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
+  "csReset": "Réinitialiser les couleurs du {themeType} ?",
 
 
 
@@ -176,6 +194,7 @@
   "dsFromFile": "Depuis un fichier",
   "dsFromCamera": "Depuis la caméra",
   "dsFromNetwork": "Depuis une URL",
+  "dsSolidColor": "Couleur unie",
   "dsResetIt": "Réinitialiser",
   "dsClearIt": "Effacer",
   "dsUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
@@ -199,10 +218,8 @@
   "dsScrollHint": "Faites défiler pour zoomer/dézoomer",
   "dsRotateLeft": "Tourner à gauche",
   "dsRotateRight": "Tourner à droite",
-  "dsUndo": "Annuler",
-  "dsRedo": "Rétablir",
 
-  "dsResetAll": "Réinitialiser tous les paramètres de conception globaux et du thème {themeType} ?",
+  "dsReset": "Réinitialiser le design de {themeType} ?",
 
 
 
@@ -214,7 +231,7 @@
 
   "lsScroll": "Masquer les barres de défilement",
 
-  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
+  "lsReset": "Réinitialiser la mise en page du {themeType} ?",
 
 
 
@@ -257,5 +274,5 @@
   "tsLabelLink": "les labels ?",
   "tsLabelP2": " Ni trop gros, ni trop petits ?",
 
-  "tsResetAll": "Réinitialiser tous les paramètres de texte ?"
+  "tsReset": "Réinitialiser les styles de texte de {themeType} ?"
 }

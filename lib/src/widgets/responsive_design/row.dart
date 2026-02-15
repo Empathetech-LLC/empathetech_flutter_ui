@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -48,7 +48,7 @@ class EzRow extends StatelessWidget {
 
   /// Reverses [children] when [reverseHands] is true and [isLeftyKey] is true
   List<Widget> getChildren() {
-    if (reverseHands && EzConfig.get(isLeftyKey) == true) {
+    if (reverseHands && EzConfig.isLefty == true) {
       return children.reversed.toList();
     } else {
       return children;

@@ -4,9 +4,11 @@
 
 
   "gApply": "Aplicar",
+  "gApplyChanges": "Aplicar cambios",
   "gContinue": "Continuar",
   "gSkip": "Saltar",
   "gOpen": "Abrir",
+  "gOpenLink": "Abrir enlace",
   "gSuccess": "Éxito",
   "gSuccessExl": "¡Éxito!",
   "gYes": "Sí",
@@ -20,6 +22,8 @@
   "gRequired": "Requerido",
 
   "gBack": "Atrás",
+  "gUndo": "Deshacer",
+  "gRedo": "Rehacer",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
   "gDisabled": "Deshabilitado",
@@ -31,8 +35,12 @@
   "gLight": "Claro",
   "gSystem": "Sistema",
 
+  "gDarkTheme": "Tema oscuro",
+  "gLightTheme": "Tema claro",
+  "gBothThemes": "Ambos temas",
+
   "gEditing": "Editando: ",
-  "gEditingTheme": "Editando: tema {themeType}",
+  "gEditingThemeHint": "Abrir la configuración del tema del sistema",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",
@@ -61,9 +69,12 @@
   "gHowThisWorks": "Cómo funciona",
   "gHowThisWorksHint": "Abrir documentación útil",
 
-  "gTranslationsPending": "Traducciones pendientes de revisión humana",
+  "gMachineTranslated": "Traducción automática",
 
   "gUpdates": "Actualizaciones disponibles",
+  "gHardRefresh": "Por favor, actualice la página...\nCtrl + Shift + R",
+  "gHardRefreshMac": "Por favor, actualice la página...\nCommand + Shift + R",
+  "gHardRefreshMobile": "Actualice la página en el menú del navegador.",
   
   "gEnterURL": "Inserta el link",
   "gValidURL": "Por favor, introduzca una URL válida",
@@ -93,7 +104,10 @@
   "gResetValue": "¿Restablecer {name}?",
   "gResetValueTo": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
-  "gUndoWarn": "No se puede deshacer",
+  "gUndoWarn1": "No se puede deshacer automáticamente.\n",
+  "gSave": "Guarde",
+  "gSaveHint": "Activar para guardar un archivo de configuración JSON.",
+  "gUndoWarn2": " su configuración actual para restaurarla manualmente.",
 
   "gCreditTo": "Acreditando a:",
   "gCreator": "Creador de",
@@ -114,13 +128,16 @@
   "ssLanguage": "Idioma",
   "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
+  "ssUpdateDark": "Actualizar tema oscuro",
+  "ssUpdateLight": "Actualizar tema claro",
+  "ssUpdateBoth": "Actualizar ambos modos de tema",
+
   "ssLoadPreset": "Cargar preajuste",
   "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
   "ssBigButtons": "Botones grandes",
   "ssHighVisibility": "Alta visibilidad",
-  "ssVideoGame": "Videojuego",
   "ssChalkboard": "Pizarra",
-  "ssFancyPants": "Pantalones elegantes",
+  "ssNebula": "Nebulosa",
   "ssDarkOnly": "Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n¿Continuar?",
   "ssLightOnly": "Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n¿Continuar?",
   "ssApplied": "{config} aplicado.",
@@ -136,6 +153,7 @@
   "ssLoadConfig": "Cargar configuración",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
+  "ssResetBoth": "Restablecer ambos modos de tema",
 
 
 
@@ -157,7 +175,7 @@
   "csFromImage": "Se generará un esquema de color a partir de la imagen.",
   "csColorScheme": "esquema de color",
 
-  "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
+  "csReset": "Restablecer los colores de {themeType}?",
 
 
 
@@ -176,6 +194,7 @@
   "dsFromFile": "Usando un archivo",
   "dsFromCamera": "Usando la cámara",
   "dsFromNetwork": "Usando un link",
+  "dsSolidColor": "Color sólido",
   "dsResetIt": "Restablecer",
   "dsClearIt": "Borrar",
   "dsUseForColors": "Actualiza los colores de la app usando esta imagen",
@@ -199,10 +218,8 @@
   "dsScrollHint": "Desplaza para acercar/alejar la imagen",
   "dsRotateLeft": "Girar a la izquierda",
   "dsRotateRight": "Girar a la derecha",
-  "dsUndo": "Deshacer",
-  "dsRedo": "Rehacer",
 
-  "dsResetAll": "¿Restablecer todas las configuraciones de diseño globales y de {themeType}?",
+  "dsReset": "¿Restablecer el diseño de {themeType}?",
 
 
 
@@ -214,7 +231,7 @@
 
   "lsScroll": "Ocultar las barras de desplazamiento",
 
-  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
+  "lsReset": "¿Restablecer el esquema de {themeType}?",
 
 
 
@@ -257,5 +274,5 @@
   "tsLabelLink": "las etiquetas?",
   "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
 
-  "tsResetAll": "¿Restablecer la configuración del texto?"
+  "tsReset": "¿Restablecer los estilos de texto de {themeType}?"
 }

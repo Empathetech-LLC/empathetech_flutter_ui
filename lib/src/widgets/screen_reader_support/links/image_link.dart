@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -111,7 +111,7 @@ class EzImageLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color focusColor =
-        Theme.of(context).colorScheme.primary.withValues(alpha: focusOpacity);
+        EzConfig.colors.primary.withValues(alpha: focusOpacity);
 
     final Image child = Image(
       image: image,

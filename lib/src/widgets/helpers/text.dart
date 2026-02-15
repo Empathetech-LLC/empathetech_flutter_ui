@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -12,7 +12,7 @@ class EzTextBackground extends StatelessWidget {
   /// Doesn't have to be [Text]
   final Widget text;
 
-  /// Defaults to [EzInsets.wrap] with [marginKey]
+  /// Defaults to [EzInsets.wrap] with [EzConfig.marginVal]
   final EdgeInsets? margin;
 
   /// Defaults to [ezRoundEdge]
@@ -38,38 +38,34 @@ class EzTextBackground extends StatelessWidget {
     this.backgroundColor,
   });
 
-  Color _color(BuildContext context, double percent) {
+  Color _color(double percent) {
     if (backgroundColor != null) {
       return backgroundColor!;
     }
 
     late final Color baseColor;
     if (useSurface == null) {
-      baseColor = Theme.of(context).colorScheme.surfaceDim;
+      baseColor = EzConfig.colors.surfaceDim;
     } else if (useSurface!) {
-      baseColor = Theme.of(context).colorScheme.surface;
+      baseColor = EzConfig.colors.surface;
     } else {
-      baseColor = Theme.of(context).colorScheme.surfaceContainer;
+      baseColor = EzConfig.colors.surfaceContainer;
     }
 
     return baseColor.withValues(alpha: percent);
   }
 
   @override
-  Widget build(BuildContext context) {
-    late final String oKey = isDarkTheme(context)
-        ? darkTextBackgroundOpacityKey
-        : lightTextBackgroundOpacityKey;
-
-    return Container(
-      padding: margin ?? EzInsets.wrap(EzConfig.get(marginKey)),
-      decoration: BoxDecoration(
-        color: _color(context, EzConfig.get(oKey)),
-        borderRadius: borderRadius ?? ezRoundEdge,
-      ),
-      child: text,
-    );
-  }
+  Widget build(BuildContext context) => Container(
+        padding: margin ?? EzInsets.wrap(EzConfig.marginVal),
+        decoration: BoxDecoration(
+          color: _color(EzConfig.get(EzConfig.isDark
+              ? darkTextBackgroundOpacityKey
+              : lightTextBackgroundOpacityKey)),
+          borderRadius: borderRadius ?? ezRoundEdge,
+        ),
+        child: text,
+      );
 }
 
 class EzText extends StatelessWidget {
@@ -145,27 +141,25 @@ class EzText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzTextBackground(
-      Text(
-        data,
-        style: style ?? Theme.of(context).textTheme.bodyLarge,
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
-        maxLines: maxLines,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      ),
-      useSurface: useSurface,
-      backgroundColor: backgroundColor,
-    );
-  }
+  Widget build(BuildContext context) => EzTextBackground(
+        Text(
+          data,
+          style: style ?? EzConfig.styles.bodyLarge,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          locale: locale,
+          softWrap: softWrap,
+          overflow: overflow,
+          maxLines: maxLines,
+          semanticsLabel: semanticsLabel,
+          textWidthBasis: textWidthBasis,
+          textHeightBehavior: textHeightBehavior,
+          selectionColor: selectionColor,
+        ),
+        useSurface: useSurface,
+        backgroundColor: backgroundColor,
+      );
 }
 
 class EzNewLine extends StatelessWidget {
@@ -178,29 +172,14 @@ class EzNewLine extends StatelessWidget {
   final TextAlign? textAlign;
 
   /// Quick wrapper for creating a [TextStyle]d blank line
-  const EzNewLine({
-    super.key,
-    this.style,
-    this.textAlign,
-  });
+  const EzNewLine({super.key, this.style, this.textAlign});
 
   @override
-  Widget build(BuildContext context) {
-    return ExcludeSemantics(
-      child: Text(
-        '',
-        style: style ?? Theme.of(context).textTheme.bodyLarge,
-        textAlign: textAlign ?? TextAlign.start,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ExcludeSemantics(
+        child: Text(
+          '',
+          style: style ?? EzConfig.styles.bodyLarge,
+          textAlign: textAlign ?? TextAlign.start,
+        ),
+      );
 }
-
-/// [TextTheme.bodyLarge] line with [TextAlign.start]
-const Widget ezStartLine = EzNewLine();
-
-/// [TextTheme.bodyLarge] line with [TextAlign.center]
-const Widget ezCenterLine = EzNewLine(textAlign: TextAlign.center);
-
-/// [TextTheme.bodyLarge] line with [TextAlign.end]
-const Widget ezEndLine = EzNewLine(textAlign: TextAlign.end);

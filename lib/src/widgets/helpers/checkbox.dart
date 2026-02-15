@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2026 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,7 +9,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
-  /// Defaults to [EdgeInsets.all] with [EzConfig]s [marginKey] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Checkbox.value] passthrough
@@ -21,7 +21,7 @@ class EzCheckbox extends StatelessWidget {
   /// [Checkbox.onChanged] passthrough
   final ValueChanged<bool?>? onChanged;
 
-  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  /// Defaults to [ezIconRatio]
   final double? scale;
 
   /// [Checkbox.mouseCursor] passthrough
@@ -92,13 +92,11 @@ class EzCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double ratio = scale ??
-        max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
-            EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
+    final double ratio = scale ?? ezIconRatio();
 
     return Padding(
       padding: ratio > 1.1
-          ? padding ?? EzInsets.wrap(EzConfig.get(marginKey))
+          ? padding ?? EzInsets.wrap(EzConfig.marginVal)
           : EdgeInsets.zero,
       child: Transform.scale(
         scale: max(1.0, ratio),
@@ -187,10 +185,10 @@ class EzCheckboxPair extends StatelessWidget {
   /// [EzText.backgroundColor] passthrough
   final Color? backgroundColor;
 
-  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  /// Defaults to [ezIconRatio]
   final double? scale;
 
-  /// Defaults to [EdgeInsets.all] with [EzConfig]s [marginKey] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Checkbox.value] passthrough
@@ -293,55 +291,53 @@ class EzCheckboxPair extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzRow(
-      reverseHands: reverseHands,
-      mainAxisSize: mainAxisSize,
-      mainAxisAlignment: mainAxisAlignment,
-      crossAxisAlignment: crossAxisAlignment,
-      children: <Widget>[
-        Flexible(
-          child: EzText(
-            text,
-            useSurface: useSurface,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            locale: locale,
-            softWrap: softWrap,
-            overflow: overflow,
-            textScaler: textScaler,
-            maxLines: maxLines,
-            semanticsLabel: semanticsLabel,
-            textWidthBasis: textWidthBasis,
-            textHeightBehavior: textHeightBehavior,
-            selectionColor: selectionColor,
-            backgroundColor: backgroundColor,
+  Widget build(BuildContext context) => EzRow(
+        reverseHands: reverseHands,
+        mainAxisSize: mainAxisSize,
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        children: <Widget>[
+          Flexible(
+            child: EzText(
+              text,
+              useSurface: useSurface,
+              style: style,
+              strutStyle: strutStyle,
+              textAlign: textAlign,
+              textDirection: textDirection,
+              locale: locale,
+              softWrap: softWrap,
+              overflow: overflow,
+              textScaler: textScaler,
+              maxLines: maxLines,
+              semanticsLabel: semanticsLabel,
+              textWidthBasis: textWidthBasis,
+              textHeightBehavior: textHeightBehavior,
+              selectionColor: selectionColor,
+              backgroundColor: backgroundColor,
+            ),
           ),
-        ),
-        EzCheckbox(
-          scale: scale,
-          padding: padding,
-          value: value,
-          tristate: tristate,
-          onChanged: onChanged,
-          mouseCursor: mouseCursor,
-          activeColor: activeColor,
-          checkColor: checkColor,
-          focusColor: focusColor,
-          hoverColor: hoverColor,
-          splashRadius: splashRadius,
-          materialTapTargetSize: materialTapTargetSize,
-          visualDensity: visualDensity,
-          focusNode: focusNode,
-          autofocus: autofocus,
-          shape: shape,
-          side: side,
-          isError: isError,
-          semanticLabel: semanticLabel,
-        ),
-      ],
-    );
-  }
+          EzCheckbox(
+            scale: scale,
+            padding: padding,
+            value: value,
+            tristate: tristate,
+            onChanged: onChanged,
+            mouseCursor: mouseCursor,
+            activeColor: activeColor,
+            checkColor: checkColor,
+            focusColor: focusColor,
+            hoverColor: hoverColor,
+            splashRadius: splashRadius,
+            materialTapTargetSize: materialTapTargetSize,
+            visualDensity: visualDensity,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            shape: shape,
+            side: side,
+            isError: isError,
+            semanticLabel: semanticLabel,
+          ),
+        ],
+      );
 }
