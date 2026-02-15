@@ -16,7 +16,7 @@ dependencies:
 
   # Flutter (Google)
   google_fonts: ^8.0.1
-  go_router: ^14.8.1
+  go_router: ^17.1.0
   http: ^1.6.0
   image_picker: ^1.2.1
   intl: ^0.20.2
@@ -29,8 +29,8 @@ dependencies:
   # Community
   country_flags: ^4.1.2
   extended_image: ^10.0.1
-  file_picker: 10.3.8
-  file_saver: ^0.2.14
+  file_picker: ^10.3.10
+  file_saver: ^0.3.1
   flex_color_picker: ^3.8.0
   flutter_localized_locales: ^2.0.5
   image: ^4.7.2

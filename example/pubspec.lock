@@ -251,18 +251,18 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: d974b6ba2606371ac71dd94254beefb6fa81185bde0b59bdc1df09885da85fde
+      sha256: "57d9a1dd5063f85fa3107fb42d1faffda52fdc948cefd5fe5ea85267a5fc7343"
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.8"
+    version: "10.3.10"
   file_saver:
     dependency: "direct main"
     description:
       name: file_saver
-      sha256: "017a127de686af2d2fbbd64afea97052d95f2a0f87d19d25b87e097407bf9c1e"
+      sha256: "9d93db09bd4da9e43238f9dd485360fc51a5c138eea5ef5f407ec56e58079ac0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.14"
+    version: "0.3.1"
   file_selector_linux:
     dependency: transitive
     description:
@@ -383,10 +383,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: f02fd7d2a4dc512fec615529824fdd217fecb3a3d3de68360293a551f21634b3
+      sha256: "7974313e217a7771557add6ff2238acb63f635317c35fa590d348fb238f00896"
       url: "https://pub.dev"
     source: hosted
-    version: "14.8.1"
+    version: "17.1.0"
   google_fonts:
     dependency: transitive
     description:
