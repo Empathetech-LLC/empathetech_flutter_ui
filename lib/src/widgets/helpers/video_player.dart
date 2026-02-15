@@ -551,7 +551,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               scrollDirection: Axis.horizontal,
                               showScrollHint: true,
                               children: <Widget>[
-                                const EzSpacer(vertical: false),
+                                EzConfig.rowSpacer,
 
                                 // Play/pause
                                 Visibility(

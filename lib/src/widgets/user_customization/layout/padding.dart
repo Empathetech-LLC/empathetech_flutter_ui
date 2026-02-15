@@ -113,7 +113,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                               ),
                               text: EzConfig.l10n.gCurrently,
                             ),
-                            const EzSpacer(vertical: false),
+                            EzConfig.rowSpacer,
                             EzElevatedButton(
                               enabled: false,
                               style: ElevatedButton.styleFrom(
