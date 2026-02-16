@@ -43,6 +43,13 @@ bool isDarkTheme(BuildContext context) =>
 /// Alias exists for [kIsWeb] support
 bool isMobile() => mobileCheck();
 
+/// [SafeArea] top padding
+double safeTop(BuildContext context) => MediaQuery.of(context).padding.top;
+
+/// [SafeArea] bottom padding
+double safeBottom(BuildContext context) =>
+    MediaQuery.of(context).padding.bottom;
+
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
 String screenshotHint() {
