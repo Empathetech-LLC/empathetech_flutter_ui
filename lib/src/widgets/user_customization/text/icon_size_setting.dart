@@ -97,7 +97,7 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                         ),
                         iconSize: iconSize,
                       ),
-                EzMargin(vertical: false),
+                EzConfig.rowMargin,
 
                 // Preview
                 GestureDetector(
@@ -124,7 +124,7 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                     color: EzConfig.colors.onSurface,
                   ),
                 ),
-                EzMargin(vertical: false),
+                EzConfig.rowMargin,
 
                 // Plus
                 (iconSize < maxIconSize)

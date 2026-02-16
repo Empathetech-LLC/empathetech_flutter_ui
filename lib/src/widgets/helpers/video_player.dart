@@ -686,7 +686,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                               '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.gPlaybackSpeed.toLowerCase()}',
                                           icon: const Icon(Icons.remove),
                                         ),
-                                        EzMargin(vertical: false),
+                                        EzConfig.rowMargin,
                                         Tooltip(
                                           message: EzConfig.l10n.gPlaybackSpeed,
                                           child: Column(
@@ -707,7 +707,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             ],
                                           ),
                                         ),
-                                        EzMargin(vertical: false),
+                                        EzConfig.rowMargin,
                                         EzIconButton(
                                           enabled: currSpeed < 2.0,
                                           onPressed: () async {

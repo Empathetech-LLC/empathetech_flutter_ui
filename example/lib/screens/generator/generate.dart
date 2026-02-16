@@ -415,7 +415,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 style: EzConfig.styles.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              EzMargin(vertical: false),
+              EzConfig.rowMargin,
               EzIconButton(
                 onPressed: () => setState(() => showReadout = !showReadout),
                 icon: Icon(
