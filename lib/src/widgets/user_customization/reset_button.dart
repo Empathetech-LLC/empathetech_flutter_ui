@@ -53,10 +53,6 @@ class EzResetButton extends StatelessWidget {
   /// Moot if [onConfirm] is provided
   final bool storageOnly;
 
-  /// Whether to notify [EzConfigProvider] of changes
-  /// Moot if [onConfirm] is provided
-  final bool notifyTheme;
-
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
   /// DO NOT include an [EzConfig.rebuildUI] or [Navigator.pop], these are included automatically
@@ -81,7 +77,6 @@ class EzResetButton extends StatelessWidget {
     this.dialogTitle,
     this.resetSkip,
     this.storageOnly = false,
-    this.notifyTheme = true,
     this.onConfirm,
     this.onDeny,
   });
