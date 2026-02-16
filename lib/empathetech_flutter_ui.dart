@@ -27,16 +27,8 @@ export 'src/consts/shared.dart';
 
 // Testing //
 
-// Core
 export 'src/functions/testing/consts.dart';
 export 'src/functions/testing/utils.dart';
-
-// Widgets
-export 'src/functions/testing/widgets/dominant_hand_switch.dart';
-export 'src/functions/testing/widgets/image_setting.dart';
-export 'src/functions/testing/widgets/locale_setting.dart';
-export 'src/functions/testing/widgets/reset_button.dart';
-export 'src/functions/testing/widgets/theme_mode_switch.dart';
 
 // Core //
 
