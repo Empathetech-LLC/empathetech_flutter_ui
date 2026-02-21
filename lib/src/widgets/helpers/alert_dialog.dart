@@ -57,18 +57,20 @@ class EzAlertDialog extends AlertDialog {
         title: title,
         titlePadding: title == null
             ? null
-            : EdgeInsets.symmetric(
-                horizontal: EzConfig.marginVal,
-                vertical: EzConfig.spacing / 2,
+            : EdgeInsets.only(
+                top: EzConfig.marginVal,
+                left: EzConfig.marginVal,
+                right: EzConfig.marginVal,
               ),
 
         // Content
         content: dialogContent,
         contentPadding: dialogContent == null
             ? null
-            : EdgeInsets.symmetric(
-                horizontal: EzConfig.marginVal,
-                vertical: EzConfig.spacing / 2,
+            : EdgeInsets.only(
+                top: (title == null) ? EzConfig.marginVal : EzConfig.spacing,
+                left: EzConfig.marginVal,
+                right: EzConfig.marginVal,
               ),
 
         // Actions
@@ -140,7 +142,10 @@ class EzMaterialAction extends StatelessWidget {
 
     return EzTextButton(
       onPressed: onPressed,
-      style: TextButton.styleFrom(backgroundColor: Colors.transparent),
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        padding: EzInsets.wrap(EzConfig.spacing),
+      ),
       text: text,
       textStyle: textStyle,
     );
