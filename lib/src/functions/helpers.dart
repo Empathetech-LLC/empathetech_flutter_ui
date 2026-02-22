@@ -13,6 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
@@ -67,6 +68,12 @@ String screenshotHint() {
 
 // Readability //
 
+/// Wide check, true if granted, limited, or provisional
+bool allowedPermCheck(PermissionStatus status) =>
+    status == PermissionStatus.granted ||
+    status == PermissionStatus.limited ||
+    status == PermissionStatus.provisional;
+
 /// More readable than...
 /// FocusScope.of(context).unfocus();
 void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
@@ -74,6 +81,12 @@ void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 /// Is there a required [Function] that you wish was optional?
 /// Then [doNothing]!
 void doNothing() {}
+
+/// Wide check, true if denied, restricted, or permanently denied
+bool deniedPermCheck(PermissionStatus status) =>
+    status == PermissionStatus.denied ||
+    status == PermissionStatus.restricted ||
+    status == PermissionStatus.permanentlyDenied;
 
 /// More readable than...
 /// MediaQuery.of(context).size.height
