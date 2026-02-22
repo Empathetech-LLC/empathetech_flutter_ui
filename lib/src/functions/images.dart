@@ -36,11 +36,10 @@ Future<String?> ezImagePicker({
     if (prefsPath != null) await EzConfig.setString(prefsPath, picked.path);
     return picked.path;
   } on Exception catch (e) {
-    if (context.mounted) {
-      final String errorMsg =
-          '${EzConfig.l10n.dsImgSetFailed}\n${e.toString()}';
-      await ezLogAlert(context, message: errorMsg);
-    }
+    final String errorMsg = '${EzConfig.l10n.dsImgSetFailed}\n${e.toString()}';
+    (context.mounted)
+        ? await ezLogAlert(context, message: errorMsg)
+        : ezLog(errorMsg);
     return null;
   }
 }

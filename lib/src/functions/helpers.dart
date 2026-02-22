@@ -112,7 +112,9 @@ Future<void> ezConfigLoader(BuildContext context) async {
       }
     }
   } catch (e) {
-    if (context.mounted) await ezLogAlert(context, message: e.toString());
+    (context.mounted)
+        ? await ezLogAlert(context, message: e.toString())
+        : ezLog(e.toString());
     return;
   }
 

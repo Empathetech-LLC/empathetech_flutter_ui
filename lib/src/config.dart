@@ -322,7 +322,9 @@ Must be one of [int, bool, double, String, List<String>]''');
         mimeType: MimeType.json,
       );
     } catch (e) {
-      if (context.mounted) await ezLogAlert(context, message: e.toString());
+      (context.mounted)
+          ? await ezLogAlert(context, message: e.toString())
+          : ezLog(e.toString());
       return;
     }
 
