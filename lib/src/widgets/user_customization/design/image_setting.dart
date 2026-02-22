@@ -202,9 +202,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Set the new path
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
-      if (mounted) {
-        await ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
-      }
+      (mounted)
+          ? await ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed)
+          : ezLog(EzConfig.l10n.dsImgSetFailed);
       return false;
     }
     currPath = newPath;
@@ -227,14 +227,15 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result == success) {
           await EzConfig.setString(darkColorSchemeImageKey, newPath);
         } else {
-          if (mounted) {
-            await ezLogAlert(
-              context,
-              title: EzConfig.l10n.dsImgGetFailed,
-              message:
-                  '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
-            );
-          }
+          final String errorMsg =
+              '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}';
+          (mounted)
+              ? await ezLogAlert(
+                  context,
+                  title: EzConfig.l10n.dsImgGetFailed,
+                  message: errorMsg,
+                )
+              : ezLog(errorMsg);
         }
       }
 
@@ -254,14 +255,15 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result == success) {
           await EzConfig.setString(lightColorSchemeImageKey, newPath);
         } else {
-          if (mounted) {
-            await ezLogAlert(
-              context,
-              title: EzConfig.l10n.dsImgGetFailed,
-              message:
-                  '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
-            );
-          }
+          final String errorMsg =
+              '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}';
+          (mounted)
+              ? await ezLogAlert(
+                  context,
+                  title: EzConfig.l10n.dsImgGetFailed,
+                  message: errorMsg,
+                )
+              : ezLog(errorMsg);
         }
       }
     }
@@ -378,14 +380,15 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Navigator.of(mContext).pop(null);
                   }
 
-                  if (mounted) {
-                    await ezLogAlert(
-                      context,
-                      title: EzConfig.l10n.dsImgGetFailed,
-                      message:
-                          '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}',
-                    );
-                  }
+                  final String errorMsg =
+                      '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}';
+                  (mounted)
+                      ? await ezLogAlert(
+                          context,
+                          title: EzConfig.l10n.dsImgGetFailed,
+                          message: errorMsg,
+                        )
+                      : ezLog(errorMsg);
                   return;
                 }
 
