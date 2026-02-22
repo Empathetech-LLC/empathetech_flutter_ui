@@ -19,8 +19,8 @@ class EzTutorial extends StatelessWidget {
   /// [Positioned.right] passthrough
   final double? right;
 
-  /// Value for the [AlertDialog]'s [Text] title
-  final String title;
+  /// [AlertDialog.title] passthrough
+  final Widget title;
 
   /// Value for the [AlertDialog]'s [Text] content
   final String content;
@@ -54,7 +54,7 @@ class EzTutorial extends StatelessWidget {
         child: SelectionArea(
           child: AlertDialog(
             // Title
-            title: Text(title, textAlign: TextAlign.center),
+            title: title,
             titlePadding: EdgeInsets.symmetric(
               horizontal: EzConfig.marginVal,
               vertical: EzConfig.spacing / 2,
