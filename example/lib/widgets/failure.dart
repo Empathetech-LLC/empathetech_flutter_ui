@@ -98,19 +98,11 @@ class DeleteOption extends StatelessWidget {
                   : 'rm -rf $appName',
               dir: dir,
               onSuccess: () async {
-                await ezSnackBar(
-                  context: context,
-                  message: l10n.rsNextTime,
-                ).closed;
-
+                await ezSnackBar(context, message: l10n.rsNextTime).closed;
                 if (context.mounted) Navigator.of(context).maybePop();
               },
               onFailure: (String message) async {
-                await ezSnackBar(
-                  context: context,
-                  message: l10n.rsAnotherOne,
-                ).closed;
-
+                await ezSnackBar(context, message: l10n.rsAnotherOne).closed;
                 if (context.mounted) Navigator.of(context).maybePop();
               },
               readout: readout,

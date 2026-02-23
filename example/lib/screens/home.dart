@@ -691,7 +691,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     } else {
                       setState(() => canGen = false);
                       await ezSnackBar(
-                        context: context,
+                        context,
                         message:
                             '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                       ).closed;
@@ -762,7 +762,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       } else {
                         setState(() => canGen = false);
                         await ezSnackBar(
-                          context: context,
+                          context,
                           message:
                               '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                         ).closed;

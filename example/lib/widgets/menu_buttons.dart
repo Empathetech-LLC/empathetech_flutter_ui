@@ -54,7 +54,7 @@ class UploadButton extends StatelessWidget {
               await onUpload(config);
             } catch (e) {
               if (context.mounted) {
-                ezSnackBar(context: context, message: e.toString());
+                ezSnackBar(context, message: e.toString());
               }
             }
           }

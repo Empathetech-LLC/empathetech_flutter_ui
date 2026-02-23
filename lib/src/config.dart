@@ -330,7 +330,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     if (context.mounted) {
       ezSnackBar(
-        context: context,
+        context,
         message: EzConfig.l10n.ssConfigSaved(
           archivePath(appName: appName, androidPackage: androidPackage),
         ),

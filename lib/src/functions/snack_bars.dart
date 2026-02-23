@@ -34,25 +34,25 @@ double snackWidth({
 /// Most parameters are available, but [SnackBar.padding], [SnackBar.width], [SnackBar.content], and [SnackBar.duration] are controlled
 /// [SnackBar.padding] can be influenced by [margin], [SnackBar.padding] is always [EdgeInsets.all]
 /// [SnackBar.width], [SnackBar.content], and [SnackBar.duration] all respond to [message]
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
-  Color? backgroundColor,
-  double? elevation,
-  ShapeBorder? shape,
-  SnackBarBehavior? behavior,
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar(
+  BuildContext context, {
+  required String message,
   SnackBarAction? action,
   double? actionOverflowThreshold,
-  bool? showCloseIcon,
-  Color? closeIconColor,
   Animation<double>? animation,
-  VoidCallback? onVisible,
-  DismissDirection? dismissDirection,
+  Color? backgroundColor,
+  SnackBarBehavior? behavior,
   Clip clipBehavior = Clip.hardEdge,
-  required BuildContext context,
-  required String message,
+  Color? closeIconColor,
+  DismissDirection? dismissDirection,
+  Duration? duration,
+  double? elevation,
+  double? margin,
+  VoidCallback? onVisible,
+  ShapeBorder? shape,
+  bool? showCloseIcon,
   Future<void> Function()? undo,
   String? undoMessage,
-  double? margin,
-  Duration? duration,
 }) {
   final double toastMargin = margin ?? EzConfig.marginVal;
 

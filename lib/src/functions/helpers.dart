@@ -133,7 +133,7 @@ Future<void> ezConfigLoader(BuildContext context) async {
 
   if (context.mounted) {
     ezSnackBar(
-      context: context,
+      context,
       message: kIsWeb
           ? EzConfig.l10n.ssRestartReminderWeb
           : EzConfig.l10n.ssRestartReminder,
