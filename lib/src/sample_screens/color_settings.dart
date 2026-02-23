@@ -414,7 +414,10 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: EzConfig.colors.primaryContainer),
+              border: Border.all(
+                color: EzConfig.colors.primaryContainer,
+                width: borderWidth,
+              ),
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,

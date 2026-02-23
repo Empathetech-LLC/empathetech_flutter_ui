@@ -212,7 +212,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         errorMaxLines: 1,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: buttonContainer),
+          borderSide: BorderSide(color: buttonContainer, width: borderWidth),
           borderRadius: ezRoundEdge,
           gapPadding: 0,
         ),
@@ -320,22 +320,40 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
       errorBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: colorScheme.errorContainer),
+        borderSide: BorderSide(
+          color: colorScheme.errorContainer,
+          width: borderWidth,
+        ),
       ),
       focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: buttonContainer),
+        borderSide: BorderSide(
+          color: buttonContainer,
+          width: borderWidth,
+        ),
       ),
       focusedErrorBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: colorScheme.error),
+        borderSide: BorderSide(
+          color: colorScheme.error,
+          width: borderWidth,
+        ),
       ),
       disabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: disabledOutline),
+        borderSide: BorderSide(
+          color: disabledOutline,
+          width: borderWidth,
+        ),
       ),
       enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: enabledOutline),
+        borderSide: BorderSide(
+          color: enabledOutline,
+          width: borderWidth,
+        ),
       ),
       border: UnderlineInputBorder(
-        borderSide: BorderSide(color: enabledOutline),
+        borderSide: BorderSide(
+          color: enabledOutline,
+          width: borderWidth,
+        ),
       ),
     ),
 
@@ -441,7 +459,10 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(
         color: colorScheme.surfaceDim,
-        border: Border.all(color: colorScheme.secondary),
+        border: Border.all(
+          color: colorScheme.secondary,
+          width: borderWidth,
+        ),
         borderRadius: ezRoundEdge,
       ),
       textStyle: textTheme.bodyLarge,

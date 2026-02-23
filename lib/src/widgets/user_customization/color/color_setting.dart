@@ -103,7 +103,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: backgroundColor),
+              border: Border.all(color: backgroundColor, width: borderWidth),
             ),
             child: CircleAvatar(
               backgroundColor: Color(recommended),
@@ -242,7 +242,10 @@ class _ColorSettingState extends State<EzColorSetting> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: EzConfig.colors.primaryContainer),
+              border: Border.all(
+                color: EzConfig.colors.primaryContainer,
+                width: borderWidth,
+              ),
             ),
             child: currColor == Colors.transparent
                 ? CircleAvatar(

@@ -62,7 +62,7 @@ const Set<String> rtlLanguageCodes = <String>{
 //* Theme Data *//
 
 /// 1.5
-const double borderWidth = 1.5;
+const double borderWidth = 2.0;
 
 /// Fit
 const String boxFitSuffix = 'Fit';

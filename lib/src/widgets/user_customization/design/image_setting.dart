@@ -707,7 +707,10 @@ class _ImageSettingState extends State<EzImageSetting> {
                 width: width,
                 height: height,
                 decoration: BoxDecoration(
-                  border: Border.all(color: EzConfig.colors.onSurface),
+                  border: Border.all(
+                    color: EzConfig.colors.onSurface,
+                    width: borderWidth,
+                  ),
                   borderRadius: ezRoundEdge,
                 ),
                 child: Column(
@@ -777,7 +780,10 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: EzConfig.colors.onSurface),
+              border: Border.all(
+                color: EzConfig.colors.onSurface,
+                width: borderWidth,
+              ),
             ),
             child: CircleAvatar(
               radius: EzConfig.iconSize + EzConfig.padding,
