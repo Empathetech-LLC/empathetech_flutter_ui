@@ -158,7 +158,7 @@ class EzIconButton extends StatelessWidget {
         ((enabled && !fauxDisabled)
             ? IconButton.styleFrom(
                 backgroundColor: buttonBackground,
-                side: BorderSide(color: enabledOutline),
+                side: BorderSide(color: enabledOutline, width: borderWidth),
                 iconSize: iSize,
               )
             : IconButton.styleFrom(
@@ -166,7 +166,7 @@ class EzIconButton extends StatelessWidget {
                 foregroundColor: EzConfig.colors.outline,
                 overlayColor: EzConfig.colors.outline,
                 shadowColor: Colors.transparent,
-                side: BorderSide(color: disabledOutline),
+                side: BorderSide(color: disabledOutline, width: borderWidth),
                 iconSize: iSize,
               ));
 

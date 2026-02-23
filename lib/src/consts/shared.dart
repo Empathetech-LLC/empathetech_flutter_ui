@@ -61,8 +61,14 @@ const Set<String> rtlLanguageCodes = <String>{
 
 //* Theme Data *//
 
+/// 1.5
+const double borderWidth = 1.5;
+
 /// Fit
 const String boxFitSuffix = 'Fit';
+
+/// 0xFF264941
+const Color chalkboardGreen = Color(0xFF264941);
 
 /// Opacity for highlight effects; on hover, on focus, etc
 /// Doubles as opacity minimum for crucial elements
@@ -89,6 +95,3 @@ const double selectionOpacity = 0.25;
 /// Shadow opacity should be "faster" than surface
 /// 1:1 looks foggy
 const double shadowMod = 0.333;
-
-/// 0xFF264941
-const Color chalkboardGreen = Color(0xFF264941);
