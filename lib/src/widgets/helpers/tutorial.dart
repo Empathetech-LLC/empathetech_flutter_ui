@@ -20,7 +20,7 @@ class EzTutorial extends StatelessWidget {
   final double? right;
 
   /// [AlertDialog.title] passthrough
-  final Widget title;
+  final Widget? title;
 
   /// Value for the [AlertDialog]'s [Text] content
   final String content;
@@ -39,7 +39,7 @@ class EzTutorial extends StatelessWidget {
     this.bottom,
     this.left,
     this.right,
-    required this.title,
+    this.title,
     required this.content,
     required this.acceptMessage,
     required this.onAccept,
