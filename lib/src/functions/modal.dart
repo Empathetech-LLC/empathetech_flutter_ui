@@ -26,7 +26,7 @@ Future<T?> ezModal<T>({
   bool useSafeArea = true,
   RouteSettings? routeSettings,
   AnimationController? transitionAnimationController,
-  double animMod = 0.667,
+  double animMod = 0.75,
   Offset? anchorPoint,
   AnimationStyle? sheetAnimationStyle,
   bool? requestFocus,
