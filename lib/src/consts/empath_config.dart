@@ -136,8 +136,8 @@ const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
 
-/// 500
-const int defaultAnimationDuration = 500;
+/// 400
+const int defaultAnimationDuration = 400;
 
 /// 0x45 / 255
 const double defaultButtonOutlineOpacity = 0.270588235294;
