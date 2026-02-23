@@ -45,6 +45,10 @@ class EzColorSettings extends StatefulWidget {
   /// Shared for both themes
   final Set<String>? saveSkip;
 
+  /// Defaults to [EzSeparator]
+  /// Shared for both themes
+  final Widget trail;
+
   /// Optional additional quick settings
   /// Will appear first, above the monochrome
   /// BYO spacers
@@ -77,6 +81,7 @@ class EzColorSettings extends StatefulWidget {
     this.androidPackage,
     this.resetSkip,
     this.saveSkip,
+    this.trail = const EzSeparator(),
 
     // Quick
     this.quickHeader,
@@ -251,7 +256,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             }
           },
         ),
-        EzConfig.separator,
+        widget.trail,
       ],
     );
   }

@@ -10,6 +10,10 @@ import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
+  /// Defaults to [EzHeader] when null
+  /// Provide a [SizedBox.shrink] to remove
+  final Widget? header;
+
   /// Locales to skip in the [EzLocaleSetting]
   /// Defaults to [english] to not dupe [americanEnglish]
   final Set<Locale>? skipLocales;
@@ -77,14 +81,15 @@ class EzSettingsHome extends StatefulWidget {
   final Set<String>? resetSkip;
 
   /// Widgets to be added below the [EzResetButton]
-  /// BYO leading spacer, trailing is always [EzSeparator]
-  final List<Widget>? footer;
+  /// Defaults to an [EzSeparator], if provided BYO trailing spacer
+  final List<Widget> footer;
 
   /// Empathetech settings landing page
   /// Contains global settings and [EzElevatedIconButton]s that lead to the rest of the settings pages
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
+    this.header,
     this.skipLocales,
     this.protest = false,
     this.inDistress = const <String>{'US'},
@@ -102,7 +107,7 @@ class EzSettingsHome extends StatefulWidget {
     this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSpacer(),
     this.resetSkip,
-    this.footer,
+    this.footer = const <Widget>[EzSeparator()],
   });
 
   @override
@@ -210,63 +215,60 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) => EzScrollView(
-        children: <Widget>[
-          EzHeader(),
+  Widget build(BuildContext context) => EzScrollView(children: <Widget>[
+        widget.header ?? EzHeader(),
 
-          // Right/left
-          EzDominantHandSwitch(redraw),
-          EzConfig.spacer,
+        // Right/left
+        EzDominantHandSwitch(redraw),
+        EzConfig.spacer,
 
-          // Theme mode
-          EzThemeModeSwitch(redraw),
-          EzConfig.spacer,
+        // Theme mode
+        EzThemeModeSwitch(redraw),
+        EzConfig.spacer,
 
-          // Language
-          EzLocaleSetting(
-            redraw,
-            skip: widget.skipLocales ?? <Locale>{english},
-            protest: widget.protest,
-            inDistress: widget.inDistress,
-          ),
-          widget.localeSpacer,
+        // Language
+        EzLocaleSetting(
+          redraw,
+          skip: widget.skipLocales ?? <Locale>{english},
+          protest: widget.protest,
+          inDistress: widget.inDistress,
+        ),
+        widget.localeSpacer,
 
-          // Additional settings
-          if (widget.additionalSettings != null) ...widget.additionalSettings!,
+        // Additional settings
+        if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
-          // Navigation buttons
-          ...navButtons(),
+        // Navigation buttons
+        ...navButtons(),
 
-          // Quick config
-          if (widget.quickConfigSpacer != null) ...<Widget>[
-            widget.quickConfigSpacer!,
-            EzQuickConfig(redraw),
-          ],
+        // Quick config
+        if (widget.quickConfigSpacer != null) ...<Widget>[
+          widget.quickConfigSpacer!,
+          EzQuickConfig(redraw),
+        ],
 
-          // Feeling lucky
-          if (widget.randomSpacer != null) ...<Widget>[
-            widget.randomSpacer!,
-            EzConfigRandomizer(
-              redraw,
-              appName: widget.appName,
-              androidPackage: widget.androidPackage,
-              saveSkip: widget.saveSkip,
-            ),
-          ],
-
-          // Reset button
-          widget.resetSpacer,
-          EzResetButton(
+        // Feeling lucky
+        if (widget.randomSpacer != null) ...<Widget>[
+          widget.randomSpacer!,
+          EzConfigRandomizer(
             redraw,
             appName: widget.appName,
             androidPackage: widget.androidPackage,
-            resetSkip: widget.resetSkip,
             saveSkip: widget.saveSkip,
           ),
-
-          // Footer
-          if (widget.footer != null) ...widget.footer!,
-          EzConfig.separator,
         ],
-      );
+
+        // Reset button
+        widget.resetSpacer,
+        EzResetButton(
+          redraw,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
+        ),
+
+        // Footer
+        ...widget.footer,
+      ]);
 }

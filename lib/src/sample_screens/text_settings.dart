@@ -46,6 +46,10 @@ class EzTextSettings extends StatelessWidget {
   /// Shared for both themes
   final Set<String>? saveSkip;
 
+  /// Defaults to [EzSeparator]
+  /// Shared for both themes
+  final Widget trail;
+
   /// Whether the onSurfaceColor (quick) setting should be shown
   final bool showOnSurface;
 
@@ -85,6 +89,7 @@ class EzTextSettings extends StatelessWidget {
     this.resetExtraLight,
     this.resetSkip,
     this.saveSkip,
+    this.trail = const EzSeparator(),
 
     // Quick
     this.showOnSurface = true,
@@ -131,6 +136,7 @@ class EzTextSettings extends StatelessWidget {
           extraLight: resetExtraLight,
           resetSkip: resetSkip,
           saveSkip: saveSkip,
+          trail: trail,
 
           // Quick
           showOnSurface: showOnSurface,
@@ -158,6 +164,7 @@ class _TextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
+  final Widget trail;
 
   // Quick
   final bool showOnSurface;
@@ -181,6 +188,7 @@ class _TextSettings extends StatefulWidget {
     required this.extraLight,
     required this.resetSkip,
     required this.saveSkip,
+    required this.trail,
     required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
@@ -309,6 +317,7 @@ class _TextSettingsState extends State<_TextSettings> {
             androidPackage: widget.androidPackage,
             resetSkip: widget.resetSkip,
             saveSkip: widget.saveSkip,
+            trail: widget.trail,
           )
         else
           _AdvancedTextSettings(
@@ -330,6 +339,7 @@ class _TextSettingsState extends State<_TextSettings> {
             androidPackage: widget.androidPackage,
             resetSkip: widget.resetSkip,
             saveSkip: widget.saveSkip,
+            trail: widget.trail,
           ),
       ],
     );
@@ -359,6 +369,7 @@ class _QuickTextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
+  final Widget trail;
 
   const _QuickTextSettings({
     required this.displayProvider,
@@ -380,6 +391,7 @@ class _QuickTextSettings extends StatefulWidget {
     required this.extraLight,
     required this.resetSkip,
     required this.saveSkip,
+    required this.trail,
   });
 
   @override
@@ -657,7 +669,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
         ),
-        EzConfig.separator,
+        widget.trail,
       ],
     );
   }
@@ -682,6 +694,7 @@ class _AdvancedTextSettings extends StatefulWidget {
   final String? androidPackage;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
+  final Widget trail;
 
   const _AdvancedTextSettings({
     required this.displayProvider,
@@ -699,6 +712,7 @@ class _AdvancedTextSettings extends StatefulWidget {
     required this.androidPackage,
     required this.resetSkip,
     required this.saveSkip,
+    required this.trail,
   });
 
   @override
@@ -1508,7 +1522,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
         ),
-        EzConfig.separator,
+        widget.trail,
       ],
     );
   }
