@@ -10,6 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 class EzSwitchPair extends StatefulWidget {
+  /// Easily disable the button
+  /// Useful if the functionality is async
+  final bool enabled;
+
   /// [EzRow.reverseHands] passthrough
   final bool reverseHands;
 
@@ -163,6 +167,8 @@ class EzSwitchPair extends StatefulWidget {
   /// Or and EzConfig optimized [valueKey] and optional [afterChanged]
   const EzSwitchPair({
     super.key,
+    this.enabled = true,
+
     // Row
     this.reverseHands = true,
     this.mainAxisSize = MainAxisSize.min,
@@ -236,23 +242,6 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
 
   late final double ratio = widget.scale ?? ezIconRatio();
 
-  // Define custom functions //
-
-  late final void Function(bool?) onChanged = widget.onChanged ??
-      (bool? choice) async {
-        if (choice == null) return;
-
-        if (widget.canChange != null) {
-          final bool canChange = await widget.canChange!(choice);
-          if (!canChange) return;
-        }
-
-        await EzConfig.setBool(widget.valueKey!, choice);
-        setState(() => value = choice);
-
-        widget.afterChanged?.call(choice);
-      };
-
   // Return the build //
 
   @override
@@ -288,12 +277,30 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
             // Dev's opinion: Material switches are better
             child: Switch(
               value: value,
-              onChanged: onChanged,
+              onChanged: widget.enabled
+                  ? widget.onChanged ??
+                      (bool? choice) async {
+                        if (choice == null) return;
+
+                        if (widget.canChange != null) {
+                          if (!await widget.canChange!(choice)) return;
+                        }
+
+                        await EzConfig.setBool(widget.valueKey!, choice);
+                        setState(() => value = choice);
+
+                        widget.afterChanged?.call(choice);
+                      }
+                  : null,
               activeThumbColor: widget.activeThumbColor,
               activeTrackColor: widget.activeTrackColor,
-              inactiveThumbColor: widget.inactiveThumbColor,
+              inactiveThumbColor:
+                  widget.inactiveThumbColor ?? EzConfig.colors.outline,
               inactiveTrackColor: widget.inactiveTrackColor,
-              trackOutlineColor: widget.trackOutlineColor,
+              trackOutlineColor: widget.enabled
+                  ? widget.trackOutlineColor
+                  : WidgetStatePropertyAll<Color>(
+                      EzConfig.colors.outlineVariant),
               trackOutlineWidth: widget.trackOutlineWidth,
               activeThumbImage: widget.activeThumbImage,
               onActiveThumbImageError: widget.onActiveThumbImageError,
