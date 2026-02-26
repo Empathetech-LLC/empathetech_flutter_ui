@@ -12,8 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:country_flags/country_flags.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
@@ -166,6 +168,38 @@ double ezDropdownWidth({
     EzConfig.padding +
     max(EzConfig.padding + EzConfig.iconSize, kMinInteractiveDimension);
 
+Widget ezFlag(Locale locale, {bool inDistress = false}) {
+  // Fix language code != flag code
+  switch (locale.languageCode) {
+    case 'fil':
+      locale = const Locale('tl'); // Filipino to Tagalog
+      break;
+
+    default:
+      break;
+  }
+
+  final double flagPadding = EzConfig.iconSize + EzConfig.padding;
+  final Widget flag = (locale.countryCode == null)
+      ? CountryFlag.fromLanguageCode(
+          locale.languageCode,
+          theme: ImageTheme(
+            shape: const Circle(),
+            width: flagPadding,
+          ),
+        )
+      : CountryFlag.fromCountryCode(
+          locale.countryCode!,
+          theme: ImageTheme(
+            height: flagPadding,
+            width: flagPadding,
+            shape: const Circle(),
+          ),
+        );
+
+  return inDistress ? Transform.rotate(angle: pi, child: flag) : flag;
+}
+
 /// [TargetPlatform] aware helper that will request/exit a fullscreen window
 /// Alias exists for [kIsWeb] support
 Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
@@ -188,6 +222,21 @@ double ezImageSize(BuildContext context) =>
     (EzConfig.iconSize /
         EzConfig.getDefault(
             EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
+
+/// Get the human readable name for [locale]
+String ezLocaleName(Locale locale, BuildContext context) {
+  final String? attempt = LocaleNames.of(context)?.nameOf(locale.languageCode);
+  if (attempt != null) return attempt;
+
+  switch (locale) {
+    case filipino:
+      return 'Filipino';
+    case creole:
+      return 'Creole';
+    default:
+      return 'Language';
+  }
+}
 
 /// A [Page] animator based on [EzConfig]
 Page<dynamic> ezPageBuilder(
