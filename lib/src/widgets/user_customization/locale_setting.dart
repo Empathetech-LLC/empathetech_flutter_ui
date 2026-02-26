@@ -5,10 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:country_flags/country_flags.dart';
-import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
   /// [EzConfig.rebuildLocale] passthrough
@@ -21,10 +18,7 @@ class EzLocaleSetting extends StatefulWidget {
   /// Works for both default and custom [locales]
   final Set<Locale>? skip;
 
-  /// [protest] to show a flipped flag
-  final bool protest;
-
-  /// Set of [String] language codes you'd like to (optionally) [protest]
+  /// Set of [String] language codes you'd like to protest
   final Set<String> inDistress;
 
   /// [EzElevatedIconButton] for updating the current [Locale]
@@ -34,7 +28,6 @@ class EzLocaleSetting extends StatefulWidget {
     super.key,
     this.locales,
     this.skip,
-    this.protest = false,
     this.inDistress = const <String>{'US'},
   });
 
@@ -43,62 +36,6 @@ class EzLocaleSetting extends StatefulWidget {
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
-  // Define the build data  //
-
-  late final List<Locale> locales;
-
-  Widget flag(
-    Locale lang, {
-    required double iconSize,
-    required double padding,
-  }) {
-    late final Widget flag;
-
-    // Fix language code != flag code
-    switch (lang.languageCode) {
-      case 'fil':
-        lang = const Locale('tl'); // Filipino to Tagalog
-        break;
-
-      default:
-        break;
-    }
-
-    flag = (lang.countryCode == null)
-        ? CountryFlag.fromLanguageCode(
-            lang.languageCode,
-            theme: ImageTheme(
-              shape: const Circle(),
-              width: iconSize + padding,
-            ),
-          )
-        : CountryFlag.fromCountryCode(
-            lang.countryCode!,
-            theme: ImageTheme(
-              height: iconSize + padding,
-              width: iconSize + padding,
-              shape: const Circle(),
-            ),
-          );
-
-    return (widget.protest && widget.inDistress.contains(lang.countryCode))
-        ? Transform.rotate(angle: pi, child: flag)
-        : flag;
-  }
-
-  // Define custom functions //
-
-  String manualNames(Locale locale) {
-    switch (locale) {
-      case filipino:
-        return 'Filipino';
-      case creole:
-        return 'Creole';
-      default:
-        return 'Language';
-    }
-  }
-
   // Init //
 
   @override
@@ -114,6 +51,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   }
 
   // Return the build //
+
+  late final List<Locale> locales;
 
   @override
   Widget build(BuildContext context) {
@@ -159,14 +98,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                               // Refresh the UI
                               await EzConfig.rebuildLocale(widget.onComplete);
                             },
-                            icon: flag(
+                            icon: ezFlag(
                               locale,
-                              iconSize: EzConfig.iconSize,
-                              padding: EzConfig.padding,
+                              inDistress: widget.inDistress
+                                  .contains(locale.countryCode),
                             ),
-                            label: LocaleNames.of(mContext)
-                                    ?.nameOf(locale.languageCode) ??
-                                manualNames(locale),
+                            label: ezLocaleName(locale, mContext),
                             labelPadding: false,
                           ),
                         ),
@@ -177,10 +114,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
               ],
             ),
           ),
-          icon: flag(
+          icon: ezFlag(
             EzConfig.locale,
-            iconSize: EzConfig.iconSize,
-            padding: EzConfig.padding,
+            inDistress: widget.inDistress.contains(EzConfig.locale.countryCode),
           ),
           label: EzConfig.l10n.ssLanguage,
           labelPadding: false,
