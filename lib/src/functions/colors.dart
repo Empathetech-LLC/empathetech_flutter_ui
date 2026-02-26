@@ -693,7 +693,8 @@ String getColorName(String key) {
     case darkSurfaceTintKey:
       return csSurfaceTint;
     default:
-      return key;
+      final String readable = ezCamelToTitle(key);
+      return readable.replaceAll(RegExp('(Light|Dark) '), '');
   }
 }
 
