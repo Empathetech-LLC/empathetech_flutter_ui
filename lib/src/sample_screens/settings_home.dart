@@ -18,9 +18,6 @@ class EzSettingsHome extends StatefulWidget {
   /// Defaults to [english] to not dupe [americanEnglish]
   final Set<Locale>? skipLocales;
 
-  /// [EzLocaleSetting.protest] passthrough
-  final bool protest;
-
   /// [EzLocaleSetting.inDistress] passthrough
   final Set<String> inDistress;
 
@@ -91,7 +88,6 @@ class EzSettingsHome extends StatefulWidget {
     super.key,
     this.header,
     this.skipLocales,
-    this.protest = false,
     this.inDistress = const <String>{'US'},
     this.localeSpacer = const EzDivider(),
     this.additionalSettings,
@@ -230,7 +226,6 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         EzLocaleSetting(
           redraw,
           skip: widget.skipLocales ?? <Locale>{english},
-          protest: widget.protest,
           inDistress: widget.inDistress,
         ),
         widget.localeSpacer,
