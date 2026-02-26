@@ -882,6 +882,7 @@ class SettingsHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         const EzScreen(EzSettingsHome(
+          inDistress: <String>{},
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
           designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}

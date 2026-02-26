@@ -16,6 +16,7 @@ class SettingsHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
         const EzScreen(EzSettingsHome(
+          inDistress: <String>{},
           colorSettingsPath: colorSettingsPath,
           designSettingsPath: designSettingsPath,
           layoutSettingsPath: layoutSettingsPath,
