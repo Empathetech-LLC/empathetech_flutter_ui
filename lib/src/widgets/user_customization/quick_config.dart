@@ -53,7 +53,7 @@ class EzQuickConfig extends StatelessWidget {
     final EdgeInsets wrapPadding = EzInsets.wrap(EzConfig.spacing);
 
     return EzElevatedIconButton(
-      onPressed: () => ezModal(
+      onPressed: () async => ezModal(
         context: context,
         builder: (BuildContext mContext) {
           bool updateBoth = false;

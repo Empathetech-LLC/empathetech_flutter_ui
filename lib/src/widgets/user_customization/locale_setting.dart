@@ -62,7 +62,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       hint: EzConfig.l10n.ssLangHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
-          onPressed: () => ezModal(
+          onPressed: () async => ezModal(
             context: context,
             builder: (BuildContext mContext) => EzScrollView(
               mainAxisSize: MainAxisSize.min,
