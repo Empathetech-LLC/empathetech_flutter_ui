@@ -108,6 +108,9 @@ class EzMaterialAction extends StatelessWidget {
   /// [EzTextButton.text] passthrough
   final String text;
 
+  /// Optional [Semantics] override for [text]
+  final String? semantics;
+
   /// [EzTextButton.onPressed] passthrough
   final void Function() onPressed;
 
@@ -124,6 +127,7 @@ class EzMaterialAction extends StatelessWidget {
   const EzMaterialAction({
     super.key,
     required this.text,
+    this.semantics,
     required this.onPressed,
     this.isDefaultAction = false,
     this.isDestructiveAction = false,
@@ -147,6 +151,7 @@ class EzMaterialAction extends StatelessWidget {
         padding: EzInsets.wrap(EzConfig.spacing),
       ),
       text: text,
+      semantics: semantics,
       textStyle: textStyle,
     );
   }
