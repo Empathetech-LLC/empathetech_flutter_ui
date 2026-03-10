@@ -15,6 +15,7 @@ Future<dynamic> ezLogAlert(
   String? title,
   required String message,
   List<Widget>? customActions,
+  bool needsClose = true,
 }) async {
   ezLog(message);
 
@@ -27,7 +28,7 @@ Future<dynamic> ezLogAlert(
       ),
       contents: <Widget>[Text(message, textAlign: TextAlign.center)],
       actions: customActions,
-      needsClose: customActions == null,
+      needsClose: needsClose,
     ),
   );
 }
