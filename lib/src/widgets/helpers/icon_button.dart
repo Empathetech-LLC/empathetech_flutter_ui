@@ -93,9 +93,9 @@ class EzIconButton extends StatelessWidget {
   /// Overriding [style] makes [enabled] moot
   final bool enabled;
 
-  /// Switches to disabled styling when false
+  /// Switches to disabled styling when true
   /// [onPressed] is unchanged
-  /// Overriding [style] makes [enabled] moot
+  /// Overriding [style] makes [fauxDisabled] moot
   final bool fauxDisabled;
 
   /// [IconButton.isSelected] passthrough
