@@ -35,9 +35,9 @@ class EzAlertDialog extends AlertDialog {
     final Widget? dialogContent = content ??
         ((contents == null) ? null : EzScrollView(children: contents!));
 
-    late final Widget closeAction = EzTextButton(
-      onPressed: () => Navigator.of(context).pop(),
+    late final Widget closeAction = EzMaterialAction(
       text: EzConfig.l10n.gClose,
+      onPressed: () => Navigator.of(context).pop(),
     );
 
     late final List<Widget>? closedActions = needsClose
