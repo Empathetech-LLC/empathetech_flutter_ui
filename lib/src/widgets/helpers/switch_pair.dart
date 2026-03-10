@@ -14,6 +14,11 @@ class EzSwitchPair extends StatefulWidget {
   /// Useful if the functionality is async
   final bool enabled;
 
+  /// Switches to disabled styling when true
+  /// The switch is unchanged
+  /// Overriding [style] makes [fauxDisabled] moot
+  final bool fauxDisabled;
+
   /// [EzRow.reverseHands] passthrough
   final bool reverseHands;
 
@@ -168,6 +173,7 @@ class EzSwitchPair extends StatefulWidget {
   const EzSwitchPair({
     super.key,
     this.enabled = true,
+    this.fauxDisabled = false,
 
     // Row
     this.reverseHands = true,
@@ -292,12 +298,16 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
                         widget.afterChanged?.call(choice);
                       }
                   : null,
-              activeThumbColor: widget.activeThumbColor,
-              activeTrackColor: widget.activeTrackColor,
+              activeThumbColor: widget.fauxDisabled
+                  ? widget.inactiveThumbColor ?? EzConfig.colors.outline
+                  : widget.activeThumbColor,
+              activeTrackColor: widget.fauxDisabled
+                  ? widget.inactiveTrackColor
+                  : widget.activeTrackColor,
               inactiveThumbColor:
                   widget.inactiveThumbColor ?? EzConfig.colors.outline,
               inactiveTrackColor: widget.inactiveTrackColor,
-              trackOutlineColor: widget.enabled
+              trackOutlineColor: (widget.enabled && !widget.fauxDisabled)
                   ? widget.trackOutlineColor
                   : WidgetStatePropertyAll<Color>(
                       EzConfig.colors.outlineVariant),
