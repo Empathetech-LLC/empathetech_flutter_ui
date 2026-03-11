@@ -71,10 +71,11 @@ String screenshotHint() {
 // Readability //
 
 /// Wide check, true if granted, limited, or provisional
-bool allowedPermCheck(PermissionStatus status) =>
-    status == PermissionStatus.granted ||
-    status == PermissionStatus.limited ||
-    status == PermissionStatus.provisional;
+bool allowedPermCheck(PermissionStatus? status) =>
+    status != null &&
+    (status == PermissionStatus.granted ||
+        status == PermissionStatus.limited ||
+        status == PermissionStatus.provisional);
 
 /// More readable than...
 /// FocusScope.of(context).unfocus();
@@ -84,8 +85,9 @@ void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 /// Then [doNothing]!
 void doNothing() {}
 
-/// Wide check, true if denied, restricted, or permanently denied
-bool deniedPermCheck(PermissionStatus status) =>
+/// Wide check, true if denied, restricted, or permanently denied, or null
+bool deniedPermCheck(PermissionStatus? status) =>
+    status == null ||
     status == PermissionStatus.denied ||
     status == PermissionStatus.restricted ||
     status == PermissionStatus.permanentlyDenied;
