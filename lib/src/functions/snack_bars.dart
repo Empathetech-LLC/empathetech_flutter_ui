@@ -58,7 +58,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar(
 
   late final Duration readingTime = (undo == null)
       ? ezReadingTime(message)
-      : ezReadingTime(message) + const Duration(seconds: 1);
+      : ezReadingTime(message) + const Duration(seconds: 2);
   final Duration toastLength = duration ?? readingTime;
 
   return ScaffoldMessenger.of(context).showSnackBar(
