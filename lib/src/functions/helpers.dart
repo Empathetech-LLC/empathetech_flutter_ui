@@ -71,11 +71,16 @@ String screenshotHint() {
 // Readability //
 
 /// Wide check, true if granted, limited, or provisional
-bool allowedPermCheck(PermissionStatus? status) =>
-    status != null &&
-    (status == PermissionStatus.granted ||
-        status == PermissionStatus.limited ||
-        status == PermissionStatus.provisional);
+bool allowedPermCheck(PermissionStatus? status) {
+  switch (status) {
+    case PermissionStatus.granted:
+    case PermissionStatus.limited:
+    case PermissionStatus.provisional:
+      return true;
+    default:
+      return false;
+  }
+}
 
 /// More readable than...
 /// FocusScope.of(context).unfocus();
@@ -86,11 +91,17 @@ void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 void doNothing() {}
 
 /// Wide check, true if denied, restricted, or permanently denied, or null
-bool deniedPermCheck(PermissionStatus? status) =>
-    status == null ||
-    status == PermissionStatus.denied ||
-    status == PermissionStatus.restricted ||
-    status == PermissionStatus.permanentlyDenied;
+bool deniedPermCheck(PermissionStatus? status) {
+  switch (status) {
+    case null:
+    case PermissionStatus.denied:
+    case PermissionStatus.permanentlyDenied:
+    case PermissionStatus.restricted:
+      return true;
+    default:
+      return false;
+  }
+}
 
 /// More readable than...
 /// MediaQuery.of(context).size.height
