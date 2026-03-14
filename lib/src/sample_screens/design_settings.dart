@@ -22,9 +22,6 @@ class EzDesignSettings extends StatefulWidget {
   /// BYO tailing spacer, leading spacer is a custom [EzSpacer]
   final List<Widget>? beforeDesign;
 
-  /// Whether to include animation duration control
-  final bool includeAnimation;
-
   /// Whether to include the background image setting
   /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
   final bool includeBackgroundImage;
@@ -37,12 +34,6 @@ class EzDesignSettings extends StatefulWidget {
   /// Moot if [includeBackgroundImage] is false
   final String? lightBackgroundCredits;
 
-  /// Whether to include the scrollbar visibility toggle
-  final bool includeScroll;
-
-  /// Whether to include icon size controls
-  final bool includeIconSize;
-
   /// Optional additional settings at the bottom of the page (above the (optional) reset button)
   /// BYO leading spacer, trailing is [resetSpacer]
   final List<Widget>? afterDesign;
@@ -51,11 +42,11 @@ class EzDesignSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [darkDesignKeys], [darkHideScrollKey], [darkIconSizeKey] are included by default
+  /// [darkDesignKeys] by default
   final Set<String>? resetExtraDark;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [lightDesignKeys], [lightHideScrollKey], [lightIconSizeKey] are included by default
+  /// [lightDesignKeys] by default
   final Set<String>? resetExtraLight;
 
   /// [EzResetButton.appName] passthrough
@@ -81,12 +72,9 @@ class EzDesignSettings extends StatefulWidget {
     this.updateBoth = false,
     this.themeLink,
     this.beforeDesign,
-    this.includeAnimation = true,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.includeScroll = true,
-    this.includeIconSize = true,
     this.afterDesign,
     this.resetSpacer = const EzDivider(),
     this.resetExtraDark,
@@ -150,98 +138,96 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       if (widget.beforeDesign != null) ...widget.beforeDesign!,
 
       // Animation duration
-      if (widget.includeAnimation) ...<Widget>[
-        EzElevatedIconButton(
-          onPressed: () async {
-            double animDuration = EzConfig.animDur.toDouble();
-            final double backup = animDuration;
+      EzElevatedIconButton(
+        onPressed: () async {
+          double animDuration = EzConfig.animDur.toDouble();
+          final double backup = animDuration;
 
-            await ezModal(
-              context: context,
-              builder: (_) => StatefulBuilder(
-                builder: (_, StateSetter setModal) => EzScrollView(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    // Preview
-                    SizedBox(
-                      height: EzConfig.iconSize * 3,
-                      child: _AnimationPreview(
-                        duration: animDuration.toInt(),
-                        iconSize: EzConfig.iconSize,
-                      ),
+          await ezModal(
+            context: context,
+            builder: (_) => StatefulBuilder(
+              builder: (_, StateSetter setModal) => EzScrollView(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  // Preview
+                  SizedBox(
+                    height: EzConfig.iconSize * 3,
+                    child: _AnimationPreview(
+                      duration: animDuration.toInt(),
+                      iconSize: EzConfig.iconSize,
                     ),
-                    EzConfig.spacer,
+                  ),
+                  EzConfig.spacer,
 
-                    // Slider
-                    Text(
-                      EzConfig.l10n.dsMilliseconds,
-                      style: EzConfig.styles.bodyLarge,
-                    ),
-                    ConstrainedBox(
-                      constraints:
-                          BoxConstraints(maxWidth: ScreenSize.small.size),
-                      child: Slider(
-                        value: animDuration,
-                        min: minAnimationDuration.toDouble(),
-                        max: maxAnimationDuration.toDouble(),
-                        divisions: 20,
-                        label: animDuration.toStringAsFixed(0),
-                        onChanged: (double value) =>
-                            setModal(() => animDuration = value),
-                        onChangeEnd: (double value) {
-                          if (widget.updateBoth || EzConfig.isDark) {
-                            EzConfig.setInt(
-                              darkAnimationDurationKey,
-                              value.toInt(),
-                            );
-                          }
-
-                          if (widget.updateBoth || !EzConfig.isDark) {
-                            EzConfig.setInt(
-                              lightAnimationDurationKey,
-                              value.toInt(),
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                    EzConfig.spacer,
-
-                    // Reset button
-                    EzElevatedIconButton(
-                      onPressed: () async {
+                  // Slider
+                  Text(
+                    EzConfig.l10n.dsMilliseconds,
+                    style: EzConfig.styles.bodyLarge,
+                  ),
+                  ConstrainedBox(
+                    constraints:
+                        BoxConstraints(maxWidth: ScreenSize.small.size),
+                    child: Slider(
+                      value: animDuration,
+                      min: minAnimationDuration.toDouble(),
+                      max: maxAnimationDuration.toDouble(),
+                      divisions: 20,
+                      label: animDuration.toStringAsFixed(0),
+                      onChanged: (double value) =>
+                          setModal(() => animDuration = value),
+                      onChangeEnd: (double value) {
                         if (widget.updateBoth || EzConfig.isDark) {
-                          await EzConfig.remove(darkAnimationDurationKey);
-                          setModal(() => animDuration =
-                              (EzConfig.getDefault(darkAnimationDurationKey)
-                                      as int)
-                                  .toDouble());
+                          EzConfig.setInt(
+                            darkAnimationDurationKey,
+                            value.toInt(),
+                          );
                         }
 
                         if (widget.updateBoth || !EzConfig.isDark) {
-                          await EzConfig.remove(lightAnimationDurationKey);
-                          setModal(() => animDuration =
-                              (EzConfig.getDefault(lightAnimationDurationKey)
-                                      as int)
-                                  .toDouble());
+                          EzConfig.setInt(
+                            lightAnimationDurationKey,
+                            value.toInt(),
+                          );
                         }
                       },
-                      icon: const Icon(Icons.refresh),
-                      label: EzConfig.l10n.gReset,
                     ),
-                    EzConfig.separator,
-                  ],
-                ),
-              ),
-            );
+                  ),
+                  EzConfig.spacer,
 
-            if (animDuration != backup) await EzConfig.rebuildUI(redraw);
-          },
-          label: EzConfig.l10n.dsAnimDuration,
-          icon: const Icon(Icons.timer_outlined),
-        ),
-        EzConfig.spacer,
-      ],
+                  // Reset button
+                  EzElevatedIconButton(
+                    onPressed: () async {
+                      if (widget.updateBoth || EzConfig.isDark) {
+                        await EzConfig.remove(darkAnimationDurationKey);
+                        setModal(() => animDuration =
+                            (EzConfig.getDefault(darkAnimationDurationKey)
+                                    as int)
+                                .toDouble());
+                      }
+
+                      if (widget.updateBoth || !EzConfig.isDark) {
+                        await EzConfig.remove(lightAnimationDurationKey);
+                        setModal(() => animDuration =
+                            (EzConfig.getDefault(lightAnimationDurationKey)
+                                    as int)
+                                .toDouble());
+                      }
+                    },
+                    icon: const Icon(Icons.refresh),
+                    label: EzConfig.l10n.gReset,
+                  ),
+                  EzConfig.separator,
+                ],
+              ),
+            ),
+          );
+
+          if (animDuration != backup) await EzConfig.rebuildUI(redraw);
+        },
+        label: EzConfig.l10n.dsAnimDuration,
+        icon: const Icon(Icons.timer_outlined),
+      ),
+      EzConfig.spacer,
 
       // Background image
       if (widget.includeBackgroundImage) ...<Widget>[
@@ -463,31 +449,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         label: EzConfig.l10n.dsButtonOpacity,
         icon: const Icon(Icons.opacity),
       ),
-      (widget.includeScroll || widget.includeIconSize)
-          ? EzConfig.divider
-          : EzConfig.spacer,
-
-      // Scrollbar toggle
-      if (widget.includeScroll) ...<Widget>[
-        EzSwitchPair(
-          valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
-          afterChanged: (bool? value) async {
-            if (value == null) return;
-            if (widget.updateBoth) {
-              await EzConfig.setBool(
-                  EzConfig.isDark ? lightHideScrollKey : darkHideScrollKey,
-                  value);
-            }
-            await EzConfig.rebuildUI(redraw);
-          },
-          text: EzConfig.l10n.lsScroll,
-        ),
-        EzConfig.spacer,
-      ],
-
-      // Icon size
-      if (widget.includeIconSize)
-        EzIconSizeSetting(updateBoth: widget.updateBoth, fullCheck: false),
 
       // After background
       if (widget.afterDesign != null) ...widget.afterDesign!,
@@ -507,8 +468,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             await EzConfig.removeKeys(<String>{
               ...darkDesignKeys.keys.toSet(),
               darkColorSchemeImageKey,
-              if (widget.includeIconSize) darkIconSizeKey,
-              if (widget.includeScroll) darkHideScrollKey,
             });
 
             if (widget.resetExtraDark != null) {
@@ -520,8 +479,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             await EzConfig.removeKeys(<String>{
               ...lightDesignKeys.keys.toSet(),
               lightColorSchemeImageKey,
-              if (widget.includeIconSize) lightIconSizeKey,
-              if (widget.includeScroll) lightHideScrollKey,
             });
 
             if (widget.resetExtraLight != null) {
