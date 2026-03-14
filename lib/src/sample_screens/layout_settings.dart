@@ -149,16 +149,35 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
       ),
       EzConfig.separator,
 
-      // Hide scroll
+      // Show back FAB
       EzSwitchPair(
-        valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
+        valueKey: EzConfig.isDark ? darkShowBackFABKey : lightShowBackFABKey,
         afterChanged: (bool? value) async {
           if (value == null) return;
+
           if (widget.updateBoth) {
             await EzConfig.setBool(
-                EzConfig.isDark ? lightHideScrollKey : darkHideScrollKey,
+                EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey,
                 value);
           }
+
+          await EzConfig.rebuildUI(redraw);
+        },
+        text: EzConfig.l10n.lsScroll,
+      ),
+
+      // Show scroll
+      EzSwitchPair(
+        valueKey: EzConfig.isDark ? darkShowScrollKey : lightShowScrollKey,
+        afterChanged: (bool? value) async {
+          if (value == null) return;
+
+          if (widget.updateBoth) {
+            await EzConfig.setBool(
+                EzConfig.isDark ? lightShowScrollKey : darkShowScrollKey,
+                value);
+          }
+
           await EzConfig.rebuildUI(redraw);
         },
         text: EzConfig.l10n.lsScroll,

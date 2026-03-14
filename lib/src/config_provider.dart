@@ -83,7 +83,8 @@ class EzConfigProvider extends ChangeNotifier {
         rowSpacer: const EzSpacer(isDark: true, vertical: false),
         separator: const EzSeparator(isDark: true),
         divider: const EzDivider(),
-        hideScroll: EzConfig.get(darkHideScrollKey),
+        showBackFAB: EzConfig.get(darkShowBackFABKey),
+        showScroll: EzConfig.get(darkShowScrollKey),
       );
       _text = EzTextCache(
         EzConfig.get(darkIconSizeKey),
@@ -107,7 +108,8 @@ class EzConfigProvider extends ChangeNotifier {
         rowSpacer: const EzSpacer(isDark: false, vertical: false),
         separator: const EzSeparator(isDark: false),
         divider: const EzDivider(),
-        hideScroll: EzConfig.get(lightHideScrollKey),
+        showBackFAB: EzConfig.get(lightShowBackFABKey),
+        showScroll: EzConfig.get(lightShowScrollKey),
       );
       _text = EzTextCache(
         EzConfig.get(lightIconSizeKey),
@@ -307,7 +309,8 @@ class EzLayoutCache {
   final EzSeparator separator;
   final EzDivider divider;
 
-  final bool hideScroll;
+  final bool showBackFAB;
+  final bool showScroll;
 
   /// Theme aware tracker for frequently used layout values...
   /// Margin, padding, and spacing
@@ -323,7 +326,8 @@ class EzLayoutCache {
     required this.rowSpacer,
     required this.separator,
     required this.divider,
-    required this.hideScroll,
+    required this.showBackFAB,
+    required this.showScroll,
   });
 }
 

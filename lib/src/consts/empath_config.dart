@@ -561,12 +561,14 @@ const Map<String, Object> empathMobileConfig = <String, Object>{
   // Dark
   darkPaddingKey: defaultMobilePadding,
   darkSpacingKey: defaultMobileSpacing,
-  darkHideScrollKey: true,
+  darkShowBackFABKey: false,
+  darkShowScrollKey: false,
 
   // Light
   lightPaddingKey: defaultMobilePadding,
   lightSpacingKey: defaultMobileSpacing,
-  lightHideScrollKey: true,
+  lightShowBackFABKey: false,
+  lightShowScrollKey: false,
 };
 
 /// [baseEmpathConfig] with a more open layout and visible scrolls
@@ -581,12 +583,14 @@ const Map<String, Object> empathDesktopConfig = <String, Object>{
   // Dark
   darkPaddingKey: defaultDesktopPadding,
   darkSpacingKey: defaultDesktopSpacing,
-  darkHideScrollKey: false,
+  darkShowBackFABKey: true,
+  darkShowScrollKey: true,
 
   // Light
   lightPaddingKey: defaultDesktopPadding,
   lightSpacingKey: defaultDesktopSpacing,
-  lightHideScrollKey: false,
+  lightShowBackFABKey: true,
+  lightShowScrollKey: true,
 };
 
 /// [EzConfig] set to all recommended max values
@@ -610,8 +614,10 @@ final Map<String, Object> empathMaxConfig = <String, Object>{
   darkSpacingKey: maxSpacing,
   lightSpacingKey: maxSpacing,
 
-  darkHideScrollKey: false,
-  lightHideScrollKey: false,
+  darkShowBackFABKey: true,
+  lightShowBackFABKey: true,
+  darkShowScrollKey: true,
+  lightShowScrollKey: true,
 
   // Text settings //
 
@@ -690,8 +696,10 @@ final Map<String, Object> empathMinConfig = <String, Object>{
   darkSpacingKey: minSpacing,
   lightSpacingKey: minSpacing,
 
-  darkHideScrollKey: true,
-  lightHideScrollKey: true,
+  darkShowBackFABKey: true,
+  lightShowBackFABKey: true,
+  darkShowScrollKey: true,
+  lightShowScrollKey: true,
 
   // Text settings //
 

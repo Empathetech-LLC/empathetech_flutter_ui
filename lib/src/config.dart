@@ -499,7 +499,8 @@ Must be one of [int, bool, double, String, List<String>]''');
         (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
       );
 
-      await setBool(darkHideScrollKey, random.nextBool());
+      await setBool(darkShowBackFABKey, random.nextBool());
+      await setBool(darkShowScrollKey, random.nextBool());
 
       // Update text settings //
 
@@ -625,7 +626,8 @@ Must be one of [int, bool, double, String, List<String>]''');
         (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
       );
 
-      await setBool(lightHideScrollKey, random.nextBool());
+      await setBool(lightShowBackFABKey, random.nextBool());
+      await setBool(lightShowScrollKey, random.nextBool());
 
       // Update text settings //
 
@@ -860,7 +862,10 @@ Must be one of [int, bool, double, String, List<String>]''');
   static EzDivider get divider => _provPoint.layout.divider;
 
   /// Theme aware alias
-  static bool get hideScroll => _provPoint.layout.hideScroll;
+  static bool get showBackFAB => _provPoint.layout.showBackFAB;
+
+  /// Theme aware alias
+  static bool get showScroll => _provPoint.layout.showScroll;
 
   /// Theme aware alias
   static double get iconSize => _provPoint.text.iconSize;

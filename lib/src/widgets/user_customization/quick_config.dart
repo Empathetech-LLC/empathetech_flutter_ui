@@ -157,7 +157,8 @@ class EzBigButtonsConfig extends StatelessWidget {
         await EzConfig.setDouble(darkPaddingKey, 25.0);
         await EzConfig.setDouble(darkSpacingKey, 40.0);
       }
-      await EzConfig.setBool(darkHideScrollKey, false);
+      await EzConfig.setBool(darkShowBackFABKey, true);
+      await EzConfig.setBool(darkShowScrollKey, true);
 
       // Conditionally update text
       if (EzConfig.iconSize < 25.0) {
@@ -175,7 +176,8 @@ class EzBigButtonsConfig extends StatelessWidget {
         await EzConfig.setDouble(lightPaddingKey, 25.0);
         await EzConfig.setDouble(lightSpacingKey, 40.0);
       }
-      await EzConfig.setBool(lightHideScrollKey, false);
+      await EzConfig.setBool(lightShowBackFABKey, true);
+      await EzConfig.setBool(lightShowScrollKey, true);
 
       // Conditionally update text
       if (EzConfig.iconSize < 25.0) {
@@ -234,7 +236,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
         await EzConfig.setDouble(darkPaddingKey, 20.0);
         await EzConfig.setDouble(darkSpacingKey, 35.0);
       }
-      await EzConfig.setBool(darkHideScrollKey, true);
+      await EzConfig.setBool(darkShowBackFABKey, false);
+      await EzConfig.setBool(darkShowScrollKey, false);
 
       // Update text //
 
@@ -314,7 +317,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
         await EzConfig.setDouble(lightPaddingKey, 20.0);
         await EzConfig.setDouble(lightSpacingKey, 35.0);
       }
-      await EzConfig.setBool(lightHideScrollKey, true);
+      await EzConfig.setBool(lightShowBackFABKey, false);
+      await EzConfig.setBool(lightShowScrollKey, false);
     }
 
     // Update text //

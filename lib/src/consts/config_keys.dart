@@ -480,14 +480,16 @@ const String darkMarginKey = 'darkMargin';
 const String darkPaddingKey = 'darkPadding';
 const String darkSpacingKey = 'darkSpacing';
 
-const String darkHideScrollKey = 'darkHideScroll';
+const String darkShowBackFABKey = 'darkShowBackFAB';
+const String darkShowScrollKey = 'darkShowScroll';
 
-/// [margin, padding, spacing, hideScroll]
+/// [margin, padding, spacing, showBackFAB, showScroll]
 const Map<String, Type> darkLayoutKeys = <String, Type>{
   darkMarginKey: double,
   darkPaddingKey: double,
   darkSpacingKey: double,
-  darkHideScrollKey: bool,
+  darkShowBackFABKey: bool,
+  darkShowScrollKey: bool,
 };
 
 // Light theme //
@@ -496,21 +498,23 @@ const String lightMarginKey = 'lightMargin';
 const String lightPaddingKey = 'lightPadding';
 const String lightSpacingKey = 'lightSpacing';
 
-const String lightHideScrollKey = 'lightHideScroll';
+const String lightShowBackFABKey = 'lightShowBackFAB';
+const String lightShowScrollKey = 'lightShowScroll';
 
-/// [margin, padding, spacing, hideScroll]
+/// [margin, padding, spacing, showBackFAB, showScroll]
 const Map<String, Type> lightLayoutKeys = <String, Type>{
   lightMarginKey: double,
   lightPaddingKey: double,
   lightSpacingKey: double,
-  lightHideScrollKey: bool,
+  lightShowBackFABKey: bool,
+  lightShowScrollKey: bool,
 };
 
 // Shared //
 
 /// [dark, light]
 ///                X
-/// [margin, padding, spacing, hideScroll]
+/// [margin, padding, spacing, showBackFAB, showScroll]
 const Map<String, Type> allLayoutKeys = <String, Type>{
   ...darkLayoutKeys,
   ...lightLayoutKeys,

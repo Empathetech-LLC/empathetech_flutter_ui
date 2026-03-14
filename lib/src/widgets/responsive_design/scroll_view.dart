@@ -219,7 +219,7 @@ class _EzScrollViewState extends State<EzScrollView> {
                 ),
     );
 
-    if (widget.thumbVisibility ?? !EzConfig.hideScroll) {
+    if (widget.thumbVisibility ?? EzConfig.showScroll) {
       core = Scrollbar(
         controller: controller,
         thumbVisibility: true,
@@ -235,7 +235,7 @@ class _EzScrollViewState extends State<EzScrollView> {
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
-        scrollbars: widget.thumbVisibility ?? !EzConfig.hideScroll,
+        scrollbars: widget.thumbVisibility ?? EzConfig.showScroll,
         dragDevices: widget.scrollDirection == Axis.vertical
             ? <PointerDeviceKind>{
                 PointerDeviceKind.invertedStylus,
