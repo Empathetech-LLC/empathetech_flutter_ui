@@ -61,8 +61,6 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
   final Color buttonContainer =
       colorScheme.primaryContainer.withValues(alpha: outlineOpacity);
-  final Color enabledOutline =
-      colorScheme.outline.withValues(alpha: outlineOpacity);
   final Color disabledOutline =
       colorScheme.outlineVariant.withValues(alpha: outlineOpacity);
 
@@ -321,13 +319,13 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       errorMaxLines: 1,
       errorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: colorScheme.errorContainer,
+          color: colorScheme.error,
           width: borderWidth,
         ),
       ),
       focusedBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: buttonContainer,
+          color: colorScheme.secondary.withValues(alpha: outlineOpacity),
           width: borderWidth,
         ),
       ),
@@ -345,13 +343,13 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       ),
       enabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: enabledOutline,
+          color: buttonContainer,
           width: borderWidth,
         ),
       ),
       border: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: enabledOutline,
+          color: buttonContainer,
           width: borderWidth,
         ),
       ),
