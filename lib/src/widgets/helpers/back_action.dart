@@ -13,7 +13,7 @@ class EzBackAction extends StatelessWidget {
   const EzBackAction({super.key});
 
   @override
-  Widget build(BuildContext context) => Navigator.canPop(context)
+  Widget build(BuildContext context) => ezRootNav.currentState!.canPop()
       ? IconButton(
           onPressed: () => Navigator.of(context).maybePop(),
           tooltip: EzConfig.l10n.gBack,
