@@ -557,7 +557,10 @@ class EFUILangEn extends EFUILang {
   String get lsSpacing => 'Spacing';
 
   @override
-  String get lsScroll => 'Hide scrollbars';
+  String get lsShowBack => 'Show back button';
+
+  @override
+  String get lsShowScroll => 'Show scrollbars';
 
   @override
   String lsReset(Object themeType) {
@@ -1223,7 +1226,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get lsSpacing => 'Spacing';
 
   @override
-  String get lsScroll => 'Hide scrollbars';
+  String get lsShowBack => 'Show back button';
+
+  @override
+  String get lsShowScroll => 'Show scrollbars';
 
   @override
   String lsReset(Object themeType) {

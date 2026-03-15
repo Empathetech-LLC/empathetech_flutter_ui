@@ -1131,11 +1131,17 @@ abstract class EFUILang {
   /// **'Spacing'**
   String get lsSpacing;
 
-  /// No description provided for @lsScroll.
+  /// No description provided for @lsShowBack.
   ///
   /// In en, this message translates to:
-  /// **'Hide scrollbars'**
-  String get lsScroll;
+  /// **'Show back button'**
+  String get lsShowBack;
+
+  /// No description provided for @lsShowScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show scrollbars'**
+  String get lsShowScroll;
 
   /// No description provided for @lsReset.
   ///

@@ -561,7 +561,10 @@ class EFUILangEs extends EFUILang {
   String get lsSpacing => 'Espaciado';
 
   @override
-  String get lsScroll => 'Ocultar las barras de desplazamiento';
+  String get lsShowBack => 'Mostrar botón de retroceso';
+
+  @override
+  String get lsShowScroll => 'Mostrar barras de desplazamiento';
 
   @override
   String lsReset(Object themeType) {

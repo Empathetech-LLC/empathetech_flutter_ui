@@ -229,7 +229,8 @@
   "lsPadding": "Acolchado",
   "lsSpacing": "Espaciado",
 
-  "lsScroll": "Ocultar las barras de desplazamiento",
+  "lsShowBack": "Mostrar botón de retroceso",
+  "lsShowScroll": "Mostrar barras de desplazamiento",
 
   "lsReset": "¿Restablecer el esquema de {themeType}?",
 

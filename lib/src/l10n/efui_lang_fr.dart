@@ -561,7 +561,10 @@ class EFUILangFr extends EFUILang {
   String get lsSpacing => 'Espacement';
 
   @override
-  String get lsScroll => 'Masquer les barres de défilement';
+  String get lsShowBack => 'Afficher le bouton Retour';
+
+  @override
+  String get lsShowScroll => 'Afficher les barres de défilement';
 
   @override
   String lsReset(Object themeType) {
