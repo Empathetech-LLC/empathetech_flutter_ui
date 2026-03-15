@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 
 enum EzPageTransition {
@@ -18,55 +20,93 @@ enum EzPageTransition {
   zoom,
 }
 
+const String _none = 'none';
+const String _system = 'system';
+const String _flip = 'flip';
+const String _rotate = 'rotate';
+const String _scale = 'scale';
+const String _slideLeft = 'slideLeft';
+const String _slideRight = 'slideRight';
+const String _slideUp = 'slideUp';
+const String _slideDown = 'slideDown';
+const String _zoom = 'zoom';
+
 extension EzPageTransitionConfig on EzPageTransition {
   String get value {
     switch (this) {
       case EzPageTransition.none:
-        return 'none';
+        return _none;
       case EzPageTransition.system:
-        return 'system';
+        return _system;
       case EzPageTransition.flip:
-        return 'flip';
+        return _flip;
       case EzPageTransition.rotate:
-        return 'rotate';
+        return _rotate;
       case EzPageTransition.scale:
-        return 'scale';
+        return _scale;
       case EzPageTransition.slideLeft:
-        return 'slideLeft';
+        return _slideLeft;
       case EzPageTransition.slideRight:
-        return 'slideRight';
+        return _slideRight;
       case EzPageTransition.slideUp:
-        return 'slideUp';
+        return _slideUp;
       case EzPageTransition.slideDown:
-        return 'slideDown';
+        return _slideDown;
       case EzPageTransition.zoom:
-        return 'zoom';
+        return _zoom;
     }
   }
 
   /// Defaults to [EzPageTransition.system]
   static EzPageTransition lookup(String? value) {
     switch (value) {
-      case 'none':
+      case _none:
         return EzPageTransition.none;
-      case 'flip':
+      case _flip:
         return EzPageTransition.flip;
-      case 'rotate':
+      case _rotate:
         return EzPageTransition.rotate;
-      case 'scale':
+      case _scale:
         return EzPageTransition.scale;
-      case 'slideLeft':
+      case _slideLeft:
         return EzPageTransition.slideLeft;
-      case 'slideRight':
+      case _slideRight:
         return EzPageTransition.slideRight;
-      case 'slideUp':
+      case _slideUp:
         return EzPageTransition.slideUp;
-      case 'slideDown':
+      case _slideDown:
         return EzPageTransition.slideDown;
-      case 'zoom':
+      case _zoom:
         return EzPageTransition.zoom;
+      case _system:
+      case null:
       default:
         return EzPageTransition.system;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case EzPageTransition.none:
+        return EzConfig.l10n.dsNone;
+      case EzPageTransition.system:
+        return EzConfig.l10n.dsSystem;
+      case EzPageTransition.flip:
+        return EzConfig.l10n.dsFlip;
+      case EzPageTransition.rotate:
+        return EzConfig.l10n.dsRotate;
+      case EzPageTransition.scale:
+        return EzConfig.l10n.dsScale;
+      case EzPageTransition.slideLeft:
+        return EzConfig.l10n.dsSlideLeft;
+      case EzPageTransition.slideRight:
+        return EzConfig.l10n.dsSlideRight;
+      case EzPageTransition.slideUp:
+        return EzConfig.l10n.dsSlideUp;
+      case EzPageTransition.slideDown:
+        return EzConfig.l10n.dsSlideDown;
+      case EzPageTransition.zoom:
+        return EzConfig.l10n.dsZoom;
     }
   }
 }
