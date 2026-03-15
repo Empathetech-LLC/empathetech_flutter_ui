@@ -229,6 +229,130 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       ),
       EzConfig.spacer,
 
+      // Page transition
+      // TODO: semantics
+      EzElevatedIconButton(
+        onPressed: () async {
+          final EzPageTransition backupType = EzPageTransitionConfig.lookup(
+              EzConfig.get(EzConfig.isDark
+                  ? darkTransitionTypeKey
+                  : lightTransitionTypeKey));
+          final bool backupFade = EzConfig.get(
+              EzConfig.isDark ? darkTransitionFadeKey : lightTransitionFadeKey);
+
+          EzPageTransition currType = backupType;
+          bool currFade = backupFade;
+
+          await ezModal(
+            context: context,
+            builder: (_) => StatefulBuilder(
+              builder: (_, StateSetter setModal) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  // Type choices
+                  RadioGroup<EzPageTransition>(
+                    groupValue: currType,
+                    onChanged: (EzPageTransition? choice) {
+                      if (choice != null) setModal(() => currType = choice);
+                    },
+                    child: EzScrollView(
+                      mainAxisSize: MainAxisSize.min,
+                      scrollDirection: Axis.horizontal,
+                      thumbVisibility: false,
+                      showScrollHint: true,
+                      children: EzPageTransition.values
+                          .map(
+                            (EzPageTransition type) => Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: EzConfig.spacing,
+                                horizontal: EzConfig.spacing / 2,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Text(
+                                    type.name,
+                                    style: EzConfig.styles.labelLarge,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  EzIconButton(
+                                    icon: switch (type) {
+                                      EzPageTransition.none =>
+                                        const Icon(Icons.cancel),
+                                      EzPageTransition.system => Icon(
+                                          EzConfig.onMobile
+                                              ? Icons.phone
+                                              : Icons.computer),
+                                      EzPageTransition.flip =>
+                                        const Icon(Icons.flip),
+                                      EzPageTransition.rotate =>
+                                        const Icon(Icons.rotate_right),
+                                      EzPageTransition.scale =>
+                                        const Icon(Icons.scale),
+                                      EzPageTransition.slideLeft =>
+                                        const Icon(Icons.arrow_left),
+                                      EzPageTransition.slideRight =>
+                                        const Icon(Icons.arrow_right),
+                                      EzPageTransition.slideUp =>
+                                        const Icon(Icons.arrow_upward),
+                                      EzPageTransition.slideDown =>
+                                        const Icon(Icons.arrow_downward),
+                                      EzPageTransition.zoom =>
+                                        const Icon(Icons.zoom_in),
+                                    },
+                                    onPressed: () =>
+                                        setModal(() => currType = type),
+                                  ),
+                                  ExcludeSemantics(
+                                    child:
+                                        EzRadio<EzPageTransition>(value: type),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  EzConfig.spacer,
+
+                  // Fade switch
+                  EzSwitchPair(
+                    enabled: currType != EzPageTransition.none &&
+                        currType != EzPageTransition.system,
+                    valueKey: EzConfig.isDark
+                        ? darkTransitionFadeKey
+                        : lightTransitionFadeKey,
+                    afterChanged: (bool? choice) {
+                      if (choice != null) setModal(() => currFade = choice);
+                    },
+                    text: EzConfig.l10n.dsFadeTransition,
+                  ),
+                  EzSpacer(space: EzConfig.spargin),
+                ],
+              ),
+            ),
+          );
+
+          if (currType != backupType || currFade != backupFade) {
+            if (EzConfig.isDark || widget.updateBoth) {
+              await EzConfig.setString(darkTransitionTypeKey, currType.value);
+              await EzConfig.setBool(darkTransitionFadeKey, currFade);
+            }
+
+            if (!EzConfig.isDark || widget.updateBoth) {
+              await EzConfig.setString(lightTransitionTypeKey, currType.value);
+              await EzConfig.setBool(lightTransitionFadeKey, currFade);
+            }
+
+            await EzConfig.rebuildUI(redraw);
+          }
+        },
+        icon: const Icon(Icons.slideshow),
+        label: EzConfig.l10n.dsPageTransition,
+      ),
+      EzConfig.spacer,
+
       // Background image
       if (widget.includeBackgroundImage) ...<Widget>[
         EzScrollView(
