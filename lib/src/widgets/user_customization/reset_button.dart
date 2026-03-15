@@ -111,7 +111,7 @@ class EzResetButton extends StatelessWidget {
                           EzSwitchPair(
                             key: ValueKey<bool>(both),
                             text: EzConfig.l10n.ssUpdateBoth,
-                            backgroundColor: EzConfig.colors.surfaceDim,
+                            useSurface: null,
                             value: both,
                             onChanged: (bool? choice) {
                               if (choice == null) return;
