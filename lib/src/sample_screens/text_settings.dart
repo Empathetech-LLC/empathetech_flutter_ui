@@ -471,16 +471,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 child: EzColorSetting(
                   configKey:
                       EzConfig.isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
-                  onUpdate: (Color color) {
-                    widget.displayProvider.redraw(color);
-                    widget.headlineProvider.redraw(color);
-                    widget.titleProvider.redraw(color);
-                    widget.bodyProvider.redraw(color);
-                    widget.labelProvider.redraw(color);
-
-                    EzConfig.pingRebuild(ezTextRebuildCheck(context));
-                    setState(() {});
-                  },
+                  onUpdate: redraw,
                 ),
               ),
 
