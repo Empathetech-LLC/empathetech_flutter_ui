@@ -72,7 +72,12 @@ class EzConfigProvider extends ChangeNotifier {
 
     if (_isDark) {
       // Build new caches
-      _design = EzDesignCache(EzConfig.get(darkAnimationDurationKey));
+      _design = EzDesignCache(
+        animDur: EzConfig.get(darkAnimationDurationKey),
+        pageT:
+            EzPageTransitionConfig.lookup(EzConfig.get(darkTransitionTypeKey)),
+        tFade: EzConfig.get(darkTransitionFadeKey),
+      );
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(darkMarginKey),
         padding: EzConfig.get(darkPaddingKey),
@@ -97,7 +102,12 @@ class EzConfigProvider extends ChangeNotifier {
       _currTheme = _darkTheme;
     } else {
       // Ditto
-      _design = EzDesignCache(EzConfig.get(lightAnimationDurationKey));
+      _design = EzDesignCache(
+        animDur: EzConfig.get(lightAnimationDurationKey),
+        pageT:
+            EzPageTransitionConfig.lookup(EzConfig.get(lightTransitionTypeKey)),
+        tFade: EzConfig.get(lightTransitionFadeKey),
+      );
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(lightMarginKey),
         padding: EzConfig.get(lightPaddingKey),
@@ -291,10 +301,16 @@ class EzConfigProvider extends ChangeNotifier {
 
 class EzDesignCache {
   final int animDur;
+  final EzPageTransition pageT;
+  final bool tFade;
 
   /// Theme aware tracker for frequently used design values...
   /// Animation duration
-  EzDesignCache(this.animDur);
+  EzDesignCache({
+    required this.animDur,
+    required this.pageT,
+    required this.tFade,
+  });
 }
 
 class EzLayoutCache {
