@@ -45,7 +45,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   /// Opens an [ezColorPicker] for updating [currColor]
   /// Returns the [Color] of what was chosen (null otherwise)
-  Future<dynamic> openColorPicker(BuildContext context) {
+  Future<dynamic> openColorPicker() {
     final Color backup = currColor;
 
     return ezColorPicker(
@@ -63,12 +63,12 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   /// Opens an [EzAlertDialog] for users to chose how they want to update the color
   /// Returns the [Color] of what was chosen (null if none)
-  Future<dynamic> changeColor(BuildContext context) {
+  Future<dynamic> changeColor() {
     if (!widget.configKey.contains(textColorPrefix)) {
       // Base color //
       // Just open a color picker
 
-      return openColorPicker(context);
+      return openColorPicker();
     }
     // 'on' (aka text) color //
 
@@ -87,7 +87,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     final int recommended = getTextColor(backgroundColor).toARGB32();
 
     // Just open a color picker if the value is already what's recommended
-    if (recommended == currColor.toARGB32()) return openColorPicker(context);
+    if (recommended == currColor.toARGB32()) return openColorPicker();
 
     // Otherwise, let the user choose...
     // Recommended, custom, or cancel (close)
@@ -125,7 +125,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           EzMaterialAction(
             text: EzConfig.l10n.csUseCustom,
             onPressed: () async {
-              final dynamic chosen = await openColorPicker(context);
+              final dynamic chosen = await openColorPicker();
               if (dContext.mounted) Navigator.of(dContext).pop(chosen);
             },
             isDestructiveAction: true,
@@ -138,7 +138,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for resetting [configKey] to default
   /// If there is no default value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
-  Future<dynamic> reset(BuildContext context) => showDialog(
+  Future<dynamic> reset() => showDialog(
         context: context,
         builder: (BuildContext dContext) {
           final int? resetValue = EzConfig.getDefault(widget.configKey);
@@ -169,8 +169,9 @@ class _ColorSettingState extends State<EzColorSetting> {
               onConfirm: () async {
                 // Remove the user's configKey and reset the current state
                 await EzConfig.remove(widget.configKey);
-                if (resetValue != null) currColor = Color(resetValue);
-                setState(() {});
+                if (resetValue != null) {
+                  setState(() => currColor = Color(resetValue));
+                }
                 await EzConfig.rebuildUI(widget.onUpdate);
               },
               confirmIsDestructive: true,
@@ -183,8 +184,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   /// Opens an [EzAlertDialog] with the all optional actions
   /// Currently: remove from list and reset to default
-  Future<dynamic> options(BuildContext context) => (widget.onRemove == null)
-      ? reset(context)
+  Future<dynamic> options() async => (widget.onRemove == null)
+      ? await reset()
       : showDialog(
           context: context,
           builder: (BuildContext dContext) => EzAlertDialog(
@@ -203,13 +204,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               // Reset to default
               EzElevatedIconButton(
-                onPressed: () async {
-                  final dynamic resetResponse = await reset(context);
-
-                  if (dContext.mounted) {
-                    Navigator.of(dContext).pop(resetResponse);
-                  }
-                },
+                onPressed: () async => await reset(),
                 icon: const Icon(Icons.refresh),
                 label: EzConfig.l10n.gReset,
               ),
@@ -233,8 +228,8 @@ class _ColorSettingState extends State<EzColorSetting> {
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(EzConfig.padding * 0.75),
           ),
-          onPressed: () => changeColor(context),
-          onLongPress: () => options(context),
+          onPressed: () => changeColor(),
+          onLongPress: () => options(),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
