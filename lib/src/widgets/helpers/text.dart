@@ -44,12 +44,13 @@ class EzTextBackground extends StatelessWidget {
     }
 
     late final Color baseColor;
-    if (useSurface == null) {
-      baseColor = EzConfig.colors.surfaceDim;
-    } else if (useSurface!) {
-      baseColor = EzConfig.colors.surface;
-    } else {
-      baseColor = EzConfig.colors.surfaceContainer;
+    switch (useSurface) {
+      case true:
+        baseColor = EzConfig.colors.surface;
+      case false:
+        baseColor = EzConfig.colors.surfaceContainer;
+      case null:
+        baseColor = EzConfig.colors.surfaceDim;
     }
 
     return baseColor.withValues(alpha: percent);
