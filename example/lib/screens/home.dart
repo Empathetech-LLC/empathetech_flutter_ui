@@ -1258,8 +1258,10 @@ class _LicensePicker extends StatelessWidget {
               groupValue: groupValue,
               onChanged: onChanged,
               child: EzScrollView(
+                mainAxisSize: MainAxisSize.min,
                 scrollDirection: Axis.horizontal,
                 thumbVisibility: false,
+                showScrollHint: true,
                 children: <Widget>[
                   EzConfig.rowMargin,
                   radio(title: 'GNU GPLv3', value: gnuKey),
