@@ -171,7 +171,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 await EzConfig.remove(widget.configKey);
                 if (resetValue != null) currColor = Color(resetValue);
                 setState(() {});
-                EzConfig.rebuildUI(widget.onUpdate);
+                await EzConfig.rebuildUI(widget.onUpdate);
               },
               confirmIsDestructive: true,
               onDeny: () => Navigator.of(dContext).pop(),
