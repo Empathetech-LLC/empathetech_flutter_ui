@@ -18,8 +18,8 @@ class EzTextBackground extends StatelessWidget {
   /// Defaults to [ezRoundEdge]
   final BorderRadiusGeometry? borderRadius;
 
-  /// false (default): [ColorScheme.surfaceContainer]
   /// true: [ColorScheme.surface]
+  /// false (default): [ColorScheme.surfaceContainer]
   /// null: [ColorScheme.surfaceDim]
   /// Quantum supremacy achieved
   final bool? useSurface;
@@ -70,7 +70,10 @@ class EzTextBackground extends StatelessWidget {
 
 class EzText extends StatelessWidget {
   /// [EzTextBackground.useSurface] passthrough
-  final bool useSurface;
+  /// true: [ColorScheme.surface]
+  /// false: [ColorScheme.surfaceContainer]
+  /// null: [ColorScheme.surfaceDim]
+  final bool? useSurface;
 
   /// [Text.data] passthrough
   final String data;
