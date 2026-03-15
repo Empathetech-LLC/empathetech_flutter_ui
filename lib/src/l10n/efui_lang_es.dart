@@ -450,6 +450,42 @@ class EFUILangEs extends EFUILang {
   String get dsMilliseconds => 'Milisegundos';
 
   @override
+  String get dsPageTransition => 'Transición de página';
+
+  @override
+  String get dsNone => 'Ninguna';
+
+  @override
+  String get dsSystem => 'Sistema';
+
+  @override
+  String get dsFlip => 'Voltear';
+
+  @override
+  String get dsRotate => 'Girar';
+
+  @override
+  String get dsScale => 'Escala';
+
+  @override
+  String get dsSlideLeft => 'Deslizar a la izquierda';
+
+  @override
+  String get dsSlideRight => 'Desliza hacia la derecha';
+
+  @override
+  String get dsSlideUp => 'Deslizar hacia arriba';
+
+  @override
+  String get dsSlideDown => 'Bajar deslizándose';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Transición de desvanecimiento';
+
+  @override
   String get dsPreview => 'Avance';
 
   @override

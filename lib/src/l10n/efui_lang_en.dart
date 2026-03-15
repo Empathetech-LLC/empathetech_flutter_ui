@@ -447,6 +447,42 @@ class EFUILangEn extends EFUILang {
   String get dsMilliseconds => 'Milliseconds';
 
   @override
+  String get dsPageTransition => 'Page transition';
+
+  @override
+  String get dsNone => 'None';
+
+  @override
+  String get dsSystem => 'System';
+
+  @override
+  String get dsFlip => 'Flip';
+
+  @override
+  String get dsRotate => 'Rotate';
+
+  @override
+  String get dsScale => 'Scale';
+
+  @override
+  String get dsSlideLeft => 'Slide left';
+
+  @override
+  String get dsSlideRight => 'Slide right';
+
+  @override
+  String get dsSlideUp => 'Slide up';
+
+  @override
+  String get dsSlideDown => 'Slide down';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Fade transition';
+
+  @override
   String get dsPreview => 'Preview';
 
   @override
@@ -1114,6 +1150,42 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsMilliseconds => 'Milliseconds';
+
+  @override
+  String get dsPageTransition => 'Page transition';
+
+  @override
+  String get dsNone => 'None';
+
+  @override
+  String get dsSystem => 'System';
+
+  @override
+  String get dsFlip => 'Flip';
+
+  @override
+  String get dsRotate => 'Rotate';
+
+  @override
+  String get dsScale => 'Scale';
+
+  @override
+  String get dsSlideLeft => 'Slide left';
+
+  @override
+  String get dsSlideRight => 'Slide right';
+
+  @override
+  String get dsSlideUp => 'Slide up';
+
+  @override
+  String get dsSlideDown => 'Slide down';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Fade transition';
 
   @override
   String get dsPreview => 'Preview';

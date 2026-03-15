@@ -921,6 +921,78 @@ abstract class EFUILang {
   /// **'Milliseconds'**
   String get dsMilliseconds;
 
+  /// No description provided for @dsPageTransition.
+  ///
+  /// In en, this message translates to:
+  /// **'Page transition'**
+  String get dsPageTransition;
+
+  /// No description provided for @dsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get dsNone;
+
+  /// No description provided for @dsSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get dsSystem;
+
+  /// No description provided for @dsFlip.
+  ///
+  /// In en, this message translates to:
+  /// **'Flip'**
+  String get dsFlip;
+
+  /// No description provided for @dsRotate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate'**
+  String get dsRotate;
+
+  /// No description provided for @dsScale.
+  ///
+  /// In en, this message translates to:
+  /// **'Scale'**
+  String get dsScale;
+
+  /// No description provided for @dsSlideLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide left'**
+  String get dsSlideLeft;
+
+  /// No description provided for @dsSlideRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide right'**
+  String get dsSlideRight;
+
+  /// No description provided for @dsSlideUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide up'**
+  String get dsSlideUp;
+
+  /// No description provided for @dsSlideDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide down'**
+  String get dsSlideDown;
+
+  /// No description provided for @dsZoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom'**
+  String get dsZoom;
+
+  /// No description provided for @dsFadeTransition.
+  ///
+  /// In en, this message translates to:
+  /// **'Fade transition'**
+  String get dsFadeTransition;
+
   /// No description provided for @dsPreview.
   ///
   /// In en, this message translates to:
