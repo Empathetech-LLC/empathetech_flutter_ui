@@ -209,15 +209,16 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Core settings
         if (currentTab == EzCSType.quick)
           _QuickColorSettings(
-            onUpdate: widget.onUpdate,
-            updateBoth: widget.updateBoth,
             quickHeader: widget.quickHeader,
             quickFooter: widget.quickFooter,
+            onUpdate: widget.onUpdate,
+            updateBoth: widget.updateBoth,
           )
         else
           _AdvancedColorSettings(
-            defaultList: defaultList,
             currList: currList,
+            defaultList: defaultList,
+            onUpdate: widget.onUpdate,
           ),
 
         // Reset button
@@ -263,17 +264,17 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 }
 
 class _QuickColorSettings extends StatefulWidget {
-  final void Function() onUpdate;
-  final bool updateBoth;
-
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
 
+  final void Function() onUpdate;
+  final bool updateBoth;
+
   const _QuickColorSettings({
-    required this.onUpdate,
-    required this.updateBoth,
     required this.quickHeader,
     required this.quickFooter,
+    required this.onUpdate,
+    required this.updateBoth,
   });
 
   @override
@@ -334,9 +335,12 @@ class _AdvancedColorSettings extends StatefulWidget {
   final List<String> defaultList;
   final List<String> currList;
 
+  final void Function() onUpdate;
+
   const _AdvancedColorSettings({
     required this.defaultList,
     required this.currList,
+    required this.onUpdate,
   });
 
   @override
@@ -344,6 +348,13 @@ class _AdvancedColorSettings extends StatefulWidget {
 }
 
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
+  // Define custom functions //
+
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
+  }
+
   // Define custom Widgets //
 
   /// Returns the color keys the user is tracking
@@ -358,7 +369,11 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         toReturn.add(
           Padding(
             padding: wrapPadding,
-            child: (EzColorSetting(key: ValueKey<String>(key), configKey: key)),
+            child: (EzColorSetting(
+              key: ValueKey<String>(key),
+              configKey: key,
+              onUpdate: redraw,
+            )),
           ),
         );
       } else {
@@ -369,6 +384,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             child: (EzColorSetting(
               key: ValueKey<String>(key),
               configKey: key,
+              onUpdate: redraw,
               onRemove: () async {
                 widget.currList.remove(key);
                 await EzConfig.setStringList(userColorsKey, widget.currList);
