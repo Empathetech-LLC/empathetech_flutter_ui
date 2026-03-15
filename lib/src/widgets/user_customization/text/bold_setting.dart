@@ -34,7 +34,17 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
 
   @override
   Widget build(BuildContext context) => EzIconButton(
-        fauxDisabled: !isBold,
+        style: IconButton.styleFrom(
+          foregroundColor:
+              isBold ? EzConfig.colors.primary : EzConfig.colors.outline,
+          side: BorderSide(
+              color: EzConfig.colors.primaryContainer.withValues(
+                  alpha: EzConfig.get(EzConfig.isDark
+                      ? darkButtonOutlineOpacityKey
+                      : lightButtonOutlineOpacityKey)),
+              width: borderWidth),
+          iconSize: EzConfig.iconSize,
+        ),
         onPressed: () async {
           isBold = !isBold;
 
