@@ -101,9 +101,9 @@ class OpenUIScaffold extends StatelessWidget {
             children: <Widget>[
               updater,
               if (fabs != null) ...fabs!,
-              if (EzConfig.showBackFAB &&
+              if (config.layout.showBackFAB &&
                   ezRootNav.currentState!.canPop()) ...<Widget>[
-                EzConfig.spacer,
+                config.layout.spacer,
                 const EzBackFAB(),
               ],
             ],
