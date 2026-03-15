@@ -163,8 +163,9 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
           await EzConfig.rebuildUI(redraw);
         },
-        text: EzConfig.l10n.lsScroll,
+        text: EzConfig.l10n.lsShowBack,
       ),
+      EzConfig.spacer,
 
       // Show scroll
       EzSwitchPair(
@@ -180,7 +181,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
           await EzConfig.rebuildUI(redraw);
         },
-        text: EzConfig.l10n.lsScroll,
+        text: EzConfig.l10n.lsShowScroll,
       ),
 
       if (widget.afterLayout != null) ...widget.afterLayout!,
