@@ -414,8 +414,8 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Dark
   darkAnimationDurationKey: defaultAnimationDuration,
-  // darkTransitionTypeKey: null,
-  // darkTransitionFadeKey: null,
+  // darkTransitionTypeKey: null (aka system),
+  darkTransitionFadeKey: false,
 
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': '',
@@ -425,8 +425,8 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Light
   lightAnimationDurationKey: defaultAnimationDuration,
-  // lightTransitionTypeKey: null,
-  // lightTransitionFadeKey: null,
+  // lightTransitionTypeKey: null (aka system),
+  lightTransitionFadeKey: false,
 
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': '',
