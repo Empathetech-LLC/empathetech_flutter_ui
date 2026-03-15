@@ -12,8 +12,8 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color] will be updated
   final String configKey;
 
-  /// Optional callback function for when the color is updated
-  final void Function(Color)? onUpdate;
+  /// [EzConfig.rebuildUI] passthrough
+  final void Function() onUpdate;
 
   /// Optional callback for when the [configKey] is removed, if it is part of a dynamic set/list
   /// If null, the remove button will not be shown
@@ -26,7 +26,7 @@ class EzColorSetting extends StatefulWidget {
   const EzColorSetting({
     super.key,
     required this.configKey,
-    this.onUpdate,
+    required this.onUpdate,
     this.onRemove,
   });
 
@@ -53,9 +53,9 @@ class _ColorSettingState extends State<EzColorSetting> {
       startColor: backup,
       onColorChange: (Color chosenColor) =>
           setState(() => currColor = chosenColor),
-      onConfirm: () {
-        EzConfig.setInt(widget.configKey, currColor.toARGB32());
-        widget.onUpdate?.call(currColor);
+      onConfirm: () async {
+        await EzConfig.setInt(widget.configKey, currColor.toARGB32());
+        await EzConfig.rebuildUI(widget.onUpdate);
       },
       onDeny: () => setState(() => currColor = backup),
     );
@@ -118,8 +118,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               // Update the user's configKey
               await EzConfig.setInt(widget.configKey, recommended);
               setState(() => currColor = Color(recommended));
-              widget.onUpdate?.call(currColor);
-              if (dContext.mounted) Navigator.of(dContext).pop(recommended);
+              await EzConfig.rebuildUI(widget.onUpdate);
             },
             isDefaultAction: true,
           ),
@@ -172,10 +171,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 await EzConfig.remove(widget.configKey);
                 if (resetValue != null) currColor = Color(resetValue);
                 setState(() {});
-                widget.onUpdate?.call(resetValue != null
-                    ? Color(resetValue)
-                    : getLiveColor(widget.configKey));
-                if (dContext.mounted) Navigator.of(dContext).pop();
+                EzConfig.rebuildUI(widget.onUpdate);
               },
               confirmIsDestructive: true,
               onDeny: () => Navigator.of(dContext).pop(),
