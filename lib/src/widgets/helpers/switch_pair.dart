@@ -325,10 +325,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
               focusNode: widget.focusNode,
               onFocusChange: widget.onFocusChange,
               autofocus: widget.autofocus,
-              padding: widget.padding ??
-                  (ratio > 1.1
-                      ? EdgeInsets.all(EzConfig.marginVal * ratio)
-                      : EdgeInsets.symmetric(horizontal: EzConfig.marginVal)),
+              padding: EdgeInsets.zero,
             ),
           ),
         ],
