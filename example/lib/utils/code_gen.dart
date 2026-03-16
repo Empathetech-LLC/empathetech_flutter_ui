@@ -366,7 +366,7 @@ class $classCaseAppName extends StatelessWidget {
                 pageBuilder: (BuildContext context, GoRouterState state) =>
                     ezPageBuilder(context, state, SettingsHomeScreen()),
                 routes: <RouteBase>[
-                  ${config.colorSettings ? '''// Color settings
+                  // Color settings
                   GoRoute(
                     path: colorSettingsPath,
                     name: colorSettingsPath,
@@ -397,8 +397,8 @@ class $classCaseAppName extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),''' : ''}
-                  ${config.designSettings ? '''
+                  ),
+
                   // Design settings
                   GoRoute(
                     path: designSettingsPath,
@@ -406,8 +406,8 @@ class $classCaseAppName extends StatelessWidget {
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
                             context, state, DesignSettingsScreen()),
-                  ),''' : ''}
-                  ${config.layoutSettings ? '''
+                  ),
+
                   // Layout settings
                   GoRoute(
                     path: layoutSettingsPath,
@@ -415,8 +415,8 @@ class $classCaseAppName extends StatelessWidget {
                     pageBuilder: (BuildContext context, GoRouterState state) =>
                         ezPageBuilder(
                             context, state, LayoutSettingsScreen()),
-                  ),''' : ''}
-                  ${config.textSettings ? '''
+                  ),
+
                   // Text settings
                   GoRoute(
                     path: textSettingsPath,
@@ -448,7 +448,7 @@ class $classCaseAppName extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),''' : ''}                     
+                  ),       
                 ],
               ),
             ],
@@ -891,10 +891,10 @@ class SettingsHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         const EzScreen(EzSettingsHome(
           inDistress: <String>{},
-          colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
-          designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
-          layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
-          textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
+          colorSettingsPath: colorSettingsPath,
+          designSettingsPath: designSettingsPath,
+          layoutSettingsPath: layoutSettingsPath,
+          textSettingsPath: textSettingsPath,
           appName: appName,
           androidPackage: androidPackage,
         )),
@@ -912,10 +912,9 @@ class SettingsHomeScreen extends StatelessWidget {
 }
 """);
 
-    // Color settings?
-    if (config.colorSettings) {
-      await File('$dir/lib/screens/settings/color.dart')
-          .writeAsString("""$copyright
+    // Color settings
+    await File('$dir/lib/screens/settings/color.dart')
+        .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -956,12 +955,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       );
 }
 """);
-    }
 
-    // Design settings?
-    if (config.designSettings) {
-      await File('$dir/lib/screens/settings/design.dart')
-          .writeAsString("""$copyright
+    // Design settings
+    await File('$dir/lib/screens/settings/design.dart')
+        .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -1006,12 +1003,10 @@ class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
       );
 }
 """);
-    }
 
-    // Layout settings?
-    if (config.layoutSettings) {
-      await File('$dir/lib/screens/settings/layout.dart')
-          .writeAsString("""$copyright
+    // Layout settings
+    await File('$dir/lib/screens/settings/layout.dart')
+        .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -1049,12 +1044,10 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
       );
 }
 """);
-    }
 
-    // Text settings?
-    if (config.textSettings) {
-      await File('$dir/lib/screens/settings/text.dart')
-          .writeAsString("""$copyright
+    // Text settings
+    await File('$dir/lib/screens/settings/text.dart')
+        .writeAsString("""$copyright
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -1102,7 +1095,6 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
       );
 }
 """);
-    }
 
     // export.dart
     await File('$dir/lib/screens/export.dart').writeAsString("""$copyright
@@ -1114,27 +1106,27 @@ export 'home.dart';
 
 export 'settings/home.dart';
 
-${config.colorSettings ? "export 'settings/color.dart';" : ''}
-${config.designSettings ? "export 'settings/design.dart';" : ''}
-${config.layoutSettings ? "export 'settings/layout.dart';" : ''}
-${config.textSettings ? "export 'settings/text.dart';" : ''}
+export 'settings/color.dart';
+export 'settings/design.dart';
+export 'settings/layout.dart';
+export 'settings/text.dart';
 
 // Route names //
 
 /// settings-home
 const String settingsHomePath = 'settings-home';
 
-${config.colorSettings ? """/// color-settings
-const String colorSettingsPath = 'color-settings';""" : ''}
+/// color-settings
+const String colorSettingsPath = 'color-settings';
 
-${config.designSettings ? """/// design-settings
-const String designSettingsPath = 'design-settings';""" : ''}
+/// design-settings
+const String designSettingsPath = 'design-settings';
 
-${config.layoutSettings ? """/// layout-settings
-const String layoutSettingsPath = 'layout-settings';""" : ''}
+/// layout-settings
+const String layoutSettingsPath = 'layout-settings';
 
-${config.textSettings ? """/// text-settings
-const String textSettingsPath = 'text-settings';""" : ''}
+/// text-settings
+const String textSettingsPath = 'text-settings';
 """);
   } catch (e) {
     onFailure(e.toString());
