@@ -231,6 +231,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
       // Page transition
       // TODO: semantics
+      // TODO: research system defaults, make sure they're accurate
       EzElevatedIconButton(
         onPressed: () async {
           final EzPageTransition backupType = EzPageTransitionConfig.lookup(
