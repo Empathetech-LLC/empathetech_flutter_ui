@@ -494,3 +494,70 @@ Future<bool> isGPlayInstall() async {
   final PackageInfo info = await PackageInfo.fromPlatform();
   return info.installerStore == 'com.android.vending';
 }
+
+/// Opens an [ezModal] with links to each of the sub-settings pages and a common setting from that page
+Future<void> openEzFavorites(
+  BuildContext context, {
+  required String colorSettingsPath,
+  required String designSettingsPath,
+  required String layoutSettingsPath,
+  required String textSettingsPath,
+}) async =>
+    ezModal(
+      context: context,
+      builder: (BuildContext mContext) => EzScrollView(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          EzConfig.margin,
+
+          // Color
+          EzLink(
+            EzConfig.l10n.csPageTitle,
+            onTap: () {
+              Navigator.of(mContext).pop();
+              context.goNamed(colorSettingsPath);
+            },
+            hint: EzConfig.l10n.gOpenLink,
+          ),
+          // TODO: high vis/monochromne
+          EzConfig.divider,
+
+          // Design
+          EzLink(
+            EzConfig.l10n.dsPageTitle,
+            onTap: () {
+              Navigator.of(mContext).pop();
+              context.goNamed(designSettingsPath);
+            },
+            hint: EzConfig.l10n.gOpenLink,
+          ),
+          // TODO: animation duration
+          EzConfig.divider,
+
+          // Layout
+          EzLink(
+            EzConfig.l10n.lsPageTitle,
+            onTap: () {
+              Navigator.of(mContext).pop();
+              context.goNamed(layoutSettingsPath);
+            },
+            hint: EzConfig.l10n.gOpenLink,
+          ),
+          // TODO: the two switches
+          // TODO: Add conditional left/right padding to switch pairs
+          EzConfig.divider,
+
+          // Text
+          EzLink(
+            EzConfig.l10n.tsPageTitle,
+            onTap: () {
+              Navigator.of(mContext).pop();
+              context.goNamed(textSettingsPath);
+            },
+            hint: EzConfig.l10n.gOpenLink,
+          ),
+          // TODO: text size
+          EzSpacer(space: EzConfig.spargin),
+        ],
+      ),
+    );
