@@ -90,16 +90,16 @@ const int darkSurfaceHex = 0xFF222222;
 /// 0xFF222222 == 34 of each
 const Color darkSurface = Color(darkSurfaceHex);
 
-/// 0x8AFFFFFF == white w/ double [defaultButtonOutlineOpacity]
+/// 0x8AFFFFFF == white w/ double [defaultBorderOpacity]
 const int darkOutlineHex = 0x8AFFFFFF;
 
-/// 0x8AFFFFFF == white w/ double [defaultButtonOutlineOpacity]
+/// 0x8AFFFFFF == white w/ double [defaultBorderOpacity]
 const Color darkOutline = Color(darkOutlineHex);
 
-/// 0x45FFFFFF == white w/ [defaultButtonOutlineOpacity]
+/// 0x45FFFFFF == white w/ [defaultBorderOpacity]
 const int darkOutlineVariantHex = 0x45FFFFFF;
 
-/// 0x45FFFFFF == white w/ [defaultButtonOutlineOpacity]
+/// 0x45FFFFFF == white w/ [defaultBorderOpacity]
 const Color darkOutlineVariant = Color(darkOutlineVariantHex);
 
 // Light //
@@ -122,16 +122,16 @@ const int lightSurfaceHex = whiteHex;
 /// 0xFFFFFFFF == white
 const Color lightSurface = Color(lightSurfaceHex);
 
-/// 0x8A000000 == black w/ double [defaultButtonOutlineOpacity]
+/// 0x8A000000 == black w/ double [defaultBorderOpacity]
 const int lightOutlineHex = 0x8A000000;
 
-/// 0x8A000000 == black w/ double [defaultButtonOutlineOpacity]
+/// 0x8A000000 == black w/ double [defaultBorderOpacity]
 const Color lightOutline = Color(lightOutlineHex);
 
-/// 0x45000000 == black w/ [defaultButtonOutlineOpacity]
+/// 0x45000000 == black w/ [defaultBorderOpacity]
 const int lightOutlineVariantHex = 0x45000000;
 
-/// 0x45000000 == black w/ [defaultButtonOutlineOpacity]
+/// 0x45000000 == black w/ [defaultBorderOpacity]
 const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
@@ -139,8 +139,11 @@ const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 /// 400
 const int defaultAnimationDuration = 400;
 
+/// 1.5
+const double defaultBorderWidth = 1.5;
+
 /// 0x45 / 255
-const double defaultButtonOutlineOpacity = 0.270588235294;
+const double defaultBorderOpacity = 0.270588235294;
 
 //* Layout settings *//
 
@@ -215,6 +218,12 @@ const double defaultWordSpacing = 1.0;
 /// 0
 const int minAnimationDuration = 0;
 
+/// 0.0
+const double minBorderWidth = 0.0;
+
+/// 0.0
+const double minOpacity = 0.0;
+
 // Layout settings //
 
 /// 5.0
@@ -257,9 +266,6 @@ const Map<String, double> fontSizeMins = <String, double>{
   lightLabelFontSizeKey: minLabel,
 };
 
-/// 0.0
-const double minOpacity = 0.0;
-
 /// 16.0
 const double minIconSize = 16.0;
 
@@ -278,6 +284,12 @@ const double minFontHeight = 1.0;
 
 /// 1000
 const int maxAnimationDuration = 1000;
+
+/// 3.0
+const double maxBorderWidth = 3.0;
+
+/// 1.0
+const double maxOpacity = 1.0;
 
 // Layout settings //
 
@@ -321,9 +333,6 @@ const Map<String, double> fontSizeMaxes = <String, double>{
   lightLabelFontSizeKey: maxLabel,
 };
 
-/// 1.0
-const double maxOpacity = 1.0;
-
 /// 48.0
 const double maxIconSize = 48.0;
 
@@ -342,7 +351,7 @@ const double maxFontHeight = 2.0;
 /// For open source consumers: this is Empathetech LLC's config
 /// You have permission to modify this code
 /// You do not have permission to use this config in your app
-const Map<String, Object> baseEmpathConfig = <String, Object>{
+final Map<String, Object> baseEmpathConfig = <String, Object>{
   // Global settings //
 
   isLeftyKey: false,
@@ -420,8 +429,11 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': '',
 
+  darkButtonShapeKey: EzButtonShape.pill.value,
+  darkBorderWidthKey: defaultBorderWidth,
+
   darkButtonOpacityKey: maxOpacity,
-  darkButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
+  darkBorderOpacityKey: defaultBorderOpacity,
 
   // Light
   lightAnimationDurationKey: defaultAnimationDuration,
@@ -431,8 +443,11 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': '',
 
+  lightButtonShapeKey: EzButtonShape.pill.value,
+  lightBorderWidthKey: defaultBorderWidth,
+
   lightButtonOpacityKey: maxOpacity,
-  lightButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
+  lightBorderOpacityKey: defaultBorderOpacity,
 
   // Layout settings //
 
@@ -553,7 +568,7 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 /// -- ATTENTION --
 /// For open source consumers: this is Empathetech LLC's config
 /// You do NOT have permission to use this config in your production app
-const Map<String, Object> empathMobileConfig = <String, Object>{
+final Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
   // Layout //
@@ -575,7 +590,7 @@ const Map<String, Object> empathMobileConfig = <String, Object>{
 /// -- ATTENTION --
 /// For open source consumers: this is Empathetech LLC's config
 /// You do NOT have permission to use this config in your production app
-const Map<String, Object> empathDesktopConfig = <String, Object>{
+final Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
   // Layout //
