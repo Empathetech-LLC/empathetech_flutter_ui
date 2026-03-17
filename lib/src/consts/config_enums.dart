@@ -29,7 +29,8 @@ final Map<String?, BoxFit?> boxFitLookup = <String?, BoxFit?>{
 
 enum EzButtonShape {
   pill,
-  box,
+  rect,
+  roundRect,
   leftZoid,
   rightZoid,
   gem,
@@ -37,7 +38,8 @@ enum EzButtonShape {
 }
 
 const String _pill = 'pill';
-const String _box = 'box';
+const String _rect = 'rect';
+const String _roundRect = 'roundRect';
 const String _leftZoid = 'leftZoid';
 const String _rightZoid = 'rightZoid';
 const String _gem = 'gem';
@@ -50,10 +52,13 @@ extension EBSConfig on EzButtonShape {
       case EzButtonShape.pill:
         return const RoundedSuperellipseBorder(borderRadius: ezPillEdge);
 
-      case EzButtonShape.box:
+      case EzButtonShape.rect:
         return const RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.zero,
         );
+
+      case EzButtonShape.roundRect:
+        return const RoundedRectangleBorder(borderRadius: ezRoundEdge);
 
       case EzButtonShape.leftZoid:
         return const ParallelogramBorder(lefty: true);
@@ -67,7 +72,7 @@ extension EBSConfig on EzButtonShape {
       case EzButtonShape.jewel:
         return BeveledRectangleBorder(
           borderRadius: BorderRadius.circular(gemSlope),
-        ); // TODO: too thick
+        );
     }
   }
 
@@ -75,8 +80,10 @@ extension EBSConfig on EzButtonShape {
     switch (this) {
       case EzButtonShape.pill:
         return _pill;
-      case EzButtonShape.box:
-        return _box;
+      case EzButtonShape.rect:
+        return _rect;
+      case EzButtonShape.roundRect:
+        return _roundRect;
       case EzButtonShape.leftZoid:
         return _leftZoid;
       case EzButtonShape.rightZoid:
@@ -91,8 +98,10 @@ extension EBSConfig on EzButtonShape {
   /// Defaults to [EzPageTransition.system]
   static EzButtonShape lookup(String? value) {
     switch (value) {
-      case _box:
-        return EzButtonShape.box;
+      case _rect:
+        return EzButtonShape.rect;
+      case _roundRect:
+        return EzButtonShape.roundRect;
       case _leftZoid:
         return EzButtonShape.leftZoid;
       case _rightZoid:
@@ -110,12 +119,14 @@ extension EBSConfig on EzButtonShape {
     switch (this) {
       case EzButtonShape.pill:
         return EzConfig.l10n.dsPill;
-      case EzButtonShape.box:
-        return EzConfig.l10n.dsBox;
+      case EzButtonShape.rect:
+        return EzConfig.l10n.dsRectangle;
+      case EzButtonShape.roundRect:
+        return EzConfig.l10n.dsRoundRectangle;
       case EzButtonShape.leftZoid:
-        return EzConfig.l10n.dsTrapezoid;
+        return EzConfig.l10n.dsLeftTrapezoid;
       case EzButtonShape.rightZoid:
-        return EzConfig.l10n.dsTrapezoid;
+        return EzConfig.l10n.dsRightTrapezoid;
       case EzButtonShape.gem:
         return EzConfig.l10n.dsGem;
       case EzButtonShape.jewel:
@@ -151,6 +162,31 @@ const String _zoom = 'zoom';
 
 /// EzPageTransition config
 extension EPTConfig on EzPageTransition {
+  Icon get icon {
+    switch (this) {
+      case EzPageTransition.none:
+        return const Icon(Icons.cancel);
+      case EzPageTransition.system:
+        return Icon(EzConfig.onMobile ? Icons.phone : Icons.computer);
+      case EzPageTransition.flip:
+        return const Icon(Icons.flip);
+      case EzPageTransition.rotate:
+        return const Icon(Icons.rotate_right);
+      case EzPageTransition.scale:
+        return const Icon(Icons.scale);
+      case EzPageTransition.slideLeft:
+        return const Icon(Icons.arrow_left);
+      case EzPageTransition.slideRight:
+        return const Icon(Icons.arrow_right);
+      case EzPageTransition.slideUp:
+        return const Icon(Icons.arrow_upward);
+      case EzPageTransition.slideDown:
+        return const Icon(Icons.arrow_downward);
+      case EzPageTransition.zoom:
+        return const Icon(Icons.zoom_in);
+    }
+  }
+
   String get value {
     switch (this) {
       case EzPageTransition.none:
