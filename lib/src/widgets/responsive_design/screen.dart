@@ -51,12 +51,7 @@ class EzScreen extends StatelessWidget {
     final int? isColor = int.tryParse(path);
     if (isColor != null) return BoxDecoration(color: Color(isColor));
 
-    return BoxDecoration(
-      image: DecorationImage(
-        image: ezImageProvider(path),
-        fit: EzConfig.backgroundImageFit,
-      ),
-    );
+    return BoxDecoration(image: EzConfig.backgroundImage);
   }
 
   @override

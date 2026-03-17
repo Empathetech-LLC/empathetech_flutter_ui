@@ -846,6 +846,12 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Theme aware [EzDesignCache] alias
   static BoxFit? get backgroundImageFit => _provPoint.design.backgroundImageFit;
 
+  /// Theme aware alias, built from [backgroundImagePath] && [backgroundImageFit]
+  static DecorationImage get backgroundImage => DecorationImage(
+        image: ezImageProvider(backgroundImagePath),
+        fit: EzConfig.backgroundImageFit,
+      );
+
   /// Theme aware [EzDesignCache] alias
   static EzButtonShape get buttonShape => _provPoint.design.buttonShape;
 

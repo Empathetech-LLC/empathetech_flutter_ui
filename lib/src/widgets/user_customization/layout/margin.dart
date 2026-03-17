@@ -124,11 +124,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                               image:
                                   (EzConfig.backgroundImagePath == noImageValue)
                                       ? null
-                                      : DecorationImage(
-                                          image: ezImageProvider(
-                                              EzConfig.backgroundImagePath),
-                                          fit: EzConfig.backgroundImageFit,
-                                        ),
+                                      : EzConfig.backgroundImage,
                             ),
                             margin: EdgeInsets.all(currValue * 0.25),
                           ),
