@@ -510,7 +510,7 @@ class EFUILangEs extends EFUILang {
   String get dsSquiggle => 'Ondulación';
 
   @override
-  String get dsVirus => 'Virus';
+  String get dsBurst => 'Explosión';
 
   @override
   String get dsPreview => 'Avance';

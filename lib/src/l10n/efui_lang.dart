@@ -1041,11 +1041,11 @@ abstract class EFUILang {
   /// **'Squiggle'**
   String get dsSquiggle;
 
-  /// No description provided for @dsVirus.
+  /// No description provided for @dsBurst.
   ///
   /// In en, this message translates to:
-  /// **'Virus'**
-  String get dsVirus;
+  /// **'Burst'**
+  String get dsBurst;
 
   /// No description provided for @dsPreview.
   ///
