@@ -441,19 +441,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                           BeveledRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(16.0),
-                                          ),
+                                          ), // TODO: too thick
                                         EzButtonShape.squiggle =>
-                                          const PerturbedPillBorder(
-                                            squiggly: true,
-                                            amplitude: 3.0,
-                                            wavelength: 16.0,
-                                          ),
-                                        EzButtonShape.virus =>
-                                          const PerturbedPillBorder(
-                                            squiggly: false,
-                                            amplitude: 5.0,
-                                            wavelength: 10.0,
-                                          ),
+                                          const SquigglyBorder(),
                                       },
                                     ),
                                     onPressed: () =>
@@ -516,9 +506,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       }
 
                       setModal(() {
-                        currShape = EzConfig.getDefault(EzConfig.isDark
-                            ? darkButtonShapeKey
-                            : lightButtonShapeKey);
+                        currShape = EBSConfig.lookup(EzConfig.getDefault(
+                            EzConfig.isDark
+                                ? darkButtonShapeKey
+                                : lightButtonShapeKey));
                         currWidth = EzConfig.getDefault(EzConfig.isDark
                             ? darkBorderWidthKey
                             : lightBorderWidthKey);
