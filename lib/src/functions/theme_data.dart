@@ -49,6 +49,9 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
   final double borderWidth =
       EzConfig.get(isDark ? darkBorderWidthKey : lightBorderWidthKey);
+  BorderSide buildBorder(Color color) => borderWidth == 0
+      ? BorderSide.none
+      : BorderSide(color: color, width: borderWidth);
 
   // Core opacity
   final double buttonOpacity =
@@ -187,7 +190,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             : null,
       ),
       overlayColor: WidgetStateProperty.all(focusColor),
-      side: BorderSide(color: colorScheme.primary, width: borderWidth),
+      side: buildBorder(colorScheme.primary),
       shape: buttonShape,
     ),
 
@@ -225,7 +228,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         errorMaxLines: 1,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: buttonBorder, width: borderWidth),
+          borderSide: buildBorder(buttonBorder),
           borderRadius: ezRoundEdge,
           gapPadding: 0,
         ),
@@ -242,7 +245,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
-        side: BorderSide(color: buttonBorder, width: borderWidth),
+        side: buildBorder(buttonBorder),
         shape: buttonShape,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
@@ -295,8 +298,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       foregroundColor: colorScheme.onPrimary,
       hoverColor: focusColor,
       extendedPadding: EdgeInsets.zero,
-      shape:
-          buttonShape, // TODO: do I like this? should I add a system setting? should I enumerate more options? how's it feeling?
+      shape: buttonShape,
       iconSize: iconSize,
       sizeConstraints: BoxConstraints(
         minWidth: (iconSize * 1.25) + padding,
@@ -316,7 +318,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: BorderSide.none,
-        shape: buttonShape, // ditto from FAB
+        shape: buttonShape,
         iconSize: iconSize,
         alignment: Alignment.center,
         padding: EzInsets.wrap(padding),
@@ -377,7 +379,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     menuTheme: MenuThemeData(
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(colorScheme.surface),
-        side: WidgetStateProperty.all(BorderSide(color: buttonBorder)),
+        side: WidgetStateProperty.all(buildBorder(buttonBorder)),
         alignment: Alignment.center,
       ),
     ),
@@ -423,7 +425,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         foregroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
         disabledForegroundColor: colorScheme.outline,
-        side: BorderSide(color: buttonBorder, width: borderWidth),
+        side: buildBorder(buttonBorder),
         shape: buttonShape, // TODO: check the shapes, some could be weird
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
@@ -436,9 +438,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       behavior: SnackBarBehavior.floating,
       backgroundColor: colorScheme.surfaceDim,
       closeIconColor: colorScheme.primary,
-      shape: buttonShape.copyWith(
-        side: BorderSide(color: colorScheme.secondary, width: borderWidth),
-      ),
+      shape: buttonShape.copyWith(side: buildBorder(colorScheme.secondary)),
       contentTextStyle: textTheme.bodyLarge,
       insetPadding: EdgeInsets.all(margin),
     ),

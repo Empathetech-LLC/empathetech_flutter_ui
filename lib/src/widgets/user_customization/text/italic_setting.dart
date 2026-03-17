@@ -37,11 +37,8 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
         style: IconButton.styleFrom(
           foregroundColor:
               isItalic ? EzConfig.colors.primary : EzConfig.colors.outline,
-          side: BorderSide(
-            color: EzConfig.colors.primaryContainer
-                .withValues(alpha: EzConfig.buttonOpacity),
-            width: EzConfig.borderWidth,
-          ),
+          side: EzConfig.borderSide(EzConfig.colors.primaryContainer
+              .withValues(alpha: EzConfig.buttonOpacity)),
           iconSize: EzConfig.iconSize,
         ),
         onPressed: () async {

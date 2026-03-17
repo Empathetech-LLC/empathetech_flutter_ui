@@ -393,10 +393,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                   EzElevatedButton(
                                     text: shape.name,
                                     style: ElevatedButton.styleFrom(
-                                      side: BorderSide(
-                                        color: EzConfig.colors.primaryContainer,
-                                        width: currWidth,
-                                      ),
+                                      side: currWidth == 0
+                                          ? BorderSide.none
+                                          : BorderSide(
+                                              color: EzConfig
+                                                  .colors.primaryContainer,
+                                              width: currWidth,
+                                            ),
                                       shape: shape.shape,
                                     ),
                                     onPressed: () =>
@@ -539,10 +542,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: buttonBackground,
                                 shadowColor: buttonShadow,
-                                side: BorderSide(
-                                  color: buttonOutline,
-                                  width: EzConfig.borderWidth,
-                                ),
+                                side: EzConfig.borderSide(buttonOutline),
                               ),
                             ),
                           ),

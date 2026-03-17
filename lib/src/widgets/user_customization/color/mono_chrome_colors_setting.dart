@@ -103,10 +103,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                 shadowColor: Colors.transparent,
                 iconColor: Colors.white,
                 overlayColor: Colors.white,
-                side: BorderSide(
-                  color: darkOutline,
-                  width: EzConfig.borderWidth,
-                ),
+                side: EzConfig.borderSide(darkOutline),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
               )
@@ -116,10 +113,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                 shadowColor: Colors.transparent,
                 iconColor: Colors.black,
                 overlayColor: Colors.black,
-                side: BorderSide(
-                  color: lightOutline,
-                  width: EzConfig.borderWidth,
-                ),
+                side: EzConfig.borderSide(lightOutline),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
               ),

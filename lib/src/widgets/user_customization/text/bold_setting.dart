@@ -37,11 +37,8 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
         style: IconButton.styleFrom(
           foregroundColor:
               isBold ? EzConfig.colors.primary : EzConfig.colors.outline,
-          side: BorderSide(
-            color: EzConfig.colors.primaryContainer
-                .withValues(alpha: EzConfig.buttonOpacity),
-            width: EzConfig.borderWidth,
-          ),
+          side: EzConfig.borderSide(EzConfig.colors.primaryContainer
+              .withValues(alpha: EzConfig.buttonOpacity)),
           iconSize: EzConfig.iconSize,
         ),
         onPressed: () async {
