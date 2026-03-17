@@ -507,6 +507,9 @@ class EFUILangEn extends EFUILang {
   String get dsSquiggle => 'Squiggle';
 
   @override
+  String get dsVirus => 'Virus';
+
+  @override
   String get dsPreview => 'Preview';
 
   @override
@@ -1234,6 +1237,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsSquiggle => 'Squiggle';
+
+  @override
+  String get dsVirus => 'Virus';
 
   @override
   String get dsPreview => 'Preview';
