@@ -20,6 +20,10 @@ class TryTip extends StatelessWidget {
       );
 }
 
+// TODO: I know I already have it written down in some form, but...
+// shout-out to checking the shape on everything
+// during the shape/side audit, I just added default. if a config sets a shape, that should be reflected in its button
+
 class EzQuickConfig extends StatelessWidget {
   /// [EzConfigProvider.rebuildUI] passthrough
   final void Function() onComplete;
@@ -402,7 +406,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
               shadowColor: Colors.transparent,
               iconColor: Colors.white,
               overlayColor: Colors.white,
-              side: const BorderSide(color: darkOutline),
+              side: BorderSide(color: darkOutline, width: EzConfig.borderWidth),
+              shape: EzConfig.buttonShape.shape,
               textStyle: localBody,
               padding: EdgeInsets.all(EzConfig.onMobile ? 17.5 : 20.0),
             )
@@ -412,7 +417,9 @@ class EzHighVisibilityConfig extends StatelessWidget {
               shadowColor: Colors.transparent,
               iconColor: Colors.black,
               overlayColor: Colors.black,
-              side: const BorderSide(color: lightOutline),
+              side:
+                  BorderSide(color: lightOutline, width: EzConfig.borderWidth),
+              shape: EzConfig.buttonShape.shape,
               textStyle: localBody,
               padding: EdgeInsets.all(EzConfig.onMobile ? 17.5 : 20.0),
             ),
@@ -590,7 +597,8 @@ class EzChalkboardConfig extends StatelessWidget {
         shadowColor: Colors.transparent,
         iconColor: empathSand,
         overlayColor: empathSand,
-        side: const BorderSide(color: chalkboardGreen),
+        side: BorderSide(color: chalkboardGreen, width: EzConfig.borderWidth),
+        shape: EzConfig.buttonShape.shape,
         textStyle: localBody,
         padding: EdgeInsets.all(
           EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding,
@@ -731,7 +739,8 @@ class EzNebulaConfig extends StatelessWidget {
           foregroundColor: Colors.white,
           iconColor: empathSand,
           overlayColor: empathSand,
-          side: const BorderSide(color: empathSandDim),
+          side: BorderSide(color: empathSandDim, width: EzConfig.borderWidth),
+          shape: EzConfig.buttonShape.shape,
           textStyle: localBody,
         ),
         onPressed: () async {
