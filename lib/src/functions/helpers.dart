@@ -331,19 +331,11 @@ Widget ezTransitionsBuilder(
   // Check for no animation
   if (EzConfig.animDur < 1) return child;
 
-  // Gather the transition details
-  final EzPageTransition transitionType = EzPageTransitionConfig.lookup(
-      EzConfig.get(
-          EzConfig.isDark ? darkTransitionTypeKey : lightTransitionTypeKey));
-
-  Widget smartFade(Widget child) => (EzConfig.get(EzConfig.isDark
-              ? darkTransitionFadeKey
-              : lightTransitionFadeKey) ==
-          true)
+  Widget smartFade(Widget child) => (EzConfig.fadedTransition)
       ? FadeTransition(opacity: animation, child: child)
       : child;
 
-  if (transitionType == EzPageTransition.system) {
+  if (EzConfig.pageTransition == EzPageTransition.system) {
     switch (EzConfig.platform) {
       // Android
       case TargetPlatform.android:
@@ -379,7 +371,7 @@ Widget ezTransitionsBuilder(
     }
   }
 
-  switch (transitionType) {
+  switch (EzConfig.pageTransition) {
     // Flip
     case EzPageTransition.flip:
       return AnimatedBuilder(
@@ -496,6 +488,8 @@ Future<bool> isGPlayInstall() async {
 }
 
 /// Opens an [ezModal] with links to each of the sub-settings pages and a common setting from that page
+/// TODO: how can I gracefully add more? or should I just rebuild it?
+/// TODO: make sure it works with urls
 Future<void> openEzFavorites(
   BuildContext context, {
   required String colorSettingsPath,
