@@ -234,12 +234,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       // TODO: research system defaults, make sure they're accurate
       EzElevatedIconButton(
         onPressed: () async {
-          final EzPageTransition backupType = EzPageTransitionConfig.lookup(
-              EzConfig.get(EzConfig.isDark
-                  ? darkTransitionTypeKey
-                  : lightTransitionTypeKey));
-          final bool backupFade = EzConfig.get(
-              EzConfig.isDark ? darkTransitionFadeKey : lightTransitionFadeKey);
+          final EzPageTransition backupType = EzConfig.pageTransition;
+          final bool backupFade = EzConfig.fadedTransition;
 
           EzPageTransition currType = backupType;
           bool currFade = backupFade;
@@ -271,10 +267,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  Text(
-                                    type.name,
-                                    style: EzConfig.styles.labelLarge,
+                                  EzTextButton(
+                                    text: type.name,
+                                    textStyle: EzConfig.styles.labelLarge,
                                     textAlign: TextAlign.center,
+                                    onPressed: () =>
+                                        setModal(() => currType = type),
                                   ),
                                   EzIconButton(
                                     icon: switch (type) {
@@ -352,7 +350,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         icon: const Icon(Icons.slideshow),
         label: EzConfig.l10n.dsPageTransition,
       ),
-      EzConfig.spacer,
+      EzConfig.separator,
 
       // Background image
       if (widget.includeBackgroundImage) ...<Widget>[
@@ -376,20 +374,182 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   updateBrightness: widget.updateBoth ? null : Brightness.light,
                 ),
         ),
-        EzConfig.spacer,
+        EzConfig.separator,
       ],
+
+      // Button shape (&& border width)
+      // TODO: l10n
+      EzElevatedIconButton(
+        onPressed: () async {
+          final EzButtonShape shapeBackup = EzConfig.buttonShape;
+          final double widthBackup = EzConfig.borderWidth;
+
+          EzButtonShape currShape = shapeBackup;
+          double currWidth = widthBackup;
+
+          await ezModal(
+            context: context,
+            builder: (_) => StatefulBuilder(
+              builder: (_, StateSetter setModal) => EzScrollView(
+                children: <Widget>[
+                  // Shape choices
+                  RadioGroup<EzButtonShape>(
+                    groupValue: currShape,
+                    onChanged: (EzButtonShape? choice) {
+                      if (choice != null) setModal(() => currShape = choice);
+                    },
+                    child: EzScrollView(
+                      mainAxisSize: MainAxisSize.min,
+                      scrollDirection: Axis.horizontal,
+                      thumbVisibility: false,
+                      showScrollHint: true,
+                      children: EzButtonShape.values
+                          .map(
+                            (EzButtonShape shape) => Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: EzConfig.spacing,
+                                horizontal: EzConfig.spacing / 2,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  EzElevatedButton(
+                                    text: shape.name,
+                                    style: ElevatedButton.styleFrom(
+                                      side: BorderSide(
+                                        color: EzConfig.colors.primaryContainer,
+                                        width: currWidth,
+                                      ),
+                                      shape: switch (shape) {
+                                        EzButtonShape.pill =>
+                                          const RoundedSuperellipseBorder(
+                                            borderRadius: ezPillEdge,
+                                          ),
+                                        EzButtonShape.box =>
+                                          const RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadiusGeometry.zero,
+                                          ),
+                                        EzButtonShape.leftZoid =>
+                                          const ParallelogramBorder(
+                                              lefty: true),
+                                        EzButtonShape.rightZoid =>
+                                          const ParallelogramBorder(
+                                              lefty: false),
+                                        EzButtonShape.gem => const GemBorder(),
+                                        EzButtonShape.jewel =>
+                                          BeveledRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
+                                        EzButtonShape.squiggle =>
+                                          const PerturbedPillBorder(
+                                            squiggly: true,
+                                            amplitude: 3.0,
+                                            wavelength: 16.0,
+                                          ),
+                                        EzButtonShape.virus =>
+                                          const PerturbedPillBorder(
+                                            squiggly: false,
+                                            amplitude: 5.0,
+                                            wavelength: 10.0,
+                                          ),
+                                      },
+                                    ),
+                                    onPressed: () =>
+                                        setModal(() => currShape = shape),
+                                  ),
+                                  EzConfig.margin,
+                                  ExcludeSemantics(
+                                    child: EzRadio<EzButtonShape>(value: shape),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  EzConfig.spacer,
+
+                  // Border width slider
+                  Text(
+                    'Border width',
+                    style: EzConfig.styles.bodyLarge,
+                  ),
+                  ConstrainedBox(
+                    constraints:
+                        BoxConstraints(maxWidth: ScreenSize.small.size),
+                    child: Slider(
+                      // Slider values
+                      value: currWidth,
+                      min: minBorderWidth,
+                      max: maxBorderWidth,
+                      divisions: 30,
+                      label: currWidth.toStringAsFixed(2),
+
+                      // Slider functions
+                      onChanged: (double value) =>
+                          setModal(() => currWidth = value),
+                      onChangeEnd: (double value) {
+                        if (widget.updateBoth || EzConfig.isDark) {
+                          EzConfig.setDouble(darkBorderWidthKey, value);
+                        }
+                        if (widget.updateBoth || !EzConfig.isDark) {
+                          EzConfig.setDouble(lightBorderWidthKey, value);
+                        }
+                      },
+                    ),
+                  ),
+                  EzConfig.spacer,
+
+                  // Reset button
+                  EzElevatedIconButton(
+                    onPressed: () async {
+                      if (widget.updateBoth || EzConfig.isDark) {
+                        await EzConfig.remove(darkButtonShapeKey);
+                        await EzConfig.remove(darkBorderWidthKey);
+                      }
+                      if (widget.updateBoth || !EzConfig.isDark) {
+                        await EzConfig.remove(lightButtonShapeKey);
+                        await EzConfig.remove(lightBorderWidthKey);
+                      }
+
+                      setModal(() {
+                        currShape = EzConfig.getDefault(EzConfig.isDark
+                            ? darkButtonShapeKey
+                            : lightButtonShapeKey);
+                        currWidth = EzConfig.getDefault(EzConfig.isDark
+                            ? darkBorderWidthKey
+                            : lightBorderWidthKey);
+                      });
+                    },
+                    icon: const Icon(Icons.refresh),
+                    label: EzConfig.l10n.gReset,
+                  ),
+                  EzConfig.separator,
+                ],
+              ),
+            ),
+          );
+
+          if (currShape != shapeBackup || currWidth != widthBackup) {
+            await EzConfig.rebuildUI(redraw);
+          }
+        },
+        label: EzConfig.l10n.dsButtonStyle,
+        icon: const Icon(Icons.edit),
+      ),
+      EzConfig.spacer,
 
       // Button opacity
       EzElevatedIconButton(
         onPressed: () async {
-          double buttonOpacity = EzConfig.get(
-              EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
-          final double buttonBackup = buttonOpacity;
+          final double buttonBackup = EzConfig.buttonOpacity;
+          final double borderBackup = EzConfig.borderOpacity;
 
-          double outlineOpacity = EzConfig.get(EzConfig.isDark
-              ? darkButtonOutlineOpacityKey
-              : lightButtonOutlineOpacityKey);
-          final double outlineBackup = outlineOpacity;
+          double buttonOpacity = buttonBackup;
+          double borderOpacity = borderBackup;
 
           await ezModal(
             context: context,
@@ -403,7 +563,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   Color buttonShadow = EzConfig.colors.shadow
                       .withValues(alpha: buttonOpacity * shadowMod);
                   Color buttonOutline = EzConfig.colors.primaryContainer
-                      .withValues(alpha: outlineOpacity);
+                      .withValues(alpha: borderOpacity);
 
                   Color trackColor = EzConfig.colors.surface
                       .withValues(alpha: max(focusOpacity, buttonOpacity));
@@ -495,25 +655,25 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                             BoxConstraints(maxWidth: ScreenSize.small.size),
                         child: Slider(
                           // Slider values
-                          value: outlineOpacity,
+                          value: borderOpacity,
                           min: minOpacity,
                           max: maxOpacity,
                           divisions: 20,
-                          label: outlineOpacity.toStringAsFixed(2),
+                          label: borderOpacity.toStringAsFixed(2),
 
                           // Slider functions
                           onChanged: (double value) =>
-                              setModal(() => outlineOpacity = value),
+                              setModal(() => borderOpacity = value),
                           onChangeEnd: (double value) {
                             if (widget.updateBoth || EzConfig.isDark) {
                               EzConfig.setDouble(
-                                darkButtonOutlineOpacityKey,
+                                darkBorderOpacityKey,
                                 value,
                               );
                             }
                             if (widget.updateBoth || !EzConfig.isDark) {
                               EzConfig.setDouble(
-                                lightButtonOutlineOpacityKey,
+                                lightBorderOpacityKey,
                                 value,
                               );
                             }
@@ -527,27 +687,27 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                         onPressed: () async {
                           if (widget.updateBoth || EzConfig.isDark) {
                             await EzConfig.remove(darkButtonOpacityKey);
-                            await EzConfig.remove(darkButtonOutlineOpacityKey);
+                            await EzConfig.remove(darkBorderOpacityKey);
                           }
                           if (widget.updateBoth || !EzConfig.isDark) {
                             await EzConfig.remove(lightButtonOpacityKey);
-                            await EzConfig.remove(lightButtonOutlineOpacityKey);
+                            await EzConfig.remove(lightBorderOpacityKey);
                           }
 
                           setModal(() {
                             buttonOpacity = EzConfig.getDefault(EzConfig.isDark
                                 ? darkButtonOpacityKey
                                 : lightButtonOpacityKey);
-                            outlineOpacity = EzConfig.getDefault(EzConfig.isDark
-                                ? darkButtonOutlineOpacityKey
-                                : lightButtonOutlineOpacityKey);
+                            borderOpacity = EzConfig.getDefault(EzConfig.isDark
+                                ? darkBorderOpacityKey
+                                : lightBorderOpacityKey);
 
                             buttonBackground = EzConfig.colors.surface
                                 .withValues(alpha: buttonOpacity);
                             buttonShadow = EzConfig.colors.shadow
                                 .withValues(alpha: buttonOpacity * shadowMod);
                             buttonOutline = EzConfig.colors.primaryContainer
-                                .withValues(alpha: outlineOpacity);
+                                .withValues(alpha: borderOpacity);
 
                             trackColor = EzConfig.colors.surface.withValues(
                                 alpha: max(focusOpacity, buttonOpacity));
@@ -566,8 +726,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             },
           );
 
-          if (buttonOpacity != buttonBackup ||
-              outlineOpacity != outlineBackup) {
+          if (buttonOpacity != buttonBackup || borderOpacity != borderBackup) {
             await EzConfig.rebuildUI(redraw);
           }
         },
