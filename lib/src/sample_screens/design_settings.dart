@@ -440,10 +440,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                         EzButtonShape.jewel =>
                                           BeveledRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(16.0),
+                                                BorderRadius.circular(gemSlope),
                                           ), // TODO: too thick
                                         EzButtonShape.squiggle =>
                                           const SquigglyBorder(),
+                                        EzButtonShape.virus =>
+                                          const SquigglyBorder(sharp: true),
                                       },
                                     ),
                                     onPressed: () =>
