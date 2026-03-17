@@ -507,12 +507,6 @@ class EFUILangEs extends EFUILang {
   String get dsJewel => 'Joya';
 
   @override
-  String get dsSquiggle => 'Ondulación';
-
-  @override
-  String get dsBurst => 'Explosión';
-
-  @override
   String get dsPreview => 'Avance';
 
   @override

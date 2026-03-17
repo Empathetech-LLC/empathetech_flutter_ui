@@ -34,8 +34,6 @@ enum EzButtonShape {
   rightZoid,
   gem,
   jewel,
-  squiggle,
-  burst,
 }
 
 const String _pill = 'pill';
@@ -44,8 +42,6 @@ const String _leftZoid = 'leftZoid';
 const String _rightZoid = 'rightZoid';
 const String _gem = 'gem';
 const String _jewel = 'jewel';
-const String _squiggle = 'squiggle';
-const String _burst = 'burst';
 
 /// EzButtonShape config
 extension EBSConfig on EzButtonShape {
@@ -72,12 +68,6 @@ extension EBSConfig on EzButtonShape {
         return BeveledRectangleBorder(
           borderRadius: BorderRadius.circular(gemSlope),
         ); // TODO: too thick
-
-      case EzButtonShape.squiggle:
-        return const SquigglyBorder();
-
-      case EzButtonShape.burst:
-        return const JaggedBorder();
     }
   }
 
@@ -95,10 +85,6 @@ extension EBSConfig on EzButtonShape {
         return _gem;
       case EzButtonShape.jewel:
         return _jewel;
-      case EzButtonShape.squiggle:
-        return _squiggle;
-      case EzButtonShape.burst:
-        return _burst;
     }
   }
 
@@ -115,10 +101,6 @@ extension EBSConfig on EzButtonShape {
         return EzButtonShape.gem;
       case _jewel:
         return EzButtonShape.jewel;
-      case _squiggle:
-        return EzButtonShape.squiggle;
-      case _burst:
-        return EzButtonShape.burst;
       default:
         return EzButtonShape.pill;
     }
@@ -138,10 +120,6 @@ extension EBSConfig on EzButtonShape {
         return EzConfig.l10n.dsGem;
       case EzButtonShape.jewel:
         return EzConfig.l10n.dsJewel;
-      case EzButtonShape.squiggle:
-        return EzConfig.l10n.dsSquiggle;
-      case EzButtonShape.burst:
-        return EzConfig.l10n.dsBurst;
     }
   }
 }

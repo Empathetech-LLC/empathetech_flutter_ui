@@ -64,12 +64,6 @@ const Set<String> rtlLanguageCodes = <String>{
 /// Fit
 const String boxFitSuffix = 'Fit';
 
-/// 3.0
-const double burstAmp = 3.0;
-
-/// 10.0
-const double burstWave = 10.0;
-
 /// 0xFF264941
 const Color chalkboardGreen = Color(0xFF264941);
 
@@ -100,12 +94,6 @@ const double selectionOpacity = 0.25;
 /// Shadow opacity should be "faster" than surface
 /// 1:1 looks foggy
 const double shadowMod = 0.333;
-
-/// 2.0
-const double squiggleAmp = 2.0;
-
-/// 20.0
-const double squiggleWave = 20.0;
 
 /// 12.0
 const double zoidSlope = 12.0;

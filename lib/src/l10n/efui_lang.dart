@@ -1035,18 +1035,6 @@ abstract class EFUILang {
   /// **'Jewel'**
   String get dsJewel;
 
-  /// No description provided for @dsSquiggle.
-  ///
-  /// In en, this message translates to:
-  /// **'Squiggle'**
-  String get dsSquiggle;
-
-  /// No description provided for @dsBurst.
-  ///
-  /// In en, this message translates to:
-  /// **'Burst'**
-  String get dsBurst;
-
   /// No description provided for @dsPreview.
   ///
   /// In en, this message translates to:

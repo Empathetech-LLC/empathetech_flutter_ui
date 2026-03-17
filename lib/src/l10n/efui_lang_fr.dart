@@ -506,12 +506,6 @@ class EFUILangFr extends EFUILang {
   String get dsJewel => 'Bijou';
 
   @override
-  String get dsSquiggle => 'Ondulation';
-
-  @override
-  String get dsBurst => 'Éclatement';
-
-  @override
   String get dsPreview => 'Aperçu';
 
   @override

@@ -504,12 +504,6 @@ class EFUILangEn extends EFUILang {
   String get dsJewel => 'Jewel';
 
   @override
-  String get dsSquiggle => 'Squiggle';
-
-  @override
-  String get dsBurst => 'Burst';
-
-  @override
   String get dsPreview => 'Preview';
 
   @override
@@ -1234,12 +1228,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsJewel => 'Jewel';
-
-  @override
-  String get dsSquiggle => 'Squiggle';
-
-  @override
-  String get dsBurst => 'Burst';
 
   @override
   String get dsPreview => 'Preview';
