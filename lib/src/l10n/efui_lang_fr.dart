@@ -488,22 +488,28 @@ class EFUILangFr extends EFUILang {
   String get dsButtonStyle => 'Style de bouton';
 
   @override
-  String get dsBorderWidth => 'Largeur de la bordure';
+  String get dsBorderWidth => 'Épaisseur de la bordure';
 
   @override
   String get dsPill => 'Pilule';
 
   @override
-  String get dsBox => 'Boîte';
+  String get dsRectangle => 'Rectangle';
 
   @override
-  String get dsTrapezoid => 'Trapèze';
+  String get dsRoundRectangle => 'Rectangle arrondi';
+
+  @override
+  String get dsLeftTrapezoid => 'Trapèze gauche';
+
+  @override
+  String get dsRightTrapezoid => 'Trapèze droit';
 
   @override
   String get dsGem => 'Gemme';
 
   @override
-  String get dsJewel => 'Bijou';
+  String get dsJewel => 'Joyau';
 
   @override
   String get dsPreview => 'Aperçu';

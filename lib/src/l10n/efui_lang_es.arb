@@ -200,8 +200,10 @@
   "dsButtonStyle": "Estilo de botón",
   "dsBorderWidth": "Ancho del borde",
   "dsPill": "Píldora",
-  "dsBox": "Caja",
-  "dsTrapezoid": "Trapecio",
+  "dsRectangle": "Rectángulo",
+  "dsRoundRectangle": "Rectángulo redondeado",
+  "dsLeftTrapezoid": "Trapecio izquierdo",
+  "dsRightTrapezoid": "Trapecio derecho",
   "dsGem": "Gema",
   "dsJewel": "Joya",
 

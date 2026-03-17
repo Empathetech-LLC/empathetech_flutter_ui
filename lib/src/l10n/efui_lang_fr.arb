@@ -198,12 +198,14 @@
   "dsFadeTransition": "Transition en fondu",
 
   "dsButtonStyle": "Style de bouton",
-  "dsBorderWidth": "Largeur de la bordure",
+  "dsBorderWidth": "Épaisseur de la bordure",
   "dsPill": "Pilule",
-  "dsBox": "Boîte",
-  "dsTrapezoid": "Trapèze",
+  "dsRectangle": "Rectangle",
+  "dsRoundRectangle": "Rectangle arrondi",
+  "dsLeftTrapezoid": "Trapèze gauche",
+  "dsRightTrapezoid": "Trapèze droit",
   "dsGem": "Gemme",
-  "dsJewel": "Bijou",
+  "dsJewel": "Joyau",
 
   "dsPreview": "Aperçu",
   "dsButtonOpacity": "Opacité du bouton",

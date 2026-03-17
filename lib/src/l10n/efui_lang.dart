@@ -1011,17 +1011,29 @@ abstract class EFUILang {
   /// **'Pill'**
   String get dsPill;
 
-  /// No description provided for @dsBox.
+  /// No description provided for @dsRectangle.
   ///
   /// In en, this message translates to:
-  /// **'Box'**
-  String get dsBox;
+  /// **'Rectangle'**
+  String get dsRectangle;
 
-  /// No description provided for @dsTrapezoid.
+  /// No description provided for @dsRoundRectangle.
   ///
   /// In en, this message translates to:
-  /// **'Trapezoid'**
-  String get dsTrapezoid;
+  /// **'Rounded rectangle'**
+  String get dsRoundRectangle;
+
+  /// No description provided for @dsLeftTrapezoid.
+  ///
+  /// In en, this message translates to:
+  /// **'Left trapezoid'**
+  String get dsLeftTrapezoid;
+
+  /// No description provided for @dsRightTrapezoid.
+  ///
+  /// In en, this message translates to:
+  /// **'Right trapezoid'**
+  String get dsRightTrapezoid;
 
   /// No description provided for @dsGem.
   ///

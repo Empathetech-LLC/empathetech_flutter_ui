@@ -200,8 +200,10 @@
   "dsButtonStyle": "Button style",
   "dsBorderWidth": "Border width",
   "dsPill": "Pill",
-  "dsBox": "Box",
-  "dsTrapezoid": "Trapezoid",
+  "dsRectangle": "Rectangle",
+  "dsRoundRectangle": "Rounded rectangle",
+  "dsLeftTrapezoid": "Left trapezoid",
+  "dsRightTrapezoid": "Right trapezoid",
   "dsGem": "Gem",
   "dsJewel": "Jewel",
 

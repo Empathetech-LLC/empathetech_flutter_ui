@@ -492,10 +492,16 @@ class EFUILangEn extends EFUILang {
   String get dsPill => 'Pill';
 
   @override
-  String get dsBox => 'Box';
+  String get dsRectangle => 'Rectangle';
 
   @override
-  String get dsTrapezoid => 'Trapezoid';
+  String get dsRoundRectangle => 'Rounded rectangle';
+
+  @override
+  String get dsLeftTrapezoid => 'Left trapezoid';
+
+  @override
+  String get dsRightTrapezoid => 'Right trapezoid';
 
   @override
   String get dsGem => 'Gem';
@@ -1218,10 +1224,16 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPill => 'Pill';
 
   @override
-  String get dsBox => 'Box';
+  String get dsRectangle => 'Rectangle';
 
   @override
-  String get dsTrapezoid => 'Trapezoid';
+  String get dsRoundRectangle => 'Rounded rectangle';
+
+  @override
+  String get dsLeftTrapezoid => 'Left trapezoid';
+
+  @override
+  String get dsRightTrapezoid => 'Right trapezoid';
 
   @override
   String get dsGem => 'Gem';

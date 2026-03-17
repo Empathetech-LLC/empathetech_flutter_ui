@@ -495,10 +495,16 @@ class EFUILangEs extends EFUILang {
   String get dsPill => 'Píldora';
 
   @override
-  String get dsBox => 'Caja';
+  String get dsRectangle => 'Rectángulo';
 
   @override
-  String get dsTrapezoid => 'Trapecio';
+  String get dsRoundRectangle => 'Rectángulo redondeado';
+
+  @override
+  String get dsLeftTrapezoid => 'Trapecio izquierdo';
+
+  @override
+  String get dsRightTrapezoid => 'Trapecio derecho';
 
   @override
   String get dsGem => 'Gema';
