@@ -683,7 +683,7 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.setString(
         '$darkBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
     await EzConfig.setDouble(darkButtonOpacityKey, nebulaOpacity);
-    await EzConfig.setDouble(darkButtonOutlineOpacityKey, nebulaOpacity);
+    await EzConfig.setDouble(darkBorderOpacityKey, nebulaOpacity);
 
     // Update layout //
 
