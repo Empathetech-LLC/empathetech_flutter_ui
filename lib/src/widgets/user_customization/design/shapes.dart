@@ -33,15 +33,15 @@ class ParallelogramBorder extends OutlinedBorder {
     final Path path = Path();
 
     if (lefty) {
-      path.moveTo(rect.left + slant, rect.top);
-      path.lineTo(rect.right, rect.top);
-      path.lineTo(rect.right - slant, rect.bottom);
-      path.lineTo(rect.left, rect.bottom);
-    } else {
       path.moveTo(rect.left, rect.top);
       path.lineTo(rect.right - slant, rect.top);
       path.lineTo(rect.right, rect.bottom);
       path.lineTo(rect.left + slant, rect.bottom);
+    } else {
+      path.moveTo(rect.left + slant, rect.top);
+      path.lineTo(rect.right, rect.top);
+      path.lineTo(rect.right - slant, rect.bottom);
+      path.lineTo(rect.left, rect.bottom);
     }
 
     path.close();
@@ -118,32 +118,13 @@ class GemBorder extends OutlinedBorder {
       );
 }
 
-/// For [EzButtonShape.squiggle] && [EzButtonShape.virus]
-class PerturbedPillBorder extends OutlinedBorder {
-  final bool squiggly;
-  final double amplitude;
-  final double wavelength;
-
-  const PerturbedPillBorder({
-    super.side,
-    this.squiggly = true,
-    this.amplitude = 4.0,
-    this.wavelength = 12.0,
-  });
+/// For [EzButtonShape.squiggle]
+class SquigglyBorder extends OutlinedBorder {
+  const SquigglyBorder({super.side});
 
   @override
-  OutlinedBorder copyWith({
-    BorderSide? side,
-    bool? squiggly,
-    double? amplitude,
-    double? wavelength,
-  }) =>
-      PerturbedPillBorder(
-        side: side ?? this.side,
-        squiggly: squiggly ?? this.squiggly,
-        amplitude: amplitude ?? this.amplitude,
-        wavelength: wavelength ?? this.wavelength,
-      );
+  OutlinedBorder copyWith({BorderSide? side}) =>
+      SquigglyBorder(side: side ?? this.side);
 
   Path _generatePerturbedPath(Rect rect) {
     // Base pill shape
@@ -162,15 +143,9 @@ class PerturbedPillBorder extends OutlinedBorder {
 
         if (tangent != null) {
           final Offset normal = Offset(-tangent.vector.dy, tangent.vector.dx);
-          double offsetAmount;
 
-          if (squiggly) {
-            offsetAmount = sin(d / wavelength * pi * 2) * amplitude;
-          } else {
-            offsetAmount = (d % wavelength - wavelength / 2).abs() /
-                (wavelength / 2) *
-                amplitude;
-          }
+          double offsetAmount;
+          offsetAmount = sin(d / 12.0 * pi * 2) * 4.0;
 
           final Offset pt = tangent.position + normal * offsetAmount;
           (d == 0.0) ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
@@ -201,10 +176,5 @@ class PerturbedPillBorder extends OutlinedBorder {
   }
 
   @override
-  ShapeBorder scale(double t) => PerturbedPillBorder(
-        side: side.scale(t),
-        squiggly: squiggly,
-        amplitude: amplitude * t,
-        wavelength: wavelength * t,
-      );
+  ShapeBorder scale(double t) => SquigglyBorder(side: side.scale(t));
 }
