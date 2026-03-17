@@ -180,12 +180,12 @@
 
 
   "dsPageTitle": "Paramètres de conception",
+  "dsNone": "Aucune",
 
   "dsAnimDuration": "Durée de l'animation",
   "dsMilliseconds": "Millisecondes",
 
   "dsPageTransition": "Transition de page",
-  "dsNone": "Aucune",
   "dsSystem": "Système",
   "dsFlip": "Retourner",
   "dsRotate": "Tourner",
@@ -196,6 +196,16 @@
   "dsSlideDown": "Glisser vers le bas",
   "dsZoom": "Zoom",
   "dsFadeTransition": "Transition en fondu",
+
+  "dsButtonStyle": "Style de bouton",
+  "dsBorderWidth": "Largeur de la bordure",
+  "dsPill": "Pilule",
+  "dsBox": "Boîte",
+  "dsTrapezoid": "Trapèze",
+  "dsGem": "Gemme",
+  "dsJewel": "Bijou",
+  "dsSquiggle": "Ondulation",
+  "dsVirus": "Virus",
 
   "dsPreview": "Aperçu",
   "dsButtonOpacity": "Opacité du bouton",

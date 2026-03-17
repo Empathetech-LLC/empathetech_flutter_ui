@@ -180,12 +180,12 @@
 
 
   "dsPageTitle": "Design settings",
+  "dsNone": "None",
 
   "dsAnimDuration": "Animation duration",
   "dsMilliseconds": "Milliseconds",
 
   "dsPageTransition": "Page transition",
-  "dsNone": "None",
   "dsSystem": "System",
   "dsFlip": "Flip",
   "dsRotate": "Rotate",
@@ -196,6 +196,16 @@
   "dsSlideDown": "Slide down",
   "dsZoom": "Zoom",
   "dsFadeTransition": "Fade transition",
+
+  "dsButtonStyle": "Button style",
+  "dsBorderWidth": "Border width",
+  "dsPill": "Pill",
+  "dsBox": "Box",
+  "dsTrapezoid": "Trapezoid",
+  "dsGem": "Gem",
+  "dsJewel": "Jewel",
+  "dsSquiggle": "Squiggle",
+  "dsVirus": "Virus",
 
   "dsPreview": "Preview",
   "dsButtonOpacity": "Button opacity",

@@ -909,6 +909,12 @@ abstract class EFUILang {
   /// **'Design settings'**
   String get dsPageTitle;
 
+  /// No description provided for @dsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get dsNone;
+
   /// No description provided for @dsAnimDuration.
   ///
   /// In en, this message translates to:
@@ -926,12 +932,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Page transition'**
   String get dsPageTransition;
-
-  /// No description provided for @dsNone.
-  ///
-  /// In en, this message translates to:
-  /// **'None'**
-  String get dsNone;
 
   /// No description provided for @dsSystem.
   ///
@@ -992,6 +992,60 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Fade transition'**
   String get dsFadeTransition;
+
+  /// No description provided for @dsButtonStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Button style'**
+  String get dsButtonStyle;
+
+  /// No description provided for @dsBorderWidth.
+  ///
+  /// In en, this message translates to:
+  /// **'Border width'**
+  String get dsBorderWidth;
+
+  /// No description provided for @dsPill.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill'**
+  String get dsPill;
+
+  /// No description provided for @dsBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Box'**
+  String get dsBox;
+
+  /// No description provided for @dsTrapezoid.
+  ///
+  /// In en, this message translates to:
+  /// **'Trapezoid'**
+  String get dsTrapezoid;
+
+  /// No description provided for @dsGem.
+  ///
+  /// In en, this message translates to:
+  /// **'Gem'**
+  String get dsGem;
+
+  /// No description provided for @dsJewel.
+  ///
+  /// In en, this message translates to:
+  /// **'Jewel'**
+  String get dsJewel;
+
+  /// No description provided for @dsSquiggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Squiggle'**
+  String get dsSquiggle;
+
+  /// No description provided for @dsVirus.
+  ///
+  /// In en, this message translates to:
+  /// **'Virus'**
+  String get dsVirus;
 
   /// No description provided for @dsPreview.
   ///

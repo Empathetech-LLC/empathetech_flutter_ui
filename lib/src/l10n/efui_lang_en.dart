@@ -441,6 +441,9 @@ class EFUILangEn extends EFUILang {
   String get dsPageTitle => 'Design settings';
 
   @override
+  String get dsNone => 'None';
+
+  @override
   String get dsAnimDuration => 'Animation duration';
 
   @override
@@ -448,9 +451,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get dsPageTransition => 'Page transition';
-
-  @override
-  String get dsNone => 'None';
 
   @override
   String get dsSystem => 'System';
@@ -481,6 +481,33 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get dsFadeTransition => 'Fade transition';
+
+  @override
+  String get dsButtonStyle => 'Button style';
+
+  @override
+  String get dsBorderWidth => 'Border width';
+
+  @override
+  String get dsPill => 'Pill';
+
+  @override
+  String get dsBox => 'Box';
+
+  @override
+  String get dsTrapezoid => 'Trapezoid';
+
+  @override
+  String get dsGem => 'Gem';
+
+  @override
+  String get dsJewel => 'Jewel';
+
+  @override
+  String get dsSquiggle => 'Squiggle';
+
+  @override
+  String get dsVirus => 'Virus';
 
   @override
   String get dsPreview => 'Preview';
@@ -1146,6 +1173,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPageTitle => 'Design settings';
 
   @override
+  String get dsNone => 'None';
+
+  @override
   String get dsAnimDuration => 'Animation duration';
 
   @override
@@ -1153,9 +1183,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsPageTransition => 'Page transition';
-
-  @override
-  String get dsNone => 'None';
 
   @override
   String get dsSystem => 'System';
@@ -1186,6 +1213,33 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsFadeTransition => 'Fade transition';
+
+  @override
+  String get dsButtonStyle => 'Button style';
+
+  @override
+  String get dsBorderWidth => 'Border width';
+
+  @override
+  String get dsPill => 'Pill';
+
+  @override
+  String get dsBox => 'Box';
+
+  @override
+  String get dsTrapezoid => 'Trapezoid';
+
+  @override
+  String get dsGem => 'Gem';
+
+  @override
+  String get dsJewel => 'Jewel';
+
+  @override
+  String get dsSquiggle => 'Squiggle';
+
+  @override
+  String get dsVirus => 'Virus';
 
   @override
   String get dsPreview => 'Preview';

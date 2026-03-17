@@ -444,6 +444,9 @@ class EFUILangEs extends EFUILang {
   String get dsPageTitle => 'Configuración de diseño';
 
   @override
+  String get dsNone => 'Ninguna';
+
+  @override
   String get dsAnimDuration => 'Duración de la animación';
 
   @override
@@ -451,9 +454,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get dsPageTransition => 'Transición de página';
-
-  @override
-  String get dsNone => 'Ninguna';
 
   @override
   String get dsSystem => 'Sistema';
@@ -484,6 +484,33 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get dsFadeTransition => 'Transición de desvanecimiento';
+
+  @override
+  String get dsButtonStyle => 'Estilo de botón';
+
+  @override
+  String get dsBorderWidth => 'Ancho del borde';
+
+  @override
+  String get dsPill => 'Píldora';
+
+  @override
+  String get dsBox => 'Caja';
+
+  @override
+  String get dsTrapezoid => 'Trapecio';
+
+  @override
+  String get dsGem => 'Gema';
+
+  @override
+  String get dsJewel => 'Joya';
+
+  @override
+  String get dsSquiggle => 'Ondulación';
+
+  @override
+  String get dsVirus => 'Virus';
 
   @override
   String get dsPreview => 'Avance';
