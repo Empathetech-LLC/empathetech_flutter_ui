@@ -12,20 +12,20 @@ import 'package:flutter/material.dart';
 /// For [EzButtonShape.leftZoid] && [EzButtonShape.rightZoid]
 class ParallelogramBorder extends OutlinedBorder {
   final bool lefty;
-  final double slant;
+  final double slope;
 
   const ParallelogramBorder({
     super.side,
     required this.lefty,
-    this.slant = 16.0,
+    this.slope = zoidSlope,
   });
 
   @override
-  OutlinedBorder copyWith({BorderSide? side, double? slant, bool? lefty}) =>
+  OutlinedBorder copyWith({BorderSide? side, double? slope, bool? lefty}) =>
       ParallelogramBorder(
         side: side ?? this.side,
         lefty: lefty ?? this.lefty,
-        slant: slant ?? this.slant,
+        slope: slope ?? this.slope,
       );
 
   @override
@@ -34,13 +34,13 @@ class ParallelogramBorder extends OutlinedBorder {
 
     if (lefty) {
       path.moveTo(rect.left, rect.top);
-      path.lineTo(rect.right - slant, rect.top);
+      path.lineTo(rect.right - slope, rect.top);
       path.lineTo(rect.right, rect.bottom);
-      path.lineTo(rect.left + slant, rect.bottom);
+      path.lineTo(rect.left + slope, rect.bottom);
     } else {
-      path.moveTo(rect.left + slant, rect.top);
+      path.moveTo(rect.left + slope, rect.top);
       path.lineTo(rect.right, rect.top);
-      path.lineTo(rect.right - slant, rect.bottom);
+      path.lineTo(rect.right - slope, rect.bottom);
       path.lineTo(rect.left, rect.bottom);
     }
 
@@ -66,7 +66,7 @@ class ParallelogramBorder extends OutlinedBorder {
   ShapeBorder scale(double t) => ParallelogramBorder(
         side: side.scale(t),
         lefty: lefty,
-        slant: slant * t,
+        slope: slope * t,
       );
 }
 
@@ -74,7 +74,10 @@ class ParallelogramBorder extends OutlinedBorder {
 class GemBorder extends OutlinedBorder {
   final double pointWidth;
 
-  const GemBorder({super.side, this.pointWidth = 16.0});
+  const GemBorder({
+    super.side,
+    this.pointWidth = gemSlope,
+  });
 
   @override
   OutlinedBorder copyWith({BorderSide? side, double? pointWidth}) => GemBorder(
@@ -120,11 +123,30 @@ class GemBorder extends OutlinedBorder {
 
 /// For [EzButtonShape.squiggle]
 class SquigglyBorder extends OutlinedBorder {
-  const SquigglyBorder({super.side});
+  final double amplitude;
+  final double wavelength;
+  final bool sharp;
+
+  const SquigglyBorder({
+    super.side,
+    this.amplitude = squiggleAmp,
+    this.wavelength = squiggleWave,
+    this.sharp = false,
+  });
 
   @override
-  OutlinedBorder copyWith({BorderSide? side}) =>
-      SquigglyBorder(side: side ?? this.side);
+  OutlinedBorder copyWith({
+    BorderSide? side,
+    double? amplitude,
+    double? wavelength,
+    bool? sharp,
+  }) =>
+      SquigglyBorder(
+        side: side ?? this.side,
+        amplitude: amplitude ?? this.amplitude,
+        wavelength: wavelength ?? this.wavelength,
+        sharp: sharp ?? this.sharp,
+      );
 
   Path _generatePerturbedPath(Rect rect) {
     // Base pill shape
@@ -136,7 +158,6 @@ class SquigglyBorder extends OutlinedBorder {
 
     // Final shape
     final Path path = Path();
-
     for (final PathMetric metric in basePath.computeMetrics()) {
       for (double d = 0.0; d < metric.length; d += 2.0) {
         final Tangent? tangent = metric.getTangentForOffset(d);
@@ -145,7 +166,13 @@ class SquigglyBorder extends OutlinedBorder {
           final Offset normal = Offset(-tangent.vector.dy, tangent.vector.dx);
 
           double offsetAmount;
-          offsetAmount = sin(d / 12.0 * pi * 2) * 4.0;
+          if (sharp) {
+            offsetAmount = (d % wavelength - wavelength / 2.0).abs() /
+                (wavelength / 2.0) *
+                amplitude;
+          } else {
+            offsetAmount = sin(d / wavelength * pi * 2.0) * amplitude;
+          }
 
           final Offset pt = tangent.position + normal * offsetAmount;
           (d == 0.0) ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
@@ -176,5 +203,10 @@ class SquigglyBorder extends OutlinedBorder {
   }
 
   @override
-  ShapeBorder scale(double t) => SquigglyBorder(side: side.scale(t));
+  ShapeBorder scale(double t) => SquigglyBorder(
+        side: side.scale(t),
+        amplitude: amplitude * t,
+        wavelength: wavelength * t,
+        sharp: sharp,
+      );
 }
