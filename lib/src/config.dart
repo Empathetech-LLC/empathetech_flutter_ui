@@ -858,6 +858,11 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Theme aware [EzDesignCache] alias
   static double get borderWidth => _provPoint.design.borderWidth;
 
+  /// Theme aware [BorderSide] function built from [borderWidth]
+  static BorderSide borderSide(Color color) => borderWidth == 0
+      ? BorderSide.none
+      : BorderSide(color: color, width: borderWidth);
+
   /// Theme aware [EzDesignCache] alias
   static double get buttonOpacity => _provPoint.design.buttonOpacity;
 
