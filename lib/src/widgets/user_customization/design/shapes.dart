@@ -125,13 +125,11 @@ class GemBorder extends OutlinedBorder {
 class SquigglyBorder extends OutlinedBorder {
   final double amplitude;
   final double wavelength;
-  final bool sharp;
 
   const SquigglyBorder({
     super.side,
     this.amplitude = squiggleAmp,
     this.wavelength = squiggleWave,
-    this.sharp = false,
   });
 
   @override
@@ -139,13 +137,11 @@ class SquigglyBorder extends OutlinedBorder {
     BorderSide? side,
     double? amplitude,
     double? wavelength,
-    bool? sharp,
   }) =>
       SquigglyBorder(
         side: side ?? this.side,
         amplitude: amplitude ?? this.amplitude,
         wavelength: wavelength ?? this.wavelength,
-        sharp: sharp ?? this.sharp,
       );
 
   Path _generatePerturbedPath(Rect rect) {
@@ -156,7 +152,7 @@ class SquigglyBorder extends OutlinedBorder {
         Radius.circular(rect.height / 2),
       ));
 
-    // Final shape
+    // Down with the squiggles
     final Path path = Path();
     for (final PathMetric metric in basePath.computeMetrics()) {
       for (double d = 0.0; d < metric.length; d += 2.0) {
@@ -164,15 +160,8 @@ class SquigglyBorder extends OutlinedBorder {
 
         if (tangent != null) {
           final Offset normal = Offset(-tangent.vector.dy, tangent.vector.dx);
-
-          double offsetAmount;
-          if (sharp) {
-            offsetAmount = (d % wavelength - wavelength / 2.0).abs() /
-                (wavelength / 2.0) *
-                amplitude;
-          } else {
-            offsetAmount = sin(d / wavelength * pi * 2.0) * amplitude;
-          }
+          final double offsetAmount =
+              sin(d / wavelength * pi * 2.0) * amplitude;
 
           final Offset pt = tangent.position + normal * offsetAmount;
           (d == 0.0) ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
@@ -207,6 +196,85 @@ class SquigglyBorder extends OutlinedBorder {
         side: side.scale(t),
         amplitude: amplitude * t,
         wavelength: wavelength * t,
-        sharp: sharp,
+      );
+}
+
+/// For [EzButtonShape.burst]
+class JaggedBorder extends OutlinedBorder {
+  final double amplitude;
+  final double wavelength;
+
+  const JaggedBorder({
+    super.side,
+    this.amplitude = burstAmp,
+    this.wavelength = burstWave,
+  });
+
+  @override
+  OutlinedBorder copyWith({
+    BorderSide? side,
+    double? amplitude,
+    double? wavelength,
+  }) =>
+      SquigglyBorder(
+        side: side ?? this.side,
+        amplitude: amplitude ?? this.amplitude,
+        wavelength: wavelength ?? this.wavelength,
+      );
+
+  Path _generatePerturbedPath(Rect rect) {
+    // Base pill shape
+    final Path basePath = Path()
+      ..addRRect(RRect.fromRectAndRadius(
+        rect,
+        Radius.circular(rect.height / 2),
+      ));
+
+    // Down with the sickness
+    final Path path = Path();
+    for (final PathMetric metric in basePath.computeMetrics()) {
+      for (double d = 0.0; d < metric.length; d += 2.0) {
+        final Tangent? tangent = metric.getTangentForOffset(d);
+
+        if (tangent != null) {
+          final Offset normal = Offset(-tangent.vector.dy, tangent.vector.dx);
+          final double offsetAmount =
+              (d % wavelength - wavelength / 2.0).abs() /
+                  (wavelength / 2.0) *
+                  amplitude;
+
+          final Offset pt = tangent.position + normal * offsetAmount;
+          (d == 0.0) ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
+        }
+      }
+
+      path.close();
+    }
+    return path;
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) =>
+      _generatePerturbedPath(rect);
+
+  @override
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) =>
+      _generatePerturbedPath(rect.deflate(side.width));
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
+    if (side.style == BorderStyle.none) return;
+
+    canvas.drawPath(
+      getOuterPath(rect, textDirection: textDirection),
+      side.toPaint(),
+    );
+  }
+
+  @override
+  ShapeBorder scale(double t) => SquigglyBorder(
+        side: side.scale(t),
+        amplitude: amplitude * t,
+        wavelength: wavelength * t,
       );
 }
