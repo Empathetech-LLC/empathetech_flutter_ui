@@ -9,6 +9,22 @@ import 'package:flutter/material.dart';
 
 const String _none = 'none';
 
+// Box Fit //
+
+/// Library for getting a [BoxFit] from its name
+/// '' && `null` both map to `null`
+final Map<String?, BoxFit?> boxFitLookup = <String?, BoxFit?>{
+  BoxFit.contain.name: BoxFit.contain,
+  BoxFit.cover.name: BoxFit.cover,
+  BoxFit.fill.name: BoxFit.fill,
+  BoxFit.fitHeight.name: BoxFit.fitHeight,
+  BoxFit.fitWidth.name: BoxFit.fitWidth,
+  BoxFit.none.name: BoxFit.none,
+  BoxFit.scaleDown.name: BoxFit.scaleDown,
+  '': null,
+  null: null,
+};
+
 // Button shapes //
 
 enum EzButtonShape {
@@ -33,6 +49,38 @@ const String _burst = 'burst';
 
 /// EzButtonShape config
 extension EBSConfig on EzButtonShape {
+  OutlinedBorder get shape {
+    switch (this) {
+      case EzButtonShape.pill:
+        return const RoundedSuperellipseBorder(borderRadius: ezPillEdge);
+
+      case EzButtonShape.box:
+        return const RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.zero,
+        );
+
+      case EzButtonShape.leftZoid:
+        return const ParallelogramBorder(lefty: true);
+
+      case EzButtonShape.rightZoid:
+        return const ParallelogramBorder(lefty: false);
+
+      case EzButtonShape.gem:
+        return const GemBorder();
+
+      case EzButtonShape.jewel:
+        return BeveledRectangleBorder(
+          borderRadius: BorderRadius.circular(gemSlope),
+        ); // TODO: too thick
+
+      case EzButtonShape.squiggle:
+        return const SquigglyBorder();
+
+      case EzButtonShape.burst:
+        return const JaggedBorder();
+    }
+  }
+
   String get value {
     switch (this) {
       case EzButtonShape.pill:
@@ -201,17 +249,3 @@ extension EPTConfig on EzPageTransition {
     }
   }
 }
-
-/// Library for getting a [BoxFit] from its name
-/// '' && [null] both map to [null]
-final Map<String?, BoxFit?> boxFitLib = <String?, BoxFit?>{
-  BoxFit.contain.name: BoxFit.contain,
-  BoxFit.cover.name: BoxFit.cover,
-  BoxFit.fill.name: BoxFit.fill,
-  BoxFit.fitHeight.name: BoxFit.fitHeight,
-  BoxFit.fitWidth.name: BoxFit.fitWidth,
-  BoxFit.none.name: BoxFit.none,
-  BoxFit.scaleDown.name: BoxFit.scaleDown,
-  '': null,
-  null: null,
-};
