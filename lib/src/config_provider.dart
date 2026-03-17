@@ -81,7 +81,7 @@ class EzConfigProvider extends ChangeNotifier {
         fadedTransition: EzConfig.get(darkTransitionFadeKey),
         backgroundImagePath: EzConfig.get(darkBackgroundImageKey),
         backgroundImageFit:
-            boxFitLib[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
+            boxFitLookup[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
         buttonShape: EBSConfig.lookup(EzConfig.get(darkButtonShapeKey)),
         borderWidth: EzConfig.get(darkBorderWidthKey),
         buttonOpacity: EzConfig.get(darkButtonOpacityKey),
@@ -118,7 +118,7 @@ class EzConfigProvider extends ChangeNotifier {
         fadedTransition: EzConfig.get(lightTransitionFadeKey),
         backgroundImagePath: EzConfig.get(lightBackgroundImageKey),
         backgroundImageFit:
-            boxFitLib[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
+            boxFitLookup[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
         buttonShape: EBSConfig.lookup(EzConfig.get(lightButtonShapeKey)),
         borderWidth: EzConfig.get(lightBorderWidthKey),
         buttonOpacity: EzConfig.get(lightButtonOpacityKey),
