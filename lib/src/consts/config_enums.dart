@@ -19,6 +19,7 @@ enum EzButtonShape {
   gem,
   jewel,
   squiggle,
+  virus,
 }
 
 const String _pill = 'pill';
@@ -28,6 +29,7 @@ const String _rightZoid = 'rightZoid';
 const String _gem = 'gem';
 const String _jewel = 'jewel';
 const String _squiggle = 'squiggle';
+const String _virus = 'virus';
 
 /// EzButtonShape config
 extension EBSConfig on EzButtonShape {
@@ -47,6 +49,8 @@ extension EBSConfig on EzButtonShape {
         return _jewel;
       case EzButtonShape.squiggle:
         return _squiggle;
+      case EzButtonShape.virus:
+        return _virus;
     }
   }
 
@@ -65,6 +69,8 @@ extension EBSConfig on EzButtonShape {
         return EzButtonShape.jewel;
       case _squiggle:
         return EzButtonShape.squiggle;
+      case _virus:
+        return EzButtonShape.virus;
       default:
         return EzButtonShape.pill;
     }
@@ -86,6 +92,8 @@ extension EBSConfig on EzButtonShape {
         return EzConfig.l10n.dsJewel;
       case EzButtonShape.squiggle:
         return EzConfig.l10n.dsSquiggle;
+      case EzButtonShape.virus:
+        return EzConfig.l10n.dsVirus;
     }
   }
 }
