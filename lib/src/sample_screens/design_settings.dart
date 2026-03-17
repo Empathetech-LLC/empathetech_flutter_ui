@@ -175,16 +175,16 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       label: animDuration.toStringAsFixed(0),
                       onChanged: (double value) =>
                           setModal(() => animDuration = value),
-                      onChangeEnd: (double value) {
+                      onChangeEnd: (double value) async {
                         if (widget.updateBoth || EzConfig.isDark) {
-                          EzConfig.setInt(
+                          await EzConfig.setInt(
                             darkAnimationDurationKey,
                             value.toInt(),
                           );
                         }
 
                         if (widget.updateBoth || !EzConfig.isDark) {
-                          EzConfig.setInt(
+                          await EzConfig.setInt(
                             lightAnimationDurationKey,
                             value.toInt(),
                           );
@@ -457,12 +457,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       // Slider functions
                       onChanged: (double value) =>
                           setModal(() => currWidth = value),
-                      onChangeEnd: (double value) {
+                      onChangeEnd: (double value) async {
                         if (widget.updateBoth || EzConfig.isDark) {
-                          EzConfig.setDouble(darkBorderWidthKey, value);
+                          await EzConfig.setDouble(darkBorderWidthKey, value);
                         }
+
                         if (widget.updateBoth || !EzConfig.isDark) {
-                          EzConfig.setDouble(lightBorderWidthKey, value);
+                          await EzConfig.setDouble(lightBorderWidthKey, value);
                         }
                       },
                     ),
@@ -501,6 +502,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           );
 
           if (currShape != shapeBackup || currWidth != widthBackup) {
+            if (widget.updateBoth || EzConfig.isDark) {
+              await EzConfig.setString(darkButtonShapeKey, currShape.value);
+            }
+
+            if (widget.updateBoth || !EzConfig.isDark) {
+              await EzConfig.setString(lightButtonShapeKey, currShape.value);
+            }
+
             await EzConfig.rebuildUI(redraw);
           }
         },
@@ -597,15 +606,15 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           // Slider functions
                           onChanged: (double value) =>
                               setModal(() => buttonOpacity = value),
-                          onChangeEnd: (double value) {
+                          onChangeEnd: (double value) async {
                             if (widget.updateBoth || EzConfig.isDark) {
-                              EzConfig.setDouble(
+                              await EzConfig.setDouble(
                                 darkButtonOpacityKey,
                                 value,
                               );
                             }
                             if (widget.updateBoth || !EzConfig.isDark) {
-                              EzConfig.setDouble(
+                              await EzConfig.setDouble(
                                 lightButtonOpacityKey,
                                 value,
                               );
@@ -634,15 +643,16 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           // Slider functions
                           onChanged: (double value) =>
                               setModal(() => borderOpacity = value),
-                          onChangeEnd: (double value) {
+                          onChangeEnd: (double value) async {
                             if (widget.updateBoth || EzConfig.isDark) {
-                              EzConfig.setDouble(
+                              await EzConfig.setDouble(
                                 darkBorderOpacityKey,
                                 value,
                               );
                             }
+
                             if (widget.updateBoth || !EzConfig.isDark) {
-                              EzConfig.setDouble(
+                              await EzConfig.setDouble(
                                 lightBorderOpacityKey,
                                 value,
                               );

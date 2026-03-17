@@ -139,12 +139,14 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                     // Slider functions
                     onChanged: (double value) =>
                         setModal(() => currValue = value),
-                    onChangeEnd: (double value) {
-                      EzConfig.setDouble(configKey, value);
+                    onChangeEnd: (double value) async {
+                      await EzConfig.setDouble(configKey, value);
+
                       if (widget.updateBoth) {
-                        EzConfig.setDouble(
-                            EzConfig.isDark ? lightSpacingKey : darkSpacingKey,
-                            value);
+                        await EzConfig.setDouble(
+                          EzConfig.isDark ? lightSpacingKey : darkSpacingKey,
+                          value,
+                        );
                       }
                     },
 
