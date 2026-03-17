@@ -73,10 +73,12 @@ const Color chalkboardGreen = Color(0xFF264941);
 /// 0.12
 const double focusOpacity = 0.125;
 
+/// 16.0
+const double gemSlope = 16.0;
+
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';
 
-/// Ein bit und nicht mehr
 /// 255
 const int rMax = 255;
 
@@ -92,3 +94,12 @@ const double selectionOpacity = 0.25;
 /// Shadow opacity should be "faster" than surface
 /// 1:1 looks foggy
 const double shadowMod = 0.333;
+
+/// 2.0
+const double squiggleAmp = 2.0;
+
+/// 20.0
+const double squiggleWave = 20.0;
+
+/// 12.0
+const double zoidSlope = 12.0;
