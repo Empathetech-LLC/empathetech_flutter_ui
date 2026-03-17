@@ -56,13 +56,15 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final Color crucialPrimaryButtonBackground =
       colorScheme.primary.withValues(alpha: crucialButtonOpacity);
 
-  final double outlineOpacity = EzConfig.get(
-      isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey);
+  final double borderOpacity =
+      EzConfig.get(isDark ? darkBorderOpacityKey : lightBorderOpacityKey);
+  final double borderWidth =
+      EzConfig.get(isDark ? darkBorderWidthKey : lightBorderWidthKey);
 
-  final Color buttonContainer =
-      colorScheme.primaryContainer.withValues(alpha: outlineOpacity);
-  final Color disabledOutline =
-      colorScheme.outlineVariant.withValues(alpha: outlineOpacity);
+  final Color buttonBorder =
+      colorScheme.primaryContainer.withValues(alpha: borderOpacity);
+  final Color disabledBorder =
+      colorScheme.outlineVariant.withValues(alpha: borderOpacity);
 
   // Icons //
 
@@ -210,7 +212,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         errorMaxLines: 1,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: buttonContainer, width: borderWidth),
+          borderSide: BorderSide(color: buttonBorder, width: borderWidth),
           borderRadius: ezRoundEdge,
           gapPadding: 0,
         ),
@@ -227,7 +229,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
-        side: BorderSide(color: buttonContainer),
+        side: BorderSide(color: buttonBorder),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
@@ -325,7 +327,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       ),
       focusedBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: colorScheme.secondary.withValues(alpha: outlineOpacity),
+          color: colorScheme.secondary.withValues(alpha: borderOpacity),
           width: borderWidth,
         ),
       ),
@@ -337,19 +339,19 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       ),
       disabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: disabledOutline,
+          color: disabledBorder,
           width: borderWidth,
         ),
       ),
       enabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: buttonContainer,
+          color: buttonBorder,
           width: borderWidth,
         ),
       ),
       border: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: buttonContainer,
+          color: buttonBorder,
           width: borderWidth,
         ),
       ),
@@ -359,7 +361,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     menuTheme: MenuThemeData(
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(colorScheme.surface),
-        side: WidgetStateProperty.all(BorderSide(color: buttonContainer)),
+        side: WidgetStateProperty.all(BorderSide(color: buttonBorder)),
         alignment: Alignment.center,
       ),
     ),
@@ -405,7 +407,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         foregroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
         disabledForegroundColor: colorScheme.outline,
-        side: BorderSide(color: buttonContainer),
+        side: BorderSide(color: buttonBorder),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
@@ -433,7 +435,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             : colorScheme.outline,
       ),
       trackColor: WidgetStateProperty.all(crucialButtonBackground),
-      trackOutlineColor: WidgetStateProperty.all(buttonContainer),
+      trackOutlineColor: WidgetStateProperty.all(buttonBorder),
       overlayColor: WidgetStateProperty.all(focusColor),
     ),
 
