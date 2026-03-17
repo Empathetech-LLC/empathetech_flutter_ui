@@ -66,14 +66,6 @@ class _LayoutSettingState extends State<EzMarginSetting> {
 
     double currValue = EzConfig.get(configKey);
 
-    late final String? backgroundImagePath = EzConfig.get(
-        EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
-
-    late final BoxFit? backgroundImageFit = boxFitLib[EzConfig.get(
-        EzConfig.isDark
-            ? '$darkBackgroundImageKey$boxFitSuffix'
-            : '$lightBackgroundImageKey$boxFitSuffix')];
-
     // Return the build //
 
     return EzElevatedIconButton(
@@ -129,14 +121,14 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: EzConfig.colors.surface,
-                              image: (backgroundImagePath == null ||
-                                      backgroundImagePath == noImageValue)
-                                  ? null
-                                  : DecorationImage(
-                                      image:
-                                          ezImageProvider(backgroundImagePath),
-                                      fit: backgroundImageFit,
-                                    ),
+                              image:
+                                  (EzConfig.backgroundImagePath == noImageValue)
+                                      ? null
+                                      : DecorationImage(
+                                          image: ezImageProvider(
+                                              EzConfig.backgroundImagePath),
+                                          fit: EzConfig.backgroundImageFit,
+                                        ),
                             ),
                             margin: EdgeInsets.all(currValue * 0.25),
                           ),

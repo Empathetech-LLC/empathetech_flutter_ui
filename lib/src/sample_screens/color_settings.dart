@@ -437,7 +437,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               shape: BoxShape.circle,
               border: Border.all(
                 color: EzConfig.colors.primaryContainer,
-                width: borderWidth,
+                width: EzConfig.borderWidth,
               ),
             ),
             child: CircleAvatar(

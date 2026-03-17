@@ -141,10 +141,8 @@ class EzDropdownMenu<T> extends StatelessWidget {
     return IconButtonTheme(
       data: IconButtonThemeData(
         style: IconButton.styleFrom(
-          backgroundColor: EzConfig.colors.surface.withValues(
-              alpha: EzConfig.get(EzConfig.isDark
-                  ? darkButtonOpacityKey
-                  : lightButtonOpacityKey)),
+          backgroundColor:
+              EzConfig.colors.surface.withValues(alpha: EzConfig.buttonOpacity),
           iconSize: iSize,
         ),
       ),

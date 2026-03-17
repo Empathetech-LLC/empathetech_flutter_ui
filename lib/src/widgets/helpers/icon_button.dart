@@ -141,24 +141,21 @@ class EzIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final double iSize = iconSize ?? EzConfig.iconSize;
 
-    late final double buttonOpacity = EzConfig.get(
-        EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
-    late final double outlineOpacity = EzConfig.get(EzConfig.isDark
-        ? darkButtonOutlineOpacityKey
-        : lightButtonOutlineOpacityKey);
-
     late final Color buttonBackground =
-        EzConfig.colors.surface.withValues(alpha: buttonOpacity);
-    late final Color enabledOutline =
-        EzConfig.colors.primaryContainer.withValues(alpha: outlineOpacity);
-    late final Color disabledOutline =
-        EzConfig.colors.outlineVariant.withValues(alpha: outlineOpacity);
+        EzConfig.colors.surface.withValues(alpha: EzConfig.buttonOpacity);
+    late final Color enabledOutline = EzConfig.colors.primaryContainer
+        .withValues(alpha: EzConfig.borderOpacity);
+    late final Color disabledOutline = EzConfig.colors.outlineVariant
+        .withValues(alpha: EzConfig.borderOpacity);
 
     late final ButtonStyle buttonStyle = style ??
         ((enabled && !fauxDisabled)
             ? IconButton.styleFrom(
                 backgroundColor: buttonBackground,
-                side: BorderSide(color: enabledOutline, width: borderWidth),
+                side: BorderSide(
+                  color: enabledOutline,
+                  width: EzConfig.borderWidth,
+                ),
                 iconSize: iSize,
               )
             : IconButton.styleFrom(
@@ -166,7 +163,10 @@ class EzIconButton extends StatelessWidget {
                 foregroundColor: EzConfig.colors.outline,
                 overlayColor: EzConfig.colors.outline,
                 shadowColor: Colors.transparent,
-                side: BorderSide(color: disabledOutline, width: borderWidth),
+                side: BorderSide(
+                  color: disabledOutline,
+                  width: EzConfig.borderWidth,
+                ),
                 iconSize: iSize,
               ));
 

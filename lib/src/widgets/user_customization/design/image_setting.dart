@@ -709,7 +709,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: EzConfig.colors.onSurface,
-                    width: borderWidth,
+                    width: EzConfig.borderWidth,
                   ),
                   borderRadius: ezRoundEdge,
                 ),
@@ -782,7 +782,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               shape: BoxShape.circle,
               border: Border.all(
                 color: EzConfig.colors.onSurface,
-                width: borderWidth,
+                width: EzConfig.borderWidth,
               ),
             ),
             child: CircleAvatar(
@@ -800,7 +800,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ? const CircularProgressIndicator()
                   : (currPath == null || currPath == noImageValue)
                       ? EzIcon(
-                          Icons.edit,
+                          Icons.image_search,
                           color: EzConfig.colors.primary,
                         )
                       : null,
