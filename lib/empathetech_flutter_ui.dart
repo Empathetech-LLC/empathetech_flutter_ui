@@ -117,6 +117,7 @@ export 'src/widgets/user_customization/color/mono_chrome_colors_setting.dart';
 
 // Design
 export 'src/widgets/user_customization/design/image_setting.dart';
+export 'src/widgets/user_customization/design/shapes.dart';
 
 // Layout
 export 'src/widgets/user_customization/layout/margin.dart';
