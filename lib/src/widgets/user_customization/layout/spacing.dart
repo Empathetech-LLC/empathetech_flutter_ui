@@ -113,7 +113,8 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                             EzElevatedButton(
                               enabled: false,
                               style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder()),
+                                shape: const CircleBorder(),
+                              ),
                               text: currValue.toStringAsFixed(widget.decimals),
                             ),
                           ],

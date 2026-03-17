@@ -38,9 +38,10 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
           foregroundColor:
               isBold ? EzConfig.colors.primary : EzConfig.colors.outline,
           side: BorderSide(
-              color: EzConfig.colors.primaryContainer
-                  .withValues(alpha: EzConfig.buttonOpacity),
-              width: EzConfig.borderWidth),
+            color: EzConfig.colors.primaryContainer
+                .withValues(alpha: EzConfig.buttonOpacity),
+            width: EzConfig.borderWidth,
+          ),
           iconSize: EzConfig.iconSize,
         ),
         onPressed: () async {
