@@ -420,33 +420,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                         color: EzConfig.colors.primaryContainer,
                                         width: currWidth,
                                       ),
-                                      shape: switch (shape) {
-                                        EzButtonShape.pill =>
-                                          const RoundedSuperellipseBorder(
-                                            borderRadius: ezPillEdge,
-                                          ),
-                                        EzButtonShape.box =>
-                                          const RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadiusGeometry.zero,
-                                          ),
-                                        EzButtonShape.leftZoid =>
-                                          const ParallelogramBorder(
-                                              lefty: true),
-                                        EzButtonShape.rightZoid =>
-                                          const ParallelogramBorder(
-                                              lefty: false),
-                                        EzButtonShape.gem => const GemBorder(),
-                                        EzButtonShape.jewel =>
-                                          BeveledRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(gemSlope),
-                                          ), // TODO: too thick
-                                        EzButtonShape.squiggle =>
-                                          const SquigglyBorder(),
-                                        EzButtonShape.burst =>
-                                          const JaggedBorder(),
-                                      },
+                                      shape: shape.shape,
                                     ),
                                     onPressed: () =>
                                         setModal(() => currShape = shape),
@@ -579,7 +553,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: buttonBackground,
                                 shadowColor: buttonShadow,
-                                side: BorderSide(color: buttonOutline),
+                                side: BorderSide(
+                                  color: buttonOutline,
+                                  width: EzConfig.borderWidth,
+                                ),
                               ),
                             ),
                           ),
