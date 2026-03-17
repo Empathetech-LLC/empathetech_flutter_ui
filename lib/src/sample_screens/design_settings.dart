@@ -444,8 +444,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                           ), // TODO: too thick
                                         EzButtonShape.squiggle =>
                                           const SquigglyBorder(),
-                                        EzButtonShape.virus =>
-                                          const SquigglyBorder(sharp: true),
+                                        EzButtonShape.burst =>
+                                          const JaggedBorder(),
                                       },
                                     ),
                                     onPressed: () =>

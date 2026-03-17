@@ -64,6 +64,12 @@ const Set<String> rtlLanguageCodes = <String>{
 /// Fit
 const String boxFitSuffix = 'Fit';
 
+/// 3.0
+const double burstAmp = 3.0;
+
+/// 10.0
+const double burstWave = 10.0;
+
 /// 0xFF264941
 const Color chalkboardGreen = Color(0xFF264941);
 
