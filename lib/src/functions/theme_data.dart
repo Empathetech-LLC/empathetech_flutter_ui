@@ -16,13 +16,16 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
   // Shared //
 
+  // Colors
   final ColorScheme colorScheme = ezColorScheme(brightness);
   final Color focusColor = colorScheme.primary.withValues(alpha: focusOpacity);
 
+  // Design
   final int animDuration = Brightness.dark == brightness
       ? EzConfig.get(darkAnimationDurationKey)
       : EzConfig.get(lightAnimationDurationKey);
 
+  // Layout
   final double margin =
       isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
   final double padding =
@@ -30,14 +33,24 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final double spacing =
       isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
 
-  final double iconSize =
-      isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
-
+  // Text
   final TextTheme textTheme =
       ezTextTheme(colorScheme.onSurface, isDark: isDark);
 
+  final double iconSize =
+      isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
+
   // Buttons //
 
+  // Shape/style
+  final OutlinedBorder buttonShape = EBSConfig.lookup(
+          EzConfig.get(isDark ? darkButtonShapeKey : lightButtonShapeKey))
+      .shape;
+
+  final double borderWidth =
+      EzConfig.get(isDark ? darkBorderWidthKey : lightBorderWidthKey);
+
+  // Core opacity
   final double buttonOpacity =
       EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
 
@@ -56,10 +69,9 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final Color crucialPrimaryButtonBackground =
       colorScheme.primary.withValues(alpha: crucialButtonOpacity);
 
+  // Border opacity
   final double borderOpacity =
       EzConfig.get(isDark ? darkBorderOpacityKey : lightBorderOpacityKey);
-  final double borderWidth =
-      EzConfig.get(isDark ? darkBorderWidthKey : lightBorderWidthKey);
 
   final Color buttonBorder =
       colorScheme.primaryContainer.withValues(alpha: borderOpacity);
@@ -175,7 +187,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             : null,
       ),
       overlayColor: WidgetStateProperty.all(focusColor),
-      side: BorderSide(color: colorScheme.primary),
+      side: BorderSide(color: colorScheme.primary, width: borderWidth),
+      shape: buttonShape,
     ),
 
     // Dialog
@@ -229,7 +242,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
-        side: BorderSide(color: buttonBorder),
+        side: BorderSide(color: buttonBorder, width: borderWidth),
+        shape: buttonShape,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
@@ -281,7 +295,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       foregroundColor: colorScheme.onPrimary,
       hoverColor: focusColor,
       extendedPadding: EdgeInsets.zero,
-      shape: const CircleBorder(),
+      shape:
+          buttonShape, // TODO: do I like this? should I add a system setting? should I enumerate more options? how's it feeling?
       iconSize: iconSize,
       sizeConstraints: BoxConstraints(
         minWidth: (iconSize * 1.25) + padding,
@@ -301,6 +316,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: BorderSide.none,
+        shape: buttonShape, // ditto from FAB
         iconSize: iconSize,
         alignment: Alignment.center,
         padding: EzInsets.wrap(padding),
@@ -407,7 +423,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         foregroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
         disabledForegroundColor: colorScheme.outline,
-        side: BorderSide(color: buttonBorder),
+        side: BorderSide(color: buttonBorder, width: borderWidth),
+        shape: buttonShape, // TODO: check the shapes, some could be weird
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
@@ -419,9 +436,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       behavior: SnackBarBehavior.floating,
       backgroundColor: colorScheme.surfaceDim,
       closeIconColor: colorScheme.primary,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: colorScheme.secondary),
-        borderRadius: ezRoundEdge,
+      shape: buttonShape.copyWith(
+        side: BorderSide(color: colorScheme.secondary, width: borderWidth),
       ),
       contentTextStyle: textTheme.bodyLarge,
       insetPadding: EdgeInsets.all(margin),
@@ -449,6 +465,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         disabledIconColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: null,
+        shape: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
