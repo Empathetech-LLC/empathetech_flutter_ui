@@ -275,30 +275,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                         setModal(() => currType = type),
                                   ),
                                   EzIconButton(
-                                    icon: switch (type) {
-                                      EzPageTransition.none =>
-                                        const Icon(Icons.cancel),
-                                      EzPageTransition.system => Icon(
-                                          EzConfig.onMobile
-                                              ? Icons.phone
-                                              : Icons.computer),
-                                      EzPageTransition.flip =>
-                                        const Icon(Icons.flip),
-                                      EzPageTransition.rotate =>
-                                        const Icon(Icons.rotate_right),
-                                      EzPageTransition.scale =>
-                                        const Icon(Icons.scale),
-                                      EzPageTransition.slideLeft =>
-                                        const Icon(Icons.arrow_left),
-                                      EzPageTransition.slideRight =>
-                                        const Icon(Icons.arrow_right),
-                                      EzPageTransition.slideUp =>
-                                        const Icon(Icons.arrow_upward),
-                                      EzPageTransition.slideDown =>
-                                        const Icon(Icons.arrow_downward),
-                                      EzPageTransition.zoom =>
-                                        const Icon(Icons.zoom_in),
-                                    },
+                                    icon: type.icon,
                                     onPressed: () =>
                                         setModal(() => currType = type),
                                   ),
