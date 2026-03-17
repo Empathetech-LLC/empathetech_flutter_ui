@@ -455,18 +455,15 @@ Must be one of [int, bool, double, String, List<String>]''');
           brightness: Brightness.dark,
           seedColor: primary,
           primary: primary,
-          primaryContainer:
-              primary.withValues(alpha: defaultButtonOutlineOpacity),
+          primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimary: onPrimary,
           onPrimaryContainer: onPrimary,
           secondary: secondary,
-          secondaryContainer:
-              secondary.withValues(alpha: defaultButtonOutlineOpacity),
+          secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondary: onSecondary,
           onSecondaryContainer: onSecondary,
           tertiary: tertiary,
-          tertiaryContainer:
-              tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+          tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiary: onTertiary,
           onTertiaryContainer: onTertiary,
           onSurface: Colors.white,
@@ -484,8 +481,14 @@ Must be one of [int, bool, double, String, List<String>]''');
               .values[random.nextInt(EzPageTransition.values.length)].value);
       await setBool(darkTransitionFadeKey, random.nextBool());
 
+      await setString(
+          darkButtonShapeKey,
+          EzButtonShape
+              .values[random.nextInt(EzButtonShape.values.length)].value);
+      await setDouble(darkBorderWidthKey, random.nextDouble() * 3);
+
       await setDouble(darkButtonOpacityKey, random.nextDouble());
-      await setDouble(darkButtonOutlineOpacityKey, random.nextDouble());
+      await setDouble(darkBorderOpacityKey, random.nextDouble());
 
       // Update layout settings //
 
@@ -582,18 +585,15 @@ Must be one of [int, bool, double, String, List<String>]''');
           brightness: Brightness.light,
           seedColor: primary,
           primary: primary,
-          primaryContainer:
-              primary.withValues(alpha: defaultButtonOutlineOpacity),
+          primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimary: onPrimary,
           onPrimaryContainer: onPrimary,
           secondary: secondary,
-          secondaryContainer:
-              secondary.withValues(alpha: defaultButtonOutlineOpacity),
+          secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondary: onSecondary,
           onSecondaryContainer: onSecondary,
           tertiary: tertiary,
-          tertiaryContainer:
-              tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+          tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiary: onTertiary,
           onTertiaryContainer: onTertiary,
           onSurface: Colors.black,
@@ -611,8 +611,14 @@ Must be one of [int, bool, double, String, List<String>]''');
               .values[random.nextInt(EzPageTransition.values.length)].value);
       await setBool(lightTransitionFadeKey, random.nextBool());
 
+      await setString(
+          lightButtonShapeKey,
+          EzButtonShape
+              .values[random.nextInt(EzButtonShape.values.length)].value);
+      await setDouble(lightBorderWidthKey, random.nextDouble() * 3);
+
       await setDouble(lightButtonOpacityKey, random.nextDouble());
-      await setDouble(lightButtonOutlineOpacityKey, random.nextDouble());
+      await setDouble(lightBorderOpacityKey, random.nextDouble());
 
       // Update layout settings //
 
@@ -815,70 +821,92 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool get isDark => _provPoint.isDark;
 
   /// Current, [ThemeMode] aware, [ColorScheme]
-  static ColorScheme get colorScheme => _provPoint.theme.colorScheme;
-
-  /// Current, [ThemeMode] aware, [ColorScheme]
-  /// [colorScheme] alias
   static ColorScheme get colors => _provPoint.theme.colorScheme;
 
   /// Current, [ThemeMode] aware, [TextTheme]
-  static TextTheme get textTheme => _provPoint.theme.textTheme;
-
-  /// Current, [ThemeMode] aware, [TextTheme]
-  /// [textTheme] alias
   static TextTheme get styles => _provPoint.theme.textTheme;
 
-  /// Theme aware alias
+  /// Theme aware [EzColorCache] alias
+  static String get schemeImagePath => _provPoint.color.schemeImagePath;
+
+  /// Theme aware [EzDesignCache] alias
   static int get animDur => _provPoint.design.animDur;
 
-  /// Theme aware alias
+  /// Theme aware [EzDesignCache] alias
+  static EzPageTransition get pageTransition =>
+      _provPoint.design.pageTransition;
+
+  /// Theme aware [EzDesignCache] alias
+  static bool get fadedTransition => _provPoint.design.fadedTransition;
+
+  /// Theme aware [EzDesignCache] alias
+  static String get backgroundImagePath =>
+      _provPoint.design.backgroundImagePath;
+
+  /// Theme aware [EzDesignCache] alias
+  static BoxFit? get backgroundImageFit => _provPoint.design.backgroundImageFit;
+
+  /// Theme aware [EzDesignCache] alias
+  static EzButtonShape get buttonShape => _provPoint.design.buttonShape;
+
+  /// Theme aware [EzDesignCache] alias
+  static double get borderWidth => _provPoint.design.borderWidth;
+
+  /// Theme aware [EzDesignCache] alias
+  static double get buttonOpacity => _provPoint.design.buttonOpacity;
+
+  /// Theme aware [EzDesignCache] alias
+  static double get borderOpacity => _provPoint.design.borderOpacity;
+
+  /// Theme aware [EzLayoutCache] alias
   static double get marginVal => _provPoint.layout.marginVal;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static double get padding => _provPoint.layout.padding;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static double get spacing => _provPoint.layout.spacing;
 
-  /// Theme aware alias (spacing + margin)
+  /// Theme aware [EzLayoutCache] alias (spacing + margin)
   static double get spargin => marginVal + spacing;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static EzMargin get margin => _provPoint.layout.margin;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static EzMargin get rowMargin => _provPoint.layout.rowMargin;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static EzSpacer get spacer => _provPoint.layout.spacer;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static EzSpacer get rowSpacer => _provPoint.layout.rowSpacer;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static EzSeparator get separator => _provPoint.layout.separator;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static EzDivider get divider => _provPoint.layout.divider;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static bool get showBackFAB => _provPoint.layout.showBackFAB;
 
-  /// Theme aware alias
+  /// Theme aware [EzLayoutCache] alias
   static bool get showScroll => _provPoint.layout.showScroll;
 
-  /// Theme aware alias
+  /// Theme aware [EzTextCache] alias
   static double get iconSize => _provPoint.text.iconSize;
 
-  /// Theme aware alias
+  /// Theme aware [EzTextCache] alias
   static EzNewLine get startLine => _provPoint.text.startLine;
 
-  /// Theme aware alias
+  /// Theme aware [EzTextCache] alias
   static EzNewLine get centerLine => _provPoint.text.centerLine;
 
-  /// Theme aware alias
+  /// Theme aware [EzTextCache] alias
   static EzNewLine get endLine => _provPoint.text.endLine;
 
+  /// Live [EzAppCache] pointer
   static EzAppCache? get appCache => _provPoint.appCache;
 
   // Setters //
