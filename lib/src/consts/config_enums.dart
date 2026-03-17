@@ -7,6 +7,99 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+const String _none = 'none';
+
+// Button shapes //
+
+enum EzButtonShape {
+  pill,
+  box,
+  leftZoid,
+  rightZoid,
+  gem,
+  jewel,
+  squiggle,
+  virus,
+}
+
+const String _pill = 'pill';
+const String _box = 'box';
+const String _leftZoid = 'leftZoid';
+const String _rightZoid = 'rightZoid';
+const String _gem = 'gem';
+const String _jewel = 'jewel';
+const String _squiggle = 'squiggle';
+const String _virus = 'virus';
+
+/// EzButtonShape config
+extension EBSConfig on EzButtonShape {
+  String get value {
+    switch (this) {
+      case EzButtonShape.pill:
+        return _pill;
+      case EzButtonShape.box:
+        return _box;
+      case EzButtonShape.leftZoid:
+        return _leftZoid;
+      case EzButtonShape.rightZoid:
+        return _rightZoid;
+      case EzButtonShape.gem:
+        return _gem;
+      case EzButtonShape.jewel:
+        return _jewel;
+      case EzButtonShape.squiggle:
+        return _squiggle;
+      case EzButtonShape.virus:
+        return _virus;
+    }
+  }
+
+  /// Defaults to [EzPageTransition.system]
+  static EzButtonShape lookup(String? value) {
+    switch (value) {
+      case _box:
+        return EzButtonShape.box;
+      case _leftZoid:
+        return EzButtonShape.leftZoid;
+      case _rightZoid:
+        return EzButtonShape.rightZoid;
+      case _gem:
+        return EzButtonShape.gem;
+      case _jewel:
+        return EzButtonShape.jewel;
+      case _squiggle:
+        return EzButtonShape.squiggle;
+      case _virus:
+        return EzButtonShape.virus;
+      default:
+        return EzButtonShape.pill;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case EzButtonShape.pill:
+        return EzConfig.l10n.dsPill;
+      case EzButtonShape.box:
+        return EzConfig.l10n.dsBox;
+      case EzButtonShape.leftZoid:
+        return EzConfig.l10n.dsTrapezoid;
+      case EzButtonShape.rightZoid:
+        return EzConfig.l10n.dsTrapezoid;
+      case EzButtonShape.gem:
+        return EzConfig.l10n.dsGem;
+      case EzButtonShape.jewel:
+        return EzConfig.l10n.dsJewel;
+      case EzButtonShape.squiggle:
+        return EzConfig.l10n.dsSquiggle;
+      case EzButtonShape.virus:
+        return EzConfig.l10n.dsVirus;
+    }
+  }
+}
+
+// Page transitions //
+
 enum EzPageTransition {
   none,
   system,
@@ -20,7 +113,6 @@ enum EzPageTransition {
   zoom,
 }
 
-const String _none = 'none';
 const String _system = 'system';
 const String _flip = 'flip';
 const String _rotate = 'rotate';
@@ -31,7 +123,8 @@ const String _slideUp = 'slideUp';
 const String _slideDown = 'slideDown';
 const String _zoom = 'zoom';
 
-extension EzPageTransitionConfig on EzPageTransition {
+/// EzPageTransition config
+extension EPTConfig on EzPageTransition {
   String get value {
     switch (this) {
       case EzPageTransition.none:
@@ -78,8 +171,7 @@ extension EzPageTransitionConfig on EzPageTransition {
         return EzPageTransition.slideDown;
       case _zoom:
         return EzPageTransition.zoom;
-      case _system:
-      case null:
+
       default:
         return EzPageTransition.system;
     }
