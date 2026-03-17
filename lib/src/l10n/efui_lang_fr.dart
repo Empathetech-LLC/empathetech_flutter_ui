@@ -509,9 +509,6 @@ class EFUILangFr extends EFUILang {
   String get dsSquiggle => 'Ondulation';
 
   @override
-  String get dsVirus => 'Virus';
-
-  @override
   String get dsPreview => 'Aperçu';
 
   @override
