@@ -430,8 +430,10 @@ const String darkAnimationDurationKey = 'darkAnimationDuration';
 const String darkTransitionTypeKey = 'darkTransitionType';
 const String darkTransitionFadeKey = 'darkTransitionFade';
 const String darkBackgroundImageKey = 'darkBackgroundImage';
+const String darkButtonShapeKey = 'darkButtonShape';
+const String darkBorderWidthKey = 'darkBorderWidth';
 const String darkButtonOpacityKey = 'darkButtonOpacity';
-const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
+const String darkBorderOpacityKey = 'darkBorderOpacity';
 
 /// Animation, background, && button opacity keys
 const Map<String, Type> darkDesignKeys = <String, Type>{
@@ -440,8 +442,10 @@ const Map<String, Type> darkDesignKeys = <String, Type>{
   darkTransitionFadeKey: bool,
   darkBackgroundImageKey: String,
   '$darkBackgroundImageKey$boxFitSuffix': String,
+  darkButtonShapeKey: String,
+  darkBorderWidthKey: double,
   darkButtonOpacityKey: double,
-  darkButtonOutlineOpacityKey: double,
+  darkBorderOpacityKey: double,
 };
 
 // Light theme //
@@ -450,8 +454,10 @@ const String lightAnimationDurationKey = 'lightAnimationDuration';
 const String lightTransitionTypeKey = 'lightTransitionType';
 const String lightTransitionFadeKey = 'lightTransitionFade';
 const String lightBackgroundImageKey = 'lightBackgroundImage';
+const String lightButtonShapeKey = 'lightButtonShape';
+const String lightBorderWidthKey = 'lightBorderWidth';
 const String lightButtonOpacityKey = 'lightButtonOpacity';
-const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
+const String lightBorderOpacityKey = 'lightBorderOpacity';
 
 /// Animation, background, && button opacity keys
 const Map<String, Type> lightDesignKeys = <String, Type>{
@@ -460,8 +466,10 @@ const Map<String, Type> lightDesignKeys = <String, Type>{
   lightTransitionFadeKey: bool,
   lightBackgroundImageKey: String,
   '$lightBackgroundImageKey$boxFitSuffix': String,
+  lightButtonShapeKey: String,
+  lightBorderWidthKey: double,
   lightButtonOpacityKey: double,
-  lightButtonOutlineOpacityKey: double,
+  lightBorderOpacityKey: double,
 };
 
 // Shared //
