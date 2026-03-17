@@ -23,9 +23,11 @@ class EzConfigProvider extends ChangeNotifier {
   late ThemeMode _themeMode;
   late bool _isDark;
 
+  late EzColorCache _color;
   late EzDesignCache _design;
   late EzLayoutCache _layout;
   late EzTextCache _text;
+
   final EzAppCache? _appCache;
 
   late ThemeData _currTheme;
@@ -72,11 +74,18 @@ class EzConfigProvider extends ChangeNotifier {
 
     if (_isDark) {
       // Build new caches
+      _color = EzColorCache(EzConfig.get(darkColorSchemeImageKey));
       _design = EzDesignCache(
         animDur: EzConfig.get(darkAnimationDurationKey),
-        pageT:
-            EzPageTransitionConfig.lookup(EzConfig.get(darkTransitionTypeKey)),
-        tFade: EzConfig.get(darkTransitionFadeKey),
+        pageTransition: EPTConfig.lookup(EzConfig.get(darkTransitionTypeKey)),
+        fadedTransition: EzConfig.get(darkTransitionFadeKey),
+        backgroundImagePath: EzConfig.get(darkBackgroundImageKey),
+        backgroundImageFit:
+            boxFitLib[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
+        buttonShape: EBSConfig.lookup(EzConfig.get(darkButtonShapeKey)),
+        borderWidth: EzConfig.get(darkBorderWidthKey),
+        buttonOpacity: EzConfig.get(darkButtonOpacityKey),
+        borderOpacity: EzConfig.get(darkBorderOpacityKey),
       );
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(darkMarginKey),
@@ -102,11 +111,18 @@ class EzConfigProvider extends ChangeNotifier {
       _currTheme = _darkTheme;
     } else {
       // Ditto
+      _color = EzColorCache(EzConfig.get(lightColorSchemeImageKey));
       _design = EzDesignCache(
         animDur: EzConfig.get(lightAnimationDurationKey),
-        pageT:
-            EzPageTransitionConfig.lookup(EzConfig.get(lightTransitionTypeKey)),
-        tFade: EzConfig.get(lightTransitionFadeKey),
+        pageTransition: EPTConfig.lookup(EzConfig.get(lightTransitionTypeKey)),
+        fadedTransition: EzConfig.get(lightTransitionFadeKey),
+        backgroundImagePath: EzConfig.get(lightBackgroundImageKey),
+        backgroundImageFit:
+            boxFitLib[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
+        buttonShape: EBSConfig.lookup(EzConfig.get(lightButtonShapeKey)),
+        borderWidth: EzConfig.get(lightBorderWidthKey),
+        buttonOpacity: EzConfig.get(lightButtonOpacityKey),
+        borderOpacity: EzConfig.get(lightBorderOpacityKey),
       );
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(lightMarginKey),
@@ -162,6 +178,9 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Whether the current [themeMode] uses [Brightness.dark]
   bool get isDark => _isDark;
+
+  /// Cache of frequently used color config values
+  EzColorCache get color => _color;
 
   /// Cache of frequently used design config values
   EzDesignCache get design => _design;
@@ -299,17 +318,41 @@ class EzConfigProvider extends ChangeNotifier {
   }
 }
 
+class EzColorCache {
+  final String schemeImagePath;
+
+  /// Theme aware tracker for frequently used color values...
+  /// (dark|light)ColorSchemeImageKey
+  EzColorCache(this.schemeImagePath);
+}
+
 class EzDesignCache {
   final int animDur;
-  final EzPageTransition pageT;
-  final bool tFade;
+
+  final EzPageTransition pageTransition;
+  final bool fadedTransition;
+
+  final String backgroundImagePath;
+  final BoxFit? backgroundImageFit;
+
+  final EzButtonShape buttonShape;
+  final double borderWidth;
+
+  final double buttonOpacity;
+  final double borderOpacity;
 
   /// Theme aware tracker for frequently used design values...
   /// Animation duration
   EzDesignCache({
     required this.animDur,
-    required this.pageT,
-    required this.tFade,
+    required this.pageTransition,
+    required this.fadedTransition,
+    required this.backgroundImagePath,
+    required this.backgroundImageFit,
+    required this.buttonShape,
+    required this.borderWidth,
+    required this.buttonOpacity,
+    required this.borderOpacity,
   });
 }
 
