@@ -488,8 +488,7 @@ Future<bool> isGPlayInstall() async {
 }
 
 /// Opens an [ezModal] with links to each of the sub-settings pages and a common setting from that page
-/// TODO: how can I gracefully add more? or should I just rebuild it?
-/// TODO: make sure it works with urls
+/// TODO: make sure it works with urls (it doesn't... turn link nav button shiz into a class then consume here (and there))
 Future<void> openEzFavorites({
   required BuildContext context,
   required void Function() onComplete,
@@ -589,7 +588,6 @@ Future<void> openEzFavorites({
             hint: EzConfig.l10n.gOpenLink,
           ),
 
-          // TODO: Add conditional left/right padding to switch pairs
           // Layout scroll
           EzScrollView(
             mainAxisSize: MainAxisSize.min,
