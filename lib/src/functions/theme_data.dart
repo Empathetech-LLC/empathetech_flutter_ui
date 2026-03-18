@@ -426,7 +426,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         selectedForegroundColor: colorScheme.onPrimary,
         disabledForegroundColor: colorScheme.outline,
         side: buildBorder(buttonBorder),
-        shape: buttonShape, // TODO: check the shapes, some could be weird
+        shape: buttonShape,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),

@@ -355,7 +355,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       ],
 
       // Button shape (&& border width)
-      // TODO: l10n
       EzElevatedIconButton(
         onPressed: () async {
           final EzButtonShape shapeBackup = EzConfig.buttonShape;
@@ -420,7 +419,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                   // Border width slider
                   Text(
-                    'Border width',
+                    EzConfig.l10n.dsBorderWidth,
                     style: EzConfig.styles.bodyLarge,
                   ),
                   ConstrainedBox(
