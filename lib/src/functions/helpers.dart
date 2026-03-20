@@ -350,22 +350,29 @@ Widget ezTransitionsBuilder(
       case TargetPlatform.macOS:
         return SlideTransition(
           position: Tween<Offset>(
-            begin: const Offset(-1.0, 0.0),
+            begin: EzConfig.isLTR
+                ? const Offset(1.0, 0.0)
+                : const Offset(-1.0, 0.0),
             end: Offset.zero,
           ).animate(CurvedAnimation(
             parent: animation,
             curve: Curves.easeInOut,
           )),
-          child: FadeTransition(opacity: animation, child: child),
+          child: child,
         );
 
-      // Other
+      // Linux && Windows (web is auto-none)
       default:
         return SlideTransition(
           position: Tween<Offset>(
-            begin: const Offset(1.0, 0.0),
+            begin: EzConfig.isLTR
+                ? const Offset(1.0, 0.0)
+                : const Offset(-1.0, 0.0),
             end: Offset.zero,
-          ).animate(animation),
+          ).animate(CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInOut,
+          )),
           child: FadeTransition(opacity: animation, child: child),
         );
     }
