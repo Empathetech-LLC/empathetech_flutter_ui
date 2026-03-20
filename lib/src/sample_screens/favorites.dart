@@ -149,7 +149,6 @@ Future<void> openEzFavorites({
           showScrollHint: true,
           children: <Widget>[
             // Icon size
-            // TODO: handle the whole ping rebuild thang (or just rebuild on modal close without fab?)
             const EzIconSizeSetting(updateBoth: false),
             EzConfig.rowSpacer,
 
