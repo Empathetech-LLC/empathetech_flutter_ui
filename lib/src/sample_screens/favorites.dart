@@ -201,21 +201,12 @@ Future<void> openEzFavorites({
                 },
               ),
             ),
-            // EzConfig.rowSpacer,
+            EzConfig.rowSpacer,
 
-            // TODO: Text size (make a version that works without providers)
-            // EzTextBackground(
-            //   EzFontDoubleBatchSetting(
-            //     updateBoth: false,
-            //     displayProvider: widget.displayProvider,
-            //     headlineProvider: widget.headlineProvider,
-            //     titleProvider: widget.titleProvider,
-            //     bodyProvider: widget.bodyProvider,
-            //     labelProvider: widget.labelProvider,
-            //   ),
-            //   backgroundColor: backgroundColor,
-            //   borderRadius: ezPillEdge,
-            // ),
+            EzTextBackground(
+              EzFontDoubleQuickSetting(),
+              borderRadius: ezPillEdge,
+            ),
           ],
         ),
         EzConfig.divider,
