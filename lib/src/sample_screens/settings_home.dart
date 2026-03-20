@@ -14,12 +14,12 @@ class EzSettingsHome extends StatefulWidget {
   /// Provide a [SizedBox.shrink] to remove
   final Widget? header;
 
+  /// [EzLocaleSetting.inDistress] passthrough
+  final Set<String> inDistress;
+
   /// Locales to skip in the [EzLocaleSetting]
   /// Defaults to [english] to not dupe [americanEnglish]
   final Set<Locale>? skipLocales;
-
-  /// [EzLocaleSetting.inDistress] passthrough
-  final Set<String> inDistress;
 
   /// Spacer between the [EzLocaleSetting] and the next block
   /// [additionalSettings] if present, the navigation buttons if not
@@ -32,22 +32,22 @@ class EzSettingsHome extends StatefulWidget {
   /// [GoRouter.goNamed] path or URL to the color settings screen
   /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
-  final String? colorSettingsPath;
+  final String colorSettingsPath;
 
   /// [GoRouter.goNamed] path or URL to the design settings screen
   /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
-  final String? designSettingsPath;
+  final String designSettingsPath;
 
   /// [GoRouter.goNamed] path or URL to the layout settings screen
   /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
-  final String? layoutSettingsPath;
+  final String layoutSettingsPath;
 
   /// [GoRouter.goNamed] path or URL to the text settings screen
   /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
-  final String? textSettingsPath;
+  final String textSettingsPath;
 
   /// Widgets to be added directly below any present routes
   /// BYO leading spacer, trailing spacer will be one of the parameters below
@@ -119,96 +119,9 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     ezWindowNamer(EzConfig.l10n.ssPageTitle);
   }
 
-  // Define custom functions //
+  // Return the build //
 
   void redraw() => setState(() {});
-
-  List<Widget> navButtons() {
-    final List<Widget> buttons = <Widget>[];
-    const Widget navIcon = Icon(Icons.navigate_next);
-
-    if (widget.colorSettingsPath != null) {
-      ezUrlCheck(widget.colorSettingsPath!)
-          ? buttons.add(Link(
-              uri: Uri.parse(widget.colorSettingsPath!),
-              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                onPressed: followLink,
-                icon: navIcon,
-                label: EzConfig.l10n.csPageTitle,
-              ),
-            ))
-          : buttons.add(EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.colorSettingsPath!),
-              icon: navIcon,
-              label: EzConfig.l10n.csPageTitle,
-            ));
-    }
-
-    if (widget.designSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
-
-      ezUrlCheck(widget.designSettingsPath!)
-          ? buttons.add(Link(
-              uri: Uri.parse(widget.designSettingsPath!),
-              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                onPressed: followLink,
-                icon: navIcon,
-                label: EzConfig.l10n.dsPageTitle,
-              ),
-            ))
-          : buttons.add(EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.designSettingsPath!),
-              icon: navIcon,
-              label: EzConfig.l10n.dsPageTitle,
-            ));
-    }
-
-    if (widget.layoutSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
-
-      ezUrlCheck(widget.layoutSettingsPath!)
-          ? buttons.add(Link(
-              uri: Uri.parse(widget.layoutSettingsPath!),
-              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                onPressed: followLink,
-                icon: navIcon,
-                label: EzConfig.l10n.lsPageTitle,
-              ),
-            ))
-          : buttons.add(EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.layoutSettingsPath!),
-              icon: navIcon,
-              label: EzConfig.l10n.lsPageTitle,
-            ));
-    }
-
-    if (widget.textSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(EzConfig.spacer);
-
-      ezUrlCheck(widget.textSettingsPath!)
-          ? buttons.add(Link(
-              uri: Uri.parse(widget.textSettingsPath!),
-              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                onPressed: followLink,
-                icon: navIcon,
-                label: EzConfig.l10n.tsPageTitle,
-              ),
-            ))
-          : buttons.add(EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.textSettingsPath!),
-              icon: navIcon,
-              label: EzConfig.l10n.tsPageTitle,
-            ));
-    }
-
-    if (widget.additionalRoutes != null) {
-      buttons.addAll(widget.additionalRoutes!);
-    }
-
-    return buttons;
-  }
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) => EzScrollView(children: <Widget>[
@@ -233,8 +146,75 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         // Additional settings
         if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
-        // Navigation buttons
-        ...navButtons(),
+        // Color nav
+        ezUrlCheck(widget.colorSettingsPath)
+            ? Link(
+                uri: Uri.parse(widget.colorSettingsPath),
+                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                  onPressed: followLink,
+                  icon: const Icon(Icons.navigate_next),
+                  label: EzConfig.l10n.csPageTitle,
+                ),
+              )
+            : EzElevatedIconButton(
+                onPressed: () => context.goNamed(widget.colorSettingsPath),
+                icon: const Icon(Icons.navigate_next),
+                label: EzConfig.l10n.csPageTitle,
+              ),
+        EzConfig.spacer,
+
+        // Design nav
+        ezUrlCheck(widget.designSettingsPath)
+            ? Link(
+                uri: Uri.parse(widget.designSettingsPath),
+                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                  onPressed: followLink,
+                  icon: const Icon(Icons.navigate_next),
+                  label: EzConfig.l10n.dsPageTitle,
+                ),
+              )
+            : EzElevatedIconButton(
+                onPressed: () => context.goNamed(widget.designSettingsPath),
+                icon: const Icon(Icons.navigate_next),
+                label: EzConfig.l10n.dsPageTitle,
+              ),
+        EzConfig.spacer,
+
+        // Layout nav
+        ezUrlCheck(widget.layoutSettingsPath)
+            ? Link(
+                uri: Uri.parse(widget.layoutSettingsPath),
+                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                  onPressed: followLink,
+                  icon: const Icon(Icons.navigate_next),
+                  label: EzConfig.l10n.lsPageTitle,
+                ),
+              )
+            : EzElevatedIconButton(
+                onPressed: () => context.goNamed(widget.layoutSettingsPath),
+                icon: const Icon(Icons.navigate_next),
+                label: EzConfig.l10n.lsPageTitle,
+              ),
+        EzConfig.spacer,
+
+        // Text nav
+        ezUrlCheck(widget.textSettingsPath)
+            ? Link(
+                uri: Uri.parse(widget.textSettingsPath),
+                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                  onPressed: followLink,
+                  icon: const Icon(Icons.navigate_next),
+                  label: EzConfig.l10n.tsPageTitle,
+                ),
+              )
+            : EzElevatedIconButton(
+                onPressed: () => context.goNamed(widget.textSettingsPath),
+                icon: const Icon(Icons.navigate_next),
+                label: EzConfig.l10n.tsPageTitle,
+              ),
+
+        // Additional routes
+        if (widget.additionalRoutes != null) ...widget.additionalRoutes!,
 
         // Quick config
         if (widget.quickConfigSpacer != null) ...<Widget>[
