@@ -201,8 +201,6 @@ class _EzScrollViewState extends State<EzScrollView> {
   Widget build(BuildContext context) {
     // Define the contextual build data //
 
-    final Color arrowColor = EzConfig.colors.secondary.withValues(alpha: 0.5);
-
     Widget core = SingleChildScrollView(
       scrollDirection: widget.scrollDirection,
       reverse: widget.reverse,
@@ -296,8 +294,10 @@ class _EzScrollViewState extends State<EzScrollView> {
                                 onEnter: (PointerEnterEvent event) =>
                                     hoverScroll(event, forward: false),
                                 onExit: stopScroll,
-                                child: EzIcon(Icons.arrow_upward,
-                                    color: arrowColor),
+                                child: EzIcon(
+                                  Icons.arrow_upward,
+                                  color: EzConfig.colors.secondary,
+                                ),
                               ),
                             ),
                           )
@@ -310,8 +310,10 @@ class _EzScrollViewState extends State<EzScrollView> {
                                 onEnter: (PointerEnterEvent event) =>
                                     hoverScroll(event, forward: false),
                                 onExit: stopScroll,
-                                child: EzIcon(Icons.chevron_left,
-                                    color: arrowColor),
+                                child: EzIcon(
+                                  Icons.chevron_left,
+                                  color: EzConfig.colors.secondary,
+                                ),
                               ),
                             ),
                           ),
@@ -328,8 +330,10 @@ class _EzScrollViewState extends State<EzScrollView> {
                                 onEnter: (PointerEnterEvent event) =>
                                     hoverScroll(event, forward: true),
                                 onExit: stopScroll,
-                                child: EzIcon(Icons.arrow_downward,
-                                    color: arrowColor),
+                                child: EzIcon(
+                                  Icons.arrow_downward,
+                                  color: EzConfig.colors.secondary,
+                                ),
                               ),
                             ),
                           )
@@ -342,8 +346,10 @@ class _EzScrollViewState extends State<EzScrollView> {
                                 onEnter: (PointerEnterEvent event) =>
                                     hoverScroll(event, forward: true),
                                 onExit: stopScroll,
-                                child: EzIcon(Icons.chevron_right,
-                                    color: arrowColor),
+                                child: EzIcon(
+                                  Icons.chevron_right,
+                                  color: EzConfig.colors.secondary,
+                                ),
                               ),
                             ),
                           ),
