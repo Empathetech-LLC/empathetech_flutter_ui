@@ -3,10 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../empathetech_flutter_ui.dart';
 
 /// Opens an [ezModal] with links to each of the sub-settings pages and a common setting from that page
 Future<void> openEzFavorites({
@@ -31,8 +31,15 @@ Future<void> openEzFavorites({
     builder: (BuildContext mContext) => EzScrollView(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        EzConfig.margin,
-        // Global scroll
+        EzLink(
+          'Global settings', // TODO: l10n
+          url: cURL ? Uri.parse(colorSettingsPath) : null,
+          onTap: cURL ? null : () => context.goNamed(colorSettingsPath),
+          hint: EzConfig.l10n.gOpenLink,
+        ),
+        EzConfig.spacer,
+
+        // Global settings
         EzScrollView(
           mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
@@ -42,18 +49,16 @@ Future<void> openEzFavorites({
             EzThemeModeSwitch(onComplete),
           ],
         ),
-        EzConfig.divider,
 
-        // Color link
-        EzLink(
-          EzConfig.l10n.csPageTitle,
-          url: cURL ? Uri.parse(colorSettingsPath) : null,
-          onTap: cURL ? null : () => context.goNamed(colorSettingsPath),
-          hint: EzConfig.l10n.gOpenLink,
+        // Color settings
+        EzDivider(
+          title: EzLink(
+            EzConfig.l10n.csPageTitle,
+            url: cURL ? Uri.parse(colorSettingsPath) : null,
+            onTap: cURL ? null : () => context.goNamed(colorSettingsPath),
+            hint: EzConfig.l10n.gOpenLink,
+          ),
         ),
-        EzConfig.margin,
-
-        // Color scroll
         EzScrollView(
           mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
@@ -63,17 +68,16 @@ Future<void> openEzFavorites({
             EzMonoChromeColorsSetting(onComplete, both: false),
           ],
         ),
-        EzConfig.divider,
 
-        // Design link
-        EzLink(
-          EzConfig.l10n.dsPageTitle,
-          url: dURL ? Uri.parse(designSettingsPath) : null,
-          onTap: dURL ? null : () => context.goNamed(designSettingsPath),
-          hint: EzConfig.l10n.gOpenLink,
+        // Design settings
+        EzDivider(
+          title: EzLink(
+            EzConfig.l10n.dsPageTitle,
+            url: dURL ? Uri.parse(designSettingsPath) : null,
+            onTap: dURL ? null : () => context.goNamed(designSettingsPath),
+            hint: EzConfig.l10n.gOpenLink,
+          ),
         ),
-
-        // Design scroll
         EzScrollView(
           mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
@@ -95,17 +99,16 @@ Future<void> openEzFavorites({
                   ),
           ],
         ),
-        EzConfig.divider,
 
-        // Layout link
-        EzLink(
-          EzConfig.l10n.lsPageTitle,
-          url: lURL ? Uri.parse(layoutSettingsPath) : null,
-          onTap: lURL ? null : () => context.goNamed(layoutSettingsPath),
-          hint: EzConfig.l10n.gOpenLink,
+        // Layout settings
+        EzDivider(
+          title: EzLink(
+            EzConfig.l10n.lsPageTitle,
+            url: lURL ? Uri.parse(layoutSettingsPath) : null,
+            onTap: lURL ? null : () => context.goNamed(layoutSettingsPath),
+            hint: EzConfig.l10n.gOpenLink,
+          ),
         ),
-
-        // Layout scroll
         EzScrollView(
           mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
@@ -130,17 +133,16 @@ Future<void> openEzFavorites({
             ),
           ],
         ),
-        EzConfig.divider,
 
-        // Text link
-        EzLink(
-          EzConfig.l10n.tsPageTitle,
-          url: tURL ? Uri.parse(textSettingsPath) : null,
-          onTap: tURL ? null : () => context.goNamed(textSettingsPath),
-          hint: EzConfig.l10n.gOpenLink,
+        // Text settings
+        EzDivider(
+          title: EzLink(
+            EzConfig.l10n.tsPageTitle,
+            url: tURL ? Uri.parse(textSettingsPath) : null,
+            onTap: tURL ? null : () => context.goNamed(textSettingsPath),
+            hint: EzConfig.l10n.gOpenLink,
+          ),
         ),
-
-        // Text scroll
         EzScrollView(
           mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
@@ -233,7 +235,7 @@ Future<void> openEzFavorites({
             EzElevatedIconButton(
               onPressed: () => ezConfigLoader(context),
               icon: const Icon(Icons.upload),
-              label: EzConfig.l10n.ssSaveConfig,
+              label: EzConfig.l10n.ssLoadConfig,
             ),
             EzConfig.rowSpacer,
 
