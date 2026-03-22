@@ -50,9 +50,10 @@ export 'src/l10n/efui_lang.dart';
 
 export 'src/sample_screens/color_settings.dart';
 export 'src/sample_screens/design_settings.dart';
+export 'src/sample_screens/global_settings.dart';
 export 'src/sample_screens/layout_settings.dart';
 export 'src/sample_screens/setting_type.dart';
-export 'src/sample_screens/settings_home.dart';
+export 'src/sample_screens/settings_hub.dart';
 export 'src/sample_screens/text_settings.dart';
 
 //* Widgets *//
