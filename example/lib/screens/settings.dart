@@ -36,88 +36,99 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
   // maybe not though... maybe pass build as a func and only actually build when active
 
   @override
-  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
-        builder: (_, EzConfigProvider config, __) => OpenUIScaffold(
-          EzScreen(EzSettingsHub(
-            pages: <EzSettingsSection>[
-              // Global
-              EzSettingsSection(
-                title: 'Global', // TODO: l10n && check web icons
-                icon: EzConfig.onMobile
-                    ? Icon(EzConfig.platform == TargetPlatform.iOS
-                        ? Icons.phone_iphone
-                        : Icons.phone_android)
-                    : const Icon(Icons.computer),
-                build: const EzGlobalSettings(
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-              ),
-
-              // Color
-              EzSettingsSection(
-                title: 'Color',
-                icon: const Icon(Icons.palette),
-                build: EzColorSettings(
-                  target: widget.cTarget,
-                  onUpdate: redraw,
-                  updateBoth: updateBoth,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-              ),
-
-              // Design
-              EzSettingsSection(
-                title: 'Design',
-                icon: const Icon(Icons.design_services),
-                build: EzDesignSettings(
-                  onUpdate: () => redraw,
-                  updateBoth: updateBoth,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-              ),
-
-              // Layout
-              EzSettingsSection(
-                title: 'Layout',
-                icon: const Icon(Icons.grid_3x3),
-                build: EzLayoutSettings(
-                  onUpdate: redraw,
-                  updateBoth: updateBoth,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-              ),
-
-              // Text
-              EzSettingsSection(
-                title: 'Text',
-                icon: const Icon(Icons.text_format),
-                build: EzTextSettings(
-                  target: widget.tTarget,
-                  onUpdate: redraw,
-                  updateBoth: updateBoth,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-              ),
-            ],
-          )),
-          title: config.l10n.ssPageTitle,
-          showSettings: false,
-          fabs: <Widget>[
-            if (config.needsRebuild) ...<Widget>[
-              config.layout.spacer,
-              EzRebuildFAB(redraw),
-            ],
-            config.layout.spacer,
-            EzSettingsDupeFAB(
-              updateBoth,
-              () => setState(() => updateBoth = !updateBoth),
+  Widget build(BuildContext context) {
+    return Consumer<EzConfigProvider>(
+      builder: (_, EzConfigProvider config, __) => OpenUIScaffold(
+        EzScreen(EzSettingsHub(pages: <EzSettingsSection>[
+          // Global
+          EzSettingsSection(
+            title: 'Global', // TODO: l10n && check web icons
+            icon: EzConfig.onMobile
+                ? Icon(EzConfig.platform == TargetPlatform.iOS
+                    ? Icons.phone_iphone
+                    : Icons.phone_android)
+                : const Icon(Icons.computer),
+            build: const EzGlobalSettings(
+              appName: appName,
+              androidPackage: androidPackage,
             ),
+          ),
+
+          // Color
+          EzSettingsSection(
+            title: 'Color',
+            icon: const Icon(Icons.palette),
+            build: EzColorSettings(
+              target: widget.cTarget,
+              onUpdate: redraw,
+              updateBoth: updateBoth,
+              appName: appName,
+              androidPackage: androidPackage,
+            ),
+          ),
+
+          // Design
+          EzSettingsSection(
+            title: 'Design',
+            icon: const Icon(Icons.design_services),
+            build: EzDesignSettings(
+              onUpdate: () => redraw,
+              updateBoth: updateBoth,
+              appName: appName,
+              androidPackage: androidPackage,
+            ),
+          ),
+
+          // Layout
+          EzSettingsSection(
+            title: 'Layout',
+            icon: const Icon(Icons.grid_3x3),
+            build: EzLayoutSettings(
+              onUpdate: redraw,
+              updateBoth: updateBoth,
+              appName: appName,
+              androidPackage: androidPackage,
+            ),
+          ),
+
+          // Text
+          EzSettingsSection(
+            title: 'Text',
+            icon: const Icon(Icons.text_format),
+            build: EzTextSettings(
+              target: widget.tTarget,
+              onUpdate: redraw,
+              updateBoth: updateBoth,
+              appName: appName,
+              androidPackage: androidPackage,
+            ),
+          ),
+        ])),
+        title: config.l10n.ssPageTitle,
+        showSettings: false,
+        fabs: <Widget>[
+          // Rebuild (conditional)
+          if (config.needsRebuild) ...<Widget>[
+            config.layout.spacer,
+            EzRebuildFAB(redraw),
           ],
-        ),
-      );
+
+          // Settings dupe/update both
+          config.layout.spacer,
+          EzSettingsDupeFAB(
+            updateBoth,
+            () => setState(() => updateBoth = !updateBoth),
+          ),
+
+          // Save/upload config
+          config.layout.spacer,
+          EzConfigFAB(
+            context,
+            appName: appName,
+            androidPackage: androidPackage,
+          ),
+        ],
+      ),
+    );
+  }
 }
