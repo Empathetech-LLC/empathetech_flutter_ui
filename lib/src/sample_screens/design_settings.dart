@@ -133,11 +133,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               hint: EzConfig.l10n.gEditingThemeHint,
               style: EzConfig.styles.labelLarge,
               textAlign: TextAlign.center,
+              padding: EdgeInsets.all(EzConfig.marginVal),
             )
           : EzText(
               EzConfig.l10n.gEditing + themeString,
               style: EzConfig.styles.labelLarge,
               textAlign: TextAlign.center,
+              padding: EdgeInsets.all(EzConfig.marginVal),
             ),
       EzConfig.spacer,
 

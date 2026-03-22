@@ -109,10 +109,12 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
               hint: EzConfig.l10n.gEditingThemeHint,
               style: EzConfig.styles.labelLarge,
               textAlign: TextAlign.center,
+              padding: EdgeInsets.all(EzConfig.marginVal),
             )
           : EzText(
               EzConfig.l10n.gEditing + themeString,
               style: EzConfig.styles.labelLarge,
+              padding: EdgeInsets.all(EzConfig.marginVal),
               textAlign: TextAlign.center,
             ),
       EzConfig.spacer,
