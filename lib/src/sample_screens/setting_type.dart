@@ -3,12 +3,40 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../empathetech_flutter_ui.dart';
+
 // Shared //
+
+enum EzSettingSection { global, color, design, layout, text }
+
+extension ESSConfig on EzSettingSection {
+  Icon get icon {
+    switch (this) {
+      case EzSettingSection.global:
+        return EzConfig.onMobile
+            ? Icon(EzConfig.platform == TargetPlatform.iOS
+                ? Icons.phone_iphone
+                : Icons.phone_android)
+            : const Icon(Icons.computer);
+      case EzSettingSection.color:
+        return const Icon(Icons.palette);
+      case EzSettingSection.design:
+        return const Icon(Icons.design_services);
+      case EzSettingSection.layout:
+        return const Icon(Icons.grid_3x3);
+      case EzSettingSection.text:
+        return const Icon(Icons.text_format);
+    }
+  }
+}
 
 const String _quick = 'quick';
 const String _advanced = 'advanced';
 
-// Color //
+// Color settings //
 
 /// Color setting types
 /// [quick] || [advanced]
@@ -35,7 +63,7 @@ extension CSConfig on EzCSType {
   }
 }
 
-// Text //
+// Text settings //
 
 /// Text setting types
 /// [quick] || [advanced]
