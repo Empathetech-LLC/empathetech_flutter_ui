@@ -18,6 +18,11 @@ class EzTextSettings extends StatelessWidget {
   /// When true, updates both dark and light theme settings simultaneously
   final bool updateBoth;
 
+  /// [Widget] at the top of the page
+  /// Defaults to [EzMargin]
+  /// Provide [SizedBox.shrink] to remove it
+  final Widget? header;
+
   /// If provided, the "Editing: X theme" text will be a link with this callback
   final void Function()? themeLink;
 
@@ -81,6 +86,7 @@ class EzTextSettings extends StatelessWidget {
     this.target,
     required this.onUpdate,
     this.updateBoth = false,
+    this.header,
     this.themeLink,
     this.resetSpacer = const EzSeparator(),
     this.androidPackage,
@@ -128,6 +134,7 @@ class EzTextSettings extends StatelessWidget {
           target: target,
           onUpdate: onUpdate,
           updateBoth: updateBoth,
+          header: header ?? EzMargin(),
           themeLink: themeLink,
           resetSpacer: resetSpacer,
           androidPackage: androidPackage,
@@ -155,6 +162,7 @@ class _TextSettings extends StatefulWidget {
   // Shared
   final EzTSType? target;
   final void Function() onUpdate;
+  final Widget header;
   final void Function()? themeLink;
   final bool updateBoth;
   final Widget resetSpacer;
@@ -180,6 +188,7 @@ class _TextSettings extends StatefulWidget {
     required this.target,
     required this.onUpdate,
     required this.updateBoth,
+    required this.header,
     required this.themeLink,
     required this.resetSpacer,
     required this.androidPackage,
@@ -247,6 +256,8 @@ class _TextSettingsState extends State<_TextSettings> {
     // Return the build //
 
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      widget.header,
+
       // Mode selector
       SegmentedButton<EzTSType>(
         segments: <ButtonSegment<EzTSType>>[
@@ -284,11 +295,13 @@ class _TextSettingsState extends State<_TextSettings> {
               hint: EzConfig.l10n.gEditingThemeHint,
               style: EzConfig.styles.labelLarge,
               textAlign: TextAlign.center,
+              padding: EdgeInsets.all(EzConfig.marginVal),
             )
           : EzText(
               EzConfig.l10n.gEditing + themeString,
               style: EzConfig.styles.labelLarge,
               textAlign: TextAlign.center,
+              padding: EdgeInsets.all(EzConfig.marginVal),
             ),
 
       // Settings
@@ -438,21 +451,42 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
     // Return the build //
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        EzSpacer(space: EzConfig.spacing / 2),
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      // Required batch settings
+      Wrap(
+        alignment: WrapAlignment.center,
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          // Font family
+          Padding(
+            padding: wrapPadding,
+            child: EzFontFamilyBatchSetting(
+              updateBoth: widget.updateBoth,
+              displayProvider: widget.displayProvider,
+              headlineProvider: widget.headlineProvider,
+              titleProvider: widget.titleProvider,
+              bodyProvider: widget.bodyProvider,
+              labelProvider: widget.labelProvider,
+            ),
+          ),
 
-        // Required batch settings
-        Wrap(
-          alignment: WrapAlignment.center,
-          runAlignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: <Widget>[
-            // Font family
+          // Optional onSurface Color setting
+          if (!widget.updateBoth && widget.showOnSurface)
             Padding(
               padding: wrapPadding,
-              child: EzFontFamilyBatchSetting(
+              child: EzColorSetting(
+                configKey:
+                    EzConfig.isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
+                onUpdate: redraw,
+              ),
+            ),
+
+          // Font size
+          Padding(
+            padding: wrapPadding,
+            child: EzTextBackground(
+              EzFontDoubleBatchSetting(
                 updateBoth: widget.updateBoth,
                 displayProvider: widget.displayProvider,
                 headlineProvider: widget.headlineProvider,
@@ -460,207 +494,180 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 bodyProvider: widget.bodyProvider,
                 labelProvider: widget.labelProvider,
               ),
-            ),
-
-            // Optional onSurface Color setting
-            if (!widget.updateBoth && widget.showOnSurface)
-              Padding(
-                padding: wrapPadding,
-                child: EzColorSetting(
-                  configKey:
-                      EzConfig.isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
-                  onUpdate: redraw,
-                ),
-              ),
-
-            // Font size
-            Padding(
-              padding: wrapPadding,
-              child: EzTextBackground(
-                EzFontDoubleBatchSetting(
-                  updateBoth: widget.updateBoth,
-                  displayProvider: widget.displayProvider,
-                  headlineProvider: widget.headlineProvider,
-                  titleProvider: widget.titleProvider,
-                  bodyProvider: widget.bodyProvider,
-                  labelProvider: widget.labelProvider,
-                ),
-                backgroundColor: backgroundColor,
-                borderRadius: ezPillEdge,
-              ),
-            ),
-          ],
-        ),
-
-        // Optional additional settings
-        if (widget.moreQuickHeaderSettings != null)
-          ...widget.moreQuickHeaderSettings!,
-
-        widget.textBlockSpacer,
-        // Display preview
-        EzTextBackground(
-          Text(
-            EzConfig.l10n.tsDisplayP1 +
-                EzConfig.l10n.tsDisplayLink +
-                EzConfig.l10n.tsDisplayP2,
-            textAlign: TextAlign.center,
-            style: widget.displayProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        EzConfig.spacer,
-
-        // Headline preview
-        EzTextBackground(
-          Text(
-            EzConfig.l10n.tsHeadlineP1 +
-                EzConfig.l10n.tsHeadlineLink +
-                EzConfig.l10n.tsHeadlineP2,
-            textAlign: TextAlign.center,
-            style: widget.headlineProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        EzConfig.spacer,
-
-        // Title preview
-        EzTextBackground(
-          Text(
-            EzConfig.l10n.tsTitleP1 + EzConfig.l10n.tsTitleLink,
-            textAlign: TextAlign.center,
-            style: widget.titleProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        EzConfig.spacer,
-
-        // Body preview
-        EzTextBackground(
-          Text(
-            EzConfig.l10n.tsBodyP1 +
-                EzConfig.l10n.tsBodyLink +
-                EzConfig.l10n.tsBodyP2,
-            textAlign: TextAlign.center,
-            style: widget.bodyProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        EzConfig.spacer,
-
-        // Label preview
-        EzTextBackground(
-          Text(
-            EzConfig.l10n.tsLabelP1 +
-                EzConfig.l10n.tsLabelLink +
-                EzConfig.l10n.tsLabelP2,
-            textAlign: TextAlign.center,
-            style: widget.labelProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        widget.textBlockSpacer,
-
-        // Text background opacity
-        if (widget.showOpacity) ...<Widget>[
-          // Label
-          EzTextBackground(
-            Text(
-              EzConfig.l10n.tsTextBackground,
-              style: widget.labelProvider.value,
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: backgroundColor,
-            margin: colMargin,
-          ),
-
-          // Slider
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-            child: Slider(
-              // Slider values
-              value: backOpacity,
-              min: minOpacity,
-              max: maxOpacity,
-              divisions: 20,
-              label: backOpacity.toStringAsFixed(2),
-
-              // Slider functions
-              onChanged: (double value) {
-                setState(() {
-                  backOpacity = value;
-                  backgroundColor =
-                      EzConfig.colors.surface.withValues(alpha: backOpacity);
-                });
-              },
-              onChangeEnd: (double value) async {
-                if (widget.updateBoth || EzConfig.isDark) {
-                  await EzConfig.setDouble(darkTextBackgroundOpacityKey, value);
-                }
-                if (widget.updateBoth || !EzConfig.isDark) {
-                  await EzConfig.setDouble(
-                      lightTextBackgroundOpacityKey, value);
-                }
-                if (context.mounted) {
-                  EzConfig.pingRebuild(ezTextRebuildCheck(context));
-                }
-              },
-
-              // Slider semantics
-              semanticFormatterCallback: (double value) =>
-                  value.toStringAsFixed(2),
+              backgroundColor: backgroundColor,
+              borderRadius: ezPillEdge,
             ),
           ),
-          EzConfig.spacer,
         ],
+      ),
 
-        // Icon size
-        EzIconSizeSetting(updateBoth: widget.updateBoth),
+      // Optional additional settings
+      if (widget.moreQuickHeaderSettings != null)
+        ...widget.moreQuickHeaderSettings!,
 
-        // Optional additional settings
-        if (widget.moreQuickFooterSettings != null)
-          ...widget.moreQuickFooterSettings!,
-
-        // Reset all
-        widget.resetSpacer,
-        EzResetButton(
-          redraw,
-          androidPackage: widget.androidPackage,
-          appName: widget.appName,
-          dialogTitle: EzConfig.l10n.tsReset(widget.updateBoth &&
-                  EzConfig.locale.languageCode == english.languageCode
-              ? "$themeString'"
-              : themeString),
-          onConfirm: () async {
-            if (widget.updateBoth || EzConfig.isDark) {
-              EzConfig.removeKeys(darkTextKeys.keys.toSet());
-              EzConfig.remove(darkOnSurfaceKey);
-
-              if (widget.extraDark != null) {
-                EzConfig.removeKeys(widget.extraDark!);
-              }
-            }
-
-            if (widget.updateBoth || !EzConfig.isDark) {
-              EzConfig.removeKeys(lightTextKeys.keys.toSet());
-              EzConfig.remove(lightOnSurfaceKey);
-
-              if (widget.extraLight != null) {
-                EzConfig.removeKeys(widget.extraLight!);
-              }
-            }
-          },
-          resetBoth: widget.updateBoth,
-          resetSkip: widget.resetSkip,
-          saveSkip: widget.saveSkip,
+      widget.textBlockSpacer,
+      // Display preview
+      EzTextBackground(
+        Text(
+          EzConfig.l10n.tsDisplayP1 +
+              EzConfig.l10n.tsDisplayLink +
+              EzConfig.l10n.tsDisplayP2,
+          textAlign: TextAlign.center,
+          style: widget.displayProvider.value,
         ),
-        widget.trail,
+        backgroundColor: backgroundColor,
+        margin: colMargin,
+      ),
+      EzConfig.spacer,
+
+      // Headline preview
+      EzTextBackground(
+        Text(
+          EzConfig.l10n.tsHeadlineP1 +
+              EzConfig.l10n.tsHeadlineLink +
+              EzConfig.l10n.tsHeadlineP2,
+          textAlign: TextAlign.center,
+          style: widget.headlineProvider.value,
+        ),
+        backgroundColor: backgroundColor,
+        margin: colMargin,
+      ),
+      EzConfig.spacer,
+
+      // Title preview
+      EzTextBackground(
+        Text(
+          EzConfig.l10n.tsTitleP1 + EzConfig.l10n.tsTitleLink,
+          textAlign: TextAlign.center,
+          style: widget.titleProvider.value,
+        ),
+        backgroundColor: backgroundColor,
+        margin: colMargin,
+      ),
+      EzConfig.spacer,
+
+      // Body preview
+      EzTextBackground(
+        Text(
+          EzConfig.l10n.tsBodyP1 +
+              EzConfig.l10n.tsBodyLink +
+              EzConfig.l10n.tsBodyP2,
+          textAlign: TextAlign.center,
+          style: widget.bodyProvider.value,
+        ),
+        backgroundColor: backgroundColor,
+        margin: colMargin,
+      ),
+      EzConfig.spacer,
+
+      // Label preview
+      EzTextBackground(
+        Text(
+          EzConfig.l10n.tsLabelP1 +
+              EzConfig.l10n.tsLabelLink +
+              EzConfig.l10n.tsLabelP2,
+          textAlign: TextAlign.center,
+          style: widget.labelProvider.value,
+        ),
+        backgroundColor: backgroundColor,
+        margin: colMargin,
+      ),
+      widget.textBlockSpacer,
+
+      // Text background opacity
+      if (widget.showOpacity) ...<Widget>[
+        // Label
+        EzTextBackground(
+          Text(
+            EzConfig.l10n.tsTextBackground,
+            style: widget.labelProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
+
+        // Slider
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+          child: Slider(
+            // Slider values
+            value: backOpacity,
+            min: minOpacity,
+            max: maxOpacity,
+            divisions: 20,
+            label: backOpacity.toStringAsFixed(2),
+
+            // Slider functions
+            onChanged: (double value) {
+              setState(() {
+                backOpacity = value;
+                backgroundColor =
+                    EzConfig.colors.surface.withValues(alpha: backOpacity);
+              });
+            },
+            onChangeEnd: (double value) async {
+              if (widget.updateBoth || EzConfig.isDark) {
+                await EzConfig.setDouble(darkTextBackgroundOpacityKey, value);
+              }
+              if (widget.updateBoth || !EzConfig.isDark) {
+                await EzConfig.setDouble(lightTextBackgroundOpacityKey, value);
+              }
+              if (context.mounted) {
+                EzConfig.pingRebuild(ezTextRebuildCheck(context));
+              }
+            },
+
+            // Slider semantics
+            semanticFormatterCallback: (double value) =>
+                value.toStringAsFixed(2),
+          ),
+        ),
+        EzConfig.spacer,
       ],
-    );
+
+      // Icon size
+      EzIconSizeSetting(updateBoth: widget.updateBoth),
+
+      // Optional additional settings
+      if (widget.moreQuickFooterSettings != null)
+        ...widget.moreQuickFooterSettings!,
+
+      // Reset all
+      widget.resetSpacer,
+      EzResetButton(
+        redraw,
+        androidPackage: widget.androidPackage,
+        appName: widget.appName,
+        dialogTitle: EzConfig.l10n.tsReset(widget.updateBoth &&
+                EzConfig.locale.languageCode == english.languageCode
+            ? "$themeString'"
+            : themeString),
+        onConfirm: () async {
+          if (widget.updateBoth || EzConfig.isDark) {
+            EzConfig.removeKeys(darkTextKeys.keys.toSet());
+            EzConfig.remove(darkOnSurfaceKey);
+
+            if (widget.extraDark != null) {
+              EzConfig.removeKeys(widget.extraDark!);
+            }
+          }
+
+          if (widget.updateBoth || !EzConfig.isDark) {
+            EzConfig.removeKeys(lightTextKeys.keys.toSet());
+            EzConfig.remove(lightOnSurfaceKey);
+
+            if (widget.extraLight != null) {
+              EzConfig.removeKeys(widget.extraLight!);
+            }
+          }
+        },
+        resetBoth: widget.updateBoth,
+        resetSkip: widget.resetSkip,
+        saveSkip: widget.saveSkip,
+      ),
+      widget.trail,
+    ]);
   }
 }
 
