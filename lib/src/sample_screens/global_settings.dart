@@ -6,13 +6,10 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
-import 'package:go_router/go_router.dart';
 
-class EzSettingsHome extends StatefulWidget {
-  /// Defaults to [EzHeader] when null
-  /// Provide a [SizedBox.shrink] to remove
-  final Widget? header;
+class EzGlobalSettings extends StatefulWidget {
+  /// [Widget] at the top of the page
+  final Widget header;
 
   /// [EzLocaleSetting.inDistress] passthrough
   final Set<String> inDistress;
@@ -21,37 +18,9 @@ class EzSettingsHome extends StatefulWidget {
   /// Defaults to [english] to not dupe [americanEnglish]
   final Set<Locale>? skipLocales;
 
-  /// Spacer between the [EzLocaleSetting] and the next block
-  /// [additionalSettings] if present, the navigation buttons if not
-  final Widget localeSpacer;
-
-  /// [Widget]s to be added below the [EzLocaleSetting] and above the navigation buttons
-  /// BYO trailing spacer, see [localeSpacer] for leading spacer
+  /// [Widget]s to be added below the [EzLocaleSetting]
+  /// BYO leading spacer, see [quickConfigSpacer] for trailing spacer
   final List<Widget>? additionalSettings;
-
-  /// [GoRouter.goNamed] path or URL to the color settings screen
-  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
-  /// If null, no button will appear
-  final String colorSettingsPath;
-
-  /// [GoRouter.goNamed] path or URL to the design settings screen
-  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
-  /// If null, no button will appear
-  final String designSettingsPath;
-
-  /// [GoRouter.goNamed] path or URL to the layout settings screen
-  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
-  /// If null, no button will appear
-  final String layoutSettingsPath;
-
-  /// [GoRouter.goNamed] path or URL to the text settings screen
-  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
-  /// If null, no button will appear
-  final String textSettingsPath;
-
-  /// Widgets to be added directly below any present routes
-  /// BYO leading spacer, trailing spacer will be one of the parameters below
-  final List<Widget>? additionalRoutes;
 
   /// [EzConfig.saveConfig] passthrough
   final String appName;
@@ -84,20 +53,14 @@ class EzSettingsHome extends StatefulWidget {
   /// Empathetech settings landing page
   /// Contains global settings and [EzElevatedIconButton]s that lead to the rest of the settings pages
   /// Recommended to use as a [Scaffold.body]
-  const EzSettingsHome({
+  const EzGlobalSettings({
     super.key,
-    this.header,
+    this.header = const EzSpacer(),
     this.skipLocales,
     this.inDistress = const <String>{'US'},
-    this.localeSpacer = const EzDivider(),
     this.additionalSettings,
-    required this.colorSettingsPath,
-    required this.designSettingsPath,
-    required this.layoutSettingsPath,
-    required this.textSettingsPath,
-    this.additionalRoutes,
     required this.appName,
-    this.androidPackage,
+    required this.androidPackage,
     this.saveSkip,
     this.quickConfigSpacer = const EzDivider(),
     this.randomSpacer = const EzSpacer(),
@@ -107,10 +70,10 @@ class EzSettingsHome extends StatefulWidget {
   });
 
   @override
-  State<EzSettingsHome> createState() => _EzSettingsHomeState();
+  State<EzGlobalSettings> createState() => _EzGlobalSettingsState();
 }
 
-class _EzSettingsHomeState extends State<EzSettingsHome> {
+class _EzGlobalSettingsState extends State<EzGlobalSettings> {
   // Set the page title //
 
   @override
@@ -125,7 +88,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
   @override
   Widget build(BuildContext context) => EzScrollView(children: <Widget>[
-        widget.header ?? EzHeader(),
+        widget.header,
 
         // Right/left
         EzDominantHandSwitch(redraw),
@@ -141,80 +104,9 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           skip: widget.skipLocales ?? <Locale>{english},
           inDistress: widget.inDistress,
         ),
-        widget.localeSpacer,
 
         // Additional settings
         if (widget.additionalSettings != null) ...widget.additionalSettings!,
-
-        // Color nav
-        ezUrlCheck(widget.colorSettingsPath)
-            ? Link(
-                uri: Uri.parse(widget.colorSettingsPath),
-                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                  onPressed: followLink,
-                  icon: const Icon(Icons.navigate_next),
-                  label: EzConfig.l10n.csPageTitle,
-                ),
-              )
-            : EzElevatedIconButton(
-                onPressed: () => context.goNamed(widget.colorSettingsPath),
-                icon: const Icon(Icons.navigate_next),
-                label: EzConfig.l10n.csPageTitle,
-              ),
-        EzConfig.spacer,
-
-        // Design nav
-        ezUrlCheck(widget.designSettingsPath)
-            ? Link(
-                uri: Uri.parse(widget.designSettingsPath),
-                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                  onPressed: followLink,
-                  icon: const Icon(Icons.navigate_next),
-                  label: EzConfig.l10n.dsPageTitle,
-                ),
-              )
-            : EzElevatedIconButton(
-                onPressed: () => context.goNamed(widget.designSettingsPath),
-                icon: const Icon(Icons.navigate_next),
-                label: EzConfig.l10n.dsPageTitle,
-              ),
-        EzConfig.spacer,
-
-        // Layout nav
-        ezUrlCheck(widget.layoutSettingsPath)
-            ? Link(
-                uri: Uri.parse(widget.layoutSettingsPath),
-                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                  onPressed: followLink,
-                  icon: const Icon(Icons.navigate_next),
-                  label: EzConfig.l10n.lsPageTitle,
-                ),
-              )
-            : EzElevatedIconButton(
-                onPressed: () => context.goNamed(widget.layoutSettingsPath),
-                icon: const Icon(Icons.navigate_next),
-                label: EzConfig.l10n.lsPageTitle,
-              ),
-        EzConfig.spacer,
-
-        // Text nav
-        ezUrlCheck(widget.textSettingsPath)
-            ? Link(
-                uri: Uri.parse(widget.textSettingsPath),
-                builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-                  onPressed: followLink,
-                  icon: const Icon(Icons.navigate_next),
-                  label: EzConfig.l10n.tsPageTitle,
-                ),
-              )
-            : EzElevatedIconButton(
-                onPressed: () => context.goNamed(widget.textSettingsPath),
-                icon: const Icon(Icons.navigate_next),
-                label: EzConfig.l10n.tsPageTitle,
-              ),
-
-        // Additional routes
-        if (widget.additionalRoutes != null) ...widget.additionalRoutes!,
 
         // Quick config
         if (widget.quickConfigSpacer != null) ...<Widget>[

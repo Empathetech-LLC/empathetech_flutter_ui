@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   EzConfig.l10n.ssPageTitle.toLowerCase(),
                   style: ezSubTitleStyle(),
                   textAlign: TextAlign.start,
-                  onTap: () => context.goNamed(settingsHomePath),
+                  onTap: () => context.goNamed(settingsHubPath),
                   hint: EzConfig.l10n.ssNavHint,
                 ),
                 EzPlainText(

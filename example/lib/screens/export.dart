@@ -11,12 +11,7 @@ export 'home.dart';
 export 'generator/generate.dart';
 export 'generator/archive.dart';
 
-export 'settings/home.dart';
-
-export 'settings/color.dart';
-export 'settings/design.dart';
-export 'settings/layout.dart';
-export 'settings/text.dart';
+export 'settings.dart';
 
 // Route names //
 
@@ -27,7 +22,7 @@ const String generateScreenPath = 'app-generator';
 const String archiveScreenPath = 'config-archiver';
 
 /// settings-home
-const String settingsHomePath = 'settings-home';
+const String settingsHubPath = 'settings-hub';
 
 /// color-settings
 const String colorSettingsPath = 'color-settings';

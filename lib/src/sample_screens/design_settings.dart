@@ -125,7 +125,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
     // Return the build //
 
-    return EzScrollView(children: <Widget>[
+    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
       (widget.themeLink != null)
           ? EzLink(
               EzConfig.l10n.gEditing + themeString,

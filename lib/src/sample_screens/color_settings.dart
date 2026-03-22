@@ -20,6 +20,11 @@ class EzColorSettings extends StatefulWidget {
   /// If provided, the "Editing: X theme" text will be a link with this callback
   final void Function()? themeLink;
 
+  /// [Widget] at the top of the page
+  /// Defaults to [EzMargin]
+  /// Use [SizedBox.shrink] to remove it
+  final Widget? header;
+
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
@@ -74,6 +79,7 @@ class EzColorSettings extends StatefulWidget {
     required this.onUpdate,
     required this.updateBoth,
     this.themeLink,
+    this.header,
     this.resetSpacer = const EzSeparator(),
     this.resetExtraDark,
     this.resetExtraLight,
@@ -158,108 +164,107 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
     // Return the build //
 
-    return EzScrollView(
-      children: <Widget>[
-        // Current theme reminder
-        (widget.themeLink != null)
-            ? EzLink(
-                EzConfig.l10n.gEditing + editString,
-                onTap: widget.themeLink,
-                hint: EzConfig.l10n.gEditingThemeHint,
-                style: EzConfig.styles.labelLarge,
-                textAlign: TextAlign.center,
-              )
-            : EzText(
-                EzConfig.l10n.gEditing + editString,
-                style: EzConfig.styles.labelLarge,
-                textAlign: TextAlign.center,
-              ),
-        EzConfig.margin,
+    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      widget.header ?? EzMargin(),
 
-        // Mode switch
-        SegmentedButton<EzCSType>(
-          segments: <ButtonSegment<EzCSType>>[
-            ButtonSegment<EzCSType>(
-              value: EzCSType.quick,
-              label: Text(EzConfig.l10n.gQuick),
-            ),
-            ButtonSegment<EzCSType>(
-              value: EzCSType.advanced,
-              label: Text(EzConfig.l10n.gAdvanced),
-            ),
-          ],
-          selected: <EzCSType>{currentTab},
-          showSelectedIcon: false,
-          onSelectionChanged: (Set<EzCSType> selected) async {
-            switch (selected.first) {
-              case EzCSType.quick:
-                currentTab = EzCSType.quick;
-                await EzConfig.setBool(advancedColorsKey, false);
-                break;
-              case EzCSType.advanced:
-                currentTab = EzCSType.advanced;
-                await EzConfig.setBool(advancedColorsKey, true);
-                break;
-            }
-            setState(() {});
-          },
-        ),
-        EzConfig.separator,
-
-        // Core settings
-        if (currentTab == EzCSType.quick)
-          _QuickColorSettings(
-            quickHeader: widget.quickHeader,
-            quickFooter: widget.quickFooter,
-            onUpdate: widget.onUpdate,
-            updateBoth: widget.updateBoth,
-          )
-        else
-          _AdvancedColorSettings(
-            currList: currList,
-            defaultList: defaultList,
-            onUpdate: widget.onUpdate,
+      // Mode switch
+      SegmentedButton<EzCSType>(
+        segments: <ButtonSegment<EzCSType>>[
+          ButtonSegment<EzCSType>(
+            value: EzCSType.quick,
+            label: Text(EzConfig.l10n.gQuick),
           ),
+          ButtonSegment<EzCSType>(
+            value: EzCSType.advanced,
+            label: Text(EzConfig.l10n.gAdvanced),
+          ),
+        ],
+        selected: <EzCSType>{currentTab},
+        showSelectedIcon: false,
+        onSelectionChanged: (Set<EzCSType> selected) async {
+          switch (selected.first) {
+            case EzCSType.quick:
+              currentTab = EzCSType.quick;
+              await EzConfig.setBool(advancedColorsKey, false);
+              break;
+            case EzCSType.advanced:
+              currentTab = EzCSType.advanced;
+              await EzConfig.setBool(advancedColorsKey, true);
+              break;
+          }
+          setState(() {});
+        },
+      ),
 
-        // Reset button
-        widget.resetSpacer,
-        EzResetButton(
-          () {
-            widget.onUpdate();
-            setState(() => currList = List<String>.from(defaultList));
-          },
-          androidPackage: widget.androidPackage,
-          appName: widget.appName,
-          dialogTitle: EzConfig.l10n.csReset(resetString),
-          resetBoth: widget.updateBoth,
-          resetSkip: widget.resetSkip,
-          onConfirm: () async {
-            if (widget.updateBoth) {
-              await EzConfig.removeKeys(allColorKeys.keys.toSet());
+      // Current theme reminder
+      (widget.themeLink != null)
+          ? EzLink(
+              EzConfig.l10n.gEditing + editString,
+              onTap: widget.themeLink,
+              hint: EzConfig.l10n.gEditingThemeHint,
+              style: EzConfig.styles.labelLarge,
+              textAlign: TextAlign.center,
+            )
+          : EzText(
+              EzConfig.l10n.gEditing + editString,
+              style: EzConfig.styles.labelLarge,
+              textAlign: TextAlign.center,
+            ),
+      EzConfig.spacer,
+
+      // Core settings
+      if (currentTab == EzCSType.quick)
+        _QuickColorSettings(
+          quickHeader: widget.quickHeader,
+          quickFooter: widget.quickFooter,
+          onUpdate: widget.onUpdate,
+          updateBoth: widget.updateBoth,
+        )
+      else
+        _AdvancedColorSettings(
+          currList: currList,
+          defaultList: defaultList,
+          onUpdate: widget.onUpdate,
+        ),
+
+      // Reset button
+      widget.resetSpacer,
+      EzResetButton(
+        () {
+          widget.onUpdate();
+          setState(() => currList = List<String>.from(defaultList));
+        },
+        androidPackage: widget.androidPackage,
+        appName: widget.appName,
+        dialogTitle: EzConfig.l10n.csReset(resetString),
+        resetBoth: widget.updateBoth,
+        resetSkip: widget.resetSkip,
+        onConfirm: () async {
+          if (widget.updateBoth) {
+            await EzConfig.removeKeys(allColorKeys.keys.toSet());
+            if (widget.resetExtraDark != null) {
+              await EzConfig.removeKeys(widget.resetExtraDark!);
+            }
+            if (widget.resetExtraLight != null) {
+              await EzConfig.removeKeys(widget.resetExtraLight!);
+            }
+          } else {
+            if (EzConfig.isDark) {
+              await EzConfig.removeKeys(darkColorKeys.keys.toSet());
               if (widget.resetExtraDark != null) {
                 await EzConfig.removeKeys(widget.resetExtraDark!);
               }
+            } else {
+              await EzConfig.removeKeys(lightColorKeys.keys.toSet());
               if (widget.resetExtraLight != null) {
                 await EzConfig.removeKeys(widget.resetExtraLight!);
               }
-            } else {
-              if (EzConfig.isDark) {
-                await EzConfig.removeKeys(darkColorKeys.keys.toSet());
-                if (widget.resetExtraDark != null) {
-                  await EzConfig.removeKeys(widget.resetExtraDark!);
-                }
-              } else {
-                await EzConfig.removeKeys(lightColorKeys.keys.toSet());
-                if (widget.resetExtraLight != null) {
-                  await EzConfig.removeKeys(widget.resetExtraLight!);
-                }
-              }
             }
-          },
-        ),
-        widget.trail,
-      ],
-    );
+          }
+        },
+      ),
+      widget.trail,
+    ]);
   }
 }
 

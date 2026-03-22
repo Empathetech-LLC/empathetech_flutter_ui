@@ -70,12 +70,6 @@ class EzTextBackground extends StatelessWidget {
 }
 
 class EzText extends StatelessWidget {
-  /// [EzTextBackground.useSurface] passthrough
-  /// true: [ColorScheme.surface]
-  /// false: [ColorScheme.surfaceContainer]
-  /// null: [ColorScheme.surfaceDim]
-  final bool? useSurface;
-
   /// [Text.data] passthrough
   final String data;
 
@@ -119,6 +113,14 @@ class EzText extends StatelessWidget {
   /// [Text.selectionColor] passthrough
   final Color? selectionColor;
 
+  final EdgeInsets? padding;
+
+  /// [EzTextBackground.useSurface] passthrough
+  /// true: [ColorScheme.surface]
+  /// false: [ColorScheme.surfaceContainer]
+  /// null: [ColorScheme.surfaceDim]
+  final bool? useSurface;
+
   /// [EzTextBackground.backgroundColor] passthrough
   final Color? backgroundColor;
 
@@ -126,7 +128,6 @@ class EzText extends StatelessWidget {
   /// [style] defaults to [TextTheme.bodyLarge]
   const EzText(
     this.data, {
-    this.useSurface = false,
     super.key,
     this.style,
     this.strutStyle,
@@ -141,6 +142,8 @@ class EzText extends StatelessWidget {
     this.textWidthBasis,
     this.textHeightBehavior,
     this.selectionColor,
+    this.padding,
+    this.useSurface = false,
     this.backgroundColor,
   });
 
@@ -161,6 +164,7 @@ class EzText extends StatelessWidget {
           textHeightBehavior: textHeightBehavior,
           selectionColor: selectionColor,
         ),
+        margin: padding,
         useSurface: useSurface,
         backgroundColor: backgroundColor,
       );

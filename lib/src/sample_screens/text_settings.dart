@@ -246,103 +246,101 @@ class _TextSettingsState extends State<_TextSettings> {
 
     // Return the build //
 
-    return EzScrollView(
-      children: <Widget>[
-        (widget.themeLink != null)
-            ? EzLink(
-                EzConfig.l10n.gEditing + themeString,
-                onTap: widget.themeLink,
-                hint: EzConfig.l10n.gEditingThemeHint,
-                style: EzConfig.styles.labelLarge,
-                textAlign: TextAlign.center,
-              )
-            : EzText(
-                EzConfig.l10n.gEditing + themeString,
-                style: EzConfig.styles.labelLarge,
-                textAlign: TextAlign.center,
-              ),
-        EzConfig.margin,
-
-        // Mode selector
-        SegmentedButton<EzTSType>(
-          segments: <ButtonSegment<EzTSType>>[
-            ButtonSegment<EzTSType>(
-              value: EzTSType.quick,
-              label: Text(EzConfig.l10n.gQuick),
-            ),
-            ButtonSegment<EzTSType>(
-              value: EzTSType.advanced,
-              label: Text(EzConfig.l10n.gAdvanced),
-            ),
-          ],
-          selected: <EzTSType>{currentTab},
-          showSelectedIcon: false,
-          onSelectionChanged: (Set<EzTSType> selected) async {
-            switch (selected.first) {
-              case EzTSType.quick:
-                currentTab = EzTSType.quick;
-                await EzConfig.setBool(advancedTextKey, false);
-                break;
-              case EzTSType.advanced:
-                currentTab = EzTSType.advanced;
-                await EzConfig.setBool(advancedTextKey, true);
-                break;
-            }
-            setState(() {});
-          },
-        ),
-
-        // Settings
-        if (currentTab == EzTSType.quick)
-          _QuickTextSettings(
-            // Providers
-            displayProvider: displayProvider,
-            headlineProvider: headlineProvider,
-            titleProvider: titleProvider,
-            bodyProvider: bodyProvider,
-            labelProvider: labelProvider,
-
-            // Settings config
-            onUpdate: redraw,
-            updateBoth: widget.updateBoth,
-            showOnSurface: widget.showOnSurface,
-            moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
-            textBlockSpacer: widget.textBlockSpacer,
-            showOpacity: widget.showOpacity,
-            moreQuickFooterSettings: widget.moreQuickFooterSettings,
-            resetSpacer: widget.resetSpacer,
-            extraDark: widget.extraDark,
-            extraLight: widget.extraLight,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-            resetSkip: widget.resetSkip,
-            saveSkip: widget.saveSkip,
-            trail: widget.trail,
-          )
-        else
-          _AdvancedTextSettings(
-            // Providers
-            displayProvider: displayProvider,
-            headlineProvider: headlineProvider,
-            titleProvider: titleProvider,
-            bodyProvider: bodyProvider,
-            labelProvider: labelProvider,
-
-            // Settings config
-            onUpdate: redraw,
-            updateBoth: widget.updateBoth,
-            showSpacing: widget.showSpacing,
-            resetSpacer: widget.resetSpacer,
-            extraDark: widget.extraDark,
-            extraLight: widget.extraLight,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-            resetSkip: widget.resetSkip,
-            saveSkip: widget.saveSkip,
-            trail: widget.trail,
+    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      // Mode selector
+      SegmentedButton<EzTSType>(
+        segments: <ButtonSegment<EzTSType>>[
+          ButtonSegment<EzTSType>(
+            value: EzTSType.quick,
+            label: Text(EzConfig.l10n.gQuick),
           ),
-      ],
-    );
+          ButtonSegment<EzTSType>(
+            value: EzTSType.advanced,
+            label: Text(EzConfig.l10n.gAdvanced),
+          ),
+        ],
+        selected: <EzTSType>{currentTab},
+        showSelectedIcon: false,
+        onSelectionChanged: (Set<EzTSType> selected) async {
+          switch (selected.first) {
+            case EzTSType.quick:
+              currentTab = EzTSType.quick;
+              await EzConfig.setBool(advancedTextKey, false);
+              break;
+            case EzTSType.advanced:
+              currentTab = EzTSType.advanced;
+              await EzConfig.setBool(advancedTextKey, true);
+              break;
+          }
+          setState(() {});
+        },
+      ),
+
+      // Current theme reminder
+      (widget.themeLink != null)
+          ? EzLink(
+              EzConfig.l10n.gEditing + themeString,
+              onTap: widget.themeLink,
+              hint: EzConfig.l10n.gEditingThemeHint,
+              style: EzConfig.styles.labelLarge,
+              textAlign: TextAlign.center,
+            )
+          : EzText(
+              EzConfig.l10n.gEditing + themeString,
+              style: EzConfig.styles.labelLarge,
+              textAlign: TextAlign.center,
+            ),
+
+      // Settings
+      if (currentTab == EzTSType.quick)
+        _QuickTextSettings(
+          // Providers
+          displayProvider: displayProvider,
+          headlineProvider: headlineProvider,
+          titleProvider: titleProvider,
+          bodyProvider: bodyProvider,
+          labelProvider: labelProvider,
+
+          // Settings config
+          onUpdate: redraw,
+          updateBoth: widget.updateBoth,
+          showOnSurface: widget.showOnSurface,
+          moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
+          textBlockSpacer: widget.textBlockSpacer,
+          showOpacity: widget.showOpacity,
+          moreQuickFooterSettings: widget.moreQuickFooterSettings,
+          resetSpacer: widget.resetSpacer,
+          extraDark: widget.extraDark,
+          extraLight: widget.extraLight,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
+          trail: widget.trail,
+        )
+      else
+        _AdvancedTextSettings(
+          // Providers
+          displayProvider: displayProvider,
+          headlineProvider: headlineProvider,
+          titleProvider: titleProvider,
+          bodyProvider: bodyProvider,
+          labelProvider: labelProvider,
+
+          // Settings config
+          onUpdate: redraw,
+          updateBoth: widget.updateBoth,
+          showSpacing: widget.showSpacing,
+          resetSpacer: widget.resetSpacer,
+          extraDark: widget.extraDark,
+          extraLight: widget.extraLight,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
+          resetSkip: widget.resetSkip,
+          saveSkip: widget.saveSkip,
+          trail: widget.trail,
+        ),
+    ]);
   }
 }
 

@@ -598,13 +598,13 @@ final Map<String, Object> empathDesktopConfig = <String, Object>{
   // Dark
   darkPaddingKey: defaultDesktopPadding,
   darkSpacingKey: defaultDesktopSpacing,
-  darkShowBackFABKey: true,
+  darkShowBackFABKey: false,
   darkShowScrollKey: true,
 
   // Light
   lightPaddingKey: defaultDesktopPadding,
   lightSpacingKey: defaultDesktopSpacing,
-  lightShowBackFABKey: true,
+  lightShowBackFABKey: false,
   lightShowScrollKey: true,
 };
 
