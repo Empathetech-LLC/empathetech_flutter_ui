@@ -42,7 +42,7 @@ dependencies:
 dev_dependencies:
   ## For development
   dartdoc: ^9.0.2
-  dependency_validator: ^5.0.4
+  dependency_validator: ^5.0.5
   flutter_lints: ^6.0.0
 
   ## For example app (Open UI)
