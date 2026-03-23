@@ -6,9 +6,9 @@
   "gApply": "Aplicar",
   "gApplyChanges": "Aplicar cambios",
   "gContinue": "Continuar",
-  "gSkip": "Saltar",
   "gOpen": "Abrir",
   "gOpenLink": "Abrir enlace",
+  "gSkip": "Saltar",
   "gSuccess": "Éxito",
   "gSuccessExl": "¡Éxito!",
   "gYes": "Sí",
@@ -22,14 +22,14 @@
   "gRequired": "Requerido",
 
   "gBack": "Atrás",
-  "gUndo": "Deshacer",
-  "gRedo": "Rehacer",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
   "gDisabled": "Deshabilitado",
   "gError": "Error",
   "gFailure": "Fracaso",
   "gNo": "No",
+  "gRedo": "Rehacer",
+  "gUndo": "Deshacer",
 
   "gSettings": "Ajustes",
   "gGlobal": "Global",
@@ -42,12 +42,12 @@
   "gLight": "Claro",
   "gSystem": "Sistema",
 
+  "gEditing": "Editando: ",
+  "gEditingThemeHint": "Abrir la configuración del tema del sistema",
+
   "gDarkTheme": "Tema oscuro",
   "gLightTheme": "Tema claro",
   "gBothThemes": "Ambos temas",
-
-  "gEditing": "Editando: ",
-  "gEditingThemeHint": "Abrir la configuración del tema del sistema",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",
