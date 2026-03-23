@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       : l10n.csTheConfig),
                 ),
                 EzInlineLink(
-                  EzConfig.l10n.ssPageTitle.toLowerCase(),
+                  EzConfig.l10n.gSettings.toLowerCase(),
                   style: ezSubTitleStyle(),
                   textAlign: TextAlign.start,
                   onTap: () => context.goNamed(settingsHubPath),
