@@ -770,7 +770,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     final Set<String> keys = Set<String>.from(_instance!._prefs.keys);
     if (skip != null) keys.removeAll(skip);
 
-    if (!forceBoth && !EzConfig.updateBoth) {
+    if (!forceBoth && !updateBoth) {
       EzConfig.isDark
           ? keys.removeWhere((String key) => key.startsWith('light'))
           : keys.removeWhere((String key) => key.startsWith('dark'));
