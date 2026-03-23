@@ -143,4 +143,5 @@ export 'src/widgets/user_customization/locale_setting.dart';
 export 'src/widgets/user_customization/quick_config.dart';
 export 'src/widgets/user_customization/random_button.dart';
 export 'src/widgets/user_customization/reset_button.dart';
+export 'src/widgets/user_customization/theme_coin.dart';
 export 'src/widgets/user_customization/theme_mode_switch.dart';
