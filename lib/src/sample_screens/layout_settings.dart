@@ -86,9 +86,15 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      // Update both toggle
+      EzConfig.margin,
+      const EzThemeCoin(),
       EzConfig.spacer,
+
+      // Optional 'before' settings
       if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
+      // Margin
       EzMarginSetting(
         onUpdate: redraw,
         min: minMargin,
@@ -98,6 +104,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
       ),
       EzConfig.spacer,
 
+      // Padding
       EzPaddingSetting(
         onUpdate: redraw,
         min: minPadding,
@@ -107,6 +114,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
       ),
       EzConfig.spacer,
 
+      // Spacing
       EzSpacingSetting(
         onUpdate: redraw,
         min: minSpacing,

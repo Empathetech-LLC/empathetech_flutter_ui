@@ -154,33 +154,46 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
       widget.header ?? EzMargin(),
 
-      // Mode switch
-      SegmentedButton<EzCSType>(
-        segments: <ButtonSegment<EzCSType>>[
-          ButtonSegment<EzCSType>(
-            value: EzCSType.quick,
-            label: Text(EzConfig.l10n.gQuick),
+      // Mode selector(s)
+      EzScrollView(
+        scrollDirection: Axis.horizontal,
+        mainAxisSize: MainAxisSize.min,
+        reverseHands: true,
+        showScrollHint: true,
+        children: <Widget>[
+          // Quick/Advanced selector
+          SegmentedButton<EzCSType>(
+            segments: <ButtonSegment<EzCSType>>[
+              ButtonSegment<EzCSType>(
+                value: EzCSType.quick,
+                label: Text(EzConfig.l10n.gQuick),
+              ),
+              ButtonSegment<EzCSType>(
+                value: EzCSType.advanced,
+                label: Text(EzConfig.l10n.gAdvanced),
+              ),
+            ],
+            selected: <EzCSType>{currentTab},
+            showSelectedIcon: false,
+            onSelectionChanged: (Set<EzCSType> selected) async {
+              switch (selected.first) {
+                case EzCSType.quick:
+                  currentTab = EzCSType.quick;
+                  await EzConfig.setBool(advancedColorsKey, false);
+                  break;
+                case EzCSType.advanced:
+                  currentTab = EzCSType.advanced;
+                  await EzConfig.setBool(advancedColorsKey, true);
+                  break;
+              }
+              setState(() {});
+            },
           ),
-          ButtonSegment<EzCSType>(
-            value: EzCSType.advanced,
-            label: Text(EzConfig.l10n.gAdvanced),
-          ),
+          EzConfig.rowMargin,
+
+          // Update both toggle
+          const EzThemeCoin(),
         ],
-        selected: <EzCSType>{currentTab},
-        showSelectedIcon: false,
-        onSelectionChanged: (Set<EzCSType> selected) async {
-          switch (selected.first) {
-            case EzCSType.quick:
-              currentTab = EzCSType.quick;
-              await EzConfig.setBool(advancedColorsKey, false);
-              break;
-            case EzCSType.advanced:
-              currentTab = EzCSType.advanced;
-              await EzConfig.setBool(advancedColorsKey, true);
-              break;
-          }
-          setState(() {});
-        },
       ),
       EzConfig.spacer,
 

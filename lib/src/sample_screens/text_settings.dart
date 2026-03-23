@@ -238,33 +238,46 @@ class _TextSettingsState extends State<_TextSettings> {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
       widget.header,
 
-      // Mode selector
-      SegmentedButton<EzTSType>(
-        segments: <ButtonSegment<EzTSType>>[
-          ButtonSegment<EzTSType>(
-            value: EzTSType.quick,
-            label: Text(EzConfig.l10n.gQuick),
+      // Mode selector(s)
+      EzScrollView(
+        scrollDirection: Axis.horizontal,
+        mainAxisSize: MainAxisSize.min,
+        reverseHands: true,
+        showScrollHint: true,
+        children: <Widget>[
+          // Quick/Advanced selector
+          SegmentedButton<EzTSType>(
+            segments: <ButtonSegment<EzTSType>>[
+              ButtonSegment<EzTSType>(
+                value: EzTSType.quick,
+                label: Text(EzConfig.l10n.gQuick),
+              ),
+              ButtonSegment<EzTSType>(
+                value: EzTSType.advanced,
+                label: Text(EzConfig.l10n.gAdvanced),
+              ),
+            ],
+            selected: <EzTSType>{currentTab},
+            showSelectedIcon: false,
+            onSelectionChanged: (Set<EzTSType> selected) async {
+              switch (selected.first) {
+                case EzTSType.quick:
+                  currentTab = EzTSType.quick;
+                  await EzConfig.setBool(advancedTextKey, false);
+                  break;
+                case EzTSType.advanced:
+                  currentTab = EzTSType.advanced;
+                  await EzConfig.setBool(advancedTextKey, true);
+                  break;
+              }
+              setState(() {});
+            },
           ),
-          ButtonSegment<EzTSType>(
-            value: EzTSType.advanced,
-            label: Text(EzConfig.l10n.gAdvanced),
-          ),
+          EzConfig.rowMargin,
+
+          // Update both toggle
+          const EzThemeCoin(),
         ],
-        selected: <EzTSType>{currentTab},
-        showSelectedIcon: false,
-        onSelectionChanged: (Set<EzTSType> selected) async {
-          switch (selected.first) {
-            case EzTSType.quick:
-              currentTab = EzTSType.quick;
-              await EzConfig.setBool(advancedTextKey, false);
-              break;
-            case EzTSType.advanced:
-              currentTab = EzTSType.advanced;
-              await EzConfig.setBool(advancedTextKey, true);
-              break;
-          }
-          setState(() {});
-        },
       ),
 
       // Settings

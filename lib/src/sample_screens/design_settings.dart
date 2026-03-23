@@ -111,7 +111,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   Widget build(BuildContext context) {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      // Update both toggle
+      EzConfig.margin,
+      const EzThemeCoin(),
       EzConfig.spacer,
+
+      // Optional 'before' settings
       if (widget.beforeDesign != null) ...widget.beforeDesign!,
 
       // Animation duration
