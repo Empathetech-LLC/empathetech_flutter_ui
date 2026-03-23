@@ -89,6 +89,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
       // Update both toggle
       EzConfig.margin,
       const EzThemeCoin(),
+      EzDivider(height: EzConfig.spacing),
       EzConfig.spacer,
 
       // Optional 'before' settings

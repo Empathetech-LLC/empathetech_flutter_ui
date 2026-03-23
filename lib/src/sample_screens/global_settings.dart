@@ -8,9 +8,6 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzGlobalSettings extends StatefulWidget {
-  /// [Widget] at the top of the page
-  final Widget header;
-
   /// [EzLocaleSetting.inDistress] passthrough
   final Set<String> inDistress;
 
@@ -55,14 +52,13 @@ class EzGlobalSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzGlobalSettings({
     super.key,
-    this.header = const EzSpacer(),
     this.skipLocales,
     this.inDistress = const <String>{'US'},
     this.additionalSettings,
     required this.appName,
     required this.androidPackage,
     this.saveSkip,
-    this.quickConfigSpacer = const EzDivider(),
+    this.quickConfigSpacer = const EzSeparator(),
     this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSeparator(),
     this.resetSkip,
@@ -88,7 +84,8 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
 
   @override
   Widget build(BuildContext context) => EzScrollView(children: <Widget>[
-        widget.header,
+        EzDivider(height: EzConfig.spacing),
+        EzConfig.spacer,
 
         // Right/left
         EzDominantHandSwitch(redraw),

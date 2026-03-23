@@ -14,11 +14,6 @@ class EzColorSettings extends StatefulWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
 
-  /// [Widget] at the top of the page
-  /// Defaults to [EzMargin]
-  /// Use [SizedBox.shrink] to remove it
-  final Widget? header;
-
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
@@ -71,7 +66,6 @@ class EzColorSettings extends StatefulWidget {
     super.key,
     this.target,
     required this.onUpdate,
-    this.header,
     this.resetSpacer = const EzSeparator(),
     this.resetExtraDark,
     this.resetExtraLight,
@@ -152,7 +146,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     // Return the build //
 
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      widget.header ?? EzMargin(),
+      EzConfig.margin,
 
       // Mode selector(s)
       EzScrollView(
@@ -189,12 +183,15 @@ class _EzColorSettingsState extends State<EzColorSettings> {
               setState(() {});
             },
           ),
-          EzConfig.rowMargin,
 
           // Update both toggle
-          const EzThemeCoin(),
+          if (currentTab == EzCSType.quick) ...<Widget>[
+            EzConfig.rowMargin,
+            const EzThemeCoin(),
+          ],
         ],
       ),
+      EzDivider(height: EzConfig.spacing),
       EzConfig.spacer,
 
       // Core settings
@@ -212,6 +209,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         ),
 
       // Reset button
+      // TODO: make two separate reset buttons (like text)
       widget.resetSpacer,
       EzResetButton(
         () {

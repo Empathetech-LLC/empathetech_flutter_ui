@@ -15,11 +15,6 @@ class EzTextSettings extends StatelessWidget {
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
 
-  /// [Widget] at the top of the page
-  /// Defaults to [EzMargin]
-  /// Provide [SizedBox.shrink] to remove it
-  final Widget? header;
-
   /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
 
@@ -79,7 +74,6 @@ class EzTextSettings extends StatelessWidget {
     super.key,
     this.target,
     required this.onUpdate,
-    this.header,
     this.resetSpacer = const EzSeparator(),
     this.androidPackage,
     required this.appName,
@@ -126,8 +120,6 @@ class EzTextSettings extends StatelessWidget {
           target: target,
           onUpdate: onUpdate,
 
-          header: header ?? EzMargin(),
-
           resetSpacer: resetSpacer,
           androidPackage: androidPackage,
           appName: appName,
@@ -154,7 +146,6 @@ class _TextSettings extends StatefulWidget {
   // Shared
   final EzTSType? target;
   final void Function() onUpdate;
-  final Widget header;
 
   final Widget resetSpacer;
   final String? androidPackage;
@@ -178,7 +169,6 @@ class _TextSettings extends StatefulWidget {
   const _TextSettings({
     required this.target,
     required this.onUpdate,
-    required this.header,
     required this.resetSpacer,
     required this.androidPackage,
     required this.appName,
@@ -236,7 +226,7 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      widget.header,
+      EzConfig.margin,
 
       // Mode selector(s)
       EzScrollView(
@@ -273,12 +263,16 @@ class _TextSettingsState extends State<_TextSettings> {
               setState(() {});
             },
           ),
-          EzConfig.rowMargin,
 
-          // Update both toggle
-          const EzThemeCoin(),
+          if (currentTab == EzTSType.quick) ...<Widget>[
+            // Update both toggle
+            EzConfig.rowMargin,
+            const EzThemeCoin(),
+          ],
         ],
       ),
+      EzDivider(height: EzConfig.spacing),
+      EzConfig.spacer,
 
       // Settings
       if (currentTab == EzTSType.quick)
@@ -412,10 +406,10 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
     final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
     final EdgeInsets wrapPadding = EdgeInsets.only(
-      top: EzConfig.spacing,
       left: EzConfig.spacing / 2,
       right: EzConfig.spacing / 2,
-    );
+      bottom: EzConfig.spacing,
+    ); // TODO: check the recent top/bottom swap
 
     // Return the build //
 
@@ -1195,8 +1189,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     // Return the build //
 
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      EzConfig.spacer,
-
       // Style selector
       EzScrollView(
         scrollDirection: Axis.horizontal,
@@ -1421,21 +1413,17 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
-                EzConfig.locale.languageCode == english.languageCode
-            ? "${ezThemeString()}'"
-            : ezThemeString()),
+        // TODO: l10n (think it already exists, just done for the day atm)
+        dialogTitle: EzConfig.l10n.tsReset(EzConfig.isDark ? 'dark' : 'light'),
         onConfirm: () async {
-          if (EzConfig.updateBoth || EzConfig.isDark) {
+          if (EzConfig.isDark) {
             EzConfig.removeKeys(darkTextKeys.keys.toSet());
             EzConfig.remove(darkOnSurfaceKey);
 
             if (widget.extraDark != null) {
               EzConfig.removeKeys(widget.extraDark!);
             }
-          }
-
-          if (EzConfig.updateBoth || !EzConfig.isDark) {
+          } else {
             EzConfig.removeKeys(lightTextKeys.keys.toSet());
             EzConfig.remove(lightOnSurfaceKey);
 
