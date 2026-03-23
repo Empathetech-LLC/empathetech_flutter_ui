@@ -79,7 +79,7 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
   @override
   void initState() {
     super.initState();
-    ezWindowNamer(EzConfig.l10n.ssPageTitle);
+    ezWindowNamer(EzConfig.l10n.gSettings);
   }
 
   // Return the build //
