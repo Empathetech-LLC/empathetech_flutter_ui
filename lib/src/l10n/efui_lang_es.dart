@@ -18,13 +18,13 @@ class EFUILangEs extends EFUILang {
   String get gContinue => 'Continuar';
 
   @override
-  String get gSkip => 'Saltar';
-
-  @override
   String get gOpen => 'Abrir';
 
   @override
   String get gOpenLink => 'Abrir enlace';
+
+  @override
+  String get gSkip => 'Saltar';
 
   @override
   String get gSuccess => 'Éxito';
@@ -60,12 +60,6 @@ class EFUILangEs extends EFUILang {
   String get gBack => 'Atrás';
 
   @override
-  String get gUndo => 'Deshacer';
-
-  @override
-  String get gRedo => 'Rehacer';
-
-  @override
   String get gCancel => 'Cancelar';
 
   @override
@@ -82,6 +76,12 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gNo => 'No';
+
+  @override
+  String get gRedo => 'Rehacer';
+
+  @override
+  String get gUndo => 'Deshacer';
 
   @override
   String get gSettings => 'Ajustes';
@@ -111,6 +111,9 @@ class EFUILangEs extends EFUILang {
   String get gSystem => 'Sistema';
 
   @override
+  String get gEditing => 'Editando: ';
+
+  @override
   String get gDarkTheme => 'Tema oscuro';
 
   @override
@@ -118,12 +121,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gBothThemes => 'Ambos temas';
-
-  @override
-  String get gEditing => 'Editando: ';
-
-  @override
-  String get gEditingThemeHint => 'Abrir la configuración del tema del sistema';
 
   @override
   String get gLeft => 'Izquierda';

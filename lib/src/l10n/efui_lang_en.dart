@@ -18,13 +18,13 @@ class EFUILangEn extends EFUILang {
   String get gContinue => 'Continue';
 
   @override
-  String get gSkip => 'Skip';
-
-  @override
   String get gOpen => 'Open';
 
   @override
   String get gOpenLink => 'Open link';
+
+  @override
+  String get gSkip => 'Skip';
 
   @override
   String get gSuccess => 'Success';
@@ -60,12 +60,6 @@ class EFUILangEn extends EFUILang {
   String get gBack => 'Back';
 
   @override
-  String get gUndo => 'Undo';
-
-  @override
-  String get gRedo => 'Redo';
-
-  @override
   String get gCancel => 'Cancel';
 
   @override
@@ -82,6 +76,12 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gNo => 'No';
+
+  @override
+  String get gRedo => 'Redo';
+
+  @override
+  String get gUndo => 'Undo';
 
   @override
   String get gSettings => 'Settings';
@@ -111,6 +111,9 @@ class EFUILangEn extends EFUILang {
   String get gSystem => 'System';
 
   @override
+  String get gEditing => 'Editing: ';
+
+  @override
   String get gDarkTheme => 'Dark theme';
 
   @override
@@ -118,12 +121,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gBothThemes => 'Both themes';
-
-  @override
-  String get gEditing => 'Editing: ';
-
-  @override
-  String get gEditingThemeHint => 'Open the system theme settings';
 
   @override
   String get gLeft => 'Left';
@@ -765,13 +762,13 @@ class EFUILangEnUs extends EFUILangEn {
   String get gContinue => 'Continue';
 
   @override
-  String get gSkip => 'Skip';
-
-  @override
   String get gOpen => 'Open';
 
   @override
   String get gOpenLink => 'Open link';
+
+  @override
+  String get gSkip => 'Skip';
 
   @override
   String get gSuccess => 'Success';
@@ -807,12 +804,6 @@ class EFUILangEnUs extends EFUILangEn {
   String get gBack => 'Back';
 
   @override
-  String get gUndo => 'Undo';
-
-  @override
-  String get gRedo => 'Redo';
-
-  @override
   String get gCancel => 'Cancel';
 
   @override
@@ -829,6 +820,12 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gNo => 'No';
+
+  @override
+  String get gRedo => 'Redo';
+
+  @override
+  String get gUndo => 'Undo';
 
   @override
   String get gSettings => 'Settings';
@@ -858,6 +855,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get gSystem => 'System';
 
   @override
+  String get gEditing => 'Editing: ';
+
+  @override
   String get gDarkTheme => 'Dark theme';
 
   @override
@@ -865,12 +865,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gBothThemes => 'Both themes';
-
-  @override
-  String get gEditing => 'Editing: ';
-
-  @override
-  String get gEditingThemeHint => 'Open the system theme settings';
 
   @override
   String get gLeft => 'Left';

@@ -18,13 +18,13 @@ class EFUILangFr extends EFUILang {
   String get gContinue => 'Continuer';
 
   @override
-  String get gSkip => 'Passer';
-
-  @override
   String get gOpen => 'Ouvrir';
 
   @override
   String get gOpenLink => 'Ouvrir le lien';
+
+  @override
+  String get gSkip => 'Passer';
 
   @override
   String get gSuccess => 'Succès';
@@ -60,12 +60,6 @@ class EFUILangFr extends EFUILang {
   String get gBack => 'Retour';
 
   @override
-  String get gUndo => 'Annuler';
-
-  @override
-  String get gRedo => 'Rétablir';
-
-  @override
   String get gCancel => 'Annuler';
 
   @override
@@ -82,6 +76,12 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gNo => 'Non';
+
+  @override
+  String get gRedo => 'Rétablir';
+
+  @override
+  String get gUndo => 'Annuler';
 
   @override
   String get gSettings => 'Paramètres';
@@ -111,6 +111,9 @@ class EFUILangFr extends EFUILang {
   String get gSystem => 'Système';
 
   @override
+  String get gEditing => 'Modification : ';
+
+  @override
   String get gDarkTheme => 'Thème sombre';
 
   @override
@@ -118,12 +121,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gBothThemes => 'Les deux thèmes';
-
-  @override
-  String get gEditing => 'Modification : ';
-
-  @override
-  String get gEditingThemeHint => 'Ouvrir les paramètres de thème système';
 
   @override
   String get gLeft => 'Gauche';

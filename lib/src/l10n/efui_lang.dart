@@ -117,12 +117,6 @@ abstract class EFUILang {
   /// **'Continue'**
   String get gContinue;
 
-  /// No description provided for @gSkip.
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get gSkip;
-
   /// No description provided for @gOpen.
   ///
   /// In en, this message translates to:
@@ -134,6 +128,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open link'**
   String get gOpenLink;
+
+  /// No description provided for @gSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get gSkip;
 
   /// No description provided for @gSuccess.
   ///
@@ -201,18 +201,6 @@ abstract class EFUILang {
   /// **'Back'**
   String get gBack;
 
-  /// No description provided for @gUndo.
-  ///
-  /// In en, this message translates to:
-  /// **'Undo'**
-  String get gUndo;
-
-  /// No description provided for @gRedo.
-  ///
-  /// In en, this message translates to:
-  /// **'Redo'**
-  String get gRedo;
-
   /// No description provided for @gCancel.
   ///
   /// In en, this message translates to:
@@ -248,6 +236,18 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'No'**
   String get gNo;
+
+  /// No description provided for @gRedo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get gRedo;
+
+  /// No description provided for @gUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get gUndo;
 
   /// No description provided for @gSettings.
   ///
@@ -303,6 +303,12 @@ abstract class EFUILang {
   /// **'System'**
   String get gSystem;
 
+  /// No description provided for @gEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: '**
+  String get gEditing;
+
   /// No description provided for @gDarkTheme.
   ///
   /// In en, this message translates to:
@@ -320,18 +326,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Both themes'**
   String get gBothThemes;
-
-  /// No description provided for @gEditing.
-  ///
-  /// In en, this message translates to:
-  /// **'Editing: '**
-  String get gEditing;
-
-  /// No description provided for @gEditingThemeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Open the system theme settings'**
-  String get gEditingThemeHint;
 
   /// No description provided for @gLeft.
   ///

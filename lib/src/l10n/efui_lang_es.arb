@@ -43,8 +43,6 @@
   "gSystem": "Sistema",
 
   "gEditing": "Editando: ",
-  "gEditingThemeHint": "Abrir la configuración del tema del sistema",
-
   "gDarkTheme": "Tema oscuro",
   "gLightTheme": "Tema claro",
   "gBothThemes": "Ambos temas",
