@@ -12,7 +12,7 @@ const String isDarkThemeKey = 'isDarkTheme';
 const String appLocaleKey = 'appLocale';
 const String updateBothKey = 'updateBoth';
 
-///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
+///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey], [updateBothKey]
 const Map<String, Type> allGlobalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
