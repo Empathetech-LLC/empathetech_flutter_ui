@@ -822,7 +822,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen():super(key: ValueKey<int>(EzConfig.seed));
+  HomeScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
