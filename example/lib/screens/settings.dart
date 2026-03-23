@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class SettingsHubScreen extends StatefulWidget {
+class SettingsHubScreen extends StatelessWidget {
   /// Auto-navigate to quick/advanced
   final EzCSType? cTarget;
 
@@ -21,15 +21,6 @@ class SettingsHubScreen extends StatefulWidget {
     this.cTarget,
     this.tTarget,
   }) : super(key: ValueKey<int>(EzConfig.seed));
-
-  @override
-  State<SettingsHubScreen> createState() => _SettingsHubScreenState();
-}
-
-class _SettingsHubScreenState extends State<SettingsHubScreen> {
-  void redraw() => setState(() {});
-
-  bool updateBoth = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +35,7 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
                     ? Icons.phone_iphone
                     : Icons.phone_android)
                 : const Icon(Icons.computer),
-            build: EzGlobalSettings(
-              key: ValueKey<int>(config.seed),
+            build: const EzGlobalSettings(
               appName: appName,
               androidPackage: androidPackage,
             ),
@@ -56,10 +46,8 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
             title: EzConfig.l10n.gColor,
             icon: const Icon(Icons.palette),
             build: EzColorSettings(
-              key: ValueKey<int>(config.seed),
-              target: widget.cTarget,
-              onUpdate: redraw,
-              updateBoth: updateBoth,
+              target: cTarget,
+              onUpdate: doNothing,
               appName: appName,
               androidPackage: androidPackage,
             ),
@@ -69,10 +57,8 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
           EzSettingsSection(
             title: EzConfig.l10n.gDesign,
             icon: const Icon(Icons.design_services),
-            build: EzDesignSettings(
-              key: ValueKey<int>(config.seed),
-              onUpdate: () => redraw,
-              updateBoth: updateBoth,
+            build: const EzDesignSettings(
+              onUpdate: doNothing,
               appName: appName,
               androidPackage: androidPackage,
             ),
@@ -82,10 +68,8 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
           EzSettingsSection(
             title: EzConfig.l10n.gLayout,
             icon: const Icon(Icons.grid_3x3),
-            build: EzLayoutSettings(
-              key: ValueKey<int>(config.seed),
-              onUpdate: redraw,
-              updateBoth: updateBoth,
+            build: const EzLayoutSettings(
+              onUpdate: doNothing,
               appName: appName,
               androidPackage: androidPackage,
             ),
@@ -96,10 +80,8 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
             title: EzConfig.l10n.gText,
             icon: const Icon(Icons.text_format),
             build: EzTextSettings(
-              key: ValueKey<int>(config.seed),
-              target: widget.tTarget,
-              onUpdate: redraw,
-              updateBoth: updateBoth,
+              target: tTarget,
+              onUpdate: doNothing,
               appName: appName,
               androidPackage: androidPackage,
             ),
@@ -111,15 +93,8 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
           // Rebuild (conditional)
           if (config.needsRebuild) ...<Widget>[
             config.layout.spacer,
-            EzRebuildFAB(redraw),
+            const EzRebuildFAB(doNothing),
           ],
-
-          // Settings dupe/update both
-          config.layout.spacer,
-          EzSettingsDupeFAB(
-            updateBoth,
-            () => setState(() => updateBoth = !updateBoth),
-          ),
 
           // Save/upload config
           config.layout.spacer,
