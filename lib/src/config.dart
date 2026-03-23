@@ -761,8 +761,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// [removeKeys], all (except those in [skip])
   /// [skip] defaults to [appLocaleKey]
-  static Future<bool> reset(
-    bool bothThemes, {
+  static Future<bool> reset({
     Set<String>? skip = const <String>{appLocaleKey},
     bool reset = true,
     bool storageOnly = false,
@@ -770,7 +769,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     final Set<String> keys = Set<String>.from(_instance!._prefs.keys);
     if (skip != null) keys.removeAll(skip);
 
-    if (!bothThemes) {
+    if (!EzConfig.updateBoth) {
       EzConfig.isDark
           ? keys.removeWhere((String key) => key.startsWith('light'))
           : keys.removeWhere((String key) => key.startsWith('dark'));
