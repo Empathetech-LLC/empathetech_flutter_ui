@@ -75,33 +75,6 @@ class EzConfigFAB extends StatelessWidget {
       );
 }
 
-class EzSettingsDupeFAB extends StatelessWidget {
-  final bool dupe;
-  final void Function() onPressed;
-
-  /// [FloatingActionButton] for updating both light and dark theme settings simultaneously
-  const EzSettingsDupeFAB(this.dupe, this.onPressed, {super.key});
-
-  @override
-  Widget build(BuildContext context) => dupe
-      ? FloatingActionButton(
-          onPressed: onPressed,
-          tooltip: EzConfig.isDark
-              ? EzConfig.l10n.ssUpdateDark
-              : EzConfig.l10n.ssUpdateLight,
-          backgroundColor: EzConfig.colors.primary,
-          foregroundColor: EzConfig.colors.onPrimary,
-          child: EzIcon(Icons.brightness_medium),
-        )
-      : FloatingActionButton(
-          onPressed: onPressed,
-          tooltip: EzConfig.l10n.ssUpdateBoth,
-          backgroundColor: EzConfig.colors.surface,
-          foregroundColor: EzConfig.colors.outline,
-          child: EzIcon(Icons.brightness_medium),
-        );
-}
-
 class EzUpdaterFAB extends StatefulWidget {
   /// Local app version
   final String appVersion;
