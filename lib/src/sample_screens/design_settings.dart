@@ -14,7 +14,7 @@ class EzDesignSettings extends StatefulWidget {
   final void Function() onUpdate;
 
   /// Optional additional settings at the top of the page
-  /// BYO tailing spacer, leading spacer is a custom [EzSpacer]
+  /// BYO tailing spacer, leading spacer is an [EzConfig.separator]
   final List<Widget>? beforeDesign;
 
   /// Whether to include the page transition setting
@@ -74,7 +74,7 @@ class EzDesignSettings extends StatefulWidget {
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
     this.afterDesign,
-    this.resetSpacer = const EzDivider(),
+    this.resetSpacer = const EzSeparator(),
     this.resetExtraDark,
     this.resetExtraLight,
     required this.appName,
@@ -111,15 +111,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   Widget build(BuildContext context) {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      EzConfig.margin,
-
-      // Update both switch
-      EzSwitchPair(
-        valueKey: updateBothKey,
-        text: EzConfig.l10n.ssUpdateBoth,
-      ),
       EzConfig.spacer,
-
       if (widget.beforeDesign != null) ...widget.beforeDesign!,
 
       // Animation duration

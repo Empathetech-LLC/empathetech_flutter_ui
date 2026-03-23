@@ -64,7 +64,7 @@ class EzGlobalSettings extends StatefulWidget {
     this.saveSkip,
     this.quickConfigSpacer = const EzDivider(),
     this.randomSpacer = const EzSpacer(),
-    this.resetSpacer = const EzSpacer(),
+    this.resetSpacer = const EzSeparator(),
     this.resetSkip,
     this.footer = const <Widget>[EzSeparator()],
   });

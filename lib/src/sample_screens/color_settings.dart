@@ -182,13 +182,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           setState(() {});
         },
       ),
-      EzConfig.margin,
-
-      // Update both switch
-      EzSwitchPair(
-        valueKey: updateBothKey,
-        text: EzConfig.l10n.ssUpdateBoth,
-      ),
       EzConfig.spacer,
 
       // Core settings

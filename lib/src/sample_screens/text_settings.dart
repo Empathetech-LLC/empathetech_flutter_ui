@@ -266,13 +266,6 @@ class _TextSettingsState extends State<_TextSettings> {
           setState(() {});
         },
       ),
-      EzConfig.margin,
-
-      // Update both switch
-      EzSwitchPair(
-        valueKey: updateBothKey,
-        text: EzConfig.l10n.ssUpdateBoth,
-      ),
 
       // Settings
       if (currentTab == EzTSType.quick)
@@ -1188,267 +1181,262 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
     // Return the build //
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        EzConfig.spacer,
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      EzConfig.spacer,
 
-        // Style selector
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
-          mainAxisSize: MainAxisSize.min,
-          primary: false,
-          children: <Widget>[
-            EzText(
-              EzConfig.l10n.gEditing,
-              style: widget.labelProvider.value,
-              textAlign: TextAlign.center,
-            ),
-            EzConfig.margin,
-            EzDropdownMenu<EzTextSettingType>(
-              widthEntries: <String>[EzConfig.l10n.tsHeadline],
-              textStyle: widget.labelProvider.value,
-              dropdownMenuEntries: <DropdownMenuEntry<EzTextSettingType>>[
-                DropdownMenuEntry<EzTextSettingType>(
-                  value: EzTextSettingType.display,
-                  label: EzConfig.l10n.tsDisplay.toLowerCase(),
-                ),
-                DropdownMenuEntry<EzTextSettingType>(
-                  value: EzTextSettingType.headline,
-                  label: EzConfig.l10n.tsHeadline.toLowerCase(),
-                ),
-                DropdownMenuEntry<EzTextSettingType>(
-                  value: EzTextSettingType.title,
-                  label: EzConfig.l10n.tsTitle.toLowerCase(),
-                ),
-                DropdownMenuEntry<EzTextSettingType>(
-                  value: EzTextSettingType.body,
-                  label: EzConfig.l10n.tsBody.toLowerCase(),
-                ),
-                DropdownMenuEntry<EzTextSettingType>(
-                  value: EzTextSettingType.label,
-                  label: EzConfig.l10n.tsLabel.toLowerCase(),
-                ),
-              ],
-              enableSearch: false,
-              initialSelection: editing,
-              onSelected: (EzTextSettingType? value) {
-                if (value != null) setState(() => editing = value);
-              },
-            ),
-          ],
-        ),
-        EzConfig.spacer,
+      // Style selector
+      EzScrollView(
+        scrollDirection: Axis.horizontal,
+        mainAxisSize: MainAxisSize.min,
+        primary: false,
+        children: <Widget>[
+          EzText(
+            EzConfig.l10n.gEditing,
+            style: widget.labelProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          EzConfig.margin,
+          EzDropdownMenu<EzTextSettingType>(
+            widthEntries: <String>[EzConfig.l10n.tsHeadline],
+            textStyle: widget.labelProvider.value,
+            dropdownMenuEntries: <DropdownMenuEntry<EzTextSettingType>>[
+              DropdownMenuEntry<EzTextSettingType>(
+                value: EzTextSettingType.display,
+                label: EzConfig.l10n.tsDisplay.toLowerCase(),
+              ),
+              DropdownMenuEntry<EzTextSettingType>(
+                value: EzTextSettingType.headline,
+                label: EzConfig.l10n.tsHeadline.toLowerCase(),
+              ),
+              DropdownMenuEntry<EzTextSettingType>(
+                value: EzTextSettingType.title,
+                label: EzConfig.l10n.tsTitle.toLowerCase(),
+              ),
+              DropdownMenuEntry<EzTextSettingType>(
+                value: EzTextSettingType.body,
+                label: EzConfig.l10n.tsBody.toLowerCase(),
+              ),
+              DropdownMenuEntry<EzTextSettingType>(
+                value: EzTextSettingType.label,
+                label: EzConfig.l10n.tsLabel.toLowerCase(),
+              ),
+            ],
+            enableSearch: false,
+            initialSelection: editing,
+            onSelected: (EzTextSettingType? value) {
+              if (value != null) setState(() => editing = value);
+            },
+          ),
+        ],
+      ),
+      EzConfig.spacer,
 
-        // Controls
-        EzRowCol.sym(
-          breakpoint: ScreenSize.medium,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Font family
-            familyController(context, editing),
+      // Controls
+      EzRowCol.sym(
+        breakpoint: ScreenSize.medium,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          // Font family
+          familyController(context, editing),
+          swapSpacer,
+
+          // Font size
+          sizeController(editing),
+          swapSpacer,
+
+          // Font weight, style, and decoration
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              boldController(editing),
+              EzConfig.rowSpacer,
+              italicsController(editing),
+              EzConfig.rowSpacer,
+              underlineController(editing),
+            ],
+          ),
+
+          // Letter, word, and line EzConfig.spacing
+          if (widget.showSpacing) ...<Widget>[
             swapSpacer,
-
-            // Font size
-            sizeController(editing),
-            swapSpacer,
-
-            // Font weight, style, and decoration
             EzScrollView(
               scrollDirection: Axis.horizontal,
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                boldController(editing),
+                letterSpacingController(editing),
                 EzConfig.rowSpacer,
-                italicsController(editing),
+                wordSpacingController(editing),
                 EzConfig.rowSpacer,
-                underlineController(editing),
+                lineHeightController(editing),
               ],
             ),
-
-            // Letter, word, and line EzConfig.spacing
-            if (widget.showSpacing) ...<Widget>[
-              swapSpacer,
-              EzScrollView(
-                scrollDirection: Axis.horizontal,
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  letterSpacingController(editing),
-                  EzConfig.rowSpacer,
-                  wordSpacingController(editing),
-                  EzConfig.rowSpacer,
-                  lineHeightController(editing),
-                ],
-              ),
-            ],
           ],
+        ],
+      ),
+      EzConfig.separator,
+
+      // Display preview
+      EzTextBackground(
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: EzConfig.l10n.tsDisplayP1),
+            EzInlineLink(
+              EzConfig.l10n.tsDisplayLink,
+              style: widget.displayProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () => setState(() => editing = EzTextSettingType.display),
+              hint: EzConfig.l10n
+                  .tsLinkHint(EzConfig.l10n.tsDisplay.toLowerCase()),
+            ),
+            EzPlainText(text: EzConfig.l10n.tsDisplayP2),
+          ],
+          textBackground: false,
+          style: widget.displayProvider.value,
+          textAlign: TextAlign.center,
         ),
-        EzConfig.separator,
+        useSurface: true,
+        margin: colMargin,
+        borderRadius: ezPillEdge,
+      ),
+      EzConfig.spacer,
 
-        // Display preview
-        EzTextBackground(
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: EzConfig.l10n.tsDisplayP1),
-              EzInlineLink(
-                EzConfig.l10n.tsDisplayLink,
-                style: widget.displayProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () =>
-                    setState(() => editing = EzTextSettingType.display),
-                hint: EzConfig.l10n
-                    .tsLinkHint(EzConfig.l10n.tsDisplay.toLowerCase()),
-              ),
-              EzPlainText(text: EzConfig.l10n.tsDisplayP2),
-            ],
-            textBackground: false,
-            style: widget.displayProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          useSurface: true,
-          margin: colMargin,
-          borderRadius: ezPillEdge,
+      // Headline preview
+      EzTextBackground(
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: EzConfig.l10n.tsHeadlineP1),
+            EzInlineLink(
+              EzConfig.l10n.tsHeadlineLink,
+              style: widget.headlineProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () => setState(() => editing = EzTextSettingType.headline),
+              hint: EzConfig.l10n
+                  .tsLinkHint(EzConfig.l10n.tsHeadline.toLowerCase()),
+            ),
+            EzPlainText(text: EzConfig.l10n.tsHeadlineP2),
+          ],
+          textBackground: false,
+          style: widget.headlineProvider.value,
+          textAlign: TextAlign.center,
         ),
-        EzConfig.spacer,
+        useSurface: true,
+        margin: colMargin,
+        borderRadius: ezPillEdge,
+      ),
+      EzConfig.spacer,
 
-        // Headline preview
-        EzTextBackground(
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: EzConfig.l10n.tsHeadlineP1),
-              EzInlineLink(
-                EzConfig.l10n.tsHeadlineLink,
-                style: widget.headlineProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () =>
-                    setState(() => editing = EzTextSettingType.headline),
-                hint: EzConfig.l10n
-                    .tsLinkHint(EzConfig.l10n.tsHeadline.toLowerCase()),
-              ),
-              EzPlainText(text: EzConfig.l10n.tsHeadlineP2),
-            ],
-            textBackground: false,
-            style: widget.headlineProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          useSurface: true,
-          margin: colMargin,
-          borderRadius: ezPillEdge,
+      // Title preview
+      EzTextBackground(
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: EzConfig.l10n.tsTitleP1),
+            EzInlineLink(
+              EzConfig.l10n.tsTitleLink,
+              style: widget.titleProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () => setState(() => editing = EzTextSettingType.title),
+              hint:
+                  EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsTitle.toLowerCase()),
+            ),
+          ],
+          textBackground: false,
+          style: widget.titleProvider.value,
+          textAlign: TextAlign.center,
         ),
-        EzConfig.spacer,
+        useSurface: true,
+        margin: colMargin,
+        borderRadius: ezPillEdge,
+      ),
+      EzConfig.spacer,
 
-        // Title preview
-        EzTextBackground(
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: EzConfig.l10n.tsTitleP1),
-              EzInlineLink(
-                EzConfig.l10n.tsTitleLink,
-                style: widget.titleProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () => setState(() => editing = EzTextSettingType.title),
-                hint: EzConfig.l10n
-                    .tsLinkHint(EzConfig.l10n.tsTitle.toLowerCase()),
-              ),
-            ],
-            textBackground: false,
-            style: widget.titleProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          useSurface: true,
-          margin: colMargin,
-          borderRadius: ezPillEdge,
+      // Body preview
+      EzTextBackground(
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: EzConfig.l10n.tsBodyP1),
+            EzInlineLink(
+              EzConfig.l10n.tsBodyLink,
+              style: widget.bodyProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () => setState(() => editing = EzTextSettingType.body),
+              hint:
+                  EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsBody.toLowerCase()),
+            ),
+            EzPlainText(text: EzConfig.l10n.tsBodyP2),
+          ],
+          textBackground: false,
+          style: widget.bodyProvider.value,
+          textAlign: TextAlign.center,
         ),
-        EzConfig.spacer,
+        useSurface: true,
+        margin: colMargin,
+        borderRadius: ezPillEdge,
+      ),
+      EzConfig.spacer,
 
-        // Body preview
-        EzTextBackground(
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: EzConfig.l10n.tsBodyP1),
-              EzInlineLink(
-                EzConfig.l10n.tsBodyLink,
-                style: widget.bodyProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () => setState(() => editing = EzTextSettingType.body),
-                hint: EzConfig.l10n
-                    .tsLinkHint(EzConfig.l10n.tsBody.toLowerCase()),
-              ),
-              EzPlainText(text: EzConfig.l10n.tsBodyP2),
-            ],
-            textBackground: false,
-            style: widget.bodyProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          useSurface: true,
-          margin: colMargin,
-          borderRadius: ezPillEdge,
+      // Label preview
+      EzTextBackground(
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: EzConfig.l10n.tsLabelP1),
+            EzInlineLink(
+              EzConfig.l10n.tsLabelLink,
+              style: widget.labelProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () => setState(() => editing = EzTextSettingType.label),
+              hint:
+                  EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsLabel.toLowerCase()),
+            ),
+            EzPlainText(text: EzConfig.l10n.tsLabelP2),
+          ],
+          textBackground: false,
+          style: widget.labelProvider.value,
+          textAlign: TextAlign.center,
         ),
-        EzConfig.spacer,
+        useSurface: true,
+        margin: colMargin,
+        borderRadius: ezPillEdge,
+      ),
 
-        // Label preview
-        EzTextBackground(
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: EzConfig.l10n.tsLabelP1),
-              EzInlineLink(
-                EzConfig.l10n.tsLabelLink,
-                style: widget.labelProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () => setState(() => editing = EzTextSettingType.label),
-                hint: EzConfig.l10n
-                    .tsLinkHint(EzConfig.l10n.tsLabel.toLowerCase()),
-              ),
-              EzPlainText(text: EzConfig.l10n.tsLabelP2),
-            ],
-            textBackground: false,
-            style: widget.labelProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          useSurface: true,
-          margin: colMargin,
-          borderRadius: ezPillEdge,
-        ),
+      // Reset all
+      widget.resetSpacer,
+      EzResetButton(
+        redraw,
+        androidPackage: widget.androidPackage,
+        appName: widget.appName,
+        dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
+                EzConfig.locale.languageCode == english.languageCode
+            ? "${ezThemeString()}'"
+            : ezThemeString()),
+        onConfirm: () async {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
+            EzConfig.removeKeys(darkTextKeys.keys.toSet());
+            EzConfig.remove(darkOnSurfaceKey);
 
-        // Reset all
-        widget.resetSpacer,
-        EzResetButton(
-          redraw,
-          androidPackage: widget.androidPackage,
-          appName: widget.appName,
-          dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
-                  EzConfig.locale.languageCode == english.languageCode
-              ? "${ezThemeString()}'"
-              : ezThemeString()),
-          onConfirm: () async {
-            if (EzConfig.updateBoth || EzConfig.isDark) {
-              EzConfig.removeKeys(darkTextKeys.keys.toSet());
-              EzConfig.remove(darkOnSurfaceKey);
-
-              if (widget.extraDark != null) {
-                EzConfig.removeKeys(widget.extraDark!);
-              }
+            if (widget.extraDark != null) {
+              EzConfig.removeKeys(widget.extraDark!);
             }
+          }
 
-            if (EzConfig.updateBoth || !EzConfig.isDark) {
-              EzConfig.removeKeys(lightTextKeys.keys.toSet());
-              EzConfig.remove(lightOnSurfaceKey);
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
+            EzConfig.removeKeys(lightTextKeys.keys.toSet());
+            EzConfig.remove(lightOnSurfaceKey);
 
-              if (widget.extraLight != null) {
-                EzConfig.removeKeys(widget.extraLight!);
-              }
+            if (widget.extraLight != null) {
+              EzConfig.removeKeys(widget.extraLight!);
             }
+          }
 
-            setState(() => editing = EzTextSettingType.display);
-          },
-          resetSkip: widget.resetSkip,
-          saveSkip: widget.saveSkip,
-        ),
-        widget.trail,
-      ],
-    );
+          setState(() => editing = EzTextSettingType.display);
+        },
+        resetSkip: widget.resetSkip,
+        saveSkip: widget.saveSkip,
+      ),
+      widget.trail,
+    ]);
   }
 }

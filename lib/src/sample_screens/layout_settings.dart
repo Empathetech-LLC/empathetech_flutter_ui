@@ -12,7 +12,7 @@ class EzLayoutSettings extends StatefulWidget {
   final void Function() onUpdate;
 
   /// Optional additional settings, before the main settings
-  /// BYO spacers
+  /// BYO trailing spacer, leading spacer is an [EzConfig.separator]
   final List<Widget>? beforeLayout;
 
   /// Optional additional settings, after the main settings
@@ -86,15 +86,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      EzConfig.margin,
-
-      // Update both switch
-      EzSwitchPair(
-        valueKey: updateBothKey,
-        text: EzConfig.l10n.ssUpdateBoth,
-      ),
       EzConfig.spacer,
-
       if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
       EzMarginSetting(

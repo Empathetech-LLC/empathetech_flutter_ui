@@ -59,13 +59,6 @@ class EzQuickConfig extends StatelessWidget {
         context: context,
         builder: (_) =>
             EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          // Update both toggle
-          EzSwitchPair(
-            valueKey: updateBothKey,
-            text: EzConfig.l10n.ssUpdateBoth,
-          ),
-          EzConfig.spacer,
-
           // Choices
           Wrap(
             alignment: WrapAlignment.center,
