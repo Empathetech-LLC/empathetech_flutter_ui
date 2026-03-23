@@ -8,9 +8,6 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  /// Whether both theme modes should be updated
-  final bool updateBoth;
-
   /// Requires the provider to be in the widget tree/context
   /// Allows for efficient (local) live updates, to avoid constant [EzConfig.rebuildUI] calls
   final EzDisplayStyleProvider displayProvider;
@@ -34,7 +31,6 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
   /// Standardized tool for updating the 5 [TextStyle.fontFamily]s
   const EzFontFamilyBatchSetting({
     super.key,
-    required this.updateBoth,
     required this.displayProvider,
     required this.headlineProvider,
     required this.titleProvider,
@@ -129,7 +125,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             }
             currFont = fontFamily;
 
-            final Map<String, String?> currFonts = widget.updateBoth
+            final Map<String, String?> currFonts = EzConfig.updateBoth
                 ? <String, String?>{...darkFonts, ...lightFonts}
                 : (EzConfig.isDark ? darkFonts : lightFonts);
 

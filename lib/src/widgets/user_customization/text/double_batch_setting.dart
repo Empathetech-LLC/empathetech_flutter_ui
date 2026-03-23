@@ -27,9 +27,6 @@ const List<String> _lightKeys = <String>[
 ];
 
 class EzFontDoubleBatchSetting extends StatelessWidget {
-  /// Whether both theme modes should be updated
-  final bool updateBoth;
-
   /// Required for max/min awareness
   final EzDisplayStyleProvider displayProvider;
 
@@ -53,7 +50,6 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
   EzFontDoubleBatchSetting({
     super.key,
-    required this.updateBoth,
     required this.displayProvider,
     required this.headlineProvider,
     required this.titleProvider,
@@ -120,7 +116,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    if (updateBoth || EzConfig.isDark) {
+                    if (EzConfig.updateBoth || EzConfig.isDark) {
                       for (final String key in _darkKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -144,7 +140,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    if (updateBoth || !EzConfig.isDark) {
+                    if (EzConfig.updateBoth || !EzConfig.isDark) {
                       for (final String key in _lightKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -182,7 +178,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
           // Core
           GestureDetector(
             onLongPress: () async {
-              if (updateBoth || EzConfig.isDark) {
+              if (EzConfig.updateBoth || EzConfig.isDark) {
                 for (final String key in _darkKeys) {
                   final EzTextStyleProvider provider = providerFromKey(key);
 
@@ -191,7 +187,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 }
               }
 
-              if (updateBoth || !EzConfig.isDark) {
+              if (EzConfig.updateBoth || !EzConfig.isDark) {
                 for (final String key in _lightKeys) {
                   final EzTextStyleProvider provider = providerFromKey(key);
 
@@ -225,7 +221,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    if (updateBoth || EzConfig.isDark) {
+                    if (EzConfig.updateBoth || EzConfig.isDark) {
                       for (final String key in _darkKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -249,7 +245,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    if (updateBoth || !EzConfig.isDark) {
+                    if (EzConfig.updateBoth || !EzConfig.isDark) {
                       for (final String key in _lightKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);

@@ -14,14 +14,10 @@ class EzBoldSetting extends StatefulWidget {
   /// Callback to live update the [TextStyle] on your UI
   final void Function(bool bold) notifierCallback;
 
-  /// Whether both [ThemeMode]s should be updated
-  final bool updateBoth;
-
   /// Standardized tool for toggling [FontWeight.bold] in the [TextStyle.fontWeight] that matches [type]
   const EzBoldSetting({
     required super.key,
     required this.type,
-    required this.updateBoth,
     required this.notifierCallback,
   });
 
@@ -45,7 +41,7 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
           isBold = !isBold;
 
           await EzConfig.setBool(widget.type.boldKey, isBold);
-          if (widget.updateBoth) {
+          if (EzConfig.updateBoth) {
             await EzConfig.setBool(widget.type.boldMirror, isBold);
           }
 

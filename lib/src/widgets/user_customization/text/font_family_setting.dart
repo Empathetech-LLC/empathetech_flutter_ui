@@ -11,9 +11,6 @@ class EzFontSetting extends StatefulWidget {
   /// Which [TextStyle] to update
   final EzTextSettingType type;
 
-  /// Whether both [ThemeMode]s should be updated
-  final bool updateBoth;
-
   /// Base [TextStyle] for the [DropdownMenu]
   /// Will be provided to [fuseWithGFont] alongside the current selection
   final TextStyle baseStyle;
@@ -26,7 +23,6 @@ class EzFontSetting extends StatefulWidget {
   const EzFontSetting({
     required super.key,
     required this.type,
-    required this.updateBoth,
     required this.baseStyle,
     required this.notifierCallback,
   });
@@ -64,7 +60,7 @@ class _FontSettingState extends State<EzFontSetting> {
             currFont = font;
 
             await EzConfig.setString(widget.type.fontKey, font);
-            if (widget.updateBoth) {
+            if (EzConfig.updateBoth) {
               await EzConfig.setString(widget.type.fontMirror, font);
             }
 
