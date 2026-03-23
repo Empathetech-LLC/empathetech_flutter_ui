@@ -103,6 +103,15 @@ bool deniedPermCheck(PermissionStatus? status) {
   }
 }
 
+/// [EFUILang.gBothThemes], [EFUILang.gDarkTheme], or [EFUILang.gLightTheme]
+/// Based on [EzConfig.updateBoth] && [EzConfig.isDark]
+String ezThemeString() => (EzConfig.updateBoth
+        ? EzConfig.l10n.gBothThemes
+        : EzConfig.isDark
+            ? EzConfig.l10n.gDarkTheme
+            : EzConfig.l10n.gLightTheme)
+    .toLowerCase();
+
 /// More readable than...
 /// MediaQuery.of(context).size.height
 double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
