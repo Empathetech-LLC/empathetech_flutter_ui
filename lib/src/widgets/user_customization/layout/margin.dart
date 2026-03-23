@@ -11,9 +11,6 @@ class EzMarginSetting extends StatefulWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
 
-  /// Whether to update both themes
-  final bool updateBoth;
-
   /// Smallest value that can be set
   final double min;
 
@@ -36,7 +33,6 @@ class EzMarginSetting extends StatefulWidget {
   const EzMarginSetting({
     super.key,
     required this.onUpdate,
-    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -150,7 +146,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
-                      if (widget.updateBoth) {
+                      if (EzConfig.updateBoth) {
                         await EzConfig.setDouble(
                             EzConfig.isDark ? lightMarginKey : darkMarginKey,
                             value);
@@ -168,7 +164,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                 EzElevatedIconButton(
                   onPressed: () async {
                     await EzConfig.remove(configKey);
-                    if (widget.updateBoth) {
+                    if (EzConfig.updateBoth) {
                       await EzConfig.remove(
                           EzConfig.isDark ? lightMarginKey : darkMarginKey);
                     }

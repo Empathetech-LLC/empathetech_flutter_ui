@@ -11,9 +11,6 @@ class EzSpacingSetting extends StatefulWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
 
-  /// Whether to update both themes
-  final bool updateBoth;
-
   /// Smallest value that can be set
   final double min;
 
@@ -36,7 +33,6 @@ class EzSpacingSetting extends StatefulWidget {
   const EzSpacingSetting({
     super.key,
     required this.onUpdate,
-    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -142,7 +138,7 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
 
-                      if (widget.updateBoth) {
+                      if (EzConfig.updateBoth) {
                         await EzConfig.setDouble(
                           EzConfig.isDark ? lightSpacingKey : darkSpacingKey,
                           value,
@@ -161,7 +157,7 @@ class _LayoutSettingState extends State<EzSpacingSetting> {
                 EzElevatedIconButton(
                   onPressed: () async {
                     await EzConfig.remove(configKey);
-                    if (widget.updateBoth) {
+                    if (EzConfig.updateBoth) {
                       await EzConfig.remove(
                           EzConfig.isDark ? lightSpacingKey : darkSpacingKey);
                     }
