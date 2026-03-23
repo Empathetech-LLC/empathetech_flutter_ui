@@ -90,14 +90,7 @@ class EzDesignSettings extends StatefulWidget {
 
 class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
-// Define custom functions //
-
-  String themeString() => (EzConfig.updateBoth
-          ? EzConfig.l10n.gBothThemes
-          : EzConfig.isDark
-              ? EzConfig.l10n.gDarkTheme
-              : EzConfig.l10n.gLightTheme)
-      .toLowerCase();
+  // Define custom functions //
 
   void redraw() {
     widget.onUpdate();
@@ -308,12 +301,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             );
 
             if (currType != backupType || currFade != backupFade) {
-              if (EzConfig.isDark || EzConfig.updateBoth) {
+              if (EzConfig.updateBoth || EzConfig.isDark) {
                 await EzConfig.setString(darkTransitionTypeKey, currType.value);
                 await EzConfig.setBool(darkTransitionFadeKey, currFade);
               }
 
-              if (!EzConfig.isDark || EzConfig.updateBoth) {
+              if (EzConfig.updateBoth || !EzConfig.isDark) {
                 await EzConfig.setString(
                     lightTransitionTypeKey, currType.value);
                 await EzConfig.setBool(lightTransitionFadeKey, currFade);
@@ -700,10 +693,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.dsReset(EzConfig.updateBoth &&
-                EzConfig.locale.languageCode == english.languageCode
-            ? "$themeString'"
-            : themeString),
+        dialogTitle:
+            EzConfig.l10n.dsReset(EzConfig.updateBoth && // TODO: check this
+                    EzConfig.locale.languageCode == english.languageCode
+                ? "${ezThemeString()}'"
+                : ezThemeString()),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(<String>{

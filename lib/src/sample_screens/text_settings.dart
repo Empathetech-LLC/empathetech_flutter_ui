@@ -393,16 +393,16 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Define custom functions //
 
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
   double? liveOpacity() => Theme.of(context)
       .textButtonTheme
       .style
       ?.backgroundColor
       ?.resolve(<WidgetState>{})?.a;
+
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -414,13 +414,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       left: EzConfig.spacing / 2,
       right: EzConfig.spacing / 2,
     );
-
-    final String themeString = (EzConfig.updateBoth
-            ? EzConfig.l10n.gBothThemes
-            : EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme)
-        .toLowerCase();
 
     // Return the build //
 
@@ -612,8 +605,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         appName: widget.appName,
         dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
                 EzConfig.locale.languageCode == english.languageCode
-            ? "$themeString'"
-            : themeString),
+            ? "${ezThemeString()}'"
+            : ezThemeString()),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             EzConfig.removeKeys(darkTextKeys.keys.toSet());
@@ -1197,13 +1190,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
     const EzSwapSpacer swapSpacer = EzSwapSpacer(breakpoint: ScreenSize.medium);
 
-    final String themeString = (EzConfig.updateBoth
-            ? EzConfig.l10n.gBothThemes
-            : EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme)
-        .toLowerCase();
-
     // Return the build //
 
     return Column(
@@ -1439,8 +1425,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           appName: widget.appName,
           dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
                   EzConfig.locale.languageCode == english.languageCode
-              ? "$themeString'"
-              : themeString),
+              ? "${ezThemeString()}'"
+              : ezThemeString()),
           onConfirm: () async {
             if (EzConfig.updateBoth || EzConfig.isDark) {
               EzConfig.removeKeys(darkTextKeys.keys.toSet());

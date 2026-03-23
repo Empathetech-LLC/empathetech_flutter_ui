@@ -67,6 +67,13 @@ class EzLayoutSettings extends StatefulWidget {
 }
 
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
+  // Define custom functions //
+
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
+  }
+
   // Init //
 
   @override
@@ -75,24 +82,9 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
     ezWindowNamer(EzConfig.l10n.lsPageTitle);
   }
 
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
+  // Return the build //
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final String themeString = (EzConfig.updateBoth
-            ? EzConfig.l10n.gBothThemes
-            : EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme)
-        .toLowerCase();
-
-    // Return the build //
-
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
       // Update both switch
       EzSwitchPair(
@@ -180,8 +172,8 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         appName: widget.appName,
         dialogTitle: EzConfig.l10n.lsReset(EzConfig.updateBoth &&
                 EzConfig.locale.languageCode == english.languageCode
-            ? "$themeString'"
-            : themeString),
+            ? "${ezThemeString()}'"
+            : ezThemeString()),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
