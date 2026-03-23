@@ -7,26 +7,29 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-// TODO: make sure you preserve web paths for the new system... potentially add a "smart" catcher
-
 class EzSettingsHub extends StatefulWidget {
   /// Where the magic happens
   final List<EzSettingsSection> pages;
 
+  /// Optional starting point
+  /// Defaults to [pages].first
+  final EzSettingsSection? target;
+
   /// Empathetech settings landing page
-  const EzSettingsHub({super.key, required this.pages});
+  const EzSettingsHub({super.key, required this.pages, this.target});
 
   @override
   State<EzSettingsHub> createState() => _EzSettingsHubState();
 }
 
 class _EzSettingsHubState extends State<EzSettingsHub> {
-  void redraw() => setState(() {});
-
-  late EzSettingsSection curr = widget.pages.first;
+  late EzSettingsSection curr = widget.target ?? widget.pages.first;
 
   @override
-  Widget build(BuildContext context) => EzScrollView(children: <Widget>[
+  Widget build(BuildContext context) {
+    return EzScrollView(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
         // Navigation
         EzText(
           curr.title,
@@ -53,5 +56,7 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
 
         // Current section
         curr.build,
-      ]);
+      ],
+    );
+  }
 }
