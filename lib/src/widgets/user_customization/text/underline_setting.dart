@@ -14,14 +14,10 @@ class EzUnderlineSetting extends StatefulWidget {
   /// Callback to live update the [TextStyle] on your UI
   final void Function(bool underline) notifierCallback;
 
-  /// Whether both [ThemeMode]s should be updated
-  final bool updateBoth;
-
   /// Standardized tool for toggling [TextDecoration.underline] in the [TextStyle.decoration] that matches [type]
   const EzUnderlineSetting({
     required super.key,
     required this.type,
-    required this.updateBoth,
     required this.notifierCallback,
   });
 
@@ -45,7 +41,7 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
           isUnderlined = !isUnderlined;
 
           await EzConfig.setBool(widget.type.underlineKey, isUnderlined);
-          if (widget.updateBoth) {
+          if (EzConfig.updateBoth) {
             await EzConfig.setBool(widget.type.underlineMirror, isUnderlined);
           }
 
