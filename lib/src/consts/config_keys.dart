@@ -8,16 +8,16 @@ import '../../empathetech_flutter_ui.dart';
 //* Global (home) settings' keys *//
 
 const String isLeftyKey = 'isLefty';
-
 const String isDarkThemeKey = 'isDarkTheme';
-
 const String appLocaleKey = 'appLocale';
+const String updateBothKey = 'updateBoth';
 
 ///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
 const Map<String, Type> allGlobalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   appLocaleKey: List<String>,
+  updateBothKey: bool,
 };
 
 //* Color settings' keys *//
