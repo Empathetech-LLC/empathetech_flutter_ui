@@ -763,13 +763,14 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// [skip] defaults to [appLocaleKey]
   static Future<bool> reset({
     Set<String>? skip = const <String>{appLocaleKey},
+    bool forceBoth = false,
     bool reset = true,
     bool storageOnly = false,
   }) async {
     final Set<String> keys = Set<String>.from(_instance!._prefs.keys);
     if (skip != null) keys.removeAll(skip);
 
-    if (!EzConfig.updateBoth) {
+    if (!forceBoth && !EzConfig.updateBoth) {
       EzConfig.isDark
           ? keys.removeWhere((String key) => key.startsWith('light'))
           : keys.removeWhere((String key) => key.startsWith('dark'));

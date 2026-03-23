@@ -65,7 +65,7 @@ class ResetFAB extends StatelessWidget {
                     // App settings
                     EzMaterialAction(
                       onPressed: () async {
-                        await EzConfig.reset(true);
+                        await EzConfig.reset(forceBoth: true);
                         await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetApp,
@@ -76,7 +76,7 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
-                        await EzConfig.reset(true);
+                        await EzConfig.reset(forceBoth: true);
                         await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetBoth,
