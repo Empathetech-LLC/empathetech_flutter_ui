@@ -84,6 +84,24 @@ class EFUILangFr extends EFUILang {
   String get gNo => 'Non';
 
   @override
+  String get gSettings => 'Paramètres';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Couleur';
+
+  @override
+  String get gDesign => 'Design';
+
+  @override
+  String get gLayout => 'Mise en page';
+
+  @override
+  String get gText => 'Texte';
+
+  @override
   String get gDark => 'Sombre';
 
   @override
@@ -292,9 +310,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gYou => 'Défini par vous';
-
-  @override
-  String get ssPageTitle => 'Paramètres';
 
   @override
   String get ssNavHint => 'Ouvrir la page des paramètres';

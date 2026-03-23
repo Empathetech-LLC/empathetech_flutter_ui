@@ -31,6 +31,13 @@
   "gFailure": "Failure",
   "gNo": "No",
 
+  "gSettings": "Settings",
+  "gGlobal": "Global",
+  "gColor": "Color",
+  "gDesign": "Design",
+  "gLayout": "Layout",
+  "gText": "Text",
+
   "gDark": "Dark",
   "gLight": "Light",
   "gSystem": "System",
@@ -116,7 +123,6 @@
 
 
 
-  "ssPageTitle": "Settings",
   "ssNavHint": "Open the settings page",
   "ssRestartReminder": "Close and reopen the app to apply your changes.",
   "ssRestartReminderWeb": "Reload/refresh the page to apply your changes.",

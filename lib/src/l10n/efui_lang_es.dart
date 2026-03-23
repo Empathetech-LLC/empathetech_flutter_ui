@@ -84,6 +84,24 @@ class EFUILangEs extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gSettings => 'Ajustes';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Color';
+
+  @override
+  String get gDesign => 'Diseño';
+
+  @override
+  String get gLayout => 'Esquema';
+
+  @override
+  String get gText => 'Texto';
+
+  @override
   String get gDark => 'Oscuro';
 
   @override
@@ -293,9 +311,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gYou => 'Configurado por ti';
-
-  @override
-  String get ssPageTitle => 'Configuración';
 
   @override
   String get ssNavHint => 'Abrir la página de configuración';

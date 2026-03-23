@@ -249,6 +249,42 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
+  /// No description provided for @gSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get gSettings;
+
+  /// No description provided for @gGlobal.
+  ///
+  /// In en, this message translates to:
+  /// **'Global'**
+  String get gGlobal;
+
+  /// No description provided for @gColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get gColor;
+
+  /// No description provided for @gDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get gDesign;
+
+  /// No description provided for @gLayout.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get gLayout;
+
+  /// No description provided for @gText.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get gText;
+
   /// No description provided for @gDark.
   ///
   /// In en, this message translates to:
@@ -638,12 +674,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Set by you'**
   String get gYou;
-
-  /// No description provided for @ssPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get ssPageTitle;
 
   /// No description provided for @ssNavHint.
   ///

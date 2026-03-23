@@ -31,6 +31,13 @@
   "gFailure": "Fracaso",
   "gNo": "No",
 
+  "gSettings": "Ajustes",
+  "gGlobal": "Global",
+  "gColor": "Color",
+  "gDesign": "Diseño",
+  "gLayout": "Esquema",
+  "gText": "Texto",
+
   "gDark": "Oscuro",
   "gLight": "Claro",
   "gSystem": "Sistema",

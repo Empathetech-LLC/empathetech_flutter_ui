@@ -84,6 +84,24 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gSettings => 'Settings';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Color';
+
+  @override
+  String get gDesign => 'Design';
+
+  @override
+  String get gLayout => 'Layout';
+
+  @override
+  String get gText => 'Text';
+
+  @override
   String get gDark => 'Dark';
 
   @override
@@ -291,9 +309,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gYou => 'Set by you';
-
-  @override
-  String get ssPageTitle => 'Settings';
 
   @override
   String get ssNavHint => 'Open the settings page';
@@ -816,6 +831,24 @@ class EFUILangEnUs extends EFUILangEn {
   String get gNo => 'No';
 
   @override
+  String get gSettings => 'Settings';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Color';
+
+  @override
+  String get gDesign => 'Design';
+
+  @override
+  String get gLayout => 'Layout';
+
+  @override
+  String get gText => 'Text';
+
+  @override
   String get gDark => 'Dark';
 
   @override
@@ -1023,9 +1056,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gYou => 'Set by you';
-
-  @override
-  String get ssPageTitle => 'Settings';
 
   @override
   String get ssNavHint => 'Open the settings page';
