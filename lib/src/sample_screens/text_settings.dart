@@ -15,16 +15,10 @@ class EzTextSettings extends StatelessWidget {
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
 
-  /// When true, updates both dark and light theme settings simultaneously
-  final bool updateBoth;
-
   /// [Widget] at the top of the page
   /// Defaults to [EzMargin]
   /// Provide [SizedBox.shrink] to remove it
   final Widget? header;
-
-  /// If provided, the "Editing: X theme" text will be a link with this callback
-  final void Function()? themeLink;
 
   /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
@@ -85,9 +79,7 @@ class EzTextSettings extends StatelessWidget {
     super.key,
     this.target,
     required this.onUpdate,
-    this.updateBoth = false,
     this.header,
-    this.themeLink,
     this.resetSpacer = const EzSeparator(),
     this.androidPackage,
     required this.appName,
@@ -133,9 +125,9 @@ class EzTextSettings extends StatelessWidget {
           // Shared
           target: target,
           onUpdate: onUpdate,
-          updateBoth: updateBoth,
+
           header: header ?? EzMargin(),
-          themeLink: themeLink,
+
           resetSpacer: resetSpacer,
           androidPackage: androidPackage,
           appName: appName,
@@ -163,8 +155,7 @@ class _TextSettings extends StatefulWidget {
   final EzTSType? target;
   final void Function() onUpdate;
   final Widget header;
-  final void Function()? themeLink;
-  final bool updateBoth;
+
   final Widget resetSpacer;
   final String? androidPackage;
   final String appName;
@@ -187,9 +178,7 @@ class _TextSettings extends StatefulWidget {
   const _TextSettings({
     required this.target,
     required this.onUpdate,
-    required this.updateBoth,
     required this.header,
-    required this.themeLink,
     required this.resetSpacer,
     required this.androidPackage,
     required this.appName,
@@ -242,19 +231,10 @@ class _TextSettingsState extends State<_TextSettings> {
     ezWindowNamer(EzConfig.l10n.tsPageTitle);
   }
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final String themeString = (widget.updateBoth
-            ? EzConfig.l10n.gBothThemes
-            : EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme)
-        .toLowerCase();
-
-    // Return the build //
-
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
       widget.header,
 
@@ -287,22 +267,16 @@ class _TextSettingsState extends State<_TextSettings> {
         },
       ),
 
-      // Current theme reminder
-      (widget.themeLink != null)
-          ? EzLink(
-              EzConfig.l10n.gEditing + themeString,
-              onTap: widget.themeLink,
-              hint: EzConfig.l10n.gEditingThemeHint,
-              style: EzConfig.styles.labelLarge,
-              textAlign: TextAlign.center,
-              padding: EdgeInsets.all(EzConfig.marginVal),
-            )
-          : EzText(
-              EzConfig.l10n.gEditing + themeString,
-              style: EzConfig.styles.labelLarge,
-              textAlign: TextAlign.center,
-              padding: EdgeInsets.all(EzConfig.marginVal),
-            ),
+      // Update both switch
+      EzSwitchPair(
+        key: UniqueKey(),
+        text: EzConfig.l10n.ssUpdateBoth,
+        value: EzConfig.updateBoth,
+        onChanged: (bool? choice) async {
+          if (choice == null) return;
+          await EzConfig.setBool(updateBothKey, choice);
+        },
+      ),
 
       // Settings
       if (currentTab == EzTSType.quick)
@@ -316,7 +290,7 @@ class _TextSettingsState extends State<_TextSettings> {
 
           // Settings config
           onUpdate: redraw,
-          updateBoth: widget.updateBoth,
+
           showOnSurface: widget.showOnSurface,
           moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
           textBlockSpacer: widget.textBlockSpacer,
@@ -342,7 +316,7 @@ class _TextSettingsState extends State<_TextSettings> {
 
           // Settings config
           onUpdate: redraw,
-          updateBoth: widget.updateBoth,
+
           showSpacing: widget.showSpacing,
           resetSpacer: widget.resetSpacer,
           extraDark: widget.extraDark,
@@ -367,7 +341,7 @@ class _QuickTextSettings extends StatefulWidget {
 
   // Settings config
   final void Function() onUpdate;
-  final bool updateBoth;
+
   final bool showOnSurface;
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockSpacer;
@@ -389,7 +363,6 @@ class _QuickTextSettings extends StatefulWidget {
     required this.bodyProvider,
     required this.labelProvider,
     required this.onUpdate,
-    required this.updateBoth,
     required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
@@ -442,7 +415,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       right: EzConfig.spacing / 2,
     );
 
-    final String themeString = (widget.updateBoth
+    final String themeString = (EzConfig.updateBoth
             ? EzConfig.l10n.gBothThemes
             : EzConfig.isDark
                 ? EzConfig.l10n.gDarkTheme
@@ -462,7 +435,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           Padding(
             padding: wrapPadding,
             child: EzFontFamilyBatchSetting(
-              updateBoth: widget.updateBoth,
               displayProvider: widget.displayProvider,
               headlineProvider: widget.headlineProvider,
               titleProvider: widget.titleProvider,
@@ -472,7 +444,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           ),
 
           // Optional onSurface Color setting
-          if (!widget.updateBoth && widget.showOnSurface)
+          if (!EzConfig.updateBoth && widget.showOnSurface)
             Padding(
               padding: wrapPadding,
               child: EzColorSetting(
@@ -487,7 +459,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             padding: wrapPadding,
             child: EzTextBackground(
               EzFontDoubleBatchSetting(
-                updateBoth: widget.updateBoth,
                 displayProvider: widget.displayProvider,
                 headlineProvider: widget.headlineProvider,
                 titleProvider: widget.titleProvider,
@@ -607,10 +578,10 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               });
             },
             onChangeEnd: (double value) async {
-              if (widget.updateBoth || EzConfig.isDark) {
+              if (EzConfig.updateBoth || EzConfig.isDark) {
                 await EzConfig.setDouble(darkTextBackgroundOpacityKey, value);
               }
-              if (widget.updateBoth || !EzConfig.isDark) {
+              if (EzConfig.updateBoth || !EzConfig.isDark) {
                 await EzConfig.setDouble(lightTextBackgroundOpacityKey, value);
               }
               if (context.mounted) {
@@ -627,7 +598,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       ],
 
       // Icon size
-      EzIconSizeSetting(updateBoth: widget.updateBoth),
+      const EzIconSizeSetting(),
 
       // Optional additional settings
       if (widget.moreQuickFooterSettings != null)
@@ -639,12 +610,12 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.tsReset(widget.updateBoth &&
+        dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
                 EzConfig.locale.languageCode == english.languageCode
             ? "$themeString'"
             : themeString),
         onConfirm: () async {
-          if (widget.updateBoth || EzConfig.isDark) {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
             EzConfig.removeKeys(darkTextKeys.keys.toSet());
             EzConfig.remove(darkOnSurfaceKey);
 
@@ -653,7 +624,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             }
           }
 
-          if (widget.updateBoth || !EzConfig.isDark) {
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
             EzConfig.removeKeys(lightTextKeys.keys.toSet());
             EzConfig.remove(lightOnSurfaceKey);
 
@@ -662,7 +633,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             }
           }
         },
-        resetBoth: widget.updateBoth,
         resetSkip: widget.resetSkip,
         saveSkip: widget.saveSkip,
       ),
@@ -681,7 +651,6 @@ class _AdvancedTextSettings extends StatefulWidget {
 
   // Settings config
   final void Function() onUpdate;
-  final bool updateBoth;
   final bool showSpacing;
   final Widget resetSpacer;
   final Set<String>? extraDark;
@@ -699,7 +668,6 @@ class _AdvancedTextSettings extends StatefulWidget {
     required this.bodyProvider,
     required this.labelProvider,
     required this.onUpdate,
-    required this.updateBoth,
     required this.showSpacing,
     required this.resetSpacer,
     required this.extraDark,
@@ -741,7 +709,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           key: ValueKey<String>('${tS()}font_display'),
           type: EzTextSettingType.display,
           baseStyle: widget.bodyProvider.value,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.displayProvider.fuse,
         );
       case EzTextSettingType.headline:
@@ -749,7 +716,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           key: ValueKey<String>('${tS()}font_headline'),
           type: EzTextSettingType.headline,
           baseStyle: widget.bodyProvider.value,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.headlineProvider.fuse,
         );
       case EzTextSettingType.title:
@@ -757,7 +723,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           key: ValueKey<String>('${tS()}font_title'),
           type: EzTextSettingType.title,
           baseStyle: widget.bodyProvider.value,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.titleProvider.fuse,
         );
       case EzTextSettingType.body:
@@ -765,7 +730,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           key: ValueKey<String>('${tS()}font_body'),
           type: EzTextSettingType.body,
           baseStyle: widget.bodyProvider.value,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.bodyProvider.fuse,
         );
       case EzTextSettingType.label:
@@ -773,7 +737,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           key: ValueKey<String>('${tS()}font_label'),
           type: EzTextSettingType.label,
           baseStyle: widget.bodyProvider.value,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.labelProvider.fuse,
         );
     }
@@ -873,35 +836,30 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         return EzBoldSetting(
           key: ValueKey<String>('${tS()}bold_display'),
           type: EzTextSettingType.display,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.displayProvider.bold,
         );
       case EzTextSettingType.headline:
         return EzBoldSetting(
           key: ValueKey<String>('${tS()}bold_headline'),
           type: EzTextSettingType.headline,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.headlineProvider.bold,
         );
       case EzTextSettingType.title:
         return EzBoldSetting(
           key: ValueKey<String>('${tS()}bold_title'),
           type: EzTextSettingType.title,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.titleProvider.bold,
         );
       case EzTextSettingType.body:
         return EzBoldSetting(
           key: ValueKey<String>('${tS()}bold_body'),
           type: EzTextSettingType.body,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.bodyProvider.bold,
         );
       case EzTextSettingType.label:
         return EzBoldSetting(
           key: ValueKey<String>('${tS()}bold_label'),
           type: EzTextSettingType.label,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.labelProvider.bold,
         );
     }
@@ -914,35 +872,30 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         return EzItalicSetting(
           key: ValueKey<String>('${tS()}italic_display'),
           type: EzTextSettingType.display,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.displayProvider.italic,
         );
       case EzTextSettingType.headline:
         return EzItalicSetting(
           key: ValueKey<String>('${tS()}italic_headline'),
           type: EzTextSettingType.headline,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.headlineProvider.italic,
         );
       case EzTextSettingType.title:
         return EzItalicSetting(
           key: ValueKey<String>('${tS()}italic_title'),
           type: EzTextSettingType.title,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.titleProvider.italic,
         );
       case EzTextSettingType.body:
         return EzItalicSetting(
           key: ValueKey<String>('${tS()}italic_body'),
           type: EzTextSettingType.body,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.bodyProvider.italic,
         );
       case EzTextSettingType.label:
         return EzItalicSetting(
           key: ValueKey<String>('${tS()}italic_label'),
           type: EzTextSettingType.label,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.labelProvider.italic,
         );
     }
@@ -955,35 +908,30 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         return EzUnderlineSetting(
           key: ValueKey<String>('${tS()}underline_display'),
           type: EzTextSettingType.display,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.displayProvider.underline,
         );
       case EzTextSettingType.headline:
         return EzUnderlineSetting(
           key: ValueKey<String>('${tS()}underline_headline'),
           type: EzTextSettingType.headline,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.headlineProvider.underline,
         );
       case EzTextSettingType.title:
         return EzUnderlineSetting(
           key: ValueKey<String>('${tS()}underline_title'),
           type: EzTextSettingType.title,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.titleProvider.underline,
         );
       case EzTextSettingType.body:
         return EzUnderlineSetting(
           key: ValueKey<String>('${tS()}underline_body'),
           type: EzTextSettingType.body,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.bodyProvider.underline,
         );
       case EzTextSettingType.label:
         return EzUnderlineSetting(
           key: ValueKey<String>('${tS()}underline_label'),
           type: EzTextSettingType.label,
-          updateBoth: widget.updateBoth,
           notifierCallback: widget.labelProvider.underline,
         );
     }
@@ -1249,7 +1197,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     final EdgeInsets colMargin = EzInsets.col(EzConfig.marginVal);
     const EzSwapSpacer swapSpacer = EzSwapSpacer(breakpoint: ScreenSize.medium);
 
-    final String themeString = (widget.updateBoth
+    final String themeString = (EzConfig.updateBoth
             ? EzConfig.l10n.gBothThemes
             : EzConfig.isDark
                 ? EzConfig.l10n.gDarkTheme
@@ -1489,12 +1437,12 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           redraw,
           androidPackage: widget.androidPackage,
           appName: widget.appName,
-          dialogTitle: EzConfig.l10n.tsReset(widget.updateBoth &&
+          dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
                   EzConfig.locale.languageCode == english.languageCode
               ? "$themeString'"
               : themeString),
           onConfirm: () async {
-            if (widget.updateBoth || EzConfig.isDark) {
+            if (EzConfig.updateBoth || EzConfig.isDark) {
               EzConfig.removeKeys(darkTextKeys.keys.toSet());
               EzConfig.remove(darkOnSurfaceKey);
 
@@ -1503,7 +1451,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               }
             }
 
-            if (widget.updateBoth || !EzConfig.isDark) {
+            if (EzConfig.updateBoth || !EzConfig.isDark) {
               EzConfig.removeKeys(lightTextKeys.keys.toSet());
               EzConfig.remove(lightOnSurfaceKey);
 
@@ -1514,7 +1462,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
             setState(() => editing = EzTextSettingType.display);
           },
-          resetBoth: widget.updateBoth,
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
         ),

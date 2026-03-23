@@ -11,12 +11,6 @@ class EzLayoutSettings extends StatefulWidget {
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
 
-  /// When true, updates both dark and light theme settings simultaneously
-  final bool updateBoth;
-
-  /// If provided, the "Editing: X theme" text will be a link with this callback
-  final void Function()? themeLink;
-
   /// Optional additional settings, before the main settings
   /// BYO spacers
   final List<Widget>? beforeLayout;
@@ -56,8 +50,6 @@ class EzLayoutSettings extends StatefulWidget {
   const EzLayoutSettings({
     super.key,
     required this.onUpdate,
-    this.updateBoth = false,
-    this.themeLink,
     this.beforeLayout,
     this.afterLayout,
     this.resetSpacer = const EzSeparator(),
@@ -92,7 +84,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final String themeString = (widget.updateBoth
+    final String themeString = (EzConfig.updateBoth
             ? EzConfig.l10n.gBothThemes
             : EzConfig.isDark
                 ? EzConfig.l10n.gDarkTheme
@@ -102,28 +94,22 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
     // Return the build //
 
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      (widget.themeLink != null)
-          ? EzLink(
-              EzConfig.l10n.gEditing + themeString,
-              onTap: widget.themeLink,
-              hint: EzConfig.l10n.gEditingThemeHint,
-              style: EzConfig.styles.labelLarge,
-              textAlign: TextAlign.center,
-              padding: EdgeInsets.all(EzConfig.marginVal),
-            )
-          : EzText(
-              EzConfig.l10n.gEditing + themeString,
-              style: EzConfig.styles.labelLarge,
-              padding: EdgeInsets.all(EzConfig.marginVal),
-              textAlign: TextAlign.center,
-            ),
+      // Update both switch
+      EzSwitchPair(
+        key: UniqueKey(),
+        text: EzConfig.l10n.ssUpdateBoth,
+        value: EzConfig.updateBoth,
+        onChanged: (bool? choice) async {
+          if (choice == null) return;
+          await EzConfig.setBool(updateBothKey, choice);
+        },
+      ),
       EzConfig.spacer,
 
       if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
       EzMarginSetting(
         onUpdate: redraw,
-        updateBoth: widget.updateBoth,
         min: minMargin,
         max: maxMargin,
         steps: 6,
@@ -133,7 +119,6 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
       EzPaddingSetting(
         onUpdate: redraw,
-        updateBoth: widget.updateBoth,
         min: minPadding,
         max: maxPadding,
         steps: 12,
@@ -143,7 +128,6 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
       EzSpacingSetting(
         onUpdate: redraw,
-        updateBoth: widget.updateBoth,
         min: minSpacing,
         max: maxSpacing,
         steps: 13,
@@ -157,7 +141,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         afterChanged: (bool? value) async {
           if (value == null) return;
 
-          if (widget.updateBoth) {
+          if (EzConfig.updateBoth) {
             await EzConfig.setBool(
                 EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey,
                 value);
@@ -175,7 +159,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         afterChanged: (bool? value) async {
           if (value == null) return;
 
-          if (widget.updateBoth) {
+          if (EzConfig.updateBoth) {
             await EzConfig.setBool(
                 EzConfig.isDark ? lightShowScrollKey : darkShowScrollKey,
                 value);
@@ -194,26 +178,25 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.lsReset(widget.updateBoth &&
+        dialogTitle: EzConfig.l10n.lsReset(EzConfig.updateBoth &&
                 EzConfig.locale.languageCode == english.languageCode
             ? "$themeString'"
             : themeString),
         onConfirm: () async {
-          if (widget.updateBoth || EzConfig.isDark) {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
             if (widget.resetExtraDark != null) {
               await EzConfig.removeKeys(widget.resetExtraDark!);
             }
           }
 
-          if (widget.updateBoth || !EzConfig.isDark) {
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
             await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
             if (widget.resetExtraLight != null) {
               await EzConfig.removeKeys(widget.resetExtraLight!);
             }
           }
         },
-        resetBoth: widget.updateBoth,
         resetSkip: widget.resetSkip,
         saveSkip: widget.saveSkip,
       ),

@@ -12,12 +12,6 @@ class EzResetButton extends StatelessWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onComplete;
 
-  /// Whether to reset both themes, or just the current theme
-  /// When null, the dialog will have a switch for the user to choose
-  /// Provide a value to remove the switch
-  /// When [onConfirm] is provided, [resetBoth] is purely cosmetic (above)
-  final bool? resetBoth;
-
   /// When true, [EzConfig.redrawUI] will be called instead of [EzConfig.rebuildUI]
   final bool justDraw;
 
@@ -66,7 +60,6 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton(
     this.onComplete, {
     super.key,
-    this.resetBoth,
     this.justDraw = false,
     this.style,
     this.label,
@@ -90,72 +83,45 @@ class EzResetButton extends StatelessWidget {
             ),
         onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dContext) {
-            bool both = resetBoth ?? true;
-
-            return StatefulBuilder(
-              builder: (_, StateSetter setDialog) => EzAlertDialog(
-                title: Text(
-                  dialogTitle ?? EzConfig.l10n.ssResetAll,
-                  textAlign: TextAlign.center,
+          builder: (BuildContext dContext) => EzAlertDialog(
+            title: Text(
+              dialogTitle ?? EzConfig.l10n.ssResetAll,
+              textAlign: TextAlign.center,
+            ),
+            content: dialogContent ??
+                ezRichUndoWarning(
+                  context,
+                  standalone: false,
+                  appName: appName,
+                  androidPackage: androidPackage,
                 ),
-                content: dialogContent,
-                contents: (dialogContent == null)
-                    ? <Widget>[
-                        if (resetBoth == null) ...<Widget>[
-                          // Reset both themes option
-                          EzSwitchPair(
-                            key: ValueKey<bool>(both),
-                            text: EzConfig.l10n.ssUpdateBoth,
-                            useSurface: null,
-                            value: both,
-                            onChanged: (bool? choice) {
-                              if (choice == null) return;
-                              setDialog(() => both = choice);
-                            },
-                          ),
-                          EzConfig.spacer,
-                        ],
-
-                        // Undo warning/save option
-                        ezRichUndoWarning(
-                          context,
-                          standalone: false,
-                          appName: appName,
-                          androidPackage: androidPackage,
-                        )
-                      ]
-                    : null,
-                actions: ezActionPair(
-                  context: context,
-                  onConfirm: () async {
-                    if (onConfirm == null) {
-                      await EzConfig.reset(
-                        both,
-                        skip: resetSkip,
-                        storageOnly: storageOnly,
-                      );
-                    } else {
-                      await onConfirm!.call();
-                    }
-                    justDraw
-                        ? await EzConfig.redrawUI(onComplete)
-                        : await EzConfig.rebuildUI(onComplete);
-                  },
-                  confirmIsDestructive: true,
-                  onDeny: () {
-                    if (onDeny == null) {
-                      doNothing();
-                    } else {
-                      onDeny!.call();
-                    }
-                    if (dContext.mounted) Navigator.of(dContext).pop();
-                  },
-                ),
-                needsClose: false,
-              ),
-            );
-          },
+            actions: ezActionPair(
+              context: context,
+              onConfirm: () async {
+                if (onConfirm == null) {
+                  await EzConfig.reset(
+                    skip: resetSkip,
+                    storageOnly: storageOnly,
+                  );
+                } else {
+                  await onConfirm!.call();
+                }
+                justDraw
+                    ? await EzConfig.redrawUI(onComplete)
+                    : await EzConfig.rebuildUI(onComplete);
+              },
+              confirmIsDestructive: true,
+              onDeny: () {
+                if (onDeny == null) {
+                  doNothing();
+                } else {
+                  onDeny!.call();
+                }
+                if (dContext.mounted) Navigator.of(dContext).pop();
+              },
+            ),
+            needsClose: false,
+          ),
         ),
         icon: const Icon(Icons.refresh),
         label: label ?? EzConfig.l10n.gResetAll,

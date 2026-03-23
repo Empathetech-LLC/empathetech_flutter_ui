@@ -13,12 +13,6 @@ class EzDesignSettings extends StatefulWidget {
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
 
-  /// When true, updates both dark and light theme settings simultaneously
-  final bool updateBoth;
-
-  /// If provided, the "Editing: X theme" text will be a link with this callback
-  final void Function()? themeLink;
-
   /// Optional additional settings at the top of the page
   /// BYO tailing spacer, leading spacer is a custom [EzSpacer]
   final List<Widget>? beforeDesign;
@@ -74,8 +68,6 @@ class EzDesignSettings extends StatefulWidget {
   const EzDesignSettings({
     super.key,
     required this.onUpdate,
-    this.updateBoth = false,
-    this.themeLink,
     this.beforeDesign,
     this.includePageTransitions,
     this.includeBackgroundImage = true,
@@ -98,6 +90,20 @@ class EzDesignSettings extends StatefulWidget {
 
 class _EzDesignSettingsState extends State<EzDesignSettings>
     with WidgetsBindingObserver {
+// Define custom functions //
+
+  String themeString() => (EzConfig.updateBoth
+          ? EzConfig.l10n.gBothThemes
+          : EzConfig.isDark
+              ? EzConfig.l10n.gDarkTheme
+              : EzConfig.l10n.gLightTheme)
+      .toLowerCase();
+
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
+  }
+
   // Init //
 
   @override
@@ -107,40 +113,21 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
     WidgetsBinding.instance.addObserver(this);
   }
 
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final String themeString = (widget.updateBoth
-            ? EzConfig.l10n.gBothThemes
-            : EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme)
-        .toLowerCase();
-
-    // Return the build //
-
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      (widget.themeLink != null)
-          ? EzLink(
-              EzConfig.l10n.gEditing + themeString,
-              onTap: widget.themeLink,
-              hint: EzConfig.l10n.gEditingThemeHint,
-              style: EzConfig.styles.labelLarge,
-              textAlign: TextAlign.center,
-              padding: EdgeInsets.all(EzConfig.marginVal),
-            )
-          : EzText(
-              EzConfig.l10n.gEditing + themeString,
-              style: EzConfig.styles.labelLarge,
-              textAlign: TextAlign.center,
-              padding: EdgeInsets.all(EzConfig.marginVal),
-            ),
+      // Update both switch
+      EzSwitchPair(
+        key: UniqueKey(),
+        text: EzConfig.l10n.ssUpdateBoth,
+        value: EzConfig.updateBoth,
+        onChanged: (bool? choice) async {
+          if (choice == null) return;
+          await EzConfig.setBool(updateBothKey, choice);
+        },
+      ),
       EzConfig.spacer,
 
       if (widget.beforeDesign != null) ...widget.beforeDesign!,
@@ -184,14 +171,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       onChanged: (double value) =>
                           setModal(() => animDuration = value),
                       onChangeEnd: (double value) async {
-                        if (widget.updateBoth || EzConfig.isDark) {
+                        if (EzConfig.updateBoth || EzConfig.isDark) {
                           await EzConfig.setInt(
                             darkAnimationDurationKey,
                             value.toInt(),
                           );
                         }
 
-                        if (widget.updateBoth || !EzConfig.isDark) {
+                        if (EzConfig.updateBoth || !EzConfig.isDark) {
                           await EzConfig.setInt(
                             lightAnimationDurationKey,
                             value.toInt(),
@@ -205,7 +192,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   // Reset button
                   EzElevatedIconButton(
                     onPressed: () async {
-                      if (widget.updateBoth || EzConfig.isDark) {
+                      if (EzConfig.updateBoth || EzConfig.isDark) {
                         await EzConfig.remove(darkAnimationDurationKey);
                         setModal(() => animDuration =
                             (EzConfig.getDefault(darkAnimationDurationKey)
@@ -213,7 +200,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                 .toDouble());
                       }
 
-                      if (widget.updateBoth || !EzConfig.isDark) {
+                      if (EzConfig.updateBoth || !EzConfig.isDark) {
                         await EzConfig.remove(lightAnimationDurationKey);
                         setModal(() => animDuration =
                             (EzConfig.getDefault(lightAnimationDurationKey)
@@ -321,12 +308,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             );
 
             if (currType != backupType || currFade != backupFade) {
-              if (EzConfig.isDark || widget.updateBoth) {
+              if (EzConfig.isDark || EzConfig.updateBoth) {
                 await EzConfig.setString(darkTransitionTypeKey, currType.value);
                 await EzConfig.setBool(darkTransitionFadeKey, currFade);
               }
 
-              if (!EzConfig.isDark || widget.updateBoth) {
+              if (!EzConfig.isDark || EzConfig.updateBoth) {
                 await EzConfig.setString(
                     lightTransitionTypeKey, currType.value);
                 await EzConfig.setBool(lightTransitionFadeKey, currFade);
@@ -353,14 +340,16 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   configKey: darkBackgroundImageKey,
                   credits: widget.darkBackgroundCredits,
                   label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                  updateBrightness: widget.updateBoth ? null : Brightness.dark,
+                  updateBrightness:
+                      EzConfig.updateBoth ? null : Brightness.dark,
                 )
               : EzImageSetting(
                   redraw,
                   configKey: lightBackgroundImageKey,
                   credits: widget.lightBackgroundCredits,
                   label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                  updateBrightness: widget.updateBoth ? null : Brightness.light,
+                  updateBrightness:
+                      EzConfig.updateBoth ? null : Brightness.light,
                 ),
         ),
         EzConfig.separator,
@@ -449,11 +438,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       onChanged: (double value) =>
                           setModal(() => currWidth = value),
                       onChangeEnd: (double value) async {
-                        if (widget.updateBoth || EzConfig.isDark) {
+                        if (EzConfig.updateBoth || EzConfig.isDark) {
                           await EzConfig.setDouble(darkBorderWidthKey, value);
                         }
 
-                        if (widget.updateBoth || !EzConfig.isDark) {
+                        if (EzConfig.updateBoth || !EzConfig.isDark) {
                           await EzConfig.setDouble(lightBorderWidthKey, value);
                         }
                       },
@@ -464,11 +453,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   // Reset button
                   EzElevatedIconButton(
                     onPressed: () async {
-                      if (widget.updateBoth || EzConfig.isDark) {
+                      if (EzConfig.updateBoth || EzConfig.isDark) {
                         await EzConfig.remove(darkButtonShapeKey);
                         await EzConfig.remove(darkBorderWidthKey);
                       }
-                      if (widget.updateBoth || !EzConfig.isDark) {
+                      if (EzConfig.updateBoth || !EzConfig.isDark) {
                         await EzConfig.remove(lightButtonShapeKey);
                         await EzConfig.remove(lightBorderWidthKey);
                       }
@@ -493,11 +482,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           );
 
           if (currShape != shapeBackup || currWidth != widthBackup) {
-            if (widget.updateBoth || EzConfig.isDark) {
+            if (EzConfig.updateBoth || EzConfig.isDark) {
               await EzConfig.setString(darkButtonShapeKey, currShape.value);
             }
 
-            if (widget.updateBoth || !EzConfig.isDark) {
+            if (EzConfig.updateBoth || !EzConfig.isDark) {
               await EzConfig.setString(lightButtonShapeKey, currShape.value);
             }
 
@@ -595,13 +584,13 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           onChanged: (double value) =>
                               setModal(() => buttonOpacity = value),
                           onChangeEnd: (double value) async {
-                            if (widget.updateBoth || EzConfig.isDark) {
+                            if (EzConfig.updateBoth || EzConfig.isDark) {
                               await EzConfig.setDouble(
                                 darkButtonOpacityKey,
                                 value,
                               );
                             }
-                            if (widget.updateBoth || !EzConfig.isDark) {
+                            if (EzConfig.updateBoth || !EzConfig.isDark) {
                               await EzConfig.setDouble(
                                 lightButtonOpacityKey,
                                 value,
@@ -632,14 +621,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                           onChanged: (double value) =>
                               setModal(() => borderOpacity = value),
                           onChangeEnd: (double value) async {
-                            if (widget.updateBoth || EzConfig.isDark) {
+                            if (EzConfig.updateBoth || EzConfig.isDark) {
                               await EzConfig.setDouble(
                                 darkBorderOpacityKey,
                                 value,
                               );
                             }
 
-                            if (widget.updateBoth || !EzConfig.isDark) {
+                            if (EzConfig.updateBoth || !EzConfig.isDark) {
                               await EzConfig.setDouble(
                                 lightBorderOpacityKey,
                                 value,
@@ -653,11 +642,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       // Reset button
                       EzElevatedIconButton(
                         onPressed: () async {
-                          if (widget.updateBoth || EzConfig.isDark) {
+                          if (EzConfig.updateBoth || EzConfig.isDark) {
                             await EzConfig.remove(darkButtonOpacityKey);
                             await EzConfig.remove(darkBorderOpacityKey);
                           }
-                          if (widget.updateBoth || !EzConfig.isDark) {
+                          if (EzConfig.updateBoth || !EzConfig.isDark) {
                             await EzConfig.remove(lightButtonOpacityKey);
                             await EzConfig.remove(lightBorderOpacityKey);
                           }
@@ -711,12 +700,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.dsReset(widget.updateBoth &&
+        dialogTitle: EzConfig.l10n.dsReset(EzConfig.updateBoth &&
                 EzConfig.locale.languageCode == english.languageCode
             ? "$themeString'"
             : themeString),
         onConfirm: () async {
-          if (widget.updateBoth || EzConfig.isDark) {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(<String>{
               ...darkDesignKeys.keys.toSet(),
               darkColorSchemeImageKey,
@@ -727,7 +716,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             }
           }
 
-          if (widget.updateBoth || !EzConfig.isDark) {
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
             await EzConfig.removeKeys(<String>{
               ...lightDesignKeys.keys.toSet(),
               lightColorSchemeImageKey,
@@ -738,7 +727,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             }
           }
         },
-        resetBoth: widget.updateBoth,
         resetSkip: widget.resetSkip,
         saveSkip: widget.saveSkip,
       ),

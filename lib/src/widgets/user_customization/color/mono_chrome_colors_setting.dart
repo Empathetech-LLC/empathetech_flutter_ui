@@ -75,9 +75,6 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   /// [EzConfig.rebuildUI] passthrough
   final void Function() onComplete;
 
-  /// When false (default), updates the current [EzConfig.themeMode]
-  final bool both;
-
   /// [ThemeData.colorScheme] for [Brightness.dark]
   final ColorScheme dark;
 
@@ -89,7 +86,6 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   const EzMonoChromeColorsSetting(
     this.onComplete, {
     super.key,
-    this.both = false,
     this.dark = ezHighContrastDark,
     this.light = ezHighContrastLight,
   });
@@ -118,14 +114,13 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
               ),
         onPressed: () async {
-          if (both) {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
             await loadColorScheme(dark, Brightness.dark);
-            await loadColorScheme(light, Brightness.light);
-          } else {
-            EzConfig.isDark
-                ? await loadColorScheme(dark, Brightness.dark)
-                : await loadColorScheme(light, Brightness.light);
           }
+          if ((EzConfig.updateBoth || !EzConfig.isDark)) {
+            await loadColorScheme(light, Brightness.light);
+          }
+
           await EzConfig.rebuildUI(onComplete);
         },
         icon: Icon(
