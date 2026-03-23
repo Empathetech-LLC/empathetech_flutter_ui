@@ -817,6 +817,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Active [ThemeMode]
   static ThemeMode get themeMode => _provPoint.themeMode;
 
+  /// [EzConfig.get] alias for [updateBothKey]
+  static bool get updateBoth => get(updateBothKey);
+
   /// Whether the active [ThemeMode] is [Brightness.dark]
   static bool get isDark => _provPoint.isDark;
 
