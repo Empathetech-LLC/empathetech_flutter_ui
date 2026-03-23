@@ -57,59 +57,52 @@ class EzQuickConfig extends StatelessWidget {
     return EzElevatedIconButton(
       onPressed: () async => ezModal(
         context: context,
-        builder: (_) => EzScrollView(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Update both toggle
-            EzSwitchPair(
-              key: UniqueKey(),
-              text: EzConfig.l10n.ssUpdateBoth,
-              value: EzConfig.updateBoth,
-              onChanged: (bool? choice) async {
-                if (choice == null) return;
-                await EzConfig.setBool(updateBothKey, choice);
-              },
-            ),
-            EzConfig.spacer,
+        builder: (_) =>
+            EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          // Update both toggle
+          EzSwitchPair(
+            valueKey: updateBothKey,
+            text: EzConfig.l10n.ssUpdateBoth,
+          ),
+          EzConfig.spacer,
 
-            // Choices
-            Wrap(
-              alignment: WrapAlignment.center,
-              runAlignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: <Widget>[
-                // Big buttons
-                if (bigButtons)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzBigButtonsConfig(cleanRebuild),
-                  ),
+          // Choices
+          Wrap(
+            alignment: WrapAlignment.center,
+            runAlignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              // Big buttons
+              if (bigButtons)
+                Padding(
+                  padding: wrapPadding,
+                  child: EzBigButtonsConfig(cleanRebuild),
+                ),
 
-                // High visibility
-                if (highVisibility)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzHighVisibilityConfig(cleanRebuild),
-                  ),
+              // High visibility
+              if (highVisibility)
+                Padding(
+                  padding: wrapPadding,
+                  child: EzHighVisibilityConfig(cleanRebuild),
+                ),
 
-                // Chalkboard
-                if (chalkboard)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzChalkboardConfig(cleanRebuild),
-                  ),
+              // Chalkboard
+              if (chalkboard)
+                Padding(
+                  padding: wrapPadding,
+                  child: EzChalkboardConfig(cleanRebuild),
+                ),
 
-                // Nebula
-                if (nebula)
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzNebulaConfig(cleanRebuild),
-                  ),
-              ],
-            ),
-            EzConfig.spacer,
-          ],
-        ),
+              // Nebula
+              if (nebula)
+                Padding(
+                  padding: wrapPadding,
+                  child: EzNebulaConfig(cleanRebuild),
+                ),
+            ],
+          ),
+          EzConfig.spacer,
+        ]),
       ),
       icon: const Icon(Icons.edit),
       label: EzConfig.l10n.ssLoadPreset,

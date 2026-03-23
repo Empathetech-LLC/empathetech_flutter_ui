@@ -111,15 +111,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   @override
   Widget build(BuildContext context) {
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      EzConfig.margin,
+
       // Update both switch
       EzSwitchPair(
-        key: UniqueKey(),
+        valueKey: updateBothKey,
         text: EzConfig.l10n.ssUpdateBoth,
-        value: EzConfig.updateBoth,
-        onChanged: (bool? choice) async {
-          if (choice == null) return;
-          await EzConfig.setBool(updateBothKey, choice);
-        },
       ),
       EzConfig.spacer,
 
