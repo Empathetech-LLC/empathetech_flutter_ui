@@ -27,13 +27,9 @@ class SettingsHubScreen extends StatefulWidget {
 }
 
 class _SettingsHubScreenState extends State<SettingsHubScreen> {
-  bool updateBoth = false;
-
   void redraw() => setState(() {});
-  // TODO: figure out how to think less
-  // Each time you redraw one "screen" you're actually doing all of them)
-  // Probably keys... maybe keys and a param for redraw?
-  // maybe not though... maybe pass build as a func and only actually build when active
+
+  bool updateBoth = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +38,14 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
         EzScreen(EzSettingsHub(pages: <EzSettingsSection>[
           // Global
           EzSettingsSection(
-            title: 'Global', // TODO: l10n && check web icons
-            icon: EzConfig.onMobile
-                ? Icon(EzConfig.platform == TargetPlatform.iOS
+            title: EzConfig.l10n.gGlobal,
+            icon: config.onMobile
+                ? Icon(config.platform == TargetPlatform.iOS
                     ? Icons.phone_iphone
                     : Icons.phone_android)
                 : const Icon(Icons.computer),
-            build: const EzGlobalSettings(
+            build: EzGlobalSettings(
+              key: ValueKey<int>(config.seed),
               appName: appName,
               androidPackage: androidPackage,
             ),
@@ -56,9 +53,10 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
 
           // Color
           EzSettingsSection(
-            title: 'Color',
+            title: EzConfig.l10n.gColor,
             icon: const Icon(Icons.palette),
             build: EzColorSettings(
+              key: ValueKey<int>(config.seed),
               target: widget.cTarget,
               onUpdate: redraw,
               updateBoth: updateBoth,
@@ -69,9 +67,10 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
 
           // Design
           EzSettingsSection(
-            title: 'Design',
+            title: EzConfig.l10n.gDesign,
             icon: const Icon(Icons.design_services),
             build: EzDesignSettings(
+              key: ValueKey<int>(config.seed),
               onUpdate: () => redraw,
               updateBoth: updateBoth,
               appName: appName,
@@ -81,9 +80,10 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
 
           // Layout
           EzSettingsSection(
-            title: 'Layout',
+            title: EzConfig.l10n.gLayout,
             icon: const Icon(Icons.grid_3x3),
             build: EzLayoutSettings(
+              key: ValueKey<int>(config.seed),
               onUpdate: redraw,
               updateBoth: updateBoth,
               appName: appName,
@@ -93,9 +93,10 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
 
           // Text
           EzSettingsSection(
-            title: 'Text',
+            title: EzConfig.l10n.gText,
             icon: const Icon(Icons.text_format),
             build: EzTextSettings(
+              key: ValueKey<int>(config.seed),
               target: widget.tTarget,
               onUpdate: redraw,
               updateBoth: updateBoth,
@@ -104,7 +105,7 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
             ),
           ),
         ])),
-        title: config.l10n.ssPageTitle,
+        title: config.l10n.gSettings,
         showSettings: false,
         fabs: <Widget>[
           // Rebuild (conditional)
