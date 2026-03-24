@@ -8,8 +8,8 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzColorSettings extends StatefulWidget {
-  /// Optional starting [EzCSType] target
-  final EzCSType? target;
+  /// Optional starting target
+  final bool? advanced;
 
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
@@ -64,7 +64,7 @@ class EzColorSettings extends StatefulWidget {
   const EzColorSettings({
     // Shared
     super.key,
-    this.target,
+    this.advanced,
     required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
     this.resetExtraDark,
@@ -107,10 +107,11 @@ class EzColorSettings extends StatefulWidget {
 class _EzColorSettingsState extends State<EzColorSettings> {
   // Define the build data //
 
-  late EzCSType currentTab = widget.target ??
-      (EzConfig.get(advancedColorsKey) == true
+  late EzCSType currentTab = (widget.advanced == null)
+      ? (EzConfig.get(advancedColorsKey) == true
           ? EzCSType.advanced
-          : EzCSType.quick);
+          : EzCSType.quick)
+      : (widget.advanced! ? EzCSType.advanced : EzCSType.quick);
 
   // Define custom functions //
 

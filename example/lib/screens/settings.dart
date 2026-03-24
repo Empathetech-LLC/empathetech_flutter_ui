@@ -11,82 +11,83 @@ import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SettingsHubScreen extends StatelessWidget {
-  /// Auto-navigate to quick/advanced
-  final EzCSType? cTarget;
+  /// [EzSettingsHub.target] passthrough
+  final int? target;
 
-  /// Auto-navigate to quick/advanced
-  final EzTSType? tTarget;
+  /// [EzColorSettings.advanced] and/or [EzTextSettings.advanced] passthrough
+  final bool? advanced;
 
-  SettingsHubScreen({
-    this.cTarget,
-    this.tTarget,
-  }) : super(key: ValueKey<int>(EzConfig.seed));
+  SettingsHubScreen({this.target, this.advanced})
+      : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) {
     return Consumer<EzConfigProvider>(
       builder: (_, EzConfigProvider config, __) => OpenUIScaffold(
-        EzScreen(EzSettingsHub(pages: <EzSettingsSection>[
-          // Global
-          EzSettingsSection(
-            title: EzConfig.l10n.gGlobal,
-            icon: config.onMobile
-                ? Icon(config.platform == TargetPlatform.iOS
-                    ? Icons.phone_iphone
-                    : Icons.phone_android)
-                : const Icon(Icons.computer),
-            build: const EzGlobalSettings(
-              appName: appName,
-              androidPackage: androidPackage,
+        EzScreen(EzSettingsHub(
+          pages: <EzSettingsSection>[
+            // Global
+            EzSettingsSection(
+              title: EzConfig.l10n.gGlobal,
+              icon: config.onMobile
+                  ? Icon(config.platform == TargetPlatform.iOS
+                      ? Icons.phone_iphone
+                      : Icons.phone_android)
+                  : const Icon(Icons.computer),
+              build: const EzGlobalSettings(
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
             ),
-          ),
 
-          // Color
-          EzSettingsSection(
-            title: EzConfig.l10n.gColor,
-            icon: const Icon(Icons.palette),
-            build: EzColorSettings(
-              target: cTarget,
-              onUpdate: doNothing,
-              appName: appName,
-              androidPackage: androidPackage,
+            // Color
+            EzSettingsSection(
+              title: EzConfig.l10n.gColor,
+              icon: const Icon(Icons.palette),
+              build: EzColorSettings(
+                advanced: advanced,
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
             ),
-          ),
 
-          // Design
-          EzSettingsSection(
-            title: EzConfig.l10n.gDesign,
-            icon: const Icon(Icons.design_services),
-            build: const EzDesignSettings(
-              onUpdate: doNothing,
-              appName: appName,
-              androidPackage: androidPackage,
+            // Design
+            EzSettingsSection(
+              title: EzConfig.l10n.gDesign,
+              icon: const Icon(Icons.design_services),
+              build: const EzDesignSettings(
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
             ),
-          ),
 
-          // Layout
-          EzSettingsSection(
-            title: EzConfig.l10n.gLayout,
-            icon: const Icon(Icons.grid_3x3),
-            build: const EzLayoutSettings(
-              onUpdate: doNothing,
-              appName: appName,
-              androidPackage: androidPackage,
+            // Layout
+            EzSettingsSection(
+              title: EzConfig.l10n.gLayout,
+              icon: const Icon(Icons.grid_3x3),
+              build: const EzLayoutSettings(
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
             ),
-          ),
 
-          // Text
-          EzSettingsSection(
-            title: EzConfig.l10n.gText,
-            icon: const Icon(Icons.text_format),
-            build: EzTextSettings(
-              target: tTarget,
-              onUpdate: doNothing,
-              appName: appName,
-              androidPackage: androidPackage,
+            // Text
+            EzSettingsSection(
+              title: EzConfig.l10n.gText,
+              icon: const Icon(Icons.text_format),
+              build: EzTextSettings(
+                advanced: advanced,
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
             ),
-          ),
-        ])),
+          ],
+          target: target,
+        )),
         title: config.l10n.gSettings,
         showSettings: false,
         fabs: <Widget>[

@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EzTextSettings extends StatelessWidget {
-  /// Optional starting [EzTSType] target
-  final EzTSType? target;
+  /// Optional starting target
+  final bool? advanced;
 
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
@@ -72,7 +72,7 @@ class EzTextSettings extends StatelessWidget {
   const EzTextSettings({
     // Shared
     super.key,
-    this.target,
+    this.advanced,
     required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
     this.androidPackage,
@@ -117,7 +117,7 @@ class EzTextSettings extends StatelessWidget {
         ],
         child: _TextSettings(
           // Shared
-          target: target,
+          advanced: advanced,
           onUpdate: onUpdate,
 
           resetSpacer: resetSpacer,
@@ -144,7 +144,7 @@ class EzTextSettings extends StatelessWidget {
 
 class _TextSettings extends StatefulWidget {
   // Shared
-  final EzTSType? target;
+  final bool? advanced;
   final void Function() onUpdate;
 
   final Widget resetSpacer;
@@ -167,7 +167,7 @@ class _TextSettings extends StatefulWidget {
   final bool showSpacing;
 
   const _TextSettings({
-    required this.target,
+    required this.advanced,
     required this.onUpdate,
     required this.resetSpacer,
     required this.androidPackage,
@@ -203,10 +203,11 @@ class _TextSettingsState extends State<_TextSettings> {
   late final EzLabelStyleProvider labelProvider =
       Provider.of<EzLabelStyleProvider>(context);
 
-  late EzTSType currentTab = widget.target ??
-      (EzConfig.get(advancedTextKey) == true
+  late EzTSType currentTab = (widget.advanced == null)
+      ? (EzConfig.get(advancedTextKey) == true
           ? EzTSType.advanced
-          : EzTSType.quick);
+          : EzTSType.quick)
+      : (widget.advanced! ? EzTSType.advanced : EzTSType.quick);
 
   void redraw() {
     widget.onUpdate();
