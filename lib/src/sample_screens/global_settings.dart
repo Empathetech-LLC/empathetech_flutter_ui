@@ -56,7 +56,7 @@ class EzGlobalSettings extends StatefulWidget {
     this.inDistress = const <String>{'US'},
     this.additionalSettings,
     required this.appName,
-    required this.androidPackage,
+    this.androidPackage,
     this.saveSkip,
     this.quickConfigSpacer = const EzSeparator(),
     this.randomSpacer = const EzSpacer(),
