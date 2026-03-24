@@ -207,8 +207,8 @@
   "dsPill": "Pilule",
   "dsRectangle": "Rectangle",
   "dsRoundRectangle": "Rectangle arrondi",
-  "dsLeftTrapezoid": "Trapèze gauche",
-  "dsRightTrapezoid": "Trapèze droit",
+  "dsLeftGram": "Parallèle gauche",
+  "dsRightGram": "Parallèle droit",
   "dsGem": "Gemme",
   "dsJewel": "Joyau",
 

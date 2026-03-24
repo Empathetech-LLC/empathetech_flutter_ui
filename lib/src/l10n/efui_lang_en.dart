@@ -510,10 +510,10 @@ class EFUILangEn extends EFUILang {
   String get dsRoundRectangle => 'Rounded rectangle';
 
   @override
-  String get dsLeftTrapezoid => 'Left trapezoid';
+  String get dsLeftGram => 'Left parallel';
 
   @override
-  String get dsRightTrapezoid => 'Right trapezoid';
+  String get dsRightGram => 'Right parallel';
 
   @override
   String get dsGem => 'Gem';
@@ -1254,10 +1254,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsRoundRectangle => 'Rounded rectangle';
 
   @override
-  String get dsLeftTrapezoid => 'Left trapezoid';
+  String get dsLeftGram => 'Left parallel';
 
   @override
-  String get dsRightTrapezoid => 'Right trapezoid';
+  String get dsRightGram => 'Right parallel';
 
   @override
   String get dsGem => 'Gem';

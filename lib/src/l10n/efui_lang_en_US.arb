@@ -206,8 +206,8 @@
   "dsPill": "Pill",
   "dsRectangle": "Rectangle",
   "dsRoundRectangle": "Rounded rectangle",
-  "dsLeftTrapezoid": "Left trapezoid",
-  "dsRightTrapezoid": "Right trapezoid",
+  "dsLeftGram": "Left parallel",
+  "dsRightGram": "Right parallel",
   "dsGem": "Gem",
   "dsJewel": "Jewel",
 

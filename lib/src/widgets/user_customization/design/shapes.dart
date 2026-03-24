@@ -7,7 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// For [EzButtonShape.leftZoid] && [EzButtonShape.rightZoid]
+/// For [EzButtonShape.leftGram] && [EzButtonShape.rightGram]
 class ParallelogramBorder extends OutlinedBorder {
   final bool lefty;
   final double slope;
@@ -15,7 +15,7 @@ class ParallelogramBorder extends OutlinedBorder {
   const ParallelogramBorder({
     super.side,
     required this.lefty,
-    this.slope = zoidSlope,
+    this.slope = gramSlope,
   });
 
   @override

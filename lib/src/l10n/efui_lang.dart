@@ -1047,17 +1047,17 @@ abstract class EFUILang {
   /// **'Rounded rectangle'**
   String get dsRoundRectangle;
 
-  /// No description provided for @dsLeftTrapezoid.
+  /// No description provided for @dsLeftGram.
   ///
   /// In en, this message translates to:
-  /// **'Left trapezoid'**
-  String get dsLeftTrapezoid;
+  /// **'Left parallel'**
+  String get dsLeftGram;
 
-  /// No description provided for @dsRightTrapezoid.
+  /// No description provided for @dsRightGram.
   ///
   /// In en, this message translates to:
-  /// **'Right trapezoid'**
-  String get dsRightTrapezoid;
+  /// **'Right parallel'**
+  String get dsRightGram;
 
   /// No description provided for @dsGem.
   ///

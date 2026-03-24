@@ -512,10 +512,10 @@ class EFUILangFr extends EFUILang {
   String get dsRoundRectangle => 'Rectangle arrondi';
 
   @override
-  String get dsLeftTrapezoid => 'Trapèze gauche';
+  String get dsLeftGram => 'Parallèle gauche';
 
   @override
-  String get dsRightTrapezoid => 'Trapèze droit';
+  String get dsRightGram => 'Parallèle droit';
 
   @override
   String get dsGem => 'Gemme';

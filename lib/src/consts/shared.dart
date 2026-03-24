@@ -76,6 +76,9 @@ const double focusOpacity = 0.125;
 /// 16.0
 const double gemSlope = 16.0;
 
+/// 12.0
+const double gramSlope = 12.0;
+
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';
 
@@ -94,6 +97,3 @@ const double selectionOpacity = 0.25;
 /// Shadow opacity should be "faster" than surface
 /// 1:1 looks foggy
 const double shadowMod = 0.333;
-
-/// 12.0
-const double zoidSlope = 12.0;

@@ -31,8 +31,8 @@ enum EzButtonShape {
   pill,
   rect,
   roundRect,
-  leftZoid,
-  rightZoid,
+  leftGram,
+  rightGram,
   gem,
   jewel,
 }
@@ -40,8 +40,8 @@ enum EzButtonShape {
 const String _pill = 'pill';
 const String _rect = 'rect';
 const String _roundRect = 'roundRect';
-const String _leftZoid = 'leftZoid';
-const String _rightZoid = 'rightZoid';
+const String _leftGram = 'leftGram';
+const String _rightGram = 'rightGram';
 const String _gem = 'gem';
 const String _jewel = 'jewel';
 
@@ -60,10 +60,10 @@ extension EBSConfig on EzButtonShape {
       case EzButtonShape.roundRect:
         return const RoundedRectangleBorder(borderRadius: ezRoundEdge);
 
-      case EzButtonShape.leftZoid:
+      case EzButtonShape.leftGram:
         return const ParallelogramBorder(lefty: true);
 
-      case EzButtonShape.rightZoid:
+      case EzButtonShape.rightGram:
         return const ParallelogramBorder(lefty: false);
 
       case EzButtonShape.gem:
@@ -84,10 +84,10 @@ extension EBSConfig on EzButtonShape {
         return _rect;
       case EzButtonShape.roundRect:
         return _roundRect;
-      case EzButtonShape.leftZoid:
-        return _leftZoid;
-      case EzButtonShape.rightZoid:
-        return _rightZoid;
+      case EzButtonShape.leftGram:
+        return _leftGram;
+      case EzButtonShape.rightGram:
+        return _rightGram;
       case EzButtonShape.gem:
         return _gem;
       case EzButtonShape.jewel:
@@ -102,10 +102,10 @@ extension EBSConfig on EzButtonShape {
         return EzButtonShape.rect;
       case _roundRect:
         return EzButtonShape.roundRect;
-      case _leftZoid:
-        return EzButtonShape.leftZoid;
-      case _rightZoid:
-        return EzButtonShape.rightZoid;
+      case _leftGram:
+        return EzButtonShape.leftGram;
+      case _rightGram:
+        return EzButtonShape.rightGram;
       case _gem:
         return EzButtonShape.gem;
       case _jewel:
@@ -123,10 +123,10 @@ extension EBSConfig on EzButtonShape {
         return EzConfig.l10n.dsRectangle;
       case EzButtonShape.roundRect:
         return EzConfig.l10n.dsRoundRectangle;
-      case EzButtonShape.leftZoid:
-        return EzConfig.l10n.dsLeftTrapezoid;
-      case EzButtonShape.rightZoid:
-        return EzConfig.l10n.dsRightTrapezoid;
+      case EzButtonShape.leftGram:
+        return EzConfig.l10n.dsLeftGram;
+      case EzButtonShape.rightGram:
+        return EzConfig.l10n.dsRightGram;
       case EzButtonShape.gem:
         return EzConfig.l10n.dsGem;
       case EzButtonShape.jewel:
