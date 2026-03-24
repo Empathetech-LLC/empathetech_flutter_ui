@@ -60,4 +60,8 @@ flutter:
 
   assets:
     - assets/
+    - assets/edo-clker.svg
+    - assets/fruity-stein-egil-liland.jpg
     - assets/nebula-jeremy-müller.jpg
+    - assets/whacky-kelly.gif
+    - assets/wall-holes-carl-wyatt.jpg

@@ -9,27 +9,73 @@ import 'package:flutter/material.dart';
 
 // For config //
 
+/// assets/edo-clker.svg
+/// https://pixabay.com/users/clker-free-vector-images-3736/
+const String edoPath = 'assets/edo-clker.svg';
+
+/// assets/fruity-stein-egil-liland.jpg
+/// https://www.pexels.com/@therato/
+const String fruityPath = 'assets/fruity-stein-egil-liland.jpg';
+
 /// assets/nebula-jeremy-müller.jpg
 /// https://www.pexels.com/@jmueller/
 const String nebulaPath = 'assets/nebula-jeremy-müller.jpg';
 
-/// [nebulaPath]
-const Set<String> efuiAssetPaths = <String>{nebulaPath};
+/// assets/whacky-kelly.gif
+/// https://www.pexels.com/@kelly/
+const String whackyPath = 'assets/whacky-kelly.gif';
 
-/// [nebulaPath]
+/// assets/wall-holes-carl-wyatt.jpg
+/// https://www.pexels.com/@carl-wyatt-654792/
+const String wallHolesPath = 'assets/wall-holes-carl-wyatt.jpg';
+
+/// [edoPath], [fruityPath], [nebulaPath], [whackyPath], [wallHolesPath]
+const Set<String> efuiAssetPaths = <String>{
+  edoPath,
+  fruityPath,
+  nebulaPath,
+  whackyPath,
+  wallHolesPath,
+};
+
+/// [edoPath], [fruityPath], [nebulaPath], [whackyPath], [wallHolesPath]
 const Map<String, String> efuiAssetCredits = <String, String>{
+  edoPath: 'https://pixabay.com/users/clker-free-vector-images-3736/',
+  fruityPath: 'https://www.pexels.com/@therato/',
   nebulaPath: 'https://www.pexels.com/@jmueller/',
+  whackyPath: 'https://www.pexels.com/@kelly/',
+  wallHolesPath: 'https://www.pexels.com/@carl-wyatt-654792/',
 };
 
 // For use //
+
+/// [AssetImage] for [edoPath]
+const AssetImage edoAsset =
+    AssetImage(edoPath, package: 'empathetech_flutter_ui');
+
+/// [AssetImage] for [fruityPath]
+const AssetImage fruityAsset =
+    AssetImage(fruityPath, package: 'empathetech_flutter_ui');
 
 /// [AssetImage] for [nebulaPath]
 const AssetImage nebulaAsset =
     AssetImage(nebulaPath, package: 'empathetech_flutter_ui');
 
+/// [AssetImage] for [whackyPath]
+const AssetImage whackyAsset =
+    AssetImage(whackyPath, package: 'empathetech_flutter_ui');
+
+/// [AssetImage] for [wallHolesPath]
+const AssetImage wallHolesAsset =
+    AssetImage(wallHolesPath, package: 'empathetech_flutter_ui');
+
 /// [nebulaPath]
 const Map<String, AssetImage> efuiImageLookup = <String, AssetImage>{
+  edoPath: edoAsset,
+  fruityPath: fruityAsset,
   nebulaPath: nebulaAsset,
+  whackyPath: whackyAsset,
+  wallHolesPath: wallHolesAsset,
 };
 
 //* BTS *//
