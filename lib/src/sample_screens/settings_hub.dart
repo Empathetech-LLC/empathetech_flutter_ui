@@ -12,8 +12,8 @@ class EzSettingsHub extends StatefulWidget {
   final List<EzSettingsSection> pages;
 
   /// Optional starting point
-  /// Defaults to [pages].first
-  final EzSettingsSection? target;
+  /// Defaults to 0/first
+  final int? target;
 
   /// Empathetech settings landing page
   const EzSettingsHub({super.key, required this.pages, this.target});
@@ -23,7 +23,7 @@ class EzSettingsHub extends StatefulWidget {
 }
 
 class _EzSettingsHubState extends State<EzSettingsHub> {
-  late EzSettingsSection curr = widget.target ?? widget.pages.first;
+  late EzSettingsSection curr = widget.pages[widget.target ?? 0];
 
   @override
   Widget build(BuildContext context) {
