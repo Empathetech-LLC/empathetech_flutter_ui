@@ -16,8 +16,6 @@ class EzBigButtonsConfig extends StatelessWidget {
   /// Slight bump to all layout values, for easier tapping
   const EzBigButtonsConfig(this.onComplete, {super.key});
 
-  /// null updates both themes
-  /// Quantum computing
   static Future<void> onPressed() async {
     if (EzConfig.updateBoth || EzConfig.isDark) {
       // Update layout
