@@ -125,6 +125,17 @@ export 'src/widgets/user_customization/layout/margin.dart';
 export 'src/widgets/user_customization/layout/padding.dart';
 export 'src/widgets/user_customization/layout/spacing.dart';
 
+// Presets
+export 'src/widgets/user_customization/presets/big_buttons.dart';
+export 'src/widgets/user_customization/presets/chalkboard.dart';
+export 'src/widgets/user_customization/presets/edo.dart';
+export 'src/widgets/user_customization/presets/fruity.dart';
+export 'src/widgets/user_customization/presets/high_visibility.dart';
+export 'src/widgets/user_customization/presets/nebula.dart';
+export 'src/widgets/user_customization/presets/quick_config.dart';
+export 'src/widgets/user_customization/presets/wall_holes.dart';
+export 'src/widgets/user_customization/presets/whacky.dart';
+
 // Text
 export 'src/widgets/user_customization/text/bold_setting.dart';
 export 'src/widgets/user_customization/text/double_batch_setting.dart';
@@ -140,7 +151,6 @@ export 'src/widgets/user_customization/text/underline_setting.dart';
 // Global
 export 'src/widgets/user_customization/dominant_hand_switch.dart';
 export 'src/widgets/user_customization/locale_setting.dart';
-export 'src/widgets/user_customization/quick_config.dart';
 export 'src/widgets/user_customization/random_button.dart';
 export 'src/widgets/user_customization/reset_button.dart';
 export 'src/widgets/user_customization/theme_coin.dart';
