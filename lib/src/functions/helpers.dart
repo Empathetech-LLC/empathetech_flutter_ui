@@ -105,11 +105,13 @@ bool deniedPermCheck(PermissionStatus? status) {
 
 /// [EFUILang.gBothThemes], [EFUILang.gDarkTheme], or [EFUILang.gLightTheme]
 /// Based on [EzConfig.updateBoth] && [EzConfig.isDark]
-String ezThemeString() => (EzConfig.updateBoth
-        ? EzConfig.l10n.gBothThemes
-        : EzConfig.isDark
+String ezThemeString(bool includeBoth) => ((includeBoth && EzConfig.updateBoth)
+        ? (EzConfig.locale.languageCode == english.languageCode
+            ? "${EzConfig.l10n.gBothThemes}'"
+            : EzConfig.l10n.gBothThemes)
+        : (EzConfig.isDark
             ? EzConfig.l10n.gDarkTheme
-            : EzConfig.l10n.gLightTheme)
+            : EzConfig.l10n.gLightTheme))
     .toLowerCase();
 
 /// More readable than...
