@@ -43,6 +43,10 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
 
+  /// [EzAlertDialog.title] that shows on click
+  /// Defaults to [dialogTitle]
+  final String Function()? dynamicTitle;
+
   /// [EzConfig.reset] skip passthrough
   /// Moot if [onConfirm] is provided
   final Set<String>? resetSkip;
@@ -73,6 +77,7 @@ class EzResetButton extends StatelessWidget {
     this.saveSkip,
     this.dialogContent,
     this.dialogTitle,
+    this.dynamicTitle,
     this.resetSkip,
     this.storageOnly = false,
     this.onConfirm,
@@ -90,7 +95,7 @@ class EzResetButton extends StatelessWidget {
           context: context,
           builder: (BuildContext dContext) => EzAlertDialog(
             title: Text(
-              dialogTitle ?? EzConfig.l10n.ssResetAll,
+              dynamicTitle?.call() ?? dialogTitle ?? EzConfig.l10n.ssResetAll,
               textAlign: TextAlign.center,
             ),
             content: dialogContent ??
