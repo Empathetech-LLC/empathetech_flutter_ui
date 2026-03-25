@@ -165,6 +165,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
       // Local reset all
       widget.resetSpacer,
       EzResetButton(
+        all: false,
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,

@@ -597,6 +597,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       // Reset all
       widget.resetSpacer,
       EzResetButton(
+        all: false,
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
@@ -1411,6 +1412,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       // Reset all
       widget.resetSpacer,
       EzResetButton(
+        all: false,
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,

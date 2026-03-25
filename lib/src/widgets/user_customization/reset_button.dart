@@ -22,6 +22,10 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
+  /// Set to false for a 'Reset' [ElevatedButton.icon] label rather than 'Reset all'
+  /// moot if [label] is provided
+  final bool all;
+
   /// [ezRichUndoWarning] passthrough
   final String appName;
 
@@ -63,6 +67,7 @@ class EzResetButton extends StatelessWidget {
     this.justDraw = false,
     this.style,
     this.label,
+    this.all = true,
     required this.appName,
     this.androidPackage,
     this.saveSkip,
@@ -124,6 +129,6 @@ class EzResetButton extends StatelessWidget {
           ),
         ),
         icon: const Icon(Icons.refresh),
-        label: label ?? EzConfig.l10n.gResetAll,
+        label: label ?? (all ? EzConfig.l10n.gResetAll : EzConfig.l10n.gReset),
       );
 }

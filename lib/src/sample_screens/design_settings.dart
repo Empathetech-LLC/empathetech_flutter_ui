@@ -685,6 +685,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       // Reset button
       widget.resetSpacer,
       EzResetButton(
+        all: false,
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
