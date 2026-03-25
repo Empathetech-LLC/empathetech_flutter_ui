@@ -212,7 +212,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       ),
 
       // Page transition
-      // TODO: semantics
+      // TODO: Verify semantics
       if ((widget.includePageTransitions == null)
           ? !kIsWeb
           : widget.includePageTransitions!) ...<Widget>[
@@ -689,11 +689,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle:
-            EzConfig.l10n.dsReset(EzConfig.updateBoth && // TODO: check this
-                    EzConfig.locale.languageCode == english.languageCode
-                ? "${ezThemeString()}'"
-                : ezThemeString()),
+        dynamicTitle: () => EzConfig.l10n.dsReset(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(<String>{
