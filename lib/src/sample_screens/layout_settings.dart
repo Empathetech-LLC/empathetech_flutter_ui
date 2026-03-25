@@ -169,10 +169,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.lsReset(EzConfig.updateBoth &&
-                EzConfig.locale.languageCode == english.languageCode
-            ? "${ezThemeString()}'"
-            : ezThemeString()),
+        dynamicTitle: () => EzConfig.l10n.lsReset(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
