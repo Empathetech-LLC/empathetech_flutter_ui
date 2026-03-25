@@ -17,16 +17,37 @@ class EzThemeCoin extends StatefulWidget {
 
 class _EzThemeCoinState extends State<EzThemeCoin> {
   bool both = EzConfig.updateBoth;
-  // TODO: tooltip && semantics
 
   @override
-  Widget build(BuildContext context) => EzIconButton(
-        icon: Icon(both
-            ? Icons.contrast
-            : (EzConfig.isDark ? Icons.dark_mode : Icons.light_mode)),
-        onPressed: () async {
-          await EzConfig.setBool(updateBothKey, !both);
-          setState(() => both = !both);
-        },
-      );
+  Widget build(BuildContext context) {
+    final IconData icon = both
+        ? Icons.contrast
+        : (EzConfig.isDark ? Icons.dark_mode : Icons.light_mode);
+
+    final String editing = EzConfig.l10n.gEditing +
+        (both
+            ? EzConfig.l10n.gBothThemes
+            : (EzConfig.isDark
+                ? EzConfig.l10n.gDarkTheme
+                : EzConfig.l10n.gLightTheme));
+    final String reverse = both
+        ? (EzConfig.isDark
+            ? 'The ${EzConfig.l10n.gDarkTheme.toLowerCase()}'
+            : 'The ${EzConfig.l10n.gLightTheme.toLowerCase()}')
+        : EzConfig.l10n.gBothThemes;
+
+    // TODO: verify semantics
+    return EzIconButton(
+      icon: Icon(
+        icon,
+        semanticLabel:
+            '$editing. Activate to edit $reverse.', // TODO: l10n (above too)
+      ),
+      onPressed: () async {
+        await EzConfig.setBool(updateBothKey, !both);
+        setState(() => both = !both);
+      },
+      tooltip: editing,
+    );
+  }
 }
