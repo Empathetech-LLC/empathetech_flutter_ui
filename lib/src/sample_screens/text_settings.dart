@@ -601,10 +601,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.tsReset(EzConfig.updateBoth &&
-                EzConfig.locale.languageCode == english.languageCode
-            ? "${ezThemeString()}'"
-            : ezThemeString()),
+        dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             EzConfig.removeKeys(darkTextKeys.keys.toSet());
@@ -1416,9 +1413,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        dialogTitle: EzConfig.l10n.tsReset(EzConfig.isDark
-            ? EzConfig.l10n.gDarkTheme
-            : EzConfig.l10n.gLightTheme),
+        dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(false)),
         onConfirm: () async {
           if (EzConfig.isDark) {
             EzConfig.removeKeys(darkTextKeys.keys.toSet());
