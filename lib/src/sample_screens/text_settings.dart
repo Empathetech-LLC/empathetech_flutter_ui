@@ -1416,8 +1416,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
-        // TODO: l10n (think it already exists, just done for the day atm)
-        dialogTitle: EzConfig.l10n.tsReset(EzConfig.isDark ? 'dark' : 'light'),
+        dialogTitle: EzConfig.l10n.tsReset(EzConfig.isDark
+            ? EzConfig.l10n.gDarkTheme
+            : EzConfig.l10n.gLightTheme),
         onConfirm: () async {
           if (EzConfig.isDark) {
             EzConfig.removeKeys(darkTextKeys.keys.toSet());
