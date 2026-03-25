@@ -17,6 +17,12 @@ class EzColorSettings extends StatefulWidget {
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
+  /// [EzResetButton.appName] passthrough
+  final String appName;
+
+  /// [EzResetButton.androidPackage] passthrough
+  final String? androidPackage;
+
   /// Additional [EzConfig] keys for the local [EzResetButton]
   /// [darkColorKeys] are included by default
   final Set<String>? resetExtraDark;
@@ -25,12 +31,6 @@ class EzColorSettings extends StatefulWidget {
   /// [lightColorKeys] are included by default
   final Set<String>? resetExtraLight;
 
-  /// [EzResetButton.appName] passthrough
-  final String appName;
-
-  /// [EzResetButton.androidPackage] passthrough
-  final String? androidPackage;
-
   /// [EzResetButton.resetSkip] passthrough
   /// Shared for both themes
   final Set<String>? resetSkip;
@@ -38,10 +38,6 @@ class EzColorSettings extends StatefulWidget {
   /// [EzResetButton.saveSkip] passthrough
   /// Shared for both themes
   final Set<String>? saveSkip;
-
-  /// Defaults to [EzSeparator]
-  /// Shared for both themes
-  final Widget trail;
 
   /// Optional additional quick settings
   /// Will appear first, above the monochrome
@@ -67,13 +63,12 @@ class EzColorSettings extends StatefulWidget {
     this.advanced,
     required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
-    this.resetExtraDark,
-    this.resetExtraLight,
     required this.appName,
     this.androidPackage,
+    this.resetExtraDark,
+    this.resetExtraLight,
     this.resetSkip,
     this.saveSkip,
-    this.trail = const EzSeparator(),
 
     // Quick
     this.quickHeader,
@@ -113,17 +108,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           : EzCSType.quick)
       : (widget.advanced! ? EzCSType.advanced : EzCSType.quick);
 
-  // Define custom functions //
-
-  String resetString() => (EzConfig.updateBoth
-          ? EzConfig.locale.languageCode == english.languageCode
-              ? "${EzConfig.l10n.gBothThemes}'"
-              : EzConfig.l10n.gBothThemes
-          : EzConfig.isDark
-              ? EzConfig.l10n.gDarkTheme
-              : EzConfig.l10n.gLightTheme)
-      .toLowerCase();
-
   // Set the page title //
 
   @override
@@ -132,19 +116,14 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     ezWindowNamer(EzConfig.l10n.csPageTitle);
   }
 
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
-
-    final List<String> defaultList =
-        EzConfig.isDark ? widget.darkStarterSet : widget.lightStarterSet;
-
     final String userColorsKey =
         EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
-    List<String> currList =
-        EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
-
-    // Return the build //
+    final List<String> defaultList =
+        EzConfig.isDark ? widget.darkStarterSet : widget.lightStarterSet;
 
     return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
       EzConfig.margin,
@@ -196,69 +175,60 @@ class _EzColorSettingsState extends State<EzColorSettings> {
       EzConfig.spacer,
 
       // Core settings
-      if (currentTab == EzCSType.quick)
-        _QuickColorSettings(
-          quickHeader: widget.quickHeader,
-          quickFooter: widget.quickFooter,
-          onUpdate: widget.onUpdate,
-        )
-      else
-        _AdvancedColorSettings(
-          currList: currList,
-          defaultList: defaultList,
-          onUpdate: widget.onUpdate,
-        ),
-
-      // Reset button
-      // TODO: make two separate reset buttons (like text)
-      widget.resetSpacer,
-      EzResetButton(
-        () {
-          widget.onUpdate();
-          setState(() => currList = List<String>.from(defaultList));
-        },
-        androidPackage: widget.androidPackage,
-        appName: widget.appName,
-        dialogTitle: EzConfig.l10n.csReset(resetString),
-        resetSkip: widget.resetSkip,
-        onConfirm: () async {
-          if (EzConfig.updateBoth) {
-            await EzConfig.removeKeys(allColorKeys.keys.toSet());
-            if (widget.resetExtraDark != null) {
-              await EzConfig.removeKeys(widget.resetExtraDark!);
-            }
-            if (widget.resetExtraLight != null) {
-              await EzConfig.removeKeys(widget.resetExtraLight!);
-            }
-          } else {
-            if (EzConfig.isDark) {
-              await EzConfig.removeKeys(darkColorKeys.keys.toSet());
-              if (widget.resetExtraDark != null) {
-                await EzConfig.removeKeys(widget.resetExtraDark!);
-              }
-            } else {
-              await EzConfig.removeKeys(lightColorKeys.keys.toSet());
-              if (widget.resetExtraLight != null) {
-                await EzConfig.removeKeys(widget.resetExtraLight!);
-              }
-            }
-          }
-        },
-      ),
-      widget.trail,
+      (currentTab == EzCSType.quick)
+          ? _QuickColorSettings(
+              onUpdate: widget.onUpdate,
+              quickHeader: widget.quickHeader,
+              quickFooter: widget.quickFooter,
+              resetSpacer: widget.resetSpacer,
+              appName: widget.appName,
+              androidPackage: widget.androidPackage,
+              resetExtraDark: widget.resetExtraDark,
+              resetExtraLight: widget.resetExtraLight,
+              resetSkip: widget.resetSkip,
+              saveSkip: widget.saveSkip,
+            )
+          : _AdvancedColorSettings(
+              onUpdate: widget.onUpdate,
+              userColorsKey: userColorsKey,
+              defaultList: defaultList,
+              currList:
+                  EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
+              resetSpacer: widget.resetSpacer,
+              appName: widget.appName,
+              androidPackage: widget.androidPackage,
+              resetExtraDark: widget.resetExtraDark,
+              resetExtraLight: widget.resetExtraLight,
+              resetSkip: widget.resetSkip,
+              saveSkip: widget.saveSkip,
+            ),
     ]);
   }
 }
 
 class _QuickColorSettings extends StatefulWidget {
+  final void Function() onUpdate;
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
-  final void Function() onUpdate;
+  final Widget resetSpacer;
+  final String appName;
+  final String? androidPackage;
+  final Set<String>? resetExtraDark;
+  final Set<String>? resetExtraLight;
+  final Set<String>? resetSkip;
+  final Set<String>? saveSkip;
 
   const _QuickColorSettings({
+    required this.onUpdate,
     required this.quickHeader,
     required this.quickFooter,
-    required this.onUpdate,
+    required this.resetSpacer,
+    required this.appName,
+    required this.androidPackage,
+    required this.resetExtraDark,
+    required this.resetExtraLight,
+    required this.resetSkip,
+    required this.saveSkip,
   });
 
   @override
@@ -310,21 +280,71 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
             // Additional settings
             if (widget.quickFooter != null) ...widget.quickFooter!,
+
+            // Local reset
+            widget.resetSpacer,
+            EzResetButton(
+              all: false,
+              widget.onUpdate,
+              androidPackage: widget.androidPackage,
+              appName: widget.appName,
+              dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(true)),
+              resetSkip: widget.resetSkip,
+              onConfirm: () async {
+                if (EzConfig.updateBoth) {
+                  await EzConfig.removeKeys(allColorKeys.keys.toSet());
+                  if (widget.resetExtraDark != null) {
+                    await EzConfig.removeKeys(widget.resetExtraDark!);
+                  }
+                  if (widget.resetExtraLight != null) {
+                    await EzConfig.removeKeys(widget.resetExtraLight!);
+                  }
+                } else {
+                  if (EzConfig.isDark) {
+                    await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+                    if (widget.resetExtraDark != null) {
+                      await EzConfig.removeKeys(widget.resetExtraDark!);
+                    }
+                  } else {
+                    await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+                    if (widget.resetExtraLight != null) {
+                      await EzConfig.removeKeys(widget.resetExtraLight!);
+                    }
+                  }
+                }
+              },
+            ),
+            EzConfig.separator,
           ],
         ),
       );
 }
 
 class _AdvancedColorSettings extends StatefulWidget {
-  final List<String> defaultList;
-  final List<String> currList;
-
   final void Function() onUpdate;
+  final String userColorsKey;
+  final List<String> currList;
+  final List<String> defaultList;
+  final Widget resetSpacer;
+  final String appName;
+  final String? androidPackage;
+  final Set<String>? resetExtraDark;
+  final Set<String>? resetExtraLight;
+  final Set<String>? resetSkip;
+  final Set<String>? saveSkip;
 
   const _AdvancedColorSettings({
-    required this.defaultList,
-    required this.currList,
     required this.onUpdate,
+    required this.userColorsKey,
+    required this.currList,
+    required this.defaultList,
+    required this.resetSpacer,
+    required this.appName,
+    required this.androidPackage,
+    required this.resetExtraDark,
+    required this.resetExtraLight,
+    required this.resetSkip,
+    required this.saveSkip,
   });
 
   @override
@@ -442,9 +462,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   @override
   Widget build(BuildContext context) {
-    final String userColorsKey =
-        EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -456,7 +473,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               alignment: WrapAlignment.center,
               runAlignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
-              children: dynamicColorSettings(userColorsKey),
+              children: dynamicColorSettings(widget.userColorsKey),
             ),
           ),
           restricted: EzScrollView(
@@ -465,7 +482,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             mainAxisSize: MainAxisSize.min,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: dynamicColorSettings(userColorsKey),
+              children: dynamicColorSettings(widget.userColorsKey),
             ),
           ),
         ),
@@ -506,13 +523,38 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             );
 
             // Save changes
-            await EzConfig.setStringList(userColorsKey, widget.currList);
+            await EzConfig.setStringList(widget.userColorsKey, widget.currList);
           },
           style:
               TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.marginVal)),
           icon: const Icon(Icons.add_circle_outline),
           label: EzConfig.l10n.csAddColor,
         ),
+
+        // Local reset
+        widget.resetSpacer,
+        EzResetButton(
+          all: false,
+          widget.onUpdate,
+          androidPackage: widget.androidPackage,
+          appName: widget.appName,
+          dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(false)),
+          resetSkip: widget.resetSkip,
+          onConfirm: () async {
+            if (EzConfig.isDark) {
+              await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+              if (widget.resetExtraDark != null) {
+                await EzConfig.removeKeys(widget.resetExtraDark!);
+              }
+            } else {
+              await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+              if (widget.resetExtraLight != null) {
+                await EzConfig.removeKeys(widget.resetExtraLight!);
+              }
+            }
+          },
+        ),
+        EzConfig.separator,
       ],
     );
   }
