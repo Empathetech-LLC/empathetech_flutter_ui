@@ -357,6 +357,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
   isLeftyKey: false,
   // isDarkThemeKey: null => system
   // appLocaleKey: null => system
+  hubPositionKey: 0,
   updateBothKey: false,
 
   // Color settings //
