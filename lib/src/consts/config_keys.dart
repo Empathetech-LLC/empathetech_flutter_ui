@@ -10,13 +10,15 @@ import '../../empathetech_flutter_ui.dart';
 const String isLeftyKey = 'isLefty';
 const String isDarkThemeKey = 'isDarkTheme';
 const String appLocaleKey = 'appLocale';
+const String hubPositionKey = 'hubPosition';
 const String updateBothKey = 'updateBoth';
 
-///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey], [updateBothKey]
+///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey], [hubPositionKey], [updateBothKey]
 const Map<String, Type> allGlobalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   appLocaleKey: List<String>,
+  hubPositionKey: int,
   updateBothKey: bool,
 };
 
