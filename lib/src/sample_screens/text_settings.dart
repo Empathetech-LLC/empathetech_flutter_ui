@@ -44,9 +44,6 @@ class EzTextSettings extends StatelessWidget {
   /// Shared for both themes
   final Widget trail;
 
-  /// Whether the onSurfaceColor (quick) setting should be shown
-  final bool showOnSurface;
-
   /// Optional additional quick settings
   /// Will appear just above the text block
   /// BYO leading spacer, trailing will be [textBlockSpacer]
@@ -84,7 +81,7 @@ class EzTextSettings extends StatelessWidget {
     this.trail = const EzSeparator(),
 
     // Quick
-    this.showOnSurface = true,
+
     this.moreQuickHeaderSettings,
     this.textBlockSpacer = const EzDivider(),
     this.showOpacity = true,
@@ -130,7 +127,6 @@ class EzTextSettings extends StatelessWidget {
           trail: trail,
 
           // Quick
-          showOnSurface: showOnSurface,
           moreQuickHeaderSettings: moreQuickHeaderSettings,
           textBlockSpacer: textBlockSpacer,
           showOpacity: showOpacity,
@@ -157,7 +153,6 @@ class _TextSettings extends StatefulWidget {
   final Widget trail;
 
   // Quick
-  final bool showOnSurface;
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockSpacer;
   final bool showOpacity;
@@ -177,7 +172,6 @@ class _TextSettings extends StatefulWidget {
     required this.resetSkip,
     required this.saveSkip,
     required this.trail,
-    required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
     required this.showOpacity,
@@ -288,7 +282,6 @@ class _TextSettingsState extends State<_TextSettings> {
           // Settings config
           onUpdate: redraw,
 
-          showOnSurface: widget.showOnSurface,
           moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
           textBlockSpacer: widget.textBlockSpacer,
           showOpacity: widget.showOpacity,
@@ -339,7 +332,6 @@ class _QuickTextSettings extends StatefulWidget {
   // Settings config
   final void Function() onUpdate;
 
-  final bool showOnSurface;
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockSpacer;
   final bool showOpacity;
@@ -360,7 +352,6 @@ class _QuickTextSettings extends StatefulWidget {
     required this.bodyProvider,
     required this.labelProvider,
     required this.onUpdate,
-    required this.showOnSurface,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
     required this.showOpacity,
@@ -432,17 +423,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               labelProvider: widget.labelProvider,
             ),
           ),
-
-          // Optional onSurface Color setting
-          if (!EzConfig.updateBoth && widget.showOnSurface)
-            Padding(
-              padding: wrapPadding,
-              child: EzColorSetting(
-                configKey:
-                    EzConfig.isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
-                onUpdate: redraw,
-              ),
-            ),
 
           // Font size
           Padding(
