@@ -900,6 +900,8 @@ linter:
     prefer_single_quotes: true
     provide_deprecation_message: true
     test_types_in_equals: true
+    unawaited_futures: true
+    unnecessary_async: true
     unnecessary_late: true
     unnecessary_library_name: true
     unnecessary_new: true
