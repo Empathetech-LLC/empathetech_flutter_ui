@@ -594,20 +594,20 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
-            EzConfig.removeKeys(darkTextKeys.keys.toSet());
-            EzConfig.remove(darkOnSurfaceKey);
+            await EzConfig.removeKeys(darkTextKeys.keys.toSet());
+            await EzConfig.remove(darkOnSurfaceKey);
 
             if (widget.extraDark != null) {
-              EzConfig.removeKeys(widget.extraDark!);
+              await EzConfig.removeKeys(widget.extraDark!);
             }
           }
 
           if (EzConfig.updateBoth || !EzConfig.isDark) {
-            EzConfig.removeKeys(lightTextKeys.keys.toSet());
-            EzConfig.remove(lightOnSurfaceKey);
+            await EzConfig.removeKeys(lightTextKeys.keys.toSet());
+            await EzConfig.remove(lightOnSurfaceKey);
 
             if (widget.extraLight != null) {
-              EzConfig.removeKeys(widget.extraLight!);
+              await EzConfig.removeKeys(widget.extraLight!);
             }
           }
         },
@@ -1406,18 +1406,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(false)),
         onConfirm: () async {
           if (EzConfig.isDark) {
-            EzConfig.removeKeys(darkTextKeys.keys.toSet());
-            EzConfig.remove(darkOnSurfaceKey);
+            await EzConfig.removeKeys(darkTextKeys.keys.toSet());
+            await EzConfig.remove(darkOnSurfaceKey);
 
             if (widget.extraDark != null) {
-              EzConfig.removeKeys(widget.extraDark!);
+              await EzConfig.removeKeys(widget.extraDark!);
             }
           } else {
-            EzConfig.removeKeys(lightTextKeys.keys.toSet());
-            EzConfig.remove(lightOnSurfaceKey);
+            await EzConfig.removeKeys(lightTextKeys.keys.toSet());
+            await EzConfig.remove(lightOnSurfaceKey);
 
             if (widget.extraLight != null) {
-              EzConfig.removeKeys(widget.extraLight!);
+              await EzConfig.removeKeys(widget.extraLight!);
             }
           }
 

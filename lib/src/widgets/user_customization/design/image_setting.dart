@@ -154,7 +154,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             actions: <EzMaterialAction>[
               EzMaterialAction(
                 text: EzConfig.l10n.gYes,
-                onPressed: () => Navigator.of(dContext).pop((_) async => true),
+                onPressed: () => Navigator.of(dContext).pop((_) => true),
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.dsCrop,
@@ -162,7 +162,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.gCancel,
-                onPressed: () => Navigator.of(dContext).pop((_) async => null),
+                onPressed: () => Navigator.of(dContext).pop((_) => null),
               ),
             ],
             needsClose: false,

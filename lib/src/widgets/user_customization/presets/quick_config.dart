@@ -43,7 +43,7 @@ class EzQuickConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzElevatedIconButton(
-      onPressed: () async => ezModal(
+      onPressed: () => ezModal(
         context: context,
         builder: (_) =>
             EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[

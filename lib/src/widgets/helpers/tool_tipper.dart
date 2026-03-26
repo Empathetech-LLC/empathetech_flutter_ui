@@ -66,7 +66,7 @@ class EzToolTipper extends StatelessWidget {
             }
 
             if (context.mounted) {
-              SemanticsService.sendAnnouncement(
+              await SemanticsService.sendAnnouncement(
                 View.of(context),
                 message,
                 TextDirection.ltr,
