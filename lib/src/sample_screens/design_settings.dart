@@ -328,16 +328,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   configKey: darkBackgroundImageKey,
                   credits: widget.darkBackgroundCredits,
                   label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                  updateBrightness:
-                      EzConfig.updateBoth ? null : Brightness.dark,
                 )
               : EzImageSetting(
                   redraw,
                   configKey: lightBackgroundImageKey,
                   credits: widget.lightBackgroundCredits,
                   label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                  updateBrightness:
-                      EzConfig.updateBoth ? null : Brightness.light,
                 ),
         ),
         EzConfig.separator,
