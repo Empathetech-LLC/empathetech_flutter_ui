@@ -46,11 +46,14 @@ class EzTextSettings extends StatelessWidget {
 
   /// Optional additional quick settings
   /// Will appear just above the text block
-  /// BYO leading spacer, trailing will be [textBlockSpacer]
+  /// BYO leading spacer, trailing will be [textBlockHeader]
   final List<Widget>? moreQuickHeaderSettings;
 
-  /// Spacer above and below the text block (when [ScreenSize.medium] or smaller)
-  final Widget textBlockSpacer;
+  /// Spacer above the text block/sample
+  final Widget textBlockHeader;
+
+  /// Spacer below the text block/sample
+  final Widget textBlockFooter;
 
   /// Whether the text background opacity (quick) setting should be shown
   final bool showOpacity;
@@ -83,7 +86,8 @@ class EzTextSettings extends StatelessWidget {
     // Quick
 
     this.moreQuickHeaderSettings,
-    this.textBlockSpacer = const EzDivider(),
+    this.textBlockHeader = const EzSpacer(),
+    this.textBlockFooter = const EzDivider(),
     this.showOpacity = true,
     this.moreQuickFooterSettings,
 
@@ -128,7 +132,8 @@ class EzTextSettings extends StatelessWidget {
 
           // Quick
           moreQuickHeaderSettings: moreQuickHeaderSettings,
-          textBlockSpacer: textBlockSpacer,
+          textBlockHeader: textBlockHeader,
+          textBlockFooter: textBlockFooter,
           showOpacity: showOpacity,
           moreQuickFooterSettings: moreQuickFooterSettings,
 
@@ -154,7 +159,8 @@ class _TextSettings extends StatefulWidget {
 
   // Quick
   final List<Widget>? moreQuickHeaderSettings;
-  final Widget textBlockSpacer;
+  final Widget textBlockHeader;
+  final Widget textBlockFooter;
   final bool showOpacity;
   final List<Widget>? moreQuickFooterSettings;
 
@@ -173,7 +179,8 @@ class _TextSettings extends StatefulWidget {
     required this.saveSkip,
     required this.trail,
     required this.moreQuickHeaderSettings,
-    required this.textBlockSpacer,
+    required this.textBlockHeader,
+    required this.textBlockFooter,
     required this.showOpacity,
     required this.moreQuickFooterSettings,
     required this.showSpacing,
@@ -283,7 +290,8 @@ class _TextSettingsState extends State<_TextSettings> {
           onUpdate: redraw,
 
           moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
-          textBlockSpacer: widget.textBlockSpacer,
+          textBlockHeader: widget.textBlockHeader,
+          textBlockFooter: widget.textBlockFooter,
           showOpacity: widget.showOpacity,
           moreQuickFooterSettings: widget.moreQuickFooterSettings,
           resetSpacer: widget.resetSpacer,
@@ -333,7 +341,8 @@ class _QuickTextSettings extends StatefulWidget {
   final void Function() onUpdate;
 
   final List<Widget>? moreQuickHeaderSettings;
-  final Widget textBlockSpacer;
+  final Widget textBlockHeader;
+  final Widget textBlockFooter;
   final bool showOpacity;
   final List<Widget>? moreQuickFooterSettings;
   final Widget resetSpacer;
@@ -353,7 +362,8 @@ class _QuickTextSettings extends StatefulWidget {
     required this.labelProvider,
     required this.onUpdate,
     required this.moreQuickHeaderSettings,
-    required this.textBlockSpacer,
+    required this.textBlockHeader,
+    required this.textBlockFooter,
     required this.showOpacity,
     required this.moreQuickFooterSettings,
     required this.resetSpacer,
@@ -401,7 +411,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       left: EzConfig.spacing / 2,
       right: EzConfig.spacing / 2,
       bottom: EzConfig.spacing,
-    ); // TODO: check the recent top/bottom swap
+    );
 
     // Return the build //
 
@@ -446,7 +456,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       if (widget.moreQuickHeaderSettings != null)
         ...widget.moreQuickHeaderSettings!,
 
-      widget.textBlockSpacer,
+      widget.textBlockHeader,
       // Display preview
       EzTextBackground(
         Text(
@@ -513,7 +523,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         backgroundColor: backgroundColor,
         margin: colMargin,
       ),
-      widget.textBlockSpacer,
+      widget.textBlockFooter,
 
       // Text background opacity
       if (widget.showOpacity) ...<Widget>[
