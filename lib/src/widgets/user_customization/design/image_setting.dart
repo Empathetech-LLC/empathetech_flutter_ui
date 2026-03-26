@@ -43,11 +43,6 @@ class EzImageSetting extends StatefulWidget {
   /// null will display a choice to the user
   final bool? allowThemeUpdate;
 
-  /// null updates both theme modes
-  /// [allowThemeUpdate] takes precedence/must be true
-  /// Parameter is required to avoid accidental double updates
-  final Brightness? updateBrightness;
-
   /// Whether the [EzImageEditor] should be displayed upon successful image selection
   /// [AssetImage]s cannot be edited/will be skipped
   final bool showEditor;
@@ -71,7 +66,6 @@ class EzImageSetting extends StatefulWidget {
     this.allowClear = true,
     this.credits,
     this.allowThemeUpdate,
-    required this.updateBrightness,
     this.showEditor = true,
     this.defaultFit,
     this.showFitOption = true,
@@ -211,9 +205,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     // Update the theme (conditionally)
     if (!isInt && updateTheme) {
-      // Dark
-      if (widget.updateBrightness == null ||
-          widget.updateBrightness == Brightness.dark) {
+      if (EzConfig.updateBoth || EzConfig.isDark) {
         // If there is little/no text background opacity, set it to 50%
         // Better to have to turn it down than up, they'll be a lot of images where people suddenly won't be able to read
         final double? opacity = EzConfig.get(darkTextBackgroundOpacityKey);
@@ -239,9 +231,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
       }
 
-      // Light
-      if (widget.updateBrightness == null ||
-          widget.updateBrightness == Brightness.light) {
+      if (EzConfig.updateBoth || !EzConfig.isDark) {
         // If there is little/no text background opacity, set it to 50%
         // Better to have to turn it down than up, they'll be a lot of images where people suddenly won't be able to read
         final double? opacity = EzConfig.get(lightTextBackgroundOpacityKey);
