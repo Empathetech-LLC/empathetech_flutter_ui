@@ -143,6 +143,10 @@
   "ssHighVisibility": "Haute visibilité",
   "ssChalkboard": "Tableau noir",
   "ssNebula": "Nébuleuse",
+  "ssFruity": "Fruité",
+  "ssWallHoles": "Trous dans le mur",
+  "ssWhacky": "Foufou",
+
   "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\nContinuer ?",
   "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\nContinuer ?",
   "ssApplied": "{config} appliqué.",

@@ -361,6 +361,15 @@ class EFUILangEn extends EFUILang {
   String get ssNebula => 'Nebula';
 
   @override
+  String get ssFruity => 'Fruity';
+
+  @override
+  String get ssWallHoles => 'Wall holes';
+
+  @override
+  String get ssWhacky => 'Whacky';
+
+  @override
   String get ssDarkOnly =>
       'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?';
 
@@ -1103,6 +1112,15 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssNebula => 'Nebula';
+
+  @override
+  String get ssFruity => 'Fruity';
+
+  @override
+  String get ssWallHoles => 'Wall holes';
+
+  @override
+  String get ssWhacky => 'Whacky';
 
   @override
   String get ssDarkOnly =>

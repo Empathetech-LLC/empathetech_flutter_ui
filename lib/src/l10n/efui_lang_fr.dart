@@ -362,6 +362,15 @@ class EFUILangFr extends EFUILang {
   String get ssNebula => 'Nébuleuse';
 
   @override
+  String get ssFruity => 'Fruité';
+
+  @override
+  String get ssWallHoles => 'Trous dans le mur';
+
+  @override
+  String get ssWhacky => 'Foufou';
+
+  @override
   String get ssDarkOnly =>
       'Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\nContinuer ?';
 

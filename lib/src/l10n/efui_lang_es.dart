@@ -363,6 +363,15 @@ class EFUILangEs extends EFUILang {
   String get ssNebula => 'Nebulosa';
 
   @override
+  String get ssFruity => 'Sabroso';
+
+  @override
+  String get ssWallHoles => 'Agujeros en la pared';
+
+  @override
+  String get ssWhacky => 'Loco';
+
+  @override
   String get ssDarkOnly =>
       'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n¿Continuar?';
 
