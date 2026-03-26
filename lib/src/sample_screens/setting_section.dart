@@ -10,6 +10,9 @@ import '../../empathetech_flutter_ui.dart';
 // Shared //
 
 class EzSettingsSection {
+  /// Ordered position amongst the tabs ([ButtonSegment]s)
+  final int position;
+
   /// What to display above the [SegmentedButton] in [EzSettingsHub]
   final String title;
 
@@ -21,6 +24,7 @@ class EzSettingsSection {
 
   /// Wrapper/helper class for building [EzSettingsHub]
   const EzSettingsSection({
+    required this.position,
     required this.title,
     required this.icon,
     required this.build,
