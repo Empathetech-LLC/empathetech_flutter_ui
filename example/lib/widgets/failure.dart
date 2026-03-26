@@ -99,11 +99,11 @@ class DeleteOption extends StatelessWidget {
               dir: dir,
               onSuccess: () async {
                 await ezSnackBar(context, message: l10n.rsNextTime).closed;
-                if (context.mounted) Navigator.of(context).maybePop();
+                if (context.mounted) await Navigator.of(context).maybePop();
               },
               onFailure: (String message) async {
                 await ezSnackBar(context, message: l10n.rsAnotherOne).closed;
-                if (context.mounted) Navigator.of(context).maybePop();
+                if (context.mounted) await Navigator.of(context).maybePop();
               },
               readout: readout,
             ),

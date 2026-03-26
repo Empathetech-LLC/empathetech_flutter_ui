@@ -16,7 +16,7 @@ Future<dynamic> ezLogAlert(
   required String message,
   List<Widget>? customActions,
   bool needsClose = true,
-}) async {
+}) {
   ezLog(message);
 
   return showDialog(
