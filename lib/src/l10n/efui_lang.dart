@@ -195,6 +195,12 @@ abstract class EFUILang {
   /// **'Required'**
   String get gRequired;
 
+  /// No description provided for @gThe.
+  ///
+  /// In en, this message translates to:
+  /// **'The'**
+  String get gThe;
+
   /// No description provided for @gBack.
   ///
   /// In en, this message translates to:
@@ -308,6 +314,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Editing: '**
   String get gEditing;
+
+  /// No description provided for @gEditingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to edit'**
+  String get gEditingHint;
 
   /// No description provided for @gDarkTheme.
   ///

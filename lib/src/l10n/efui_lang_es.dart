@@ -57,6 +57,9 @@ class EFUILangEs extends EFUILang {
   String get gRequired => 'Requerido';
 
   @override
+  String get gThe => 'El';
+
+  @override
   String get gBack => 'Atrás';
 
   @override
@@ -112,6 +115,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gEditing => 'Editando: ';
+
+  @override
+  String get gEditingHint => 'Activar para editar';
 
   @override
   String get gDarkTheme => 'Tema oscuro';

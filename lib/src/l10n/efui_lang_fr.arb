@@ -20,6 +20,7 @@
   "gOptional": "optionnel",
   "gOptions": "Paramètres",
   "gRequired": "Requis",
+  "gThe": "Le",
 
   "gBack": "Retour",
   "gCancel": "Annuler",
@@ -43,6 +44,7 @@
   "gSystem": "Système",
 
   "gEditing": "Modification : ",
+  "gEditingHint": "Activer pour modifier",
   "gDarkTheme": "Thème sombre",
   "gLightTheme": "Thème clair",
   "gBothThemes": "Les deux thèmes",
