@@ -46,7 +46,7 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
             await EzConfig.setBool(updateBothKey, !both);
             setState(() => both = !both);
           },
-          tooltip: editing, // TODO: make sure this still works with exclude
+          tooltip: editing,
         ),
       ),
     );
