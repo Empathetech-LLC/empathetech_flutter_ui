@@ -58,7 +58,7 @@ class EzWallHolesConfig extends StatelessWidget {
     return EzElevatedButton(
       style: ElevatedButton.styleFrom(),
       onPressed: () async => await onPressed(context),
-      text: 'Whacky', // TODO: l10n
+      text: EzConfig.l10n.ssWhacky,
     );
   }
 }

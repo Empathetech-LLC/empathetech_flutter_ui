@@ -32,22 +32,23 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
                 : EzConfig.l10n.gLightTheme));
     final String reverse = both
         ? (EzConfig.isDark
-            ? 'The ${EzConfig.l10n.gDarkTheme.toLowerCase()}'
-            : 'The ${EzConfig.l10n.gLightTheme.toLowerCase()}')
+            ? '${EzConfig.l10n.gThe} ${EzConfig.l10n.gDarkTheme.toLowerCase()}'
+            : '${EzConfig.l10n.gThe} ${EzConfig.l10n.gLightTheme.toLowerCase()}')
         : EzConfig.l10n.gBothThemes;
 
-    // TODO: verify semantics
-    return EzIconButton(
-      icon: Icon(
-        icon,
-        semanticLabel:
-            '$editing. Activate to edit $reverse.', // TODO: l10n (above too)
+    return Semantics(
+      button: true,
+      hint: '$editing. ${EzConfig.l10n.gEditingHint} $reverse.',
+      child: ExcludeSemantics(
+        child: EzIconButton(
+          icon: Icon(icon),
+          onPressed: () async {
+            await EzConfig.setBool(updateBothKey, !both);
+            setState(() => both = !both);
+          },
+          tooltip: editing, // TODO: make sure this still works with exclude
+        ),
       ),
-      onPressed: () async {
-        await EzConfig.setBool(updateBothKey, !both);
-        setState(() => both = !both);
-      },
-      tooltip: editing,
     );
   }
 }
