@@ -820,11 +820,17 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Active [ThemeMode]
   static ThemeMode get themeMode => _provPoint.themeMode;
 
-  /// [EzConfig.get] alias for [updateBothKey]
-  static bool get updateBoth => get(updateBothKey);
-
   /// Whether the active [ThemeMode] is [Brightness.dark]
   static bool get isDark => _provPoint.isDark;
+
+  /// [EzConfig.get] alias for [hubPositionKey]
+  static int get hubPos => get(hubPositionKey);
+
+  /// [EzConfig.setInt] alias for [hubPositionKey]
+  static Future<bool> setHubPos(int pos) => setInt(hubPositionKey, pos);
+
+  /// [EzConfig.get] alias for [updateBothKey]
+  static bool get updateBoth => get(updateBothKey);
 
   /// Current, [ThemeMode] aware, [ColorScheme]
   static ColorScheme get colors => _provPoint.theme.colorScheme;
