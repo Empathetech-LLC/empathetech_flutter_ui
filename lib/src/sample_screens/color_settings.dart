@@ -269,9 +269,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
                       : lightColorSchemeImageKey,
                   label: EzConfig.l10n.csSchemeBase,
                   allowThemeUpdate: true,
-                  updateBrightness: EzConfig.updateBoth
-                      ? null
-                      : (EzConfig.isDark ? Brightness.dark : Brightness.light),
                   showEditor: false,
                   showFitOption: false,
                 ),
