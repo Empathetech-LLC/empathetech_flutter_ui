@@ -23,7 +23,7 @@ class EzSettingsHub extends StatefulWidget {
 }
 
 class _EzSettingsHubState extends State<EzSettingsHub> {
-  late EzSettingsSection curr = widget.pages[widget.target ?? 0];
+  late EzSettingsSection curr = widget.pages[widget.target ?? EzConfig.hubPos];
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,10 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
               .toList(),
           selected: <EzSettingsSection>{curr},
           showSelectedIcon: false,
-          onSelectionChanged: (Set<EzSettingsSection> selected) =>
-              setState(() => curr = selected.first),
+          onSelectionChanged: (Set<EzSettingsSection> selected) async {
+            await EzConfig.setHubPos(selected.first.position);
+            setState(() => curr = selected.first);
+          },
         ),
 
         // Current section
