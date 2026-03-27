@@ -783,23 +783,11 @@ abstract class EFUILang {
   /// **'Nebula'**
   String get ssNebula;
 
-  /// No description provided for @ssFruity.
-  ///
-  /// In en, this message translates to:
-  /// **'Fruity'**
-  String get ssFruity;
-
   /// No description provided for @ssWallHoles.
   ///
   /// In en, this message translates to:
   /// **'Wall holes'**
   String get ssWallHoles;
-
-  /// No description provided for @ssWhacky.
-  ///
-  /// In en, this message translates to:
-  /// **'Whacky'**
-  String get ssWhacky;
 
   /// No description provided for @ssDarkOnly.
   ///

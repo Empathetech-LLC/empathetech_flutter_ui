@@ -367,13 +367,7 @@ class EFUILangEn extends EFUILang {
   String get ssNebula => 'Nebula';
 
   @override
-  String get ssFruity => 'Fruity';
-
-  @override
   String get ssWallHoles => 'Wall holes';
-
-  @override
-  String get ssWhacky => 'Whacky';
 
   @override
   String get ssDarkOnly =>
@@ -1126,13 +1120,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssNebula => 'Nebula';
 
   @override
-  String get ssFruity => 'Fruity';
-
-  @override
   String get ssWallHoles => 'Wall holes';
-
-  @override
-  String get ssWhacky => 'Whacky';
 
   @override
   String get ssDarkOnly =>

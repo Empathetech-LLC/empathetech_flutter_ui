@@ -368,13 +368,7 @@ class EFUILangFr extends EFUILang {
   String get ssNebula => 'Nébuleuse';
 
   @override
-  String get ssFruity => 'Fruité';
-
-  @override
   String get ssWallHoles => 'Trous dans le mur';
-
-  @override
-  String get ssWhacky => 'Foufou';
 
   @override
   String get ssDarkOnly =>
