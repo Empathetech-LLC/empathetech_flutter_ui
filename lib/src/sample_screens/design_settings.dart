@@ -259,10 +259,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                       onPressed: () =>
                                           setModal(() => currType = type),
                                     ),
-                                    EzIconButton(
-                                      icon: type.icon,
-                                      onPressed: () =>
-                                          setModal(() => currType = type),
+                                    ExcludeSemantics(
+                                      child: EzIconButton(
+                                        icon: type.icon,
+                                        onPressed: () =>
+                                            setModal(() => currType = type),
+                                      ),
                                     ),
                                     ExcludeSemantics(
                                       child: EzRadio<EzPageTransition>(
