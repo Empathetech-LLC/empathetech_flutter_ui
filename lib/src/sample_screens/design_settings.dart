@@ -255,6 +255,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                                       text: type.name,
                                       textStyle: EzConfig.styles.labelLarge,
                                       textAlign: TextAlign.center,
+                                      style: TextButton.styleFrom(
+                                          backgroundColor:
+                                              EzConfig.colors.surfaceContainer),
                                       onPressed: () =>
                                           setModal(() => currType = type),
                                     ),
