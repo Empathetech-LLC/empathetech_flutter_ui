@@ -8,6 +8,9 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzGlobalSettings extends StatefulWidget {
+  /// Optionally remove the locale setting
+  final bool excludeLocaleSetting;
+
   /// [EzLocaleSetting.inDistress] passthrough
   final Set<String> inDistress;
 
@@ -52,6 +55,7 @@ class EzGlobalSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzGlobalSettings({
     super.key,
+    this.excludeLocaleSetting = false,
     this.skipLocales,
     this.inDistress = const <String>{'US'},
     this.additionalSettings,
@@ -93,14 +97,16 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
 
         // Theme mode
         EzThemeModeSwitch(redraw),
-        EzConfig.spacer,
 
         // Language
-        EzLocaleSetting(
-          redraw,
-          skip: widget.skipLocales ?? <Locale>{english},
-          inDistress: widget.inDistress,
-        ),
+        if (!widget.excludeLocaleSetting) ...<Widget>[
+          EzConfig.spacer,
+          EzLocaleSetting(
+            redraw,
+            skip: widget.skipLocales ?? <Locale>{english},
+            inDistress: widget.inDistress,
+          ),
+        ],
 
         // Additional settings
         if (widget.additionalSettings != null) ...widget.additionalSettings!,
