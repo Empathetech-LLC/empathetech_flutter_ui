@@ -128,13 +128,10 @@ export 'src/widgets/user_customization/layout/spacing.dart';
 // Presets
 export 'src/widgets/user_customization/presets/big_buttons.dart';
 export 'src/widgets/user_customization/presets/chalkboard.dart';
-export 'src/widgets/user_customization/presets/edo.dart';
-export 'src/widgets/user_customization/presets/fruity.dart';
 export 'src/widgets/user_customization/presets/high_visibility.dart';
 export 'src/widgets/user_customization/presets/nebula.dart';
 export 'src/widgets/user_customization/presets/quick_config.dart';
 export 'src/widgets/user_customization/presets/wall_holes.dart';
-export 'src/widgets/user_customization/presets/whacky.dart';
 
 // Text
 export 'src/widgets/user_customization/text/bold_setting.dart';
