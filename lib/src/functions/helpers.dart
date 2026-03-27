@@ -269,14 +269,35 @@ Page<dynamic> ezPageBuilder(
   Widget child, {
   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
       transitionsBuilder,
-}) =>
-    CustomTransitionPage<dynamic>(
-      key: state.pageKey,
-      transitionsBuilder: transitionsBuilder ?? ezTransitionsBuilder,
-      transitionDuration: ezAnimDuration(),
-      reverseTransitionDuration: ezAnimDuration(),
-      child: child,
-    );
+}) {
+  Widget swipeBackWrap(Widget child) {
+    switch (EzConfig.platform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onHorizontalDragEnd: (DragEndDetails details) {
+            if (details.primaryVelocity != null &&
+                details.primaryVelocity! > 250 &&
+                ezRootNav.currentState!.canPop()) {
+              ezRootNav.currentState!.pop();
+            }
+          },
+          child: child,
+        );
+      default:
+        return child;
+    }
+  }
+
+  return CustomTransitionPage<dynamic>(
+    key: state.pageKey,
+    transitionsBuilder: transitionsBuilder ?? ezTransitionsBuilder,
+    transitionDuration: ezAnimDuration(),
+    reverseTransitionDuration: ezAnimDuration(),
+    child: swipeBackWrap(child),
+  );
+}
 
 /// Returns the app's current [Locale] and it's corresponding [EFUILang]
 Future<(Locale, EFUILang)> ezStoredL10n() async {
