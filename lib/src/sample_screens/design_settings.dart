@@ -212,7 +212,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       ),
 
       // Page transition
-      // TODO: Verify semantics
       if ((widget.includePageTransitions == null)
           ? !kIsWeb
           : widget.includePageTransitions!) ...<Widget>[
