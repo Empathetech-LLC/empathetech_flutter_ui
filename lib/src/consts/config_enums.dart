@@ -167,7 +167,11 @@ extension EPTConfig on EzPageTransition {
       case EzPageTransition.none:
         return const Icon(Icons.cancel);
       case EzPageTransition.system:
-        return Icon(EzConfig.onMobile ? Icons.phone : Icons.computer);
+        return Icon(EzConfig.onMobile
+            ? EzConfig.platform == TargetPlatform.iOS
+                ? Icons.phone_iphone
+                : Icons.phone_android
+            : Icons.computer);
       case EzPageTransition.flip:
         return const Icon(Icons.flip);
       case EzPageTransition.rotate:
@@ -175,13 +179,13 @@ extension EPTConfig on EzPageTransition {
       case EzPageTransition.scale:
         return const Icon(Icons.scale);
       case EzPageTransition.slideLeft:
-        return const Icon(Icons.arrow_left);
+        return const Icon(Icons.keyboard_double_arrow_left);
       case EzPageTransition.slideRight:
-        return const Icon(Icons.arrow_right);
+        return const Icon(Icons.keyboard_double_arrow_right);
       case EzPageTransition.slideUp:
-        return const Icon(Icons.arrow_upward);
+        return const Icon(Icons.keyboard_double_arrow_up);
       case EzPageTransition.slideDown:
-        return const Icon(Icons.arrow_downward);
+        return const Icon(Icons.keyboard_double_arrow_down);
       case EzPageTransition.zoom:
         return const Icon(Icons.zoom_in);
     }
