@@ -21,11 +21,7 @@ class EzWallHolesConfig extends StatelessWidget {
 
       // Update design //
 
-      await EzConfig.setString(
-          darkTransitionTypeKey, EzPageTransition.flip.value);
-      await EzConfig.setBool(darkTransitionFadeKey, true);
-
-      await EzConfig.setString(darkBackgroundImageKey, whackyPath);
+      await EzConfig.setString(darkBackgroundImageKey, wallHolesPath);
       await EzConfig.setString(
           '$darkBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
 
@@ -39,11 +35,7 @@ class EzWallHolesConfig extends StatelessWidget {
 
       // Update design //
 
-      await EzConfig.setString(
-          lightTransitionTypeKey, EzPageTransition.flip.value);
-      await EzConfig.setBool(lightTransitionFadeKey, true);
-
-      await EzConfig.setString(lightBackgroundImageKey, whackyPath);
+      await EzConfig.setString(lightBackgroundImageKey, wallHolesPath);
       await EzConfig.setString(
           '$lightBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
 
@@ -58,7 +50,7 @@ class EzWallHolesConfig extends StatelessWidget {
     return EzElevatedButton(
       style: ElevatedButton.styleFrom(),
       onPressed: () async => await onPressed(context),
-      text: EzConfig.l10n.ssWhacky,
+      text: EzConfig.l10n.ssWallHoles,
     );
   }
 }
