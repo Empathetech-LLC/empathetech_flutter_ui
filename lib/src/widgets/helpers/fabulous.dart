@@ -127,9 +127,12 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
 
   // Define custom functions //
 
-  /// Check for Open UI updates (Desktop only)
+  /// Check for Open UI updates
   void checkVersion() async {
-    if (EzConfig.onMobile) return;
+    if (EzConfig.onMobile) {
+      if (EzConfig.platform == TargetPlatform.iOS) return;
+      if (await isGPlayInstall()) return;
+    }
 
     final http.Response response =
         await http.get(Uri.parse(widget.versionSource));
