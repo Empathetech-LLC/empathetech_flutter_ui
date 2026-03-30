@@ -17,39 +17,63 @@ class EzBigButtonsConfig extends StatelessWidget {
   const EzBigButtonsConfig(this.onComplete, {super.key});
 
   static Future<void> onPressed() async {
+    // Don't reset //
+
     if (EzConfig.updateBoth || EzConfig.isDark) {
-      // Update layout
-      await EzConfig.setDouble(darkMarginKey, 12.5);
+      // Default global && color settings //
+
+      // Design settings //
+
+      await EzConfig.setString(
+          darkButtonShapeKey, EzButtonShape.roundRect.value);
+
+      // Layout settings //
+
+      await EzConfig.setDouble(darkMarginKey, 12.0);
       if (EzConfig.onMobile) {
-        await EzConfig.setDouble(darkPaddingKey, 22.5);
-        await EzConfig.setDouble(darkSpacingKey, 35.0);
+        await EzConfig.setDouble(darkPaddingKey, 21.0);
+        await EzConfig.setDouble(darkSpacingKey, 30.0);
       } else {
-        await EzConfig.setDouble(darkPaddingKey, 25.0);
-        await EzConfig.setDouble(darkSpacingKey, 40.0);
+        await EzConfig.setDouble(darkPaddingKey, 24.0);
+        await EzConfig.setDouble(darkSpacingKey, 36.0);
       }
       await EzConfig.setBool(darkShowBackFABKey, true);
       await EzConfig.setBool(darkShowScrollKey, true);
 
-      // Conditionally update text
+      // Text settings //
+
+      // Default styles
+
       if (EzConfig.iconSize < 25.0) {
         await EzConfig.setDouble(darkIconSizeKey, 25.0);
       }
     }
 
     if (EzConfig.updateBoth || !EzConfig.isDark) {
-      // Update layout
-      await EzConfig.setDouble(lightMarginKey, 12.5);
+      // Default global && color settings //
+
+      // Design settings //
+
+      await EzConfig.setString(
+          lightButtonShapeKey, EzButtonShape.roundRect.value);
+
+      // Layout settings //
+
+      await EzConfig.setDouble(lightMarginKey, 12.0);
       if (EzConfig.onMobile) {
-        await EzConfig.setDouble(lightPaddingKey, 22.5);
-        await EzConfig.setDouble(lightSpacingKey, 35.0);
+        await EzConfig.setDouble(lightPaddingKey, 21.0);
+        await EzConfig.setDouble(lightSpacingKey, 30.0);
       } else {
-        await EzConfig.setDouble(lightPaddingKey, 25.0);
-        await EzConfig.setDouble(lightSpacingKey, 40.0);
+        await EzConfig.setDouble(lightPaddingKey, 24.0);
+        await EzConfig.setDouble(lightSpacingKey, 36.0);
       }
       await EzConfig.setBool(lightShowBackFABKey, true);
       await EzConfig.setBool(lightShowScrollKey, true);
 
-      // Conditionally update text
+      // Text settings //
+
+      // Default styles
+
       if (EzConfig.iconSize < 25.0) {
         await EzConfig.setDouble(lightIconSizeKey, 25.0);
       }
@@ -59,6 +83,7 @@ class EzBigButtonsConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzElevatedButton(
         style: ElevatedButton.styleFrom(
+          shape: EzButtonShape.roundRect.shape,
           padding: EdgeInsets.all(EzConfig.onMobile ? 22.5 : 25.0),
         ),
         onPressed: () async {
