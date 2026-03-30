@@ -23,12 +23,6 @@ class EzMarginSetting extends StatefulWidget {
   /// Number of significant figures to display after the decimal point
   final int decimals;
 
-  /// Defaults to [TextTheme.titleLarge]
-  final TextStyle? titleStyle;
-
-  /// Defaults to [TextTheme.bodyLarge]
-  final TextStyle? bodyStyle;
-
   /// An ez to use margin setting
   const EzMarginSetting({
     super.key,
@@ -37,8 +31,6 @@ class EzMarginSetting extends StatefulWidget {
     required this.max,
     required this.steps,
     required this.decimals,
-    this.titleStyle,
-    this.bodyStyle,
   });
 
   @override
@@ -91,8 +83,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         // Title
                         Text(
                           EzConfig.l10n.lsMargin,
-                          style:
-                              widget.titleStyle ?? EzConfig.styles.titleLarge,
+                          style: EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
 
@@ -101,15 +92,11 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         EzTextBackground(
                           Text(
                             currValue.toStringAsFixed(widget.decimals),
-                            style: widget.bodyStyle ??
-                                EzConfig.styles.bodyLarge
-                                    ?.copyWith(color: EzConfig.colors.surface),
+                            style: EzConfig.styles.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
                           margin: EzInsets.wrap(currValue),
-                          backgroundColor: EzConfig.colors.onSurface,
                         ),
-                        EzSpacer(space: currValue),
                         Container(
                           color: EzConfig.colors.onSurface,
                           height: heightOf(modalContext) * 0.25,
