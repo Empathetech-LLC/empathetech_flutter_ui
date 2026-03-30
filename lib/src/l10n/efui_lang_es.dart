@@ -373,11 +373,11 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssDarkOnly =>
-      'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n¿Continuar?';
+      'Este es un preajuste de tema oscuro.\nCambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?';
 
   @override
   String get ssLightOnly =>
-      'Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n¿Continuar?';
+      'Este es un preajuste de tema claro.\nCambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?';
 
   @override
   String ssApplied(Object config) {

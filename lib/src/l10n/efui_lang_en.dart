@@ -371,11 +371,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssDarkOnly =>
-      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?';
+      'This is a dark theme preset.\nIt will set the theme mode to dark, and update that theme.\n\nContinue?';
 
   @override
   String get ssLightOnly =>
-      'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?';
+      'This is a light theme preset.\nIt will set the theme mode to light, and update that theme.\n\nContinue?';
 
   @override
   String ssApplied(Object config) {
@@ -1124,11 +1124,11 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssDarkOnly =>
-      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?';
+      'This is a dark theme preset.\nIt will set the theme mode to dark, and update that theme.\n\nContinue?';
 
   @override
   String get ssLightOnly =>
-      'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?';
+      'This is a light theme preset.\nIt will set the theme mode to light, and update that theme.\n\nContinue?';
 
   @override
   String ssApplied(Object config) {
