@@ -224,17 +224,17 @@ dependencies:
     sdk: flutter
 
   # Flutter (Google)
-  go_router: ^14.8.1
+  go_router: ^17.1.0
   intl: ^0.20.2
-  shared_preferences: ^2.5.4
+  shared_preferences: ^2.5.5
 
   # Community
-  empathetech_flutter_ui: ^11.0.0
+  empathetech_flutter_ui: ^11.1.0
   flutter_localized_locales: ^2.0.5
   provider: ^6.1.5+1
 
 dev_dependencies:
-  dependency_validator: ^5.0.4
+  dependency_validator: ^5.0.5
   flutter_lints: ^6.0.0
 
 flutter:
@@ -270,8 +270,8 @@ Future<void> genLib({
 
   await ezCmd(
     EzConfig.platform == TargetPlatform.windows
-        ? 'mkdir lib lib\\utils lib\\widgets lib\\screens lib\\screens\\settings'
-        : 'mkdir lib lib/utils lib/widgets lib/screens lib/screens/settings',
+        ? 'mkdir lib lib\\utils lib\\widgets lib\\screens'
+        : 'mkdir lib lib/utils lib/widgets lib/screens',
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -359,97 +359,12 @@ class $classCaseAppName extends StatelessWidget {
             pageBuilder: (BuildContext context, GoRouterState state) =>
                 ezPageBuilder(context, state, HomeScreen()),
             routes: <RouteBase>[
-              // Settings home
+              // Settings
               GoRoute(
-                path: settingsHomePath,
-                name: settingsHomePath,
+                path: settingsHubPath,
+                name: settingsHubPath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state, SettingsHomeScreen()),
-                routes: <RouteBase>[
-                  // Color settings
-                  GoRoute(
-                    path: colorSettingsPath,
-                    name: colorSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, ColorSettingsScreen()),
-                    routes: <RouteBase>[
-                      GoRoute(
-                        path: EzCSType.quick.path,
-                        name: EzCSType.quick.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          ColorSettingsScreen(target: EzCSType.quick),
-                        ),
-                      ),
-                      GoRoute(
-                        path: EzCSType.advanced.path,
-                        name: EzCSType.advanced.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          ColorSettingsScreen(target: EzCSType.advanced),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  // Design settings
-                  GoRoute(
-                    path: designSettingsPath,
-                    name: designSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, DesignSettingsScreen()),
-                  ),
-
-                  // Layout settings
-                  GoRoute(
-                    path: layoutSettingsPath,
-                    name: layoutSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, LayoutSettingsScreen()),
-                  ),
-
-                  // Text settings
-                  GoRoute(
-                    path: textSettingsPath,
-                    name: textSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(
-                            context, state, TextSettingsScreen()),
-                    routes: <RouteBase>[
-                      GoRoute(
-                        path: EzTSType.quick.path,
-                        name: EzTSType.quick.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          TextSettingsScreen(target: EzTSType.quick),
-                        ),
-                      ),
-                      GoRoute(
-                        path: EzTSType.advanced.path,
-                        name: EzTSType.advanced.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(
-                          context,
-                          state,
-                          TextSettingsScreen(target: EzTSType.advanced),
-                        ),
-                      ),
-                    ],
-                  ),       
-                ],
+                    ezPageBuilder(context, state, SettingsHubScreen()),
               ),
             ],
           ),
@@ -607,9 +522,9 @@ class SettingsButton extends StatelessWidget {
 
   @override
   Widget build(_) => EzMenuButton(
-        onPressed: () => parentContext.goNamed(settingsHomePath),
+        onPressed: () => parentContext.goNamed(settingsHubPath),
         icon: EzIcon(Icons.settings),
-        label: EzConfig.l10n.ssPageTitle,
+        label: EzConfig.l10n.gSettings,
       );
 }
 
@@ -633,7 +548,7 @@ class EFUICredits extends StatelessWidget {
         icon: EzIcon(Icons.settings),
         label: label,
         semanticsLabel:
-            '\${EzConfig.isLefty ? '\${EzConfig.l10n.ssPageTitle} \$label' : '\$label \${EzConfig.l10n.ssPageTitle}'}. \${EzConfig.l10n.gOpenEmpathetech}',
+            '\${EzConfig.isLefty ? '\${EzConfig.l10n.gSettings} \$label' : '\$label \${EzConfig.l10n.gSettings}'}. \${EzConfig.l10n.gOpenEmpathetech}',
       ),
     );
   }
@@ -874,225 +789,133 @@ class _HomeScreenState extends State<HomeScreen> {
 """);
 
     // home.dart
-    await File('$dir/lib/screens/settings/home.dart')
-        .writeAsString("""$copyright
+    await File('$dir/lib/screens/settings.dart').writeAsString("""$copyright
 
-import '../../screens/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class SettingsHomeScreen extends StatelessWidget {
-  SettingsHomeScreen() : super(key: ValueKey<int>(EzConfig.seed));
+class SettingsHubScreen extends StatelessWidget {
+  /// [EzSettingsHub.target] passthrough
+  final int? target;
+
+  /// [EzColorSettings.advanced] and/or [EzTextSettings.advanced] passthrough
+  final bool? advanced;
+
+  SettingsHubScreen({this.target, this.advanced})
+      : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        const EzScreen(EzSettingsHome(
-          inDistress: <String>{},
-          colorSettingsPath: colorSettingsPath,
-          designSettingsPath: designSettingsPath,
-          layoutSettingsPath: layoutSettingsPath,
-          textSettingsPath: textSettingsPath,
-          appName: appName,
-          androidPackage: androidPackage,
+  Widget build(BuildContext context) {
+    return Consumer<EzConfigProvider>(
+      builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
+        EzScreen(EzSettingsHub(
+          pages: <EzSettingsSection>[
+            // Global
+            EzSettingsSection(
+              position: 0,
+              title: EzConfig.l10n.gGlobal,
+              icon: Icon(
+                config.onMobile
+                    ? config.platform == TargetPlatform.iOS
+                        ? Icons.phone_iphone
+                        : Icons.phone_android
+                    : Icons.computer,
+                semanticLabel: EzConfig.l10n.gGlobal,
+              ),
+              build: const EzGlobalSettings(
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
+            ),
+
+            // Color
+            EzSettingsSection(
+              position: 1,
+              title: EzConfig.l10n.gColor,
+              icon: Icon(
+                Icons.palette,
+                semanticLabel: EzConfig.l10n.gColor,
+              ),
+              build: EzColorSettings(
+                advanced: advanced,
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
+            ),
+
+            // Design
+            EzSettingsSection(
+              position: 2,
+              title: EzConfig.l10n.gDesign,
+              icon: Icon(
+                Icons.design_services,
+                semanticLabel: EzConfig.l10n.gDesign,
+              ),
+              build: const EzDesignSettings(
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
+            ),
+
+            // Layout
+            EzSettingsSection(
+              position: 3,
+              title: EzConfig.l10n.gLayout,
+              icon: Icon(
+                Icons.grid_3x3,
+                semanticLabel: EzConfig.l10n.gLayout,
+              ),
+              build: const EzLayoutSettings(
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
+            ),
+
+            // Text
+            EzSettingsSection(
+              position: 4,
+              title: EzConfig.l10n.gText,
+              icon: Icon(
+                Icons.text_format,
+                semanticLabel: EzConfig.l10n.gText,
+              ),
+              build: EzTextSettings(
+                advanced: advanced,
+                onUpdate: doNothing,
+                appName: appName,
+                androidPackage: androidPackage,
+              ),
+            ),
+          ],
+          target: target,
         )),
-        title: EzConfig.l10n.ssPageTitle,
+        title: config.l10n.gSettings,
         showSettings: false,
         fabs: <Widget>[
-          EzConfig.spacer,
+          // Rebuild (conditional)
+          if (config.needsRebuild) ...<Widget>[
+            config.layout.spacer,
+            const EzRebuildFAB(doNothing),
+          ],
+
+          // Save/upload config
+          config.layout.spacer,
           EzConfigFAB(
             context,
             appName: appName,
             androidPackage: androidPackage,
           ),
         ],
-      );
-}
-""");
-
-    // Color settings
-    await File('$dir/lib/screens/settings/color.dart')
-        .writeAsString("""$copyright
-
-import '../../utils/export.dart';
-import '../../widgets/export.dart';
-
-import 'package:flutter/material.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-class ColorSettingsScreen extends StatefulWidget {
-  final EzCSType? target;
-
-  ColorSettingsScreen({this.target}) : super(key: ValueKey<int>(EzConfig.seed));
-
-  @override
-  State<ColorSettingsScreen> createState() => _ColorSettingsScreenState();
-}
-
-class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
-  bool updateBoth = false;
-
-  @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        EzScreen(EzColorSettings(
-          target: widget.target,
-          onUpdate: () => setState(() {}),
-          updateBoth: updateBoth,
-          appName: appName,
-          androidPackage: androidPackage,
-        )),
-        title: EzConfig.l10n.csPageTitle,
-        showSettings: false,
-        fabs: <Widget>[
-          EzConfig.spacer,
-          EzSettingsDupeFAB(
-            updateBoth,
-            () => setState(() => updateBoth = !updateBoth),
-          ),
-        ],
-      );
-}
-""");
-
-    // Design settings
-    await File('$dir/lib/screens/settings/design.dart')
-        .writeAsString("""$copyright
-
-import '../../utils/export.dart';
-import '../../widgets/export.dart';
-
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-class DesignSettingsScreen extends StatefulWidget {
-  DesignSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
-
-  @override
-  State<DesignSettingsScreen> createState() => _DesignSettingsScreenState();
-}
-
-class _DesignSettingsScreenState extends State<DesignSettingsScreen> {
-  bool updateBoth = false;
-
-  @override
-  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
-        builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
-          EzScreen(EzDesignSettings(
-            onUpdate: () => setState(() {}),
-            updateBoth: updateBoth,
-            appName: appName,
-            androidPackage: androidPackage,
-          )),
-          title: config.l10n.dsPageTitle,
-          showSettings: false,
-          fabs: <Widget>[
-            if (config.needsRebuild) ...<Widget>[
-              config.layout.spacer,
-              EzRebuildFAB(() => setState(() {})),
-            ],
-            config.layout.spacer,
-            EzSettingsDupeFAB(
-              updateBoth,
-              () => setState(() => updateBoth = !updateBoth),
-            ),
-          ],
-        ),
-      );
-}
-""");
-
-    // Layout settings
-    await File('$dir/lib/screens/settings/layout.dart')
-        .writeAsString("""$copyright
-
-import '../../utils/export.dart';
-import '../../widgets/export.dart';
-
-import 'package:flutter/material.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-class LayoutSettingsScreen extends StatefulWidget {
-  LayoutSettingsScreen() : super(key: ValueKey<int>(EzConfig.seed));
-
-  @override
-  State<LayoutSettingsScreen> createState() => _LayoutSettingsScreenState();
-}
-
-class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
-  bool updateBoth = false;
-
-  @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        EzScreen(EzLayoutSettings(
-          onUpdate: () => setState(() {}),
-          updateBoth: updateBoth,
-          appName: appName,
-          androidPackage: androidPackage,
-        )),
-        title: EzConfig.l10n.lsPageTitle,
-        showSettings: false,
-        fabs: <Widget>[
-          EzConfig.spacer,
-          EzSettingsDupeFAB(
-            updateBoth,
-            () => setState(() => updateBoth = !updateBoth),
-          ),
-        ],
-      );
-}
-""");
-
-    // Text settings
-    await File('$dir/lib/screens/settings/text.dart')
-        .writeAsString("""$copyright
-
-import '../../utils/export.dart';
-import '../../widgets/export.dart';
-
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-class TextSettingsScreen extends StatefulWidget {
-  final EzTSType? target;
-
-  TextSettingsScreen({this.target}) : super(key: ValueKey<int>(EzConfig.seed));
-  
-  @override
-  State<TextSettingsScreen> createState() => _TextSettingsScreenState();
-}
-
-class _TextSettingsScreenState extends State<TextSettingsScreen> {
-  bool updateBoth = false;
-
-  @override
-  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
-        builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
-          EzScreen(EzTextSettings(
-            target: widget.target,
-            onUpdate: () => setState(() {}),
-            updateBoth: updateBoth,
-            appName: appName,
-            androidPackage: androidPackage,
-          )),
-          title: config.l10n.tsPageTitle,
-          showSettings: false,
-          fabs: <Widget>[
-            if (config.needsRebuild) ...<Widget>[
-              config.layout.spacer,
-              EzRebuildFAB(() => setState(() {})),
-            ],
-            config.layout.spacer,
-            EzSettingsDupeFAB(
-              updateBoth,
-              () => setState(() => updateBoth = !updateBoth),
-            ),
-          ],
-        ),
-      );
+      ),
+    );
+  }
 }
 """);
 
@@ -1103,30 +926,12 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
 
 export 'error.dart';
 export 'home.dart';
-
-export 'settings/home.dart';
-
-export 'settings/color.dart';
-export 'settings/design.dart';
-export 'settings/layout.dart';
-export 'settings/text.dart';
+export 'settings.dart';
 
 // Route names //
 
 /// settings-home
-const String settingsHomePath = 'settings-home';
-
-/// color-settings
-const String colorSettingsPath = 'color-settings';
-
-/// design-settings
-const String designSettingsPath = 'design-settings';
-
-/// layout-settings
-const String layoutSettingsPath = 'layout-settings';
-
-/// text-settings
-const String textSettingsPath = 'text-settings';
+const String settingsHubPath = 'settings-hub';
 """);
   } catch (e) {
     onFailure(e.toString());
