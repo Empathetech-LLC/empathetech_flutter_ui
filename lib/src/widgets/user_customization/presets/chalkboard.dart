@@ -62,8 +62,8 @@ class EzChalkboardConfig extends StatelessWidget {
         // Primary
         primary: empathSand,
         onPrimary: Colors.black,
-        primaryContainer: chalkboardGreen,
-        onPrimaryContainer: Colors.white,
+        primaryContainer: Colors.white,
+        onPrimaryContainer: chalkboardGreen,
         primaryFixed: empathSand,
         primaryFixedDim: empathSand,
         onPrimaryFixed: Colors.black,
@@ -72,8 +72,8 @@ class EzChalkboardConfig extends StatelessWidget {
         // Secondary
         secondary: Colors.white,
         onSecondary: Colors.black,
-        secondaryContainer: chalkboardGreen,
-        onSecondaryContainer: Colors.white,
+        secondaryContainer: Colors.white,
+        onSecondaryContainer: chalkboardGreen,
         secondaryFixed: Colors.white,
         secondaryFixedDim: Colors.white,
         onSecondaryFixed: Colors.black,
@@ -82,8 +82,8 @@ class EzChalkboardConfig extends StatelessWidget {
         // Tertiary
         tertiary: Colors.white,
         onTertiary: Colors.black,
-        tertiaryContainer: chalkboardGreen,
-        onTertiaryContainer: Colors.white,
+        tertiaryContainer: Colors.white,
+        onTertiaryContainer: chalkboardGreen,
         tertiaryFixed: Colors.white,
         tertiaryFixedDim: Colors.white,
         onTertiaryFixed: Colors.black,
@@ -92,8 +92,8 @@ class EzChalkboardConfig extends StatelessWidget {
         // Error
         error: Colors.red,
         onError: Colors.white,
-        errorContainer: Colors.redAccent,
-        onErrorContainer: Colors.white,
+        errorContainer: Colors.white,
+        onErrorContainer: Colors.red,
 
         // Surface
         surface: chalkboardGreen,
@@ -126,10 +126,8 @@ class EzChalkboardConfig extends StatelessWidget {
 
     await EzConfig.setString(
         darkTransitionTypeKey, EzPageTransition.slideDown.value);
-    await EzConfig.setBool(darkTransitionFadeKey, true);
 
     await EzConfig.setString(darkButtonShapeKey, EzButtonShape.rect.value);
-    await EzConfig.setDouble(darkBorderWidthKey, 0.0);
 
     await EzConfig.setDouble(darkBorderOpacityKey, 0.0);
 
