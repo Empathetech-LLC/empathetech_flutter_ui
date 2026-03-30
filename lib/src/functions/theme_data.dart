@@ -227,9 +227,29 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         errorMaxLines: 1,
+        border: OutlineInputBorder(
+          borderSide: buildBorder(buttonBorder),
+          gapPadding: 0,
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: buildBorder(disabledBorder),
+          gapPadding: 0,
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: buildBorder(buttonBorder),
-          borderRadius: ezRoundEdge,
+          gapPadding: 0,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: buildBorder(colorScheme.error),
+          gapPadding: 0,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: buildBorder(
+              colorScheme.secondary.withValues(alpha: borderOpacity)),
+          gapPadding: 0,
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: buildBorder(colorScheme.error),
           gapPadding: 0,
         ),
       ),
@@ -337,49 +357,27 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       helperStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
-      errorBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: colorScheme.error,
-          width: borderWidth,
-        ),
-      ),
+      border: UnderlineInputBorder(borderSide: buildBorder(buttonBorder)),
+      disabledBorder:
+          UnderlineInputBorder(borderSide: buildBorder(disabledBorder)),
+      enabledBorder:
+          UnderlineInputBorder(borderSide: buildBorder(buttonBorder)),
+      errorBorder:
+          UnderlineInputBorder(borderSide: buildBorder(colorScheme.error)),
       focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: colorScheme.secondary.withValues(alpha: borderOpacity),
-          width: borderWidth,
-        ),
-      ),
-      focusedErrorBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: colorScheme.error,
-          width: borderWidth,
-        ),
-      ),
-      disabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: disabledBorder,
-          width: borderWidth,
-        ),
-      ),
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: buttonBorder,
-          width: borderWidth,
-        ),
-      ),
-      border: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: buttonBorder,
-          width: borderWidth,
-        ),
-      ),
+          borderSide: buildBorder(
+              colorScheme.secondary.withValues(alpha: borderOpacity))),
+      focusedErrorBorder:
+          UnderlineInputBorder(borderSide: buildBorder(colorScheme.error)),
     ),
 
     // Menu
     menuTheme: MenuThemeData(
       style: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+        backgroundColor: WidgetStateProperty.all(crucialButtonBackground),
+        padding: WidgetStateProperty.all(EdgeInsets.zero),
         side: WidgetStateProperty.all(buildBorder(buttonBorder)),
+        shape: WidgetStateProperty.all(buttonShape),
         alignment: Alignment.center,
       ),
     ),
@@ -387,13 +385,14 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Menu button
     menuButtonTheme: MenuButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: crucialButtonBackground,
         foregroundColor: colorScheme.onSurface,
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: null,
+        shape: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EzInsets.wrap(padding),
