@@ -251,9 +251,9 @@ class EzRebuildFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
-        onPressed: () async => justDraw
-            ? await EzConfig.redrawUI(onComplete)
-            : await EzConfig.rebuildUI(onComplete),
+        onPressed: () => justDraw
+            ? EzConfig.redrawUI(onComplete)
+            : EzConfig.rebuildUI(onComplete),
         tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
         backgroundColor: EzConfig.colors.secondary,
         foregroundColor: EzConfig.colors.onSecondary,
