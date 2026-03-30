@@ -467,7 +467,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           style: widget.displayProvider.value,
         ),
         backgroundColor: backgroundColor,
-        margin: colMargin,
+        padding: colMargin,
       ),
       EzConfig.spacer,
 
@@ -481,7 +481,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           style: widget.headlineProvider.value,
         ),
         backgroundColor: backgroundColor,
-        margin: colMargin,
+        padding: colMargin,
       ),
       EzConfig.spacer,
 
@@ -493,7 +493,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           style: widget.titleProvider.value,
         ),
         backgroundColor: backgroundColor,
-        margin: colMargin,
+        padding: colMargin,
       ),
       EzConfig.spacer,
 
@@ -507,7 +507,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           style: widget.bodyProvider.value,
         ),
         backgroundColor: backgroundColor,
-        margin: colMargin,
+        padding: colMargin,
       ),
       EzConfig.spacer,
 
@@ -521,7 +521,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           style: widget.labelProvider.value,
         ),
         backgroundColor: backgroundColor,
-        margin: colMargin,
+        padding: colMargin,
       ),
       widget.textBlockFooter,
 
@@ -535,7 +535,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
           ),
           backgroundColor: backgroundColor,
-          margin: colMargin,
+          padding: colMargin,
         ),
 
         // Slider
@@ -1293,7 +1293,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           textAlign: TextAlign.center,
         ),
         useSurface: true,
-        margin: colMargin,
+        padding: colMargin,
         borderRadius: ezPillEdge,
       ),
       EzConfig.spacer,
@@ -1318,7 +1318,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           textAlign: TextAlign.center,
         ),
         useSurface: true,
-        margin: colMargin,
+        padding: colMargin,
         borderRadius: ezPillEdge,
       ),
       EzConfig.spacer,
@@ -1342,7 +1342,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           textAlign: TextAlign.center,
         ),
         useSurface: true,
-        margin: colMargin,
+        padding: colMargin,
         borderRadius: ezPillEdge,
       ),
       EzConfig.spacer,
@@ -1367,7 +1367,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           textAlign: TextAlign.center,
         ),
         useSurface: true,
-        margin: colMargin,
+        padding: colMargin,
         borderRadius: ezPillEdge,
       ),
       EzConfig.spacer,
@@ -1392,7 +1392,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           textAlign: TextAlign.center,
         ),
         useSurface: true,
-        margin: colMargin,
+        padding: colMargin,
         borderRadius: ezPillEdge,
       ),
 
