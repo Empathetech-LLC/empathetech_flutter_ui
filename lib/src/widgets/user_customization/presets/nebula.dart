@@ -15,8 +15,6 @@ class EzNebulaConfig extends StatelessWidget {
   /// Dark theme only config, will set [ThemeMode.dark]
   const EzNebulaConfig(this.onComplete, {super.key});
 
-  static const double nebulaOpacity = 0.25;
-
   /// When true, skips the "This is a dark theme only..." dialog
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not dark, show a warning dialog
@@ -49,43 +47,69 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
     await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
-    // Update theme mode //
+    // Global settings //
 
     await EzConfig.setBool(isDarkThemeKey, true);
 
-    // Update colors //
+    // Color settings //
 
-    await EzConfig.setInt(darkPrimaryKey, empathSandHex);
-    await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
-    await EzConfig.setInt(darkOnPrimaryKey, blackHex);
-    await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
+    await loadColorScheme(
+      const ColorScheme(
+        brightness: Brightness.dark,
+        // Primary
+        primary: empathSand,
+        primaryContainer: empathSandDim,
+        onPrimary: Colors.black,
+        onPrimaryContainer: Colors.black,
 
-    await EzConfig.setInt(darkSecondaryKey, empathEucalyptusHex);
-    await EzConfig.setInt(darkSecondaryContainerKey, empathEucalyptusDimHex);
-    await EzConfig.setInt(darkOnSecondaryKey, blackHex);
-    await EzConfig.setInt(darkOnSecondaryContainerKey, blackHex);
+        // Secondary
+        secondary: empathEucalyptus,
+        secondaryContainer: empathEucalyptusDim,
+        onSecondary: Colors.black,
+        onSecondaryContainer: Colors.black,
 
-    await EzConfig.setInt(darkTertiaryKey, empathPurpleHex);
-    await EzConfig.setInt(darkTertiaryContainerKey, empathPurpleDimHex);
-    await EzConfig.setInt(darkOnTertiaryKey, whiteHex);
-    await EzConfig.setInt(darkOnTertiaryContainerKey, whiteHex);
+        // Tertiary
+        tertiary: empathPurple,
+        tertiaryContainer: empathPurpleDim,
+        onTertiary: Colors.white,
+        onTertiaryContainer: Colors.white,
 
-    await EzConfig.setInt(darkSurfaceKey, 0x19A520DA);
-    await EzConfig.setInt(darkSurfaceDimKey, 0xFF0C0C0C);
-    await EzConfig.setInt(darkSurfaceContainerKey, 0xFF0C0C0C);
-    await EzConfig.setInt(darkInversePrimaryKey, empathSandHex);
+        // Error
+        error: Colors.red,
+        errorContainer: Colors.redAccent,
+        onError: Colors.white,
+        onErrorContainer: Colors.white,
 
-    // Update design //
+        // Surface
+        surface: Color(0x19A520DA),
+        surfaceContainer: Color(0xFF0C0C0C),
+        surfaceDim: Color(0xFF0C0C0C),
+        onSurface: Colors.white,
+
+        // Misc
+        inversePrimary: empathSand,
+        surfaceTint: Colors.transparent,
+      ),
+      Brightness.dark,
+    );
+
+    // Design settings //
+
+    // Default transition(s)
 
     await EzConfig.setString(darkBackgroundImageKey, nebulaPath);
     await EzConfig.setString(
         '$darkBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
-    await EzConfig.setDouble(darkButtonOpacityKey, nebulaOpacity);
-    await EzConfig.setDouble(darkBorderOpacityKey, nebulaOpacity);
 
-    // Update layout //
+    await EzConfig.setString(darkButtonShapeKey, EzButtonShape.jewel.value);
+    await EzConfig.setDouble(darkBorderWidthKey, 1.0);
 
-    // Update text //
+    await EzConfig.setDouble(darkButtonOpacityKey, 0.333);
+    await EzConfig.setDouble(darkBorderOpacityKey, 0.5);
+
+    // Default layout settings //
+
+    // Text settings //
 
     // Font
     await EzConfig.setString(darkDisplayFontFamilyKey, sourceCodePro);
@@ -95,7 +119,7 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.setString(darkLabelFontFamilyKey, sourceCodePro);
 
     // Background opacity
-    await EzConfig.setDouble(darkTextBackgroundOpacityKey, nebulaOpacity);
+    await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.333);
 
     return true;
   }
@@ -118,20 +142,21 @@ class EzNebulaConfig extends StatelessWidget {
     );
 
     return Container(
-      decoration: const BoxDecoration(
-        color: darkSurfaceContainer,
-        borderRadius: ezPillEdge,
+      decoration: ShapeDecoration(
+        color: darkSurface,
+        shape: EzButtonShape.jewel.shape,
       ),
       child: EzElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: empathPurple.withValues(alpha: nebulaOpacity),
-          shadowColor: empathPurple.withValues(alpha: nebulaOpacity),
+          backgroundColor: empathPurpleDim,
           foregroundColor: Colors.white,
-          iconColor: empathSand,
-          overlayColor: empathSand,
-          side: EzConfig.borderSide(empathSandDim),
-          shape: EzConfig.buttonShape.shape,
+          shadowColor: empathPurpleDim,
+          overlayColor: empathSandDim,
+          side: const BorderSide(color: empathSandDim, width: 1.0),
+          shape: EzButtonShape.jewel.shape,
           textStyle: localBody,
+          padding: EdgeInsets.all(
+              EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
         ),
         onPressed: () async {
           final bool confirmed = await onPressed(context);
