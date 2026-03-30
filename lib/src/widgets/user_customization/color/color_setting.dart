@@ -187,8 +187,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   /// Opens an [EzAlertDialog] with the all optional actions
   /// Currently: remove from list and reset to default
-  Future<dynamic> options() async => (widget.onRemove == null)
-      ? await reset()
+  Future<dynamic> options() => (widget.onRemove == null)
+      ? reset()
       : showDialog(
           context: context,
           builder: (BuildContext dContext) => EzAlertDialog(
@@ -207,7 +207,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               // Reset to default
               EzElevatedIconButton(
-                onPressed: () async => await reset(),
+                onPressed: () => reset(),
                 icon: const Icon(Icons.refresh),
                 label: EzConfig.l10n.gReset,
               ),
