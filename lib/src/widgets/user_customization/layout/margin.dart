@@ -95,7 +95,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                             style: EzConfig.styles.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
-                          margin: EzInsets.wrap(currValue),
+                          padding: EzInsets.wrap(currValue),
                         ),
                         Container(
                           color: EzConfig.colors.onSurface,
