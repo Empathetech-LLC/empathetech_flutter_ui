@@ -158,7 +158,9 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       ),
               ],
             ),
-            borderRadius: ezPillEdge,
+            useSurface: true,
+            buttonShape: true,
+            padding: EdgeInsets.zero,
           ),
         ],
       );
