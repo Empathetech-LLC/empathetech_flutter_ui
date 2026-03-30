@@ -61,7 +61,7 @@ class EzQuickConfig extends StatelessWidget {
               // Fun
               if (!simple) ...<Widget>[
                 wrapIt(EzNebulaConfig(cleanRebuild)),
-                // wrapIt(EzWallHolesConfig(cleanRebuild)),
+                wrapIt(EzWallHolesConfig(cleanRebuild)),
               ],
             ],
           ),
