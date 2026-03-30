@@ -120,45 +120,9 @@ class EzUpdaterFAB extends StatefulWidget {
 class _EzUpdaterState extends State<EzUpdaterFAB> {
   // Define the build data //
 
-  String? latestVersion;
-  String? url;
-
   bool isLatest = true; // True to start to prevent flickering
 
-  // Define custom functions //
-
-  /// Check for Open UI updates
-  void checkVersion() async {
-    if (EzConfig.onMobile) {
-      if (EzConfig.platform == TargetPlatform.iOS) return;
-      if (await isGPlayInstall()) return;
-    }
-
-    final http.Response response =
-        await http.get(Uri.parse(widget.versionSource));
-
-    if (response.statusCode != 200) return;
-
-    latestVersion = response.body;
-    if (latestVersion != widget.appVersion && latestVersion != null) {
-      final List<int> latestDigits =
-          latestVersion!.split('.').map(int.parse).toList();
-
-      if (latestDigits.length != 3) return;
-
-      final List<int> appDigits =
-          widget.appVersion.split('.').map(int.parse).toList();
-
-      for (int i = 0; i < latestDigits.length; i++) {
-        if (latestDigits[i] > appDigits[i]) {
-          setState(() => isLatest = false);
-          return;
-        } else if (latestDigits[i] < appDigits[i]) {
-          return;
-        } // if == continue
-      }
-    }
-  }
+  String? url;
 
   /// Platform aware instructions
   String hardRefresh() {
@@ -178,11 +142,47 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
   @override
   void initState() {
     super.initState();
-    checkVersion();
+    asyncInit();
+  }
+
+  /// Check for Open UI updates
+  void asyncInit() async {
+    final bool isGPlay = await isGPlayInstall();
+
+    if (EzConfig.onMobile &&
+        (isGPlay || EzConfig.platform == TargetPlatform.iOS)) {
+      return; // Don't show for store installs, they will auto-update
+    }
+
+    final http.Response response =
+        await http.get(Uri.parse(widget.versionSource));
+
+    if (response.statusCode != 200) return;
+    // Skip on failure - otherwise no internet would return a false positive
+
+    final String latestVersion = response.body;
+    if (latestVersion != widget.appVersion) {
+      final List<int> latestDigits =
+          latestVersion.split('.').map(int.parse).toList();
+
+      if (latestDigits.length != 3) return; // Ditto
+
+      final List<int> appDigits =
+          widget.appVersion.split('.').map(int.parse).toList();
+
+      for (int i = 0; i < latestDigits.length; i++) {
+        if (latestDigits[i] > appDigits[i]) {
+          setState(() => isLatest = false);
+          return;
+        } else if (latestDigits[i] < appDigits[i]) {
+          return;
+        } // else, continue
+      }
+    }
 
     switch (EzConfig.platform) {
       case TargetPlatform.android:
-        url = widget.gPlay ?? widget.github;
+        url = isGPlay ? (widget.gPlay ?? widget.github) : widget.github;
       case TargetPlatform.iOS:
         url = widget.appStore ?? widget.github;
       default:
