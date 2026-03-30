@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-const String _none = 'none';
+const String none = 'none';
 
 // Box Fit //
 
@@ -37,13 +37,13 @@ enum EzButtonShape {
   jewel,
 }
 
-const String _pill = 'pill';
-const String _rect = 'rect';
-const String _roundRect = 'roundRect';
-const String _leftGram = 'leftGram';
-const String _rightGram = 'rightGram';
-const String _gem = 'gem';
-const String _jewel = 'jewel';
+const String pill = 'pill';
+const String rect = 'rect';
+const String roundRect = 'roundRect';
+const String leftGram = 'leftGram';
+const String rightGram = 'rightGram';
+const String gem = 'gem';
+const String jewel = 'jewel';
 
 /// EzButtonShape config
 extension EBSConfig on EzButtonShape {
@@ -79,36 +79,36 @@ extension EBSConfig on EzButtonShape {
   String get value {
     switch (this) {
       case EzButtonShape.pill:
-        return _pill;
+        return pill;
       case EzButtonShape.rect:
-        return _rect;
+        return rect;
       case EzButtonShape.roundRect:
-        return _roundRect;
+        return roundRect;
       case EzButtonShape.leftGram:
-        return _leftGram;
+        return leftGram;
       case EzButtonShape.rightGram:
-        return _rightGram;
+        return rightGram;
       case EzButtonShape.gem:
-        return _gem;
+        return gem;
       case EzButtonShape.jewel:
-        return _jewel;
+        return jewel;
     }
   }
 
   /// Defaults to [EzPageTransition.system]
   static EzButtonShape lookup(String? value) {
     switch (value) {
-      case _rect:
+      case rect:
         return EzButtonShape.rect;
-      case _roundRect:
+      case roundRect:
         return EzButtonShape.roundRect;
-      case _leftGram:
+      case leftGram:
         return EzButtonShape.leftGram;
-      case _rightGram:
+      case rightGram:
         return EzButtonShape.rightGram;
-      case _gem:
+      case gem:
         return EzButtonShape.gem;
-      case _jewel:
+      case jewel:
         return EzButtonShape.jewel;
       default:
         return EzButtonShape.pill;
@@ -194,7 +194,7 @@ extension EPTConfig on EzPageTransition {
   String get value {
     switch (this) {
       case EzPageTransition.none:
-        return _none;
+        return none;
       case EzPageTransition.system:
         return _system;
       case EzPageTransition.flip:
@@ -219,7 +219,7 @@ extension EPTConfig on EzPageTransition {
   /// Defaults to [EzPageTransition.system]
   static EzPageTransition lookup(String? value) {
     switch (value) {
-      case _none:
+      case none:
         return EzPageTransition.none;
       case _flip:
         return EzPageTransition.flip;
