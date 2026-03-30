@@ -26,24 +26,29 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
       await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
-      // Update colors //
+      // Default global settings //
+
+      // Color settings //
 
       await loadColorScheme(ezHighContrastDark, Brightness.dark);
 
-      // Update layout //
+      // Design settings //
 
-      await EzConfig.setDouble(darkMarginKey, 12.5);
-      if (EzConfig.onMobile) {
-        await EzConfig.setDouble(darkPaddingKey, 17.5);
-        await EzConfig.setDouble(darkSpacingKey, 30.0);
-      } else {
-        await EzConfig.setDouble(darkPaddingKey, 20.0);
-        await EzConfig.setDouble(darkSpacingKey, 35.0);
-      }
+      await EzConfig.setString(
+          darkTransitionTypeKey, EzPageTransition.none.value);
+
+      await EzConfig.setDouble(darkBorderOpacityKey, 0.5);
+
+      // Layout settings //
+
+      // Default margin and padding
+
+      await EzConfig.setDouble(darkSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
+
       await EzConfig.setBool(darkShowBackFABKey, false);
       await EzConfig.setBool(darkShowScrollKey, false);
 
-      // Update text //
+      // Text settings //
 
       // Display
       await EzConfig.setString(darkDisplayFontFamilyKey, atkinsonHyperlegible);
@@ -107,78 +112,85 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
       await EzConfig.removeKeys(lightTextKeys.keys.toSet());
 
-      // Update colors //
+      // Default global settings //
+
+      // Color settings //
 
       await loadColorScheme(ezHighContrastLight, Brightness.light);
 
-      // Update layout //
+      // Design settings //
 
-      await EzConfig.setDouble(lightMarginKey, 12.5);
-      if (EzConfig.onMobile) {
-        await EzConfig.setDouble(lightPaddingKey, 17.5);
-        await EzConfig.setDouble(lightSpacingKey, 30.0);
-      } else {
-        await EzConfig.setDouble(lightPaddingKey, 20.0);
-        await EzConfig.setDouble(lightSpacingKey, 35.0);
-      }
+      await EzConfig.setString(
+          lightTransitionTypeKey, EzPageTransition.none.value);
+
+      await EzConfig.setDouble(lightBorderOpacityKey, 0.5);
+
+      // Layout settings //
+
+      // Default margin and padding
+
+      await EzConfig.setDouble(
+          lightSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
+
       await EzConfig.setBool(lightShowBackFABKey, false);
       await EzConfig.setBool(lightShowScrollKey, false);
+
+      // Text settings //
+
+      // Display
+      await EzConfig.setString(lightDisplayFontFamilyKey, atkinsonHyperlegible);
+      await EzConfig.setDouble(lightDisplayFontSizeKey, 50);
+      await EzConfig.setBool(lightDisplayBoldedKey, false);
+      await EzConfig.setBool(lightDisplayItalicizedKey, false);
+      await EzConfig.setBool(lightDisplayUnderlinedKey, false);
+      await EzConfig.setDouble(lightDisplayFontHeightKey, 1.5);
+      await EzConfig.setDouble(lightDisplayLetterSpacingKey, 0.30);
+      await EzConfig.setDouble(lightDisplayWordSpacingKey, 1.25);
+
+      // Headline
+      await EzConfig.setString(
+          lightHeadlineFontFamilyKey, atkinsonHyperlegible);
+      await EzConfig.setDouble(lightHeadlineFontSizeKey, 38);
+      await EzConfig.setBool(lightHeadlineBoldedKey, false);
+      await EzConfig.setBool(lightHeadlineItalicizedKey, false);
+      await EzConfig.setBool(lightHeadlineUnderlinedKey, false);
+      await EzConfig.setDouble(lightHeadlineFontHeightKey, 1.625);
+      await EzConfig.setDouble(lightHeadlineLetterSpacingKey, 0.30);
+      await EzConfig.setDouble(lightHeadlineWordSpacingKey, 1.25);
+
+      // Title
+      await EzConfig.setString(lightTitleFontFamilyKey, atkinsonHyperlegible);
+      await EzConfig.setDouble(lightTitleFontSizeKey, 26);
+      await EzConfig.setBool(lightTitleBoldedKey, false);
+      await EzConfig.setBool(lightTitleItalicizedKey, false);
+      await EzConfig.setBool(lightTitleUnderlinedKey, true);
+      await EzConfig.setDouble(lightTitleFontHeightKey, 1.75);
+      await EzConfig.setDouble(lightTitleLetterSpacingKey, 0.30);
+      await EzConfig.setDouble(lightTitleWordSpacingKey, 1.25);
+
+      // Body
+      await EzConfig.setString(lightBodyFontFamilyKey, atkinsonHyperlegible);
+      await EzConfig.setDouble(lightBodyFontSizeKey, 20);
+      await EzConfig.setBool(lightBodyBoldedKey, false);
+      await EzConfig.setBool(lightBodyItalicizedKey, false);
+      await EzConfig.setBool(lightBodyUnderlinedKey, false);
+      await EzConfig.setDouble(lightBodyFontHeightKey, 1.75);
+      await EzConfig.setDouble(lightBodyLetterSpacingKey, 0.30);
+      await EzConfig.setDouble(lightBodyWordSpacingKey, 1.25);
+
+      // Label
+      await EzConfig.setString(lightLabelFontFamilyKey, atkinsonHyperlegible);
+      await EzConfig.setDouble(lightLabelFontSizeKey, 16);
+      await EzConfig.setBool(lightLabelBoldedKey, false);
+      await EzConfig.setBool(lightLabelItalicizedKey, false);
+      await EzConfig.setBool(lightLabelUnderlinedKey, false);
+      await EzConfig.setDouble(lightLabelFontHeightKey, 1.75);
+      await EzConfig.setDouble(lightLabelLetterSpacingKey, 0.30);
+      await EzConfig.setDouble(lightLabelWordSpacingKey, 1.25);
+
+      // Icons
+      await EzConfig.setDouble(lightIconSizeKey, 22.0);
     }
-
-    // Update text //
-
-    // Display
-    await EzConfig.setString(lightDisplayFontFamilyKey, atkinsonHyperlegible);
-    await EzConfig.setDouble(lightDisplayFontSizeKey, 50);
-    await EzConfig.setBool(lightDisplayBoldedKey, false);
-    await EzConfig.setBool(lightDisplayItalicizedKey, false);
-    await EzConfig.setBool(lightDisplayUnderlinedKey, false);
-    await EzConfig.setDouble(lightDisplayFontHeightKey, 1.5);
-    await EzConfig.setDouble(lightDisplayLetterSpacingKey, 0.30);
-    await EzConfig.setDouble(lightDisplayWordSpacingKey, 1.25);
-
-    // Headline
-    await EzConfig.setString(lightHeadlineFontFamilyKey, atkinsonHyperlegible);
-    await EzConfig.setDouble(lightHeadlineFontSizeKey, 38);
-    await EzConfig.setBool(lightHeadlineBoldedKey, false);
-    await EzConfig.setBool(lightHeadlineItalicizedKey, false);
-    await EzConfig.setBool(lightHeadlineUnderlinedKey, false);
-    await EzConfig.setDouble(lightHeadlineFontHeightKey, 1.625);
-    await EzConfig.setDouble(lightHeadlineLetterSpacingKey, 0.30);
-    await EzConfig.setDouble(lightHeadlineWordSpacingKey, 1.25);
-
-    // Title
-    await EzConfig.setString(lightTitleFontFamilyKey, atkinsonHyperlegible);
-    await EzConfig.setDouble(lightTitleFontSizeKey, 26);
-    await EzConfig.setBool(lightTitleBoldedKey, false);
-    await EzConfig.setBool(lightTitleItalicizedKey, false);
-    await EzConfig.setBool(lightTitleUnderlinedKey, true);
-    await EzConfig.setDouble(lightTitleFontHeightKey, 1.75);
-    await EzConfig.setDouble(lightTitleLetterSpacingKey, 0.30);
-    await EzConfig.setDouble(lightTitleWordSpacingKey, 1.25);
-
-    // Body
-    await EzConfig.setString(lightBodyFontFamilyKey, atkinsonHyperlegible);
-    await EzConfig.setDouble(lightBodyFontSizeKey, 20);
-    await EzConfig.setBool(lightBodyBoldedKey, false);
-    await EzConfig.setBool(lightBodyItalicizedKey, false);
-    await EzConfig.setBool(lightBodyUnderlinedKey, false);
-    await EzConfig.setDouble(lightBodyFontHeightKey, 1.75);
-    await EzConfig.setDouble(lightBodyLetterSpacingKey, 0.30);
-    await EzConfig.setDouble(lightBodyWordSpacingKey, 1.25);
-
-    // Label
-    await EzConfig.setString(lightLabelFontFamilyKey, atkinsonHyperlegible);
-    await EzConfig.setDouble(lightLabelFontSizeKey, 16);
-    await EzConfig.setBool(lightLabelBoldedKey, false);
-    await EzConfig.setBool(lightLabelItalicizedKey, false);
-    await EzConfig.setBool(lightLabelUnderlinedKey, false);
-    await EzConfig.setDouble(lightLabelFontHeightKey, 1.75);
-    await EzConfig.setDouble(lightLabelLetterSpacingKey, 0.30);
-    await EzConfig.setDouble(lightLabelWordSpacingKey, 1.25);
-
-    // Icons
-    await EzConfig.setDouble(lightIconSizeKey, 22.0);
   }
 
   @override
@@ -204,23 +216,31 @@ class EzHighVisibilityConfig extends StatelessWidget {
               backgroundColor: darkSurface,
               foregroundColor: Colors.white,
               shadowColor: Colors.transparent,
-              iconColor: Colors.white,
               overlayColor: Colors.white,
-              side: EzConfig.borderSide(darkOutline),
-              shape: EzConfig.buttonShape.shape,
+              side: const BorderSide(
+                color: darkOutline,
+                width: defaultBorderWidth,
+              ),
+              shape: EzButtonShape.pill.shape,
               textStyle: localBody,
-              padding: EdgeInsets.all(EzConfig.onMobile ? 17.5 : 20.0),
+              padding: EdgeInsets.all(EzConfig.onMobile
+                  ? defaultMobilePadding
+                  : defaultDesktopPadding),
             )
           : ElevatedButton.styleFrom(
               backgroundColor: lightSurface,
               foregroundColor: Colors.black,
               shadowColor: Colors.transparent,
-              iconColor: Colors.black,
               overlayColor: Colors.black,
-              side: EzConfig.borderSide(lightOutline),
-              shape: EzConfig.buttonShape.shape,
+              side: const BorderSide(
+                color: lightOutline,
+                width: defaultBorderWidth,
+              ),
+              shape: EzButtonShape.pill.shape,
               textStyle: localBody,
-              padding: EdgeInsets.all(EzConfig.onMobile ? 17.5 : 20.0),
+              padding: EdgeInsets.all(EzConfig.onMobile
+                  ? defaultMobilePadding
+                  : defaultDesktopPadding),
             ),
       onPressed: () async {
         await onPressed();
