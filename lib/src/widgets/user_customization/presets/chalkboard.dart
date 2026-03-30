@@ -17,7 +17,6 @@ class EzChalkboardConfig extends StatelessWidget {
   /// Has default design and layout settings, but a [fingerPaint] based [TextTheme]
   const EzChalkboardConfig(this.onComplete, {super.key});
 
-  /// When true, skips the "This is a dark theme only..." dialog
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not dark, show a warning dialog
     if (EzConfig.themeMode != ThemeMode.dark) {
@@ -49,11 +48,13 @@ class EzChalkboardConfig extends StatelessWidget {
     await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
     await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
-    // Update theme mode //
+    // Global settings //
+
+    // Default lefty and language
 
     await EzConfig.setBool(isDarkThemeKey, true);
 
-    // Update colors //
+    // Color settings //
 
     await loadColorScheme(
       const ColorScheme(
@@ -119,7 +120,25 @@ class EzChalkboardConfig extends StatelessWidget {
       Brightness.dark,
     );
 
-    // Update text //
+    // Design settings //
+
+    await EzConfig.setInt(darkAnimationDurationKey, 500);
+
+    await EzConfig.setString(
+        darkTransitionTypeKey, EzPageTransition.slideDown.value);
+    await EzConfig.setBool(darkTransitionFadeKey, true);
+
+    await EzConfig.setString(darkButtonShapeKey, EzButtonShape.rect.value);
+    await EzConfig.setDouble(darkBorderWidthKey, 0.0);
+
+    await EzConfig.setDouble(darkBorderOpacityKey, 0.0);
+
+    // Layout settings //
+
+    await EzConfig.setBool(darkShowScrollKey, false);
+    await EzConfig.setBool(darkShowBackFABKey, false);
+
+    // Text settings //
 
     // Display
     await EzConfig.setString(darkDisplayFontFamilyKey, fingerPaint);
@@ -140,6 +159,8 @@ class EzChalkboardConfig extends StatelessWidget {
     // Label
     await EzConfig.setString(darkLabelFontFamilyKey, fingerPaint);
     await EzConfig.setBool(darkLabelItalicizedKey, false);
+
+    await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.0);
 
     return true;
   }
@@ -166,10 +187,9 @@ class EzChalkboardConfig extends StatelessWidget {
         backgroundColor: chalkboardGreen,
         foregroundColor: Colors.white,
         shadowColor: Colors.transparent,
-        iconColor: empathSand,
         overlayColor: empathSand,
-        side: EzConfig.borderSide(chalkboardGreen),
-        shape: EzConfig.buttonShape.shape,
+        side: BorderSide.none,
+        shape: EzButtonShape.rect.shape,
         textStyle: localBody,
         padding: EdgeInsets.all(
           EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding,
