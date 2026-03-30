@@ -81,6 +81,13 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final Color disabledBorder =
       colorScheme.outlineVariant.withValues(alpha: borderOpacity);
 
+  final double crucialBorderOpacity = max(borderOpacity, focusOpacity);
+
+  final Color crucialBorder =
+      colorScheme.primaryContainer.withValues(alpha: crucialBorderOpacity);
+  final Color crucialDisabledBorder =
+      colorScheme.outlineVariant.withValues(alpha: crucialBorderOpacity);
+
   // Icons //
 
   final IconThemeData iconData = IconThemeData(
@@ -357,16 +364,16 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       helperStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
-      border: UnderlineInputBorder(borderSide: buildBorder(buttonBorder)),
+      border: UnderlineInputBorder(borderSide: buildBorder(crucialBorder)),
       disabledBorder:
-          UnderlineInputBorder(borderSide: buildBorder(disabledBorder)),
+          UnderlineInputBorder(borderSide: buildBorder(crucialDisabledBorder)),
       enabledBorder:
-          UnderlineInputBorder(borderSide: buildBorder(buttonBorder)),
+          UnderlineInputBorder(borderSide: buildBorder(crucialBorder)),
       errorBorder:
           UnderlineInputBorder(borderSide: buildBorder(colorScheme.error)),
       focusedBorder: UnderlineInputBorder(
           borderSide: buildBorder(
-              colorScheme.secondary.withValues(alpha: borderOpacity))),
+              colorScheme.secondary.withValues(alpha: crucialBorderOpacity))),
       focusedErrorBorder:
           UnderlineInputBorder(borderSide: buildBorder(colorScheme.error)),
     ),
