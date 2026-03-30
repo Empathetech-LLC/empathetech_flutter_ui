@@ -500,6 +500,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                       EzConfig.l10n.gHowThisWorks,
                       style: EzConfig.styles.labelLarge!,
                       textAlign: TextAlign.center,
+                      padding: EdgeInsets.all(EzConfig.marginVal),
+                      buttonShape: true,
                       url: Uri.parse(
                           'https://m3.material.io/styles/color/roles'),
                       hint: EzConfig.l10n.gHowThisWorksHint,
@@ -522,8 +524,10 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             // Save changes
             await EzConfig.setStringList(widget.userColorsKey, widget.currList);
           },
-          style:
-              TextButton.styleFrom(padding: EzInsets.wrap(EzConfig.marginVal)),
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(EzConfig.marginVal),
+            shape: EzConfig.buttonShape.shape,
+          ),
           icon: const Icon(Icons.add_circle_outline),
           label: EzConfig.l10n.csAddColor,
         ),

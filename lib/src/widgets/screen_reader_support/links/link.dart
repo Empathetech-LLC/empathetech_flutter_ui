@@ -29,6 +29,9 @@ class EzLink extends StatefulWidget {
   /// Optional padding override for [TextButton.style]
   final EdgeInsets? padding;
 
+  /// [EzTextBackground.buttonShape] passthrough
+  final bool buttonShape;
+
   /// Destination function
   /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
@@ -63,6 +66,7 @@ class EzLink extends StatefulWidget {
     this.backgroundColor,
     this.textAlign,
     this.padding,
+    this.buttonShape = false,
     this.onTap,
     this.url,
     required this.hint,
@@ -95,6 +99,7 @@ class _EzLinkState extends State<EzLink> {
 
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       padding: widget.padding,
+      shape: widget.buttonShape ? EzConfig.buttonShape.shape : null,
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: VisualDensity.compact,
       minimumSize: Size.zero,
