@@ -6,6 +6,7 @@
 import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class EzConfigProvider extends ChangeNotifier {
@@ -267,6 +268,18 @@ class EzConfigProvider extends ChangeNotifier {
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
   Future<void> rebuildUI(void Function() onComplete) async {
+    unawaited(ezRootNav.currentState!.push(
+      // Open progress layer
+      PageRouteBuilder<Widget>(
+        opaque: false,
+        transitionsBuilder: (_, __, ___, Widget child) => child,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (_, __, ___) =>
+            const Center(child: CircularProgressIndicator()),
+      ),
+    ));
+
     final ThemeMode newMode = _buildThemeMode();
 
     switch (newMode) {
@@ -287,6 +300,10 @@ class EzConfigProvider extends ChangeNotifier {
 
     _needsRebuild = false;
     await redrawUI(onComplete);
+
+    // Close progress layer
+    ezRootNav.currentState!.pop();
+    ezCloseAll(); // redraw's version is "blocked" by the progress layer
   }
 
   /// Randomizes the [seed] and notifies listeners
