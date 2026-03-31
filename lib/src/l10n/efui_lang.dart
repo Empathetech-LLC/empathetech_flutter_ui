@@ -1497,6 +1497,12 @@ abstract class EFUILang {
   /// **' Not too big, not too small?'**
   String get tsLabelP2;
 
+  /// No description provided for @tsAlwaysUnderline.
+  ///
+  /// In en, this message translates to:
+  /// **'Always underline links'**
+  String get tsAlwaysUnderline;
+
   /// No description provided for @tsReset.
   ///
   /// In en, this message translates to:

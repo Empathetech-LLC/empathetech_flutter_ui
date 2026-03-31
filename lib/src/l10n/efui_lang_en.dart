@@ -746,6 +746,9 @@ class EFUILangEn extends EFUILang {
   String get tsLabelP2 => ' Not too big, not too small?';
 
   @override
+  String get tsAlwaysUnderline => 'Always underline links';
+
+  @override
   String tsReset(Object themeType) {
     return 'Reset $themeType text styles?';
   }
@@ -1491,6 +1494,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get tsLabelP2 => ' Not too big, not too small?';
+
+  @override
+  String get tsAlwaysUnderline => 'Always underline links';
 
   @override
   String tsReset(Object themeType) {

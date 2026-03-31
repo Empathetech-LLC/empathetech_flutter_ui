@@ -304,5 +304,7 @@
   "tsLabelLink": "las etiquetas?",
   "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
 
+  "tsAlwaysUnderline": "Subraya siempre los enlaces",
+
   "tsReset": "¿Restablecer los estilos de texto de {themeType}?"
 }

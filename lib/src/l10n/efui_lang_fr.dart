@@ -750,6 +750,9 @@ class EFUILangFr extends EFUILang {
   String get tsLabelP2 => ' Ni trop gros, ni trop petits ?';
 
   @override
+  String get tsAlwaysUnderline => 'Soulignez toujours les liens';
+
+  @override
   String tsReset(Object themeType) {
     return 'Réinitialiser les styles de texte de $themeType ?';
   }
