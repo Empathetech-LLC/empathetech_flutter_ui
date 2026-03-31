@@ -35,11 +35,6 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           curr.title,
           style: EzConfig.styles.labelLarge,
           textAlign: TextAlign.center,
-          padding: EdgeInsets.only(
-            left: EzConfig.marginVal,
-            right: EzConfig.marginVal,
-            bottom: EzConfig.marginVal,
-          ),
         ),
         SegmentedButton<EzSettingsSection>(
           segments: widget.pages
