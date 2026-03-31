@@ -53,89 +53,50 @@ class EzWallHolesConfig extends StatelessWidget {
     await EzConfig.setBool(isDarkThemeKey, false);
 
     // Color settings //
-    // TODO: mess around with it, I'm sure there's lots more to do
 
     await loadColorScheme(
       const ColorScheme(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
+
         // Primary
-        primary: empathSand,
-        onPrimary: Colors.black,
-        primaryContainer: chalkboardGreen,
+        primary: Color(0xFF3B77BC),
+        onPrimary: Colors.white,
+        primaryContainer: Colors.black,
         onPrimaryContainer: Colors.white,
-        primaryFixed: empathSand,
-        primaryFixedDim: empathSand,
-        onPrimaryFixed: Colors.black,
-        onPrimaryFixedVariant: Colors.black,
 
         // Secondary
-        secondary: Colors.white,
+        secondary: Color(0xFFFCCF03),
         onSecondary: Colors.black,
-        secondaryContainer: chalkboardGreen,
+        secondaryContainer: Colors.black,
         onSecondaryContainer: Colors.white,
-        secondaryFixed: Colors.white,
-        secondaryFixedDim: Colors.white,
-        onSecondaryFixed: Colors.black,
-        onSecondaryFixedVariant: Colors.black,
 
         // Tertiary
-        tertiary: Colors.white,
+        tertiary: Color(0xFF81C046),
         onTertiary: Colors.black,
-        tertiaryContainer: chalkboardGreen,
+        tertiaryContainer: Colors.black,
         onTertiaryContainer: Colors.white,
-        tertiaryFixed: Colors.white,
-        tertiaryFixedDim: Colors.white,
-        onTertiaryFixed: Colors.black,
-        onTertiaryFixedVariant: Colors.black,
 
         // Error
-        error: Colors.red,
+        error: Color(0xFFDE482B),
         onError: Colors.white,
-        errorContainer: Colors.redAccent,
+        errorContainer: Colors.black,
         onErrorContainer: Colors.white,
 
         // Surface
-        surface: chalkboardGreen,
-        onSurface: Colors.white,
-        surfaceDim: chalkboardGreen,
-        surfaceBright: chalkboardGreen,
-        surfaceContainerLowest: chalkboardGreen,
-        surfaceContainerLow: chalkboardGreen,
-        surfaceContainer: chalkboardGreen,
-        surfaceContainerHigh: chalkboardGreen,
-        surfaceContainerHighest: chalkboardGreen,
-        onSurfaceVariant: Colors.white,
+        surface: lightSurface,
+        onSurface: Colors.black,
+        surfaceContainer: Color(0xFFDAE4F8),
+        surfaceDim: Color(0xFFDAE4F8),
 
         // Misc
-        outline: darkOutline,
-        outlineVariant: darkOutlineVariant,
+        outline: lightOutline,
+        outlineVariant: lightOutlineVariant,
         shadow: Colors.transparent,
-        scrim: Colors.black,
-        inverseSurface: chalkboardGreen,
-        onInverseSurface: Colors.white,
-        inversePrimary: empathSand,
+        scrim: Colors.white,
         surfaceTint: Colors.transparent,
       ),
-      Brightness.dark,
+      Brightness.light,
     );
-
-    await EzConfig.setInt(lightPrimaryKey, 0xFF3B77BC);
-    await EzConfig.setInt(lightPrimaryContainerKey, blackHex);
-    await EzConfig.setInt(lightOnPrimaryKey, whiteHex);
-
-    await EzConfig.setInt(lightSecondaryKey, 0xFFFCCF03);
-    await EzConfig.setInt(lightSecondaryContainerKey, blackHex);
-    await EzConfig.setInt(lightOnSecondaryKey, blackHex);
-
-    await EzConfig.setInt(lightTertiaryKey, 0xFF81C046);
-    await EzConfig.setInt(lightTertiaryContainerKey, blackHex);
-    await EzConfig.setInt(lightOnTertiaryKey, blackHex);
-
-    await EzConfig.setInt(lightSurfaceContainerKey, 0xFFDAE4F8);
-    await EzConfig.setInt(lightSurfaceDimKey, 0xFFDAE4F8);
-
-    await EzConfig.setInt(lightErrorKey, 0xFFDE482B);
-    await EzConfig.setInt(lightOnErrorKey, blackHex);
 
     // Design settings //
     // TODO: both scale and zoom? This is for elsewhere but I'm in the zone
