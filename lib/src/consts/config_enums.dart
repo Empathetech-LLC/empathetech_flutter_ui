@@ -161,16 +161,16 @@ extension EBSConfig on EzButtonShape {
 enum EzPageTransition {
   none,
   system,
-  flipX,
-  flipY,
+  turnX,
+  turnY,
   rotate,
   slideX,
   slideY,
   zoom,
 }
 
-const String flipX = 'flipX';
-const String flipY = 'flipY';
+const String turnX = 'turnX';
+const String turnY = 'turnY';
 const String rotate = 'rotate';
 const String slideX = 'slideX';
 const String slideY = 'slideY';
@@ -190,10 +190,10 @@ extension EPTConfig on EzPageTransition {
                 : Icons.phone_android
             : Icons.computer);
 
-      case EzPageTransition.flipX:
+      case EzPageTransition.turnX:
         return const Icon(Icons.flip);
 
-      case EzPageTransition.flipY:
+      case EzPageTransition.turnY:
         return const Icon(Icons.u_turn_left);
 
       case EzPageTransition.rotate:
@@ -201,11 +201,11 @@ extension EPTConfig on EzPageTransition {
 
       case EzPageTransition.slideX:
         return Icon(EzConfig.isLTR
-            ? Icons.keyboard_double_arrow_right
-            : Icons.keyboard_double_arrow_left);
+            ? Icons.keyboard_double_arrow_left
+            : Icons.keyboard_double_arrow_right);
 
       case EzPageTransition.slideY:
-        return const Icon(Icons.keyboard_double_arrow_down);
+        return const Icon(Icons.keyboard_double_arrow_up);
 
       case EzPageTransition.zoom:
         return const Icon(Icons.zoom_in);
@@ -220,11 +220,11 @@ extension EPTConfig on EzPageTransition {
       case EzPageTransition.system:
         return system;
 
-      case EzPageTransition.flipX:
-        return flipX;
+      case EzPageTransition.turnX:
+        return turnX;
 
-      case EzPageTransition.flipY:
-        return flipY;
+      case EzPageTransition.turnY:
+        return turnY;
 
       case EzPageTransition.rotate:
         return rotate;
@@ -246,11 +246,11 @@ extension EPTConfig on EzPageTransition {
       case none:
         return EzPageTransition.none;
 
-      case flipX:
-        return EzPageTransition.flipX;
+      case turnX:
+        return EzPageTransition.turnX;
 
-      case flipY:
-        return EzPageTransition.flipY;
+      case turnY:
+        return EzPageTransition.turnY;
 
       case rotate:
         return EzPageTransition.rotate;
@@ -277,11 +277,11 @@ extension EPTConfig on EzPageTransition {
       case EzPageTransition.system:
         return EzConfig.l10n.dsSystem;
 
-      case EzPageTransition.flipX:
-        return EzConfig.l10n.dsFlipX;
+      case EzPageTransition.turnX:
+        return EzConfig.l10n.dsTurnX;
 
-      case EzPageTransition.flipY:
-        return EzConfig.l10n.dsFlipY;
+      case EzPageTransition.turnY:
+        return EzConfig.l10n.dsTurnY;
 
       case EzPageTransition.rotate:
         return EzConfig.l10n.dsRotate;
