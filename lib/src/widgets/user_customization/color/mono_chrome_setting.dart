@@ -8,7 +8,7 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 /// Custom [ColorScheme.highContrastDark]
-const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
+const ColorScheme ezMonoChromeDark = ColorScheme.highContrastDark(
   // Primary
   primary: Colors.white,
   primaryContainer: darkOutline,
@@ -40,7 +40,7 @@ const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
 );
 
 /// Custom [ColorScheme.highContrastLight]
-const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
+const ColorScheme ezMonoChromeLight = ColorScheme.highContrastLight(
   // Primary
   primary: Colors.black,
   primaryContainer: lightOutline,
@@ -86,8 +86,8 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   const EzMonoChromeColorsSetting(
     this.onComplete, {
     super.key,
-    this.dark = ezHighContrastDark,
-    this.light = ezHighContrastLight,
+    this.dark = ezMonoChromeDark,
+    this.light = ezMonoChromeLight,
   });
 
   @override
