@@ -114,7 +114,8 @@ export 'src/widgets/screen_reader_support/rich_text.dart';
 
 // Color
 export 'src/widgets/user_customization/color/color_setting.dart';
-export 'src/widgets/user_customization/color/mono_chrome_colors_setting.dart';
+export 'src/widgets/user_customization/color/high_contrast_setting.dart';
+export 'src/widgets/user_customization/color/mono_chrome_setting.dart';
 
 // Design
 export 'src/widgets/user_customization/design/image_setting.dart';
