@@ -251,9 +251,13 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           children: <Widget>[
             if (widget.quickHeader != null) ...widget.quickHeader!,
 
+            // High contrast
+            EzHighContrastColorsSetting(redraw),
+            EzConfig.spacer,
+
             // MonoChrome
             EzMonoChromeColorsSetting(redraw),
-            EzConfig.spacer,
+            EzConfig.separator,
 
             // From image
             Semantics(
