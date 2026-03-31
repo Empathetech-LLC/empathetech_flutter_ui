@@ -17,7 +17,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
   /// Spacing is also increased, but not as much as [EzBigButtonsConfig]
   const EzHighVisibilityConfig(this.onComplete, {super.key});
 
-  static Future<void> onPressed() async {
+  static Future<void> onPressed({bool monoChrome = false}) async {
     if (EzConfig.updateBoth || EzConfig.isDark) {
       // Reset //
 
@@ -30,7 +30,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Color settings //
 
-      await loadColorScheme(ezHighContrastDark, Brightness.dark);
+      await loadColorScheme(
+          monoChrome ? ezMonoChromeDark : ezHighContrastDark, Brightness.dark);
 
       // Design settings //
 
@@ -100,8 +101,9 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(darkLabelLetterSpacingKey, 0.30);
       await EzConfig.setDouble(darkLabelWordSpacingKey, 1.25);
 
-      // Icons
+      // etc
       await EzConfig.setDouble(darkIconSizeKey, 22.0);
+      await EzConfig.setBool(darkLineLinksKey, true);
     }
 
     if (EzConfig.updateBoth || !EzConfig.isDark) {
@@ -116,7 +118,9 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Color settings //
 
-      await loadColorScheme(ezHighContrastLight, Brightness.light);
+      await loadColorScheme(
+          monoChrome ? ezMonoChromeLight : ezHighContrastLight,
+          Brightness.light);
 
       // Design settings //
 
@@ -188,8 +192,9 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(lightLabelLetterSpacingKey, 0.30);
       await EzConfig.setDouble(lightLabelWordSpacingKey, 1.25);
 
-      // Icons
+      // etc
       await EzConfig.setDouble(lightIconSizeKey, 22.0);
+      await EzConfig.setBool(lightLineLinksKey, true);
     }
   }
 
