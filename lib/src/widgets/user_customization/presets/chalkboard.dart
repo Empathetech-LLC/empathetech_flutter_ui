@@ -63,48 +63,36 @@ class EzChalkboardConfig extends StatelessWidget {
         primary: empathSand,
         onPrimary: Colors.black,
         primaryContainer: Colors.white,
-        onPrimaryContainer: chalkboardGreen,
-        primaryFixed: empathSand,
-        primaryFixedDim: empathSand,
-        onPrimaryFixed: Colors.black,
-        onPrimaryFixedVariant: Colors.black,
+        onPrimaryContainer: Colors.black,
 
         // Secondary
-        secondary: Colors.white,
+        secondary: darkOutline,
         onSecondary: Colors.black,
         secondaryContainer: Colors.white,
-        onSecondaryContainer: chalkboardGreen,
-        secondaryFixed: Colors.white,
-        secondaryFixedDim: Colors.white,
-        onSecondaryFixed: Colors.black,
-        onSecondaryFixedVariant: Colors.black,
+        onSecondaryContainer: Colors.black,
 
         // Tertiary
         tertiary: Colors.white,
         onTertiary: Colors.black,
         tertiaryContainer: Colors.white,
-        onTertiaryContainer: chalkboardGreen,
-        tertiaryFixed: Colors.white,
-        tertiaryFixedDim: Colors.white,
-        onTertiaryFixed: Colors.black,
-        onTertiaryFixedVariant: Colors.black,
+        onTertiaryContainer: Colors.black,
 
         // Error
         error: Colors.red,
         onError: Colors.white,
         errorContainer: Colors.white,
-        onErrorContainer: Colors.red,
+        onErrorContainer: Colors.black,
 
         // Surface
         surface: chalkboardGreen,
         onSurface: Colors.white,
-        surfaceDim: chalkboardGreen,
         surfaceBright: chalkboardGreen,
         surfaceContainerLowest: chalkboardGreen,
         surfaceContainerLow: chalkboardGreen,
         surfaceContainer: chalkboardGreen,
         surfaceContainerHigh: chalkboardGreen,
         surfaceContainerHighest: chalkboardGreen,
+        surfaceDim: chalkboardGreen,
         onSurfaceVariant: Colors.white,
 
         // Misc
