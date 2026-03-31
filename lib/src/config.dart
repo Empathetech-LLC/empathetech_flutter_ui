@@ -594,6 +594,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       // Leave text background opacity as-is
 
       await setDouble(darkIconSizeKey, defaultIconSize * getScalar());
+      await setBool(darkLineLinksKey, random.nextBool());
     } else {
       // Update color settings //
 
@@ -741,6 +742,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       // Leave text background opacity as-is
 
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
+      await setBool(lightLineLinksKey, random.nextBool());
     }
   }
 
@@ -953,6 +955,9 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Theme aware [EzTextCache] alias
   static double get iconSize => _provPoint.text.iconSize;
+
+  /// Theme aware [EzTextCache] alias
+  static bool get lineLinks => _provPoint.text.lineLinks;
 
   /// Theme aware [EzTextCache] alias
   static EzNewLine get startLine => _provPoint.text.startLine;

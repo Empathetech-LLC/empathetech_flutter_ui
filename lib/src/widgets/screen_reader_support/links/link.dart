@@ -93,7 +93,8 @@ class _EzLinkState extends State<EzLink> {
     TextStyle? textStyle =
         (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
       color: textColor,
-      decoration: TextDecoration.none,
+      decoration:
+          EzConfig.lineLinks ? TextDecoration.underline : TextDecoration.none,
       decorationColor: widget.decorationColor ?? textColor,
     );
 
@@ -110,10 +111,11 @@ class _EzLinkState extends State<EzLink> {
     // Define custom functions //
 
     void underline(bool addIt) {
-      textStyle = textStyle?.copyWith(
-        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-      );
-      setState(() {});
+      if (EzConfig.lineLinks) return;
+
+      setState(() => textStyle = textStyle?.copyWith(
+            decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+          ));
     }
 
     // Return the build //

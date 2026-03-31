@@ -587,6 +587,7 @@ const String darkLabelFontHeightKey = 'darkLabelFontHeight';
 // etc
 const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
 const String darkIconSizeKey = 'darkIconSize';
+const String darkLineLinksKey = 'darkLineLinks';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -647,6 +648,7 @@ const Map<String, Type> darkTextKeys = <String, Type>{
   // etc
   darkTextBackgroundOpacityKey: double,
   darkIconSizeKey: double,
+  darkLineLinksKey: bool,
 };
 
 // Light theme //
@@ -704,6 +706,7 @@ const String lightLabelFontHeightKey = 'lightLabelFontHeight';
 // etc
 const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 const String lightIconSizeKey = 'lightIconSize';
+const String lightLineLinksKey = 'lightLineLinks';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -764,6 +767,7 @@ const Map<String, Type> lightTextKeys = <String, Type>{
   // etc
   lightTextBackgroundOpacityKey: double,
   lightIconSizeKey: double,
+  lightLineLinksKey: bool,
 };
 
 // Shared //

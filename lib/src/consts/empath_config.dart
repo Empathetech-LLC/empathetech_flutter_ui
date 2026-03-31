@@ -515,6 +515,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
 
   darkTextBackgroundOpacityKey: defaultTextOpacity,
   darkIconSizeKey: defaultIconSize,
+  darkLineLinksKey: false,
 
   // Light
   lightDisplayFontFamilyKey: roboto,
@@ -564,6 +565,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
 
   lightTextBackgroundOpacityKey: defaultTextOpacity,
   lightIconSizeKey: defaultIconSize,
+  lightLineLinksKey: false,
 };
 
 /// [baseEmpathConfig] with a more compact layout and hidden scrolls
