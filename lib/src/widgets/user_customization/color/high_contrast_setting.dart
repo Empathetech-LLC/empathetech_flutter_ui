@@ -7,38 +7,68 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+/// High contrast Empath green ==
+/// 0xFF00FFB4
+const int hceGreenHex = 0xFF00FFB4;
+
+/// High contrast Empath green ==
+/// 0xFF00FFB4
+const Color hceGreen = Color(hceGreenHex);
+
+/// High contrast Empath gold ==
+/// 0xFFFFB400
+const int hceGoldHex = 0xFFFFB400;
+
+/// High contrast Empath gold ==
+/// 0xFFFFB400
+const Color hceGold = Color(0xFFFFB400);
+
+/// High contrast Empath purple ==
+/// 0xFFB400FF
+const int hcePurpleHex = 0xFFB400FF;
+
+/// High contrast Empath purple ==
+/// 0xFFB400FF
+const Color hcePurple = Color(0xFFB400FF);
+
+/// 0xFFFF6700
+const int safetyOrangeHex = 0xFFFF6700;
+
+/// 0xFFFF6700
+const Color safetyOrange = Color(safetyOrangeHex);
+
 /// Custom [ColorScheme.highContrastDark]
 const ColorScheme ezHighContrastDark = ColorScheme(
   brightness: Brightness.dark,
   // Primary
-  primary: Color(0xFF00FFB4),
+  primary: hceGreen,
   onPrimary: Colors.black,
-  primaryContainer: Colors.white,
+  primaryContainer: darkOutline,
   onPrimaryContainer: Colors.black,
 
   // Secondary
-  secondary: Color(0xFFFFB400),
+  secondary: hceGold,
   onSecondary: Colors.black,
-  secondaryContainer: Colors.white,
+  secondaryContainer: darkOutline,
   onSecondaryContainer: Colors.black,
 
   // Tertiary
-  tertiary: Color(0xFFB400FF),
+  tertiary: hcePurple,
   onTertiary: Colors.white,
-  tertiaryContainer: Colors.white,
+  tertiaryContainer: darkOutline,
   onTertiaryContainer: Colors.black,
 
   // Error
-  error: Color(0xFFB400FF),
+  error: safetyOrange,
   onError: Colors.white,
-  errorContainer: Colors.white,
+  errorContainer: darkOutline,
   onErrorContainer: Colors.black,
 
   // Surface
-  surface: Colors.black,
-  onSurface: Colors.white,
   surfaceContainer: Colors.black,
-  surfaceDim: Colors.black,
+  surfaceDim: darkSurfaceContainer,
+  surface: darkSurfaceDim,
+  onSurface: Colors.white,
 
   // Misc
   outline: darkOutline,
@@ -52,34 +82,34 @@ const ColorScheme ezHighContrastDark = ColorScheme(
 const ColorScheme ezHighContrastLight = ColorScheme(
   brightness: Brightness.light,
   // Primary
-  primary: Color(0xFFB400FF),
+  primary: hcePurple,
   onPrimary: Colors.white,
-  primaryContainer: Colors.black,
+  primaryContainer: lightOutline,
   onPrimaryContainer: Colors.white,
 
   // Secondary
-  secondary: Color(0xFFFFB400),
+  secondary: hceGold,
   onSecondary: Colors.black,
-  secondaryContainer: Colors.black,
+  secondaryContainer: lightOutline,
   onSecondaryContainer: Colors.white,
 
   // Tertiary
-  tertiary: Color(0xFF00FFB4),
+  tertiary: hceGreen,
   onTertiary: Colors.black,
-  tertiaryContainer: Colors.black,
+  tertiaryContainer: lightOutline,
   onTertiaryContainer: Colors.white,
 
   // Error
-  error: Color(0xFF00FFB4),
-  onError: Colors.black,
-  errorContainer: Colors.black,
+  error: safetyOrange,
+  onError: Colors.white,
+  errorContainer: lightOutline,
   onErrorContainer: Colors.white,
 
   // Surface
+  surfaceContainer: lightSurfaceContainer,
+  surfaceDim: lightSurfaceDim,
   surface: Colors.white,
   onSurface: Colors.black,
-  surfaceContainer: Colors.white,
-  surfaceDim: Colors.white,
 
   // Misc
   outline: lightOutline,
@@ -112,21 +142,19 @@ class EzHighContrastColorsSetting extends StatelessWidget {
   Widget build(BuildContext context) => EzElevatedIconButton(
         style: EzConfig.isDark
             ? ElevatedButton.styleFrom(
-                backgroundColor: darkSurface,
+                backgroundColor: darkSurfaceDim,
                 foregroundColor: Colors.white,
                 shadowColor: Colors.transparent,
-                iconColor: Colors.white,
-                overlayColor: Colors.white,
+                overlayColor: hceGreen,
                 side: EzConfig.borderSide(darkOutline),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
               )
             : ElevatedButton.styleFrom(
-                backgroundColor: lightSurface,
+                backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
                 shadowColor: Colors.transparent,
-                iconColor: Colors.black,
-                overlayColor: Colors.black,
+                overlayColor: hcePurple,
                 side: EzConfig.borderSide(lightOutline),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
