@@ -58,36 +58,36 @@ class EzNebulaConfig extends StatelessWidget {
         brightness: Brightness.dark,
         // Primary
         primary: empathSand,
-        primaryContainer: empathSandDim,
         onPrimary: Colors.black,
+        primaryContainer: empathSandDim,
         onPrimaryContainer: Colors.black,
 
         // Secondary
         secondary: empathEucalyptus,
-        secondaryContainer: empathEucalyptusDim,
         onSecondary: Colors.black,
+        secondaryContainer: empathEucalyptusDim,
         onSecondaryContainer: Colors.black,
 
         // Tertiary
         tertiary: empathPurple,
-        tertiaryContainer: empathPurpleDim,
         onTertiary: Colors.white,
+        tertiaryContainer: empathPurpleDim,
         onTertiaryContainer: Colors.white,
 
         // Error
         error: Colors.red,
-        errorContainer: Colors.redAccent,
         onError: Colors.white,
+        errorContainer: Colors.red,
         onErrorContainer: Colors.white,
 
         // Surface
         surface: Color(0x19A520DA),
+        onSurface: Colors.white,
         surfaceContainer: Color(0xFF0C0C0C),
         surfaceDim: Color(0xFF0C0C0C),
-        onSurface: Colors.white,
 
         // Misc
-        inversePrimary: empathSand,
+        scrim: Colors.black,
         surfaceTint: Colors.transparent,
       ),
       Brightness.dark,
