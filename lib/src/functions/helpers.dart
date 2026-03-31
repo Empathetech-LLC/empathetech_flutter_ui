@@ -240,12 +240,9 @@ double ezIconRatio() => max(
 
 /// Recommended size for an image
 /// Starts with 160.0, chosen by visual inspection
-/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
+/// Then, applies [MediaQuery] and/or [ezIconRatio] based scaling
 double ezImageSize(BuildContext context) =>
-    MediaQuery.textScalerOf(context).scale(160.0) *
-    (EzConfig.iconSize /
-        EzConfig.getDefault(
-            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
+    MediaQuery.textScalerOf(context).scale(160.0) * ezIconRatio();
 
 /// Get the human readable name for [locale]
 String ezLocaleName(Locale locale, BuildContext context) {
