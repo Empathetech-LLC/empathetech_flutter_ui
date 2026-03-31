@@ -454,19 +454,36 @@ Must be one of [int, bool, double, String, List<String>]''');
         ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: primary,
+
+          // Primary
           primary: primary,
           primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimary: onPrimary,
           onPrimaryContainer: onPrimary,
+
+          // Secondary
           secondary: secondary,
           secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondary: onSecondary,
           onSecondaryContainer: onSecondary,
+
+          // Tertiary
           tertiary: tertiary,
           tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiary: onTertiary,
           onTertiaryContainer: onTertiary,
+
+          // Error
+          error: Colors.red,
+          onError: Colors.white,
+          errorContainer: Colors.red,
+          onErrorContainer: Colors.white,
+
+          // Surface
           onSurface: Colors.white,
+
+          // Misc
+          scrim: Colors.black,
           surfaceTint: Colors.transparent,
         ),
         Brightness.dark,
@@ -584,19 +601,36 @@ Must be one of [int, bool, double, String, List<String>]''');
         ColorScheme.fromSeed(
           brightness: Brightness.light,
           seedColor: primary,
+
+          // Primary
           primary: primary,
           primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimary: onPrimary,
           onPrimaryContainer: onPrimary,
+
+          // Secondary
           secondary: secondary,
           secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondary: onSecondary,
           onSecondaryContainer: onSecondary,
+
+          // Tertiary
           tertiary: tertiary,
           tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiary: onTertiary,
           onTertiaryContainer: onTertiary,
+
+          // Error
+          error: Colors.red,
+          onError: Colors.white,
+          errorContainer: Colors.red,
+          onErrorContainer: Colors.white,
+
+          // Surface
           onSurface: Colors.black,
+
+          // Misc
+          scrim: Colors.white,
           surfaceTint: Colors.transparent,
         ),
         Brightness.light,
