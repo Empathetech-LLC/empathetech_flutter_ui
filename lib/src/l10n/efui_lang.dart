@@ -984,13 +984,13 @@ abstract class EFUILang {
   /// No description provided for @dsFlipX.
   ///
   /// In en, this message translates to:
-  /// **'Horizontal\nflip'**
+  /// **'Horizontal turn'**
   String get dsFlipX;
 
   /// No description provided for @dsFlipY.
   ///
   /// In en, this message translates to:
-  /// **'Vertical\nflip'**
+  /// **'Vertical turn'**
   String get dsFlipY;
 
   /// No description provided for @dsRotate.
@@ -1002,13 +1002,13 @@ abstract class EFUILang {
   /// No description provided for @dsSlideX.
   ///
   /// In en, this message translates to:
-  /// **'Horizontal\nslide'**
+  /// **'Horizontal slide'**
   String get dsSlideX;
 
   /// No description provided for @dsSlideY.
   ///
   /// In en, this message translates to:
-  /// **'Vertical\nslide'**
+  /// **'Vertical slide'**
   String get dsSlideY;
 
   /// No description provided for @dsZoom.

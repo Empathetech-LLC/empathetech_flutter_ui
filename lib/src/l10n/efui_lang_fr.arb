@@ -195,11 +195,11 @@
   "dsMilliseconds": "Millisecondes",
 
   "dsPageTransition": "Transition de page",
-  "dsFlipX": "Retournement\nhorizontal",
-  "dsFlipY": "Retournement\nvertical",
+  "dsFlipX": "Virage horizontal",
+  "dsFlipY": "Virage vertical",
   "dsRotate": "Tourner",
-  "dsSlideX": "Diapositive\nhorizontale",
-  "dsSlideY": "Diapositive\nverticale",
+  "dsSlideX": "Diapositive horizontal",
+  "dsSlideY": "Diapositive vertical",
   "dsZoom": "Zoom",
   "dsFadeTransition": "Transition en fondu",
 

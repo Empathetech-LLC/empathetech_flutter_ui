@@ -479,19 +479,19 @@ class EFUILangFr extends EFUILang {
   String get dsPageTransition => 'Transition de page';
 
   @override
-  String get dsFlipX => 'Retournement\nhorizontal';
+  String get dsFlipX => 'Virage horizontal';
 
   @override
-  String get dsFlipY => 'Retournement\nvertical';
+  String get dsFlipY => 'Virage vertical';
 
   @override
   String get dsRotate => 'Tourner';
 
   @override
-  String get dsSlideX => 'Diapositive\nhorizontale';
+  String get dsSlideX => 'Diapositive horizontal';
 
   @override
-  String get dsSlideY => 'Diapositive\nverticale';
+  String get dsSlideY => 'Diapositive vertical';
 
   @override
   String get dsZoom => 'Zoom';

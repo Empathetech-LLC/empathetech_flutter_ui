@@ -477,19 +477,19 @@ class EFUILangEn extends EFUILang {
   String get dsPageTransition => 'Page transition';
 
   @override
-  String get dsFlipX => 'Horizontal\nflip';
+  String get dsFlipX => 'Horizontal turn';
 
   @override
-  String get dsFlipY => 'Vertical\nflip';
+  String get dsFlipY => 'Vertical turn';
 
   @override
   String get dsRotate => 'Rotate';
 
   @override
-  String get dsSlideX => 'Horizontal\nslide';
+  String get dsSlideX => 'Horizontal slide';
 
   @override
-  String get dsSlideY => 'Vertical\nslide';
+  String get dsSlideY => 'Vertical slide';
 
   @override
   String get dsZoom => 'Zoom';
@@ -1224,19 +1224,19 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPageTransition => 'Page transition';
 
   @override
-  String get dsFlipX => 'Horizontal\nflip';
+  String get dsFlipX => 'Horizontal turn';
 
   @override
-  String get dsFlipY => 'Vertical\nflip';
+  String get dsFlipY => 'Vertical turn';
 
   @override
   String get dsRotate => 'Rotate';
 
   @override
-  String get dsSlideX => 'Horizontal\nslide';
+  String get dsSlideX => 'Horizontal slide';
 
   @override
-  String get dsSlideY => 'Vertical\nslide';
+  String get dsSlideY => 'Vertical slide';
 
   @override
   String get dsZoom => 'Zoom';
