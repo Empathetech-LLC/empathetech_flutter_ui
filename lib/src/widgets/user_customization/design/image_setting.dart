@@ -154,7 +154,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             actions: <EzMaterialAction>[
               EzMaterialAction(
                 text: EzConfig.l10n.gYes,
-                onPressed: () => Navigator.of(dContext).pop((_) => true),
+                onPressed: () => Navigator.of(dContext)
+                    .pop((_) => Future<dynamic>.value(true)),
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.dsCrop,
@@ -162,12 +163,13 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.gCancel,
-                onPressed: () => Navigator.of(dContext).pop((_) => null),
+                onPressed: () => Navigator.of(dContext)
+                    .pop((_) => Future<dynamic>.value(null)),
               ),
             ],
             needsClose: false,
           ),
-        );
+        ); // TODO: fix previews, render overflow
 
         final dynamic result = await toDo(newPath);
         switch (result.runtimeType) {
@@ -759,11 +761,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             });
             final bool changed = await activateSetting();
 
-            if (changed) {
-              updateTheme
-                  ? await EzConfig.rebuildUI(widget.onComplete)
-                  : await EzConfig.redrawUI(widget.onComplete);
-            }
+            if (changed) await EzConfig.rebuildUI(widget.onComplete);
             setState(() => inProgress = false);
           },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
