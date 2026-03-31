@@ -93,16 +93,12 @@ class EzChalkboardConfig extends StatelessWidget {
         surfaceContainerHigh: chalkboardGreen,
         surfaceContainerHighest: chalkboardGreen,
         surfaceDim: chalkboardGreen,
-        onSurfaceVariant: Colors.white,
 
         // Misc
         outline: darkOutline,
         outlineVariant: darkOutlineVariant,
-        shadow: Colors.transparent,
         scrim: Colors.black,
-        inverseSurface: chalkboardGreen,
-        onInverseSurface: Colors.white,
-        inversePrimary: empathSand,
+        shadow: Colors.transparent,
         surfaceTint: Colors.transparent,
       ),
       Brightness.dark,
