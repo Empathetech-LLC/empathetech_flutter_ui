@@ -468,6 +468,9 @@ class EFUILangEs extends EFUILang {
   String get dsNone => 'Ninguna';
 
   @override
+  String get dsSystem => 'Sistema';
+
+  @override
   String get dsAnimDuration => 'Duración de la animación';
 
   @override
@@ -477,28 +480,19 @@ class EFUILangEs extends EFUILang {
   String get dsPageTransition => 'Transición de página';
 
   @override
-  String get dsSystem => 'Sistema';
+  String get dsFlipX => 'Volteo\nhorizontal';
 
   @override
-  String get dsFlip => 'Voltear';
+  String get dsFlipY => 'Volteo\nvertical';
 
   @override
   String get dsRotate => 'Girar';
 
   @override
-  String get dsScale => 'Escala';
+  String get dsSlideX => 'Diapositiva\nhorizontal';
 
   @override
-  String get dsSlideLeft => 'Deslizar a la izquierda';
-
-  @override
-  String get dsSlideRight => 'Desliza hacia la derecha';
-
-  @override
-  String get dsSlideUp => 'Deslizar hacia arriba';
-
-  @override
-  String get dsSlideDown => 'Bajar deslizándose';
+  String get dsSlideY => 'Diapositiva\nvertical';
 
   @override
   String get dsZoom => 'Zoom';

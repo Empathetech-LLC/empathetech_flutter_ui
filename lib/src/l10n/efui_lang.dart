@@ -957,6 +957,12 @@ abstract class EFUILang {
   /// **'None'**
   String get dsNone;
 
+  /// No description provided for @dsSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get dsSystem;
+
   /// No description provided for @dsAnimDuration.
   ///
   /// In en, this message translates to:
@@ -975,17 +981,17 @@ abstract class EFUILang {
   /// **'Page transition'**
   String get dsPageTransition;
 
-  /// No description provided for @dsSystem.
+  /// No description provided for @dsFlipX.
   ///
   /// In en, this message translates to:
-  /// **'System'**
-  String get dsSystem;
+  /// **'Horizontal\nflip'**
+  String get dsFlipX;
 
-  /// No description provided for @dsFlip.
+  /// No description provided for @dsFlipY.
   ///
   /// In en, this message translates to:
-  /// **'Flip'**
-  String get dsFlip;
+  /// **'Vertical\nflip'**
+  String get dsFlipY;
 
   /// No description provided for @dsRotate.
   ///
@@ -993,35 +999,17 @@ abstract class EFUILang {
   /// **'Rotate'**
   String get dsRotate;
 
-  /// No description provided for @dsScale.
+  /// No description provided for @dsSlideX.
   ///
   /// In en, this message translates to:
-  /// **'Scale'**
-  String get dsScale;
+  /// **'Horizontal\nslide'**
+  String get dsSlideX;
 
-  /// No description provided for @dsSlideLeft.
+  /// No description provided for @dsSlideY.
   ///
   /// In en, this message translates to:
-  /// **'Slide left'**
-  String get dsSlideLeft;
-
-  /// No description provided for @dsSlideRight.
-  ///
-  /// In en, this message translates to:
-  /// **'Slide right'**
-  String get dsSlideRight;
-
-  /// No description provided for @dsSlideUp.
-  ///
-  /// In en, this message translates to:
-  /// **'Slide up'**
-  String get dsSlideUp;
-
-  /// No description provided for @dsSlideDown.
-  ///
-  /// In en, this message translates to:
-  /// **'Slide down'**
-  String get dsSlideDown;
+  /// **'Vertical\nslide'**
+  String get dsSlideY;
 
   /// No description provided for @dsZoom.
   ///

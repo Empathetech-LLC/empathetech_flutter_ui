@@ -123,7 +123,6 @@
   
 
 
-  "ssPageTitle": "Configuración",
   "ssNavHint": "Abrir la página de configuración",
   "ssRestartReminder": "Cierre y vuelva a abrir la app para aplicar los cambios.",
   "ssRestartReminderWeb": "Recarga o actualice la página para aplicar tus cambios.",
@@ -190,19 +189,17 @@
 
   "dsPageTitle": "Configuración de diseño",
   "dsNone": "Ninguna",
+  "dsSystem": "Sistema",
 
   "dsAnimDuration": "Duración de la animación",
   "dsMilliseconds": "Milisegundos",
 
   "dsPageTransition": "Transición de página",
-  "dsSystem": "Sistema",
-  "dsFlip": "Voltear",
+  "dsFlipX": "Volteo\nhorizontal",
+  "dsFlipY": "Volteo\nvertical",
   "dsRotate": "Girar",
-  "dsScale": "Escala",
-  "dsSlideLeft": "Deslizar a la izquierda",
-  "dsSlideRight": "Desliza hacia la derecha",
-  "dsSlideUp": "Deslizar hacia arriba",
-  "dsSlideDown": "Bajar deslizándose",
+  "dsSlideX": "Diapositiva\nhorizontal",
+  "dsSlideY": "Diapositiva\nvertical",
   "dsZoom": "Zoom",
   "dsFadeTransition": "Transición de desvanecimiento",
 

@@ -189,19 +189,17 @@
 
   "dsPageTitle": "Design settings",
   "dsNone": "None",
+  "dsSystem": "System",
 
   "dsAnimDuration": "Animation duration",
   "dsMilliseconds": "Milliseconds",
 
   "dsPageTransition": "Page transition",
-  "dsSystem": "System",
-  "dsFlip": "Flip",
+  "dsFlipX": "Horizontal\nflip",
+  "dsFlipY": "Vertical\nflip",
   "dsRotate": "Rotate",
-  "dsScale": "Scale",
-  "dsSlideLeft": "Slide left",
-  "dsSlideRight": "Slide right",
-  "dsSlideUp": "Slide up",
-  "dsSlideDown": "Slide down",
+  "dsSlideX": "Horizontal\nslide",
+  "dsSlideY": "Vertical\nslide",
   "dsZoom": "Zoom",
   "dsFadeTransition": "Fade transition",
 
