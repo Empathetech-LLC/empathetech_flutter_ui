@@ -251,14 +251,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           children: <Widget>[
             if (widget.quickHeader != null) ...widget.quickHeader!,
 
-            // High contrast
-            EzHighContrastColorsSetting(redraw),
-            EzConfig.spacer,
-
-            // MonoChrome
-            EzMonoChromeColorsSetting(redraw),
-            EzConfig.separator,
-
             // From image
             Semantics(
               label: EzConfig.l10n.csSchemeBase.replaceAll('\n', ' '),
@@ -278,6 +270,14 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
                 ),
               ),
             ),
+            EzConfig.separator,
+
+            // High contrast
+            EzHighContrastColorsSetting(redraw),
+            EzConfig.spacer,
+
+            // MonoChrome
+            EzMonoChromeColorsSetting(redraw),
 
             // Additional settings
             if (widget.quickFooter != null) ...widget.quickFooter!,
