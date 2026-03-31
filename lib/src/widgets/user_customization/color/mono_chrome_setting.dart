@@ -11,30 +11,38 @@ import 'package:flutter/material.dart';
 const ColorScheme ezMonoChromeDark = ColorScheme.highContrastDark(
   // Primary
   primary: Colors.white,
-  primaryContainer: darkOutline,
   onPrimary: Colors.black,
+  primaryContainer: darkOutline,
   onPrimaryContainer: Colors.black,
 
   // Secondary
   secondary: Colors.white,
-  secondaryContainer: darkOutline,
   onSecondary: Colors.black,
+  secondaryContainer: darkOutline,
   onSecondaryContainer: Colors.black,
 
   // Tertiary
   tertiary: Colors.white,
-  tertiaryContainer: darkOutline,
   onTertiary: Colors.black,
+  tertiaryContainer: darkOutline,
   onTertiaryContainer: Colors.black,
 
-  // Misc
+  // Error
+  error: Colors.red,
+  onError: Colors.white,
+  errorContainer: Colors.redAccent,
+  onErrorContainer: Colors.white,
+
+  // Surface
+  surfaceContainer: darkSurfaceContainer,
+  surfaceDim: darkSurfaceDim,
   surface: darkSurface,
   onSurface: Colors.white,
-  surfaceDim: darkSurfaceDim,
-  surfaceContainer: darkSurfaceContainer,
+
+  // Misc
   outline: darkOutline,
   outlineVariant: darkOutlineVariant,
-  inversePrimary: Colors.white,
+  scrim: Colors.black,
   shadow: Colors.transparent,
   surfaceTint: Colors.transparent,
 );
@@ -43,30 +51,38 @@ const ColorScheme ezMonoChromeDark = ColorScheme.highContrastDark(
 const ColorScheme ezMonoChromeLight = ColorScheme.highContrastLight(
   // Primary
   primary: Colors.black,
-  primaryContainer: lightOutline,
   onPrimary: Colors.white,
+  primaryContainer: lightOutline,
   onPrimaryContainer: Colors.white,
 
   // Secondary
   secondary: Colors.black,
-  secondaryContainer: lightOutline,
   onSecondary: Colors.white,
+  secondaryContainer: lightOutline,
   onSecondaryContainer: Colors.white,
 
   // Tertiary
   tertiary: Colors.black,
-  tertiaryContainer: lightOutline,
   onTertiary: Colors.white,
+  tertiaryContainer: lightOutline,
   onTertiaryContainer: Colors.white,
 
+  // Error
+  error: Colors.red,
+  onError: Colors.white,
+  errorContainer: Colors.redAccent,
+  onErrorContainer: Colors.white,
+
   // Surface
+  surfaceContainer: lightSurfaceContainer,
+  surfaceDim: lightSurfaceDim,
   surface: lightSurface,
   onSurface: Colors.black,
-  surfaceDim: lightSurfaceDim,
-  surfaceContainer: lightSurfaceContainer,
+
+  // Misc
   outline: lightOutline,
   outlineVariant: lightOutlineVariant,
-  inversePrimary: Colors.black,
+  scrim: Colors.white,
   shadow: Colors.transparent,
   surfaceTint: Colors.transparent,
 );
@@ -96,20 +112,22 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
             ? ElevatedButton.styleFrom(
                 backgroundColor: darkSurface,
                 foregroundColor: Colors.white,
-                shadowColor: Colors.transparent,
                 iconColor: Colors.white,
+                shadowColor: Colors.transparent,
                 overlayColor: Colors.white,
-                side: EzConfig.borderSide(darkOutline),
+                side: EzConfig.borderSide(
+                    darkOutline.withValues(alpha: EzConfig.borderOpacity)),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
               )
             : ElevatedButton.styleFrom(
                 backgroundColor: lightSurface,
                 foregroundColor: Colors.black,
-                shadowColor: Colors.transparent,
                 iconColor: Colors.black,
+                shadowColor: Colors.transparent,
                 overlayColor: Colors.black,
-                side: EzConfig.borderSide(lightOutline),
+                side: EzConfig.borderSide(
+                    lightOutline.withValues(alpha: EzConfig.borderOpacity)),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
               ),
@@ -123,10 +141,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
 
           await EzConfig.rebuildUI(onComplete);
         },
-        icon: Icon(
-          Icons.contrast,
-          color: EzConfig.colors.onSurface,
-        ),
+        icon: const Icon(Icons.contrast),
         label: EzConfig.l10n.csMonoChrome,
       );
 }

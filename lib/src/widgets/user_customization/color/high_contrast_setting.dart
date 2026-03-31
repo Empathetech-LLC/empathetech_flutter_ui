@@ -43,25 +43,25 @@ const ColorScheme ezHighContrastDark = ColorScheme(
   // Primary
   primary: hceGreen,
   onPrimary: Colors.black,
-  primaryContainer: darkOutline,
+  primaryContainer: Colors.white,
   onPrimaryContainer: Colors.black,
 
   // Secondary
   secondary: hceGold,
   onSecondary: Colors.black,
-  secondaryContainer: darkOutline,
+  secondaryContainer: Colors.white,
   onSecondaryContainer: Colors.black,
 
   // Tertiary
   tertiary: hcePurple,
   onTertiary: Colors.white,
-  tertiaryContainer: darkOutline,
+  tertiaryContainer: Colors.white,
   onTertiaryContainer: Colors.black,
 
   // Error
   error: safetyOrange,
   onError: Colors.white,
-  errorContainer: darkOutline,
+  errorContainer: Colors.white,
   onErrorContainer: Colors.black,
 
   // Surface
@@ -84,25 +84,25 @@ const ColorScheme ezHighContrastLight = ColorScheme(
   // Primary
   primary: hcePurple,
   onPrimary: Colors.white,
-  primaryContainer: lightOutline,
+  primaryContainer: Colors.black,
   onPrimaryContainer: Colors.white,
 
   // Secondary
   secondary: hceGold,
   onSecondary: Colors.black,
-  secondaryContainer: lightOutline,
+  secondaryContainer: Colors.black,
   onSecondaryContainer: Colors.white,
 
   // Tertiary
   tertiary: hceGreen,
   onTertiary: Colors.black,
-  tertiaryContainer: lightOutline,
+  tertiaryContainer: Colors.black,
   onTertiaryContainer: Colors.white,
 
   // Error
   error: safetyOrange,
   onError: Colors.white,
-  errorContainer: lightOutline,
+  errorContainer: Colors.black,
   onErrorContainer: Colors.white,
 
   // Surface
@@ -144,18 +144,22 @@ class EzHighContrastColorsSetting extends StatelessWidget {
             ? ElevatedButton.styleFrom(
                 backgroundColor: darkSurfaceDim,
                 foregroundColor: Colors.white,
+                iconColor: hceGreen,
                 shadowColor: Colors.transparent,
                 overlayColor: hceGreen,
-                side: EzConfig.borderSide(darkOutline),
+                side: EzConfig.borderSide(
+                    Colors.white.withValues(alpha: EzConfig.borderOpacity)),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
               )
             : ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
+                iconColor: hcePurple,
                 shadowColor: Colors.transparent,
                 overlayColor: hcePurple,
-                side: EzConfig.borderSide(lightOutline),
+                side: EzConfig.borderSide(
+                    Colors.black.withValues(alpha: EzConfig.borderOpacity)),
                 textStyle:
                     EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
               ),
@@ -169,10 +173,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
 
           await EzConfig.rebuildUI(onComplete);
         },
-        icon: Icon(
-          Icons.contrast,
-          color: EzConfig.colors.onSurface,
-        ),
-        label: EzConfig.l10n.csMonoChrome,
+        icon: const Icon(Icons.contrast),
+        label: EzConfig.l10n.csHighContrast,
       );
 }
