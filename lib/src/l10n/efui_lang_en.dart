@@ -477,10 +477,10 @@ class EFUILangEn extends EFUILang {
   String get dsPageTransition => 'Page transition';
 
   @override
-  String get dsFlipX => 'Horizontal turn';
+  String get dsTurnX => 'Horizontal turn';
 
   @override
-  String get dsFlipY => 'Vertical turn';
+  String get dsTurnY => 'Vertical turn';
 
   @override
   String get dsRotate => 'Rotate';
@@ -1224,10 +1224,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPageTransition => 'Page transition';
 
   @override
-  String get dsFlipX => 'Horizontal turn';
+  String get dsTurnX => 'Horizontal turn';
 
   @override
-  String get dsFlipY => 'Vertical turn';
+  String get dsTurnY => 'Vertical turn';
 
   @override
   String get dsRotate => 'Rotate';

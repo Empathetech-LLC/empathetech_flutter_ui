@@ -195,8 +195,8 @@
   "dsMilliseconds": "Millisecondes",
 
   "dsPageTransition": "Transition de page",
-  "dsFlipX": "Virage horizontal",
-  "dsFlipY": "Virage vertical",
+  "dsTurnX": "Virage horizontal",
+  "dsTurnY": "Virage vertical",
   "dsRotate": "Tourner",
   "dsSlideX": "Diapositive horizontal",
   "dsSlideY": "Diapositive vertical",

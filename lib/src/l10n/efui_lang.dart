@@ -981,17 +981,17 @@ abstract class EFUILang {
   /// **'Page transition'**
   String get dsPageTransition;
 
-  /// No description provided for @dsFlipX.
+  /// No description provided for @dsTurnX.
   ///
   /// In en, this message translates to:
   /// **'Horizontal turn'**
-  String get dsFlipX;
+  String get dsTurnX;
 
-  /// No description provided for @dsFlipY.
+  /// No description provided for @dsTurnY.
   ///
   /// In en, this message translates to:
   /// **'Vertical turn'**
-  String get dsFlipY;
+  String get dsTurnY;
 
   /// No description provided for @dsRotate.
   ///
