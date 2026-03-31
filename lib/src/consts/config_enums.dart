@@ -7,7 +7,10 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+// Shared //
+
 const String none = 'none';
+const String system = 'system';
 
 // Box Fit //
 
@@ -80,16 +83,22 @@ extension EBSConfig on EzButtonShape {
     switch (this) {
       case EzButtonShape.pill:
         return pill;
+
       case EzButtonShape.rect:
         return rect;
+
       case EzButtonShape.roundRect:
         return roundRect;
+
       case EzButtonShape.leftGram:
         return leftGram;
+
       case EzButtonShape.rightGram:
         return rightGram;
+
       case EzButtonShape.gem:
         return gem;
+
       case EzButtonShape.jewel:
         return jewel;
     }
@@ -100,16 +109,22 @@ extension EBSConfig on EzButtonShape {
     switch (value) {
       case rect:
         return EzButtonShape.rect;
+
       case roundRect:
         return EzButtonShape.roundRect;
+
       case leftGram:
         return EzButtonShape.leftGram;
+
       case rightGram:
         return EzButtonShape.rightGram;
+
       case gem:
         return EzButtonShape.gem;
+
       case jewel:
         return EzButtonShape.jewel;
+
       default:
         return EzButtonShape.pill;
     }
@@ -119,16 +134,22 @@ extension EBSConfig on EzButtonShape {
     switch (this) {
       case EzButtonShape.pill:
         return EzConfig.l10n.dsPill;
+
       case EzButtonShape.rect:
         return EzConfig.l10n.dsRectangle;
+
       case EzButtonShape.roundRect:
         return EzConfig.l10n.dsRoundRectangle;
+
       case EzButtonShape.leftGram:
         return EzConfig.l10n.dsLeftGram;
+
       case EzButtonShape.rightGram:
         return EzConfig.l10n.dsRightGram;
+
       case EzButtonShape.gem:
         return EzConfig.l10n.dsGem;
+
       case EzButtonShape.jewel:
         return EzConfig.l10n.dsJewel;
     }
@@ -140,25 +161,20 @@ extension EBSConfig on EzButtonShape {
 enum EzPageTransition {
   none,
   system,
-  flip,
+  flipX,
+  flipY,
   rotate,
-  scale,
-  slideLeft,
-  slideRight,
-  slideUp,
-  slideDown,
+  slideX,
+  slideY,
   zoom,
 }
 
-const String _system = 'system';
-const String _flip = 'flip';
-const String _rotate = 'rotate';
-const String _scale = 'scale';
-const String _slideLeft = 'slideLeft';
-const String _slideRight = 'slideRight';
-const String _slideUp = 'slideUp';
-const String _slideDown = 'slideDown';
-const String _zoom = 'zoom';
+const String flipX = 'flipX';
+const String flipY = 'flipY';
+const String rotate = 'rotate';
+const String slideX = 'slideX';
+const String slideY = 'slideY';
+const String zoom = 'zoom';
 
 /// EzPageTransition config
 extension EPTConfig on EzPageTransition {
@@ -166,26 +182,31 @@ extension EPTConfig on EzPageTransition {
     switch (this) {
       case EzPageTransition.none:
         return const Icon(Icons.cancel);
+
       case EzPageTransition.system:
         return Icon(EzConfig.onMobile
             ? EzConfig.platform == TargetPlatform.iOS
                 ? Icons.phone_iphone
                 : Icons.phone_android
             : Icons.computer);
-      case EzPageTransition.flip:
+
+      case EzPageTransition.flipX:
         return const Icon(Icons.flip);
+
+      case EzPageTransition.flipY:
+        return const Icon(Icons.u_turn_left);
+
       case EzPageTransition.rotate:
-        return const Icon(Icons.rotate_right);
-      case EzPageTransition.scale:
-        return const Icon(Icons.scale);
-      case EzPageTransition.slideLeft:
-        return const Icon(Icons.keyboard_double_arrow_left);
-      case EzPageTransition.slideRight:
-        return const Icon(Icons.keyboard_double_arrow_right);
-      case EzPageTransition.slideUp:
-        return const Icon(Icons.keyboard_double_arrow_up);
-      case EzPageTransition.slideDown:
+        return const Icon(Icons.rotate_90_degrees_cw);
+
+      case EzPageTransition.slideX:
+        return Icon(EzConfig.isLTR
+            ? Icons.keyboard_double_arrow_right
+            : Icons.keyboard_double_arrow_left);
+
+      case EzPageTransition.slideY:
         return const Icon(Icons.keyboard_double_arrow_down);
+
       case EzPageTransition.zoom:
         return const Icon(Icons.zoom_in);
     }
@@ -195,24 +216,27 @@ extension EPTConfig on EzPageTransition {
     switch (this) {
       case EzPageTransition.none:
         return none;
+
       case EzPageTransition.system:
-        return _system;
-      case EzPageTransition.flip:
-        return _flip;
+        return system;
+
+      case EzPageTransition.flipX:
+        return flipX;
+
+      case EzPageTransition.flipY:
+        return flipY;
+
       case EzPageTransition.rotate:
-        return _rotate;
-      case EzPageTransition.scale:
-        return _scale;
-      case EzPageTransition.slideLeft:
-        return _slideLeft;
-      case EzPageTransition.slideRight:
-        return _slideRight;
-      case EzPageTransition.slideUp:
-        return _slideUp;
-      case EzPageTransition.slideDown:
-        return _slideDown;
+        return rotate;
+
+      case EzPageTransition.slideX:
+        return slideX;
+
+      case EzPageTransition.slideY:
+        return slideY;
+
       case EzPageTransition.zoom:
-        return _zoom;
+        return zoom;
     }
   }
 
@@ -221,22 +245,25 @@ extension EPTConfig on EzPageTransition {
     switch (value) {
       case none:
         return EzPageTransition.none;
-      case _flip:
-        return EzPageTransition.flip;
-      case _rotate:
+
+      case flipX:
+        return EzPageTransition.flipX;
+
+      case flipY:
+        return EzPageTransition.flipY;
+
+      case rotate:
         return EzPageTransition.rotate;
-      case _scale:
-        return EzPageTransition.scale;
-      case _slideLeft:
-        return EzPageTransition.slideLeft;
-      case _slideRight:
-        return EzPageTransition.slideRight;
-      case _slideUp:
-        return EzPageTransition.slideUp;
-      case _slideDown:
-        return EzPageTransition.slideDown;
-      case _zoom:
+
+      case slideX:
+        return EzPageTransition.slideX;
+
+      case slideY:
+        return EzPageTransition.slideY;
+
+      case zoom:
         return EzPageTransition.zoom;
+
       default:
         return EzPageTransition.system;
     }
@@ -246,22 +273,25 @@ extension EPTConfig on EzPageTransition {
     switch (this) {
       case EzPageTransition.none:
         return EzConfig.l10n.dsNone;
+
       case EzPageTransition.system:
         return EzConfig.l10n.dsSystem;
-      case EzPageTransition.flip:
-        return EzConfig.l10n.dsFlip;
+
+      case EzPageTransition.flipX:
+        return EzConfig.l10n.dsFlipX;
+
+      case EzPageTransition.flipY:
+        return EzConfig.l10n.dsFlipY;
+
       case EzPageTransition.rotate:
         return EzConfig.l10n.dsRotate;
-      case EzPageTransition.scale:
-        return EzConfig.l10n.dsScale;
-      case EzPageTransition.slideLeft:
-        return EzConfig.l10n.dsSlideLeft;
-      case EzPageTransition.slideRight:
-        return EzConfig.l10n.dsSlideRight;
-      case EzPageTransition.slideUp:
-        return EzConfig.l10n.dsSlideUp;
-      case EzPageTransition.slideDown:
-        return EzConfig.l10n.dsSlideDown;
+
+      case EzPageTransition.slideX:
+        return EzConfig.l10n.dsSlideX;
+
+      case EzPageTransition.slideY:
+        return EzConfig.l10n.dsSlideY;
+
       case EzPageTransition.zoom:
         return EzConfig.l10n.dsZoom;
     }
