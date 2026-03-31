@@ -6,6 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class EzThemeCoin extends StatefulWidget {
   /// [EzIconButton] for toggling [EzConfig.updateBoth]
@@ -21,7 +22,7 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
   @override
   Widget build(BuildContext context) {
     final IconData icon = both
-        ? Icons.contrast
+        ? LineIcons.yinYang
         : (EzConfig.isDark ? Icons.dark_mode : Icons.light_mode);
 
     final String editing = EzConfig.l10n.gEditing +
