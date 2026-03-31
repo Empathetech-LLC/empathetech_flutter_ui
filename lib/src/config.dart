@@ -954,6 +954,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool get showScroll => _provPoint.layout.showScroll;
 
   /// Theme aware [EzTextCache] alias
+  static double get textBackgroundOpacity => _provPoint.text.backgroundOpacity;
+
+  /// Theme aware [EzTextCache] alias
   static double get iconSize => _provPoint.text.iconSize;
 
   /// Theme aware [EzTextCache] alias

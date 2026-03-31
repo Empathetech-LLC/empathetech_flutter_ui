@@ -383,19 +383,11 @@ class _QuickTextSettings extends StatefulWidget {
 class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the build data //
 
-  late double backOpacity = EzConfig.get(EzConfig.isDark
-      ? darkTextBackgroundOpacityKey
-      : lightTextBackgroundOpacityKey);
+  late double backOpacity = EzConfig.textBackgroundOpacity;
   late Color backgroundColor =
       EzConfig.colors.surface.withValues(alpha: backOpacity);
 
   // Define custom functions //
-
-  double? liveOpacity() => Theme.of(context)
-      .textButtonTheme
-      .style
-      ?.backgroundColor
-      ?.resolve(<WidgetState>{})?.a;
 
   void redraw() {
     widget.onUpdate();
@@ -565,8 +557,10 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               if (EzConfig.updateBoth || !EzConfig.isDark) {
                 await EzConfig.setDouble(lightTextBackgroundOpacityKey, value);
               }
+
               if (context.mounted) {
-                EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                EzConfig.pingRebuild(ezTextRebuildCheck(context) ||
+                    (value != EzConfig.textBackgroundOpacity));
               }
             },
 

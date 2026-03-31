@@ -102,6 +102,7 @@ class EzConfigProvider extends ChangeNotifier {
         showScroll: EzConfig.get(darkShowScrollKey),
       );
       _text = EzTextCache(
+        backgroundOpacity: EzConfig.get(darkTextBackgroundOpacityKey),
         iconSize: EzConfig.get(darkIconSizeKey),
         lineLinks: EzConfig.get(darkLineLinksKey),
         startLine: const EzNewLine(textAlign: TextAlign.start),
@@ -140,6 +141,7 @@ class EzConfigProvider extends ChangeNotifier {
         showScroll: EzConfig.get(lightShowScrollKey),
       );
       _text = EzTextCache(
+        backgroundOpacity: EzConfig.get(lightTextBackgroundOpacityKey),
         iconSize: EzConfig.get(lightIconSizeKey),
         lineLinks: EzConfig.get(lightLineLinksKey),
         startLine: const EzNewLine(textAlign: TextAlign.start),
@@ -410,6 +412,7 @@ class EzLayoutCache {
 }
 
 class EzTextCache {
+  final double backgroundOpacity;
   final double iconSize;
   final bool lineLinks;
 
@@ -420,6 +423,7 @@ class EzTextCache {
   /// Theme aware tracker for frequently used text values...
   /// Icon size, frequently used [EzNewLine]s
   EzTextCache({
+    required this.backgroundOpacity,
     required this.iconSize,
     required this.lineLinks,
     required this.startLine,

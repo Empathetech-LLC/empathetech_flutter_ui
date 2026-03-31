@@ -64,9 +64,7 @@ class EzTextBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = _color(EzConfig.get(EzConfig.isDark
-        ? darkTextBackgroundOpacityKey
-        : lightTextBackgroundOpacityKey));
+    final Color color = _color(EzConfig.textBackgroundOpacity);
 
     return Container(
       padding: padding ?? EzInsets.wrap(EzConfig.marginVal),

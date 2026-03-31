@@ -75,11 +75,8 @@ class EzRadio<T> extends StatelessWidget {
           ? padding ?? EzInsets.wrap(EzConfig.marginVal)
           : EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: Theme.of(context)
-            .textButtonTheme
-            .style
-            ?.backgroundColor
-            ?.resolve(<WidgetState>{}),
+        color: EzConfig.colors.surface
+            .withValues(alpha: EzConfig.textBackgroundOpacity),
         shape: BoxShape.circle,
       ),
       child: Transform.scale(
