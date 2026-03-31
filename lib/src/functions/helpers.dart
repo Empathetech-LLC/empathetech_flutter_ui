@@ -411,40 +411,40 @@ Widget ezTransitionsBuilder(
           );
       }
 
-    // Horizontal turn TODO: flip turn
+    // Horizontal turn
     case EzPageTransition.turnX:
       return AnimatedBuilder(
         animation: animation,
-        builder: (_, Widget? aChild) => EzConfig.isLTR
+        builder: (_, __) => EzConfig.isLTR
             ? Transform(
-                alignment: Alignment.centerLeft,
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.0001)
-                  ..rotateY((-1.0 + animation.value) * pi),
-                child: aChild,
+                  ..rotateY((1 - animation.value) * (pi / 2)),
+                alignment: Alignment.centerLeft,
+                child: smartFade(child),
               )
             : Transform(
-                alignment: Alignment.centerRight,
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.0001)
-                  ..rotateY((1.0 - animation.value) * -pi),
-                child: aChild,
+                  ..rotateY((1 - animation.value) * -(pi / 2)),
+                alignment: Alignment.centerRight,
+                child: smartFade(child),
               ),
-        child: smartFade(child),
+        child: child,
       );
 
-    // Vertical turn // TODO: ditto
+    // Vertical turn
     case EzPageTransition.turnY:
       return AnimatedBuilder(
         animation: animation,
-        builder: (_, Widget? aChild) => Transform(
-          alignment: Alignment.topCenter,
+        builder: (_, __) => Transform(
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.0001)
-            ..rotateX((1.0 - animation.value) * pi),
-          child: aChild,
+            ..rotateX((1 - animation.value) * -(pi / 2)),
+          alignment: Alignment.topCenter,
+          child: smartFade(child),
         ),
-        child: smartFade(child),
+        child: child,
       );
 
     // Rotate
