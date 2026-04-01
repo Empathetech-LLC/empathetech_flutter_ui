@@ -229,7 +229,7 @@ dependencies:
   shared_preferences: ^2.5.5
 
   # Community
-  empathetech_flutter_ui: ^11.1.0
+  empathetech_flutter_ui: ^11.1.1
   flutter_localized_locales: ^2.0.5
   provider: ^6.1.5+1
 
@@ -700,30 +700,29 @@ class _ErrorScreenState extends State<ErrorScreen> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(EzScreen(
-      Center(
-        child: EzScrollView(children: <Widget>[
-          Text(
-            EzConfig.l10n.g404Wonder,
-            style: EzConfig.styles.headlineLarge,
-            textAlign: TextAlign.center,
-          ),
-          EzConfig.separator,
-          Text(
-            EzConfig.l10n.g404,
-            style: ezSubTitleStyle(),
-            textAlign: TextAlign.center,
-          ),
-          EzConfig.separator,
-          Text(
-            EzConfig.l10n.g404Note,
-            style: EzConfig.styles.labelLarge,
-            textAlign: TextAlign.center,
-          ),            
-        ]),
-      ),
-      useImageDecoration: false,
-    ));
+  Widget build(BuildContext context) {
+    return ${classCaseAppName}Scaffold(EzScreen(Center(
+      child: EzScrollView(children: <Widget>[
+        Text(
+          EzConfig.l10n.g404Wonder,
+          style: EzConfig.styles.headlineLarge,
+          textAlign: TextAlign.center,
+        ),
+        EzConfig.separator,
+        Text(
+          EzConfig.l10n.g404,
+          style: ezSubTitleStyle(),
+          textAlign: TextAlign.center,
+        ),
+        EzConfig.separator,
+        Text(
+          EzConfig.l10n.g404Note,
+          style: EzConfig.styles.labelLarge,
+          textAlign: TextAlign.center,
+        ),            
+      ]),
+    )));
+  }
 }
 """);
 
