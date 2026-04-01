@@ -7,6 +7,9 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+/// 0.1
+const double _delta = 0.1;
+
 const List<String> _darkKeys = <String>[
   darkDisplayFontSizeKey,
   darkHeadlineFontSizeKey,
@@ -24,9 +27,6 @@ const List<String> _lightKeys = <String>[
 ];
 
 class EzFontDoubleBatchSetting extends StatelessWidget {
-  /// Whether both theme modes should be updated
-  final bool updateBoth;
-
   /// Required for max/min awareness
   final EzDisplayStyleProvider displayProvider;
 
@@ -50,13 +50,12 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
   EzFontDoubleBatchSetting({
     super.key,
-    required this.updateBoth,
     required this.displayProvider,
     required this.headlineProvider,
     required this.titleProvider,
     required this.bodyProvider,
     required this.labelProvider,
-    this.delta = 0.1,
+    this.delta = _delta,
   });
 
   // Define the build data //
@@ -117,7 +116,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    if (updateBoth || EzConfig.isDark) {
+                    if (EzConfig.updateBoth || EzConfig.isDark) {
                       for (final String key in _darkKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -141,7 +140,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    if (updateBoth || !EzConfig.isDark) {
+                    if (EzConfig.updateBoth || !EzConfig.isDark) {
                       for (final String key in _lightKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -179,7 +178,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
           // Core
           GestureDetector(
             onLongPress: () async {
-              if (updateBoth || EzConfig.isDark) {
+              if (EzConfig.updateBoth || EzConfig.isDark) {
                 for (final String key in _darkKeys) {
                   final EzTextStyleProvider provider = providerFromKey(key);
 
@@ -188,7 +187,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 }
               }
 
-              if (updateBoth || !EzConfig.isDark) {
+              if (EzConfig.updateBoth || !EzConfig.isDark) {
                 for (final String key in _lightKeys) {
                   final EzTextStyleProvider provider = providerFromKey(key);
 
@@ -222,7 +221,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                 )
               : EzIconButton(
                   onPressed: () async {
-                    if (updateBoth || EzConfig.isDark) {
+                    if (EzConfig.updateBoth || EzConfig.isDark) {
                       for (final String key in _darkKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -246,7 +245,7 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                       }
                     }
 
-                    if (updateBoth || !EzConfig.isDark) {
+                    if (EzConfig.updateBoth || !EzConfig.isDark) {
                       for (final String key in _lightKeys) {
                         final EzTextStyleProvider provider =
                             providerFromKey(key);
@@ -266,6 +265,172 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
                             await EzConfig.setDouble(key, sizeLimit);
                             provider.resize(sizeLimit);
                           }
+                        }
+                      }
+                    }
+
+                    if (context.mounted) {
+                      EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                    }
+                  },
+                  tooltip:
+                      '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
+                  iconSize: iconSize,
+                  icon: const Icon(Icons.add),
+                ),
+        ],
+      ),
+    );
+  }
+}
+
+class EzFontDoubleQuickSetting extends StatelessWidget {
+  /// Amount to scale (relative to the default value) on each click
+  final double delta;
+
+  /// [EzFontDoubleBatchSetting] that doesn't use [EzTextStyleProvider]s
+  /// Built primarily for [openEzFavorites]
+  EzFontDoubleQuickSetting({super.key, this.delta = _delta});
+
+  // Define custom functions //
+
+  final bool atMax = fontSizeMaxes.entries.every(
+    (MapEntry<String, double> max) => max.value == EzConfig.get(max.key),
+  );
+
+  final bool atMin = fontSizeMins.entries.every(
+    (MapEntry<String, double> min) => min.value == EzConfig.get(min.key),
+  );
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    final double? iconSize = EzConfig.styles.titleLarge?.fontSize;
+
+    return Tooltip(
+      message: EzConfig.l10n.tsFontSize,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Minus icon
+          atMin
+              ? EzIconButton(
+                  enabled: false,
+                  tooltip: EzConfig.l10n.gMinimum,
+                  iconSize: iconSize,
+                  icon: Icon(
+                    Icons.remove,
+                    color: EzConfig.colors.outline,
+                  ),
+                )
+              : EzIconButton(
+                  onPressed: () async {
+                    if (EzConfig.isDark) {
+                      for (final String key in _darkKeys) {
+                        final double currSize = EzConfig.get(key);
+
+                        if (currSize != fontSizeMins[key]) {
+                          final double newSize =
+                              currSize - (fontSizeDefaults[key]! * delta);
+                          final double sizeLimit = fontSizeMins[key]!;
+
+                          (newSize >= sizeLimit)
+                              ? await EzConfig.setDouble(key, newSize)
+                              : await EzConfig.setDouble(key, sizeLimit);
+                        }
+                      }
+                    } else {
+                      for (final String key in _lightKeys) {
+                        final double currSize = EzConfig.get(key);
+
+                        if (currSize != fontSizeMins[key]) {
+                          final double newSize =
+                              currSize - (fontSizeDefaults[key]! * delta);
+                          final double sizeLimit = fontSizeMins[key]!;
+
+                          (newSize >= sizeLimit)
+                              ? await EzConfig.setDouble(key, newSize)
+                              : await EzConfig.setDouble(key, sizeLimit);
+                        }
+                      }
+                    }
+
+                    if (context.mounted) {
+                      EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                    }
+                  },
+                  tooltip:
+                      '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsFontSize.toLowerCase()}',
+                  iconSize: iconSize,
+                  icon: const Icon(Icons.remove),
+                ),
+          EzConfig.rowMargin,
+
+          // Core
+          GestureDetector(
+            onLongPress: () async {
+              if (EzConfig.isDark) {
+                for (final String key in _darkKeys) {
+                  await EzConfig.setDouble(key, fontSizeDefaults[key]!);
+                }
+              } else {
+                for (final String key in _lightKeys) {
+                  await EzConfig.setDouble(key, fontSizeDefaults[key]!);
+                }
+              }
+
+              if (context.mounted) {
+                EzConfig.pingRebuild(ezTextRebuildCheck(context));
+              }
+            },
+            child: Icon(
+              Icons.text_fields_sharp,
+              size: iconSize,
+              color: EzConfig.colors.onSurface,
+            ),
+          ),
+          EzConfig.rowMargin,
+
+          // Plus icon
+          atMax
+              ? EzIconButton(
+                  enabled: false,
+                  tooltip: EzConfig.l10n.gMaximum,
+                  iconSize: iconSize,
+                  icon: Icon(
+                    Icons.add,
+                    color: EzConfig.colors.outline,
+                  ),
+                )
+              : EzIconButton(
+                  onPressed: () async {
+                    if (EzConfig.isDark) {
+                      for (final String key in _darkKeys) {
+                        final double currSize = EzConfig.get(key);
+
+                        if (currSize != fontSizeMaxes[key]) {
+                          final double newSize =
+                              currSize + (fontSizeDefaults[key]! * delta);
+                          final double sizeLimit = fontSizeMaxes[key]!;
+
+                          (newSize <= sizeLimit)
+                              ? await EzConfig.setDouble(key, newSize)
+                              : await EzConfig.setDouble(key, sizeLimit);
+                        }
+                      }
+                    } else {
+                      for (final String key in _lightKeys) {
+                        final double currSize = EzConfig.get(key);
+
+                        if (currSize != fontSizeMaxes[key]) {
+                          final double newSize =
+                              currSize + (fontSizeDefaults[key]! * delta);
+                          final double sizeLimit = fontSizeMaxes[key]!;
+
+                          (newSize <= sizeLimit)
+                              ? await EzConfig.setDouble(key, newSize)
+                              : await EzConfig.setDouble(key, sizeLimit);
                         }
                       }
                     }

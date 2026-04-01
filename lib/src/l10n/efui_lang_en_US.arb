@@ -6,9 +6,9 @@
   "gApply": "Apply",
   "gApplyChanges": "Apply changes",
   "gContinue": "Continue",
-  "gSkip": "Skip",
   "gOpen": "Open",
   "gOpenLink": "Open link",
+  "gSkip": "Skip",
   "gSuccess": "Success",
   "gSuccessExl": "Success!",
   "gYes": "Yes",
@@ -20,27 +20,34 @@
   "gOptional": "optional",
   "gOptions": "Options",
   "gRequired": "Required",
+  "gThe": "The",
 
   "gBack": "Back",
-  "gUndo": "Undo",
-  "gRedo": "Redo",
   "gCancel": "Cancel",
   "gClose": "Close",
   "gDisabled": "Disabled",
   "gError": "Error",
   "gFailure": "Failure",
   "gNo": "No",
+  "gRedo": "Redo",
+  "gUndo": "Undo",
+
+  "gSettings": "Settings",
+  "gGlobal": "Global",
+  "gColor": "Color",
+  "gDesign": "Design",
+  "gLayout": "Layout",
+  "gText": "Text",
 
   "gDark": "Dark",
   "gLight": "Light",
   "gSystem": "System",
 
+  "gEditing": "Editing: ",
+  "gEditingHint": "Activate to edit",
   "gDarkTheme": "Dark theme",
   "gLightTheme": "Light theme",
   "gBothThemes": "Both themes",
-
-  "gEditing": "Editing: ",
-  "gEditingThemeHint": "Open the system theme settings",
 
   "gLeft": "Left",
   "gRight": "Right",
@@ -116,7 +123,6 @@
 
 
 
-  "ssPageTitle": "Settings",
   "ssNavHint": "Open the settings page",
   "ssRestartReminder": "Close and reopen the app to apply your changes.",
   "ssRestartReminderWeb": "Reload/refresh the page to apply your changes.",
@@ -138,8 +144,10 @@
   "ssHighVisibility": "High visibility",
   "ssChalkboard": "Chalkboard",
   "ssNebula": "Nebula",
-  "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?",
-  "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?",
+  "ssWallHoles": "Wall holes",
+
+  "ssDarkOnly": "This is a dark theme preset.\nIt will set the theme mode to dark, and update that theme.\n\nContinue?",
+  "ssLightOnly": "This is a light theme preset.\nIt will set the theme mode to light, and update that theme.\n\nContinue?",
   "ssApplied": "{config} applied.",
   "ssTryMe": "Try me",
 
@@ -180,9 +188,31 @@
 
 
   "dsPageTitle": "Design settings",
+  "dsNone": "None",
+  "dsSystem": "System",
 
   "dsAnimDuration": "Animation duration",
+  "dsPlay": "Play animation",
   "dsMilliseconds": "Milliseconds",
+
+  "dsPageTransition": "Page transition",
+  "dsTurnX": "Horizontal turn",
+  "dsTurnY": "Vertical turn",
+  "dsRotate": "Rotate",
+  "dsSlideX": "Horizontal slide",
+  "dsSlideY": "Vertical slide",
+  "dsZoom": "Zoom",
+  "dsFadeTransition": "Fade transition",
+
+  "dsButtonStyle": "Button style",
+  "dsBorderWidth": "Border width",
+  "dsPill": "Pill",
+  "dsRectangle": "Rectangle",
+  "dsRoundRectangle": "Rounded rectangle",
+  "dsLeftGram": "Left parallel",
+  "dsRightGram": "Right parallel",
+  "dsGem": "Gem",
+  "dsJewel": "Jewel",
 
   "dsPreview": "Preview",
   "dsButtonOpacity": "Button opacity",
@@ -229,7 +259,8 @@
   "lsPadding": "Padding",
   "lsSpacing": "Spacing",
 
-  "lsScroll": "Hide scrollbars",
+  "lsShowBack": "Show back button",
+  "lsShowScroll": "Show scrollbars",
 
   "lsReset": "Reset {themeType} layout?",
 
@@ -273,6 +304,8 @@
   "tsLabelP1": "And ",
   "tsLabelLink": "the labels?",
   "tsLabelP2": " Not too big, not too small?",
+
+  "tsAlwaysUnderline": "Always underline links",
 
   "tsReset": "Reset {themeType} text styles?"
 }

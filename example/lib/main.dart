@@ -79,16 +79,7 @@ class OpenUI extends StatelessWidget {
             pageBuilder: (BuildContext context, GoRouterState state) =>
                 ezPageBuilder(context, state, HomeScreen()),
             routes: <RouteBase>[
-              // Generate app
-              GoRoute(
-                path: generateScreenPath,
-                name: generateScreenPath,
-                pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state,
-                        GenerateScreen((state.extra as EAGConfig))),
-              ),
-
-              // Archive config
+              // Archive
               GoRoute(
                 path: archiveScreenPath,
                 name: archiveScreenPath,
@@ -97,81 +88,21 @@ class OpenUI extends StatelessWidget {
                         ArchiveScreen((state.extra as EAGConfig))),
               ),
 
-              // Settings home
+              // Generate
               GoRoute(
-                path: settingsHomePath,
-                name: settingsHomePath,
+                path: generateScreenPath,
+                name: generateScreenPath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state, SettingsHomeScreen()),
-                routes: <RouteBase>[
-                  // Color settings
-                  GoRoute(
-                    path: colorSettingsPath,
-                    name: colorSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(context, state, ColorSettingsScreen()),
-                    routes: <RouteBase>[
-                      GoRoute(
-                        path: EzCSType.quick.path,
-                        name: EzCSType.quick.name,
-                        pageBuilder: (BuildContext context,
-                                GoRouterState state) =>
-                            ezPageBuilder(context, state,
-                                ColorSettingsScreen(target: EzCSType.quick)),
-                      ),
-                      GoRoute(
-                        path: EzCSType.advanced.path,
-                        name: EzCSType.advanced.name,
-                        pageBuilder: (BuildContext context,
-                                GoRouterState state) =>
-                            ezPageBuilder(context, state,
-                                ColorSettingsScreen(target: EzCSType.advanced)),
-                      ),
-                    ],
-                  ),
+                    ezPageBuilder(context, state,
+                        GenerateScreen((state.extra as EAGConfig))),
+              ),
 
-                  // Design settings
-                  GoRoute(
-                    path: designSettingsPath,
-                    name: designSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(context, state, DesignSettingsScreen()),
-                  ),
-
-                  // Layout settings
-                  GoRoute(
-                    path: layoutSettingsPath,
-                    name: layoutSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(context, state, LayoutSettingsScreen()),
-                  ),
-
-                  // Text settings
-                  GoRoute(
-                    path: textSettingsPath,
-                    name: textSettingsPath,
-                    pageBuilder: (BuildContext context, GoRouterState state) =>
-                        ezPageBuilder(context, state, TextSettingsScreen()),
-                    routes: <RouteBase>[
-                      GoRoute(
-                        path: EzTSType.quick.path,
-                        name: EzTSType.quick.name,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) =>
-                                ezPageBuilder(context, state,
-                                    TextSettingsScreen(target: EzTSType.quick)),
-                      ),
-                      GoRoute(
-                        path: EzTSType.advanced.path,
-                        name: EzTSType.advanced.name,
-                        pageBuilder: (BuildContext context,
-                                GoRouterState state) =>
-                            ezPageBuilder(context, state,
-                                TextSettingsScreen(target: EzTSType.advanced)),
-                      ),
-                    ],
-                  ),
-                ],
+              // Settings
+              GoRoute(
+                path: settingsHubPath,
+                name: settingsHubPath,
+                pageBuilder: (BuildContext context, GoRouterState state) =>
+                    ezPageBuilder(context, state, SettingsHubScreen()),
               ),
             ],
           ),

@@ -11,6 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
+  /// [Scaffold.body] passthrough
+  final Widget body;
+
   /// [AppBar.title] passthrough (via [Text] widget)
   final String title;
 
@@ -22,9 +25,6 @@ class OpenUIScaffold extends StatelessWidget {
 
   /// Whether to include [UploadButton] in the [MenuAnchor]
   final Future<void> Function(EAGConfig)? onUpload;
-
-  /// [Scaffold.body] passthrough
-  final Widget body;
 
   /// [FloatingActionButton]s to add on top of the [EzUpdaterFAB]
   /// BYO spacing widgets
@@ -98,7 +98,15 @@ class OpenUIScaffold extends StatelessWidget {
           body: body,
           floatingActionButton: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[updater, if (fabs != null) ...fabs!],
+            children: <Widget>[
+              updater,
+              if (config.layout.showBackFAB &&
+                  ezRootNav.currentState!.canPop()) ...<Widget>[
+                config.layout.spacer,
+                const EzBackFAB(),
+              ],
+              if (fabs != null) ...fabs!,
+            ],
           ),
           floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat

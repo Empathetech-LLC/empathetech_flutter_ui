@@ -46,6 +46,9 @@ class EzTextButton extends StatefulWidget {
   /// [TextButton.child] will be [Text] with [text], [textStyle], and [textAlign]
   final String text;
 
+  /// Optional [Text.semanticsLabel] passthrough
+  final String? semantics;
+
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
 
@@ -68,6 +71,7 @@ class EzTextButton extends StatefulWidget {
     this.clipBehavior,
     this.statesController,
     required this.text,
+    this.semantics,
     this.textStyle,
     this.textAlign,
   });
@@ -111,7 +115,12 @@ class _EzTextButtonState extends State<EzTextButton> {
       autofocus: widget.autofocus,
       clipBehavior: widget.clipBehavior,
       statesController: widget.statesController,
-      child: Text(widget.text, style: textStyle, textAlign: widget.textAlign),
+      child: Text(
+        widget.text,
+        semanticsLabel: widget.semantics,
+        style: textStyle,
+        textAlign: widget.textAlign,
+      ),
     );
   }
 }
@@ -159,6 +168,9 @@ class EzTextIconButton extends StatefulWidget {
   /// [TextButton.icon] label will be [Text] with [label], [textStyle], and [textAlign]
   final String label;
 
+  /// Optional [Text.semanticsLabel] passthrough for [label]
+  final String? semantics;
+
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
 
@@ -181,6 +193,7 @@ class EzTextIconButton extends StatefulWidget {
     this.statesController,
     required this.icon,
     required this.label,
+    this.semantics,
     this.textStyle,
     this.textAlign,
   });
@@ -226,7 +239,12 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
       statesController: widget.statesController,
       icon: widget.icon,
       iconAlignment: EzConfig.isLefty ? IconAlignment.start : IconAlignment.end,
-      label: Text(widget.label, style: textStyle, textAlign: widget.textAlign),
+      label: Text(
+        widget.label,
+        semanticsLabel: widget.semantics,
+        style: textStyle,
+        textAlign: widget.textAlign,
+      ),
     );
   }
 }

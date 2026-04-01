@@ -13,13 +13,18 @@ class EzTextBackground extends StatelessWidget {
   final Widget text;
 
   /// Defaults to [EzInsets.wrap] with [EzConfig.marginVal]
-  final EdgeInsets? margin;
+  final EdgeInsets? padding;
 
   /// Defaults to [ezRoundEdge]
+  /// moot if [buttonShape] is true
   final BorderRadiusGeometry? borderRadius;
 
-  /// false (default): [ColorScheme.surfaceContainer]
+  /// Match the current [EzConfig.buttonShape]
+  /// Takes priority over [borderRadius]
+  final bool buttonShape;
+
   /// true: [ColorScheme.surface]
+  /// false (default): [ColorScheme.surfaceContainer]
   /// null: [ColorScheme.surfaceDim]
   /// Quantum supremacy achieved
   final bool? useSurface;
@@ -32,8 +37,9 @@ class EzTextBackground extends StatelessWidget {
   const EzTextBackground(
     this.text, {
     super.key,
-    this.margin,
+    this.padding,
     this.borderRadius,
+    this.buttonShape = false,
     this.useSurface = false,
     this.backgroundColor,
   });
@@ -44,34 +50,36 @@ class EzTextBackground extends StatelessWidget {
     }
 
     late final Color baseColor;
-    if (useSurface == null) {
-      baseColor = EzConfig.colors.surfaceDim;
-    } else if (useSurface!) {
-      baseColor = EzConfig.colors.surface;
-    } else {
-      baseColor = EzConfig.colors.surfaceContainer;
+    switch (useSurface) {
+      case true:
+        baseColor = EzConfig.colors.surface;
+      case false:
+        baseColor = EzConfig.colors.surfaceContainer;
+      case null:
+        baseColor = EzConfig.colors.surfaceDim;
     }
 
     return baseColor.withValues(alpha: percent);
   }
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: margin ?? EzInsets.wrap(EzConfig.marginVal),
-        decoration: BoxDecoration(
-          color: _color(EzConfig.get(EzConfig.isDark
-              ? darkTextBackgroundOpacityKey
-              : lightTextBackgroundOpacityKey)),
-          borderRadius: borderRadius ?? ezRoundEdge,
-        ),
-        child: text,
-      );
+  Widget build(BuildContext context) {
+    final Color color = _color(EzConfig.textBackgroundOpacity);
+
+    return Container(
+      padding: padding ?? EzInsets.wrap(EzConfig.marginVal),
+      decoration: buttonShape
+          ? ShapeDecoration(color: color, shape: EzConfig.buttonShape.shape)
+          : BoxDecoration(
+              color: color,
+              borderRadius: borderRadius ?? ezRoundEdge,
+            ),
+      child: text,
+    );
+  }
 }
 
 class EzText extends StatelessWidget {
-  /// [EzTextBackground.useSurface] passthrough
-  final bool useSurface;
-
   /// [Text.data] passthrough
   final String data;
 
@@ -115,6 +123,22 @@ class EzText extends StatelessWidget {
   /// [Text.selectionColor] passthrough
   final Color? selectionColor;
 
+  /// [EzTextBackground.padding] passthrough
+  final EdgeInsets? padding;
+
+  /// [EzTextBackground.borderRadius] passthrough
+  /// moot if [buttonShape] is true
+  final BorderRadiusGeometry? borderRadius;
+
+  /// [EzTextBackground.buttonShape] passthrough
+  final bool buttonShape;
+
+  /// [EzTextBackground.useSurface] passthrough
+  /// true: [ColorScheme.surface]
+  /// false: [ColorScheme.surfaceContainer]
+  /// null: [ColorScheme.surfaceDim]
+  final bool? useSurface;
+
   /// [EzTextBackground.backgroundColor] passthrough
   final Color? backgroundColor;
 
@@ -122,7 +146,6 @@ class EzText extends StatelessWidget {
   /// [style] defaults to [TextTheme.bodyLarge]
   const EzText(
     this.data, {
-    this.useSurface = false,
     super.key,
     this.style,
     this.strutStyle,
@@ -137,6 +160,10 @@ class EzText extends StatelessWidget {
     this.textWidthBasis,
     this.textHeightBehavior,
     this.selectionColor,
+    this.padding,
+    this.borderRadius,
+    this.buttonShape = false,
+    this.useSurface = false,
     this.backgroundColor,
   });
 
@@ -157,6 +184,9 @@ class EzText extends StatelessWidget {
           textHeightBehavior: textHeightBehavior,
           selectionColor: selectionColor,
         ),
+        padding: padding,
+        borderRadius: borderRadius,
+        buttonShape: buttonShape,
         useSurface: useSurface,
         backgroundColor: backgroundColor,
       );

@@ -18,13 +18,13 @@ class EFUILangEn extends EFUILang {
   String get gContinue => 'Continue';
 
   @override
-  String get gSkip => 'Skip';
-
-  @override
   String get gOpen => 'Open';
 
   @override
   String get gOpenLink => 'Open link';
+
+  @override
+  String get gSkip => 'Skip';
 
   @override
   String get gSuccess => 'Success';
@@ -57,13 +57,10 @@ class EFUILangEn extends EFUILang {
   String get gRequired => 'Required';
 
   @override
+  String get gThe => 'The';
+
+  @override
   String get gBack => 'Back';
-
-  @override
-  String get gUndo => 'Undo';
-
-  @override
-  String get gRedo => 'Redo';
 
   @override
   String get gCancel => 'Cancel';
@@ -84,6 +81,30 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gRedo => 'Redo';
+
+  @override
+  String get gUndo => 'Undo';
+
+  @override
+  String get gSettings => 'Settings';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Color';
+
+  @override
+  String get gDesign => 'Design';
+
+  @override
+  String get gLayout => 'Layout';
+
+  @override
+  String get gText => 'Text';
+
+  @override
   String get gDark => 'Dark';
 
   @override
@@ -93,6 +114,12 @@ class EFUILangEn extends EFUILang {
   String get gSystem => 'System';
 
   @override
+  String get gEditing => 'Editing: ';
+
+  @override
+  String get gEditingHint => 'Activate to edit';
+
+  @override
   String get gDarkTheme => 'Dark theme';
 
   @override
@@ -100,12 +127,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gBothThemes => 'Both themes';
-
-  @override
-  String get gEditing => 'Editing: ';
-
-  @override
-  String get gEditingThemeHint => 'Open the system theme settings';
 
   @override
   String get gLeft => 'Left';
@@ -293,9 +314,6 @@ class EFUILangEn extends EFUILang {
   String get gYou => 'Set by you';
 
   @override
-  String get ssPageTitle => 'Settings';
-
-  @override
   String get ssNavHint => 'Open the settings page';
 
   @override
@@ -349,12 +367,15 @@ class EFUILangEn extends EFUILang {
   String get ssNebula => 'Nebula';
 
   @override
+  String get ssWallHoles => 'Wall holes';
+
+  @override
   String get ssDarkOnly =>
-      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?';
+      'This is a dark theme preset.\nIt will set the theme mode to dark, and update that theme.\n\nContinue?';
 
   @override
   String get ssLightOnly =>
-      'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?';
+      'This is a light theme preset.\nIt will set the theme mode to light, and update that theme.\n\nContinue?';
 
   @override
   String ssApplied(Object config) {
@@ -441,10 +462,70 @@ class EFUILangEn extends EFUILang {
   String get dsPageTitle => 'Design settings';
 
   @override
+  String get dsNone => 'None';
+
+  @override
+  String get dsSystem => 'System';
+
+  @override
   String get dsAnimDuration => 'Animation duration';
 
   @override
+  String get dsPlay => 'Play animation';
+
+  @override
   String get dsMilliseconds => 'Milliseconds';
+
+  @override
+  String get dsPageTransition => 'Page transition';
+
+  @override
+  String get dsTurnX => 'Horizontal turn';
+
+  @override
+  String get dsTurnY => 'Vertical turn';
+
+  @override
+  String get dsRotate => 'Rotate';
+
+  @override
+  String get dsSlideX => 'Horizontal slide';
+
+  @override
+  String get dsSlideY => 'Vertical slide';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Fade transition';
+
+  @override
+  String get dsButtonStyle => 'Button style';
+
+  @override
+  String get dsBorderWidth => 'Border width';
+
+  @override
+  String get dsPill => 'Pill';
+
+  @override
+  String get dsRectangle => 'Rectangle';
+
+  @override
+  String get dsRoundRectangle => 'Rounded rectangle';
+
+  @override
+  String get dsLeftGram => 'Left parallel';
+
+  @override
+  String get dsRightGram => 'Right parallel';
+
+  @override
+  String get dsGem => 'Gem';
+
+  @override
+  String get dsJewel => 'Jewel';
 
   @override
   String get dsPreview => 'Preview';
@@ -557,7 +638,10 @@ class EFUILangEn extends EFUILang {
   String get lsSpacing => 'Spacing';
 
   @override
-  String get lsScroll => 'Hide scrollbars';
+  String get lsShowBack => 'Show back button';
+
+  @override
+  String get lsShowScroll => 'Show scrollbars';
 
   @override
   String lsReset(Object themeType) {
@@ -663,6 +747,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsLabelP2 => ' Not too big, not too small?';
+
+  @override
+  String get tsAlwaysUnderline => 'Always underline links';
 
   @override
   String tsReset(Object themeType) {
@@ -684,13 +771,13 @@ class EFUILangEnUs extends EFUILangEn {
   String get gContinue => 'Continue';
 
   @override
-  String get gSkip => 'Skip';
-
-  @override
   String get gOpen => 'Open';
 
   @override
   String get gOpenLink => 'Open link';
+
+  @override
+  String get gSkip => 'Skip';
 
   @override
   String get gSuccess => 'Success';
@@ -723,13 +810,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get gRequired => 'Required';
 
   @override
+  String get gThe => 'The';
+
+  @override
   String get gBack => 'Back';
-
-  @override
-  String get gUndo => 'Undo';
-
-  @override
-  String get gRedo => 'Redo';
 
   @override
   String get gCancel => 'Cancel';
@@ -750,6 +834,30 @@ class EFUILangEnUs extends EFUILangEn {
   String get gNo => 'No';
 
   @override
+  String get gRedo => 'Redo';
+
+  @override
+  String get gUndo => 'Undo';
+
+  @override
+  String get gSettings => 'Settings';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Color';
+
+  @override
+  String get gDesign => 'Design';
+
+  @override
+  String get gLayout => 'Layout';
+
+  @override
+  String get gText => 'Text';
+
+  @override
   String get gDark => 'Dark';
 
   @override
@@ -759,6 +867,12 @@ class EFUILangEnUs extends EFUILangEn {
   String get gSystem => 'System';
 
   @override
+  String get gEditing => 'Editing: ';
+
+  @override
+  String get gEditingHint => 'Activate to edit';
+
+  @override
   String get gDarkTheme => 'Dark theme';
 
   @override
@@ -766,12 +880,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gBothThemes => 'Both themes';
-
-  @override
-  String get gEditing => 'Editing: ';
-
-  @override
-  String get gEditingThemeHint => 'Open the system theme settings';
 
   @override
   String get gLeft => 'Left';
@@ -959,9 +1067,6 @@ class EFUILangEnUs extends EFUILangEn {
   String get gYou => 'Set by you';
 
   @override
-  String get ssPageTitle => 'Settings';
-
-  @override
   String get ssNavHint => 'Open the settings page';
 
   @override
@@ -1015,12 +1120,15 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssNebula => 'Nebula';
 
   @override
+  String get ssWallHoles => 'Wall holes';
+
+  @override
   String get ssDarkOnly =>
-      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?';
+      'This is a dark theme preset.\nIt will set the theme mode to dark, and update that theme.\n\nContinue?';
 
   @override
   String get ssLightOnly =>
-      'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?';
+      'This is a light theme preset.\nIt will set the theme mode to light, and update that theme.\n\nContinue?';
 
   @override
   String ssApplied(Object config) {
@@ -1107,10 +1215,70 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPageTitle => 'Design settings';
 
   @override
+  String get dsNone => 'None';
+
+  @override
+  String get dsSystem => 'System';
+
+  @override
   String get dsAnimDuration => 'Animation duration';
 
   @override
+  String get dsPlay => 'Play animation';
+
+  @override
   String get dsMilliseconds => 'Milliseconds';
+
+  @override
+  String get dsPageTransition => 'Page transition';
+
+  @override
+  String get dsTurnX => 'Horizontal turn';
+
+  @override
+  String get dsTurnY => 'Vertical turn';
+
+  @override
+  String get dsRotate => 'Rotate';
+
+  @override
+  String get dsSlideX => 'Horizontal slide';
+
+  @override
+  String get dsSlideY => 'Vertical slide';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Fade transition';
+
+  @override
+  String get dsButtonStyle => 'Button style';
+
+  @override
+  String get dsBorderWidth => 'Border width';
+
+  @override
+  String get dsPill => 'Pill';
+
+  @override
+  String get dsRectangle => 'Rectangle';
+
+  @override
+  String get dsRoundRectangle => 'Rounded rectangle';
+
+  @override
+  String get dsLeftGram => 'Left parallel';
+
+  @override
+  String get dsRightGram => 'Right parallel';
+
+  @override
+  String get dsGem => 'Gem';
+
+  @override
+  String get dsJewel => 'Jewel';
 
   @override
   String get dsPreview => 'Preview';
@@ -1223,7 +1391,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get lsSpacing => 'Spacing';
 
   @override
-  String get lsScroll => 'Hide scrollbars';
+  String get lsShowBack => 'Show back button';
+
+  @override
+  String get lsShowScroll => 'Show scrollbars';
 
   @override
   String lsReset(Object themeType) {
@@ -1329,6 +1500,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get tsLabelP2 => ' Not too big, not too small?';
+
+  @override
+  String get tsAlwaysUnderline => 'Always underline links';
 
   @override
   String tsReset(Object themeType) {

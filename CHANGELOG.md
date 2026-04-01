@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [11.1.0] - 2026-03-31
+## Added
+- New settings: button shape, always underline links, and show back fab
+- New presets
+  - New high contrast color scheme (which is used in the high vis preset)
+
+### Updated
+- Settings overhaul: one screen fits all!
+- Streamlined Open UI app gen a bit
+  - Removed "Include X settings" section
+
 ## [11.0.0] - 2026-02-15
 ### Added
 - appName and androidPackage parameters to all sample settings screen constructions

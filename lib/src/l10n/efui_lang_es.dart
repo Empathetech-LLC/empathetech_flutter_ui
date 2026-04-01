@@ -18,13 +18,13 @@ class EFUILangEs extends EFUILang {
   String get gContinue => 'Continuar';
 
   @override
-  String get gSkip => 'Saltar';
-
-  @override
   String get gOpen => 'Abrir';
 
   @override
   String get gOpenLink => 'Abrir enlace';
+
+  @override
+  String get gSkip => 'Saltar';
 
   @override
   String get gSuccess => 'Éxito';
@@ -57,13 +57,10 @@ class EFUILangEs extends EFUILang {
   String get gRequired => 'Requerido';
 
   @override
+  String get gThe => 'El';
+
+  @override
   String get gBack => 'Atrás';
-
-  @override
-  String get gUndo => 'Deshacer';
-
-  @override
-  String get gRedo => 'Rehacer';
 
   @override
   String get gCancel => 'Cancelar';
@@ -84,6 +81,30 @@ class EFUILangEs extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gRedo => 'Rehacer';
+
+  @override
+  String get gUndo => 'Deshacer';
+
+  @override
+  String get gSettings => 'Ajustes';
+
+  @override
+  String get gGlobal => 'Global';
+
+  @override
+  String get gColor => 'Color';
+
+  @override
+  String get gDesign => 'Diseño';
+
+  @override
+  String get gLayout => 'Esquema';
+
+  @override
+  String get gText => 'Texto';
+
+  @override
   String get gDark => 'Oscuro';
 
   @override
@@ -93,6 +114,12 @@ class EFUILangEs extends EFUILang {
   String get gSystem => 'Sistema';
 
   @override
+  String get gEditing => 'Editando: ';
+
+  @override
+  String get gEditingHint => 'Activar para editar';
+
+  @override
   String get gDarkTheme => 'Tema oscuro';
 
   @override
@@ -100,12 +127,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gBothThemes => 'Ambos temas';
-
-  @override
-  String get gEditing => 'Editando: ';
-
-  @override
-  String get gEditingThemeHint => 'Abrir la configuración del tema del sistema';
 
   @override
   String get gLeft => 'Izquierda';
@@ -295,9 +316,6 @@ class EFUILangEs extends EFUILang {
   String get gYou => 'Configurado por ti';
 
   @override
-  String get ssPageTitle => 'Configuración';
-
-  @override
   String get ssNavHint => 'Abrir la página de configuración';
 
   @override
@@ -351,12 +369,15 @@ class EFUILangEs extends EFUILang {
   String get ssNebula => 'Nebulosa';
 
   @override
+  String get ssWallHoles => 'Agujeros en la pared';
+
+  @override
   String get ssDarkOnly =>
-      'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n¿Continuar?';
+      'Este es un preajuste de tema oscuro.\nCambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?';
 
   @override
   String get ssLightOnly =>
-      'Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n¿Continuar?';
+      'Este es un preajuste de tema claro.\nCambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?';
 
   @override
   String ssApplied(Object config) {
@@ -444,10 +465,70 @@ class EFUILangEs extends EFUILang {
   String get dsPageTitle => 'Configuración de diseño';
 
   @override
+  String get dsNone => 'Ninguna';
+
+  @override
+  String get dsSystem => 'Sistema';
+
+  @override
   String get dsAnimDuration => 'Duración de la animación';
 
   @override
+  String get dsPlay => 'Reproducir animación';
+
+  @override
   String get dsMilliseconds => 'Milisegundos';
+
+  @override
+  String get dsPageTransition => 'Transición de página';
+
+  @override
+  String get dsTurnX => 'Giro horizontal';
+
+  @override
+  String get dsTurnY => 'Giro vertical';
+
+  @override
+  String get dsRotate => 'Girar';
+
+  @override
+  String get dsSlideX => 'Diapositiva horizontal';
+
+  @override
+  String get dsSlideY => 'Diapositiva vertical';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Transición de desvanecimiento';
+
+  @override
+  String get dsButtonStyle => 'Estilo de botón';
+
+  @override
+  String get dsBorderWidth => 'Ancho del borde';
+
+  @override
+  String get dsPill => 'Píldora';
+
+  @override
+  String get dsRectangle => 'Rectángulo';
+
+  @override
+  String get dsRoundRectangle => 'Rectángulo redondeado';
+
+  @override
+  String get dsLeftGram => 'Paralelo izquierdo';
+
+  @override
+  String get dsRightGram => 'Paralelo derecho';
+
+  @override
+  String get dsGem => 'Gema';
+
+  @override
+  String get dsJewel => 'Joya';
 
   @override
   String get dsPreview => 'Avance';
@@ -561,7 +642,10 @@ class EFUILangEs extends EFUILang {
   String get lsSpacing => 'Espaciado';
 
   @override
-  String get lsScroll => 'Ocultar las barras de desplazamiento';
+  String get lsShowBack => 'Mostrar botón de retroceso';
+
+  @override
+  String get lsShowScroll => 'Mostrar barras de desplazamiento';
 
   @override
   String lsReset(Object themeType) {
@@ -667,6 +751,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get tsLabelP2 => ' ¿No muy grandes, no muy pequeñas?';
+
+  @override
+  String get tsAlwaysUnderline => 'Subraya siempre los enlaces';
 
   @override
   String tsReset(Object themeType) {

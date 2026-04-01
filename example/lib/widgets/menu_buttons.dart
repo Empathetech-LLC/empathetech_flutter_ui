@@ -22,9 +22,9 @@ class SettingsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => EzMenuButton(
-        onPressed: () => parentContext.goNamed(settingsHomePath),
+        onPressed: () => parentContext.goNamed(settingsHubPath),
         icon: EzIcon(Icons.settings),
-        label: EzConfig.l10n.ssPageTitle,
+        label: EzConfig.l10n.gSettings,
       );
 }
 
@@ -54,7 +54,7 @@ class UploadButton extends StatelessWidget {
               await onUpload(config);
             } catch (e) {
               if (context.mounted) {
-                ezSnackBar(context: context, message: e.toString());
+                ezSnackBar(context, message: e.toString());
               }
             }
           }

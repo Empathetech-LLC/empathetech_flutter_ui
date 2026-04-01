@@ -141,7 +141,10 @@ class EzCheckboxPair extends StatelessWidget {
   final String text;
 
   /// [EzText.useSurface] passthrough
-  final bool useSurface;
+  /// true: [ColorScheme.surface]
+  /// false: [ColorScheme.surfaceContainer]
+  /// null: [ColorScheme.surfaceDim]
+  final bool? useSurface;
 
   /// [EzText.style] passthrough
   final TextStyle? style;

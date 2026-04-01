@@ -338,10 +338,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     if (genState == GeneratorState.running) return;
 
                     setState(() => genState = GeneratorState.running);
-                    ezSnackBar(
-                      context: context,
-                      message: l10n.gsFirstRun,
-                    );
+                    ezSnackBar(context, message: l10n.gsFirstRun);
 
                     await ezCmd(
                       '${flutterPath}flutter run -d ${device()}',
@@ -415,7 +412,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 style: EzConfig.styles.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              EzMargin(vertical: false),
+              EzConfig.rowMargin,
               EzIconButton(
                 onPressed: () => setState(() => showReadout = !showReadout),
                 icon: Icon(

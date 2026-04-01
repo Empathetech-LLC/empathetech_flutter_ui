@@ -3,12 +3,38 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:flutter/material.dart';
+
+import '../../empathetech_flutter_ui.dart';
+
 // Shared //
+
+class EzSettingsSection {
+  /// Ordered position amongst the tabs ([ButtonSegment]s)
+  final int position;
+
+  /// What to display above the [SegmentedButton] in [EzSettingsHub]
+  final String title;
+
+  /// What to display on the [SegmentedButton] in [EzSettingsHub]
+  final Widget icon;
+
+  /// Page content for [EzSettingsHub]
+  final Widget build;
+
+  /// Wrapper/helper class for building [EzSettingsHub]
+  const EzSettingsSection({
+    required this.position,
+    required this.title,
+    required this.icon,
+    required this.build,
+  });
+}
 
 const String _quick = 'quick';
 const String _advanced = 'advanced';
 
-// Color //
+// Color settings //
 
 /// Color setting types
 /// [quick] || [advanced]
@@ -35,7 +61,7 @@ extension CSConfig on EzCSType {
   }
 }
 
-// Text //
+// Text settings //
 
 /// Text setting types
 /// [quick] || [advanced]

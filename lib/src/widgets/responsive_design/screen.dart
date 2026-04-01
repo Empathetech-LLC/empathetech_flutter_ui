@@ -17,18 +17,12 @@ class EzScreen extends StatelessWidget {
   /// Margin around the screen content
   final EdgeInsetsGeometry? margin;
 
+  /// Whether [EzConfig.backgroundImagePath] should be used to decorate the screen
+  final bool useImageDecoration;
+
   /// Optional [Decoration] background for the screen
   /// If provided, must set [useImageDecoration] to false
   final Decoration? decoration;
-
-  /// Whether the [darkDecorationImageKey]/[lightDecorationImageKey] should be used
-  final bool useImageDecoration;
-
-  /// [EzConfig] key that will be used to create a [DecorationImage] background for the screen (dark theme)
-  final String darkDecorationImageKey;
-
-  /// [EzConfig] key that will be used to create a [DecorationImage] background for the screen (light theme)
-  final String lightDecorationImageKey;
 
   /// Screen width
   final double width;
@@ -36,118 +30,37 @@ class EzScreen extends StatelessWidget {
   /// Screen height
   final double height;
 
-  /// [Container.constraints] passthrough
-  final BoxConstraints? constraints;
-
-  /// [Container.transform] passthrough
-  final Matrix4? transform;
-
-  /// [Container.transformAlignment] passthrough
-  final AlignmentGeometry? transformAlignment;
-
-  /// [Container.clipBehavior] passthrough
-  final Clip clipBehavior;
-
-  /// [Container] wrapper that defaults to max size with a "margin" from [EzConfig]
-  /// In this case, the screen's "margin" is the actually the [Container.padding]
+  /// Custom [Container] that creates a standard screen for [EzConfig] powered apps
   const EzScreen(
     this.child, {
     super.key,
     this.alignment,
     this.margin,
-    this.decoration,
     this.useImageDecoration = true,
-    this.darkDecorationImageKey = darkBackgroundImageKey,
-    this.lightDecorationImageKey = lightBackgroundImageKey,
-    this.width = double.infinity,
+    this.decoration,
     this.height = double.infinity,
-    this.constraints,
-    this.transform,
-    this.transformAlignment,
-    this.clipBehavior = Clip.none,
+    this.width = double.infinity,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    final EdgeInsetsGeometry screenMargin =
-        margin ?? EdgeInsets.all(EzConfig.marginVal);
+  Decoration? buildDecoration() {
+    if (!useImageDecoration) return null;
 
-    Decoration? buildDecoration() {
-      if (!useImageDecoration) return null;
+    final String path = EzConfig.backgroundImagePath;
+    if (path == noImageValue) return null;
 
-      final String decorationKey =
-          EzConfig.isDark ? darkDecorationImageKey : lightDecorationImageKey;
-      final String? imagePath = EzConfig.get(decorationKey);
+    final int? isColor = int.tryParse(path);
+    if (isColor != null) return BoxDecoration(color: Color(isColor));
 
-      if (imagePath == null || imagePath == noImageValue) {
-        return null;
-      } else {
-        final int? isColor = int.tryParse(imagePath);
-        if (isColor != null) return BoxDecoration(color: Color(isColor));
-
-        final BoxFit? fit =
-            boxFitLib[EzConfig.get('$decorationKey$boxFitSuffix')];
-
-        return BoxDecoration(
-          image: DecorationImage(image: ezImageProvider(imagePath), fit: fit),
-        );
-      }
-    }
-
-    return Container(
-      alignment: alignment,
-      padding: screenMargin,
-      decoration: decoration ?? buildDecoration(),
-      width: width,
-      height: height,
-      constraints: constraints,
-      transform: transform,
-      transformAlignment: transformAlignment,
-      clipBehavior: clipBehavior,
-      child: child,
-    );
+    return BoxDecoration(image: EzConfig.backgroundImage);
   }
 
-  /// [EzScreen] with a horizontal [EzScrollView] as the top level child
-  /// For fancier solutions, see https://api.flutter.dev/flutter/widgets/TwoDimensionalScrollView-class.html
-  EzScreen.hScroll(
-    Widget kid, {
-    super.key,
-    this.alignment,
-    this.margin,
-    this.decoration,
-    this.useImageDecoration = true,
-    this.darkDecorationImageKey = darkBackgroundImageKey,
-    this.lightDecorationImageKey = lightBackgroundImageKey,
-    this.width = double.infinity,
-    this.height = double.infinity,
-    this.constraints,
-    this.transform,
-    this.transformAlignment,
-    this.clipBehavior = Clip.none,
-  }) : child = EzScrollView(
-          scrollDirection: Axis.horizontal,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          child: kid,
-        );
-
-  /// [EzScreen] with a [EzScrollView] as the top level child
-  /// For fancier solutions, see https://api.flutter.dev/flutter/widgets/TwoDimensionalScrollView-class.html
-  EzScreen.vScroll(
-    Widget kid, {
-    super.key,
-    this.alignment,
-    this.margin,
-    this.decoration,
-    this.useImageDecoration = true,
-    this.darkDecorationImageKey = darkBackgroundImageKey,
-    this.lightDecorationImageKey = lightBackgroundImageKey,
-    this.width = double.infinity,
-    this.height = double.infinity,
-    this.constraints,
-    this.transform,
-    this.transformAlignment,
-    this.clipBehavior = Clip.none,
-  }) : child = EzScrollView(child: kid);
+  @override
+  Widget build(BuildContext context) => Container(
+        alignment: alignment,
+        padding: margin ?? EdgeInsets.all(EzConfig.marginVal),
+        decoration: decoration ?? buildDecoration(),
+        height: height,
+        width: width,
+        child: child,
+      );
 }

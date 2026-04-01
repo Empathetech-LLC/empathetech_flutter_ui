@@ -12,7 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:country_flags/country_flags.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
@@ -43,6 +46,13 @@ bool isDarkTheme(BuildContext context) =>
 /// Alias exists for [kIsWeb] support
 bool isMobile() => mobileCheck();
 
+/// [SafeArea] top padding
+double safeTop(BuildContext context) => MediaQuery.of(context).padding.top;
+
+/// [SafeArea] bottom padding
+double safeBottom(BuildContext context) =>
+    MediaQuery.of(context).padding.bottom;
+
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
 String screenshotHint() {
@@ -60,6 +70,18 @@ String screenshotHint() {
 
 // Readability //
 
+/// Wide check, true if granted, limited, or provisional
+bool allowedPermCheck(PermissionStatus? status) {
+  switch (status) {
+    case PermissionStatus.granted:
+    case PermissionStatus.limited:
+    case PermissionStatus.provisional:
+      return true;
+    default:
+      return false;
+  }
+}
+
 /// More readable than...
 /// FocusScope.of(context).unfocus();
 void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
@@ -67,6 +89,30 @@ void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 /// Is there a required [Function] that you wish was optional?
 /// Then [doNothing]!
 void doNothing() {}
+
+/// Wide check, true if denied, restricted, or permanently denied, or null
+bool deniedPermCheck(PermissionStatus? status) {
+  switch (status) {
+    case null:
+    case PermissionStatus.denied:
+    case PermissionStatus.permanentlyDenied:
+    case PermissionStatus.restricted:
+      return true;
+    default:
+      return false;
+  }
+}
+
+/// [EFUILang.gBothThemes], [EFUILang.gDarkTheme], or [EFUILang.gLightTheme]
+/// Based on [EzConfig.updateBoth] && [EzConfig.isDark]
+String ezThemeString(bool includeBoth) => ((includeBoth && EzConfig.updateBoth)
+        ? (EzConfig.locale.languageCode == english.languageCode
+            ? "${EzConfig.l10n.gBothThemes}'"
+            : EzConfig.l10n.gBothThemes)
+        : (EzConfig.isDark
+            ? EzConfig.l10n.gDarkTheme
+            : EzConfig.l10n.gLightTheme))
+    .toLowerCase();
 
 /// More readable than...
 /// MediaQuery.of(context).size.height
@@ -105,13 +151,15 @@ Future<void> ezConfigLoader(BuildContext context) async {
       }
     }
   } catch (e) {
-    if (context.mounted) await ezLogAlert(context, message: e.toString());
+    (context.mounted)
+        ? await ezLogAlert(context, message: e.toString())
+        : ezLog(e.toString());
     return;
   }
 
   if (context.mounted) {
     ezSnackBar(
-      context: context,
+      context,
       message: kIsWeb
           ? EzConfig.l10n.ssRestartReminderWeb
           : EzConfig.l10n.ssRestartReminder,
@@ -144,6 +192,38 @@ double ezDropdownWidth({
     EzConfig.padding +
     max(EzConfig.padding + EzConfig.iconSize, kMinInteractiveDimension);
 
+Widget ezFlag(Locale locale, {bool inDistress = false}) {
+  // Fix language code != flag code
+  switch (locale.languageCode) {
+    case 'fil':
+      locale = const Locale('tl'); // Filipino to Tagalog
+      break;
+
+    default:
+      break;
+  }
+
+  final double flagPadding = EzConfig.iconSize + EzConfig.padding;
+  final Widget flag = (locale.countryCode == null)
+      ? CountryFlag.fromLanguageCode(
+          locale.languageCode,
+          theme: ImageTheme(
+            shape: const Circle(),
+            width: flagPadding,
+          ),
+        )
+      : CountryFlag.fromCountryCode(
+          locale.countryCode!,
+          theme: ImageTheme(
+            height: flagPadding,
+            width: flagPadding,
+            shape: const Circle(),
+          ),
+        );
+
+  return inDistress ? Transform.rotate(angle: pi, child: flag) : flag;
+}
+
 /// [TargetPlatform] aware helper that will request/exit a fullscreen window
 /// Alias exists for [kIsWeb] support
 Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
@@ -160,12 +240,24 @@ double ezIconRatio() => max(
 
 /// Recommended size for an image
 /// Starts with 160.0, chosen by visual inspection
-/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
+/// Then, applies [MediaQuery] and/or [ezIconRatio] based scaling
 double ezImageSize(BuildContext context) =>
-    MediaQuery.textScalerOf(context).scale(160.0) *
-    (EzConfig.iconSize /
-        EzConfig.getDefault(
-            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey));
+    MediaQuery.textScalerOf(context).scale(160.0) * ezIconRatio();
+
+/// Get the human readable name for [locale]
+String ezLocaleName(Locale locale, BuildContext context) {
+  final String? attempt = LocaleNames.of(context)?.nameOf(locale.languageCode);
+  if (attempt != null) return attempt;
+
+  switch (locale) {
+    case filipino:
+      return 'Filipino';
+    case creole:
+      return 'Creole';
+    default:
+      return 'Language';
+  }
+}
 
 /// A [Page] animator based on [EzConfig]
 Page<dynamic> ezPageBuilder(
@@ -174,14 +266,35 @@ Page<dynamic> ezPageBuilder(
   Widget child, {
   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
       transitionsBuilder,
-}) =>
-    CustomTransitionPage<dynamic>(
-      key: state.pageKey,
-      transitionsBuilder: transitionsBuilder ?? ezTransitionsBuilder,
-      transitionDuration: ezAnimDuration(),
-      reverseTransitionDuration: ezAnimDuration(),
-      child: child,
-    );
+}) {
+  Widget swipeBackWrap(Widget child) {
+    switch (EzConfig.platform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onHorizontalDragEnd: (DragEndDetails details) {
+            if (details.primaryVelocity != null &&
+                details.primaryVelocity! > 250 &&
+                ezRootNav.currentState!.canPop()) {
+              ezRootNav.currentState!.pop();
+            }
+          },
+          child: child,
+        );
+      default:
+        return child;
+    }
+  }
+
+  return CustomTransitionPage<dynamic>(
+    key: state.pageKey,
+    transitionsBuilder: transitionsBuilder ?? ezTransitionsBuilder,
+    transitionDuration: ezAnimDuration(),
+    reverseTransitionDuration: ezAnimDuration(),
+    child: swipeBackWrap(child),
+  );
+}
 
 /// Returns the app's current [Locale] and it's corresponding [EFUILang]
 Future<(Locale, EFUILang)> ezStoredL10n() async {
@@ -247,67 +360,88 @@ Widget ezTransitionsBuilder(
   // Check for no animation
   if (EzConfig.animDur < 1) return child;
 
-  // Gather the transition details
-  final EzPageTransition transitionType = EzPageTransitionConfig.lookup(
-      EzConfig.get(
-          EzConfig.isDark ? darkTransitionTypeKey : lightTransitionTypeKey));
-
-  Widget smartFade(Widget child) => (EzConfig.get(EzConfig.isDark
-              ? darkTransitionFadeKey
-              : lightTransitionFadeKey) ==
-          true)
+  Widget smartFade(Widget child) => (EzConfig.fadedTransition)
       ? FadeTransition(opacity: animation, child: child)
       : child;
 
-  if (transitionType == EzPageTransition.system) {
-    switch (EzConfig.platform) {
-      // Android
-      case TargetPlatform.android:
-        return ScaleTransition(
-          scale: CurveTween(curve: Curves.easeInOut).animate(animation),
-          alignment: Alignment.center,
-          child: child,
-        );
+  switch (EzConfig.pageTransition) {
+    // System
+    case EzPageTransition.system:
+      switch (EzConfig.platform) {
+        // Android
+        case TargetPlatform.android:
+          return ScaleTransition(
+            scale: CurveTween(curve: Curves.easeInOut).animate(animation),
+            alignment: Alignment.center,
+            child: child,
+          );
 
-      // Apple
-      case TargetPlatform.iOS:
-      case TargetPlatform.macOS:
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(-1.0, 0.0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeInOut,
-          )),
-          child: FadeTransition(opacity: animation, child: child),
-        );
+        // Apple
+        case TargetPlatform.iOS:
+        case TargetPlatform.macOS:
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: EzConfig.isLTR
+                  ? const Offset(1.0, 0.0)
+                  : const Offset(-1.0, 0.0),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            )),
+            child: child,
+          );
 
-      // Other
-      default:
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(1.0, 0.0),
-            end: Offset.zero,
-          ).animate(animation),
-          child: FadeTransition(opacity: animation, child: child),
-        );
-    }
-  }
+        // Linux && Windows (web is auto-none)
+        default:
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: EzConfig.isLTR
+                  ? const Offset(1.0, 0.0)
+                  : const Offset(-1.0, 0.0),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            )),
+            child: FadeTransition(opacity: animation, child: child),
+          );
+      }
 
-  switch (transitionType) {
-    // Flip
-    case EzPageTransition.flip:
+    // Horizontal turn
+    case EzPageTransition.turnX:
       return AnimatedBuilder(
         animation: animation,
-        builder: (BuildContext context, Widget? bChild) => Transform(
+        builder: (_, __) => EzConfig.isLTR
+            ? Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.0001)
+                  ..rotateY((1 - animation.value) * (pi / 2)),
+                alignment: Alignment.centerLeft,
+                child: smartFade(child),
+              )
+            : Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.0001)
+                  ..rotateY((1 - animation.value) * -(pi / 2)),
+                alignment: Alignment.centerRight,
+                child: smartFade(child),
+              ),
+        child: child,
+      );
+
+    // Vertical turn
+    case EzPageTransition.turnY:
+      return AnimatedBuilder(
+        animation: animation,
+        builder: (_, __) => Transform(
           transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
-            ..rotateY((1.0 - animation.value) * (pi / 2)),
-          alignment: Alignment.center,
-          child: bChild,
+            ..setEntry(3, 2, 0.0001)
+            ..rotateX((1 - animation.value) * -(pi / 2)),
+          alignment: Alignment.topCenter,
+          child: smartFade(child),
         ),
-        child: smartFade(child),
+        child: child,
       );
 
     // Rotate
@@ -317,61 +451,35 @@ Widget ezTransitionsBuilder(
         child: smartFade(child),
       );
 
-    // Scale
-    case EzPageTransition.scale:
-      return ScaleTransition(
-        scale: CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeInOut,
-        ),
-        alignment: Alignment.center,
-        child: smartFade(child),
-      );
+    // Horizontal slide
+    case EzPageTransition.slideX:
+      return EzConfig.isLTR
+          ? SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeInOut,
+              )),
+              child: smartFade(child),
+            )
+          : SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(-1.0, 0.0),
+                end: Offset.zero,
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeInOut,
+              )),
+              child: smartFade(child),
+            );
 
-    // Slide left
-    case EzPageTransition.slideLeft:
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(-1.0, 0.0),
-          end: Offset.zero,
-        ).animate(CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeInOut,
-        )),
-        child: smartFade(child),
-      );
-
-    // Slide right
-    case EzPageTransition.slideRight:
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(1.0, 0.0),
-          end: Offset.zero,
-        ).animate(CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeInOut,
-        )),
-        child: smartFade(child),
-      );
-
-    // Slide up
-    case EzPageTransition.slideUp:
+    // Vertical slide
+    case EzPageTransition.slideY:
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(0.0, 1.0),
-          end: Offset.zero,
-        ).animate(CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeInOut,
-        )),
-        child: smartFade(child),
-      );
-
-    // Slide down
-    case EzPageTransition.slideDown:
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(0.0, -1.0),
           end: Offset.zero,
         ).animate(CurvedAnimation(
           parent: animation,
@@ -389,7 +497,7 @@ Widget ezTransitionsBuilder(
       );
 
     // None
-    default:
+    case EzPageTransition.none:
       return child;
   }
 }

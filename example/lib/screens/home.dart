@@ -61,11 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final int currentYear = DateTime.now().year;
 
-  bool colorSettings = true;
-  bool designSettings = true;
-  bool layoutSettings = true;
-  bool textSettings = true;
-
   late final TextEditingController flutterPathControl = TextEditingController();
 
   bool showAdvanced = false;
@@ -265,68 +260,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             EzConfig.separator,
 
-            // Settings selection //
-
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Flexible(
-                  child: EzText(
-                    l10n.csInclude,
-                    style: EzConfig.styles.titleLarge,
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                EzToolTipper(message: l10n.csEasy),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: EzConfig.marginVal),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  EzConfig.margin,
-                  EzCheckboxPair(
-                    text: EzConfig.l10n.csPageTitle,
-                    value: colorSettings,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => colorSettings = value);
-                    },
-                  ),
-                  EzConfig.margin,
-                  EzCheckboxPair(
-                    text: EzConfig.l10n.dsPageTitle,
-                    value: designSettings,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => designSettings = value);
-                    },
-                  ),
-                  EzConfig.margin,
-                  EzCheckboxPair(
-                    text: EzConfig.l10n.lsPageTitle,
-                    value: layoutSettings,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => layoutSettings = value);
-                    },
-                  ),
-                  EzConfig.margin,
-                  EzCheckboxPair(
-                    text: EzConfig.l10n.tsPageTitle,
-                    value: textSettings,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => textSettings = value);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            EzConfig.divider,
-
             // Default app config //
 
             EzRichText(
@@ -337,10 +270,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       : l10n.csTheConfig),
                 ),
                 EzInlineLink(
-                  EzConfig.l10n.ssPageTitle.toLowerCase(),
+                  EzConfig.l10n.gSettings.toLowerCase(),
                   style: ezSubTitleStyle(),
                   textAlign: TextAlign.start,
-                  onTap: () => context.goNamed(settingsHomePath),
+                  onTap: () => context.goNamed(settingsHubPath),
                   hint: EzConfig.l10n.ssNavHint,
                 ),
                 EzPlainText(
@@ -654,10 +587,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           domainName: exampleDomain
                               ? 'com.example'
                               : domainController.text,
-                          colorSettings: colorSettings,
-                          designSettings: designSettings,
-                          layoutSettings: layoutSettings,
-                          textSettings: textSettings,
                           appDefaults: Map<String, dynamic>.fromEntries(
                             allEZConfigKeys.keys.map(
                               (String key) => MapEntry<String, dynamic>(
@@ -691,7 +620,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     } else {
                       setState(() => canGen = false);
                       await ezSnackBar(
-                        context: context,
+                        context,
                         message:
                             '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                       ).closed;
@@ -725,10 +654,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             domainName: exampleDomain
                                 ? 'com.example'
                                 : domainController.text,
-                            colorSettings: colorSettings,
-                            designSettings: designSettings,
-                            layoutSettings: layoutSettings,
-                            textSettings: textSettings,
                             appDefaults: Map<String, dynamic>.fromEntries(
                               allEZConfigKeys.keys.map(
                                 (String key) => MapEntry<String, dynamic>(
@@ -762,7 +687,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       } else {
                         setState(() => canGen = false);
                         await ezSnackBar(
-                          context: context,
+                          context,
                           message:
                               '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                         ).closed;
@@ -797,11 +722,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
         domainController.text = config.domainName;
         if (config.domainName == 'com.example') exampleDomain = true;
-
-        colorSettings = config.colorSettings;
-        designSettings = config.designSettings;
-        layoutSettings = config.layoutSettings;
-        textSettings = config.textSettings;
 
         await EzConfig.loadConfig(config.appDefaults);
 
@@ -866,11 +786,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             domainController.clear();
             exampleDomain = false;
-
-            colorSettings = true;
-            designSettings = true;
-            layoutSettings = true;
-            textSettings = true;
 
             flutterPathControl.clear();
 
@@ -985,6 +900,8 @@ linter:
     prefer_single_quotes: true
     provide_deprecation_message: true
     test_types_in_equals: true
+    unawaited_futures: true
+    unnecessary_async: true
     unnecessary_late: true
     unnecessary_library_name: true
     unnecessary_new: true
@@ -1258,8 +1175,10 @@ class _LicensePicker extends StatelessWidget {
               groupValue: groupValue,
               onChanged: onChanged,
               child: EzScrollView(
+                mainAxisSize: MainAxisSize.min,
                 scrollDirection: Axis.horizontal,
                 thumbVisibility: false,
+                showScrollHint: true,
                 children: <Widget>[
                   EzConfig.rowMargin,
                   radio(title: 'GNU GPLv3', value: gnuKey),

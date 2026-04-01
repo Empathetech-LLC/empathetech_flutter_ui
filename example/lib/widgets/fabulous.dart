@@ -11,7 +11,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// Track version updates
 const Widget updater = EzUpdaterFAB(
-  appVersion: '3.0.0',
+  appVersion: '3.1.0',
   versionSource:
       'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
   gPlay:
@@ -65,7 +65,7 @@ class ResetFAB extends StatelessWidget {
                     // App settings
                     EzMaterialAction(
                       onPressed: () async {
-                        await EzConfig.reset(true);
+                        await EzConfig.reset(forceBoth: true);
                         await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetApp,
@@ -76,7 +76,7 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         clearForms();
-                        await EzConfig.reset(true);
+                        await EzConfig.reset(forceBoth: true);
                         await EzConfig.rebuildUI(onComplete);
                       },
                       text: l10n.csResetBoth,

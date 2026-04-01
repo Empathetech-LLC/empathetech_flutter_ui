@@ -27,16 +27,8 @@ export 'src/consts/shared.dart';
 
 // Testing //
 
-// Core
 export 'src/functions/testing/consts.dart';
 export 'src/functions/testing/utils.dart';
-
-// Widgets
-export 'src/functions/testing/widgets/dominant_hand_switch.dart';
-export 'src/functions/testing/widgets/image_setting.dart';
-export 'src/functions/testing/widgets/locale_setting.dart';
-export 'src/functions/testing/widgets/reset_button.dart';
-export 'src/functions/testing/widgets/theme_mode_switch.dart';
 
 // Core //
 
@@ -58,9 +50,10 @@ export 'src/l10n/efui_lang.dart';
 
 export 'src/sample_screens/color_settings.dart';
 export 'src/sample_screens/design_settings.dart';
+export 'src/sample_screens/global_settings.dart';
 export 'src/sample_screens/layout_settings.dart';
-export 'src/sample_screens/setting_type.dart';
-export 'src/sample_screens/settings_home.dart';
+export 'src/sample_screens/setting_section.dart';
+export 'src/sample_screens/settings_hub.dart';
 export 'src/sample_screens/text_settings.dart';
 
 //* Widgets *//
@@ -121,15 +114,25 @@ export 'src/widgets/screen_reader_support/rich_text.dart';
 
 // Color
 export 'src/widgets/user_customization/color/color_setting.dart';
-export 'src/widgets/user_customization/color/mono_chrome_colors_setting.dart';
+export 'src/widgets/user_customization/color/high_contrast_setting.dart';
+export 'src/widgets/user_customization/color/mono_chrome_setting.dart';
 
 // Design
 export 'src/widgets/user_customization/design/image_setting.dart';
+export 'src/widgets/user_customization/design/shapes.dart';
 
 // Layout
 export 'src/widgets/user_customization/layout/margin.dart';
 export 'src/widgets/user_customization/layout/padding.dart';
 export 'src/widgets/user_customization/layout/spacing.dart';
+
+// Presets
+export 'src/widgets/user_customization/presets/big_buttons.dart';
+export 'src/widgets/user_customization/presets/chalkboard.dart';
+export 'src/widgets/user_customization/presets/high_visibility.dart';
+export 'src/widgets/user_customization/presets/nebula.dart';
+export 'src/widgets/user_customization/presets/quick_config.dart';
+export 'src/widgets/user_customization/presets/wall_holes.dart';
 
 // Text
 export 'src/widgets/user_customization/text/bold_setting.dart';
@@ -146,7 +149,7 @@ export 'src/widgets/user_customization/text/underline_setting.dart';
 // Global
 export 'src/widgets/user_customization/dominant_hand_switch.dart';
 export 'src/widgets/user_customization/locale_setting.dart';
-export 'src/widgets/user_customization/quick_config.dart';
 export 'src/widgets/user_customization/random_button.dart';
 export 'src/widgets/user_customization/reset_button.dart';
+export 'src/widgets/user_customization/theme_coin.dart';
 export 'src/widgets/user_customization/theme_mode_switch.dart';

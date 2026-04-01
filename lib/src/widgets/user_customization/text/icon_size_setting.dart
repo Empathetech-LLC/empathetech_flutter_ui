@@ -7,17 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class EzIconSizeSetting extends StatefulWidget {
-  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
-  final bool updateBoth;
-
   /// Set to false when using this outside of [EzTextSettings]
   final bool fullCheck;
 
-  const EzIconSizeSetting({
-    super.key,
-    required this.updateBoth,
-    this.fullCheck = true,
-  });
+  const EzIconSizeSetting({super.key, this.fullCheck = true});
 
   @override
   State<EzIconSizeSetting> createState() => _EzIconSizeSettingState();
@@ -34,10 +27,10 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
             message: EzConfig.l10n.gCenterReset,
             child: GestureDetector(
               onLongPress: () async {
-                if (widget.updateBoth || EzConfig.isDark) {
+                if (EzConfig.updateBoth || EzConfig.isDark) {
                   await EzConfig.remove(darkIconSizeKey);
                 }
-                if (widget.updateBoth || !EzConfig.isDark) {
+                if (EzConfig.updateBoth || !EzConfig.isDark) {
                   await EzConfig.remove(lightIconSizeKey);
                 }
 
@@ -65,10 +58,10 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                     ? EzIconButton(
                         onPressed: () async {
                           iconSize -= iconDelta;
-                          if (widget.updateBoth || EzConfig.isDark) {
+                          if (EzConfig.updateBoth || EzConfig.isDark) {
                             await EzConfig.setDouble(darkIconSizeKey, iconSize);
                           }
-                          if (widget.updateBoth || !EzConfig.isDark) {
+                          if (EzConfig.updateBoth || !EzConfig.isDark) {
                             await EzConfig.setDouble(
                                 lightIconSizeKey, iconSize);
                           }
@@ -97,15 +90,15 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                         ),
                         iconSize: iconSize,
                       ),
-                EzMargin(vertical: false),
+                EzConfig.rowMargin,
 
                 // Preview
                 GestureDetector(
                   onLongPress: () async {
-                    if (widget.updateBoth || EzConfig.isDark) {
+                    if (EzConfig.updateBoth || EzConfig.isDark) {
                       await EzConfig.remove(darkIconSizeKey);
                     }
-                    if (widget.updateBoth || !EzConfig.isDark) {
+                    if (EzConfig.updateBoth || !EzConfig.isDark) {
                       await EzConfig.remove(lightIconSizeKey);
                     }
 
@@ -124,17 +117,17 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                     color: EzConfig.colors.onSurface,
                   ),
                 ),
-                EzMargin(vertical: false),
+                EzConfig.rowMargin,
 
                 // Plus
                 (iconSize < maxIconSize)
                     ? EzIconButton(
                         onPressed: () async {
                           iconSize += iconDelta;
-                          if (widget.updateBoth || EzConfig.isDark) {
+                          if (EzConfig.updateBoth || EzConfig.isDark) {
                             await EzConfig.setDouble(darkIconSizeKey, iconSize);
                           }
-                          if (widget.updateBoth || !EzConfig.isDark) {
+                          if (EzConfig.updateBoth || !EzConfig.isDark) {
                             await EzConfig.setDouble(
                                 lightIconSizeKey, iconSize);
                           }
@@ -165,7 +158,9 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
                       ),
               ],
             ),
-            borderRadius: ezPillEdge,
+            useSurface: true,
+            buttonShape: true,
+            padding: EdgeInsets.zero,
           ),
         ],
       );

@@ -8,16 +8,11 @@ const String publisherNameKey = 'publisherName';
 const String appDescriptionKey = 'appDescription';
 const String domainNameKey = 'domainName';
 
-const String colorSettingsKey = 'colorSettings';
-const String designSettingsKey = 'designSettings';
-const String layoutSettingsKey = 'layoutSettings';
-const String textSettingsKey = 'textSettings';
-
 const String appDefaultsKey = 'appDefaults';
 
 const String flutterPathKey = 'flutterPath';
-
 const String workPathKey = 'workPath';
+
 const String copyrightKey = 'copyright';
 const String licenseKey = 'license';
 const String l10nConfigKey = 'l10nConfig';
@@ -31,16 +26,11 @@ class EAGConfig {
   final String appDescription;
   final String domainName;
 
-  final bool colorSettings;
-  final bool designSettings;
-  final bool layoutSettings;
-  final bool textSettings;
-
   final Map<String, dynamic> appDefaults;
 
   final String? flutterPath;
-
   final String? workPath;
+
   final String? copyright;
   final String license;
   final String l10nConfig;
@@ -52,10 +42,6 @@ class EAGConfig {
     required this.publisherName,
     required this.appDescription,
     required this.domainName,
-    required this.colorSettings,
-    required this.designSettings,
-    required this.layoutSettings,
-    required this.textSettings,
     required this.appDefaults,
     this.flutterPath,
     this.workPath,
@@ -72,10 +58,6 @@ class EAGConfig {
       publisherName: json[publisherNameKey] as String,
       appDescription: json[appDescriptionKey] as String,
       domainName: json[domainNameKey] as String,
-      colorSettings: json[colorSettingsKey] as bool,
-      designSettings: json[designSettingsKey] as bool,
-      layoutSettings: json[layoutSettingsKey] as bool,
-      textSettings: json[textSettingsKey] as bool,
       appDefaults: json[appDefaultsKey] as Map<String, dynamic>,
       flutterPath: json[flutterPathKey] as String?,
       workPath: json[workPathKey] as String?,
@@ -93,10 +75,6 @@ class EAGConfig {
       publisherNameKey: publisherName,
       appDescriptionKey: appDescription,
       domainNameKey: domainName,
-      colorSettingsKey: colorSettings,
-      designSettingsKey: designSettings,
-      layoutSettingsKey: layoutSettings,
-      textSettingsKey: textSettings,
       appDefaultsKey: appDefaults,
       flutterPathKey: flutterPath,
       workPathKey: workPath,
@@ -115,10 +93,6 @@ class EAGConfig {
   $publisherNameKey: $publisherName,
   $appDescriptionKey: $appDescription,
   $domainNameKey: $domainName,
-  $colorSettingsKey: $colorSettings,
-  $designSettingsKey: $designSettings,
-  $layoutSettingsKey: $layoutSettings,
-  $textSettingsKey: $textSettings,
   $appDefaultsKey: ${appDefaults.toString()}
   $flutterPathKey: $flutterPath,
   $workPathKey: $workPath,

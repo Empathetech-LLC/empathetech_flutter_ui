@@ -349,9 +349,9 @@ class _EzImageEditorState extends State<EzImageEditor> {
                       Navigator.pop(context, newFile.path);
                     }
                   } catch (e) {
-                    if (context.mounted) {
-                      await ezLogAlert(context, message: e.toString());
-                    }
+                    (context.mounted)
+                        ? await ezLogAlert(context, message: e.toString())
+                        : ezLog(e.toString());
                     setState(() => processing = false);
                   }
                 },

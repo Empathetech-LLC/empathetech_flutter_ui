@@ -18,9 +18,6 @@ class EzDropdownMenu<T> extends StatelessWidget {
   /// Will set [width] to [ezDropdownWidth] of [widthEntries]
   final List<String>? widthEntries;
 
-  /// Optional [IconButton.iconSize] override
-  final double? iconSize;
-
   /// [DropdownMenu.menuHeight] passthrough
   final double? menuHeight;
 
@@ -106,7 +103,6 @@ class EzDropdownMenu<T> extends StatelessWidget {
     this.enabled = true,
     this.width,
     this.widthEntries,
-    this.iconSize,
     this.menuHeight,
     this.leadingIcon,
     this.trailingIcon,
@@ -136,16 +132,19 @@ class EzDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double iSize = iconSize ?? EzConfig.iconSize;
-
     return IconButtonTheme(
       data: IconButtonThemeData(
         style: IconButton.styleFrom(
-          backgroundColor: EzConfig.colors.surface.withValues(
-              alpha: EzConfig.get(EzConfig.isDark
-                  ? darkButtonOpacityKey
-                  : lightButtonOpacityKey)),
-          iconSize: iSize,
+          backgroundColor:
+              EzConfig.colors.surface.withValues(alpha: EzConfig.buttonOpacity),
+          foregroundColor: EzConfig.colors.primary,
+          disabledForegroundColor: EzConfig.colors.outline,
+          overlayColor: EzConfig.colors.primary,
+          side: null,
+          shape: EzConfig.buttonShape.shape,
+          iconSize: EzConfig.iconSize,
+          alignment: Alignment.center,
+          padding: EzInsets.wrap(EzConfig.padding),
         ),
       ),
       child: DropdownMenu<T>(
@@ -156,13 +155,20 @@ class EzDropdownMenu<T> extends StatelessWidget {
                 : ezDropdownWidth(context: context, entries: widthEntries!)),
         menuHeight: menuHeight,
         leadingIcon: leadingIcon,
-        trailingIcon: trailingIcon ?? Icon(Icons.arrow_drop_down, size: iSize),
+        trailingIcon: trailingIcon ??
+            Icon(
+              Icons.arrow_drop_down,
+              size: EzConfig.iconSize,
+            ),
         label: label,
         hintText: hintText,
         helperText: helperText,
         errorText: errorText,
-        selectedTrailingIcon:
-            selectedTrailingIcon ?? Icon(Icons.arrow_drop_up, size: iSize),
+        selectedTrailingIcon: selectedTrailingIcon ??
+            Icon(
+              Icons.arrow_drop_up,
+              size: EzConfig.iconSize,
+            ),
         enableFilter: enableFilter,
         enableSearch: enableSearch,
         keyboardType: keyboardType,

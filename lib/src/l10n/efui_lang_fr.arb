@@ -6,9 +6,9 @@
   "gApply": "Appliquer",
   "gApplyChanges": "Appliquer les modifications",
   "gContinue": "Continuer",
-  "gSkip": "Passer",
   "gOpen": "Ouvrir",
   "gOpenLink": "Ouvrir le lien",
+  "gSkip": "Passer",
   "gSuccess": "Succès",
   "gSuccessExl": "Succès !",
   "gYes": "Oui",
@@ -20,27 +20,34 @@
   "gOptional": "optionnel",
   "gOptions": "Paramètres",
   "gRequired": "Requis",
+  "gThe": "Le",
 
   "gBack": "Retour",
-  "gUndo": "Annuler",
-  "gRedo": "Rétablir",
   "gCancel": "Annuler",
   "gClose": "Fermer",
   "gDisabled": "Désactivé",
   "gError": "Erreur",
   "gFailure": "Échec",
   "gNo": "Non",
+  "gRedo": "Rétablir",
+  "gUndo": "Annuler",
+
+  "gSettings": "Paramètres",
+  "gGlobal": "Global",
+  "gColor": "Couleur",
+  "gDesign": "Design",
+  "gLayout": "Mise en page",
+  "gText": "Texte",
 
   "gDark": "Sombre",
   "gLight": "Clair",
   "gSystem": "Système",
 
+  "gEditing": "Modification : ",
+  "gEditingHint": "Activer pour modifier",
   "gDarkTheme": "Thème sombre",
   "gLightTheme": "Thème clair",
   "gBothThemes": "Les deux thèmes",
-
-  "gEditing": "Modification : ",
-  "gEditingThemeHint": "Ouvrir les paramètres de thème système",
 
   "gLeft": "Gauche",
   "gRight": "Droite",
@@ -116,7 +123,6 @@
 
 
 
-  "ssPageTitle": "Paramètres",
   "ssNavHint": "Ouvrir la page des paramètres",
   "ssRestartReminder": "Fermez et rouvrez l'application pour appliquer vos modifications.",
   "ssRestartReminderWeb": "Rechargez/actualisez la page pour appliquer vos modifications.",
@@ -138,8 +144,10 @@
   "ssHighVisibility": "Haute visibilité",
   "ssChalkboard": "Tableau noir",
   "ssNebula": "Nébuleuse",
-  "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\nContinuer ?",
-  "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\nContinuer ?",
+  "ssWallHoles": "Trous dans le mur",
+
+  "ssDarkOnly": "Ceci est un préréglage de thème sombre.\nIl définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?",
+  "ssLightOnly": "Ceci est un préréglage de thème clair.\nIl définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?",
   "ssApplied": "{config} appliqué.",
   "ssTryMe": "Essayez-moi",
 
@@ -180,9 +188,31 @@
 
 
   "dsPageTitle": "Paramètres de conception",
+  "dsNone": "Aucune",
+  "dsSystem": "Système",
 
   "dsAnimDuration": "Durée de l'animation",
+  "dsPlay": "Lancer l'animation",
   "dsMilliseconds": "Millisecondes",
+
+  "dsPageTransition": "Transition de page",
+  "dsTurnX": "Virage horizontal",
+  "dsTurnY": "Virage vertical",
+  "dsRotate": "Tourner",
+  "dsSlideX": "Diapositive horizontal",
+  "dsSlideY": "Diapositive vertical",
+  "dsZoom": "Zoom",
+  "dsFadeTransition": "Transition en fondu",
+
+  "dsButtonStyle": "Style de bouton",
+  "dsBorderWidth": "Épaisseur de la bordure",
+  "dsPill": "Pilule",
+  "dsRectangle": "Rectangle",
+  "dsRoundRectangle": "Rectangle arrondi",
+  "dsLeftGram": "Parallèle gauche",
+  "dsRightGram": "Parallèle droit",
+  "dsGem": "Gemme",
+  "dsJewel": "Joyau",
 
   "dsPreview": "Aperçu",
   "dsButtonOpacity": "Opacité du bouton",
@@ -229,7 +259,8 @@
   "lsPadding": "Marge intérieure",
   "lsSpacing": "Espacement",
 
-  "lsScroll": "Masquer les barres de défilement",
+  "lsShowBack": "Afficher le bouton Retour",
+  "lsShowScroll": "Afficher les barres de défilement",
 
   "lsReset": "Réinitialiser la mise en page du {themeType} ?",
 
@@ -273,6 +304,8 @@
   "tsLabelP1": "Et ",
   "tsLabelLink": "les labels ?",
   "tsLabelP2": " Ni trop gros, ni trop petits ?",
+
+  "tsAlwaysUnderline": "Soulignez toujours les liens",
 
   "tsReset": "Réinitialiser les styles de texte de {themeType} ?"
 }

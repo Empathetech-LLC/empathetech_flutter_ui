@@ -122,6 +122,9 @@ class EzDivider extends StatelessWidget {
   /// Bounds for the [Divider]
   final BoxConstraints constraints;
 
+  /// If provided, it will be positioned directly underneath the diving line
+  final Widget? title;
+
   /// [Divider.height] passthrough
   final double? height;
 
@@ -148,6 +151,7 @@ class EzDivider extends StatelessWidget {
     this.constraints = const BoxConstraints(maxWidth: 175),
 
     // Divider
+    this.title,
     this.height,
     this.thickness,
     this.indent,
@@ -157,7 +161,9 @@ class EzDivider extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ConstrainedBox(
+  Widget build(BuildContext context) {
+    if (title == null) {
+      return ConstrainedBox(
         constraints: constraints,
         child: Divider(
           height: height,
@@ -168,6 +174,30 @@ class EzDivider extends StatelessWidget {
           radius: radius,
         ),
       );
+    }
+
+    final double space = height ?? (EzConfig.spacing * 3);
+
+    return ConstrainedBox(
+      constraints: constraints,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          EzSpacer(space: space / 2),
+          Divider(
+            height: EzConfig.marginVal,
+            thickness: thickness,
+            indent: indent,
+            endIndent: endIndent,
+            color: color,
+            radius: radius,
+          ),
+          title!,
+          EzSpacer(space: space / 2),
+        ],
+      ),
+    );
+  }
 }
 
 // Swap constructors //

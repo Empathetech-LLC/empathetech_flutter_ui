@@ -11,9 +11,6 @@ class EzPaddingSetting extends StatefulWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
 
-  /// Whether to update both themes
-  final bool updateBoth;
-
   /// Smallest value that can be set
   final double min;
 
@@ -36,7 +33,6 @@ class EzPaddingSetting extends StatefulWidget {
   const EzPaddingSetting({
     super.key,
     required this.onUpdate,
-    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
@@ -113,7 +109,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                               ),
                               text: EzConfig.l10n.gCurrently,
                             ),
-                            const EzSpacer(vertical: false),
+                            EzConfig.rowSpacer,
                             EzElevatedButton(
                               enabled: false,
                               style: ElevatedButton.styleFrom(
@@ -145,7 +141,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                         setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
-                      if (widget.updateBoth) {
+                      if (EzConfig.updateBoth) {
                         await EzConfig.setDouble(
                             EzConfig.isDark ? lightPaddingKey : darkPaddingKey,
                             value);
@@ -163,7 +159,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                 EzElevatedIconButton(
                   onPressed: () async {
                     await EzConfig.remove(configKey);
-                    if (widget.updateBoth) {
+                    if (EzConfig.updateBoth) {
                       await EzConfig.remove(
                           EzConfig.isDark ? lightPaddingKey : darkPaddingKey);
                     }
@@ -173,7 +169,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                   label:
                       '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
                 ),
-                EzSpacer(space: EzConfig.spacing * 1.5),
+                EzSpacer(space: EzConfig.spargin),
               ],
             ),
           ),

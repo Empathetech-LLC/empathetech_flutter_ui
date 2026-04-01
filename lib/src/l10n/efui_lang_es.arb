@@ -6,9 +6,9 @@
   "gApply": "Aplicar",
   "gApplyChanges": "Aplicar cambios",
   "gContinue": "Continuar",
-  "gSkip": "Saltar",
   "gOpen": "Abrir",
   "gOpenLink": "Abrir enlace",
+  "gSkip": "Saltar",
   "gSuccess": "Éxito",
   "gSuccessExl": "¡Éxito!",
   "gYes": "Sí",
@@ -20,27 +20,34 @@
   "gOptional": "opcional",
   "gOptions": "Opciones",
   "gRequired": "Requerido",
+  "gThe": "El",
 
   "gBack": "Atrás",
-  "gUndo": "Deshacer",
-  "gRedo": "Rehacer",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
   "gDisabled": "Deshabilitado",
   "gError": "Error",
   "gFailure": "Fracaso",
   "gNo": "No",
+  "gRedo": "Rehacer",
+  "gUndo": "Deshacer",
+
+  "gSettings": "Ajustes",
+  "gGlobal": "Global",
+  "gColor": "Color",
+  "gDesign": "Diseño",
+  "gLayout": "Esquema",
+  "gText": "Texto",
 
   "gDark": "Oscuro",
   "gLight": "Claro",
   "gSystem": "Sistema",
 
+  "gEditing": "Editando: ",
+  "gEditingHint": "Activar para editar",
   "gDarkTheme": "Tema oscuro",
   "gLightTheme": "Tema claro",
   "gBothThemes": "Ambos temas",
-
-  "gEditing": "Editando: ",
-  "gEditingThemeHint": "Abrir la configuración del tema del sistema",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",
@@ -116,7 +123,6 @@
   
 
 
-  "ssPageTitle": "Configuración",
   "ssNavHint": "Abrir la página de configuración",
   "ssRestartReminder": "Cierre y vuelva a abrir la app para aplicar los cambios.",
   "ssRestartReminderWeb": "Recarga o actualice la página para aplicar tus cambios.",
@@ -138,8 +144,10 @@
   "ssHighVisibility": "Alta visibilidad",
   "ssChalkboard": "Pizarra",
   "ssNebula": "Nebulosa",
-  "ssDarkOnly": "Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n¿Continuar?",
-  "ssLightOnly": "Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n¿Continuar?",
+  "ssWallHoles": "Agujeros en la pared",
+
+  "ssDarkOnly": "Este es un preajuste de tema oscuro.\nCambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?",
+  "ssLightOnly": "Este es un preajuste de tema claro.\nCambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?",
   "ssApplied": "{config} aplicado.",
   "ssTryMe": "Pruébame",
 
@@ -180,9 +188,31 @@
 
 
   "dsPageTitle": "Configuración de diseño",
+  "dsNone": "Ninguna",
+  "dsSystem": "Sistema",
 
   "dsAnimDuration": "Duración de la animación",
+  "dsPlay": "Reproducir animación",
   "dsMilliseconds": "Milisegundos",
+
+  "dsPageTransition": "Transición de página",
+  "dsTurnX": "Giro horizontal",
+  "dsTurnY": "Giro vertical",
+  "dsRotate": "Girar",
+  "dsSlideX": "Diapositiva horizontal",
+  "dsSlideY": "Diapositiva vertical",
+  "dsZoom": "Zoom",
+  "dsFadeTransition": "Transición de desvanecimiento",
+
+  "dsButtonStyle": "Estilo de botón",
+  "dsBorderWidth": "Ancho del borde",
+  "dsPill": "Píldora",
+  "dsRectangle": "Rectángulo",
+  "dsRoundRectangle": "Rectángulo redondeado",
+  "dsLeftGram": "Paralelo izquierdo",
+  "dsRightGram": "Paralelo derecho",
+  "dsGem": "Gema",
+  "dsJewel": "Joya",
 
   "dsPreview": "Avance",
   "dsButtonOpacity": "Opacidad del botón",
@@ -229,7 +259,8 @@
   "lsPadding": "Acolchado",
   "lsSpacing": "Espaciado",
 
-  "lsScroll": "Ocultar las barras de desplazamiento",
+  "lsShowBack": "Mostrar botón de retroceso",
+  "lsShowScroll": "Mostrar barras de desplazamiento",
 
   "lsReset": "¿Restablecer el esquema de {themeType}?",
 
@@ -273,6 +304,8 @@
   "tsLabelP1": "¿Y ",
   "tsLabelLink": "las etiquetas?",
   "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
+
+  "tsAlwaysUnderline": "Subraya siempre los enlaces",
 
   "tsReset": "¿Restablecer los estilos de texto de {themeType}?"
 }

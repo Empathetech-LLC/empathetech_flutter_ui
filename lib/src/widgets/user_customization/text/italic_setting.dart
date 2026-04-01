@@ -14,14 +14,10 @@ class EzItalicSetting extends StatefulWidget {
   /// Callback to live update the [TextStyle] on your UI
   final void Function(bool italic) notifierCallback;
 
-  /// Whether both [ThemeMode]s should be updated
-  final bool updateBoth;
-
   /// Standardized tool for toggling [FontStyle.italic] in the [TextStyle.fontStyle] that matches [type]
   const EzItalicSetting({
     required super.key,
     required this.type,
-    required this.updateBoth,
     required this.notifierCallback,
   });
 
@@ -34,12 +30,18 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
 
   @override
   Widget build(BuildContext context) => EzIconButton(
-        fauxDisabled: !isItalic,
+        style: IconButton.styleFrom(
+          foregroundColor:
+              isItalic ? EzConfig.colors.primary : EzConfig.colors.outline,
+          side: EzConfig.borderSide(EzConfig.colors.primaryContainer
+              .withValues(alpha: EzConfig.borderOpacity)),
+          iconSize: EzConfig.iconSize,
+        ),
         onPressed: () async {
           isItalic = !isItalic;
 
           await EzConfig.setBool(widget.type.italicKey, isItalic);
-          if (widget.updateBoth) {
+          if (EzConfig.updateBoth) {
             await EzConfig.setBool(widget.type.italicMirror, isItalic);
           }
 

@@ -11,14 +11,8 @@ class EzLayoutSettings extends StatefulWidget {
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
 
-  /// When true, updates both dark and light theme settings simultaneously
-  final bool updateBoth;
-
-  /// If provided, the "Editing: X theme" text will be a link with this callback
-  final void Function()? themeLink;
-
   /// Optional additional settings, before the main settings
-  /// BYO spacers
+  /// BYO trailing spacer, leading spacer is an [EzConfig.separator]
   final List<Widget>? beforeLayout;
 
   /// Optional additional settings, after the main settings
@@ -48,13 +42,14 @@ class EzLayoutSettings extends StatefulWidget {
   /// [EzResetButton.saveSkip] passthrough
   final Set<String>? saveSkip;
 
+  /// Defaults to [EzSeparator]
+  final Widget trail;
+
   /// Empathetech layout settings
   /// Recommended to use as a [Scaffold.body]
   const EzLayoutSettings({
     super.key,
     required this.onUpdate,
-    this.updateBoth = false,
-    this.themeLink,
     this.beforeLayout,
     this.afterLayout,
     this.resetSpacer = const EzSeparator(),
@@ -64,6 +59,7 @@ class EzLayoutSettings extends StatefulWidget {
     this.androidPackage,
     this.resetSkip,
     this.saveSkip,
+    this.trail = const EzSeparator(),
   });
 
   @override
@@ -71,6 +67,13 @@ class EzLayoutSettings extends StatefulWidget {
 }
 
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
+  // Define custom functions //
+
+  void redraw() {
+    widget.onUpdate();
+    setState(() {});
+  }
+
   // Init //
 
   @override
@@ -79,121 +82,113 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
     ezWindowNamer(EzConfig.l10n.lsPageTitle);
   }
 
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
+  // Return the build //
   @override
   Widget build(BuildContext context) {
-    // Gather the contextual theme data //
+    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      // Update both toggle
+      EzConfig.margin,
+      const EzThemeCoin(),
+      EzDivider(height: EzConfig.spacing),
+      EzConfig.spacer,
 
-    final String themeString = (widget.updateBoth
-            ? EzConfig.l10n.gBothThemes
-            : EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme)
-        .toLowerCase();
+      // Optional 'before' settings
+      if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
-    // Return the build //
+      // Margin
+      EzMarginSetting(
+        onUpdate: redraw,
+        min: minMargin,
+        max: maxMargin,
+        steps: 6,
+        decimals: 1,
+      ),
+      EzConfig.spacer,
 
-    return EzScrollView(
-      children: <Widget>[
-        (widget.themeLink != null)
-            ? EzLink(
-                EzConfig.l10n.gEditing + themeString,
-                onTap: widget.themeLink,
-                hint: EzConfig.l10n.gEditingThemeHint,
-                style: EzConfig.styles.labelLarge,
-                textAlign: TextAlign.center,
-              )
-            : EzText(
-                EzConfig.l10n.gEditing + themeString,
-                style: EzConfig.styles.labelLarge,
-                textAlign: TextAlign.center,
-              ),
-        EzConfig.margin,
+      // Padding
+      EzPaddingSetting(
+        onUpdate: redraw,
+        min: minPadding,
+        max: maxPadding,
+        steps: 12,
+        decimals: 1,
+      ),
+      EzConfig.spacer,
 
-        if (widget.beforeLayout != null) ...widget.beforeLayout!,
+      // Spacing
+      EzSpacingSetting(
+        onUpdate: redraw,
+        min: minSpacing,
+        max: maxSpacing,
+        steps: 13,
+        decimals: 0,
+      ),
+      EzConfig.separator,
 
-        EzMarginSetting(
-          onUpdate: redraw,
-          updateBoth: widget.updateBoth,
-          min: minMargin,
-          max: maxMargin,
-          steps: 6,
-          decimals: 1,
-        ),
-        EzConfig.spacer,
+      // Show back FAB
+      EzSwitchPair(
+        valueKey: EzConfig.isDark ? darkShowBackFABKey : lightShowBackFABKey,
+        afterChanged: (bool? value) async {
+          if (value == null) return;
 
-        EzPaddingSetting(
-          onUpdate: redraw,
-          updateBoth: widget.updateBoth,
-          min: minPadding,
-          max: maxPadding,
-          steps: 12,
-          decimals: 1,
-        ),
-        EzConfig.spacer,
+          if (EzConfig.updateBoth) {
+            await EzConfig.setBool(
+                EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey,
+                value);
+          }
 
-        EzSpacingSetting(
-          onUpdate: redraw,
-          updateBoth: widget.updateBoth,
-          min: minSpacing,
-          max: maxSpacing,
-          steps: 13,
-          decimals: 0,
-        ),
-        EzConfig.separator,
+          await EzConfig.rebuildUI(redraw);
+        },
+        text: EzConfig.l10n.lsShowBack,
+      ),
+      EzConfig.spacer,
 
-        // Hide scroll
-        EzSwitchPair(
-          valueKey: EzConfig.isDark ? darkHideScrollKey : lightHideScrollKey,
-          afterChanged: (bool? value) async {
-            if (value == null) return;
-            if (widget.updateBoth) {
-              await EzConfig.setBool(
-                  EzConfig.isDark ? lightHideScrollKey : darkHideScrollKey,
-                  value);
+      // Show scroll
+      EzSwitchPair(
+        valueKey: EzConfig.isDark ? darkShowScrollKey : lightShowScrollKey,
+        afterChanged: (bool? value) async {
+          if (value == null) return;
+
+          if (EzConfig.updateBoth) {
+            await EzConfig.setBool(
+                EzConfig.isDark ? lightShowScrollKey : darkShowScrollKey,
+                value);
+          }
+
+          await EzConfig.rebuildUI(redraw);
+        },
+        text: EzConfig.l10n.lsShowScroll,
+      ),
+
+      if (widget.afterLayout != null) ...widget.afterLayout!,
+
+      // Local reset all
+      widget.resetSpacer,
+      EzResetButton(
+        all: false,
+        redraw,
+        androidPackage: widget.androidPackage,
+        appName: widget.appName,
+        dynamicTitle: () => EzConfig.l10n.lsReset(ezThemeString(true)),
+        onConfirm: () async {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
+            await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
+            if (widget.resetExtraDark != null) {
+              await EzConfig.removeKeys(widget.resetExtraDark!);
             }
-            await EzConfig.rebuildUI(redraw);
-          },
-          text: EzConfig.l10n.lsScroll,
-        ),
+          }
 
-        if (widget.afterLayout != null) ...widget.afterLayout!,
-
-        // Local reset all
-        widget.resetSpacer,
-        EzResetButton(
-          redraw,
-          androidPackage: widget.androidPackage,
-          appName: widget.appName,
-          dialogTitle: EzConfig.l10n.lsReset(widget.updateBoth &&
-                  EzConfig.locale.languageCode == english.languageCode
-              ? "$themeString'"
-              : themeString),
-          onConfirm: () async {
-            if (widget.updateBoth || EzConfig.isDark) {
-              await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
-              if (widget.resetExtraDark != null) {
-                await EzConfig.removeKeys(widget.resetExtraDark!);
-              }
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
+            await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
+            if (widget.resetExtraLight != null) {
+              await EzConfig.removeKeys(widget.resetExtraLight!);
             }
-
-            if (widget.updateBoth || !EzConfig.isDark) {
-              await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
-              if (widget.resetExtraLight != null) {
-                await EzConfig.removeKeys(widget.resetExtraLight!);
-              }
-            }
-          },
-          resetBoth: widget.updateBoth,
-          resetSkip: widget.resetSkip,
-          saveSkip: widget.saveSkip,
-        ),
-        EzConfig.separator,
-      ],
-    );
+          }
+        },
+        resetSkip: widget.resetSkip,
+        saveSkip: widget.saveSkip,
+      ),
+      widget.trail,
+    ]);
   }
 }

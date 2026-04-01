@@ -117,12 +117,6 @@ abstract class EFUILang {
   /// **'Continue'**
   String get gContinue;
 
-  /// No description provided for @gSkip.
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get gSkip;
-
   /// No description provided for @gOpen.
   ///
   /// In en, this message translates to:
@@ -134,6 +128,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open link'**
   String get gOpenLink;
+
+  /// No description provided for @gSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get gSkip;
 
   /// No description provided for @gSuccess.
   ///
@@ -195,23 +195,17 @@ abstract class EFUILang {
   /// **'Required'**
   String get gRequired;
 
+  /// No description provided for @gThe.
+  ///
+  /// In en, this message translates to:
+  /// **'The'**
+  String get gThe;
+
   /// No description provided for @gBack.
   ///
   /// In en, this message translates to:
   /// **'Back'**
   String get gBack;
-
-  /// No description provided for @gUndo.
-  ///
-  /// In en, this message translates to:
-  /// **'Undo'**
-  String get gUndo;
-
-  /// No description provided for @gRedo.
-  ///
-  /// In en, this message translates to:
-  /// **'Redo'**
-  String get gRedo;
 
   /// No description provided for @gCancel.
   ///
@@ -249,6 +243,54 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
+  /// No description provided for @gRedo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get gRedo;
+
+  /// No description provided for @gUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get gUndo;
+
+  /// No description provided for @gSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get gSettings;
+
+  /// No description provided for @gGlobal.
+  ///
+  /// In en, this message translates to:
+  /// **'Global'**
+  String get gGlobal;
+
+  /// No description provided for @gColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get gColor;
+
+  /// No description provided for @gDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get gDesign;
+
+  /// No description provided for @gLayout.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get gLayout;
+
+  /// No description provided for @gText.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get gText;
+
   /// No description provided for @gDark.
   ///
   /// In en, this message translates to:
@@ -267,6 +309,18 @@ abstract class EFUILang {
   /// **'System'**
   String get gSystem;
 
+  /// No description provided for @gEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: '**
+  String get gEditing;
+
+  /// No description provided for @gEditingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to edit'**
+  String get gEditingHint;
+
   /// No description provided for @gDarkTheme.
   ///
   /// In en, this message translates to:
@@ -284,18 +338,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Both themes'**
   String get gBothThemes;
-
-  /// No description provided for @gEditing.
-  ///
-  /// In en, this message translates to:
-  /// **'Editing: '**
-  String get gEditing;
-
-  /// No description provided for @gEditingThemeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Open the system theme settings'**
-  String get gEditingThemeHint;
 
   /// No description provided for @gLeft.
   ///
@@ -639,12 +681,6 @@ abstract class EFUILang {
   /// **'Set by you'**
   String get gYou;
 
-  /// No description provided for @ssPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get ssPageTitle;
-
   /// No description provided for @ssNavHint.
   ///
   /// In en, this message translates to:
@@ -747,16 +783,22 @@ abstract class EFUILang {
   /// **'Nebula'**
   String get ssNebula;
 
+  /// No description provided for @ssWallHoles.
+  ///
+  /// In en, this message translates to:
+  /// **'Wall holes'**
+  String get ssWallHoles;
+
   /// No description provided for @ssDarkOnly.
   ///
   /// In en, this message translates to:
-  /// **'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?'**
+  /// **'This is a dark theme preset.\nIt will set the theme mode to dark, and update that theme.\n\nContinue?'**
   String get ssDarkOnly;
 
   /// No description provided for @ssLightOnly.
   ///
   /// In en, this message translates to:
-  /// **'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?'**
+  /// **'This is a light theme preset.\nIt will set the theme mode to light, and update that theme.\n\nContinue?'**
   String get ssLightOnly;
 
   /// No description provided for @ssApplied.
@@ -909,17 +951,137 @@ abstract class EFUILang {
   /// **'Design settings'**
   String get dsPageTitle;
 
+  /// No description provided for @dsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get dsNone;
+
+  /// No description provided for @dsSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get dsSystem;
+
   /// No description provided for @dsAnimDuration.
   ///
   /// In en, this message translates to:
   /// **'Animation duration'**
   String get dsAnimDuration;
 
+  /// No description provided for @dsPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play animation'**
+  String get dsPlay;
+
   /// No description provided for @dsMilliseconds.
   ///
   /// In en, this message translates to:
   /// **'Milliseconds'**
   String get dsMilliseconds;
+
+  /// No description provided for @dsPageTransition.
+  ///
+  /// In en, this message translates to:
+  /// **'Page transition'**
+  String get dsPageTransition;
+
+  /// No description provided for @dsTurnX.
+  ///
+  /// In en, this message translates to:
+  /// **'Horizontal turn'**
+  String get dsTurnX;
+
+  /// No description provided for @dsTurnY.
+  ///
+  /// In en, this message translates to:
+  /// **'Vertical turn'**
+  String get dsTurnY;
+
+  /// No description provided for @dsRotate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate'**
+  String get dsRotate;
+
+  /// No description provided for @dsSlideX.
+  ///
+  /// In en, this message translates to:
+  /// **'Horizontal slide'**
+  String get dsSlideX;
+
+  /// No description provided for @dsSlideY.
+  ///
+  /// In en, this message translates to:
+  /// **'Vertical slide'**
+  String get dsSlideY;
+
+  /// No description provided for @dsZoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom'**
+  String get dsZoom;
+
+  /// No description provided for @dsFadeTransition.
+  ///
+  /// In en, this message translates to:
+  /// **'Fade transition'**
+  String get dsFadeTransition;
+
+  /// No description provided for @dsButtonStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Button style'**
+  String get dsButtonStyle;
+
+  /// No description provided for @dsBorderWidth.
+  ///
+  /// In en, this message translates to:
+  /// **'Border width'**
+  String get dsBorderWidth;
+
+  /// No description provided for @dsPill.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill'**
+  String get dsPill;
+
+  /// No description provided for @dsRectangle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rectangle'**
+  String get dsRectangle;
+
+  /// No description provided for @dsRoundRectangle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rounded rectangle'**
+  String get dsRoundRectangle;
+
+  /// No description provided for @dsLeftGram.
+  ///
+  /// In en, this message translates to:
+  /// **'Left parallel'**
+  String get dsLeftGram;
+
+  /// No description provided for @dsRightGram.
+  ///
+  /// In en, this message translates to:
+  /// **'Right parallel'**
+  String get dsRightGram;
+
+  /// No description provided for @dsGem.
+  ///
+  /// In en, this message translates to:
+  /// **'Gem'**
+  String get dsGem;
+
+  /// No description provided for @dsJewel.
+  ///
+  /// In en, this message translates to:
+  /// **'Jewel'**
+  String get dsJewel;
 
   /// No description provided for @dsPreview.
   ///
@@ -1131,11 +1293,17 @@ abstract class EFUILang {
   /// **'Spacing'**
   String get lsSpacing;
 
-  /// No description provided for @lsScroll.
+  /// No description provided for @lsShowBack.
   ///
   /// In en, this message translates to:
-  /// **'Hide scrollbars'**
-  String get lsScroll;
+  /// **'Show back button'**
+  String get lsShowBack;
+
+  /// No description provided for @lsShowScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show scrollbars'**
+  String get lsShowScroll;
 
   /// No description provided for @lsReset.
   ///
@@ -1334,6 +1502,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **' Not too big, not too small?'**
   String get tsLabelP2;
+
+  /// No description provided for @tsAlwaysUnderline.
+  ///
+  /// In en, this message translates to:
+  /// **'Always underline links'**
+  String get tsAlwaysUnderline;
 
   /// No description provided for @tsReset.
   ///

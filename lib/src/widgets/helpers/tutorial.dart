@@ -19,14 +19,20 @@ class EzTutorial extends StatelessWidget {
   /// [Positioned.right] passthrough
   final double? right;
 
-  /// Value for the [AlertDialog]'s [Text] title
-  final String title;
+  /// [AlertDialog.title] passthrough
+  final Widget? title;
 
   /// Value for the [AlertDialog]'s [Text] content
   final String content;
 
+  /// Optional [Semantics] override for [content]
+  final String? contentSemantics;
+
   /// [EzMaterialAction.text] passthrough
   final String acceptMessage;
+
+  /// Optional [Semantics] override for [acceptMessage]
+  final String? acceptSemantics;
 
   /// [EzMaterialAction.onPressed] passthrough
   final void Function() onAccept;
@@ -39,9 +45,11 @@ class EzTutorial extends StatelessWidget {
     this.bottom,
     this.left,
     this.right,
-    required this.title,
+    this.title,
     required this.content,
+    this.contentSemantics,
     required this.acceptMessage,
+    this.acceptSemantics,
     required this.onAccept,
   });
 
@@ -54,14 +62,18 @@ class EzTutorial extends StatelessWidget {
         child: SelectionArea(
           child: AlertDialog(
             // Title
-            title: Text(title, textAlign: TextAlign.center),
+            title: title,
             titlePadding: EdgeInsets.symmetric(
               horizontal: EzConfig.marginVal,
               vertical: EzConfig.spacing / 2,
             ),
 
             // Content
-            content: Text(content, textAlign: TextAlign.center),
+            content: Text(
+              content,
+              semanticsLabel: contentSemantics,
+              textAlign: TextAlign.center,
+            ),
             contentPadding: EdgeInsets.symmetric(
               horizontal: EzConfig.marginVal,
               vertical: EzConfig.spacing / 2,
@@ -69,7 +81,11 @@ class EzTutorial extends StatelessWidget {
 
             // Actions
             actions: <Widget>[
-              EzMaterialAction(text: acceptMessage, onPressed: onAccept)
+              EzMaterialAction(
+                text: acceptMessage,
+                semantics: acceptSemantics,
+                onPressed: onAccept,
+              )
             ],
             actionsAlignment: EzConfig.isLefty
                 ? MainAxisAlignment.start

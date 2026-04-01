@@ -8,16 +8,18 @@ import '../../empathetech_flutter_ui.dart';
 //* Global (home) settings' keys *//
 
 const String isLeftyKey = 'isLefty';
-
 const String isDarkThemeKey = 'isDarkTheme';
-
 const String appLocaleKey = 'appLocale';
+const String hubPositionKey = 'hubPosition';
+const String updateBothKey = 'updateBoth';
 
-///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
+///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey], [hubPositionKey], [updateBothKey]
 const Map<String, Type> allGlobalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   appLocaleKey: List<String>,
+  hubPositionKey: int,
+  updateBothKey: bool,
 };
 
 //* Color settings' keys *//
@@ -430,8 +432,10 @@ const String darkAnimationDurationKey = 'darkAnimationDuration';
 const String darkTransitionTypeKey = 'darkTransitionType';
 const String darkTransitionFadeKey = 'darkTransitionFade';
 const String darkBackgroundImageKey = 'darkBackgroundImage';
+const String darkButtonShapeKey = 'darkButtonShape';
+const String darkBorderWidthKey = 'darkBorderWidth';
 const String darkButtonOpacityKey = 'darkButtonOpacity';
-const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
+const String darkBorderOpacityKey = 'darkBorderOpacity';
 
 /// Animation, background, && button opacity keys
 const Map<String, Type> darkDesignKeys = <String, Type>{
@@ -440,8 +444,10 @@ const Map<String, Type> darkDesignKeys = <String, Type>{
   darkTransitionFadeKey: bool,
   darkBackgroundImageKey: String,
   '$darkBackgroundImageKey$boxFitSuffix': String,
+  darkButtonShapeKey: String,
+  darkBorderWidthKey: double,
   darkButtonOpacityKey: double,
-  darkButtonOutlineOpacityKey: double,
+  darkBorderOpacityKey: double,
 };
 
 // Light theme //
@@ -450,8 +456,10 @@ const String lightAnimationDurationKey = 'lightAnimationDuration';
 const String lightTransitionTypeKey = 'lightTransitionType';
 const String lightTransitionFadeKey = 'lightTransitionFade';
 const String lightBackgroundImageKey = 'lightBackgroundImage';
+const String lightButtonShapeKey = 'lightButtonShape';
+const String lightBorderWidthKey = 'lightBorderWidth';
 const String lightButtonOpacityKey = 'lightButtonOpacity';
-const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
+const String lightBorderOpacityKey = 'lightBorderOpacity';
 
 /// Animation, background, && button opacity keys
 const Map<String, Type> lightDesignKeys = <String, Type>{
@@ -460,8 +468,10 @@ const Map<String, Type> lightDesignKeys = <String, Type>{
   lightTransitionFadeKey: bool,
   lightBackgroundImageKey: String,
   '$lightBackgroundImageKey$boxFitSuffix': String,
+  lightButtonShapeKey: String,
+  lightBorderWidthKey: double,
   lightButtonOpacityKey: double,
-  lightButtonOutlineOpacityKey: double,
+  lightBorderOpacityKey: double,
 };
 
 // Shared //
@@ -480,14 +490,16 @@ const String darkMarginKey = 'darkMargin';
 const String darkPaddingKey = 'darkPadding';
 const String darkSpacingKey = 'darkSpacing';
 
-const String darkHideScrollKey = 'darkHideScroll';
+const String darkShowBackFABKey = 'darkShowBackFAB';
+const String darkShowScrollKey = 'darkShowScroll';
 
-/// [margin, padding, spacing, hideScroll]
+/// [margin, padding, spacing, showBackFAB, showScroll]
 const Map<String, Type> darkLayoutKeys = <String, Type>{
   darkMarginKey: double,
   darkPaddingKey: double,
   darkSpacingKey: double,
-  darkHideScrollKey: bool,
+  darkShowBackFABKey: bool,
+  darkShowScrollKey: bool,
 };
 
 // Light theme //
@@ -496,21 +508,23 @@ const String lightMarginKey = 'lightMargin';
 const String lightPaddingKey = 'lightPadding';
 const String lightSpacingKey = 'lightSpacing';
 
-const String lightHideScrollKey = 'lightHideScroll';
+const String lightShowBackFABKey = 'lightShowBackFAB';
+const String lightShowScrollKey = 'lightShowScroll';
 
-/// [margin, padding, spacing, hideScroll]
+/// [margin, padding, spacing, showBackFAB, showScroll]
 const Map<String, Type> lightLayoutKeys = <String, Type>{
   lightMarginKey: double,
   lightPaddingKey: double,
   lightSpacingKey: double,
-  lightHideScrollKey: bool,
+  lightShowBackFABKey: bool,
+  lightShowScrollKey: bool,
 };
 
 // Shared //
 
 /// [dark, light]
 ///                X
-/// [margin, padding, spacing, hideScroll]
+/// [margin, padding, spacing, showBackFAB, showScroll]
 const Map<String, Type> allLayoutKeys = <String, Type>{
   ...darkLayoutKeys,
   ...lightLayoutKeys,
@@ -573,6 +587,7 @@ const String darkLabelFontHeightKey = 'darkLabelFontHeight';
 // etc
 const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
 const String darkIconSizeKey = 'darkIconSize';
+const String darkLineLinksKey = 'darkLineLinks';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -633,6 +648,7 @@ const Map<String, Type> darkTextKeys = <String, Type>{
   // etc
   darkTextBackgroundOpacityKey: double,
   darkIconSizeKey: double,
+  darkLineLinksKey: bool,
 };
 
 // Light theme //
@@ -690,6 +706,7 @@ const String lightLabelFontHeightKey = 'lightLabelFontHeight';
 // etc
 const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 const String lightIconSizeKey = 'lightIconSize';
+const String lightLineLinksKey = 'lightLineLinks';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -750,6 +767,7 @@ const Map<String, Type> lightTextKeys = <String, Type>{
   // etc
   lightTextBackgroundOpacityKey: double,
   lightIconSizeKey: double,
+  lightLineLinksKey: bool,
 };
 
 // Shared //

@@ -144,6 +144,25 @@ class _EzScrollViewState extends State<EzScrollView> {
   bool canScrollUp = false;
   bool canScrollDown = false;
 
+  // Define custom functions //
+
+  /// onEnter for showScrollHint
+  void hoverScroll(PointerEnterEvent event, {required bool forward}) {
+    if (!controller.hasClients) return;
+
+    controller.animateTo(
+      forward ? controller.position.maxScrollExtent : 0.0,
+      duration: Duration(milliseconds: EzConfig.animDur),
+      curve: Curves.linear,
+    );
+  }
+
+  /// onExit for showScrollHint
+  void stopScroll(PointerExitEvent event) {
+    if (!controller.hasClients) return;
+    controller.position.hold(() {});
+  }
+
   // Init //
 
   @override
@@ -182,8 +201,6 @@ class _EzScrollViewState extends State<EzScrollView> {
   Widget build(BuildContext context) {
     // Define the contextual build data //
 
-    final Color arrowColor = EzConfig.colors.secondary.withValues(alpha: 0.5);
-
     Widget core = SingleChildScrollView(
       scrollDirection: widget.scrollDirection,
       reverse: widget.reverse,
@@ -219,7 +236,7 @@ class _EzScrollViewState extends State<EzScrollView> {
                 ),
     );
 
-    if (widget.thumbVisibility ?? !EzConfig.hideScroll) {
+    if (widget.thumbVisibility ?? EzConfig.showScroll) {
       core = Scrollbar(
         controller: controller,
         thumbVisibility: true,
@@ -235,7 +252,7 @@ class _EzScrollViewState extends State<EzScrollView> {
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
-        scrollbars: widget.thumbVisibility ?? !EzConfig.hideScroll,
+        scrollbars: widget.thumbVisibility ?? EzConfig.showScroll,
         dragDevices: widget.scrollDirection == Axis.vertical
             ? <PointerDeviceKind>{
                 PointerDeviceKind.invertedStylus,
@@ -273,8 +290,15 @@ class _EzScrollViewState extends State<EzScrollView> {
                             right: 0,
                             top: 0,
                             child: ExcludeSemantics(
-                              child:
-                                  EzIcon(Icons.arrow_upward, color: arrowColor),
+                              child: MouseRegion(
+                                onEnter: (PointerEnterEvent event) =>
+                                    hoverScroll(event, forward: false),
+                                onExit: stopScroll,
+                                child: EzIcon(
+                                  Icons.arrow_upward,
+                                  color: EzConfig.colors.secondary,
+                                ),
+                              ),
                             ),
                           )
                         : Positioned(
@@ -282,8 +306,15 @@ class _EzScrollViewState extends State<EzScrollView> {
                             top: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child:
-                                  EzIcon(Icons.chevron_left, color: arrowColor),
+                              child: MouseRegion(
+                                onEnter: (PointerEnterEvent event) =>
+                                    hoverScroll(event, forward: false),
+                                onExit: stopScroll,
+                                child: EzIcon(
+                                  Icons.chevron_left,
+                                  color: EzConfig.colors.secondary,
+                                ),
+                              ),
                             ),
                           ),
 
@@ -295,8 +326,15 @@ class _EzScrollViewState extends State<EzScrollView> {
                             right: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(Icons.arrow_downward,
-                                  color: arrowColor),
+                              child: MouseRegion(
+                                onEnter: (PointerEnterEvent event) =>
+                                    hoverScroll(event, forward: true),
+                                onExit: stopScroll,
+                                child: EzIcon(
+                                  Icons.arrow_downward,
+                                  color: EzConfig.colors.secondary,
+                                ),
+                              ),
                             ),
                           )
                         : Positioned(
@@ -304,8 +342,15 @@ class _EzScrollViewState extends State<EzScrollView> {
                             top: 0,
                             bottom: 0,
                             child: ExcludeSemantics(
-                              child: EzIcon(Icons.chevron_right,
-                                  color: arrowColor),
+                              child: MouseRegion(
+                                onEnter: (PointerEnterEvent event) =>
+                                    hoverScroll(event, forward: true),
+                                onExit: stopScroll,
+                                child: EzIcon(
+                                  Icons.chevron_right,
+                                  color: EzConfig.colors.secondary,
+                                ),
+                              ),
                             ),
                           ),
                 ],

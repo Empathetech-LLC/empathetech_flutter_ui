@@ -43,11 +43,6 @@ class EzImageSetting extends StatefulWidget {
   /// null will display a choice to the user
   final bool? allowThemeUpdate;
 
-  /// null updates both theme modes
-  /// [allowThemeUpdate] takes precedence/must be true
-  /// Parameter is required to avoid accidental double updates
-  final Brightness? updateBrightness;
-
   /// Whether the [EzImageEditor] should be displayed upon successful image selection
   /// [AssetImage]s cannot be edited/will be skipped
   final bool showEditor;
@@ -71,7 +66,6 @@ class EzImageSetting extends StatefulWidget {
     this.allowClear = true,
     this.credits,
     this.allowThemeUpdate,
-    required this.updateBrightness,
     this.showEditor = true,
     this.defaultFit,
     this.showFitOption = true,
@@ -160,7 +154,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             actions: <EzMaterialAction>[
               EzMaterialAction(
                 text: EzConfig.l10n.gYes,
-                onPressed: () => Navigator.of(dContext).pop((_) async => true),
+                onPressed: () => Navigator.of(dContext)
+                    .pop((_) => Future<dynamic>.value(true)),
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.dsCrop,
@@ -168,7 +163,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.gCancel,
-                onPressed: () => Navigator.of(dContext).pop((_) async => null),
+                onPressed: () => Navigator.of(dContext)
+                    .pop((_) => Future<dynamic>.value(null)),
               ),
             ],
             needsClose: false,
@@ -202,18 +198,16 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Set the new path
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
-      if (mounted) {
-        await ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed);
-      }
+      (mounted)
+          ? await ezLogAlert(context, message: EzConfig.l10n.dsImgSetFailed)
+          : ezLog(EzConfig.l10n.dsImgSetFailed);
       return false;
     }
     currPath = newPath;
 
     // Update the theme (conditionally)
     if (!isInt && updateTheme) {
-      // Dark
-      if (widget.updateBrightness == null ||
-          widget.updateBrightness == Brightness.dark) {
+      if (EzConfig.updateBoth || EzConfig.isDark) {
         // If there is little/no text background opacity, set it to 50%
         // Better to have to turn it down than up, they'll be a lot of images where people suddenly won't be able to read
         final double? opacity = EzConfig.get(darkTextBackgroundOpacityKey);
@@ -227,20 +221,19 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result == success) {
           await EzConfig.setString(darkColorSchemeImageKey, newPath);
         } else {
-          if (mounted) {
-            await ezLogAlert(
-              context,
-              title: EzConfig.l10n.dsImgGetFailed,
-              message:
-                  '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
-            );
-          }
+          final String errorMsg =
+              '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}';
+          (mounted)
+              ? await ezLogAlert(
+                  context,
+                  title: EzConfig.l10n.dsImgGetFailed,
+                  message: errorMsg,
+                )
+              : ezLog(errorMsg);
         }
       }
 
-      // Light
-      if (widget.updateBrightness == null ||
-          widget.updateBrightness == Brightness.light) {
+      if (EzConfig.updateBoth || !EzConfig.isDark) {
         // If there is little/no text background opacity, set it to 50%
         // Better to have to turn it down than up, they'll be a lot of images where people suddenly won't be able to read
         final double? opacity = EzConfig.get(lightTextBackgroundOpacityKey);
@@ -254,14 +247,15 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result == success) {
           await EzConfig.setString(lightColorSchemeImageKey, newPath);
         } else {
-          if (mounted) {
-            await ezLogAlert(
-              context,
-              title: EzConfig.l10n.dsImgGetFailed,
-              message:
-                  '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}',
-            );
-          }
+          final String errorMsg =
+              '$result${ezUrlCheck(newPath) ? '\n\n${EzConfig.l10n.dsImgPermission}' : ''}';
+          (mounted)
+              ? await ezLogAlert(
+                  context,
+                  title: EzConfig.l10n.dsImgGetFailed,
+                  message: errorMsg,
+                )
+              : ezLog(errorMsg);
         }
       }
     }
@@ -378,14 +372,15 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Navigator.of(mContext).pop(null);
                   }
 
-                  if (mounted) {
-                    await ezLogAlert(
-                      context,
-                      title: EzConfig.l10n.dsImgGetFailed,
-                      message:
-                          '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}',
-                    );
-                  }
+                  final String errorMsg =
+                      '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}';
+                  (mounted)
+                      ? await ezLogAlert(
+                          context,
+                          title: EzConfig.l10n.dsImgGetFailed,
+                          message: errorMsg,
+                        )
+                      : ezLog(errorMsg);
                   return;
                 }
 
@@ -553,6 +548,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 },
                 child: EzScrollView(
                   scrollDirection: Axis.horizontal,
+                  showScrollHint: true,
                   primary: false,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -678,14 +674,10 @@ class _ImageSettingState extends State<EzImageSetting> {
     required BuildContext modalContext,
     required StateSetter setModal,
   }) {
-    final double scaleMargin = EzConfig.marginVal * 0.25;
-
-    final String name = fit.name;
-
-    final double toolbarHeight = ezTextSize(name,
+    final double toolbarHeight = ezTextSize(fit.name,
                 style: EzConfig.styles.bodyLarge, context: modalContext)
             .height +
-        scaleMargin;
+        (EzConfig.marginVal * 0.25);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -696,7 +688,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             setModal(() {});
           },
           child: Semantics(
-            hint: name,
+            hint: fit.name,
             image: true,
             button: true,
             child: ExcludeSemantics(
@@ -704,7 +696,10 @@ class _ImageSettingState extends State<EzImageSetting> {
                 width: width,
                 height: height,
                 decoration: BoxDecoration(
-                  border: Border.all(color: EzConfig.colors.onSurface),
+                  border: Border.all(
+                    color: EzConfig.colors.onSurface,
+                    width: EzConfig.borderWidth,
+                  ),
                   borderRadius: ezRoundEdge,
                 ),
                 child: Column(
@@ -717,16 +712,16 @@ class _ImageSettingState extends State<EzImageSetting> {
                         borderRadius: ezTextFieldRadius,
                       ),
                       child: Text(
-                        name,
+                        fit.name,
                         style: EzConfig.styles.bodyLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    Image(
-                      width: width - scaleMargin,
-                      height: height - toolbarHeight - scaleMargin,
-                      image: ezImageProvider(path),
-                      fit: fit,
+                    Expanded(
+                      child: Image(
+                        image: ezImageProvider(path),
+                        fit: fit,
+                      ),
                     ),
                   ],
                 ),
@@ -763,18 +758,17 @@ class _ImageSettingState extends State<EzImageSetting> {
             });
             final bool changed = await activateSetting();
 
-            if (changed) {
-              updateTheme
-                  ? await EzConfig.rebuildUI(widget.onComplete)
-                  : await EzConfig.redrawUI(widget.onComplete);
-            }
+            if (changed) await EzConfig.rebuildUI(widget.onComplete);
             setState(() => inProgress = false);
           },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: EzConfig.colors.onSurface),
+              border: Border.all(
+                color: EzConfig.colors.onSurface,
+                width: EzConfig.borderWidth,
+              ),
             ),
             child: CircleAvatar(
               radius: EzConfig.iconSize + EzConfig.padding,
@@ -791,7 +785,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ? const CircularProgressIndicator()
                   : (currPath == null || currPath == noImageValue)
                       ? EzIcon(
-                          Icons.edit,
+                          Icons.image_search,
                           color: EzConfig.colors.primary,
                         )
                       : null,

@@ -35,9 +35,9 @@ class EzAlertDialog extends AlertDialog {
     final Widget? dialogContent = content ??
         ((contents == null) ? null : EzScrollView(children: contents!));
 
-    late final Widget closeAction = EzTextButton(
-      onPressed: () => Navigator.of(context).pop(),
+    late final Widget closeAction = EzMaterialAction(
       text: EzConfig.l10n.gClose,
+      onPressed: () => Navigator.of(context).pop(),
     );
 
     late final List<Widget>? closedActions = needsClose
@@ -57,18 +57,20 @@ class EzAlertDialog extends AlertDialog {
         title: title,
         titlePadding: title == null
             ? null
-            : EdgeInsets.symmetric(
-                horizontal: EzConfig.marginVal,
-                vertical: EzConfig.spacing / 2,
+            : EdgeInsets.only(
+                top: EzConfig.marginVal,
+                left: EzConfig.marginVal,
+                right: EzConfig.marginVal,
               ),
 
         // Content
         content: dialogContent,
         contentPadding: dialogContent == null
             ? null
-            : EdgeInsets.symmetric(
-                horizontal: EzConfig.marginVal,
-                vertical: EzConfig.spacing / 2,
+            : EdgeInsets.only(
+                top: (title == null) ? EzConfig.marginVal : EzConfig.spacing,
+                left: EzConfig.marginVal,
+                right: EzConfig.marginVal,
               ),
 
         // Actions
@@ -106,6 +108,9 @@ class EzMaterialAction extends StatelessWidget {
   /// [EzTextButton.text] passthrough
   final String text;
 
+  /// Optional [Semantics] override for [text]
+  final String? semantics;
+
   /// [EzTextButton.onPressed] passthrough
   final void Function() onPressed;
 
@@ -122,6 +127,7 @@ class EzMaterialAction extends StatelessWidget {
   const EzMaterialAction({
     super.key,
     required this.text,
+    this.semantics,
     required this.onPressed,
     this.isDefaultAction = false,
     this.isDestructiveAction = false,
@@ -140,8 +146,12 @@ class EzMaterialAction extends StatelessWidget {
 
     return EzTextButton(
       onPressed: onPressed,
-      style: TextButton.styleFrom(backgroundColor: Colors.transparent),
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        padding: EzInsets.wrap(EzConfig.spacing),
+      ),
       text: text,
+      semantics: semantics,
       textStyle: textStyle,
     );
   }

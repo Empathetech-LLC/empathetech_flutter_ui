@@ -11,9 +11,6 @@ class EzMarginSetting extends StatefulWidget {
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
 
-  /// Whether to update both themes
-  final bool updateBoth;
-
   /// Smallest value that can be set
   final double min;
 
@@ -26,23 +23,14 @@ class EzMarginSetting extends StatefulWidget {
   /// Number of significant figures to display after the decimal point
   final int decimals;
 
-  /// Defaults to [TextTheme.titleLarge]
-  final TextStyle? titleStyle;
-
-  /// Defaults to [TextTheme.bodyLarge]
-  final TextStyle? bodyStyle;
-
   /// An ez to use margin setting
   const EzMarginSetting({
     super.key,
     required this.onUpdate,
-    required this.updateBoth,
     required this.min,
     required this.max,
     required this.steps,
     required this.decimals,
-    this.titleStyle,
-    this.bodyStyle,
   });
 
   @override
@@ -65,14 +53,6 @@ class _LayoutSettingState extends State<EzMarginSetting> {
     final double defaultValue = EzConfig.getDefault(configKey);
 
     double currValue = EzConfig.get(configKey);
-
-    late final String? backgroundImagePath = EzConfig.get(
-        EzConfig.isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
-
-    late final BoxFit? backgroundImageFit = boxFitLib[EzConfig.get(
-        EzConfig.isDark
-            ? '$darkBackgroundImageKey$boxFitSuffix'
-            : '$lightBackgroundImageKey$boxFitSuffix')];
 
     // Return the build //
 
@@ -103,8 +83,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         // Title
                         Text(
                           EzConfig.l10n.lsMargin,
-                          style:
-                              widget.titleStyle ?? EzConfig.styles.titleLarge,
+                          style: EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
 
@@ -113,15 +92,11 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         EzTextBackground(
                           Text(
                             currValue.toStringAsFixed(widget.decimals),
-                            style: widget.bodyStyle ??
-                                EzConfig.styles.bodyLarge
-                                    ?.copyWith(color: EzConfig.colors.surface),
+                            style: EzConfig.styles.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
-                          margin: EzInsets.wrap(currValue),
-                          backgroundColor: EzConfig.colors.onSurface,
+                          padding: EzInsets.wrap(currValue),
                         ),
-                        EzSpacer(space: currValue),
                         Container(
                           color: EzConfig.colors.onSurface,
                           height: heightOf(modalContext) * 0.25,
@@ -129,14 +104,10 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: EzConfig.colors.surface,
-                              image: (backgroundImagePath == null ||
-                                      backgroundImagePath == noImageValue)
-                                  ? null
-                                  : DecorationImage(
-                                      image:
-                                          ezImageProvider(backgroundImagePath),
-                                      fit: backgroundImageFit,
-                                    ),
+                              image:
+                                  (EzConfig.backgroundImagePath == noImageValue)
+                                      ? null
+                                      : EzConfig.backgroundImage,
                             ),
                             margin: EdgeInsets.all(currValue * 0.25),
                           ),
@@ -162,7 +133,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                         setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
-                      if (widget.updateBoth) {
+                      if (EzConfig.updateBoth) {
                         await EzConfig.setDouble(
                             EzConfig.isDark ? lightMarginKey : darkMarginKey,
                             value);
@@ -180,7 +151,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                 EzElevatedIconButton(
                   onPressed: () async {
                     await EzConfig.remove(configKey);
-                    if (widget.updateBoth) {
+                    if (EzConfig.updateBoth) {
                       await EzConfig.remove(
                           EzConfig.isDark ? lightMarginKey : darkMarginKey);
                     }
@@ -190,7 +161,7 @@ class _LayoutSettingState extends State<EzMarginSetting> {
                   label:
                       '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
                 ),
-                EzSpacer(space: EzConfig.spacing * 1.5),
+                EzSpacer(space: EzConfig.spargin),
               ],
             ),
           ),

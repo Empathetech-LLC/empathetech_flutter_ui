@@ -6,6 +6,7 @@
 import '../empathetech_flutter_ui.dart';
 
 import 'dart:math';
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class EzConfigProvider extends ChangeNotifier {
@@ -23,9 +24,11 @@ class EzConfigProvider extends ChangeNotifier {
   late ThemeMode _themeMode;
   late bool _isDark;
 
+  late EzColorCache _color;
   late EzDesignCache _design;
   late EzLayoutCache _layout;
   late EzTextCache _text;
+
   final EzAppCache? _appCache;
 
   late ThemeData _currTheme;
@@ -72,7 +75,19 @@ class EzConfigProvider extends ChangeNotifier {
 
     if (_isDark) {
       // Build new caches
-      _design = EzDesignCache(EzConfig.get(darkAnimationDurationKey));
+      _color = EzColorCache(EzConfig.get(darkColorSchemeImageKey));
+      _design = EzDesignCache(
+        animDur: EzConfig.get(darkAnimationDurationKey),
+        pageTransition: EPTConfig.lookup(EzConfig.get(darkTransitionTypeKey)),
+        fadedTransition: EzConfig.get(darkTransitionFadeKey),
+        backgroundImagePath: EzConfig.get(darkBackgroundImageKey),
+        backgroundImageFit:
+            boxFitLookup[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
+        buttonShape: EBSConfig.lookup(EzConfig.get(darkButtonShapeKey)),
+        borderWidth: EzConfig.get(darkBorderWidthKey),
+        buttonOpacity: EzConfig.get(darkButtonOpacityKey),
+        borderOpacity: EzConfig.get(darkBorderOpacityKey),
+      );
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(darkMarginKey),
         padding: EzConfig.get(darkPaddingKey),
@@ -83,10 +98,13 @@ class EzConfigProvider extends ChangeNotifier {
         rowSpacer: const EzSpacer(isDark: true, vertical: false),
         separator: const EzSeparator(isDark: true),
         divider: const EzDivider(),
-        hideScroll: EzConfig.get(darkHideScrollKey),
+        showBackFAB: EzConfig.get(darkShowBackFABKey),
+        showScroll: EzConfig.get(darkShowScrollKey),
       );
       _text = EzTextCache(
-        EzConfig.get(darkIconSizeKey),
+        backgroundOpacity: EzConfig.get(darkTextBackgroundOpacityKey),
+        iconSize: EzConfig.get(darkIconSizeKey),
+        lineLinks: EzConfig.get(darkLineLinksKey),
         startLine: const EzNewLine(textAlign: TextAlign.start),
         centerLine: const EzNewLine(),
         endLine: const EzNewLine(textAlign: TextAlign.end),
@@ -96,7 +114,19 @@ class EzConfigProvider extends ChangeNotifier {
       _currTheme = _darkTheme;
     } else {
       // Ditto
-      _design = EzDesignCache(EzConfig.get(lightAnimationDurationKey));
+      _color = EzColorCache(EzConfig.get(lightColorSchemeImageKey));
+      _design = EzDesignCache(
+        animDur: EzConfig.get(lightAnimationDurationKey),
+        pageTransition: EPTConfig.lookup(EzConfig.get(lightTransitionTypeKey)),
+        fadedTransition: EzConfig.get(lightTransitionFadeKey),
+        backgroundImagePath: EzConfig.get(lightBackgroundImageKey),
+        backgroundImageFit:
+            boxFitLookup[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
+        buttonShape: EBSConfig.lookup(EzConfig.get(lightButtonShapeKey)),
+        borderWidth: EzConfig.get(lightBorderWidthKey),
+        buttonOpacity: EzConfig.get(lightButtonOpacityKey),
+        borderOpacity: EzConfig.get(lightBorderOpacityKey),
+      );
       _layout = EzLayoutCache(
         marginVal: EzConfig.get(lightMarginKey),
         padding: EzConfig.get(lightPaddingKey),
@@ -107,10 +137,13 @@ class EzConfigProvider extends ChangeNotifier {
         rowSpacer: const EzSpacer(isDark: false, vertical: false),
         separator: const EzSeparator(isDark: false),
         divider: const EzDivider(),
-        hideScroll: EzConfig.get(lightHideScrollKey),
+        showBackFAB: EzConfig.get(lightShowBackFABKey),
+        showScroll: EzConfig.get(lightShowScrollKey),
       );
       _text = EzTextCache(
-        EzConfig.get(lightIconSizeKey),
+        backgroundOpacity: EzConfig.get(lightTextBackgroundOpacityKey),
+        iconSize: EzConfig.get(lightIconSizeKey),
+        lineLinks: EzConfig.get(lightLineLinksKey),
         startLine: const EzNewLine(textAlign: TextAlign.start),
         centerLine: const EzNewLine(),
         endLine: const EzNewLine(textAlign: TextAlign.end),
@@ -150,6 +183,9 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Whether the current [themeMode] uses [Brightness.dark]
   bool get isDark => _isDark;
+
+  /// Cache of frequently used color config values
+  EzColorCache get color => _color;
 
   /// Cache of frequently used design config values
   EzDesignCache get design => _design;
@@ -236,6 +272,18 @@ class EzConfigProvider extends ChangeNotifier {
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
   Future<void> rebuildUI(void Function() onComplete) async {
+    unawaited(ezRootNav.currentState!.push(
+      // Open progress layer
+      PageRouteBuilder<Widget>(
+        opaque: false,
+        transitionsBuilder: (_, __, ___, Widget child) => child,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (_, __, ___) =>
+            const Center(child: CircularProgressIndicator()),
+      ),
+    ));
+
     final ThemeMode newMode = _buildThemeMode();
 
     switch (newMode) {
@@ -256,6 +304,10 @@ class EzConfigProvider extends ChangeNotifier {
 
     _needsRebuild = false;
     await redrawUI(onComplete);
+
+    // Close progress layer
+    ezRootNav.currentState!.pop();
+    ezCloseAll(); // redraw's version is "blocked" by the progress layer
   }
 
   /// Randomizes the [seed] and notifies listeners
@@ -287,12 +339,42 @@ class EzConfigProvider extends ChangeNotifier {
   }
 }
 
+class EzColorCache {
+  final String schemeImagePath;
+
+  /// Theme aware tracker for frequently used color values...
+  /// (dark|light)ColorSchemeImageKey
+  EzColorCache(this.schemeImagePath);
+}
+
 class EzDesignCache {
   final int animDur;
 
+  final EzPageTransition pageTransition;
+  final bool fadedTransition;
+
+  final String backgroundImagePath;
+  final BoxFit? backgroundImageFit;
+
+  final EzButtonShape buttonShape;
+  final double borderWidth;
+
+  final double buttonOpacity;
+  final double borderOpacity;
+
   /// Theme aware tracker for frequently used design values...
   /// Animation duration
-  EzDesignCache(this.animDur);
+  EzDesignCache({
+    required this.animDur,
+    required this.pageTransition,
+    required this.fadedTransition,
+    required this.backgroundImagePath,
+    required this.backgroundImageFit,
+    required this.buttonShape,
+    required this.borderWidth,
+    required this.buttonOpacity,
+    required this.borderOpacity,
+  });
 }
 
 class EzLayoutCache {
@@ -307,7 +389,8 @@ class EzLayoutCache {
   final EzSeparator separator;
   final EzDivider divider;
 
-  final bool hideScroll;
+  final bool showBackFAB;
+  final bool showScroll;
 
   /// Theme aware tracker for frequently used layout values...
   /// Margin, padding, and spacing
@@ -323,12 +406,15 @@ class EzLayoutCache {
     required this.rowSpacer,
     required this.separator,
     required this.divider,
-    required this.hideScroll,
+    required this.showBackFAB,
+    required this.showScroll,
   });
 }
 
 class EzTextCache {
+  final double backgroundOpacity;
   final double iconSize;
+  final bool lineLinks;
 
   final EzNewLine startLine;
   final EzNewLine centerLine;
@@ -336,8 +422,10 @@ class EzTextCache {
 
   /// Theme aware tracker for frequently used text values...
   /// Icon size, frequently used [EzNewLine]s
-  EzTextCache(
-    this.iconSize, {
+  EzTextCache({
+    required this.backgroundOpacity,
+    required this.iconSize,
+    required this.lineLinks,
     required this.startLine,
     required this.centerLine,
     required this.endLine,
