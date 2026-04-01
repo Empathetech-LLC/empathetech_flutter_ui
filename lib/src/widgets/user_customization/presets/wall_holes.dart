@@ -99,7 +99,6 @@ class EzWallHolesConfig extends StatelessWidget {
     );
 
     // Design settings //
-    // TODO: both scale and zoom? This is for elsewhere but I'm in the zone
 
     await EzConfig.setInt(lightAnimationDurationKey, 600);
     await EzConfig.setString(
