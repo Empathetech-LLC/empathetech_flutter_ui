@@ -102,7 +102,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(darkLabelWordSpacingKey, 1.25);
 
       // etc
-      await EzConfig.setDouble(darkTextBackgroundOpacityKey, 1.0);
+      // Default text backgrounds
       await EzConfig.setDouble(darkIconSizeKey, 22.0);
       await EzConfig.setBool(darkLineLinksKey, true);
     }
@@ -194,7 +194,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(lightLabelWordSpacingKey, 1.25);
 
       // etc
-      await EzConfig.setDouble(lightTextBackgroundOpacityKey, 1.0);
+      // Default text backgrounds
       await EzConfig.setDouble(lightIconSizeKey, 22.0);
       await EzConfig.setBool(lightLineLinksKey, true);
     }
