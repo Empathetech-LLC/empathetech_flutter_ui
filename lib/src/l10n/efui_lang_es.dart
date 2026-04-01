@@ -474,6 +474,9 @@ class EFUILangEs extends EFUILang {
   String get dsAnimDuration => 'Duración de la animación';
 
   @override
+  String get dsPlay => 'Reproducir animación';
+
+  @override
   String get dsMilliseconds => 'Milisegundos';
 
   @override

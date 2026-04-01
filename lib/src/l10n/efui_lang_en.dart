@@ -471,6 +471,9 @@ class EFUILangEn extends EFUILang {
   String get dsAnimDuration => 'Animation duration';
 
   @override
+  String get dsPlay => 'Play animation';
+
+  @override
   String get dsMilliseconds => 'Milliseconds';
 
   @override
@@ -1219,6 +1222,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsAnimDuration => 'Animation duration';
+
+  @override
+  String get dsPlay => 'Play animation';
 
   @override
   String get dsMilliseconds => 'Milliseconds';

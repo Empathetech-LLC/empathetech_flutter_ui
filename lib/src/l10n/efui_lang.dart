@@ -969,6 +969,12 @@ abstract class EFUILang {
   /// **'Animation duration'**
   String get dsAnimDuration;
 
+  /// No description provided for @dsPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play animation'**
+  String get dsPlay;
+
   /// No description provided for @dsMilliseconds.
   ///
   /// In en, this message translates to:

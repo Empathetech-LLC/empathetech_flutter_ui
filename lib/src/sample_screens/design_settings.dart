@@ -794,7 +794,10 @@ class _AnimationPreviewState extends State<_AnimationPreview>
               onPressed: () => _controller.isAnimating
                   ? _controller.stop()
                   : _controller.forward(from: 0.0),
-              icon: const Icon(Icons.play_arrow),
+              icon: Icon(
+                Icons.play_arrow,
+                semanticLabel: EzConfig.l10n.dsPlay,
+              ),
               iconSize: widget.iconSize,
             ),
           ),

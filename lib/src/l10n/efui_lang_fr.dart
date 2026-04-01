@@ -473,6 +473,9 @@ class EFUILangFr extends EFUILang {
   String get dsAnimDuration => 'Durée de l\'animation';
 
   @override
+  String get dsPlay => 'Lancer l\'animation';
+
+  @override
   String get dsMilliseconds => 'Millisecondes';
 
   @override

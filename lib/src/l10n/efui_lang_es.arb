@@ -192,6 +192,7 @@
   "dsSystem": "Sistema",
 
   "dsAnimDuration": "Duración de la animación",
+  "dsPlay": "Reproducir animación",
   "dsMilliseconds": "Milisegundos",
 
   "dsPageTransition": "Transición de página",
