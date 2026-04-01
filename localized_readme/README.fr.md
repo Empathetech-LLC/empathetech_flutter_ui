@@ -15,7 +15,7 @@
 ### **Open UI**
 Est un générateur de code pour démarrer des applications propulsées par EFUI. Il est disponible sur toutes les plateformes...
 
-&nbsp;&nbsp;&nbsp;[Android (Google Play)](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Android (.apk)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-android.apk)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[macOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-windows.exe)
+&nbsp;&nbsp;&nbsp;[Android (Google Play)](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Android (.apk)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-android.apk)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[macOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-windows.exe)
 
 <br>Remarque : Les plateformes mobiles enregistrent simplement un fichier de configuration qui peut être utilisé sur ordinateur (Desktop).<br>Pour que la génération de code fonctionne sur ordinateur, Flutter doit être [installé](https://docs.flutter.dev/get-started/install).
 
@@ -30,11 +30,11 @@ Et voici quelques vidéos (non affiliées) que vous pourriez trouver utiles.
 
 ### <br>Intégration d'EFUI avec des projets existants 
 
-Il n'y a plus de guide formel. Depuis la version 11.1.0, EFUI permet une configuration en direct. Chaque aspect du thème d'une application peut être mis à jour à la volée, sans redémarrage requis.
+Il n'y a plus de guide formel. Depuis la version 11.1.1, EFUI permet une configuration en direct. Chaque aspect du thème d'une application peut être mis à jour à la volée, sans redémarrage requis.
 
-Cependant, une quantité importante de code de configuration/initialisation est requise pour le faire fonctionner.<br>Les utilisateurs d'EFUI n'ont rien à craindre : il y a très peu à faire pour se préparer à la version 11.1.0.<br>Toutefois, la configuration n'est plus optionnelle.
+Cependant, une quantité importante de code de configuration/initialisation est requise pour le faire fonctionner.<br>Les utilisateurs d'EFUI n'ont rien à craindre : il y a très peu à faire pour se préparer à la version 11.1.1.<br>Toutefois, la configuration n'est plus optionnelle.
 
-Pour s'adapter à la marge de manœuvre réduite, la version 11.1.0 a également réduit le nombre de dépendances externes.<br>EFUI est aussi proche du Flutter "vanilla" que possible. Une fois que vous avez récupéré votre kit de démarrage via Open UI, il ne vous reste plus qu'à coder joyeusement (happy hacking). Que vous commenciez quelque chose de nouveau ou que vous mettiez un peu de musique d'ambiance et que vous vous prépariez pour une session de copier-coller.
+Pour s'adapter à la marge de manœuvre réduite, la version 11.1.1 a également réduit le nombre de dépendances externes.<br>EFUI est aussi proche du Flutter "vanilla" que possible. Une fois que vous avez récupéré votre kit de démarrage via Open UI, il ne vous reste plus qu'à coder joyeusement (happy hacking). Que vous commenciez quelque chose de nouveau ou que vous mettiez un peu de musique d'ambiance et que vous vous prépariez pour une session de copier-coller.
 
 # <br>Contribution
 ## Vibes

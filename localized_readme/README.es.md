@@ -15,7 +15,7 @@
 ### **Open UI**
 Es un generador de código para iniciar aplicaciones impulsadas por EFUI. Está disponible en todas las plataformas...
 
-&nbsp;&nbsp;&nbsp;[Android (Google Play)](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Android (.apk)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-android.apk)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[macOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.0/open-ui-windows.exe)
+&nbsp;&nbsp;&nbsp;[Android (Google Play)](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Android (.apk)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-android.apk)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[macOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/11.1.1/open-ui-windows.exe)
 
 <br>Nota: Las plataformas móviles simplemente guardan un archivo de configuración que puede usarse en Escritorio.<br>Para que la generación de código funcione en Escritorio, Flutter debe estar [instalado](https://docs.flutter.dev/get-started/install).
 
@@ -30,11 +30,11 @@ Y aquí hay algunos videos (no afiliados) que podrías encontrar útiles.
 
 ### <br>Integración de EFUI con proyectos existentes
 
-Ya no cuenta con una guía formal. Desde la versión 11.1.0, EFUI permite la configuración en vivo. Cada aspecto del tema de una aplicación se puede actualizar sobre la marcha, sin necesidad de reiniciar.
+Ya no cuenta con una guía formal. Desde la versión 11.1.1, EFUI permite la configuración en vivo. Cada aspecto del tema de una aplicación se puede actualizar sobre la marcha, sin necesidad de reiniciar.
 
-Sin embargo, se requiere una cantidad significativa de código de configuración/inicialización para que funcione.<br>Los consumidores de EFUI no tienen nada de qué preocuparse: hay muy poco que hacer para estar listo para la versión 11.1.0.<br>Sin embargo, la configuración ya no es opcional.
+Sin embargo, se requiere una cantidad significativa de código de configuración/inicialización para que funcione.<br>Los consumidores de EFUI no tienen nada de qué preocuparse: hay muy poco que hacer para estar listo para la versión 11.1.1.<br>Sin embargo, la configuración ya no es opcional.
 
-Para acomodar el margen de maniobra reducido, la versión 11.1.0 también redujo la cantidad de dependencias externas.<br>EFUI es tan "vanilla Flutter" (Flutter puro) como es posible. Después de obtener tu kit de inicio de Open UI, debería ser todo programar y disfrutar. Ya sea que estés empezando algo nuevo o que simplemente quieras poner algo de música de fondo y prepararte para una sesión de copiar y pegar.
+Para acomodar el margen de maniobra reducido, la versión 11.1.1 también redujo la cantidad de dependencias externas.<br>EFUI es tan "vanilla Flutter" (Flutter puro) como es posible. Después de obtener tu kit de inicio de Open UI, debería ser todo programar y disfrutar. Ya sea que estés empezando algo nuevo o que simplemente quieras poner algo de música de fondo y prepararte para una sesión de copiar y pegar.
 
 # <br>Contribuir
 ## Vibras
