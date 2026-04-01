@@ -384,7 +384,6 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
         backgroundColor: WidgetStateProperty.all(crucialButtonBackground),
         padding: WidgetStateProperty.all(EdgeInsets.zero),
         side: WidgetStateProperty.all(buildBorder(buttonBorder)),
-        shape: WidgetStateProperty.all(buttonShape),
         alignment: Alignment.center,
       ),
     ),

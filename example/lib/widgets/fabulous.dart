@@ -11,7 +11,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// Track version updates
 const Widget updater = EzUpdaterFAB(
-  appVersion: '3.1.0',
+  appVersion: '3.1.1',
   versionSource:
       'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
   gPlay:

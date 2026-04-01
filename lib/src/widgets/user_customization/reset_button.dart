@@ -9,22 +9,20 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzResetButton extends StatelessWidget {
-  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
-  final void Function() onComplete;
-
-  /// When true, [EzConfig.redrawUI] will be called instead of [EzConfig.rebuildUI]
-  final bool justDraw;
-
-  /// [EzElevatedIconButton.style] passthrough
-  final ButtonStyle? style;
-
-  /// [EzElevatedIconButton.label] passthrough
-  /// Defaults to [EFUILang.gResetAll]
-  final String? label;
-
   /// Set to false for a 'Reset' [ElevatedButton.icon] label rather than 'Reset all'
-  /// moot if [label] is provided
+  /// Also, when true there will be a local 'Reset all' switch
+  /// When false, the current [EzConfig.updateBoth] value is used
   final bool all;
+
+  /// [EzAlertDialog.title] that shows on click
+  final String Function()? dynamicTitle;
+
+  /// Optionally override [EzAlertDialog.content] that shows on click
+  /// Defaults to [ezRichUndoWarning]
+  final Widget? dialogContent;
+
+  /// [EzConfig.rebuildUI] passthrough
+  final void Function() onComplete;
 
   /// [ezRichUndoWarning] passthrough
   final String appName;
@@ -32,35 +30,19 @@ class EzResetButton extends StatelessWidget {
   /// [ezRichUndoWarning] passthrough
   final String? androidPackage;
 
-  /// [ezRichUndoWarning] passthrough
-  final Set<String>? saveSkip;
-
-  /// Optionally override [EzAlertDialog.content] that shows on click
-  /// Defaults to [ezRichUndoWarning]
-  final Widget? dialogContent;
-
-  /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.ssResetAll]
-  final String? dialogTitle;
-
-  /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [dialogTitle]
-  final String Function()? dynamicTitle;
-
   /// [EzConfig.reset] skip passthrough
   /// Moot if [onConfirm] is provided
   final Set<String>? resetSkip;
 
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final bool storageOnly;
+  /// [ezRichUndoWarning] passthrough
+  final Set<String>? saveSkip;
 
-  /// What happens when the user choses to reset
+  /// Override what happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
   /// DO NOT include an [EzConfig.rebuildUI] or [Navigator.pop], these are included automatically
   final Future<void> Function()? onConfirm;
 
-  /// What happens when the user choses not to reset
+  /// Override what happens when the user choses not to reset
   /// DO NOT include a [Navigator.pop], it is included automatically
   final void Function()? onDeny;
 
@@ -68,72 +50,100 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton(
     this.onComplete, {
     super.key,
-    this.justDraw = false,
-    this.style,
-    this.label,
     this.all = true,
     required this.appName,
     this.androidPackage,
     this.saveSkip,
     this.dialogContent,
-    this.dialogTitle,
     this.dynamicTitle,
     this.resetSkip,
-    this.storageOnly = false,
     this.onConfirm,
     this.onDeny,
   });
 
   @override
-  Widget build(BuildContext context) => EzElevatedIconButton(
-        style: style ??
-            ElevatedButton.styleFrom(
-              backgroundColor: EzConfig.colors.surface
-                  .withValues(alpha: max(EzConfig.buttonOpacity, focusOpacity)),
+  Widget build(BuildContext context) {
+    return EzElevatedIconButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: EzConfig.colors.surface
+            .withValues(alpha: max(EzConfig.buttonOpacity, focusOpacity)),
+      ),
+      onPressed: () => showDialog(
+        context: context,
+        builder: (_) {
+          bool updateBoth = true;
+
+          return StatefulBuilder(
+            builder: (BuildContext dContext, StateSetter setDialog) =>
+                EzAlertDialog(
+              title: Text(
+                dynamicTitle?.call() ?? EzConfig.l10n.ssResetAll,
+                textAlign: TextAlign.center,
+              ),
+              content: (dialogContent == null)
+                  ? (all
+                      ? null
+                      : ezRichUndoWarning(
+                          context,
+                          standalone: false,
+                          appName: appName,
+                          androidPackage: androidPackage,
+                        ))
+                  : dialogContent,
+              contents: (dialogContent == null)
+                  ? (all
+                      ? <Widget>[
+                          ezRichUndoWarning(
+                            context,
+                            standalone: false,
+                            appName: appName,
+                            androidPackage: androidPackage,
+                          ),
+                          EzConfig.margin,
+                          EzSwitchPair(
+                            key: ValueKey<bool>(updateBoth),
+                            text: EzConfig.l10n.ssResetBoth,
+                            value: updateBoth,
+                            onChanged: (bool? choice) {
+                              if (choice == null) return;
+                              setDialog(() => updateBoth = choice);
+                            },
+                          ),
+                        ]
+                      : null)
+                  : null,
+              actions: ezActionPair(
+                context: context,
+                onConfirm: () async {
+                  if (onConfirm == null) {
+                    await EzConfig.reset(
+                      skip: resetSkip,
+                      forceOne: !updateBoth,
+                      forceBoth: updateBoth,
+                    );
+                  } else {
+                    await onConfirm!.call();
+                  }
+
+                  await EzConfig.rebuildUI(onComplete);
+                },
+                confirmIsDestructive: true,
+                onDeny: () {
+                  if (onDeny == null) {
+                    doNothing();
+                  } else {
+                    onDeny!.call();
+                  }
+                  if (dContext.mounted) Navigator.of(dContext).pop();
+                },
+              ),
+              needsClose: false,
             ),
-        onPressed: () => showDialog(
-          context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(
-            title: Text(
-              dynamicTitle?.call() ?? dialogTitle ?? EzConfig.l10n.ssResetAll,
-              textAlign: TextAlign.center,
-            ),
-            content: dialogContent ??
-                ezRichUndoWarning(
-                  context,
-                  standalone: false,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
-            actions: ezActionPair(
-              context: context,
-              onConfirm: () async {
-                if (onConfirm == null) {
-                  await EzConfig.reset(
-                    skip: resetSkip,
-                    storageOnly: storageOnly,
-                  );
-                } else {
-                  await onConfirm!.call();
-                }
-                justDraw
-                    ? await EzConfig.redrawUI(onComplete)
-                    : await EzConfig.rebuildUI(onComplete);
-              },
-              confirmIsDestructive: true,
-              onDeny: () {
-                if (onDeny == null) {
-                  doNothing();
-                } else {
-                  onDeny!.call();
-                }
-                if (dContext.mounted) Navigator.of(dContext).pop();
-              },
-            ),
-            needsClose: false,
-          ),
-        ),
-        icon: const Icon(Icons.refresh),
-        label: label ?? (all ? EzConfig.l10n.gResetAll : EzConfig.l10n.gReset),
-      );
+          );
+        },
+      ),
+      icon: const Icon(Icons.refresh),
+      label: all ? EzConfig.l10n.gResetAll : EzConfig.l10n.gReset,
+    );
+  }
 }

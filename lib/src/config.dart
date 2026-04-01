@@ -217,14 +217,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Set the EzConfig [key] to [value] with type [bool]
   /// Defaults to both the live and [SharedPreferencesAsync] values
-  static Future<bool> setBool(
-    String key,
-    bool value, {
-    bool storageOnly = false,
-  }) async {
+  static Future<bool> setBool(String key, bool value) async {
     try {
       await _instance!._preferences.setBool(key, value);
-      if (!storageOnly) _instance!._prefs[key] = value;
+      _instance!._prefs[key] = value;
       return true;
     } catch (e) {
       ezLog('Error setting bool [$key]...\n$e');
@@ -234,14 +230,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Set the EzConfig [key] to [value] with type [int]
   /// Defaults to both the live and [SharedPreferencesAsync] values
-  static Future<bool> setInt(
-    String key,
-    int value, {
-    bool storageOnly = false,
-  }) async {
+  static Future<bool> setInt(String key, int value) async {
     try {
       await _instance!._preferences.setInt(key, value);
-      if (!storageOnly) _instance!._prefs[key] = value;
+      _instance!._prefs[key] = value;
       return true;
     } catch (e) {
       ezLog('Error setting int [$key]...\n$e');
@@ -251,14 +243,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Set the EzConfig [key] to [value] with type [double]
   /// Defaults to both the live and [SharedPreferencesAsync] values
-  static Future<bool> setDouble(
-    String key,
-    double value, {
-    bool storageOnly = false,
-  }) async {
+  static Future<bool> setDouble(String key, double value) async {
     try {
       await _instance!._preferences.setDouble(key, value);
-      if (!storageOnly) _instance!._prefs[key] = value;
+      _instance!._prefs[key] = value;
       return true;
     } catch (e) {
       ezLog('Error setting double [$key]...\n$e');
@@ -268,14 +256,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Set the EzConfig [key] to [value] with type [String]
   /// Defaults to both the live and [SharedPreferencesAsync] values
-  static Future<bool> setString(
-    String key,
-    String value, {
-    bool storageOnly = false,
-  }) async {
+  static Future<bool> setString(String key, String value) async {
     try {
       await _instance!._preferences.setString(key, value);
-      if (!storageOnly) _instance!._prefs[key] = value;
+      _instance!._prefs[key] = value;
       return true;
     } catch (e) {
       ezLog('Error setting String [$key]...\n$e');
@@ -285,14 +269,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Set the EzConfig [key] to [value] with type [List]
   /// Defaults to both the live and [SharedPreferencesAsync] values
-  static Future<bool> setStringList(
-    String key,
-    List<String> value, {
-    bool storageOnly = false,
-  }) async {
+  static Future<bool> setStringList(String key, List<String> value) async {
     try {
       await _instance!._preferences.setStringList(key, value);
-      if (!storageOnly) _instance!._prefs[key] = value;
+      _instance!._prefs[key] = value;
       return true;
     } catch (e) {
       ezLog('Error setting String List [$key]...\n$e');
@@ -342,7 +322,6 @@ Must be one of [int, bool, double, String, List<String>]''');
   static Future<void> loadConfig(
     Map<String, dynamic> config, {
     Set<String>? filter,
-    bool storageOnly = false,
   }) async {
     final Set<MapEntry<String, dynamic>> entries = config.entries.toSet();
     if (filter != null) entries.removeAll(filter);
@@ -364,37 +343,17 @@ Must be one of [int, bool, double, String, List<String>]''');
       // Load value
       switch (entry.value.runtimeType) {
         case const (bool):
-          await setBool(
-            entry.key,
-            entry.value,
-            storageOnly: storageOnly,
-          );
+          await setBool(entry.key, entry.value);
           break;
         case const (int):
-          await setInt(
-            entry.key,
-            entry.value,
-            storageOnly: storageOnly,
-          );
+          await setInt(entry.key, entry.value);
         case const (double):
-          await setDouble(
-            entry.key,
-            entry.value,
-            storageOnly: storageOnly,
-          );
+          await setDouble(entry.key, entry.value);
         case const (String):
-          await setString(
-            entry.key,
-            entry.value,
-            storageOnly: storageOnly,
-          );
+          await setString(entry.key, entry.value);
           break;
         case const (List<String>):
-          await setStringList(
-            entry.key,
-            entry.value,
-            storageOnly: storageOnly,
-          );
+          await setStringList(entry.key, entry.value);
           break;
       }
     }
@@ -749,20 +708,16 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Remove the custom value for [key]
   /// When [reset] is true, the default value is restored (if present)
   /// By default, both the live and [SharedPreferencesAsync] values are modified
-  /// Setting [storageOnly] to true will make [reset] moot
-
   static Future<bool> remove(
     String key, {
     bool reset = true,
-    bool storageOnly = false,
   }) async {
     try {
       await _instance!._preferences.remove(key);
-      if (!storageOnly) {
-        (reset && _instance!._defaults.containsKey(key))
-            ? _instance!._prefs[key] = _instance!._defaults[key]
-            : _instance!._prefs.remove(key);
-      }
+
+      (reset && _instance!._defaults.containsKey(key))
+          ? _instance!._prefs[key] = _instance!._defaults[key]
+          : _instance!._prefs.remove(key);
 
       return true;
     } catch (e) {
@@ -774,20 +729,14 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Remove the [keys] custom values
   /// When [reset] is true, the default value is restored (if present)
   /// By default, both the live and [SharedPreferencesAsync] values are modified
-  /// Setting [storageOnly] to true will make [reset] moot
   /// Returns false if any keys fail to be removed, but all keys will be attempted
   static Future<bool> removeKeys(
     Set<String> keys, {
     bool reset = true,
-    bool storageOnly = false,
   }) async {
     bool success = true;
     for (final String key in keys) {
-      success &= await remove(
-        key,
-        reset: reset,
-        storageOnly: storageOnly,
-      );
+      success &= await remove(key, reset: reset);
     }
 
     return success;
@@ -798,8 +747,6 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Obviously, [forceOne] and [forceBoth] are not meant to be true at the same time
   /// If they are, forceOne takes precedence
   static Future<bool> reset({
-    bool reset = true,
-    bool storageOnly = false,
     Set<String>? skip = const <String>{appLocaleKey},
     bool forceOne = false,
     bool forceBoth = false,
@@ -815,11 +762,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     bool success = true;
     for (final String key in keys) {
-      success &= await remove(
-        key,
-        reset: reset,
-        storageOnly: storageOnly,
-      );
+      success &= await remove(key, reset: true);
     }
     return success;
   }

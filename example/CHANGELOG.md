@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2026-04-01
+### Updated
+- EFUI 11.1.1
+
 ## [3.1.0] - 2026-03-31
 ### Updated
 - EFUI 11.1.0

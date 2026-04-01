@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [11.1.1] - 2026-04-01
+### Fixed
+- UX pattern inconsistencies
+
 ## [11.1.0] - 2026-03-31
 ## Added
 - New settings: button shape, always underline links, and show back fab
