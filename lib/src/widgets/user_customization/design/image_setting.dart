@@ -169,7 +169,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             ],
             needsClose: false,
           ),
-        ); // TODO: fix previews, render overflow
+        );
 
         final dynamic result = await toDo(newPath);
         switch (result.runtimeType) {
