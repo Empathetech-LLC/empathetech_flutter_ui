@@ -457,26 +457,26 @@ Must be one of [int, bool, double, String, List<String>]''');
 
           // Primary
           primary: primary,
-          primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimary: onPrimary,
+          primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimaryContainer: onPrimary,
 
           // Secondary
           secondary: secondary,
-          secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondary: onSecondary,
+          secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondaryContainer: onSecondary,
 
           // Tertiary
           tertiary: tertiary,
-          tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiary: onTertiary,
+          tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiaryContainer: onTertiary,
 
           // Error
           error: Colors.red,
           onError: Colors.white,
-          errorContainer: Colors.red,
+          errorContainer: Colors.redAccent,
           onErrorContainer: Colors.white,
 
           // Surface
@@ -591,8 +591,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setDouble(darkLabelLetterSpacingKey, defaultLetterSpacing);
       await setDouble(darkLabelWordSpacingKey, defaultWordSpacing);
 
-      // Leave text background opacity as-is
-
+      await setDouble(darkTextBackgroundOpacityKey, random.nextDouble());
       await setDouble(darkIconSizeKey, defaultIconSize * getScalar());
       await setBool(darkLineLinksKey, random.nextBool());
     } else {
@@ -605,26 +604,26 @@ Must be one of [int, bool, double, String, List<String>]''');
 
           // Primary
           primary: primary,
-          primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimary: onPrimary,
+          primaryContainer: primary.withValues(alpha: defaultBorderOpacity),
           onPrimaryContainer: onPrimary,
 
           // Secondary
           secondary: secondary,
-          secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondary: onSecondary,
+          secondaryContainer: secondary.withValues(alpha: defaultBorderOpacity),
           onSecondaryContainer: onSecondary,
 
           // Tertiary
           tertiary: tertiary,
-          tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiary: onTertiary,
+          tertiaryContainer: tertiary.withValues(alpha: defaultBorderOpacity),
           onTertiaryContainer: onTertiary,
 
           // Error
           error: Colors.red,
           onError: Colors.white,
-          errorContainer: Colors.red,
+          errorContainer: Colors.redAccent,
           onErrorContainer: Colors.white,
 
           // Surface
@@ -739,8 +738,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setDouble(lightLabelLetterSpacingKey, defaultLetterSpacing);
       await setDouble(lightLabelWordSpacingKey, defaultWordSpacing);
 
-      // Leave text background opacity as-is
-
+      await setDouble(lightTextBackgroundOpacityKey, random.nextDouble());
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
       await setBool(lightLineLinksKey, random.nextBool());
     }
