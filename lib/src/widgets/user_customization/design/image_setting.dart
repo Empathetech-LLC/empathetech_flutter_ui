@@ -548,6 +548,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 },
                 child: EzScrollView(
                   scrollDirection: Axis.horizontal,
+                  showScrollHint: true,
                   primary: false,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -673,14 +674,10 @@ class _ImageSettingState extends State<EzImageSetting> {
     required BuildContext modalContext,
     required StateSetter setModal,
   }) {
-    final double scaleMargin = EzConfig.marginVal * 0.25;
-
-    final String name = fit.name;
-
-    final double toolbarHeight = ezTextSize(name,
+    final double toolbarHeight = ezTextSize(fit.name,
                 style: EzConfig.styles.bodyLarge, context: modalContext)
             .height +
-        scaleMargin;
+        (EzConfig.marginVal * 0.25);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -691,7 +688,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             setModal(() {});
           },
           child: Semantics(
-            hint: name,
+            hint: fit.name,
             image: true,
             button: true,
             child: ExcludeSemantics(
@@ -715,16 +712,16 @@ class _ImageSettingState extends State<EzImageSetting> {
                         borderRadius: ezTextFieldRadius,
                       ),
                       child: Text(
-                        name,
+                        fit.name,
                         style: EzConfig.styles.bodyLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    Image(
-                      width: width - scaleMargin,
-                      height: height - toolbarHeight - scaleMargin,
-                      image: ezImageProvider(path),
-                      fit: fit,
+                    Expanded(
+                      child: Image(
+                        image: ezImageProvider(path),
+                        fit: fit,
+                      ),
                     ),
                   ],
                 ),
