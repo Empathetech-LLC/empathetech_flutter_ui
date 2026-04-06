@@ -345,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       EzIconButton(
                         onPressed: () async {
                           final String? selectedDirectory =
-                              await FilePicker.platform.getDirectoryPath(
+                              await FilePicker.getDirectoryPath(
                                   dialogTitle: l10n.csFlutterPath);
 
                           if (selectedDirectory == null) return;
@@ -471,8 +471,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             EzIconButton(
                               onPressed: () async {
                                 final String? selectedDirectory =
-                                    await FilePicker.platform
-                                        .getDirectoryPath();
+                                    await FilePicker.getDirectoryPath();
 
                                 if (selectedDirectory == null) return;
 

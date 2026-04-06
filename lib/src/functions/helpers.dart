@@ -130,7 +130,7 @@ Duration ezAnimDuration({double mod = 1.0}) =>
     Duration(milliseconds: (EzConfig.animDur * mod).toInt());
 
 Future<void> ezConfigLoader(BuildContext context) async {
-  final FilePickerResult? result = await FilePicker.platform.pickFiles(
+  final FilePickerResult? result = await FilePicker.pickFiles(
     type: FileType.custom,
     allowedExtensions: <String>['json'],
   );
@@ -355,8 +355,9 @@ Widget ezTransitionsBuilder(
   BuildContext context,
   Animation<double> animation,
   Animation<double> secondaryAnimation,
-  Widget child,
-) {
+  Widget child, {
+  EzPageTransition? force,
+}) {
   // Check for no animation
   if (EzConfig.animDur < 1) return child;
 
@@ -364,7 +365,7 @@ Widget ezTransitionsBuilder(
       ? FadeTransition(opacity: animation, child: child)
       : child;
 
-  switch (EzConfig.pageTransition) {
+  switch (force ?? EzConfig.pageTransition) {
     // System
     case EzPageTransition.system:
       switch (EzConfig.platform) {

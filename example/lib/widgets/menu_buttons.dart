@@ -38,7 +38,7 @@ class UploadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () async {
-          final FilePickerResult? result = await FilePicker.platform.pickFiles(
+          final FilePickerResult? result = await FilePicker.pickFiles(
             type: FileType.custom,
             allowedExtensions: <String>['json'],
           );
