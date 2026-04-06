@@ -9,8 +9,11 @@ import 'package:flutter/material.dart';
 
 // Shared //
 
-const String none = 'none';
-const String system = 'system';
+/// enum String 'none'
+const String esNone = 'none';
+
+/// enum String 'system'
+const String esSystem = 'system';
 
 // Box Fit //
 
@@ -40,13 +43,26 @@ enum EzButtonShape {
   jewel,
 }
 
-const String pill = 'pill';
-const String rect = 'rect';
-const String roundRect = 'roundRect';
-const String leftGram = 'leftGram';
-const String rightGram = 'rightGram';
-const String gem = 'gem';
-const String jewel = 'jewel';
+/// enum String 'pill'
+const String esPill = 'pill';
+
+/// enum String 'rect'
+const String esRect = 'rect';
+
+/// enum String 'roundRect'
+const String esRoundRect = 'roundRect';
+
+/// enum String 'leftGram'
+const String esLeftGram = 'leftGram';
+
+/// enum String 'rightGram'
+const String esRightGram = 'rightGram';
+
+/// enum String 'gem'
+const String esGem = 'gem';
+
+/// enum String 'jewel'
+const String esJewel = 'jewel';
 
 /// EzButtonShape config
 extension EBSConfig on EzButtonShape {
@@ -82,47 +98,47 @@ extension EBSConfig on EzButtonShape {
   String get value {
     switch (this) {
       case EzButtonShape.pill:
-        return pill;
+        return esPill;
 
       case EzButtonShape.rect:
-        return rect;
+        return esRect;
 
       case EzButtonShape.roundRect:
-        return roundRect;
+        return esRoundRect;
 
       case EzButtonShape.leftGram:
-        return leftGram;
+        return esLeftGram;
 
       case EzButtonShape.rightGram:
-        return rightGram;
+        return esRightGram;
 
       case EzButtonShape.gem:
-        return gem;
+        return esGem;
 
       case EzButtonShape.jewel:
-        return jewel;
+        return esJewel;
     }
   }
 
   /// Defaults to [EzPageTransition.system]
   static EzButtonShape lookup(String? value) {
     switch (value) {
-      case rect:
+      case esRect:
         return EzButtonShape.rect;
 
-      case roundRect:
+      case esRoundRect:
         return EzButtonShape.roundRect;
 
-      case leftGram:
+      case esLeftGram:
         return EzButtonShape.leftGram;
 
-      case rightGram:
+      case esRightGram:
         return EzButtonShape.rightGram;
 
-      case gem:
+      case esGem:
         return EzButtonShape.gem;
 
-      case jewel:
+      case esJewel:
         return EzButtonShape.jewel;
 
       default:
@@ -169,12 +185,23 @@ enum EzPageTransition {
   zoom,
 }
 
-const String turnX = 'turnX';
-const String turnY = 'turnY';
-const String rotate = 'rotate';
-const String slideX = 'slideX';
-const String slideY = 'slideY';
-const String zoom = 'zoom';
+/// enum String 'turnX'
+const String esTurnX = 'turnX';
+
+/// enum String 'turnY'
+const String esTurnY = 'turnY';
+
+/// enum String 'rotate'
+const String esRotate = 'rotate';
+
+/// enum String 'slideX'
+const String esSlideX = 'slideX';
+
+/// enum String 'slideY'
+const String esSlideY = 'slideY';
+
+/// enum String 'zoom'
+const String esZoom = 'zoom';
 
 /// EzPageTransition config
 extension EPTConfig on EzPageTransition {
@@ -215,53 +242,53 @@ extension EPTConfig on EzPageTransition {
   String get value {
     switch (this) {
       case EzPageTransition.none:
-        return none;
+        return esNone;
 
       case EzPageTransition.system:
-        return system;
+        return esSystem;
 
       case EzPageTransition.turnX:
-        return turnX;
+        return esTurnX;
 
       case EzPageTransition.turnY:
-        return turnY;
+        return esTurnY;
 
       case EzPageTransition.rotate:
-        return rotate;
+        return esRotate;
 
       case EzPageTransition.slideX:
-        return slideX;
+        return esSlideX;
 
       case EzPageTransition.slideY:
-        return slideY;
+        return esSlideY;
 
       case EzPageTransition.zoom:
-        return zoom;
+        return esZoom;
     }
   }
 
   /// Defaults to [EzPageTransition.system]
   static EzPageTransition lookup(String? value) {
     switch (value) {
-      case none:
+      case esNone:
         return EzPageTransition.none;
 
-      case turnX:
+      case esTurnX:
         return EzPageTransition.turnX;
 
-      case turnY:
+      case esTurnY:
         return EzPageTransition.turnY;
 
-      case rotate:
+      case esRotate:
         return EzPageTransition.rotate;
 
-      case slideX:
+      case esSlideX:
         return EzPageTransition.slideX;
 
-      case slideY:
+      case esSlideY:
         return EzPageTransition.slideY;
 
-      case zoom:
+      case esZoom:
         return EzPageTransition.zoom;
 
       default:
