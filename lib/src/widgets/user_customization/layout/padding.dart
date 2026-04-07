@@ -169,7 +169,7 @@ class _LayoutSettingState extends State<EzPaddingSetting> {
                   label:
                       '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
                 ),
-                EzSpacer(space: EzConfig.spargin),
+                EzConfig.separator,
               ],
             ),
           ),

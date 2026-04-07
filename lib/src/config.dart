@@ -867,9 +867,6 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Theme aware [EzLayoutCache] alias
   static double get spacing => _provPoint.layout.spacing;
 
-  /// Theme aware [EzLayoutCache] alias (spacing + margin)
-  static double get spargin => marginVal + spacing;
-
   /// Theme aware [EzLayoutCache] alias
   static EzMargin get margin => _provPoint.layout.margin;
 
