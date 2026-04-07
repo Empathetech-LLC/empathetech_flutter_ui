@@ -24,7 +24,7 @@ class EzConfigurableApp extends StatelessWidget {
   final EFUILang el10n;
 
   /// Sets [EzConfigProvider.appCache]
-  final EzAppCache? appCache;
+  final EzAppCache appCache;
 
   /// App name (window title, etc.)
   final String appName;
@@ -39,7 +39,7 @@ class EzConfigurableApp extends StatelessWidget {
     required this.supportedLocales,
     required this.locale,
     required this.el10n,
-    this.appCache,
+    required this.appCache,
     required this.appName,
     this.routerConfig,
   });

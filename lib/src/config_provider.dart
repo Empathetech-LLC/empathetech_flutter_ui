@@ -29,7 +29,7 @@ class EzConfigProvider extends ChangeNotifier {
   late EzLayoutCache _layout;
   late EzTextCache _text;
 
-  final EzAppCache? _appCache;
+  final EzAppCache _appCache;
 
   late ThemeData _currTheme;
   late ThemeData _darkTheme;
@@ -39,7 +39,7 @@ class EzConfigProvider extends ChangeNotifier {
     required Locale locale,
     required EFUILang el10n,
     required bool isDark,
-    EzAppCache? appCache,
+    required EzAppCache appCache,
   })  : _platform = getBasePlatform(),
         _onMobile = isMobile(),
         _seed = Random().nextInt(rMax),
@@ -51,6 +51,7 @@ class EzConfigProvider extends ChangeNotifier {
         _appCache = appCache {
     _buildThemeMode();
     _buildThemeData();
+    _appCache.init(isDark);
   }
 
   /// Gather and set [_themeMode] from storage
@@ -316,7 +317,7 @@ class EzConfigProvider extends ChangeNotifier {
   /// Or [doNothing] for [StatelessWidget]s
   Future<void> redrawUI(void Function() onComplete) async {
     _seed = Random().nextInt(rMax);
-    if (_appCache != null) await _appCache.rebuild();
+    await _appCache.rebuild();
 
     ezCloseAll();
     notifyListeners();
@@ -433,6 +434,9 @@ class EzTextCache {
 }
 
 abstract class EzAppCache {
+  /// Will run on app setup
+  Future<void> init(bool isDark);
+
   /// Will run on every call to [EzConfigProvider.redrawUI]
   /// AKA when [EzConfig.seed] changes
   Future<void> rebuild();

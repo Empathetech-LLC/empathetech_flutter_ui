@@ -451,6 +451,9 @@ class ${classCaseAppName}Cache extends EzAppCache {
   // Set //
 
   @override
+  Future<void> init(_) async {}
+
+  @override
   Future<void> rebuild() async {
     if (_locale != EzConfig.locale) {
       _l10n = await $l10nClass.delegate.load(EzConfig.locale);
