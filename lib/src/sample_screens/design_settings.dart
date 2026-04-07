@@ -293,7 +293,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                       },
                       text: EzConfig.l10n.dsFadeTransition,
                     ),
-                    EzSpacer(space: EzConfig.spargin),
+                    EzConfig.separator,
                   ],
                 ),
               ),
