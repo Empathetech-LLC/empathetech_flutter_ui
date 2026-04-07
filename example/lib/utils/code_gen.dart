@@ -451,7 +451,7 @@ class ${classCaseAppName}Cache extends EzAppCache {
   // Set //
 
   @override
-  Future<void> init(_) async {}
+  void init(_) {}
 
   @override
   Future<void> rebuild() async {

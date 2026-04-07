@@ -435,7 +435,7 @@ class EzTextCache {
 
 abstract class EzAppCache {
   /// Will run on app setup
-  Future<void> init(bool isDark);
+  void init(bool isDark);
 
   /// Will run on every call to [EzConfigProvider.redrawUI]
   /// AKA when [EzConfig.seed] changes
