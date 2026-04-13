@@ -283,8 +283,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                     // Fade switch
                     EzSwitchPair(
-                      enabled: currType != EzPageTransition.none &&
-                          currType != EzPageTransition.system,
+                      enabled: currType != EzPageTransition.system,
                       valueKey: EzConfig.isDark
                           ? darkTransitionFadeKey
                           : lightTransitionFadeKey,

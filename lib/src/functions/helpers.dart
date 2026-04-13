@@ -499,7 +499,7 @@ Widget ezTransitionsBuilder(
 
     // None
     case EzPageTransition.none:
-      return child;
+      return smartFade(child);
   }
 }
 
