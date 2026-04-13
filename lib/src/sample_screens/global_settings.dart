@@ -46,6 +46,9 @@ class EzGlobalSettings extends StatefulWidget {
   /// [EzResetButton.resetSkip] passthrough
   final Set<String>? resetSkip;
 
+  /// [EzResetButton.dynamicTitle] passthrough
+  final String Function()? resetTitle;
+
   /// Widgets to be added below the [EzResetButton]
   /// Defaults to an [EzSeparator], if provided BYO trailing spacer
   final List<Widget> footer;
@@ -66,6 +69,7 @@ class EzGlobalSettings extends StatefulWidget {
     this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSeparator(),
     this.resetSkip,
+    this.resetTitle,
     this.footer = const <Widget>[EzSeparator()],
   });
 
@@ -136,6 +140,7 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
           androidPackage: widget.androidPackage,
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
+          dynamicTitle: widget.resetTitle,
         ),
 
         // Footer
