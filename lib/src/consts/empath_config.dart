@@ -90,16 +90,16 @@ const int darkSurfaceHex = 0xFF222222;
 /// 0xFF222222 == 34 of each
 const Color darkSurface = Color(darkSurfaceHex);
 
-/// 0x8AFFFFFF == white w/ double [defaultBorderOpacity]
-const int darkOutlineHex = 0x8AFFFFFF;
+/// 0x80FFFFFF == white w/ [defaultOutlineOpacity]
+const int darkOutlineHex = 0x80FFFFFF;
 
-/// 0x8AFFFFFF == white w/ double [defaultBorderOpacity]
+/// 0x80FFFFFF == white w/ [defaultOutlineOpacity]
 const Color darkOutline = Color(darkOutlineHex);
 
-/// 0x45FFFFFF == white w/ [defaultBorderOpacity]
-const int darkOutlineVariantHex = 0x45FFFFFF;
+/// 0x33FFFFFF == white w/ [defaultBorderOpacity]
+const int darkOutlineVariantHex = 0x33FFFFFF;
 
-/// 0x45FFFFFF == white w/ [defaultBorderOpacity]
+/// 0x33FFFFFF == white w/ [defaultBorderOpacity]
 const Color darkOutlineVariant = Color(darkOutlineVariantHex);
 
 // Light //
@@ -122,16 +122,16 @@ const int lightSurfaceHex = whiteHex;
 /// 0xFFFFFFFF == white
 const Color lightSurface = Color(lightSurfaceHex);
 
-/// 0x8A000000 == black w/ double [defaultBorderOpacity]
-const int lightOutlineHex = 0x8A000000;
+/// 0x80000000 == black w/ double [defaultOutlineOpacity]
+const int lightOutlineHex = 0x80000000;
 
-/// 0x8A000000 == black w/ double [defaultBorderOpacity]
+/// 0x80000000 == black w/ double [defaultOutlineOpacity]
 const Color lightOutline = Color(lightOutlineHex);
 
-/// 0x45000000 == black w/ [defaultBorderOpacity]
-const int lightOutlineVariantHex = 0x45000000;
+/// 0x33000000 == black w/ [defaultBorderOpacity]
+const int lightOutlineVariantHex = 0x33000000;
 
-/// 0x45000000 == black w/ [defaultBorderOpacity]
+/// 0x33000000 == black w/ [defaultBorderOpacity]
 const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
@@ -142,8 +142,11 @@ const int defaultAnimationDuration = 400;
 /// 1.5
 const double defaultBorderWidth = 1.5;
 
-/// 0x45 / 255
-const double defaultBorderOpacity = 0.270588235294;
+/// 0.2 == 0x33
+const double defaultBorderOpacity = 0.2;
+
+/// 0.5 == 0x80
+const double defaultOutlineOpacity = 0.5;
 
 //* Layout settings *//
 
