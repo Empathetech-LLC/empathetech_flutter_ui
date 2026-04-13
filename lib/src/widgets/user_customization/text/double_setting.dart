@@ -166,11 +166,11 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                     autovalidateMode: AutovalidateMode.onUnfocus,
                     validator: (String? value) {
                       if (value == null) return null;
-                      final double? doubleVale = double.tryParse(value);
+                      final double? doubleVal = double.tryParse(value);
 
-                      if (doubleVale == null ||
-                          doubleVale < widget.min ||
-                          doubleVale > widget.max) {
+                      if (doubleVal == null ||
+                          doubleVal < widget.min ||
+                          doubleVal > widget.max) {
                         setState(() {
                           formFieldWidth =
                               (sizeLimit.width + EzConfig.padding) * 1.75;
@@ -190,8 +190,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                       final double? doubleVal = double.tryParse(stringVal);
 
                       if (doubleVal == null ||
-                          doubleVal > widget.max ||
-                          doubleVal < widget.min) {
+                          doubleVal < widget.min ||
+                          doubleVal > widget.max) {
                         return;
                       }
                       currValue = doubleVal;
