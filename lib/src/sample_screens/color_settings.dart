@@ -206,7 +206,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   }
 }
 
-class _QuickColorSettings extends StatefulWidget {
+class _QuickColorSettings extends StatelessWidget {
   final void Function() onUpdate;
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
@@ -232,16 +232,6 @@ class _QuickColorSettings extends StatefulWidget {
   });
 
   @override
-  State<_QuickColorSettings> createState() => _QuickColorSettingsState();
-}
-
-class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) => EzScrollView(
         scrollDirection: Axis.horizontal,
         startCentered: true,
@@ -249,7 +239,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (widget.quickHeader != null) ...widget.quickHeader!,
+            if (quickHeader != null) ...quickHeader!,
 
             // From image
             Semantics(
@@ -259,7 +249,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
               hint: EzConfig.l10n.csFromImage,
               child: ExcludeSemantics(
                 child: EzImageSetting(
-                  redraw,
+                  onUpdate,
                   configKey: EzConfig.isDark
                       ? darkColorSchemeImageKey
                       : lightColorSchemeImageKey,
@@ -273,43 +263,43 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
             EzConfig.separator,
 
             // High contrast
-            EzHighContrastColorsSetting(redraw),
+            EzHighContrastColorsSetting(onUpdate),
             EzConfig.spacer,
 
             // MonoChrome
-            EzMonoChromeColorsSetting(redraw),
+            EzMonoChromeColorsSetting(onUpdate),
 
             // Additional settings
-            if (widget.quickFooter != null) ...widget.quickFooter!,
+            if (quickFooter != null) ...quickFooter!,
 
             // Local reset
-            widget.resetSpacer,
+            resetSpacer,
             EzResetButton(
               all: false,
-              widget.onUpdate,
-              androidPackage: widget.androidPackage,
-              appName: widget.appName,
+              onUpdate,
+              androidPackage: androidPackage,
+              appName: appName,
               dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(true)),
-              resetSkip: widget.resetSkip,
+              resetSkip: resetSkip,
               onConfirm: () async {
                 if (EzConfig.updateBoth) {
                   await EzConfig.removeKeys(allColorKeys.keys.toSet());
-                  if (widget.resetExtraDark != null) {
-                    await EzConfig.removeKeys(widget.resetExtraDark!);
+                  if (resetExtraDark != null) {
+                    await EzConfig.removeKeys(resetExtraDark!);
                   }
-                  if (widget.resetExtraLight != null) {
-                    await EzConfig.removeKeys(widget.resetExtraLight!);
+                  if (resetExtraLight != null) {
+                    await EzConfig.removeKeys(resetExtraLight!);
                   }
                 } else {
                   if (EzConfig.isDark) {
                     await EzConfig.removeKeys(darkColorKeys.keys.toSet());
-                    if (widget.resetExtraDark != null) {
-                      await EzConfig.removeKeys(widget.resetExtraDark!);
+                    if (resetExtraDark != null) {
+                      await EzConfig.removeKeys(resetExtraDark!);
                     }
                   } else {
                     await EzConfig.removeKeys(lightColorKeys.keys.toSet());
-                    if (widget.resetExtraLight != null) {
-                      await EzConfig.removeKeys(widget.resetExtraLight!);
+                    if (resetExtraLight != null) {
+                      await EzConfig.removeKeys(resetExtraLight!);
                     }
                   }
                 }
