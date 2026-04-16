@@ -7,7 +7,7 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class EzSwitchPair extends StatefulWidget {
   /// Easily disable the button
@@ -43,38 +43,17 @@ class EzSwitchPair extends StatefulWidget {
   /// [EzText.style] passthrough
   final TextStyle? style;
 
-  /// [EzText.strutStyle] passthrough
-  final StrutStyle? strutStyle;
-
   /// [EzText.textAlign] passthrough
   final TextAlign? textAlign;
 
   /// [EzText.textDirection] passthrough
   final TextDirection? textDirection;
 
-  /// [EzText.locale] passthrough
-  final Locale? locale;
-
-  /// [EzText.softWrap] passthrough
-  final bool? softWrap;
-
-  /// [EzText.overflow] passthrough
-  final TextOverflow? overflow;
-
-  /// [EzText.textScaler] passthrough
-  final TextScaler? textScaler;
-
   /// [EzText.maxLines] passthrough
   final int? maxLines;
 
   /// [EzText.semanticsLabel] passthrough
   final String? semanticsLabel;
-
-  /// [EzText.textWidthBasis] passthrough
-  final TextWidthBasis? textWidthBasis;
-
-  /// [EzText.textHeightBehavior] passthrough
-  final TextHeightBehavior? textHeightBehavior;
 
   /// [EzText.selectionColor] passthrough
   final Color? selectionColor;
@@ -96,6 +75,9 @@ class EzSwitchPair extends StatefulWidget {
   /// Provide [valueKey] OR [value]
   /// Optionally provide [afterChanged]
   final String? valueKey;
+
+  /// Whether the key should use [FlutterSecureStorage]
+  final bool secureKey;
 
   /// [Switch.onChanged] passthrough
   /// Provide [onChanged] OR [afterChanged]
@@ -128,24 +110,6 @@ class EzSwitchPair extends StatefulWidget {
   /// [Switch.trackOutlineWidth] passthrough
   final WidgetStateProperty<double?>? trackOutlineWidth;
 
-  /// [Switch.activeThumbImage] passthrough
-  final ImageProvider<Object>? activeThumbImage;
-
-  /// [Switch.onActiveThumbImageError] passthrough
-  final ImageErrorListener? onActiveThumbImageError;
-
-  /// [Switch.inactiveThumbImage] passthrough
-  final ImageProvider<Object>? inactiveThumbImage;
-
-  /// [Switch.onInactiveThumbImageError] passthrough
-  final ImageErrorListener? onInactiveThumbImageError;
-
-  /// [Switch.materialTapTargetSize] passthrough
-  final MaterialTapTargetSize? materialTapTargetSize;
-
-  /// [Switch.dragStartBehavior] passthrough
-  final DragStartBehavior dragStartBehavior;
-
   /// [Switch.mouseCursor] passthrough
   final MouseCursor? mouseCursor;
 
@@ -154,9 +118,6 @@ class EzSwitchPair extends StatefulWidget {
 
   /// [Switch.hoverColor] passthrough
   final Color? hoverColor;
-
-  /// [Switch.splashRadius] passthrough
-  final double? splashRadius;
 
   /// [Switch.focusNode] passthrough
   final FocusNode? focusNode;
@@ -188,23 +149,17 @@ class EzSwitchPair extends StatefulWidget {
     required this.text,
     this.useSurface = false,
     this.style,
-    this.strutStyle,
     this.textAlign,
     this.textDirection,
-    this.locale,
-    this.softWrap,
-    this.overflow,
-    this.textScaler,
     this.maxLines,
     this.semanticsLabel,
-    this.textWidthBasis,
-    this.textHeightBehavior,
     this.selectionColor,
     this.backgroundColor,
 
     // Switch
     this.value,
     this.valueKey,
+    this.secureKey = false,
     this.onChanged,
     this.canChange,
     this.afterChanged,
@@ -215,16 +170,9 @@ class EzSwitchPair extends StatefulWidget {
     this.inactiveTrackColor,
     this.trackOutlineColor,
     this.trackOutlineWidth,
-    this.activeThumbImage,
-    this.onActiveThumbImageError,
-    this.inactiveThumbImage,
-    this.onInactiveThumbImageError,
-    this.materialTapTargetSize,
-    this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
     this.focusColor,
     this.hoverColor,
-    this.splashRadius,
     this.focusNode,
     this.onFocusChange,
     this.autofocus = false,
@@ -265,17 +213,10 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
               widget.text,
               useSurface: widget.useSurface,
               style: widget.style,
-              strutStyle: widget.strutStyle,
               textAlign: widget.textAlign,
               textDirection: widget.textDirection,
-              locale: widget.locale,
-              softWrap: widget.softWrap,
-              overflow: widget.overflow,
-              textScaler: widget.textScaler,
               maxLines: widget.maxLines,
               semanticsLabel: widget.semanticsLabel,
-              textWidthBasis: widget.textWidthBasis,
-              textHeightBehavior: widget.textHeightBehavior,
               selectionColor: widget.selectionColor,
               backgroundColor: widget.backgroundColor,
             ),
@@ -295,7 +236,12 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
                           if (!await widget.canChange!(choice)) return;
                         }
 
-                        await EzConfig.setBool(widget.valueKey!, choice);
+                        if (widget.secureKey) {
+                          await EzConfig.secSetString(
+                              widget.valueKey!, choice.toString());
+                        } else {
+                          await EzConfig.setBool(widget.valueKey!, choice);
+                        }
                         setState(() => value = choice);
 
                         widget.afterChanged?.call(choice);
@@ -315,16 +261,9 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
                   : WidgetStatePropertyAll<Color>(
                       EzConfig.colors.outlineVariant),
               trackOutlineWidth: widget.trackOutlineWidth,
-              activeThumbImage: widget.activeThumbImage,
-              onActiveThumbImageError: widget.onActiveThumbImageError,
-              inactiveThumbImage: widget.inactiveThumbImage,
-              onInactiveThumbImageError: widget.onInactiveThumbImageError,
-              materialTapTargetSize: widget.materialTapTargetSize,
-              dragStartBehavior: widget.dragStartBehavior,
               mouseCursor: widget.mouseCursor,
               focusColor: widget.focusColor,
               hoverColor: widget.hoverColor,
-              splashRadius: widget.splashRadius,
               focusNode: widget.focusNode,
               onFocusChange: widget.onFocusChange,
               autofocus: widget.autofocus,
