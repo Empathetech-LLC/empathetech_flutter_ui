@@ -7,8 +7,8 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzLayoutSettings extends StatefulWidget {
-  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
+class EzLayoutSettings extends StatelessWidget {
+  /// [EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
 
   /// Optional additional settings, before the main settings
@@ -62,26 +62,6 @@ class EzLayoutSettings extends StatefulWidget {
     this.trail = const EzSeparator(),
   });
 
-  @override
-  State<EzLayoutSettings> createState() => _EzLayoutSettingsState();
-}
-
-class _EzLayoutSettingsState extends State<EzLayoutSettings> {
-  // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
-  // Init //
-
-  @override
-  void initState() {
-    super.initState();
-    ezWindowNamer(EzConfig.l10n.lsPageTitle);
-  }
-
   // Return the build //
   @override
   Widget build(BuildContext context) {
@@ -93,11 +73,11 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
       EzConfig.spacer,
 
       // Optional 'before' settings
-      if (widget.beforeLayout != null) ...widget.beforeLayout!,
+      if (beforeLayout != null) ...beforeLayout!,
 
       // Margin
       EzMarginSetting(
-        onUpdate: redraw,
+        onUpdate: onUpdate,
         min: minMargin,
         max: maxMargin,
         steps: 6,
@@ -107,7 +87,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
       // Padding
       EzPaddingSetting(
-        onUpdate: redraw,
+        onUpdate: onUpdate,
         min: minPadding,
         max: maxPadding,
         steps: 12,
@@ -117,7 +97,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
       // Spacing
       EzSpacingSetting(
-        onUpdate: redraw,
+        onUpdate: onUpdate,
         min: minSpacing,
         max: maxSpacing,
         steps: 13,
@@ -137,7 +117,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                 value);
           }
 
-          await EzConfig.rebuildUI(redraw);
+          await EzConfig.rebuildUI(onUpdate);
         },
         text: EzConfig.l10n.lsShowBack,
       ),
@@ -155,40 +135,40 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
                 value);
           }
 
-          await EzConfig.rebuildUI(redraw);
+          await EzConfig.rebuildUI(onUpdate);
         },
         text: EzConfig.l10n.lsShowScroll,
       ),
 
-      if (widget.afterLayout != null) ...widget.afterLayout!,
+      if (afterLayout != null) ...afterLayout!,
 
       // Local reset all
-      widget.resetSpacer,
+      resetSpacer,
       EzResetButton(
         all: false,
-        redraw,
-        androidPackage: widget.androidPackage,
-        appName: widget.appName,
+        onUpdate,
+        androidPackage: androidPackage,
+        appName: appName,
         dynamicTitle: () => EzConfig.l10n.lsReset(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
-            if (widget.resetExtraDark != null) {
-              await EzConfig.removeKeys(widget.resetExtraDark!);
+            if (resetExtraDark != null) {
+              await EzConfig.removeKeys(resetExtraDark!);
             }
           }
 
           if (EzConfig.updateBoth || !EzConfig.isDark) {
             await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
-            if (widget.resetExtraLight != null) {
-              await EzConfig.removeKeys(widget.resetExtraLight!);
+            if (resetExtraLight != null) {
+              await EzConfig.removeKeys(resetExtraLight!);
             }
           }
         },
-        resetSkip: widget.resetSkip,
-        saveSkip: widget.saveSkip,
+        resetSkip: resetSkip,
+        saveSkip: saveSkip,
       ),
-      widget.trail,
+      trail,
     ]);
   }
 }
