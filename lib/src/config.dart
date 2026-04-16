@@ -10,18 +10,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// There are few (if any) null checks in EzConfig
-// EFUI won't work at all (immediate runtime failure) if EzConfig isn't properly initialized, so they're moot
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 //* Config constructor(s) *//
+// There are few (if any) null checks in EzConfig
+// EFUI won't work at all (immediate runtime failure) if EzConfig isn't properly initialized, so they're moot
 
 class EzConfig {
   /// [AssetImage] paths for the app
   final Set<String> _assetPaths;
-
-  /// Default config
-  final Map<String, dynamic> _defaults;
 
   /// Fallback [Locale] for unsupported [Locale]s
   /// [english] or [americanEnglish] is recommended
@@ -35,35 +32,49 @@ class EzConfig {
   /// [SharedPreferencesAsync] instance
   final SharedPreferencesAsync _preferences;
 
+  /// Optional [FlutterSecureStorage] instance
+  final FlutterSecureStorage? _securePreferences;
+
+  /// Default config
+  final Map<String, dynamic> _defaults;
+
+  /// Optional protected keys
+  final Set<String> _neverReset;
+
   /// Live values in use
   final Map<String, dynamic> _prefs;
 
   /// [EzConfig] key : value runtime [Type] map
   final Map<String, Type> _typeMap;
 
-  /// Allows for [EzConfigProvider.rebuildUI] and hosts caches for [ThemeMode] aware [EzConfig] values
-  EzConfigProvider? _provider;
-
   /// Private instance
   static EzConfig? _instance;
+
+  /// Set post-init
+  /// Allows for [EzConfigProvider.rebuildUI] and hosts caches for [ThemeMode] aware [EzConfig] values
+  EzConfigProvider? _provider;
 
   /// Private/internal constructor
   EzConfig._({
     // External (factory parameters)
     required Set<String> assetPaths,
-    required Map<String, dynamic> defaults,
     required Locale localeFallback,
     required EFUILang l10nFallback,
     required SharedPreferencesAsync preferences,
+    FlutterSecureStorage? securePreferences,
+    required Map<String, dynamic> defaults,
+    Set<String>? neverReset,
 
     // Internal (built by factory)
     required Map<String, dynamic> prefs,
     required Map<String, Type> typeMap,
   })  : _assetPaths = assetPaths,
-        _defaults = defaults,
         _localeFallback = localeFallback,
         _l10nFallback = l10nFallback,
         _preferences = preferences,
+        _securePreferences = securePreferences,
+        _defaults = defaults,
+        _neverReset = neverReset ?? const <String>{appLocaleKey},
         _prefs = prefs,
         _typeMap = typeMap;
 
@@ -75,11 +86,12 @@ class EzConfig {
   /// [provider] => Set by [EzConfigurableApp], recommended to leave null unless you are not using [EzConfigurableApp]
   factory EzConfig.init({
     required Set<String> assetPaths,
-    required Map<String, dynamic> defaults,
     required Locale localeFallback,
     required EFUILang l10nFallback,
     required SharedPreferencesWithCache preferences,
-    EzConfigProvider? provider,
+    FlutterSecureStorage? securePreferences,
+    required Map<String, dynamic> defaults,
+    Set<String>? neverReset,
   }) {
     if (_instance == null) {
       // Get the value type for each key //
@@ -143,10 +155,12 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       _instance = EzConfig._(
         assetPaths: <String>{...assetPaths, ...efuiAssetPaths},
-        defaults: defaults,
         localeFallback: localeFallback,
         l10nFallback: l10nFallback,
         preferences: SharedPreferencesAsync(),
+        securePreferences: securePreferences,
+        defaults: defaults,
+        neverReset: neverReset,
         prefs: prefs,
         typeMap: typeMap,
       );
@@ -171,6 +185,11 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Get the [key]s current EzConfig value
   /// bool, int, double, String, String List, or null
   static dynamic get(String key) => _instance!._prefs[key] ?? getDefault(key);
+
+  /// [FlutterSecureStorage] only stores Strings
+  /// No null or error checking, assumes the proper instance was provided in [EzConfig.init]
+  static Future<String?> secGet(String key) =>
+      _instance!._securePreferences!.read(key: key);
 
   /// Alias for [EzConfig.get] => [isLeftyKey]
   static bool get isLefty => get(isLeftyKey);
@@ -263,6 +282,22 @@ Must be one of [int, bool, double, String, List<String>]''');
       return true;
     } catch (e) {
       ezLog('Error setting String [$key]...\n$e');
+      return false;
+    }
+  }
+
+  /// [setString] but with [FlutterSecureStorage]
+  static Future<bool> secSetString(String key, String value) async {
+    if (_instance!._securePreferences == null) {
+      ezLog('Attempted to secSetString without a secure storage instance');
+      return false;
+    }
+
+    try {
+      await _instance!._securePreferences!.write(key: key, value: value);
+      return true;
+    } catch (e) {
+      ezLog('Error in secSetString: [$key]...\n$e');
       return false;
     }
   }
@@ -743,15 +778,17 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// [removeKeys], all (except those in [skip])
-  /// [skip] defaults to [appLocaleKey]
+  /// The neverReset keys from [EzConfig.init] will always be [skip]ed, provided keys will be appended
   /// Obviously, [forceOne] and [forceBoth] are not meant to be true at the same time
   /// If they are, forceOne takes precedence
   static Future<bool> reset({
-    Set<String>? skip = const <String>{appLocaleKey},
+    Set<String>? skip,
     bool forceOne = false,
     bool forceBoth = false,
   }) async {
     final Set<String> keys = Set<String>.from(_instance!._prefs.keys);
+
+    keys.removeAll(_instance!._neverReset);
     if (skip != null) keys.removeAll(skip);
 
     if (forceOne || (!forceBoth && !updateBoth)) {
