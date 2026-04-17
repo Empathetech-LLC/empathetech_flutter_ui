@@ -94,17 +94,27 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                               widget.titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
-
-                        // Preview
                         EzSpacer(space: currValue),
 
+                        // Vertical preview
+                        EzElevatedButton(
+                          enabled: false,
+                          text: EzConfig.l10n.gValue,
+                        ),
+
+                        // Divider preview
+                        EzDivider(height: currValue * 3),
+
+                        // Horizontal preview
                         EzScrollView(
                           mainAxisSize: MainAxisSize.min,
                           scrollDirection: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             EzElevatedButton(
-                                enabled: false, text: EzConfig.l10n.gCurrently),
+                              enabled: false,
+                              text: EzConfig.l10n.gCurrently,
+                            ),
                             EzSpacer(space: currValue, vertical: false),
                             EzElevatedButton(
                               enabled: false,
@@ -115,7 +125,6 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                             ),
                           ],
                         ),
-
                         EzSpacer(space: currValue),
                       ],
                     ),
