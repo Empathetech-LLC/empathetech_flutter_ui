@@ -61,6 +61,35 @@ extension CSConfig on EzCSType {
   }
 }
 
+// Design settings //
+
+const String _button = 'button';
+const String _page = 'page';
+
+// Design setting types
+// [button] || [page]
+enum EzDSType { button, page }
+
+extension DSConfig on EzDSType {
+  String get path {
+    switch (this) {
+      case EzDSType.button:
+        return _button;
+      case EzDSType.page:
+        return _page;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case EzDSType.button:
+        return 'button_design_settings';
+      case EzDSType.page:
+        return 'page_design_settings';
+    }
+  }
+}
+
 // Text settings //
 
 /// Text setting types
