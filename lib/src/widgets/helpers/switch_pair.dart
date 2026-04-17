@@ -150,75 +150,78 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) => EzRow(
-        reverseHands: widget.reverseHands,
-        mainAxisSize: widget.mainAxisSize,
-        mainAxisAlignment: widget.mainAxisAlignment,
-        crossAxisAlignment: widget.crossAxisAlignment,
-        children: <Widget>[
-          Flexible(
-            child: widget.clickable
-                ? EzLink(
-                    widget.text,
-                    backgroundColor: widget.backgroundColor ??
-                        (widget.useSurface == null
-                            ? EzConfig.colors.surfaceDim
-                            : (widget.useSurface == true)
-                                ? EzConfig.colors.surface
-                                : EzConfig.colors.surfaceContainer),
-                    style: widget.style,
-                    textAlign: widget.textAlign,
-                    hint: widget.semanticsLabel ?? EzConfig.l10n.gOpenLink,
-                    padding: EzInsets.wrap(EzConfig.marginVal),
-                  )
-                : EzText(
-                    widget.text,
-                    useSurface: widget.useSurface,
-                    backgroundColor: widget.backgroundColor,
-                    style: widget.style,
-                    textAlign: widget.textAlign,
-                    semanticsLabel: widget.semanticsLabel,
-                  ),
+  Widget build(BuildContext context) {
+    void onChanged(bool? choice) async {
+      if (!widget.enabled) return;
+      if (widget.onChanged != null) return widget.onChanged!.call(choice);
+      if (choice == null) return;
+
+      if (widget.canChange != null) {
+        if (!await widget.canChange!(choice)) return;
+      }
+
+      if (widget.secureKey) {
+        await EzConfig.secSetString(widget.valueKey!, choice.toString());
+      } else {
+        await EzConfig.setBool(widget.valueKey!, choice);
+      }
+      setState(() => value = choice);
+
+      widget.afterChanged?.call(choice);
+    }
+
+    return EzRow(
+      reverseHands: widget.reverseHands,
+      mainAxisSize: widget.mainAxisSize,
+      mainAxisAlignment: widget.mainAxisAlignment,
+      crossAxisAlignment: widget.crossAxisAlignment,
+      children: <Widget>[
+        Flexible(
+          child: widget.clickable
+              ? EzLink(
+                  widget.text,
+                  backgroundColor: widget.backgroundColor ??
+                      (widget.useSurface == null
+                          ? EzConfig.colors.surfaceDim
+                          : (widget.useSurface == true)
+                              ? EzConfig.colors.surface
+                              : EzConfig.colors.surfaceContainer),
+                  style: widget.style,
+                  textAlign: widget.textAlign,
+                  hint: widget.semanticsLabel ?? EzConfig.l10n.gOpenLink,
+                  onTap: () => onChanged(!value),
+                  textColor: EzConfig.colors.onSurface,
+                  padding: EzInsets.wrap(EzConfig.marginVal),
+                )
+              : EzText(
+                  widget.text,
+                  useSurface: widget.useSurface,
+                  backgroundColor: widget.backgroundColor,
+                  style: widget.style,
+                  textAlign: widget.textAlign,
+                  semanticsLabel: widget.semanticsLabel,
+                ),
+        ),
+        Transform.scale(
+          scale: max(1.0, ratio),
+          // Could be PlatformSwitch
+          // Dev's opinion: Material switches are better
+          child: Switch(
+            value: value,
+            onChanged: onChanged,
+            activeThumbColor:
+                widget.fauxDisabled ? EzConfig.colors.outline : null,
+            inactiveThumbColor: EzConfig.colors.outline,
+            trackOutlineColor: (!widget.enabled || widget.fauxDisabled)
+                ? WidgetStatePropertyAll<Color>(EzConfig.colors.outlineVariant)
+                : null,
+            trackOutlineWidth: widget.trackOutlineWidth,
+            padding: EzConfig.isLefty
+                ? EdgeInsets.only(right: EzConfig.marginVal)
+                : EdgeInsets.only(left: EzConfig.marginVal),
           ),
-          Transform.scale(
-            scale: max(1.0, ratio),
-            // Could be PlatformSwitch
-            // Dev's opinion: Material switches are better
-            child: Switch(
-              value: value,
-              onChanged: widget.enabled
-                  ? widget.onChanged ??
-                      (bool? choice) async {
-                        if (choice == null) return;
-
-                        if (widget.canChange != null) {
-                          if (!await widget.canChange!(choice)) return;
-                        }
-
-                        if (widget.secureKey) {
-                          await EzConfig.secSetString(
-                              widget.valueKey!, choice.toString());
-                        } else {
-                          await EzConfig.setBool(widget.valueKey!, choice);
-                        }
-                        setState(() => value = choice);
-
-                        widget.afterChanged?.call(choice);
-                      }
-                  : null,
-              activeThumbColor:
-                  widget.fauxDisabled ? EzConfig.colors.outline : null,
-              inactiveThumbColor: EzConfig.colors.outline,
-              trackOutlineColor: (!widget.enabled || widget.fauxDisabled)
-                  ? WidgetStatePropertyAll<Color>(
-                      EzConfig.colors.outlineVariant)
-                  : null,
-              trackOutlineWidth: widget.trackOutlineWidth,
-              padding: EzConfig.isLefty
-                  ? EdgeInsets.only(right: EzConfig.marginVal)
-                  : EdgeInsets.only(left: EzConfig.marginVal),
-            ),
-          ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 }
