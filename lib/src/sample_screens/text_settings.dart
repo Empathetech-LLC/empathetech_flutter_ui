@@ -266,11 +266,9 @@ class _TextSettingsState extends State<_TextSettings> {
             },
           ),
 
-          if (currentTab == EzTSType.quick) ...<Widget>[
-            // Update both toggle
-            EzConfig.rowMargin,
-            const EzThemeCoin(),
-          ],
+          // Update both toggle
+          EzConfig.rowMargin,
+          EzThemeCoin(enabled: currentTab == EzTSType.quick),
         ],
       ),
       EzDivider(height: EzConfig.spacing),

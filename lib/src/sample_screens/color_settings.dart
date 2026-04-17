@@ -165,10 +165,8 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           ),
 
           // Update both toggle
-          if (currentTab == EzCSType.quick) ...<Widget>[
-            EzConfig.rowMargin,
-            const EzThemeCoin(),
-          ],
+          EzConfig.rowMargin,
+          EzThemeCoin(enabled: currentTab == EzCSType.quick),
         ],
       ),
       EzDivider(height: EzConfig.spacing),
