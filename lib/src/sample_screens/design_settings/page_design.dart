@@ -119,7 +119,7 @@ class PageDesign extends StatelessWidget {
 
           await EzConfig.rebuildUI(onUpdate);
         },
-        text: EzConfig.l10n.lsShowScroll,
+        text: EzConfig.l10n.dsShowScroll,
       ),
 
       // After background
@@ -132,7 +132,8 @@ class PageDesign extends StatelessWidget {
         onUpdate,
         androidPackage: androidPackage,
         appName: appName,
-        dynamicTitle: () => EzConfig.l10n.dsReset(ezThemeString(true)),
+        dynamicTitle: () =>
+            EzConfig.l10n.dsReset(ezThemeString(true)), // TODO: add page
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(<String>{

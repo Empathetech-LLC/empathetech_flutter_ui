@@ -61,7 +61,7 @@ class ButtonDesign extends StatelessWidget {
 
       // Underline links TODO: make 'links' a link (toggles switch too)
       EzSwitchPair(
-        text: EzConfig.l10n.tsAlwaysUnderline,
+        text: EzConfig.l10n.dsAlwaysUnderline,
         valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
         afterChanged: (bool? changed) async {
           if (changed == null) return;
@@ -84,7 +84,7 @@ class ButtonDesign extends StatelessWidget {
 
           await EzConfig.rebuildUI(onUpdate);
         },
-        text: EzConfig.l10n.lsShowBack,
+        text: EzConfig.l10n.dsShowBack,
       ),
 
       if (append != null) ...append!,
@@ -96,7 +96,8 @@ class ButtonDesign extends StatelessWidget {
         onUpdate,
         androidPackage: androidPackage,
         appName: appName,
-        dynamicTitle: () => EzConfig.l10n.lsReset(ezThemeString(true)),
+        dynamicTitle: () =>
+            EzConfig.l10n.dsReset(ezThemeString(true)), // TODO: add button
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(darkButtonDesignKeys.keys.toSet());
