@@ -14,7 +14,7 @@ class EzChalkboardConfig extends StatelessWidget {
 
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets a [ColorScheme] similar to [ezHighContrastDark], but with a [chalkboardGreen] surface and [empathSand] accents
-  /// Has default design and layout settings, but a [fingerPaint] based [TextTheme]
+  /// Has mostly default design settings, but a [fingerPaint] based [TextTheme]
   const EzChalkboardConfig(this.onComplete, {super.key});
 
   static Future<bool> onPressed(BuildContext context) async {
@@ -48,8 +48,6 @@ class EzChalkboardConfig extends StatelessWidget {
     await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
     // Global settings //
-
-    // Default lefty and language
 
     await EzConfig.setBool(isDarkThemeKey, true);
 
@@ -114,10 +112,9 @@ class EzChalkboardConfig extends StatelessWidget {
 
     await EzConfig.setDouble(darkBorderOpacityKey, 0.0);
 
-    // Layout settings //
+    await EzConfig.setBool(darkShowBackFABKey, false);
 
     await EzConfig.setBool(darkShowScrollKey, false);
-    await EzConfig.setBool(darkShowBackFABKey, false);
 
     // Text settings //
 

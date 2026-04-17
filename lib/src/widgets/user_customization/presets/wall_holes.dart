@@ -47,8 +47,6 @@ class EzWallHolesConfig extends StatelessWidget {
 
     // Global settings //
 
-    // Default lefty and language
-
     await EzConfig.setBool(isDarkThemeKey, false);
 
     // Color settings //
@@ -99,6 +97,12 @@ class EzWallHolesConfig extends StatelessWidget {
 
     // Design settings //
 
+    await EzConfig.setString(lightButtonShapeKey, EzButtonShape.rect.value);
+    await EzConfig.setDouble(lightBorderWidthKey, 2.0);
+    await EzConfig.setDouble(lightBorderOpacityKey, 1.0);
+
+    await EzConfig.setBool(lightShowBackFABKey, true);
+
     await EzConfig.setInt(lightAnimationDurationKey, 600);
     await EzConfig.setString(
         lightTransitionTypeKey, EzPageTransition.zoom.value);
@@ -107,20 +111,9 @@ class EzWallHolesConfig extends StatelessWidget {
     await EzConfig.setString(
         '$lightBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
 
-    await EzConfig.setString(lightButtonShapeKey, EzButtonShape.rect.value);
-    await EzConfig.setDouble(lightBorderWidthKey, 2.0);
-    await EzConfig.setDouble(lightBorderOpacityKey, 1.0);
-
-    // Layout settings //
-
-    // Default margin, padding, && spacing
-
-    await EzConfig.setBool(lightShowBackFABKey, true);
     await EzConfig.setBool(lightShowScrollKey, true);
 
     // Text settings //
-
-    // Default text styles
 
     await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.65);
 

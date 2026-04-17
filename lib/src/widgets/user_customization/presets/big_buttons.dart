@@ -12,7 +12,7 @@ class EzBigButtonsConfig extends StatelessWidget {
   /// Calling [onPressed] does not trigger [onComplete]
   final Future<void> Function() onComplete;
 
-  /// Only modifies the layout settings and icon size
+  /// Doesn't replace, only modifies: larger touch points from default
   /// Slight bump to all layout values, for easier tapping
   const EzBigButtonsConfig(this.onComplete, {super.key});
 
@@ -20,14 +20,7 @@ class EzBigButtonsConfig extends StatelessWidget {
     // Don't reset //
 
     if (EzConfig.updateBoth || EzConfig.isDark) {
-      // Default global && color settings //
-
       // Design settings //
-
-      await EzConfig.setString(
-          darkButtonShapeKey, EzButtonShape.roundRect.value);
-
-      // Layout settings //
 
       await EzConfig.setDouble(darkMarginKey, 12.0);
       if (EzConfig.onMobile) {
@@ -37,12 +30,15 @@ class EzBigButtonsConfig extends StatelessWidget {
         await EzConfig.setDouble(darkPaddingKey, 24.0);
         await EzConfig.setDouble(darkSpacingKey, 36.0);
       }
+
       await EzConfig.setBool(darkShowBackFABKey, true);
+
+      await EzConfig.setString(
+          darkButtonShapeKey, EzButtonShape.roundRect.value);
+
       await EzConfig.setBool(darkShowScrollKey, true);
 
       // Text settings //
-
-      // Default styles
 
       if (EzConfig.iconSize < 25.0) {
         await EzConfig.setDouble(darkIconSizeKey, 25.0);
@@ -50,14 +46,7 @@ class EzBigButtonsConfig extends StatelessWidget {
     }
 
     if (EzConfig.updateBoth || !EzConfig.isDark) {
-      // Default global && color settings //
-
       // Design settings //
-
-      await EzConfig.setString(
-          lightButtonShapeKey, EzButtonShape.roundRect.value);
-
-      // Layout settings //
 
       await EzConfig.setDouble(lightMarginKey, 12.0);
       if (EzConfig.onMobile) {
@@ -67,12 +56,15 @@ class EzBigButtonsConfig extends StatelessWidget {
         await EzConfig.setDouble(lightPaddingKey, 24.0);
         await EzConfig.setDouble(lightSpacingKey, 36.0);
       }
+
       await EzConfig.setBool(lightShowBackFABKey, true);
+
+      await EzConfig.setString(
+          lightButtonShapeKey, EzButtonShape.roundRect.value);
+
       await EzConfig.setBool(lightShowScrollKey, true);
 
       // Text settings //
-
-      // Default styles
 
       if (EzConfig.iconSize < 25.0) {
         await EzConfig.setDouble(lightIconSizeKey, 25.0);
