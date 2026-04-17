@@ -43,7 +43,6 @@ class EzWallHolesConfig extends StatelessWidget {
 
     await EzConfig.removeKeys(lightColorKeys.keys.toSet());
     await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
-    await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
     await EzConfig.removeKeys(lightTextKeys.keys.toSet());
 
     // Global settings //
