@@ -34,6 +34,9 @@ class EzSwitchPair extends StatefulWidget {
   /// [EzText.data] passthrough
   final String text;
 
+  /// When true, the [text] will be a clickable link (toggles the switch)
+  final bool clickable;
+
   /// [EzText.useSurface] passthrough
   /// true: [ColorScheme.surface]
   /// false: [ColorScheme.surfaceContainer]
@@ -46,17 +49,8 @@ class EzSwitchPair extends StatefulWidget {
   /// [EzText.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// [EzText.textDirection] passthrough
-  final TextDirection? textDirection;
-
-  /// [EzText.maxLines] passthrough
-  final int? maxLines;
-
   /// [EzText.semanticsLabel] passthrough
   final String? semanticsLabel;
-
-  /// [EzText.selectionColor] passthrough
-  final Color? selectionColor;
 
   /// [EzText.backgroundColor] passthrough
   final Color? backgroundColor;
@@ -92,41 +86,8 @@ class EzSwitchPair extends StatefulWidget {
   /// Defaults to [ezIconRatio]
   final double? scale;
 
-  /// [Switch.activeThumbColor] passthrough
-  final Color? activeThumbColor;
-
-  /// [Switch.activeTrackColor] passthrough
-  final Color? activeTrackColor;
-
-  /// [Switch.inactiveThumbColor] passthrough
-  final Color? inactiveThumbColor;
-
-  /// [Switch.inactiveTrackColor] passthrough
-  final Color? inactiveTrackColor;
-
-  /// [Switch.trackOutlineColor] passthrough
-  final WidgetStateProperty<Color?>? trackOutlineColor;
-
   /// [Switch.trackOutlineWidth] passthrough
   final WidgetStateProperty<double?>? trackOutlineWidth;
-
-  /// [Switch.mouseCursor] passthrough
-  final MouseCursor? mouseCursor;
-
-  /// [Switch.focusColor] passthrough
-  final Color? focusColor;
-
-  /// [Switch.hoverColor] passthrough
-  final Color? hoverColor;
-
-  /// [Switch.focusNode] passthrough
-  final FocusNode? focusNode;
-
-  /// [Switch.onFocusChange] passthrough
-  final ValueChanged<bool>? onFocusChange;
-
-  /// [Switch.autofocus] passthrough
-  final bool autofocus;
 
   /// [Switch.padding] passthrough
   final EdgeInsetsGeometry? padding;
@@ -147,13 +108,11 @@ class EzSwitchPair extends StatefulWidget {
 
     // Text
     required this.text,
+    this.clickable = false,
     this.useSurface = false,
     this.style,
     this.textAlign,
-    this.textDirection,
-    this.maxLines,
     this.semanticsLabel,
-    this.selectionColor,
     this.backgroundColor,
 
     // Switch
@@ -164,18 +123,7 @@ class EzSwitchPair extends StatefulWidget {
     this.canChange,
     this.afterChanged,
     this.scale,
-    this.activeThumbColor,
-    this.activeTrackColor,
-    this.inactiveThumbColor,
-    this.inactiveTrackColor,
-    this.trackOutlineColor,
     this.trackOutlineWidth,
-    this.mouseCursor,
-    this.focusColor,
-    this.hoverColor,
-    this.focusNode,
-    this.onFocusChange,
-    this.autofocus = false,
     this.padding,
   })  : assert((value == null) != (valueKey == null),
             'Provide value OR valueKey, but not both'),
@@ -209,17 +157,28 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
         crossAxisAlignment: widget.crossAxisAlignment,
         children: <Widget>[
           Flexible(
-            child: EzText(
-              widget.text,
-              useSurface: widget.useSurface,
-              style: widget.style,
-              textAlign: widget.textAlign,
-              textDirection: widget.textDirection,
-              maxLines: widget.maxLines,
-              semanticsLabel: widget.semanticsLabel,
-              selectionColor: widget.selectionColor,
-              backgroundColor: widget.backgroundColor,
-            ),
+            child: widget.clickable
+                ? EzLink(
+                    widget.text,
+                    backgroundColor: widget.backgroundColor ??
+                        (widget.useSurface == null
+                            ? EzConfig.colors.surfaceDim
+                            : (widget.useSurface == true)
+                                ? EzConfig.colors.surface
+                                : EzConfig.colors.surfaceContainer),
+                    style: widget.style,
+                    textAlign: widget.textAlign,
+                    hint: widget.semanticsLabel ?? EzConfig.l10n.gOpenLink,
+                    padding: EzInsets.wrap(EzConfig.marginVal),
+                  )
+                : EzText(
+                    widget.text,
+                    useSurface: widget.useSurface,
+                    backgroundColor: widget.backgroundColor,
+                    style: widget.style,
+                    textAlign: widget.textAlign,
+                    semanticsLabel: widget.semanticsLabel,
+                  ),
           ),
           Transform.scale(
             scale: max(1.0, ratio),
@@ -247,26 +206,14 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
                         widget.afterChanged?.call(choice);
                       }
                   : null,
-              activeThumbColor: widget.fauxDisabled
-                  ? widget.inactiveThumbColor ?? EzConfig.colors.outline
-                  : widget.activeThumbColor,
-              activeTrackColor: widget.fauxDisabled
-                  ? widget.inactiveTrackColor
-                  : widget.activeTrackColor,
-              inactiveThumbColor:
-                  widget.inactiveThumbColor ?? EzConfig.colors.outline,
-              inactiveTrackColor: widget.inactiveTrackColor,
-              trackOutlineColor: (widget.enabled && !widget.fauxDisabled)
-                  ? widget.trackOutlineColor
-                  : WidgetStatePropertyAll<Color>(
-                      EzConfig.colors.outlineVariant),
+              activeThumbColor:
+                  widget.fauxDisabled ? EzConfig.colors.outline : null,
+              inactiveThumbColor: EzConfig.colors.outline,
+              trackOutlineColor: (!widget.enabled || widget.fauxDisabled)
+                  ? WidgetStatePropertyAll<Color>(
+                      EzConfig.colors.outlineVariant)
+                  : null,
               trackOutlineWidth: widget.trackOutlineWidth,
-              mouseCursor: widget.mouseCursor,
-              focusColor: widget.focusColor,
-              hoverColor: widget.hoverColor,
-              focusNode: widget.focusNode,
-              onFocusChange: widget.onFocusChange,
-              autofocus: widget.autofocus,
               padding: EzConfig.isLefty
                   ? EdgeInsets.only(right: EzConfig.marginVal)
                   : EdgeInsets.only(left: EzConfig.marginVal),
