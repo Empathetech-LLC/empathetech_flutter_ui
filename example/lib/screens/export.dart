@@ -30,8 +30,5 @@ const String colorSettingsPath = 'color-settings';
 /// design-settings
 const String designSettingsPath = 'design-settings';
 
-/// layout-settings
-const String layoutSettingsPath = 'layout-settings';
-
 /// text-settings
 const String textSettingsPath = 'text-settings';

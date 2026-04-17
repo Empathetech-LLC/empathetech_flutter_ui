@@ -858,22 +858,8 @@ class SettingsHubScreen extends StatelessWidget {
                 Icons.design_services,
                 semanticLabel: EzConfig.l10n.gDesign,
               ),
-              build: const EzDesignSettings(
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
-            ),
-
-            // Layout
-            EzSettingsSection(
-              position: 3,
-              title: EzConfig.l10n.gLayout,
-              icon: Icon(
-                Icons.grid_3x3,
-                semanticLabel: EzConfig.l10n.gLayout,
-              ),
-              build: const EzLayoutSettings(
+              build: EzDesignSettings(
+                pageTab: advanced,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
@@ -882,7 +868,7 @@ class SettingsHubScreen extends StatelessWidget {
 
             // Text
             EzSettingsSection(
-              position: 4,
+              position: 3,
               title: EzConfig.l10n.gText,
               icon: Icon(
                 Icons.text_format,
