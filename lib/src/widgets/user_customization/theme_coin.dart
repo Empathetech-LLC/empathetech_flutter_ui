@@ -6,7 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EzThemeCoin extends StatefulWidget {
   final bool enabled;
@@ -23,11 +23,6 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
 
   @override
   Widget build(BuildContext context) {
-    final IconData icon = (widget.enabled && both)
-        ? LineIcons
-            .yinYang // TODO: LineIcons...brother... being half filled is a kinda important part of a yin yang... why so white?
-        : (EzConfig.isDark ? Icons.dark_mode : Icons.light_mode);
-
     final String editing = EzConfig.l10n.gEditing +
         (both
             ? EzConfig.l10n.gBothThemes
@@ -46,7 +41,9 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
       child: ExcludeSemantics(
         child: EzIconButton(
           enabled: widget.enabled,
-          icon: Icon(icon),
+          icon: (widget.enabled && both)
+              ? const FaIcon(FontAwesomeIcons.yinYang)
+              : Icon(EzConfig.isDark ? Icons.dark_mode : Icons.light_mode),
           onPressed: () async {
             await EzConfig.setBool(updateBothKey, !both);
             setState(() => both = !both);
