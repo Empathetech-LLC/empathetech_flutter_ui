@@ -156,14 +156,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         children: <Widget>[
           // Quick/Advanced selector
           SegmentedButton<EzDSType>(
-            segments: const <ButtonSegment<EzDSType>>[
+            segments: <ButtonSegment<EzDSType>>[
               ButtonSegment<EzDSType>(
                 value: EzDSType.button,
-                label: Text('Button'), // TODO: l10n
+                label: Text(EzConfig.l10n.dsButton),
               ),
               ButtonSegment<EzDSType>(
                 value: EzDSType.page,
-                label: Text('Page'), // TODO: l10n
+                label: Text(EzConfig.l10n.dsPage),
               ),
             ],
             selected: <EzDSType>{currentTab},
