@@ -643,8 +643,13 @@ class EFUILangFr extends EFUILang {
   String get dsShowScroll => 'Afficher les barres de défilement';
 
   @override
-  String dsReset(Object themeType) {
-    return 'Réinitialiser le design de $themeType ?';
+  String dsResetButton(Object themeType) {
+    return 'Réinitialiser le design du bouton du $themeType ?';
+  }
+
+  @override
+  String dsResetPage(Object themeType) {
+    return 'Réinitialiser le design de la page en $themeType ?';
   }
 
   @override

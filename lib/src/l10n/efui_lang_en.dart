@@ -639,8 +639,13 @@ class EFUILangEn extends EFUILang {
   String get dsShowScroll => 'Show scrollbars';
 
   @override
-  String dsReset(Object themeType) {
-    return 'Reset $themeType design?';
+  String dsResetButton(Object themeType) {
+    return 'Reset $themeType button design?';
+  }
+
+  @override
+  String dsResetPage(Object themeType) {
+    return 'Reset $themeType page design?';
   }
 
   @override
@@ -1384,8 +1389,13 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsShowScroll => 'Show scrollbars';
 
   @override
-  String dsReset(Object themeType) {
-    return 'Reset $themeType design?';
+  String dsResetButton(Object themeType) {
+    return 'Reset $themeType button design?';
+  }
+
+  @override
+  String dsResetPage(Object themeType) {
+    return 'Reset $themeType page design?';
   }
 
   @override

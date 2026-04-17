@@ -257,7 +257,8 @@
 
   "dsShowScroll": "Afficher les barres de défilement",
 
-  "dsReset": "Réinitialiser le design de {themeType} ?",
+  "dsResetButton": "Réinitialiser le design du bouton du {themeType} ?",
+  "dsResetPage": "Réinitialiser le design de la page en {themeType} ?",
 
 
 

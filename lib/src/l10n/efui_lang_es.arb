@@ -257,7 +257,8 @@
 
   "dsShowScroll": "Mostrar barras de desplazamiento",
 
-  "dsReset": "¿Restablecer el diseño de {themeType}?",
+  "dsResetButton": "¿Restablecer el diseño del botón del {themeType}?",
+  "dsResetPage": "¿Restablecer el diseño de la página del {themeType}?",
 
 
 

@@ -1299,11 +1299,17 @@ abstract class EFUILang {
   /// **'Show scrollbars'**
   String get dsShowScroll;
 
-  /// No description provided for @dsReset.
+  /// No description provided for @dsResetButton.
   ///
   /// In en, this message translates to:
-  /// **'Reset {themeType} design?'**
-  String dsReset(Object themeType);
+  /// **'Reset {themeType} button design?'**
+  String dsResetButton(Object themeType);
+
+  /// No description provided for @dsResetPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset {themeType} page design?'**
+  String dsResetPage(Object themeType);
 
   /// No description provided for @tsPageTitle.
   ///

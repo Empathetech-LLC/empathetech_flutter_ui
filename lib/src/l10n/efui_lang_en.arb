@@ -257,7 +257,8 @@
 
   "dsShowScroll": "Show scrollbars",
 
-  "dsReset": "Reset {themeType} design?",
+  "dsResetButton": "Reset {themeType} button design?",
+  "dsResetPage": "Reset {themeType} page design?",
 
 
 

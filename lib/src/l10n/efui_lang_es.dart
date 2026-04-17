@@ -643,8 +643,13 @@ class EFUILangEs extends EFUILang {
   String get dsShowScroll => 'Mostrar barras de desplazamiento';
 
   @override
-  String dsReset(Object themeType) {
-    return '¿Restablecer el diseño de $themeType?';
+  String dsResetButton(Object themeType) {
+    return '¿Restablecer el diseño del botón del $themeType?';
+  }
+
+  @override
+  String dsResetPage(Object themeType) {
+    return '¿Restablecer el diseño de la página del $themeType?';
   }
 
   @override
