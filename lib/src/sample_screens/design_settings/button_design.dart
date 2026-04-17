@@ -66,7 +66,7 @@ class ButtonDesign extends StatelessWidget {
         valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
         afterChanged: (bool? changed) async {
           if (changed == null) return;
-          await EzConfig.redrawUI(onUpdate);
+          await EzConfig.rebuildUI(onUpdate);
         },
       ),
       EzConfig.spacer,
