@@ -78,78 +78,79 @@ class EzConfigProvider extends ChangeNotifier {
       // Build new caches
       _color = EzColorCache(EzConfig.get(darkColorSchemeImageKey));
       _design = EzDesignCache(
+        padding: EzConfig.get(darkPaddingKey),
+        buttonShape: EBSConfig.lookup(EzConfig.get(darkButtonShapeKey)),
+        borderWidth: EzConfig.get(darkBorderWidthKey),
+        buttonOpacity: EzConfig.get(darkButtonOpacityKey),
+        borderOpacity: EzConfig.get(darkBorderOpacityKey),
+        lineLinks: EzConfig.get(darkLineLinksKey),
+        showBackFAB: EzConfig.get(darkShowBackFABKey),
+        margin: EzConfig.get(darkMarginKey),
+        spacing: EzConfig.get(darkSpacingKey),
         animDur: EzConfig.get(darkAnimationDurationKey),
         pageTransition: EPTConfig.lookup(EzConfig.get(darkTransitionTypeKey)),
         fadedTransition: EzConfig.get(darkTransitionFadeKey),
         backgroundImagePath: EzConfig.get(darkBackgroundImageKey),
         backgroundImageFit:
             boxFitLookup[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
-        buttonShape: EBSConfig.lookup(EzConfig.get(darkButtonShapeKey)),
-        borderWidth: EzConfig.get(darkBorderWidthKey),
-        buttonOpacity: EzConfig.get(darkButtonOpacityKey),
-        borderOpacity: EzConfig.get(darkBorderOpacityKey),
+        showScroll: EzConfig.get(darkShowScrollKey),
       );
       _layout = EzLayoutCache(
-        marginVal: EzConfig.get(darkMarginKey),
-        padding: EzConfig.get(darkPaddingKey),
-        spacing: EzConfig.get(darkSpacingKey),
         margin: EzMargin(isDark: true),
         rowMargin: EzMargin(isDark: true, vertical: false),
         spacer: const EzSpacer(isDark: true),
         rowSpacer: const EzSpacer(isDark: true, vertical: false),
         separator: const EzSeparator(isDark: true),
         divider: const EzDivider(),
-        showBackFAB: EzConfig.get(darkShowBackFABKey),
-        showScroll: EzConfig.get(darkShowScrollKey),
+        startLine: const EzNewLine(textAlign: TextAlign.start),
+        centerLine: const EzNewLine(),
+        endLine: const EzNewLine(textAlign: TextAlign.end),
       );
       _text = EzTextCache(
         backgroundOpacity: EzConfig.get(darkTextBackgroundOpacityKey),
         iconSize: EzConfig.get(darkIconSizeKey),
-        lineLinks: EzConfig.get(darkLineLinksKey),
-        startLine: const EzNewLine(textAlign: TextAlign.start),
-        centerLine: const EzNewLine(),
-        endLine: const EzNewLine(textAlign: TextAlign.end),
       );
 
       // Update the curr theme pointer
       _currTheme = _darkTheme;
     } else {
-      // Ditto
+      // Build new caches
       _color = EzColorCache(EzConfig.get(lightColorSchemeImageKey));
       _design = EzDesignCache(
+        padding: EzConfig.get(lightPaddingKey),
+        buttonShape: EBSConfig.lookup(EzConfig.get(lightButtonShapeKey)),
+        borderWidth: EzConfig.get(lightBorderWidthKey),
+        buttonOpacity: EzConfig.get(lightButtonOpacityKey),
+        borderOpacity: EzConfig.get(lightBorderOpacityKey),
+        lineLinks: EzConfig.get(lightLineLinksKey),
+        showBackFAB: EzConfig.get(lightShowBackFABKey),
+        margin: EzConfig.get(lightMarginKey),
+        spacing: EzConfig.get(lightSpacingKey),
         animDur: EzConfig.get(lightAnimationDurationKey),
         pageTransition: EPTConfig.lookup(EzConfig.get(lightTransitionTypeKey)),
         fadedTransition: EzConfig.get(lightTransitionFadeKey),
         backgroundImagePath: EzConfig.get(lightBackgroundImageKey),
         backgroundImageFit:
             boxFitLookup[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
-        buttonShape: EBSConfig.lookup(EzConfig.get(lightButtonShapeKey)),
-        borderWidth: EzConfig.get(lightBorderWidthKey),
-        buttonOpacity: EzConfig.get(lightButtonOpacityKey),
-        borderOpacity: EzConfig.get(lightBorderOpacityKey),
+        showScroll: EzConfig.get(lightShowScrollKey),
       );
       _layout = EzLayoutCache(
-        marginVal: EzConfig.get(lightMarginKey),
-        padding: EzConfig.get(lightPaddingKey),
-        spacing: EzConfig.get(lightSpacingKey),
         margin: EzMargin(isDark: false),
         rowMargin: EzMargin(isDark: false, vertical: false),
         spacer: const EzSpacer(isDark: false),
         rowSpacer: const EzSpacer(isDark: false, vertical: false),
         separator: const EzSeparator(isDark: false),
         divider: const EzDivider(),
-        showBackFAB: EzConfig.get(lightShowBackFABKey),
-        showScroll: EzConfig.get(lightShowScrollKey),
-      );
-      _text = EzTextCache(
-        backgroundOpacity: EzConfig.get(lightTextBackgroundOpacityKey),
-        iconSize: EzConfig.get(lightIconSizeKey),
-        lineLinks: EzConfig.get(lightLineLinksKey),
         startLine: const EzNewLine(textAlign: TextAlign.start),
         centerLine: const EzNewLine(),
         endLine: const EzNewLine(textAlign: TextAlign.end),
       );
+      _text = EzTextCache(
+        backgroundOpacity: EzConfig.get(lightTextBackgroundOpacityKey),
+        iconSize: EzConfig.get(lightIconSizeKey),
+      );
 
+      // Update the curr theme pointer
       _currTheme = _lightTheme;
     }
   }
@@ -349,40 +350,54 @@ class EzColorCache {
 }
 
 class EzDesignCache {
-  final int animDur;
+  // Button //
 
+  final double padding;
+
+  final EzButtonShape buttonShape;
+  final double borderWidth;
+  final double buttonOpacity;
+  final double borderOpacity;
+
+  final bool lineLinks;
+  final bool showBackFAB;
+
+  // Page //
+
+  final double margin;
+  final double spacing;
+
+  final int animDur;
   final EzPageTransition pageTransition;
   final bool fadedTransition;
 
   final String backgroundImagePath;
   final BoxFit? backgroundImageFit;
 
-  final EzButtonShape buttonShape;
-  final double borderWidth;
-
-  final double buttonOpacity;
-  final double borderOpacity;
+  final bool showScroll;
 
   /// Theme aware tracker for frequently used design values...
   /// Animation duration
   EzDesignCache({
+    required this.padding,
+    required this.buttonShape,
+    required this.borderWidth,
+    required this.buttonOpacity,
+    required this.borderOpacity,
+    required this.lineLinks,
+    required this.showBackFAB,
+    required this.margin,
+    required this.spacing,
     required this.animDur,
     required this.pageTransition,
     required this.fadedTransition,
     required this.backgroundImagePath,
     required this.backgroundImageFit,
-    required this.buttonShape,
-    required this.borderWidth,
-    required this.buttonOpacity,
-    required this.borderOpacity,
+    required this.showScroll,
   });
 }
 
 class EzLayoutCache {
-  final double marginVal;
-  final double padding;
-  final double spacing;
-
   final EzMargin margin;
   final EzMargin rowMargin;
   final EzSpacer spacer;
@@ -390,46 +405,33 @@ class EzLayoutCache {
   final EzSeparator separator;
   final EzDivider divider;
 
-  final bool showBackFAB;
-  final bool showScroll;
+  final EzNewLine startLine;
+  final EzNewLine centerLine;
+  final EzNewLine endLine;
 
-  /// Theme aware tracker for frequently used layout values...
-  /// Margin, padding, and spacing
-  /// Both their [EzConfig] values and default [Widget]s
-  /// ...and hideScroll
+  /// Theme aware tracker for frequently used layout [Widget]s
   EzLayoutCache({
-    required this.marginVal,
-    required this.padding,
-    required this.spacing,
     required this.margin,
     required this.rowMargin,
     required this.spacer,
     required this.rowSpacer,
     required this.separator,
     required this.divider,
-    required this.showBackFAB,
-    required this.showScroll,
+    required this.startLine,
+    required this.centerLine,
+    required this.endLine,
   });
 }
 
 class EzTextCache {
   final double backgroundOpacity;
   final double iconSize;
-  final bool lineLinks;
-
-  final EzNewLine startLine;
-  final EzNewLine centerLine;
-  final EzNewLine endLine;
 
   /// Theme aware tracker for frequently used text values...
   /// Icon size, frequently used [EzNewLine]s
   EzTextCache({
     required this.backgroundOpacity,
     required this.iconSize,
-    required this.lineLinks,
-    required this.startLine,
-    required this.centerLine,
-    required this.endLine,
   });
 }
 

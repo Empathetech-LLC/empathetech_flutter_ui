@@ -79,7 +79,7 @@ class EzConfig {
         _typeMap = typeMap;
 
   /// [assetPaths] => provide the [AssetImage] paths for this app
-  /// [defaults] => provide your brand colors, text styles, layout settings, etc.
+  /// [defaults] => provide your brand colors, text styles, design settings, etc.
   /// [localeFallback] => provide a fallback [Locale] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [l10nFallback] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [preferences] => provide a [SharedPreferencesWithCache] instance
@@ -485,6 +485,28 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       // Update design settings //
 
+      await setDouble(
+        darkPaddingKey,
+        (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+      );
+
+      await setString(
+          darkButtonShapeKey,
+          EzButtonShape
+              .values[random.nextInt(EzButtonShape.values.length)].value);
+      await setDouble(darkBorderWidthKey, random.nextDouble() * 3);
+      await setDouble(darkButtonOpacityKey, random.nextDouble());
+      await setDouble(darkBorderOpacityKey, random.nextDouble());
+
+      await setBool(darkLineLinksKey, random.nextBool());
+      await setBool(darkShowBackFABKey, random.nextBool());
+
+      await setDouble(darkMarginKey, defaultMargin * getScalar());
+      await setDouble(
+        darkSpacingKey,
+        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+      );
+
       await setInt(darkAnimationDurationKey, random.nextInt(1000));
       await setString(
           darkTransitionTypeKey,
@@ -492,28 +514,6 @@ Must be one of [int, bool, double, String, List<String>]''');
               .values[random.nextInt(EzPageTransition.values.length)].value);
       await setBool(darkTransitionFadeKey, random.nextBool());
 
-      await setString(
-          darkButtonShapeKey,
-          EzButtonShape
-              .values[random.nextInt(EzButtonShape.values.length)].value);
-      await setDouble(darkBorderWidthKey, random.nextDouble() * 3);
-
-      await setDouble(darkButtonOpacityKey, random.nextDouble());
-      await setDouble(darkBorderOpacityKey, random.nextDouble());
-
-      // Update layout settings //
-
-      await setDouble(darkMarginKey, defaultMargin * getScalar());
-      await setDouble(
-        darkPaddingKey,
-        (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
-      );
-      await setDouble(
-        darkSpacingKey,
-        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-      );
-
-      await setBool(darkShowBackFABKey, random.nextBool());
       await setBool(darkShowScrollKey, random.nextBool());
 
       // Update text settings //
@@ -587,7 +587,6 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       await setDouble(darkTextBackgroundOpacityKey, random.nextDouble());
       await setDouble(darkIconSizeKey, defaultIconSize * getScalar());
-      await setBool(darkLineLinksKey, random.nextBool());
     } else {
       // Update color settings //
 
@@ -632,6 +631,28 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       // Update design settings //
 
+      await setDouble(
+        lightPaddingKey,
+        (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+      );
+
+      await setString(
+          lightButtonShapeKey,
+          EzButtonShape
+              .values[random.nextInt(EzButtonShape.values.length)].value);
+      await setDouble(lightBorderWidthKey, random.nextDouble() * 3);
+      await setDouble(lightButtonOpacityKey, random.nextDouble());
+      await setDouble(lightBorderOpacityKey, random.nextDouble());
+
+      await setBool(lightLineLinksKey, random.nextBool());
+      await setBool(lightShowBackFABKey, random.nextBool());
+
+      await setDouble(lightMarginKey, defaultMargin * getScalar());
+      await setDouble(
+        lightSpacingKey,
+        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+      );
+
       await setInt(lightAnimationDurationKey, random.nextInt(1000));
       await setString(
           lightTransitionTypeKey,
@@ -639,28 +660,6 @@ Must be one of [int, bool, double, String, List<String>]''');
               .values[random.nextInt(EzPageTransition.values.length)].value);
       await setBool(lightTransitionFadeKey, random.nextBool());
 
-      await setString(
-          lightButtonShapeKey,
-          EzButtonShape
-              .values[random.nextInt(EzButtonShape.values.length)].value);
-      await setDouble(lightBorderWidthKey, random.nextDouble() * 3);
-
-      await setDouble(lightButtonOpacityKey, random.nextDouble());
-      await setDouble(lightBorderOpacityKey, random.nextDouble());
-
-      // Update layout settings //
-
-      await setDouble(lightMarginKey, defaultMargin * getScalar());
-      await setDouble(
-        lightPaddingKey,
-        (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
-      );
-      await setDouble(
-        lightSpacingKey,
-        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-      );
-
-      await setBool(lightShowBackFABKey, random.nextBool());
       await setBool(lightShowScrollKey, random.nextBool());
 
       // Update text settings //
@@ -734,7 +733,6 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       await setDouble(lightTextBackgroundOpacityKey, random.nextDouble());
       await setDouble(lightIconSizeKey, defaultIconSize * getScalar());
-      await setBool(lightLineLinksKey, random.nextBool());
     }
   }
 
@@ -807,146 +805,87 @@ Must be one of [int, bool, double, String, List<String>]''');
   //* Provider aliases *//
   // Getters //
 
-  /// Active [EzConfigProvider]
-  /// "Internal" use only; easier to have all pointers in one place
+  // Internal
   static EzConfigProvider get _provPoint => _instance!._provider!;
 
-  /// Current [TargetPlatform]
+  // App data && global cache
   static TargetPlatform get platform => _provPoint.platform;
-
-  /// Whether the app is running on a mobile device
   static bool get onMobile => _provPoint.onMobile;
-
-  /// Tracks major changes to the config
   static int get seed => _provPoint.seed;
-
   static bool get needsRebuild => _provPoint.needsRebuild;
 
-  /// Active [Locale]
   static Locale get locale => _provPoint.locale;
-
-  /// EFUI localizations
   static EFUILang get l10n => _provPoint.l10n;
-
-  /// Whether the active [Locale] is a left-to-right language
   static bool get isLTR => _provPoint.isLTR;
 
-  /// Active [ThemeMode]
   static ThemeMode get themeMode => _provPoint.themeMode;
-
-  /// Whether the active [ThemeMode] is [Brightness.dark]
   static bool get isDark => _provPoint.isDark;
 
-  /// [EzConfig.get] alias for [hubPositionKey]
+  // Settings hub cache
   static int get hubPos => get(hubPositionKey);
-
-  /// [EzConfig.setInt] alias for [hubPositionKey]
-  static Future<bool> setHubPos(int pos) => setInt(hubPositionKey, pos);
-
-  /// [EzConfig.get] alias for [updateBothKey]
   static bool get updateBoth => get(updateBothKey);
 
-  /// Current, [ThemeMode] aware, [ColorScheme]
+  // Settings hub cache helpers
+  static Future<bool> setHubPos(int pos) => setInt(hubPositionKey, pos);
+
+  // Color cache
   static ColorScheme get colors => _provPoint.theme.colorScheme;
 
-  /// Current, [ThemeMode] aware, [TextTheme]
-  static TextTheme get styles => _provPoint.theme.textTheme;
-
-  /// Theme aware [EzColorCache] alias
   static String get schemeImagePath => _provPoint.color.schemeImagePath;
 
-  /// Theme aware [EzDesignCache] alias
-  static int get animDur => _provPoint.design.animDur;
+  // Design cache
+  static double get padding => _provPoint.design.padding;
 
-  /// Theme aware [EzDesignCache] alias
+  static EzButtonShape get buttonShape => _provPoint.design.buttonShape;
+  static double get borderWidth => _provPoint.design.borderWidth;
+  static double get buttonOpacity => _provPoint.design.buttonOpacity;
+  static double get borderOpacity => _provPoint.design.borderOpacity;
+
+  static bool get lineLinks => _provPoint.design.lineLinks;
+  static bool get showBackFAB => _provPoint.design.showBackFAB;
+
+  static double get marginVal => _provPoint.design.margin;
+  static double get spacing => _provPoint.design.spacing;
+
+  static int get animDur => _provPoint.design.animDur;
   static EzPageTransition get pageTransition =>
       _provPoint.design.pageTransition;
-
-  /// Theme aware [EzDesignCache] alias
   static bool get fadedTransition => _provPoint.design.fadedTransition;
 
-  /// Theme aware [EzDesignCache] alias
   static String get backgroundImagePath =>
       _provPoint.design.backgroundImagePath;
-
-  /// Theme aware [EzDesignCache] alias
   static BoxFit? get backgroundImageFit => _provPoint.design.backgroundImageFit;
 
-  /// Theme aware alias, built from [backgroundImagePath] && [backgroundImageFit]
+  static bool get showScroll => _provPoint.design.showScroll;
+
+  // Design cache helpers
+  static BorderSide borderSide(Color color) => borderWidth == 0
+      ? BorderSide.none
+      : BorderSide(color: color, width: borderWidth);
+
   static DecorationImage get backgroundImage => DecorationImage(
         image: ezImageProvider(backgroundImagePath),
         fit: EzConfig.backgroundImageFit,
       );
 
-  /// Theme aware [EzDesignCache] alias
-  static EzButtonShape get buttonShape => _provPoint.design.buttonShape;
-
-  /// Theme aware [EzDesignCache] alias
-  static double get borderWidth => _provPoint.design.borderWidth;
-
-  /// Theme aware [BorderSide] function built from [borderWidth]
-  static BorderSide borderSide(Color color) => borderWidth == 0
-      ? BorderSide.none
-      : BorderSide(color: color, width: borderWidth);
-
-  /// Theme aware [EzDesignCache] alias
-  static double get buttonOpacity => _provPoint.design.buttonOpacity;
-
-  /// Theme aware [EzDesignCache] alias
-  static double get borderOpacity => _provPoint.design.borderOpacity;
-
-  /// Theme aware [EzLayoutCache] alias
-  static double get marginVal => _provPoint.layout.marginVal;
-
-  /// Theme aware [EzLayoutCache] alias
-  static double get padding => _provPoint.layout.padding;
-
-  /// Theme aware [EzLayoutCache] alias
-  static double get spacing => _provPoint.layout.spacing;
-
-  /// Theme aware [EzLayoutCache] alias
+  // Layout (Widgets) cache
   static EzMargin get margin => _provPoint.layout.margin;
-
-  /// Theme aware [EzLayoutCache] alias
   static EzMargin get rowMargin => _provPoint.layout.rowMargin;
-
-  /// Theme aware [EzLayoutCache] alias
   static EzSpacer get spacer => _provPoint.layout.spacer;
-
-  /// Theme aware [EzLayoutCache] alias
   static EzSpacer get rowSpacer => _provPoint.layout.rowSpacer;
-
-  /// Theme aware [EzLayoutCache] alias
   static EzSeparator get separator => _provPoint.layout.separator;
-
-  /// Theme aware [EzLayoutCache] alias
   static EzDivider get divider => _provPoint.layout.divider;
 
-  /// Theme aware [EzLayoutCache] alias
-  static bool get showBackFAB => _provPoint.layout.showBackFAB;
+  static EzNewLine get startLine => _provPoint.layout.startLine;
+  static EzNewLine get centerLine => _provPoint.layout.centerLine;
+  static EzNewLine get endLine => _provPoint.layout.endLine;
 
-  /// Theme aware [EzLayoutCache] alias
-  static bool get showScroll => _provPoint.layout.showScroll;
-
-  /// Theme aware [EzTextCache] alias
+  // Text cache
+  static TextTheme get styles => _provPoint.theme.textTheme;
   static double get textBackgroundOpacity => _provPoint.text.backgroundOpacity;
-
-  /// Theme aware [EzTextCache] alias
   static double get iconSize => _provPoint.text.iconSize;
 
-  /// Theme aware [EzTextCache] alias
-  static bool get lineLinks => _provPoint.text.lineLinks;
-
-  /// Theme aware [EzTextCache] alias
-  static EzNewLine get startLine => _provPoint.text.startLine;
-
-  /// Theme aware [EzTextCache] alias
-  static EzNewLine get centerLine => _provPoint.text.centerLine;
-
-  /// Theme aware [EzTextCache] alias
-  static EzNewLine get endLine => _provPoint.text.endLine;
-
-  /// Live [EzAppCache] pointer
+  // App (EFUI consumer) cache
   static EzAppCache? get appCache => _provPoint.appCache;
 
   // Setters //

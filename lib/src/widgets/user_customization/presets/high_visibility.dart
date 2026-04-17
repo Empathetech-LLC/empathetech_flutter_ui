@@ -34,18 +34,21 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Design settings //
 
+      // Default padding
+
+      // Default button shape, border width, and surface opacity
+      await EzConfig.setDouble(darkBorderOpacityKey, 0.5);
+
+      await EzConfig.setBool(darkLineLinksKey, true);
+      await EzConfig.setBool(darkShowBackFABKey, false);
+
+      // Default margin
+      await EzConfig.setDouble(darkSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
+
+      // Default anim duration and page fade
       await EzConfig.setString(
           darkTransitionTypeKey, EzPageTransition.none.value);
 
-      await EzConfig.setDouble(darkBorderOpacityKey, 0.5);
-
-      // Layout settings //
-
-      // Default margin and padding
-
-      await EzConfig.setDouble(darkSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
-
-      await EzConfig.setBool(darkShowBackFABKey, false);
       await EzConfig.setBool(darkShowScrollKey, false);
 
       // Text settings //
@@ -103,7 +106,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
       // etc
       // Default text backgrounds
       await EzConfig.setDouble(darkIconSizeKey, 22.0);
-      await EzConfig.setBool(darkLineLinksKey, true);
     }
 
     if (EzConfig.updateBoth || !EzConfig.isDark) {
@@ -123,19 +125,22 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Design settings //
 
-      await EzConfig.setString(
-          lightTransitionTypeKey, EzPageTransition.none.value);
+      // Default padding
 
+      // Default button shape, border width, and surface opacity
       await EzConfig.setDouble(lightBorderOpacityKey, 0.5);
 
-      // Layout settings //
+      await EzConfig.setBool(lightLineLinksKey, true);
+      await EzConfig.setBool(lightShowBackFABKey, false);
 
-      // Default margin and padding
-
+      // Default margin
       await EzConfig.setDouble(
           lightSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
 
-      await EzConfig.setBool(lightShowBackFABKey, false);
+      // Default anim duration and page fade
+      await EzConfig.setString(
+          lightTransitionTypeKey, EzPageTransition.none.value);
+
       await EzConfig.setBool(lightShowScrollKey, false);
 
       // Text settings //
@@ -194,7 +199,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
       // etc
       // Default text backgrounds
       await EzConfig.setDouble(lightIconSizeKey, 22.0);
-      await EzConfig.setBool(lightLineLinksKey, true);
     }
   }
 
