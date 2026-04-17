@@ -60,7 +60,7 @@ class PageDesign extends StatelessWidget {
       ),
       EzConfig.spacer,
 
-      // Spacing TODO: add more stuff. definitely a divider
+      // Spacing
       EzSpacingSetting(
         onUpdate: onUpdate,
         min: minSpacing,
