@@ -96,8 +96,7 @@ class ButtonDesign extends StatelessWidget {
         onUpdate,
         androidPackage: androidPackage,
         appName: appName,
-        dynamicTitle: () =>
-            EzConfig.l10n.dsReset(ezThemeString(true)), // TODO: add button
+        dynamicTitle: () => EzConfig.l10n.dsResetButton(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(darkButtonDesignKeys.keys.toSet());

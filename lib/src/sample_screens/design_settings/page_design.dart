@@ -132,8 +132,7 @@ class PageDesign extends StatelessWidget {
         onUpdate,
         androidPackage: androidPackage,
         appName: appName,
-        dynamicTitle: () =>
-            EzConfig.l10n.dsReset(ezThemeString(true)), // TODO: add page
+        dynamicTitle: () => EzConfig.l10n.dsResetPage(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await EzConfig.removeKeys(<String>{
