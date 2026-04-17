@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class EzThemeCoin extends StatefulWidget {
+  final bool enabled;
+
   /// [EzIconButton] for toggling [EzConfig.updateBoth]
-  const EzThemeCoin({super.key});
+  const EzThemeCoin({super.key, this.enabled = true});
 
   @override
   State<EzThemeCoin> createState() => _EzThemeCoinState();
@@ -21,7 +23,7 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
 
   @override
   Widget build(BuildContext context) {
-    final IconData icon = both
+    final IconData icon = (widget.enabled && both)
         ? LineIcons
             .yinYang // TODO: LineIcons...brother... being half filled is a kinda important part of a yin yang... why so white?
         : (EzConfig.isDark ? Icons.dark_mode : Icons.light_mode);
@@ -43,6 +45,7 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
       hint: '$editing. ${EzConfig.l10n.gEditingHint} $reverse.',
       child: ExcludeSemantics(
         child: EzIconButton(
+          enabled: widget.enabled,
           icon: Icon(icon),
           onPressed: () async {
             await EzConfig.setBool(updateBothKey, !both);
