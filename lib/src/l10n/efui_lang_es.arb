@@ -113,6 +113,7 @@
   "gSave": "Guarde",
   "gSaveHint": "Activar para guardar un archivo de configuración JSON.",
   "gUndoWarn2": " su configuración actual para restaurarla manualmente.",
+  "gValue": "Valor",
 
   "gCreditTo": "Acreditando a:",
   "gCreator": "Creador de",

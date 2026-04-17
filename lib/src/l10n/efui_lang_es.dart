@@ -304,6 +304,9 @@ class EFUILangEs extends EFUILang {
       ' su configuración actual para restaurarla manualmente.';
 
   @override
+  String get gValue => 'Valor';
+
+  @override
   String get gCreditTo => 'Acreditando a:';
 
   @override

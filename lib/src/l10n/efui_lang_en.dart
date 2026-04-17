@@ -302,6 +302,9 @@ class EFUILangEn extends EFUILang {
   String get gUndoWarn2 => ' your current config to restore it manually.';
 
   @override
+  String get gValue => 'Value';
+
+  @override
   String get gCreditTo => 'Credit to:';
 
   @override
@@ -1056,6 +1059,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gUndoWarn2 => ' your current config to restore it manually.';
+
+  @override
+  String get gValue => 'Value';
 
   @override
   String get gCreditTo => 'Credit to:';

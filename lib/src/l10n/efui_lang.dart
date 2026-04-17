@@ -657,6 +657,12 @@ abstract class EFUILang {
   /// **' your current config to restore it manually.'**
   String get gUndoWarn2;
 
+  /// No description provided for @gValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Value'**
+  String get gValue;
+
   /// No description provided for @gCreditTo.
   ///
   /// In en, this message translates to:

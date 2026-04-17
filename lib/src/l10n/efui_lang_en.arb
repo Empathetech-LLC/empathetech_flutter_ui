@@ -113,6 +113,7 @@
   "gSave": "Save",
   "gSaveHint": "Activate to save a JSON config file.",
   "gUndoWarn2": " your current config to restore it manually.",
+  "gValue": "Value",
 
   "gCreditTo": "Credit to:",
   "gCreator": "Creator of",
