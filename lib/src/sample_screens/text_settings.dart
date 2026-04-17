@@ -1390,17 +1390,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         padding: colMargin,
         borderRadius: ezPillEdge,
       ),
-      EzConfig.separator,
-
-      // Underline links
-      EzSwitchPair(
-        text: EzConfig.l10n.tsAlwaysUnderline,
-        valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
-        afterChanged: (bool? changed) async {
-          if (changed == null) return;
-          await EzConfig.rebuildUI(redraw);
-        },
-      ),
 
       // Reset all
       widget.resetSpacer,
