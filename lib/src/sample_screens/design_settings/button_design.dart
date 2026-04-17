@@ -59,9 +59,10 @@ class ButtonDesign extends StatelessWidget {
       _ButtonOpacitySetting(onUpdate),
       EzConfig.separator,
 
-      // Underline links TODO: make 'links' a link (toggles switch too)
+      // Underline links
       EzSwitchPair(
         text: EzConfig.l10n.dsAlwaysUnderline,
+        clickable: true,
         valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
         afterChanged: (bool? changed) async {
           if (changed == null) return;
@@ -262,7 +263,7 @@ class _ButtonStyleSetting extends StatelessWidget {
           await EzConfig.rebuildUI(onUpdate);
         }
       },
-      label: 'Style', // TODO: l10n
+      label: EzConfig.l10n.dsStyle,
       icon: const Icon(Icons.edit),
     );
   }
@@ -463,7 +464,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
           await EzConfig.rebuildUI(onUpdate);
         }
       },
-      label: 'Opacity', // TODO: l10n
+      label: EzConfig.l10n.dsOpacity,
       icon: const Icon(Icons.opacity),
     );
   }
