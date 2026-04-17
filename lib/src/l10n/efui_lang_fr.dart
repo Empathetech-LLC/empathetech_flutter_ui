@@ -464,6 +464,12 @@ class EFUILangFr extends EFUILang {
   String get dsPageTitle => 'Paramètres de conception';
 
   @override
+  String get dsButton => 'Bouton';
+
+  @override
+  String get dsPage => 'Page';
+
+  @override
   String get dsNone => 'Aucune';
 
   @override

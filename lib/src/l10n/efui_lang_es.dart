@@ -465,6 +465,12 @@ class EFUILangEs extends EFUILang {
   String get dsPageTitle => 'Configuración de diseño';
 
   @override
+  String get dsButton => 'Botón';
+
+  @override
+  String get dsPage => 'Página';
+
+  @override
   String get dsNone => 'Ninguna';
 
   @override

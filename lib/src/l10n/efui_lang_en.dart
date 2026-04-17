@@ -462,6 +462,12 @@ class EFUILangEn extends EFUILang {
   String get dsPageTitle => 'Design settings';
 
   @override
+  String get dsButton => 'Button';
+
+  @override
+  String get dsPage => 'Page';
+
+  @override
   String get dsNone => 'None';
 
   @override
@@ -1210,6 +1216,12 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsPageTitle => 'Design settings';
+
+  @override
+  String get dsButton => 'Button';
+
+  @override
+  String get dsPage => 'Page';
 
   @override
   String get dsNone => 'None';

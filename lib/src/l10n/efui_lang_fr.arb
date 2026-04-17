@@ -186,6 +186,10 @@
 
 
   "dsPageTitle": "Paramètres de conception",
+
+  "dsButton": "Bouton",
+  "dsPage": "Page",
+
   "dsNone": "Aucune",
   "dsSystem": "Système",
 

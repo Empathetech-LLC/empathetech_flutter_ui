@@ -951,6 +951,18 @@ abstract class EFUILang {
   /// **'Design settings'**
   String get dsPageTitle;
 
+  /// No description provided for @dsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Button'**
+  String get dsButton;
+
+  /// No description provided for @dsPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Page'**
+  String get dsPage;
+
   /// No description provided for @dsNone.
   ///
   /// In en, this message translates to:

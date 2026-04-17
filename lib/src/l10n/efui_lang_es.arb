@@ -186,6 +186,10 @@
 
 
   "dsPageTitle": "Configuración de diseño",
+
+  "dsButton": "Botón",
+  "dsPage": "Página",
+
   "dsNone": "Ninguna",
   "dsSystem": "Sistema",
 
