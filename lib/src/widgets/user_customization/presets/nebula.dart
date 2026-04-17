@@ -44,7 +44,6 @@ class EzNebulaConfig extends StatelessWidget {
 
     await EzConfig.removeKeys(darkColorKeys.keys.toSet());
     await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
-    await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
     await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
     // Global settings //

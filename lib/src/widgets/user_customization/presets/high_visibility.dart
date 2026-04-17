@@ -23,7 +23,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       await EzConfig.removeKeys(darkColorKeys.keys.toSet());
       await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
-      await EzConfig.removeKeys(darkLayoutKeys.keys.toSet());
       await EzConfig.removeKeys(darkTextKeys.keys.toSet());
 
       // Default global settings //
@@ -112,7 +111,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       await EzConfig.removeKeys(lightColorKeys.keys.toSet());
       await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
-      await EzConfig.removeKeys(lightLayoutKeys.keys.toSet());
       await EzConfig.removeKeys(lightTextKeys.keys.toSet());
 
       // Default global settings //
