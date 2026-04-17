@@ -474,7 +474,7 @@ class EFUILangEs extends EFUILang {
   String get dsPadding => 'Acolchado';
 
   @override
-  String get dsButtonStyle => 'Estilo de botón';
+  String get dsStyle => 'Estilo';
 
   @override
   String get dsBorderWidth => 'Ancho del borde';
@@ -504,7 +504,7 @@ class EFUILangEs extends EFUILang {
   String get dsPreview => 'Avance';
 
   @override
-  String get dsButtonOpacity => 'Opacidad del botón';
+  String get dsOpacity => 'Opacidad';
 
   @override
   String get dsBackground => 'Fondo del botón';

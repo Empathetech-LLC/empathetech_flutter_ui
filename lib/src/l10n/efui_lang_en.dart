@@ -471,7 +471,7 @@ class EFUILangEn extends EFUILang {
   String get dsPadding => 'Padding';
 
   @override
-  String get dsButtonStyle => 'Button style';
+  String get dsStyle => 'Style';
 
   @override
   String get dsBorderWidth => 'Border width';
@@ -501,7 +501,7 @@ class EFUILangEn extends EFUILang {
   String get dsPreview => 'Preview';
 
   @override
-  String get dsButtonOpacity => 'Button opacity';
+  String get dsOpacity => 'Opacity';
 
   @override
   String get dsBackground => 'Background opacity';
@@ -1221,7 +1221,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPadding => 'Padding';
 
   @override
-  String get dsButtonStyle => 'Button style';
+  String get dsStyle => 'Style';
 
   @override
   String get dsBorderWidth => 'Border width';
@@ -1251,7 +1251,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPreview => 'Preview';
 
   @override
-  String get dsButtonOpacity => 'Button opacity';
+  String get dsOpacity => 'Opacity';
 
   @override
   String get dsBackground => 'Background opacity';

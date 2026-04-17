@@ -191,7 +191,7 @@
 
   "dsPadding": "Acolchado",
 
-  "dsButtonStyle": "Estilo de botón",
+  "dsStyle": "Estilo",
   "dsBorderWidth": "Ancho del borde",
   "dsPill": "Píldora",
   "dsRectangle": "Rectángulo",
@@ -202,7 +202,7 @@
   "dsJewel": "Joya",
 
   "dsPreview": "Avance",
-  "dsButtonOpacity": "Opacidad del botón",
+  "dsOpacity": "Opacidad",
   "dsBackground": "Fondo del botón",
   "dsOutline": "Contorno del botón",
 

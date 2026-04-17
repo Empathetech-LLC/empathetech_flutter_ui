@@ -969,11 +969,11 @@ abstract class EFUILang {
   /// **'Padding'**
   String get dsPadding;
 
-  /// No description provided for @dsButtonStyle.
+  /// No description provided for @dsStyle.
   ///
   /// In en, this message translates to:
-  /// **'Button style'**
-  String get dsButtonStyle;
+  /// **'Style'**
+  String get dsStyle;
 
   /// No description provided for @dsBorderWidth.
   ///
@@ -1029,11 +1029,11 @@ abstract class EFUILang {
   /// **'Preview'**
   String get dsPreview;
 
-  /// No description provided for @dsButtonOpacity.
+  /// No description provided for @dsOpacity.
   ///
   /// In en, this message translates to:
-  /// **'Button opacity'**
-  String get dsButtonOpacity;
+  /// **'Opacity'**
+  String get dsOpacity;
 
   /// No description provided for @dsBackground.
   ///

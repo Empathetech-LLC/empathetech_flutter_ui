@@ -473,7 +473,7 @@ class EFUILangFr extends EFUILang {
   String get dsPadding => 'Marge intérieure';
 
   @override
-  String get dsButtonStyle => 'Style de bouton';
+  String get dsStyle => 'Style';
 
   @override
   String get dsBorderWidth => 'Épaisseur de la bordure';
@@ -503,7 +503,7 @@ class EFUILangFr extends EFUILang {
   String get dsPreview => 'Aperçu';
 
   @override
-  String get dsButtonOpacity => 'Opacité du bouton';
+  String get dsOpacity => 'Opacité';
 
   @override
   String get dsBackground => 'L\'arrière-plan du bouton';

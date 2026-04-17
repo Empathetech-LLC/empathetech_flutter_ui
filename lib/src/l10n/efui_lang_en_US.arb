@@ -191,7 +191,7 @@
 
   "dsPadding": "Padding",
 
-  "dsButtonStyle": "Button style",
+  "dsStyle": "Style",
   "dsBorderWidth": "Border width",
   "dsPill": "Pill",
   "dsRectangle": "Rectangle",
@@ -202,7 +202,7 @@
   "dsJewel": "Jewel",
 
   "dsPreview": "Preview",
-  "dsButtonOpacity": "Button opacity",
+  "dsOpacity": "Opacity",
   "dsBackground": "Background opacity",
   "dsOutline": "Outline opacity",
 

@@ -191,7 +191,7 @@
 
   "dsPadding": "Marge intérieure",
 
-  "dsButtonStyle": "Style de bouton",
+  "dsStyle": "Style",
   "dsBorderWidth": "Épaisseur de la bordure",
   "dsPill": "Pilule",
   "dsRectangle": "Rectangle",
@@ -202,7 +202,7 @@
   "dsJewel": "Joyau",
 
   "dsPreview": "Aperçu",
-  "dsButtonOpacity": "Opacité du bouton",
+  "dsOpacity": "Opacité",
   "dsBackground": "L'arrière-plan du bouton",
   "dsOutline": "Contour du bouton",
 
