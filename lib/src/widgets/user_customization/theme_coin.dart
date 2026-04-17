@@ -22,7 +22,8 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
   @override
   Widget build(BuildContext context) {
     final IconData icon = both
-        ? LineIcons.yinYang
+        ? LineIcons
+            .yinYang // TODO: LineIcons...brother... being half filled is a kinda important part of a yin yang... why so white?
         : (EzConfig.isDark ? Icons.dark_mode : Icons.light_mode);
 
     final String editing = EzConfig.l10n.gEditing +
