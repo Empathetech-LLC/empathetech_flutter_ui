@@ -34,10 +34,10 @@ class EzMarginSetting extends StatefulWidget {
   });
 
   @override
-  State<EzMarginSetting> createState() => _LayoutSettingState();
+  State<EzMarginSetting> createState() => _EzMarginSettingState();
 }
 
-class _LayoutSettingState extends State<EzMarginSetting> {
+class _EzMarginSettingState extends State<EzMarginSetting> {
   // Define custom functions //
 
   void redraw() {

@@ -42,10 +42,10 @@ class EzPaddingSetting extends StatefulWidget {
   });
 
   @override
-  State<EzPaddingSetting> createState() => _LayoutSettingState();
+  State<EzPaddingSetting> createState() => _EzPaddingSettingState();
 }
 
-class _LayoutSettingState extends State<EzPaddingSetting> {
+class _EzPaddingSettingState extends State<EzPaddingSetting> {
   // Define custom functions //
 
   void redraw() {

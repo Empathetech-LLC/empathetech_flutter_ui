@@ -42,10 +42,10 @@ class EzSpacingSetting extends StatefulWidget {
   });
 
   @override
-  State<EzSpacingSetting> createState() => _LayoutSettingState();
+  State<EzSpacingSetting> createState() => _EzSpacingSettingState();
 }
 
-class _LayoutSettingState extends State<EzSpacingSetting> {
+class _EzSpacingSettingState extends State<EzSpacingSetting> {
   // Define custom functions //
 
   void redraw() {
