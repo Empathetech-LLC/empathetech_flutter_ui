@@ -1,8 +1,6 @@
 {
   "@@locale": "es",
 
-
-
   "gApply": "Aplicar",
   "gApplyChanges": "Aplicar cambios",
   "gContinue": "Continuar",
@@ -191,18 +189,7 @@
   "dsNone": "Ninguna",
   "dsSystem": "Sistema",
 
-  "dsAnimDuration": "Duración de la animación",
-  "dsPlay": "Reproducir animación",
-  "dsMilliseconds": "Milisegundos",
-
-  "dsPageTransition": "Transición de página",
-  "dsTurnX": "Giro horizontal",
-  "dsTurnY": "Giro vertical",
-  "dsRotate": "Girar",
-  "dsSlideX": "Diapositiva horizontal",
-  "dsSlideY": "Diapositiva vertical",
-  "dsZoom": "Zoom",
-  "dsFadeTransition": "Transición de desvanecimiento",
+  "dsPadding": "Acolchado",
 
   "dsButtonStyle": "Estilo de botón",
   "dsBorderWidth": "Ancho del borde",
@@ -218,6 +205,25 @@
   "dsButtonOpacity": "Opacidad del botón",
   "dsBackground": "Fondo del botón",
   "dsOutline": "Contorno del botón",
+
+  "dsAlwaysUnderline": "Subraya siempre los enlaces",
+  "dsShowBack": "Mostrar botón de retroceso",
+  
+  "dsMargin": "Margen",
+  "dsSpacing": "Espaciado",
+
+  "dsAnimDuration": "Duración de la animación",
+  "dsPlay": "Reproducir animación",
+  "dsMilliseconds": "Milisegundos",
+
+  "dsPageTransition": "Transición de página",
+  "dsTurnX": "Giro horizontal",
+  "dsTurnY": "Giro vertical",
+  "dsRotate": "Girar",
+  "dsSlideX": "Diapositiva horizontal",
+  "dsSlideY": "Diapositiva vertical",
+  "dsZoom": "Zoom",
+  "dsFadeTransition": "Transición de desvanecimiento",
 
   "dsBackgroundImg": "Imagen de fondo",
   "dsImgSettingHint": "Actualizar la imagen {title}",
@@ -249,20 +255,9 @@
   "dsRotateLeft": "Girar a la izquierda",
   "dsRotateRight": "Girar a la derecha",
 
+  "dsShowScroll": "Mostrar barras de desplazamiento",
+
   "dsReset": "¿Restablecer el diseño de {themeType}?",
-
-
-
-  "lsPageTitle": "Configuración del esquema",
-
-  "lsMargin": "Margen",
-  "lsPadding": "Acolchado",
-  "lsSpacing": "Espaciado",
-
-  "lsShowBack": "Mostrar botón de retroceso",
-  "lsShowScroll": "Mostrar barras de desplazamiento",
-
-  "lsReset": "¿Restablecer el esquema de {themeType}?",
 
 
 
@@ -304,8 +299,6 @@
   "tsLabelP1": "¿Y ",
   "tsLabelLink": "las etiquetas?",
   "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
-
-  "tsAlwaysUnderline": "Subraya siempre los enlaces",
 
   "tsReset": "¿Restablecer los estilos de texto de {themeType}?"
 }

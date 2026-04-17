@@ -1,8 +1,6 @@
 {
   "@@locale": "fr",
 
-
-
   "gApply": "Appliquer",
   "gApplyChanges": "Appliquer les modifications",
   "gContinue": "Continuer",
@@ -191,18 +189,7 @@
   "dsNone": "Aucune",
   "dsSystem": "Système",
 
-  "dsAnimDuration": "Durée de l'animation",
-  "dsPlay": "Lancer l'animation",
-  "dsMilliseconds": "Millisecondes",
-
-  "dsPageTransition": "Transition de page",
-  "dsTurnX": "Virage horizontal",
-  "dsTurnY": "Virage vertical",
-  "dsRotate": "Tourner",
-  "dsSlideX": "Diapositive horizontal",
-  "dsSlideY": "Diapositive vertical",
-  "dsZoom": "Zoom",
-  "dsFadeTransition": "Transition en fondu",
+  "dsPadding": "Marge intérieure",
 
   "dsButtonStyle": "Style de bouton",
   "dsBorderWidth": "Épaisseur de la bordure",
@@ -218,6 +205,25 @@
   "dsButtonOpacity": "Opacité du bouton",
   "dsBackground": "L'arrière-plan du bouton",
   "dsOutline": "Contour du bouton",
+
+  "dsAlwaysUnderline": "Soulignez toujours les liens",
+  "dsShowBack": "Afficher le bouton Retour",
+
+  "dsMargin": "Marge extérieure",
+  "dsSpacing": "Espacement",
+
+  "dsAnimDuration": "Durée de l'animation",
+  "dsPlay": "Lancer l'animation",
+  "dsMilliseconds": "Millisecondes",
+
+  "dsPageTransition": "Transition de page",
+  "dsTurnX": "Virage horizontal",
+  "dsTurnY": "Virage vertical",
+  "dsRotate": "Tourner",
+  "dsSlideX": "Diapositive horizontal",
+  "dsSlideY": "Diapositive vertical",
+  "dsZoom": "Zoom",
+  "dsFadeTransition": "Transition en fondu",
 
   "dsBackgroundImg": "Arrière-plan de l'image",
   "dsImgSettingHint": "Mettre à jour l'image {title}",
@@ -249,20 +255,9 @@
   "dsRotateLeft": "Tourner à gauche",
   "dsRotateRight": "Tourner à droite",
 
+  "dsShowScroll": "Afficher les barres de défilement",
+
   "dsReset": "Réinitialiser le design de {themeType} ?",
-
-
-
-  "lsPageTitle": "Paramètres de mise en page",
-
-  "lsMargin": "Marge extérieure",
-  "lsPadding": "Marge intérieure",
-  "lsSpacing": "Espacement",
-
-  "lsShowBack": "Afficher le bouton Retour",
-  "lsShowScroll": "Afficher les barres de défilement",
-
-  "lsReset": "Réinitialiser la mise en page du {themeType} ?",
 
 
 
@@ -304,8 +299,6 @@
   "tsLabelP1": "Et ",
   "tsLabelLink": "les labels ?",
   "tsLabelP2": " Ni trop gros, ni trop petits ?",
-
-  "tsAlwaysUnderline": "Soulignez toujours les liens",
 
   "tsReset": "Réinitialiser les styles de texte de {themeType} ?"
 }

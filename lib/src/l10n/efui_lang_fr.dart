@@ -470,37 +470,7 @@ class EFUILangFr extends EFUILang {
   String get dsSystem => 'Système';
 
   @override
-  String get dsAnimDuration => 'Durée de l\'animation';
-
-  @override
-  String get dsPlay => 'Lancer l\'animation';
-
-  @override
-  String get dsMilliseconds => 'Millisecondes';
-
-  @override
-  String get dsPageTransition => 'Transition de page';
-
-  @override
-  String get dsTurnX => 'Virage horizontal';
-
-  @override
-  String get dsTurnY => 'Virage vertical';
-
-  @override
-  String get dsRotate => 'Tourner';
-
-  @override
-  String get dsSlideX => 'Diapositive horizontal';
-
-  @override
-  String get dsSlideY => 'Diapositive vertical';
-
-  @override
-  String get dsZoom => 'Zoom';
-
-  @override
-  String get dsFadeTransition => 'Transition en fondu';
+  String get dsPadding => 'Marge intérieure';
 
   @override
   String get dsButtonStyle => 'Style de bouton';
@@ -540,6 +510,51 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get dsOutline => 'Contour du bouton';
+
+  @override
+  String get dsAlwaysUnderline => 'Soulignez toujours les liens';
+
+  @override
+  String get dsShowBack => 'Afficher le bouton Retour';
+
+  @override
+  String get dsMargin => 'Marge extérieure';
+
+  @override
+  String get dsSpacing => 'Espacement';
+
+  @override
+  String get dsAnimDuration => 'Durée de l\'animation';
+
+  @override
+  String get dsPlay => 'Lancer l\'animation';
+
+  @override
+  String get dsMilliseconds => 'Millisecondes';
+
+  @override
+  String get dsPageTransition => 'Transition de page';
+
+  @override
+  String get dsTurnX => 'Virage horizontal';
+
+  @override
+  String get dsTurnY => 'Virage vertical';
+
+  @override
+  String get dsRotate => 'Tourner';
+
+  @override
+  String get dsSlideX => 'Diapositive horizontal';
+
+  @override
+  String get dsSlideY => 'Diapositive vertical';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Transition en fondu';
 
   @override
   String get dsBackgroundImg => 'Arrière-plan de l\'image';
@@ -625,31 +640,11 @@ class EFUILangFr extends EFUILang {
   String get dsRotateRight => 'Tourner à droite';
 
   @override
+  String get dsShowScroll => 'Afficher les barres de défilement';
+
+  @override
   String dsReset(Object themeType) {
     return 'Réinitialiser le design de $themeType ?';
-  }
-
-  @override
-  String get lsPageTitle => 'Paramètres de mise en page';
-
-  @override
-  String get lsMargin => 'Marge extérieure';
-
-  @override
-  String get lsPadding => 'Marge intérieure';
-
-  @override
-  String get lsSpacing => 'Espacement';
-
-  @override
-  String get lsShowBack => 'Afficher le bouton Retour';
-
-  @override
-  String get lsShowScroll => 'Afficher les barres de défilement';
-
-  @override
-  String lsReset(Object themeType) {
-    return 'Réinitialiser la mise en page du $themeType ?';
   }
 
   @override
@@ -751,9 +746,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get tsLabelP2 => ' Ni trop gros, ni trop petits ?';
-
-  @override
-  String get tsAlwaysUnderline => 'Soulignez toujours les liens';
 
   @override
   String tsReset(Object themeType) {

@@ -468,37 +468,7 @@ class EFUILangEn extends EFUILang {
   String get dsSystem => 'System';
 
   @override
-  String get dsAnimDuration => 'Animation duration';
-
-  @override
-  String get dsPlay => 'Play animation';
-
-  @override
-  String get dsMilliseconds => 'Milliseconds';
-
-  @override
-  String get dsPageTransition => 'Page transition';
-
-  @override
-  String get dsTurnX => 'Horizontal turn';
-
-  @override
-  String get dsTurnY => 'Vertical turn';
-
-  @override
-  String get dsRotate => 'Rotate';
-
-  @override
-  String get dsSlideX => 'Horizontal slide';
-
-  @override
-  String get dsSlideY => 'Vertical slide';
-
-  @override
-  String get dsZoom => 'Zoom';
-
-  @override
-  String get dsFadeTransition => 'Fade transition';
+  String get dsPadding => 'Padding';
 
   @override
   String get dsButtonStyle => 'Button style';
@@ -538,6 +508,51 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get dsOutline => 'Outline opacity';
+
+  @override
+  String get dsAlwaysUnderline => 'Always underline links';
+
+  @override
+  String get dsShowBack => 'Show back button';
+
+  @override
+  String get dsMargin => 'Margin';
+
+  @override
+  String get dsSpacing => 'Spacing';
+
+  @override
+  String get dsAnimDuration => 'Animation duration';
+
+  @override
+  String get dsPlay => 'Play animation';
+
+  @override
+  String get dsMilliseconds => 'Milliseconds';
+
+  @override
+  String get dsPageTransition => 'Page transition';
+
+  @override
+  String get dsTurnX => 'Horizontal turn';
+
+  @override
+  String get dsTurnY => 'Vertical turn';
+
+  @override
+  String get dsRotate => 'Rotate';
+
+  @override
+  String get dsSlideX => 'Horizontal slide';
+
+  @override
+  String get dsSlideY => 'Vertical slide';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Fade transition';
 
   @override
   String get dsBackgroundImg => 'Background image';
@@ -621,31 +636,11 @@ class EFUILangEn extends EFUILang {
   String get dsRotateRight => 'Rotate right';
 
   @override
+  String get dsShowScroll => 'Show scrollbars';
+
+  @override
   String dsReset(Object themeType) {
     return 'Reset $themeType design?';
-  }
-
-  @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsPadding => 'Padding';
-
-  @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsShowBack => 'Show back button';
-
-  @override
-  String get lsShowScroll => 'Show scrollbars';
-
-  @override
-  String lsReset(Object themeType) {
-    return 'Reset $themeType layout?';
   }
 
   @override
@@ -747,9 +742,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsLabelP2 => ' Not too big, not too small?';
-
-  @override
-  String get tsAlwaysUnderline => 'Always underline links';
 
   @override
   String tsReset(Object themeType) {
@@ -1221,37 +1213,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsSystem => 'System';
 
   @override
-  String get dsAnimDuration => 'Animation duration';
-
-  @override
-  String get dsPlay => 'Play animation';
-
-  @override
-  String get dsMilliseconds => 'Milliseconds';
-
-  @override
-  String get dsPageTransition => 'Page transition';
-
-  @override
-  String get dsTurnX => 'Horizontal turn';
-
-  @override
-  String get dsTurnY => 'Vertical turn';
-
-  @override
-  String get dsRotate => 'Rotate';
-
-  @override
-  String get dsSlideX => 'Horizontal slide';
-
-  @override
-  String get dsSlideY => 'Vertical slide';
-
-  @override
-  String get dsZoom => 'Zoom';
-
-  @override
-  String get dsFadeTransition => 'Fade transition';
+  String get dsPadding => 'Padding';
 
   @override
   String get dsButtonStyle => 'Button style';
@@ -1291,6 +1253,51 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsOutline => 'Outline opacity';
+
+  @override
+  String get dsAlwaysUnderline => 'Always underline links';
+
+  @override
+  String get dsShowBack => 'Show back button';
+
+  @override
+  String get dsMargin => 'Margin';
+
+  @override
+  String get dsSpacing => 'Spacing';
+
+  @override
+  String get dsAnimDuration => 'Animation duration';
+
+  @override
+  String get dsPlay => 'Play animation';
+
+  @override
+  String get dsMilliseconds => 'Milliseconds';
+
+  @override
+  String get dsPageTransition => 'Page transition';
+
+  @override
+  String get dsTurnX => 'Horizontal turn';
+
+  @override
+  String get dsTurnY => 'Vertical turn';
+
+  @override
+  String get dsRotate => 'Rotate';
+
+  @override
+  String get dsSlideX => 'Horizontal slide';
+
+  @override
+  String get dsSlideY => 'Vertical slide';
+
+  @override
+  String get dsZoom => 'Zoom';
+
+  @override
+  String get dsFadeTransition => 'Fade transition';
 
   @override
   String get dsBackgroundImg => 'Background image';
@@ -1374,31 +1381,11 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsRotateRight => 'Rotate right';
 
   @override
+  String get dsShowScroll => 'Show scrollbars';
+
+  @override
   String dsReset(Object themeType) {
     return 'Reset $themeType design?';
-  }
-
-  @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsPadding => 'Padding';
-
-  @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsShowBack => 'Show back button';
-
-  @override
-  String get lsShowScroll => 'Show scrollbars';
-
-  @override
-  String lsReset(Object themeType) {
-    return 'Reset $themeType layout?';
   }
 
   @override
@@ -1500,9 +1487,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get tsLabelP2 => ' Not too big, not too small?';
-
-  @override
-  String get tsAlwaysUnderline => 'Always underline links';
 
   @override
   String tsReset(Object themeType) {

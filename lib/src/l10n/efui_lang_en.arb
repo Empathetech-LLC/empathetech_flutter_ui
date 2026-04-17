@@ -1,8 +1,6 @@
 {
   "@@locale": "en",
 
-
-
   "gApply": "Apply",
   "gApplyChanges": "Apply changes",
   "gContinue": "Continue",
@@ -191,18 +189,7 @@
   "dsNone": "None",
   "dsSystem": "System",
 
-  "dsAnimDuration": "Animation duration",
-  "dsPlay": "Play animation",
-  "dsMilliseconds": "Milliseconds",
-
-  "dsPageTransition": "Page transition",
-  "dsTurnX": "Horizontal turn",
-  "dsTurnY": "Vertical turn",
-  "dsRotate": "Rotate",
-  "dsSlideX": "Horizontal slide",
-  "dsSlideY": "Vertical slide",
-  "dsZoom": "Zoom",
-  "dsFadeTransition": "Fade transition",
+  "dsPadding": "Padding",
 
   "dsButtonStyle": "Button style",
   "dsBorderWidth": "Border width",
@@ -218,6 +205,25 @@
   "dsButtonOpacity": "Button opacity",
   "dsBackground": "Background opacity",
   "dsOutline": "Outline opacity",
+
+  "dsAlwaysUnderline": "Always underline links",
+  "dsShowBack": "Show back button",
+
+  "dsMargin": "Margin",
+  "dsSpacing": "Spacing",
+
+  "dsAnimDuration": "Animation duration",
+  "dsPlay": "Play animation",
+  "dsMilliseconds": "Milliseconds",
+
+  "dsPageTransition": "Page transition",
+  "dsTurnX": "Horizontal turn",
+  "dsTurnY": "Vertical turn",
+  "dsRotate": "Rotate",
+  "dsSlideX": "Horizontal slide",
+  "dsSlideY": "Vertical slide",
+  "dsZoom": "Zoom",
+  "dsFadeTransition": "Fade transition",  
 
   "dsBackgroundImg": "Background image",
   "dsImgSettingHint": "Update the {title} image",
@@ -249,20 +255,9 @@
   "dsRotateLeft": "Rotate left",
   "dsRotateRight": "Rotate right",
 
+  "dsShowScroll": "Show scrollbars",
+
   "dsReset": "Reset {themeType} design?",
-
-
-
-  "lsPageTitle": "Layout settings",
-
-  "lsMargin": "Margin",
-  "lsPadding": "Padding",
-  "lsSpacing": "Spacing",
-
-  "lsShowBack": "Show back button",
-  "lsShowScroll": "Show scrollbars",
-
-  "lsReset": "Reset {themeType} layout?",
 
 
 
@@ -304,8 +299,6 @@
   "tsLabelP1": "And ",
   "tsLabelLink": "the labels?",
   "tsLabelP2": " Not too big, not too small?",
-
-  "tsAlwaysUnderline": "Always underline links",
 
   "tsReset": "Reset {themeType} text styles?"
 }
