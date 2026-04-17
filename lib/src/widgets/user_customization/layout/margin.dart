@@ -72,7 +72,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                   button: false,
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
-                    EzConfig.l10n.lsMargin,
+                    EzConfig.l10n.dsMargin,
                     currValue.toStringAsFixed(widget.decimals),
                   ),
                   child: ExcludeSemantics(
@@ -82,7 +82,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                       children: <Widget>[
                         // Title
                         Text(
-                          EzConfig.l10n.lsMargin,
+                          EzConfig.l10n.dsMargin,
                           style: EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
@@ -172,7 +172,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
         }
       },
       icon: const Icon(Icons.margin),
-      label: EzConfig.l10n.lsMargin,
+      label: EzConfig.l10n.dsMargin,
     );
   }
 }

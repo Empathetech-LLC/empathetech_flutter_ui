@@ -79,7 +79,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                   button: false,
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
-                    EzConfig.l10n.lsSpacing,
+                    EzConfig.l10n.dsSpacing,
                     currValue.toStringAsFixed(widget.decimals),
                   ),
                   child: ExcludeSemantics(
@@ -89,7 +89,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                       children: <Widget>[
                         // Title
                         Text(
-                          EzConfig.l10n.lsSpacing,
+                          EzConfig.l10n.dsSpacing,
                           style:
                               widget.titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
@@ -178,7 +178,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
         }
       },
       icon: const Icon(Icons.space_bar),
-      label: EzConfig.l10n.lsSpacing,
+      label: EzConfig.l10n.dsSpacing,
     );
   }
 }

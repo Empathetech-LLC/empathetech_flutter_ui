@@ -79,7 +79,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                   button: false,
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
-                    EzConfig.l10n.lsPadding,
+                    EzConfig.l10n.dsPadding,
                     currValue.toStringAsFixed(widget.decimals),
                   ),
                   child: ExcludeSemantics(
@@ -89,7 +89,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                       children: <Widget>[
                         // Title
                         Text(
-                          EzConfig.l10n.lsPadding,
+                          EzConfig.l10n.dsPadding,
                           style:
                               widget.titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
@@ -180,7 +180,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
         }
       },
       icon: const Icon(Icons.padding),
-      label: EzConfig.l10n.lsPadding,
+      label: EzConfig.l10n.dsPadding,
     );
   }
 }
