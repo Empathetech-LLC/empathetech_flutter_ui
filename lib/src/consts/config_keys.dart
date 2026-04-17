@@ -432,8 +432,7 @@ const String darkButtonShapeKey = 'darkButtonShape';
 const String darkBorderWidthKey = 'darkBorderWidth';
 const String darkButtonOpacityKey = 'darkButtonOpacity';
 const String darkBorderOpacityKey = 'darkBorderOpacity';
-const String darkLineLinksKey =
-    'darkLineLinks'; // TODO: finish moving from text to design
+const String darkLineLinksKey = 'darkLineLinks';
 const String darkShowBackFABKey = 'darkShowBackFAB';
 
 const String lightPaddingKey = 'lightPadding';
