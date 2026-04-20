@@ -118,12 +118,10 @@ export 'src/widgets/user_customization/color/mono_chrome_setting.dart';
 
 // Design
 export 'src/widgets/user_customization/design/image_setting.dart';
+export 'src/widgets/user_customization/design/margin.dart';
+export 'src/widgets/user_customization/design/padding.dart';
 export 'src/widgets/user_customization/design/shapes.dart';
-
-// Layout
-export 'src/widgets/user_customization/layout/margin.dart';
-export 'src/widgets/user_customization/layout/padding.dart';
-export 'src/widgets/user_customization/layout/spacing.dart';
+export 'src/widgets/user_customization/design/spacing.dart';
 
 // Presets
 export 'src/widgets/user_customization/presets/big_buttons.dart';
