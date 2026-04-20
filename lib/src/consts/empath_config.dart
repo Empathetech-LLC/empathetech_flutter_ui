@@ -572,7 +572,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
 final Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
-  // Layout //
+  // Design //
 
   // Dark
   darkPaddingKey: defaultMobilePadding,
@@ -594,7 +594,7 @@ final Map<String, Object> empathMobileConfig = <String, Object>{
 final Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
-  // Layout //
+  // Design //
 
   // Dark
   darkPaddingKey: defaultDesktopPadding,

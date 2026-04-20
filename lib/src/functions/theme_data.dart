@@ -21,17 +21,18 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final Color focusColor = colorScheme.primary.withValues(alpha: focusOpacity);
 
   // Design
+
+  final double padding =
+      isDark ? EzConfig.get(darkPaddingKey) : EzConfig.get(lightPaddingKey);
+
+  final double margin =
+      isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
+  final double spacing =
+      isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
+
   final int animDuration = Brightness.dark == brightness
       ? EzConfig.get(darkAnimationDurationKey)
       : EzConfig.get(lightAnimationDurationKey);
-
-  // Layout
-  final double margin =
-      isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
-  final double padding =
-      isDark ? EzConfig.get(darkPaddingKey) : EzConfig.get(lightPaddingKey);
-  final double spacing =
-      isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
 
   // Text
   final TextTheme textTheme =
