@@ -501,11 +501,13 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setBool(darkLineLinksKey, random.nextBool());
       await setBool(darkShowBackFABKey, random.nextBool());
 
-      await setDouble(darkMarginKey, defaultMargin * getScalar());
-      await setDouble(
-        darkSpacingKey,
-        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-      );
+      if (onMobile) {
+        await setDouble(darkMarginKey, defaultMobileMargin * getScalar());
+        await setDouble(darkSpacingKey, defaultMobileSpacing * getScalar());
+      } else {
+        await setDouble(darkMarginKey, defaultDesktopMargin * getScalar());
+        await setDouble(darkSpacingKey, defaultDesktopSpacing * getScalar());
+      }
 
       await setInt(darkAnimationDurationKey, random.nextInt(1000));
       await setString(
@@ -647,11 +649,13 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setBool(lightLineLinksKey, random.nextBool());
       await setBool(lightShowBackFABKey, random.nextBool());
 
-      await setDouble(lightMarginKey, defaultMargin * getScalar());
-      await setDouble(
-        lightSpacingKey,
-        (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-      );
+      if (onMobile) {
+        await setDouble(lightMarginKey, defaultMobileMargin * getScalar());
+        await setDouble(lightSpacingKey, defaultMobileSpacing * getScalar());
+      } else {
+        await setDouble(lightMarginKey, defaultDesktopMargin * getScalar());
+        await setDouble(lightSpacingKey, defaultDesktopSpacing * getScalar());
+      }
 
       await setInt(lightAnimationDurationKey, random.nextInt(1000));
       await setString(
