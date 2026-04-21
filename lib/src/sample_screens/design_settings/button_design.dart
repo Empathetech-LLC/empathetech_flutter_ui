@@ -46,8 +46,8 @@ class ButtonDesign extends StatelessWidget {
         onUpdate: onUpdate,
         min: minPadding,
         max: maxPadding,
-        steps: 12,
-        decimals: 1,
+        steps: 20,
+        decimals: 0,
       ),
       EzConfig.spacer,
 
