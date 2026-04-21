@@ -268,7 +268,7 @@ class _TextSettingsState extends State<_TextSettings> {
 
           // Update both toggle
           EzConfig.rowMargin,
-          EzThemeCoin(enabled: currentTab == EzTSType.quick),
+          EzThemeCoin(widget.onUpdate, enabled: currentTab == EzTSType.quick),
         ],
       ),
       EzDivider(height: EzConfig.spacing),

@@ -185,7 +185,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
 
           // Update both toggle
           EzConfig.rowMargin,
-          const EzThemeCoin(),
+          EzThemeCoin(widget.onUpdate),
         ],
       ),
       EzDivider(height: EzConfig.spacing),

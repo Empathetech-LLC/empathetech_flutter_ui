@@ -166,7 +166,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
           // Update both toggle
           EzConfig.rowMargin,
-          EzThemeCoin(enabled: currentTab == EzCSType.quick),
+          EzThemeCoin(widget.onUpdate, enabled: currentTab == EzCSType.quick),
         ],
       ),
       EzDivider(height: EzConfig.spacing),
