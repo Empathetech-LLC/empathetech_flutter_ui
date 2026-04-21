@@ -579,14 +579,18 @@ final Map<String, Object> empathMobileConfig = <String, Object>{
 
   // Dark
   darkPaddingKey: defaultMobilePadding,
-  darkSpacingKey: defaultMobileSpacing,
   darkShowBackFABKey: false,
+
+  darkMarginKey: defaultMobileMargin,
+  darkSpacingKey: defaultMobileSpacing,
   darkShowScrollKey: false,
 
   // Light
   lightPaddingKey: defaultMobilePadding,
-  lightSpacingKey: defaultMobileSpacing,
   lightShowBackFABKey: false,
+
+  lightMarginKey: defaultMobileMargin,
+  lightSpacingKey: defaultMobileSpacing,
   lightShowScrollKey: false,
 };
 
