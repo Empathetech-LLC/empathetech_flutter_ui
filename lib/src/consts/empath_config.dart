@@ -136,11 +136,11 @@ const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
 
-/// 17.5
-const double defaultMobilePadding = 17.5;
+/// 15.0
+const double defaultMobilePadding = 15.0;
 
-/// 20.0
-const double defaultDesktopPadding = 20.0;
+/// 18.0
+const double defaultDesktopPadding = 18.0;
 
 /// 1.5
 const double defaultBorderWidth = 1.5;
@@ -151,8 +151,11 @@ const double defaultBorderOpacity = 0.2;
 /// 0.5 == 0x80
 const double defaultOutlineOpacity = 0.5;
 
-/// 10.0
-const double defaultMargin = 10.0;
+/// 7.5
+const double defaultMobileMargin = 7.5;
+
+/// 9.0
+const double defaultDesktopMargin = 9.0;
 
 /// 25.0
 const double defaultMobileSpacing = 25.0;
@@ -281,8 +284,8 @@ const double minFontHeight = 1.0;
 
 // Design settings //
 
-/// 40.0
-const double maxPadding = 40.0;
+/// 30.0
+const double maxPadding = 30.0;
 
 /// 3.0
 const double maxBorderWidth = 3.0;
@@ -290,10 +293,10 @@ const double maxBorderWidth = 3.0;
 /// 1.0
 const double maxOpacity = 1.0;
 
-/// 20.0
-const double maxMargin = 20.0;
+/// 15.0
+const double maxMargin = 15.0;
 
-/// 50.0
+/// 75.0
 const double maxSpacing = 75.0;
 
 /// 1000
@@ -422,7 +425,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
   pageTabKey: false,
 
   // Dark
-  darkMarginKey: defaultMargin,
+  // margin defined in mobile/desktop configs
 
   darkButtonShapeKey: EzButtonShape.pill.value,
   darkBorderWidthKey: defaultBorderWidth,
@@ -444,7 +447,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
   // showScroll defined in mobile/desktop configs
 
   // Light
-  lightMarginKey: defaultMargin,
+  // margin defined in mobile/desktop configs
 
   lightButtonShapeKey: EzButtonShape.pill.value,
   lightBorderWidthKey: defaultBorderWidth,
@@ -598,14 +601,18 @@ final Map<String, Object> empathDesktopConfig = <String, Object>{
 
   // Dark
   darkPaddingKey: defaultDesktopPadding,
-  darkSpacingKey: defaultDesktopSpacing,
   darkShowBackFABKey: false,
+
+  darkMarginKey: defaultDesktopMargin,
+  darkSpacingKey: defaultDesktopSpacing,
   darkShowScrollKey: true,
 
   // Light
   lightPaddingKey: defaultDesktopPadding,
-  lightSpacingKey: defaultDesktopSpacing,
   lightShowBackFABKey: false,
+
+  lightMarginKey: defaultDesktopMargin,
+  lightSpacingKey: defaultDesktopSpacing,
   lightShowScrollKey: true,
 };
 
