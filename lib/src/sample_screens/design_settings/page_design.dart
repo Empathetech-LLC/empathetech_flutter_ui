@@ -8,6 +8,8 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+// TODO: all local reset buttons should force their relevant/default styling (noticed in padding setting)
+
 class PageDesign extends StatelessWidget {
   final void Function() onUpdate;
   final List<Widget>? prepend;
@@ -55,7 +57,7 @@ class PageDesign extends StatelessWidget {
         onUpdate: onUpdate,
         min: minMargin,
         max: maxMargin,
-        steps: 6,
+        steps: 20,
         decimals: 1,
       ),
       EzConfig.spacer,
@@ -65,8 +67,8 @@ class PageDesign extends StatelessWidget {
         onUpdate: onUpdate,
         min: minSpacing,
         max: maxSpacing,
-        steps: 13,
-        decimals: 0,
+        steps: 26,
+        decimals: 1,
       ),
 
       // Background image
