@@ -9,10 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EzThemeCoin extends StatefulWidget {
+  /// [EzConfig.rebuildThemeMode] passthrough
+  final void Function() onComplete;
+
   final bool enabled;
 
   /// [EzIconButton] for toggling [EzConfig.updateBoth]
-  const EzThemeCoin({super.key, this.enabled = true});
+  const EzThemeCoin(this.onComplete, {super.key, this.enabled = true});
 
   @override
   State<EzThemeCoin> createState() => _EzThemeCoinState();
@@ -48,9 +51,15 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
             await EzConfig.setBool(updateBothKey, !both);
             setState(() => both = !both);
           },
+          onLongPress: () async {
+            await EzConfig.setBool(isDarkThemeKey, !EzConfig.isDark);
+            await EzConfig.rebuildThemeMode(widget.onComplete);
+          },
           tooltip: editing,
         ),
       ),
     );
   }
 }
+
+// TODO: check the order of things on rebuild - try to close and show loading circle ASAP
