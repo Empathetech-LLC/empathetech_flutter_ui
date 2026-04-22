@@ -405,7 +405,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
           // Toggle
           EzRow(
-            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               EzText(
                 l10n.gsConsole,

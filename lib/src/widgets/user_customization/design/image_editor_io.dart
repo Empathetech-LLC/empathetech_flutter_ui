@@ -158,7 +158,6 @@ class _EzImageEditorState extends State<EzImageEditor> {
         Padding(
           padding: EdgeInsets.all(EzConfig.spacing),
           child: EzScrollView(
-            mainAxisSize: MainAxisSize.min,
             scrollDirection: Axis.horizontal,
             startCentered: true,
             showScrollHint: true,

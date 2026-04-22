@@ -31,7 +31,6 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
-      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Section nav
         EzText(
@@ -62,7 +61,6 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           EzConfig.margin,
           EzScrollView(
             scrollDirection: Axis.horizontal,
-            mainAxisSize: MainAxisSize.min,
             reverseHands: true,
             showScrollHint: true,
             children: <Widget>[
@@ -104,7 +102,7 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           switchInCurve: Curves.easeInOut,
           switchOutCurve: Curves.easeInOut,
           transitionBuilder: (Widget w, Animation<double> a) =>
-              ezTransitionsBuilder(context, a, a, w),
+              ezTransitionBuilder(context, a, w),
           // TODO: using same animation works?
           child: currSection.build(currSubSec),
         ),

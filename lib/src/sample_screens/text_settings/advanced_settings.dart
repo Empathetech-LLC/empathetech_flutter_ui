@@ -568,7 +568,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       // Style selector
       EzScrollView(
         scrollDirection: Axis.horizontal,
-        mainAxisSize: MainAxisSize.min,
         primary: false,
         children: <Widget>[
           EzText(
@@ -615,7 +614,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       // Controls
       EzRowCol.sym(
         breakpoint: ScreenSize.medium,
-        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Font family
@@ -629,7 +627,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
           // Font weight, style, and decoration
           EzScrollView(
             scrollDirection: Axis.horizontal,
-            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               boldController(editing),
@@ -645,7 +642,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
             swapSpacer,
             EzScrollView(
               scrollDirection: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 letterSpacingController(editing),

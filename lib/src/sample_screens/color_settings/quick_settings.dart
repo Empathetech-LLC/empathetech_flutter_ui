@@ -38,7 +38,6 @@ class QuickColorSettings extends StatelessWidget {
     return EzScrollView(
       scrollDirection: Axis.horizontal,
       startCentered: true,
-      mainAxisSize: MainAxisSize.min,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

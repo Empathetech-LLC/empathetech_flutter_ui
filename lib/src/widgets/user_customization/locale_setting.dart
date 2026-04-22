@@ -65,7 +65,6 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           onPressed: () => ezModal(
             context: context,
             builder: (BuildContext mContext) => EzScrollView(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Wrap(
                   alignment: WrapAlignment.center,

@@ -354,7 +354,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         // Picker
                         EzScrollView(
-                          mainAxisSize: MainAxisSize.min,
                           scrollDirection: Axis.horizontal,
                           reverseHands: true,
                           children: <Widget>[
@@ -492,7 +491,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // Picker
                   EzScrollView(
-                    mainAxisSize: MainAxisSize.min,
                     scrollDirection: Axis.horizontal,
                     reverseHands: true,
                     children: <Widget>[
@@ -1039,7 +1037,6 @@ class _AdvancedSettingsField extends StatelessWidget {
             children: <Widget>[
               // Title and show buttons
               EzScrollView(
-                mainAxisSize: MainAxisSize.min,
                 scrollDirection: Axis.horizontal,
                 children: EzConfig.isLefty
                     ? <Widget>[
@@ -1152,7 +1149,6 @@ class _LicensePicker extends StatelessWidget {
       children: <Widget>[
         // Title and show buttons
         EzScrollView(
-          mainAxisSize: MainAxisSize.min,
           scrollDirection: Axis.horizontal,
           children: EzConfig.isLefty
               ? <Widget>[
@@ -1179,7 +1175,6 @@ class _LicensePicker extends StatelessWidget {
               groupValue: groupValue,
               onChanged: onChanged,
               child: EzScrollView(
-                mainAxisSize: MainAxisSize.min,
                 scrollDirection: Axis.horizontal,
                 thumbVisibility: false,
                 showScrollHint: true,

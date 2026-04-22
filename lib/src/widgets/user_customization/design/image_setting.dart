@@ -126,7 +126,6 @@ class _ImageSettingState extends State<EzImageSetting> {
       context: context,
       builder: (BuildContext mContext) => StatefulBuilder(
         builder: (_, StateSetter setModal) => EzScrollView(
-          mainAxisSize: MainAxisSize.min,
           children: sourceOptions(mContext, setModal),
         ),
       ),
@@ -532,7 +531,6 @@ class _ImageSettingState extends State<EzImageSetting> {
       builder: (_) => StatefulBuilder(
         builder: (BuildContext fitContext, StateSetter fitState) {
           return EzScrollView(
-            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
                 EzConfig.l10n.dsFit,
@@ -550,7 +548,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                   scrollDirection: Axis.horizontal,
                   showScrollHint: true,
                   primary: false,
-                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     EzConfig.rowSpacer,
                     fitPreview(

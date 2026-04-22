@@ -167,7 +167,6 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
           restricted: EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
-            mainAxisSize: MainAxisSize.min,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: dynamicColorSettings(widget.userColorsKey),
@@ -184,7 +183,6 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
               context: context,
               builder: (_) => StatefulBuilder(
                 builder: (_, StateSetter setModalState) => EzScrollView(
-                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     // Tutorial link
                     EzLink(

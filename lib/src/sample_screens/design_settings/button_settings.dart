@@ -37,7 +37,7 @@ class ButtonDesign extends StatelessWidget {
   // Return the build //
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+    return EzScrollView(children: <Widget>[
       // Optional 'before' settings
       if (prepend != null) ...prepend!,
 
@@ -147,7 +147,6 @@ class _ButtonStyleSetting extends StatelessWidget {
                     if (choice != null) setModal(() => currShape = choice);
                   },
                   child: EzScrollView(
-                    mainAxisSize: MainAxisSize.min,
                     scrollDirection: Axis.horizontal,
                     thumbVisibility: false,
                     showScrollHint: true,
