@@ -8,7 +8,9 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -30,6 +32,18 @@ void main() async {
       ),
     ),
   );
+
+  if (!kIsWeb && !isMobile()) {
+    await windowManager.ensureInitialized();
+
+    await windowManager.waitUntilReadyToShow(
+      const WindowOptions(minimumSize: Size(500, 500)),
+      () async {
+        await windowManager.show();
+        await windowManager.focus();
+      },
+    );
+  }
 
   // Run the app //
 
