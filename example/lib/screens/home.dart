@@ -290,99 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: ezSubTitleStyle(),
               textAlign: TextAlign.start,
             ),
-            EzConfig.divider,
-
-            // Flutter path picker
-            Visibility(
-              visible: isMac,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  // Title
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Flexible(
-                        child: EzText(
-                          l10n.csFlutterPath,
-                          style: EzConfig.styles.titleLarge,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      EzToolTipper(message: l10n.csNoSpaces),
-                    ],
-                  ),
-
-                  // Picker
-                  EzScrollView(
-                    mainAxisSize: MainAxisSize.min,
-                    scrollDirection: Axis.horizontal,
-                    reverseHands: true,
-                    children: <Widget>[
-                      // Text box
-                      ConstrainedBox(
-                        constraints: ezTextFieldConstraints(context),
-                        child: TextFormField(
-                          controller: flutterPathControl,
-                          readOnly: !canGen,
-                          textAlign: TextAlign.start,
-                          maxLines: 1,
-                          validator: (String? path) =>
-                              (path == null || path.isEmpty)
-                                  ? l10n.csPathRequired
-                                  : null,
-                          autovalidateMode: AutovalidateMode.onUnfocus,
-                          decoration: InputDecoration(
-                              hintText: isWindows
-                                  ? 'example_path\\flutter\\bin'
-                                  : 'example_path/flutter/bin'),
-                        ),
-                      ),
-                      EzConfig.rowMargin,
-
-                      // Browse
-                      EzIconButton(
-                        onPressed: () async {
-                          final String? selectedDirectory =
-                              await FilePicker.getDirectoryPath(
-                                  dialogTitle: l10n.csFlutterPath);
-
-                          if (selectedDirectory == null) return;
-
-                          setState(() {
-                            flutterPathControl.text = selectedDirectory
-                                    .contains(homePath)
-                                ? '$homePath${selectedDirectory.split(homePath)[1]}'
-                                : selectedDirectory;
-                          });
-                        },
-                        tooltip: l10n.csFileBrowser,
-                        icon: const Icon(Icons.folder_open),
-                      ),
-                    ],
-                  ),
-                  EzConfig.spacer,
-
-                  EzScrollView(
-                    mainAxisSize: MainAxisSize.min,
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      EzText(l10n.csNotInstalled, textAlign: TextAlign.start),
-                      EzConfig.spacer,
-                      EzElevatedIconLink(
-                        url: Uri.parse(installFlutter),
-                        tooltip: installFlutter,
-                        hint: l10n.rsInstallHint,
-                        icon: const Icon(Icons.computer),
-                        label: l10n.rsInstall,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            if (isMac) EzConfig.divider,
+            EzConfig.separator,
 
             // Advanced settings //
 
@@ -557,7 +465,104 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            showAdvanced ? EzConfig.divider : EzConfig.separator,
+            EzDivider(
+                constraints: ezTextFieldConstraints(context, prop: 0.333)),
+
+            // Flutter path picker (Mac only)
+            Visibility(
+              visible: isMac,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Title
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Flexible(
+                        child: EzText(
+                          l10n.csFlutterPath,
+                          style: EzConfig.styles.titleLarge,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      EzToolTipper(message: l10n.csNoSpaces),
+                    ],
+                  ),
+
+                  // Picker
+                  EzScrollView(
+                    mainAxisSize: MainAxisSize.min,
+                    scrollDirection: Axis.horizontal,
+                    reverseHands: true,
+                    children: <Widget>[
+                      // Text box
+                      ConstrainedBox(
+                        constraints: ezTextFieldConstraints(context),
+                        child: TextFormField(
+                          controller: flutterPathControl,
+                          readOnly: !canGen,
+                          textAlign: TextAlign.start,
+                          maxLines: 1,
+                          validator: (String? path) =>
+                              (path == null || path.isEmpty)
+                                  ? l10n.csPathRequired
+                                  : null,
+                          autovalidateMode: AutovalidateMode.onUnfocus,
+                          decoration: InputDecoration(
+                              hintText: isWindows
+                                  ? 'example_path\\flutter\\bin'
+                                  : 'example_path/flutter/bin'),
+                        ),
+                      ),
+                      EzConfig.rowMargin,
+
+                      // Browse
+                      EzIconButton(
+                        onPressed: () async {
+                          final String? selectedDirectory =
+                              await FilePicker.getDirectoryPath(
+                                  dialogTitle: l10n.csFlutterPath);
+
+                          if (selectedDirectory == null) return;
+
+                          setState(() {
+                            flutterPathControl.text = selectedDirectory
+                                    .contains(homePath)
+                                ? '$homePath${selectedDirectory.split(homePath)[1]}'
+                                : selectedDirectory;
+                          });
+                        },
+                        tooltip: l10n.csFileBrowser,
+                        icon: const Icon(Icons.folder_open),
+                      ),
+                    ],
+                  ),
+                  EzConfig.margin,
+                  EzRichText(
+                    <InlineSpan>[
+                      EzPlainText(
+                        text: '${l10n.csNotInstalled} ',
+                        style: EzConfig.styles.bodyLarge,
+                      ),
+                      EzInlineLink(
+                        l10n.rsInstall,
+                        style: EzConfig.styles.bodyLarge,
+                        textAlign: TextAlign.start,
+                        url: Uri.parse(installFlutter),
+                        hint: l10n.rsInstallHint,
+                        tooltip: installFlutter,
+                      ),
+                      EzPlainText(
+                        text: '.',
+                        style: EzConfig.styles.bodyLarge,
+                      ),
+                    ],
+                  ),
+                  EzConfig.separator,
+                ],
+              ),
+            ),
 
             // Make it so //
 
