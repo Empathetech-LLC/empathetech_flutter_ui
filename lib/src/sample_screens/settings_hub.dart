@@ -91,19 +91,13 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           EzConfig.spacer,
         ],
 
-        // TODO...
-        // Add an up/down slide for the mini segments when navigating to/fro global
-        // Make a todoist note about this setup for open ui's home page, and
-        // Organize todoist a bit
-
         // Current section
         AnimatedSwitcher(
           duration: ezAnimDuration(),
           switchInCurve: Curves.easeInOut,
           switchOutCurve: Curves.easeInOut,
           transitionBuilder: (Widget w, Animation<double> a) =>
-              ezTransitionBuilder(context, a, w),
-          // TODO: using same animation works?
+              ezTransitionBuilder(context, a, w, reverse: delta < 0),
           child: currSection.build(currSubSec),
         ),
         EzConfig.separator
