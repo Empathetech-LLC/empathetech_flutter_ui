@@ -350,11 +350,20 @@ double ezToolbarHeight({
     ) +
     EzConfig.marginVal;
 
-/// A [Page] animator based on [EzConfig]
+/// [Page] animator based on [EzConfig]
 Widget ezTransitionsBuilder(
   BuildContext context,
   Animation<double> animation,
   Animation<double> secondaryAnimation,
+  Widget child, {
+  EzPageTransition? force,
+}) =>
+    ezTransitionBuilder(context, animation, child, force: force);
+
+/// Animator based on [EzConfig]
+Widget ezTransitionBuilder(
+  BuildContext context,
+  Animation<double> animation,
   Widget child, {
   EzPageTransition? force,
 }) {
