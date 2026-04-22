@@ -24,13 +24,15 @@ class EzSettingsHub extends StatefulWidget {
 
 class _EzSettingsHubState extends State<EzSettingsHub> {
   late EzSettingsSection curr = widget.pages[widget.target ?? EzConfig.hubPos];
+  late EzSubSetting currSub = curr.fromStorage();
+  int delta = 0;
 
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        // Navigation
+        // Section nav
         EzText(
           curr.title,
           style: EzConfig.styles.labelLarge,
@@ -46,13 +48,67 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           selected: <EzSettingsSection>{curr},
           showSelectedIcon: false,
           onSelectionChanged: (Set<EzSettingsSection> selected) async {
-            await EzConfig.setHubPos(selected.first.position);
-            setState(() => curr = selected.first);
+            final EzSettingsSection choice = selected.first;
+            delta = curr.position - choice.position;
+
+            await EzConfig.setHubPos(choice.position);
+            setState(() => curr = choice);
           },
         ),
 
+        // Sub-section nav
+        if (curr.subSettings.isNotEmpty) ...<Widget>[
+          EzConfig.margin,
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            mainAxisSize: MainAxisSize.min,
+            reverseHands: true,
+            showScrollHint: true,
+            children: <Widget>[
+              // Quick/Advanced selector
+              SegmentedButton<EzSubSetting>(
+                segments: (curr.subSettings)
+                    .map((EzSubSetting sub) => ButtonSegment<EzSubSetting>(
+                          value: sub,
+                          label: Text(sub.label),
+                        ))
+                    .toList(),
+                selected: <EzSubSetting>{currSub},
+                showSelectedIcon: false,
+                onSelectionChanged: (Set<EzSubSetting> selected) async {
+                  final EzSubSetting choice = selected.first;
+
+                  await EzConfig.setBool(choice.write.$1, choice.write.$2);
+                  setState(() => currSub = choice);
+                },
+              ),
+
+              // Update both toggle
+              EzConfig.rowMargin,
+              EzThemeCoin(doNothing, enabled: currSub.bothable),
+            ],
+          ),
+          EzDivider(height: EzConfig.spacing),
+          EzConfig.spacer,
+        ],
+
+        // TODO...
+        // Add an up/down slide for the mini segments when navigating to/fro global
+        // Make a todoist note about this setup for open ui's home page, and
+        // Organize todoist a bit
+
         // Current section
-        curr.build,
+        AnimatedSwitcher(
+          key: ValueKey<int>(EzConfig.seed),
+          duration: ezAnimDuration(),
+          switchInCurve: Curves.easeInOut,
+          switchOutCurve: Curves.easeInOut,
+          transitionBuilder: (Widget w, Animation<double> a) =>
+              ezTransitionsBuilder(context, a, a, w),
+          // TODO: using same animation works?
+          child: curr.build,
+        ),
+        EzConfig.separator
       ],
     );
   }

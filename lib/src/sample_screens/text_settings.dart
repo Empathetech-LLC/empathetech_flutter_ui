@@ -40,10 +40,6 @@ class EzTextSettings extends StatelessWidget {
   /// Shared for both themes
   final Set<String>? saveSkip;
 
-  /// Defaults to [EzSeparator]
-  /// Shared for both themes
-  final Widget trail;
-
   /// Optional additional quick settings
   /// Will appear just above the text block
   /// BYO leading spacer, trailing will be [textBlockHeader]
@@ -81,10 +77,8 @@ class EzTextSettings extends StatelessWidget {
     this.resetExtraLight,
     this.resetSkip,
     this.saveSkip,
-    this.trail = const EzSeparator(),
 
     // Quick
-
     this.moreQuickHeaderSettings,
     this.textBlockHeader = const EzSpacer(),
     this.textBlockFooter = const EzDivider(),
@@ -128,7 +122,6 @@ class EzTextSettings extends StatelessWidget {
           extraLight: resetExtraLight,
           resetSkip: resetSkip,
           saveSkip: saveSkip,
-          trail: trail,
 
           // Quick
           moreQuickHeaderSettings: moreQuickHeaderSettings,
@@ -155,7 +148,6 @@ class _TextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
-  final Widget trail;
 
   // Quick
   final List<Widget>? moreQuickHeaderSettings;
@@ -177,7 +169,6 @@ class _TextSettings extends StatefulWidget {
     required this.extraLight,
     required this.resetSkip,
     required this.saveSkip,
-    required this.trail,
     required this.moreQuickHeaderSettings,
     required this.textBlockHeader,
     required this.textBlockFooter,
@@ -204,11 +195,11 @@ class _TextSettingsState extends State<_TextSettings> {
   late final EzLabelStyleProvider labelProvider =
       Provider.of<EzLabelStyleProvider>(context);
 
-  late EzTSType currentTab = (widget.advanced == null)
+  late EzSubSetting currentTab = (widget.advanced == null)
       ? (EzConfig.get(advancedTextKey) == true
-          ? EzTSType.advanced
-          : EzTSType.quick)
-      : (widget.advanced! ? EzTSType.advanced : EzTSType.quick);
+          ? EzSubSetting.advText
+          : EzSubSetting.qckText)
+      : (widget.advanced! ? EzSubSetting.advText : EzSubSetting.qckText);
 
   void redraw() {
     widget.onUpdate();
@@ -238,29 +229,32 @@ class _TextSettingsState extends State<_TextSettings> {
         showScrollHint: true,
         children: <Widget>[
           // Quick/Advanced selector
-          SegmentedButton<EzTSType>(
-            segments: <ButtonSegment<EzTSType>>[
-              ButtonSegment<EzTSType>(
-                value: EzTSType.quick,
+          SegmentedButton<EzSubSetting>(
+            segments: <ButtonSegment<EzSubSetting>>[
+              ButtonSegment<EzSubSetting>(
+                value: EzSubSetting.qckText,
                 label: Text(EzConfig.l10n.gQuick),
               ),
-              ButtonSegment<EzTSType>(
-                value: EzTSType.advanced,
+              ButtonSegment<EzSubSetting>(
+                value: EzSubSetting.advText,
                 label: Text(EzConfig.l10n.gAdvanced),
               ),
             ],
-            selected: <EzTSType>{currentTab},
+            selected: <EzSubSetting>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzTSType> selected) async {
+            onSelectionChanged: (Set<EzSubSetting> selected) async {
               switch (selected.first) {
-                case EzTSType.quick:
-                  currentTab = EzTSType.quick;
+                case EzSubSetting.qckText:
+                  currentTab = EzSubSetting.qckText;
                   await EzConfig.setBool(advancedTextKey, false);
                   break;
-                case EzTSType.advanced:
-                  currentTab = EzTSType.advanced;
+                case EzSubSetting.advText:
+                  currentTab = EzSubSetting.advText;
                   await EzConfig.setBool(advancedTextKey, true);
                   break;
+                default:
+                  // Inconceivable! But required for linter
+                  doNothing();
               }
               setState(() {});
             },
@@ -268,14 +262,15 @@ class _TextSettingsState extends State<_TextSettings> {
 
           // Update both toggle
           EzConfig.rowMargin,
-          EzThemeCoin(widget.onUpdate, enabled: currentTab == EzTSType.quick),
+          EzThemeCoin(widget.onUpdate,
+              enabled: currentTab == EzSubSetting.qckText),
         ],
       ),
       EzDivider(height: EzConfig.spacing),
       EzConfig.spacer,
 
       // Settings
-      if (currentTab == EzTSType.quick)
+      if (currentTab == EzSubSetting.qckText)
         _QuickTextSettings(
           // Providers
           displayProvider: displayProvider,
@@ -299,7 +294,6 @@ class _TextSettingsState extends State<_TextSettings> {
           androidPackage: widget.androidPackage,
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
-          trail: widget.trail,
         )
       else
         _AdvancedTextSettings(
@@ -321,7 +315,6 @@ class _TextSettingsState extends State<_TextSettings> {
           androidPackage: widget.androidPackage,
           resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
-          trail: widget.trail,
         ),
     ]);
   }
@@ -350,7 +343,6 @@ class _QuickTextSettings extends StatefulWidget {
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
-  final Widget trail;
 
   const _QuickTextSettings({
     required this.displayProvider,
@@ -371,7 +363,6 @@ class _QuickTextSettings extends StatefulWidget {
     required this.extraLight,
     required this.resetSkip,
     required this.saveSkip,
-    required this.trail,
   });
 
   @override
@@ -607,7 +598,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         resetSkip: widget.resetSkip,
         saveSkip: widget.saveSkip,
       ),
-      widget.trail,
     ]);
   }
 }
@@ -630,7 +620,6 @@ class _AdvancedTextSettings extends StatefulWidget {
   final String? androidPackage;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
-  final Widget trail;
 
   const _AdvancedTextSettings({
     required this.displayProvider,
@@ -647,7 +636,6 @@ class _AdvancedTextSettings extends StatefulWidget {
     required this.androidPackage,
     required this.resetSkip,
     required this.saveSkip,
-    required this.trail,
   });
 
   @override
@@ -1419,7 +1407,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         resetSkip: widget.resetSkip,
         saveSkip: widget.saveSkip,
       ),
-      widget.trail,
     ]);
   }
 }

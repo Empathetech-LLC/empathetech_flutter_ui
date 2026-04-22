@@ -102,11 +102,11 @@ class EzColorSettings extends StatefulWidget {
 class _EzColorSettingsState extends State<EzColorSettings> {
   // Define the build data //
 
-  late EzCSType currentTab = (widget.advanced == null)
+  late EzSubSetting currentTab = (widget.advanced == null)
       ? (EzConfig.get(advancedColorsKey) == true
-          ? EzCSType.advanced
-          : EzCSType.quick)
-      : (widget.advanced! ? EzCSType.advanced : EzCSType.quick);
+          ? EzSubSetting.advColor
+          : EzSubSetting.qckColor)
+      : (widget.advanced! ? EzSubSetting.advColor : EzSubSetting.qckColor);
 
   // Set the page title //
 
@@ -136,29 +136,32 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         showScrollHint: true,
         children: <Widget>[
           // Quick/Advanced selector
-          SegmentedButton<EzCSType>(
-            segments: <ButtonSegment<EzCSType>>[
-              ButtonSegment<EzCSType>(
-                value: EzCSType.quick,
+          SegmentedButton<EzSubSetting>(
+            segments: <ButtonSegment<EzSubSetting>>[
+              ButtonSegment<EzSubSetting>(
+                value: EzSubSetting.qckColor,
                 label: Text(EzConfig.l10n.gQuick),
               ),
-              ButtonSegment<EzCSType>(
-                value: EzCSType.advanced,
+              ButtonSegment<EzSubSetting>(
+                value: EzSubSetting.advColor,
                 label: Text(EzConfig.l10n.gAdvanced),
               ),
             ],
-            selected: <EzCSType>{currentTab},
+            selected: <EzSubSetting>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzCSType> selected) async {
+            onSelectionChanged: (Set<EzSubSetting> selected) async {
               switch (selected.first) {
-                case EzCSType.quick:
-                  currentTab = EzCSType.quick;
+                case EzSubSetting.qckColor:
+                  currentTab = EzSubSetting.qckColor;
                   await EzConfig.setBool(advancedColorsKey, false);
                   break;
-                case EzCSType.advanced:
-                  currentTab = EzCSType.advanced;
+                case EzSubSetting.advColor:
+                  currentTab = EzSubSetting.advColor;
                   await EzConfig.setBool(advancedColorsKey, true);
                   break;
+                default:
+                  // Inconceivable! But required for linter
+                  doNothing();
               }
               setState(() {});
             },
@@ -166,14 +169,15 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
           // Update both toggle
           EzConfig.rowMargin,
-          EzThemeCoin(widget.onUpdate, enabled: currentTab == EzCSType.quick),
+          EzThemeCoin(widget.onUpdate,
+              enabled: currentTab == EzSubSetting.qckColor),
         ],
       ),
       EzDivider(height: EzConfig.spacing),
       EzConfig.spacer,
 
       // Core settings
-      (currentTab == EzCSType.quick)
+      (currentTab == EzSubSetting.qckColor)
           ? _QuickColorSettings(
               onUpdate: widget.onUpdate,
               quickHeader: widget.quickHeader,
@@ -547,7 +551,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             }
           },
         ),
-        EzConfig.separator,
       ],
     );
   }

@@ -92,7 +92,6 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
 
   @override
   Widget build(BuildContext context) => EzScrollView(children: <Widget>[
-        EzDivider(height: EzConfig.spacing),
         EzConfig.spacer,
 
         // Right/left
@@ -142,8 +141,5 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
           saveSkip: widget.saveSkip,
           dynamicTitle: widget.resetTitle,
         ),
-
-        // Footer
-        ...widget.footer,
       ]);
 }

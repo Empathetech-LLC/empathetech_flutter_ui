@@ -128,9 +128,11 @@ class EzDesignSettings extends StatefulWidget {
 class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Define the build data //
 
-  late EzDSType currentTab = (widget.pageTab == null)
-      ? (EzConfig.get(pageTabKey) == true ? EzDSType.page : EzDSType.button)
-      : (widget.pageTab! ? EzDSType.page : EzDSType.button);
+  late EzSubSetting currentTab = (widget.pageTab == null)
+      ? (EzConfig.get(pageTabKey) == true
+          ? EzSubSetting.pagDesign
+          : EzSubSetting.butDesign)
+      : (widget.pageTab! ? EzSubSetting.pagDesign : EzSubSetting.butDesign);
 
   // Set the page title //
 
@@ -143,85 +145,33 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      EzConfig.margin,
-
-      // Mode selector(s)
-      EzScrollView(
-        scrollDirection: Axis.horizontal,
-        mainAxisSize: MainAxisSize.min,
-        reverseHands: true,
-        showScrollHint: true,
-        children: <Widget>[
-          // Quick/Advanced selector
-          SegmentedButton<EzDSType>(
-            segments: <ButtonSegment<EzDSType>>[
-              ButtonSegment<EzDSType>(
-                value: EzDSType.button,
-                label: Text(EzConfig.l10n.dsButton),
-              ),
-              ButtonSegment<EzDSType>(
-                value: EzDSType.page,
-                label: Text(EzConfig.l10n.dsPage),
-              ),
-            ],
-            selected: <EzDSType>{currentTab},
-            showSelectedIcon: false,
-            onSelectionChanged: (Set<EzDSType> selected) async {
-              switch (selected.first) {
-                case EzDSType.button:
-                  currentTab = EzDSType.button;
-                  await EzConfig.setBool(pageTabKey, false);
-                  break;
-                case EzDSType.page:
-                  currentTab = EzDSType.page;
-                  await EzConfig.setBool(pageTabKey, true);
-                  break;
-              }
-              setState(() {});
-            },
-          ),
-
-          // Update both toggle
-          EzConfig.rowMargin,
-          EzThemeCoin(widget.onUpdate),
-        ],
-      ),
-      EzDivider(height: EzConfig.spacing),
-      EzConfig.spacer,
-
-      // Core settings
-      (currentTab == EzDSType.button)
-          ? ButtonDesign(
-              onUpdate: widget.onUpdate,
-              prepend: widget.prependButton,
-              append: widget.appendButton,
-              resetSpacer: widget.resetSpacerButton,
-              resetExtraDark: widget.resetExtraDarkButton,
-              resetExtraLight: widget.resetExtraLightButton,
-              appName: widget.appName,
-              androidPackage: widget.androidPackage,
-              resetSkip: widget.resetSkipButton,
-              saveSkip: widget.saveSkipButton,
-            )
-          : PageDesign(
-              onUpdate: widget.onUpdate,
-              prepend: widget.prependPage,
-              includePageTransitions: widget.includePageTransitions,
-              includeBackgroundImage: widget.includeBackgroundImage,
-              darkBackgroundCredits: widget.darkBackgroundCredits,
-              lightBackgroundCredits: widget.lightBackgroundCredits,
-              append: widget.appendPage,
-              resetSpacer: widget.resetSpacerPage,
-              resetExtraDark: widget.resetExtraDarkPage,
-              resetExtraLight: widget.resetExtraLightPage,
-              appName: widget.appName,
-              androidPackage: widget.androidPackage,
-              resetSkip: widget.resetSkipPage,
-              saveSkip: widget.saveSkipPage,
-            ),
-      widget.trail,
-    ]);
-  }
+  Widget build(BuildContext context) => (currentTab == EzSubSetting.butDesign)
+      ? ButtonDesign(
+          onUpdate: widget.onUpdate,
+          prepend: widget.prependButton,
+          append: widget.appendButton,
+          resetSpacer: widget.resetSpacerButton,
+          resetExtraDark: widget.resetExtraDarkButton,
+          resetExtraLight: widget.resetExtraLightButton,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
+          resetSkip: widget.resetSkipButton,
+          saveSkip: widget.saveSkipButton,
+        )
+      : PageDesign(
+          onUpdate: widget.onUpdate,
+          prepend: widget.prependPage,
+          includePageTransitions: widget.includePageTransitions,
+          includeBackgroundImage: widget.includeBackgroundImage,
+          darkBackgroundCredits: widget.darkBackgroundCredits,
+          lightBackgroundCredits: widget.lightBackgroundCredits,
+          append: widget.appendPage,
+          resetSpacer: widget.resetSpacerPage,
+          resetExtraDark: widget.resetExtraDarkPage,
+          resetExtraLight: widget.resetExtraLightPage,
+          appName: widget.appName,
+          androidPackage: widget.androidPackage,
+          resetSkip: widget.resetSkipPage,
+          saveSkip: widget.saveSkipPage,
+        );
 }
