@@ -419,7 +419,6 @@ class _PageTransitionSetting extends StatelessWidget {
 
                 // Fade switch
                 EzSwitchPair(
-                  enabled: currType != EzPageTransition.system,
                   valueKey: EzConfig.isDark
                       ? darkTransitionFadeKey
                       : lightTransitionFadeKey,
