@@ -491,9 +491,7 @@ Widget ezTransitionBuilder(
         default:
           return SlideTransition(
             position: Tween<Offset>(
-              begin: EzConfig.isLTR
-                  ? const Offset(1.0, 0.0)
-                  : const Offset(-1.0, 0.0),
+              begin: Offset(EzConfig.isLTR ? 1.0 : -1.0, 0.0),
               end: Offset.zero,
             ).animate(CurvedAnimation(
               parent: animation,
@@ -550,8 +548,7 @@ Widget ezTransitionBuilder(
     case EzPageTransition.slideX:
       return SlideTransition(
         position: Tween<Offset>(
-          begin:
-              EzConfig.isLTR ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0),
+          begin: Offset(EzConfig.isLTR ? 1.0 : -1.0, 0.0),
           end: Offset.zero,
         ).animate(CurvedAnimation(
           parent: animation,
