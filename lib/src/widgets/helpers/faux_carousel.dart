@@ -18,7 +18,7 @@ class EzFauxCarousel extends StatelessWidget {
     required this.position,
     required this.delta,
     required this.child,
-    this.animMod = 0.667,
+    this.animMod = 0.75,
   });
 
   @override
