@@ -3,9 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'button_settings.dart';
+import 'page_settings.dart';
 import '../../../empathetech_flutter_ui.dart';
-import './button_design.dart';
-import './page_design.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';

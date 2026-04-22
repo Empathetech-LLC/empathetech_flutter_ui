@@ -48,12 +48,13 @@ export 'src/l10n/efui_lang.dart';
 
 //* Sample screens *//
 
-export 'src/sample_screens/color_settings.dart';
-export 'src/sample_screens/design_settings/design_settings.dart';
+export 'src/sample_screens/color_settings/screen.dart';
+export 'src/sample_screens/design_settings/screen.dart';
+export 'src/sample_screens/text_settings/screen.dart';
 export 'src/sample_screens/global_settings.dart';
+
 export 'src/sample_screens/setting_section.dart';
 export 'src/sample_screens/settings_hub.dart';
-export 'src/sample_screens/text_settings.dart';
 
 //* Widgets *//
 
