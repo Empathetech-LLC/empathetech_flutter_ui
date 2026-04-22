@@ -34,7 +34,6 @@ export 'src/functions/testing/utils.dart';
 
 export 'src/functions/cmd.dart';
 export 'src/functions/colors.dart';
-export 'src/functions/dialogs.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
 export 'src/functions/modal.dart';

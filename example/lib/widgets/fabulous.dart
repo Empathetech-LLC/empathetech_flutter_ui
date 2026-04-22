@@ -46,7 +46,7 @@ class ResetFAB extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () => showDialog(
                 context: context,
-                builder: (BuildContext dContext) => EzAlertDialog(
+                builder: (BuildContext dCon) => EzAlertDialog(
                   title: Text(
                     '${EzConfig.l10n.gReset}...',
                     textAlign: TextAlign.center,
@@ -56,7 +56,7 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () {
                         clearForms();
-                        Navigator.of(dContext).pop();
+                        Navigator.of(dCon).pop();
                       },
                       text: l10n.csResetBuilder,
                       isDefaultAction: true,
@@ -85,7 +85,7 @@ class ResetFAB extends StatelessWidget {
 
                     // None
                     EzMaterialAction(
-                      onPressed: () => Navigator.of(dContext).pop(),
+                      onPressed: () => Navigator.of(dCon).pop(),
                       text: l10n.csResetNothing,
                     ),
                   ],
@@ -110,7 +110,7 @@ class MacStoreFAB extends StatelessWidget {
         tooltip: 'EoL',
         onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(contents: <Widget>[
+          builder: (BuildContext dCon) => EzAlertDialog(contents: <Widget>[
             const Text(
               '''Good news: Open UI is now an app generator!
 

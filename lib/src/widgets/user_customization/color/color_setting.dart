@@ -93,7 +93,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     // Recommended, custom, or cancel (close)
     return showDialog(
       context: context,
-      builder: (BuildContext dContext) => EzAlertDialog(
+      builder: (BuildContext dCon) => EzAlertDialog(
         title: Text(
           EzConfig.l10n.csRecommended,
           textAlign: TextAlign.center,
@@ -129,7 +129,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             text: EzConfig.l10n.csUseCustom,
             onPressed: () async {
               final dynamic chosen = await openColorPicker();
-              if (dContext.mounted) Navigator.of(dContext).pop(chosen);
+              if (dCon.mounted) Navigator.of(dCon).pop(chosen);
             },
             isDestructiveAction: true,
           ),
@@ -143,7 +143,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> reset() => showDialog(
         context: context,
-        builder: (BuildContext dContext) {
+        builder: (BuildContext dCon) {
           final int? resetValue = EzConfig.getDefault(widget.configKey);
           final String currColorLabel =
               currColor.toARGB32().toRadixString(16).toUpperCase().substring(2);
@@ -178,7 +178,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 await EzConfig.rebuildUI(widget.onUpdate);
               },
               confirmIsDestructive: true,
-              onDeny: () => Navigator.of(dContext).pop(),
+              onDeny: () => Navigator.of(dCon).pop(),
             ),
             needsClose: false,
           );
@@ -191,14 +191,14 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? reset()
       : showDialog(
           context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(
+          builder: (BuildContext dCon) => EzAlertDialog(
             title: Text(EzConfig.l10n.gOptions, textAlign: TextAlign.center),
             contents: <Widget>[
               // Remove from list
               EzElevatedIconButton(
                 onPressed: () {
                   widget.onRemove!();
-                  Navigator.of(dContext).pop();
+                  Navigator.of(dCon).pop();
                 },
                 icon: const Icon(Icons.delete),
                 label: EzConfig.l10n.gRemove,

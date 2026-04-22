@@ -74,7 +74,7 @@ class EzResetButton extends StatelessWidget {
           bool updateBoth = true;
 
           return StatefulBuilder(
-            builder: (BuildContext dContext, StateSetter setDialog) =>
+            builder: (BuildContext dCon, StateSetter setDialog) =>
                 EzAlertDialog(
               title: Text(
                 dynamicTitle?.call() ?? EzConfig.l10n.ssResetAll,
@@ -134,7 +134,7 @@ class EzResetButton extends StatelessWidget {
                   } else {
                     onDeny!.call();
                   }
-                  if (dContext.mounted) Navigator.of(dContext).pop();
+                  if (dCon.mounted) Navigator.of(dCon).pop();
                 },
               ),
               needsClose: false,

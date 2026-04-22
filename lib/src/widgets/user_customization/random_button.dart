@@ -50,7 +50,7 @@ class EzConfigRandomizer extends StatelessWidget {
   Widget build(BuildContext context) => EzElevatedIconButton(
         onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(
+          builder: (BuildContext dCon) => EzAlertDialog(
             title: Text(
               dialogTitle ??
                   EzConfig.l10n.ssRandomize(EzConfig.isDark
@@ -72,7 +72,7 @@ class EzConfigRandomizer extends StatelessWidget {
                 await EzConfig.rebuildUI(onComplete);
               },
               confirmIsDestructive: true,
-              onDeny: () => Navigator.of(dContext).pop(),
+              onDeny: () => Navigator.of(dCon).pop(),
             ),
             needsClose: false,
           ),

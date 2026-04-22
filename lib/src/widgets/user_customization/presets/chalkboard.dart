@@ -22,7 +22,7 @@ class EzChalkboardConfig extends StatelessWidget {
     if (EzConfig.themeMode != ThemeMode.dark) {
       final bool doIt = await showDialog(
         context: context,
-        builder: (BuildContext dContext) => EzAlertDialog(
+        builder: (BuildContext dCon) => EzAlertDialog(
           title: Text(EzConfig.l10n.gAttention, textAlign: TextAlign.center),
           content: Text(
             EzConfig.l10n.ssDarkOnly,
@@ -30,9 +30,9 @@ class EzChalkboardConfig extends StatelessWidget {
           ),
           actions: ezActionPair(
             context: context,
-            onConfirm: () => Navigator.of(dContext).pop(true),
+            onConfirm: () => Navigator.of(dCon).pop(true),
             confirmIsDestructive: true,
-            onDeny: () => Navigator.of(dContext).pop(false),
+            onDeny: () => Navigator.of(dCon).pop(false),
           ),
           needsClose: false,
         ),

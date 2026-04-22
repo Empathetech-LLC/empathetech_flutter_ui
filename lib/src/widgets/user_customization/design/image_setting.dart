@@ -124,9 +124,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Get an image (path) from the user
     String? newPath = await ezModal<String?>(
       context: context,
-      builder: (BuildContext mContext) => StatefulBuilder(
+      builder: (BuildContext mCon) => StatefulBuilder(
         builder: (_, StateSetter setModal) => EzScrollView(
-          children: sourceOptions(mContext, setModal),
+          children: sourceOptions(mCon, setModal),
         ),
       ),
     );
@@ -148,22 +148,22 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (mounted) {
         final Future<dynamic> Function(String path) toDo = await showDialog(
           context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(
+          builder: (BuildContext dCon) => EzAlertDialog(
             title: Text(EzConfig.l10n.dsUseFull, textAlign: TextAlign.center),
             actions: <EzMaterialAction>[
               EzMaterialAction(
                 text: EzConfig.l10n.gYes,
-                onPressed: () => Navigator.of(dContext)
-                    .pop((_) => Future<dynamic>.value(true)),
+                onPressed: () =>
+                    Navigator.of(dCon).pop((_) => Future<dynamic>.value(true)),
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.dsCrop,
-                onPressed: () => Navigator.of(dContext).pop(editImage),
+                onPressed: () => Navigator.of(dCon).pop(editImage),
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.gCancel,
-                onPressed: () => Navigator.of(dContext)
-                    .pop((_) => Future<dynamic>.value(null)),
+                onPressed: () =>
+                    Navigator.of(dCon).pop((_) => Future<dynamic>.value(null)),
               ),
             ],
             needsClose: false,
@@ -262,7 +262,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Build the list of [ImageSource] options
-  List<Widget> sourceOptions(BuildContext mContext, StateSetter setModal) {
+  List<Widget> sourceOptions(BuildContext mCon, StateSetter setModal) {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
@@ -281,7 +281,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
 
             fromLocal = true;
-            if (mContext.mounted) Navigator.of(mContext).pop(picked);
+            if (mCon.mounted) Navigator.of(mCon).pop(picked);
           },
           icon: const Icon(Icons.camera),
           label: EzConfig.l10n.dsFromCamera,
@@ -302,7 +302,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
 
             fromLocal = true;
-            if (mContext.mounted) Navigator.of(mContext).pop(picked);
+            if (mCon.mounted) Navigator.of(mCon).pop(picked);
           },
           icon: const Icon(Icons.folder),
           label: EzConfig.l10n.dsFromFile,
@@ -317,7 +317,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       child: EzElevatedIconButton(
         onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext dContext) => EzAlertDialog(
+          builder: (BuildContext dCon) => EzAlertDialog(
             title: Text(
               EzConfig.l10n.gEnterURL,
               textAlign: TextAlign.center,
@@ -336,7 +336,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               context: context,
               confirmMsg: EzConfig.l10n.gApply,
               onConfirm: () async {
-                closeKeyboard(dContext);
+                closeKeyboard(dCon);
 
                 // Validate the URL
                 final String url = urlController.text.trim();
@@ -364,11 +364,11 @@ class _ImageSettingState extends State<EzImageSetting> {
                   stream.addListener(listener);
                   await completer.future;
                 } catch (e) {
-                  if (dContext.mounted) {
-                    Navigator.of(dContext).pop(null);
+                  if (dCon.mounted) {
+                    Navigator.of(dCon).pop(null);
                   }
-                  if (mContext.mounted) {
-                    Navigator.of(mContext).pop(null);
+                  if (mCon.mounted) {
+                    Navigator.of(mCon).pop(null);
                   }
 
                   final String errorMsg =
@@ -384,17 +384,17 @@ class _ImageSettingState extends State<EzImageSetting> {
                 }
 
                 // Pop dialogs
-                if (dContext.mounted) {
-                  Navigator.of(dContext).pop(url);
+                if (dCon.mounted) {
+                  Navigator.of(dCon).pop(url);
                 }
 
-                if (mContext.mounted) {
-                  Navigator.of(mContext).pop(url);
+                if (mCon.mounted) {
+                  Navigator.of(mCon).pop(url);
                 }
               },
               confirmIsDestructive: true,
               denyMsg: EzConfig.l10n.gCancel,
-              onDeny: () => Navigator.of(dContext).pop(null),
+              onDeny: () => Navigator.of(dCon).pop(null),
             ),
             needsClose: false,
           ),
@@ -426,8 +426,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                   currColor.toARGB32().toString(),
                 );
 
-                if (mContext.mounted) {
-                  Navigator.of(mContext).pop(currColor.toARGB32().toString());
+                if (mCon.mounted) {
+                  Navigator.of(mCon).pop(currColor.toARGB32().toString());
                 }
               },
               onDeny: doNothing,
@@ -448,8 +448,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             await fileCleanup();
             await EzConfig.remove(widget.configKey);
 
-            if (mContext.mounted) {
-              Navigator.of(mContext).pop(defaultPath);
+            if (mCon.mounted) {
+              Navigator.of(mCon).pop(defaultPath);
             }
           },
           icon: const Icon(Icons.refresh),
@@ -467,8 +467,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             await fileCleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
 
-            if (mContext.mounted) {
-              Navigator.of(mContext).pop(noImageValue);
+            if (mCon.mounted) {
+              Navigator.of(mCon).pop(noImageValue);
             }
           },
           icon: const Icon(Icons.clear),

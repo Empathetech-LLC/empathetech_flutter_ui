@@ -13,6 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:country_flags/country_flags.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -178,6 +179,79 @@ void ezCloseAll() {
   }
 }
 
+/// Wraps a [ColorPicker] in an [EzAlertDialog]
+Future<dynamic> ezColorPicker(
+  BuildContext context, {
+  String? title,
+  required Color startColor,
+  required void Function(Color chosenColor) onColorChange,
+  String? confirmMsg,
+  required void Function() onConfirm,
+  String? denyMsg,
+  required void Function() onDeny,
+}) =>
+    ezModal(
+      isDismissible: false,
+      showDragHandle: false,
+      enableDrag: false,
+      context: context,
+      builder: (BuildContext mCon) => EzScrollView(children: <Widget>[
+        EzConfig.spacer,
+
+        // The magic
+        ColorPicker(
+          color: startColor,
+          mainAxisSize: MainAxisSize.min,
+          padding: EdgeInsets.zero,
+          spacing: EzConfig.spacing / 2,
+          runSpacing: EzConfig.spacing / 2,
+          columnSpacing: EzConfig.spacing,
+          pickersEnabled: const <ColorPickerType, bool>{
+            ColorPickerType.both: false,
+            ColorPickerType.primary: false,
+            ColorPickerType.accent: false,
+            ColorPickerType.bw: false,
+            ColorPickerType.custom: false,
+            ColorPickerType.customSecondary: false,
+            ColorPickerType.wheel: true,
+          },
+          onColorChanged: onColorChange,
+          showRecentColors: true,
+          enableOpacity: true,
+          opacityThumbRadius: min(EzConfig.padding, 25.0),
+          opacityTrackHeight: min(EzConfig.padding * 2, 50.0),
+          showColorCode: true,
+        ),
+        EzConfig.margin,
+
+        // The choice(s)
+        EzRow(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            EzTextIconButton(
+              icon: const Icon(Icons.cancel),
+              label: denyMsg ?? EzConfig.l10n.gCancel,
+              onPressed: () {
+                onDeny();
+                if (mCon.mounted) Navigator.of(mCon).pop();
+              },
+            ),
+            EzConfig.rowSpacer,
+            EzTextIconButton(
+              icon: const Icon(Icons.check),
+              label: confirmMsg ?? EzConfig.l10n.gApply,
+              onPressed: () {
+                onConfirm();
+                if (mCon.mounted) Navigator.of(mCon).pop();
+              },
+            ),
+          ],
+        ),
+        EzConfig.separator,
+      ]),
+    );
+
 /// Returns an appropriate width for a [DropdownMenu]
 double ezDropdownWidth({
   required BuildContext context,
@@ -257,6 +331,30 @@ String ezLocaleName(Locale locale, BuildContext context) {
     default:
       return 'Language';
   }
+}
+
+/// [ezLog] the passed message and display an [EzAlertDialog] to notify the user
+Future<dynamic> ezLogAlert(
+  BuildContext context, {
+  String? title,
+  required String message,
+  List<Widget>? customActions,
+  bool needsClose = true,
+}) {
+  ezLog(message);
+
+  return showDialog(
+    context: context,
+    builder: (_) => EzAlertDialog(
+      title: Text(
+        title ?? EzConfig.l10n.gAttention,
+        textAlign: TextAlign.center,
+      ),
+      contents: <Widget>[Text(message, textAlign: TextAlign.center)],
+      actions: customActions,
+      needsClose: needsClose,
+    ),
+  );
 }
 
 /// A [Page] animator based on [EzConfig]

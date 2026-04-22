@@ -64,7 +64,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         child: EzElevatedIconButton(
           onPressed: () => ezModal(
             context: context,
-            builder: (BuildContext mContext) => EzScrollView(
+            builder: (BuildContext mCon) => EzScrollView(
               children: <Widget>[
                 Wrap(
                   children: locales
@@ -75,7 +75,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                             onPressed: () async {
                               // Check for no change
                               if (locale == EzConfig.locale) {
-                                Navigator.of(mContext).pop();
+                                Navigator.of(mCon).pop();
                                 return;
                               }
 
@@ -99,7 +99,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                               inDistress: widget.inDistress
                                   .contains(locale.countryCode),
                             ),
-                            label: ezLocaleName(locale, mContext),
+                            label: ezLocaleName(locale, mCon),
                             labelPadding: false,
                           ),
                         ),
