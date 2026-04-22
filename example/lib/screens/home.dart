@@ -696,7 +696,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         setState(() => canGen = true);
                       }
                     },
-                    icon: const Icon(Icons.create),
+                    icon: const Icon(Icons.build),
                     label: l10n.csGenerate,
                   ),
                 ],
