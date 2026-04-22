@@ -91,7 +91,10 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
   void redraw() => setState(() {});
 
   @override
-  Widget build(BuildContext context) => EzScrollView(children: <Widget>[
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
         EzConfig.spacer,
 
         // Right/left
@@ -141,5 +144,7 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
           saveSkip: widget.saveSkip,
           dynamicTitle: widget.resetTitle,
         ),
-      ]);
+      ],
+    );
+  }
 }
