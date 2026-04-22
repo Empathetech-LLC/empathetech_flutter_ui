@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+// TODO: get code gen up to date with everthing you've done
+// TODO: figure out how to get the sub sections to highlight properly when moving between color/text and design (with adv and without adv)
+
 class SettingsHubScreen extends StatelessWidget {
   /// Optionally override the starting position
   final int? targetPass;
