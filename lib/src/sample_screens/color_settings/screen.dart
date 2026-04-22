@@ -9,9 +9,9 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzColorSettings extends StatefulWidget {
-  /// Optional starting target
-  final bool? advanced;
+class EzColorSettings extends StatelessWidget {
+  /// Current sub-page
+  final EzSubSetting target;
 
   /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
   final void Function() onUpdate;
@@ -62,7 +62,7 @@ class EzColorSettings extends StatefulWidget {
   const EzColorSettings({
     // Shared
     super.key,
-    this.advanced,
+    required this.target,
     required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
     required this.appName,
@@ -98,61 +98,38 @@ class EzColorSettings extends StatefulWidget {
   });
 
   @override
-  State<EzColorSettings> createState() => _EzColorSettingsState();
-}
-
-class _EzColorSettingsState extends State<EzColorSettings> {
-  // Define the build data //
-
-  late EzSubSetting currentTab = (widget.advanced == null)
-      ? (EzConfig.get(advancedColorsKey) == true
-          ? EzSubSetting.advColor
-          : EzSubSetting.qckColor)
-      : (widget.advanced! ? EzSubSetting.advColor : EzSubSetting.qckColor);
-
-  // Set the page title //
-
-  @override
-  void initState() {
-    super.initState();
-    ezWindowNamer(EzConfig.l10n.csPageTitle);
-  }
-
-  // Return the build //
-
-  @override
   Widget build(BuildContext context) {
     final String userColorsKey =
         EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
     final List<String> defaultList =
-        EzConfig.isDark ? widget.darkStarterSet : widget.lightStarterSet;
+        EzConfig.isDark ? darkStarterSet : lightStarterSet;
 
-    return (currentTab == EzSubSetting.qckColor)
+    return (target == EzSubSetting.qckColor)
         ? QuickColorSettings(
-            onUpdate: widget.onUpdate,
-            quickHeader: widget.quickHeader,
-            quickFooter: widget.quickFooter,
-            resetSpacer: widget.resetSpacer,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-            resetExtraDark: widget.resetExtraDark,
-            resetExtraLight: widget.resetExtraLight,
-            resetSkip: widget.resetSkip,
-            saveSkip: widget.saveSkip,
+            onUpdate: onUpdate,
+            quickHeader: quickHeader,
+            quickFooter: quickFooter,
+            resetSpacer: resetSpacer,
+            appName: appName,
+            androidPackage: androidPackage,
+            resetExtraDark: resetExtraDark,
+            resetExtraLight: resetExtraLight,
+            resetSkip: resetSkip,
+            saveSkip: saveSkip,
           )
         : AdvancedColorSettings(
-            onUpdate: widget.onUpdate,
+            onUpdate: onUpdate,
             userColorsKey: userColorsKey,
             defaultList: defaultList,
             currList:
                 EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
-            resetSpacer: widget.resetSpacer,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-            resetExtraDark: widget.resetExtraDark,
-            resetExtraLight: widget.resetExtraLight,
-            resetSkip: widget.resetSkip,
-            saveSkip: widget.saveSkip,
+            resetSpacer: resetSpacer,
+            appName: appName,
+            androidPackage: androidPackage,
+            resetExtraDark: resetExtraDark,
+            resetExtraLight: resetExtraLight,
+            resetSkip: resetSkip,
+            saveSkip: saveSkip,
           );
   }
 }

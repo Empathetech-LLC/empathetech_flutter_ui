@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EzTextSettings extends StatelessWidget {
-  /// Optional starting target
-  final bool? advanced;
+  /// Current sub-page
+  final EzSubSetting target;
 
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
@@ -20,11 +20,11 @@ class EzTextSettings extends StatelessWidget {
   /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
 
-  /// [EzResetButton.androidPackage] passthrough
-  final String? androidPackage;
-
   /// [EzResetButton.appName] passthrough
   final String appName;
+
+  /// [EzResetButton.androidPackage] passthrough
+  final String? androidPackage;
 
   /// Optional additional reset keys for the dark theme
   /// [allTextKeys] and [darkOnSurfaceKey] are included by default
@@ -70,7 +70,7 @@ class EzTextSettings extends StatelessWidget {
   const EzTextSettings({
     // Shared
     super.key,
-    this.advanced,
+    required this.target,
     required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
     this.androidPackage,
@@ -114,7 +114,7 @@ class EzTextSettings extends StatelessWidget {
         ],
         child: _TextSettings(
           // Shared
-          advanced: advanced,
+          target: target,
           onUpdate: onUpdate,
 
           resetSpacer: resetSpacer,
@@ -138,31 +138,25 @@ class EzTextSettings extends StatelessWidget {
       );
 }
 
-class _TextSettings extends StatefulWidget {
-  // Shared
-  final bool? advanced;
+class _TextSettings extends StatelessWidget {
+  final EzSubSetting target;
   final void Function() onUpdate;
-
   final Widget resetSpacer;
-  final String? androidPackage;
   final String appName;
+  final String? androidPackage;
   final Set<String>? extraDark;
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
-
-  // Quick
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockHeader;
   final Widget textBlockFooter;
   final bool showOpacity;
   final List<Widget>? moreQuickFooterSettings;
-
-  // Advanced
   final bool showSpacing;
 
   const _TextSettings({
-    required this.advanced,
+    required this.target,
     required this.onUpdate,
     required this.resetSpacer,
     required this.androidPackage,
@@ -180,80 +174,41 @@ class _TextSettings extends StatefulWidget {
   });
 
   @override
-  State<_TextSettings> createState() => _TextSettingsState();
-}
-
-class _TextSettingsState extends State<_TextSettings> {
-  // Define the build data //
-
-  late final EzDisplayStyleProvider displayProvider =
-      Provider.of<EzDisplayStyleProvider>(context);
-  late final EzHeadlineStyleProvider headlineProvider =
-      Provider.of<EzHeadlineStyleProvider>(context);
-  late final EzTitleStyleProvider titleProvider =
-      Provider.of<EzTitleStyleProvider>(context);
-  late final EzBodyStyleProvider bodyProvider =
-      Provider.of<EzBodyStyleProvider>(context);
-  late final EzLabelStyleProvider labelProvider =
-      Provider.of<EzLabelStyleProvider>(context);
-
-  late EzSubSetting currentTab = (widget.advanced == null)
-      ? (EzConfig.get(advancedTextKey) == true
-          ? EzSubSetting.advText
-          : EzSubSetting.qckText)
-      : (widget.advanced! ? EzSubSetting.advText : EzSubSetting.qckText);
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
-  // Init //
-
-  @override
-  void initState() {
-    super.initState();
-    ezWindowNamer(EzConfig.l10n.tsPageTitle);
-  }
-
-  // Return the build //
-
-  @override
-  Widget build(BuildContext context) => (currentTab == EzSubSetting.qckText)
+  Widget build(BuildContext context) => (target == EzSubSetting.qckText)
       ? QuickTextSettings(
-          displayProvider: displayProvider,
-          headlineProvider: headlineProvider,
-          titleProvider: titleProvider,
-          bodyProvider: bodyProvider,
-          labelProvider: labelProvider,
-          onUpdate: redraw,
-          moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
-          textBlockHeader: widget.textBlockHeader,
-          textBlockFooter: widget.textBlockFooter,
-          showOpacity: widget.showOpacity,
-          moreQuickFooterSettings: widget.moreQuickFooterSettings,
-          resetSpacer: widget.resetSpacer,
-          extraDark: widget.extraDark,
-          extraLight: widget.extraLight,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-          resetSkip: widget.resetSkip,
-          saveSkip: widget.saveSkip,
+          displayProvider: Provider.of<EzDisplayStyleProvider>(context),
+          headlineProvider: Provider.of<EzHeadlineStyleProvider>(context),
+          titleProvider: Provider.of<EzTitleStyleProvider>(context),
+          bodyProvider: Provider.of<EzBodyStyleProvider>(context),
+          labelProvider: Provider.of<EzLabelStyleProvider>(context),
+          onUpdate: onUpdate,
+          moreQuickHeaderSettings: moreQuickHeaderSettings,
+          textBlockHeader: textBlockHeader,
+          textBlockFooter: textBlockFooter,
+          showOpacity: showOpacity,
+          moreQuickFooterSettings: moreQuickFooterSettings,
+          resetSpacer: resetSpacer,
+          extraDark: extraDark,
+          extraLight: extraLight,
+          appName: appName,
+          androidPackage: androidPackage,
+          resetSkip: resetSkip,
+          saveSkip: saveSkip,
         )
       : AdvancedTextSettings(
-          displayProvider: displayProvider,
-          headlineProvider: headlineProvider,
-          titleProvider: titleProvider,
-          bodyProvider: bodyProvider,
-          labelProvider: labelProvider,
-          onUpdate: redraw,
-          showSpacing: widget.showSpacing,
-          resetSpacer: widget.resetSpacer,
-          extraDark: widget.extraDark,
-          extraLight: widget.extraLight,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-          resetSkip: widget.resetSkip,
-          saveSkip: widget.saveSkip,
+          displayProvider: Provider.of<EzDisplayStyleProvider>(context),
+          headlineProvider: Provider.of<EzHeadlineStyleProvider>(context),
+          titleProvider: Provider.of<EzTitleStyleProvider>(context),
+          bodyProvider: Provider.of<EzBodyStyleProvider>(context),
+          labelProvider: Provider.of<EzLabelStyleProvider>(context),
+          onUpdate: onUpdate,
+          showSpacing: showSpacing,
+          resetSpacer: resetSpacer,
+          extraDark: extraDark,
+          extraLight: extraLight,
+          appName: appName,
+          androidPackage: androidPackage,
+          resetSkip: resetSkip,
+          saveSkip: saveSkip,
         );
 }

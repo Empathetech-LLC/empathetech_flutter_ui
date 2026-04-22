@@ -10,9 +10,9 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-class EzDesignSettings extends StatefulWidget {
-  /// Optionally start on the page design tab
-  final bool? pageTab;
+class EzDesignSettings extends StatelessWidget {
+  /// Current sub-page
+  final EzSubSetting target;
 
   /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
   final void Function() onUpdate;
@@ -42,11 +42,11 @@ class EzDesignSettings extends StatefulWidget {
   final String? lightBackgroundCredits;
 
   /// Optional additional settings at the bottom of the button design tab (above the reset button)
-  /// BYO leading spacer, trailing is [resetSpacer]
+  /// BYO leading spacer, trailing is [resetSpacerButton]
   final List<Widget>? appendButton;
 
   /// Optional additional settings at the bottom of the page design tab (above the reset button)
-  /// BYO leading spacer, trailing is [resetSpacer]
+  /// BYO leading spacer, trailing is [resetSpacerPage]
   final List<Widget>? appendPage;
 
   /// Spacer before the [EzResetButton]
@@ -89,14 +89,11 @@ class EzDesignSettings extends StatefulWidget {
   /// [EzResetButton.saveSkip] passthrough
   final Set<String>? saveSkipPage;
 
-  /// Defaults to [EzSeparator]
-  final Widget trail;
-
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
-    this.pageTab,
+    required this.target,
     required this.onUpdate,
     this.prependButton,
     this.prependPage,
@@ -118,60 +115,36 @@ class EzDesignSettings extends StatefulWidget {
     this.saveSkipButton,
     this.resetSkipPage,
     this.saveSkipPage,
-    this.trail = const EzSeparator(),
   });
 
   @override
-  State<EzDesignSettings> createState() => _EzDesignSettingsState();
-}
-
-class _EzDesignSettingsState extends State<EzDesignSettings> {
-  // Define the build data //
-
-  late EzSubSetting currentTab = (widget.pageTab == null)
-      ? (EzConfig.get(pageTabKey) == true
-          ? EzSubSetting.pagDesign
-          : EzSubSetting.butDesign)
-      : (widget.pageTab! ? EzSubSetting.pagDesign : EzSubSetting.butDesign);
-
-  // Set the page title //
-
-  @override
-  void initState() {
-    super.initState();
-    ezWindowNamer(EzConfig.l10n.dsPageTitle);
-  }
-
-  // Return the build //
-
-  @override
-  Widget build(BuildContext context) => (currentTab == EzSubSetting.butDesign)
+  Widget build(BuildContext context) => (target == EzSubSetting.butDesign)
       ? ButtonDesign(
-          onUpdate: widget.onUpdate,
-          prepend: widget.prependButton,
-          append: widget.appendButton,
-          resetSpacer: widget.resetSpacerButton,
-          resetExtraDark: widget.resetExtraDarkButton,
-          resetExtraLight: widget.resetExtraLightButton,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-          resetSkip: widget.resetSkipButton,
-          saveSkip: widget.saveSkipButton,
+          onUpdate: onUpdate,
+          prepend: prependButton,
+          append: appendButton,
+          resetSpacer: resetSpacerButton,
+          resetExtraDark: resetExtraDarkButton,
+          resetExtraLight: resetExtraLightButton,
+          appName: appName,
+          androidPackage: androidPackage,
+          resetSkip: resetSkipButton,
+          saveSkip: saveSkipButton,
         )
       : PageDesign(
-          onUpdate: widget.onUpdate,
-          prepend: widget.prependPage,
-          includePageTransitions: widget.includePageTransitions,
-          includeBackgroundImage: widget.includeBackgroundImage,
-          darkBackgroundCredits: widget.darkBackgroundCredits,
-          lightBackgroundCredits: widget.lightBackgroundCredits,
-          append: widget.appendPage,
-          resetSpacer: widget.resetSpacerPage,
-          resetExtraDark: widget.resetExtraDarkPage,
-          resetExtraLight: widget.resetExtraLightPage,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-          resetSkip: widget.resetSkipPage,
-          saveSkip: widget.saveSkipPage,
+          onUpdate: onUpdate,
+          prepend: prependPage,
+          includePageTransitions: includePageTransitions,
+          includeBackgroundImage: includeBackgroundImage,
+          darkBackgroundCredits: darkBackgroundCredits,
+          lightBackgroundCredits: lightBackgroundCredits,
+          append: appendPage,
+          resetSpacer: resetSpacerPage,
+          resetExtraDark: resetExtraDarkPage,
+          resetExtraLight: resetExtraLightPage,
+          appName: appName,
+          androidPackage: androidPackage,
+          resetSkip: resetSkipPage,
+          saveSkip: saveSkipPage,
         );
 }

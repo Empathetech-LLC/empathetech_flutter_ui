@@ -23,9 +23,9 @@ class EzSettingsSection {
   final EzSubSetting Function() fromStorage;
 
   /// Page content for [EzSettingsHub]
-  final Widget build;
+  final Widget Function(EzSubSetting) build;
 
-  /// Wrapper/helper class for building [EzSettingsHub]
+  /// Custom class for building [EzSettingsHub]
   const EzSettingsSection({
     required this.position,
     required this.title,
@@ -90,6 +90,7 @@ enum EzSubSetting {
   final bool bothable;
   final (String, bool) write;
 
+  /// Custom enum for populating [EzSettingsSection]
   const EzSubSetting({
     required this.path,
     required this.bothable,

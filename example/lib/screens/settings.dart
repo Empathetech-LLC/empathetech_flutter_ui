@@ -41,7 +41,7 @@ class SettingsHubScreen extends StatelessWidget {
               ),
               subSettings: <EzSubSetting>[],
               fromStorage: () => EzSubSetting.blank,
-              build: const EzGlobalSettings(
+              build: (_) => const EzGlobalSettings(
                 appName: appName,
                 androidPackage: androidPackage,
               ),
@@ -63,8 +63,8 @@ class SettingsHubScreen extends StatelessWidget {
               fromStorage: () => EzConfig.get(advancedColorsKey) == true
                   ? EzSubSetting.advColor
                   : EzSubSetting.qckColor,
-              build: EzColorSettings(
-                advanced: advancedPass,
+              build: (EzSubSetting subSec) => EzColorSettings(
+                target: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
@@ -87,8 +87,8 @@ class SettingsHubScreen extends StatelessWidget {
               fromStorage: () => EzConfig.get(pageTabKey) == true
                   ? EzSubSetting.pagDesign
                   : EzSubSetting.butDesign,
-              build: EzDesignSettings(
-                pageTab: advancedPass,
+              build: (EzSubSetting subSec) => EzDesignSettings(
+                target: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
@@ -111,8 +111,8 @@ class SettingsHubScreen extends StatelessWidget {
               fromStorage: () => EzConfig.get(advancedTextKey) == true
                   ? EzSubSetting.advText
                   : EzSubSetting.qckText,
-              build: EzTextSettings(
-                advanced: advancedPass,
+              build: (EzSubSetting subSec) => EzTextSettings(
+                target: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,

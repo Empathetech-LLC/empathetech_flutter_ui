@@ -23,8 +23,9 @@ class EzSettingsHub extends StatefulWidget {
 }
 
 class _EzSettingsHubState extends State<EzSettingsHub> {
-  late EzSettingsSection curr = widget.pages[widget.target ?? EzConfig.hubPos];
-  late EzSubSetting currSub = curr.fromStorage();
+  late EzSettingsSection currSection =
+      widget.pages[widget.target ?? EzConfig.hubPos];
+  late EzSubSetting currSubSec = currSection.fromStorage();
   int delta = 0;
 
   @override
@@ -34,7 +35,7 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
       children: <Widget>[
         // Section nav
         EzText(
-          curr.title,
+          currSection.title,
           style: EzConfig.styles.labelLarge,
           textAlign: TextAlign.center,
         ),
@@ -45,19 +46,19 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
                     icon: type.icon,
                   ))
               .toList(),
-          selected: <EzSettingsSection>{curr},
+          selected: <EzSettingsSection>{currSection},
           showSelectedIcon: false,
           onSelectionChanged: (Set<EzSettingsSection> selected) async {
             final EzSettingsSection choice = selected.first;
-            delta = curr.position - choice.position;
+            delta = currSection.position - choice.position;
 
             await EzConfig.setHubPos(choice.position);
-            setState(() => curr = choice);
+            setState(() => currSection = choice);
           },
         ),
 
         // Sub-section nav
-        if (curr.subSettings.isNotEmpty) ...<Widget>[
+        if (currSection.subSettings.isNotEmpty) ...<Widget>[
           EzConfig.margin,
           EzScrollView(
             scrollDirection: Axis.horizontal,
@@ -67,25 +68,25 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
             children: <Widget>[
               // Quick/Advanced selector
               SegmentedButton<EzSubSetting>(
-                segments: (curr.subSettings)
+                segments: (currSection.subSettings)
                     .map((EzSubSetting sub) => ButtonSegment<EzSubSetting>(
                           value: sub,
                           label: Text(sub.label),
                         ))
                     .toList(),
-                selected: <EzSubSetting>{currSub},
+                selected: <EzSubSetting>{currSubSec},
                 showSelectedIcon: false,
                 onSelectionChanged: (Set<EzSubSetting> selected) async {
                   final EzSubSetting choice = selected.first;
 
                   await EzConfig.setBool(choice.write.$1, choice.write.$2);
-                  setState(() => currSub = choice);
+                  setState(() => currSubSec = choice);
                 },
               ),
 
               // Update both toggle
               EzConfig.rowMargin,
-              EzThemeCoin(doNothing, enabled: currSub.bothable),
+              EzThemeCoin(doNothing, enabled: currSubSec.bothable),
             ],
           ),
           EzDivider(height: EzConfig.spacing),
@@ -99,14 +100,13 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
 
         // Current section
         AnimatedSwitcher(
-          key: ValueKey<int>(EzConfig.seed),
           duration: ezAnimDuration(),
           switchInCurve: Curves.easeInOut,
           switchOutCurve: Curves.easeInOut,
           transitionBuilder: (Widget w, Animation<double> a) =>
               ezTransitionsBuilder(context, a, a, w),
           // TODO: using same animation works?
-          child: curr.build,
+          child: currSection.build(currSubSec),
         ),
         EzConfig.separator
       ],
