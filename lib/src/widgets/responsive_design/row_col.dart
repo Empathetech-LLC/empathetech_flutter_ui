@@ -49,7 +49,7 @@ class EzRowCol extends StatelessWidget {
     this.breakpoint = ScreenSize.small,
     bool reverseHands = false,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
-    MainAxisSize mainAxisSize = MainAxisSize.max,
+    MainAxisSize mainAxisSize = MainAxisSize.min,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
     TextDirection? textDirection,
     VerticalDirection verticalDirection = VerticalDirection.down,

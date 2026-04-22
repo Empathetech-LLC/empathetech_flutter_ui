@@ -48,7 +48,7 @@ class PageDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+    return EzScrollView(children: <Widget>[
       // Optional 'before' settings
       if (prepend != null) ...prepend!,
 
@@ -77,7 +77,6 @@ class PageDesign extends StatelessWidget {
         EzScrollView(
           scrollDirection: Axis.horizontal,
           startCentered: true,
-          mainAxisSize: MainAxisSize.min,
           child: EzConfig.isDark
               ? EzImageSetting(
                   onUpdate,
@@ -181,7 +180,6 @@ class _AnimDurSetting extends StatelessWidget {
           context: context,
           builder: (_) => StatefulBuilder(
             builder: (_, StateSetter setModal) => EzScrollView(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
                 SizedBox(
@@ -374,7 +372,6 @@ class _PageTransitionSetting extends StatelessWidget {
                     if (choice != null) setModal(() => currType = choice);
                   },
                   child: EzScrollView(
-                    mainAxisSize: MainAxisSize.min,
                     scrollDirection: Axis.horizontal,
                     thumbVisibility: false,
                     showScrollHint: true,

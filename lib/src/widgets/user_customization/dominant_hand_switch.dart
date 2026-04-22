@@ -43,7 +43,6 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   Widget build(BuildContext context) => EzScrollView(
         scrollDirection: Axis.horizontal,
         reverseHands: true,
-        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Label
           EzText(

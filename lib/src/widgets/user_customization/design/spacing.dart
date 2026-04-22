@@ -72,7 +72,6 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
           context: context,
           builder: (_) => StatefulBuilder(
             builder: (_, StateSetter setModal) => EzScrollView(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
                 Semantics(
@@ -107,7 +106,6 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
 
                         // Horizontal preview
                         EzScrollView(
-                          mainAxisSize: MainAxisSize.min,
                           scrollDirection: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

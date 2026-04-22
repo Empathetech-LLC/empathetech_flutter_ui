@@ -106,7 +106,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
           children: <Widget>[
             EzScrollView(
               scrollDirection: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Minus
                 if (widget.plusMinus) ...<Widget>[

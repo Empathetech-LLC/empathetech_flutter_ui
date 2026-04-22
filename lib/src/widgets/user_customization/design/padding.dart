@@ -72,7 +72,6 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
           context: context,
           builder: (_) => StatefulBuilder(
             builder: (_, StateSetter setModal) => EzScrollView(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
                 Semantics(
@@ -98,7 +97,6 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                         // Preview
                         EzConfig.spacer,
                         EzScrollView(
-                          mainAxisSize: MainAxisSize.min,
                           scrollDirection: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

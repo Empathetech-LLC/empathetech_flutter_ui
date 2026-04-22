@@ -65,7 +65,6 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
           builder: (_) => StatefulBuilder(
             builder: (BuildContext modalContext, StateSetter setModal) =>
                 EzScrollView(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Preview
                 Semantics(

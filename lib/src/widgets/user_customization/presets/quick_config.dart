@@ -45,8 +45,7 @@ class EzQuickConfig extends StatelessWidget {
     return EzElevatedIconButton(
       onPressed: () => ezModal(
         context: context,
-        builder: (_) =>
-            EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
+        builder: (_) => EzScrollView(children: <Widget>[
           // Choices
           Wrap(
             alignment: WrapAlignment.center,
