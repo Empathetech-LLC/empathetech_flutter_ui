@@ -467,6 +467,7 @@ Widget ezTransitionBuilder(
   Animation<double> animation,
   Widget child, {
   EzPageTransition? force,
+  bool reverse = false,
 }) {
   // Check for no animation
   if (EzConfig.animDur < 1) return child;
@@ -474,6 +475,7 @@ Widget ezTransitionBuilder(
   Widget smartFade(Widget child) => (EzConfig.fadedTransition)
       ? FadeTransition(opacity: animation, child: child)
       : child;
+  final double mod = reverse ? -1.0 : 1.0;
 
   switch (force ?? EzConfig.pageTransition) {
     // System
@@ -482,7 +484,13 @@ Widget ezTransitionBuilder(
         // Android -> Zoom
         case TargetPlatform.android:
           return ScaleTransition(
-            scale: CurveTween(curve: Curves.easeInOut).animate(animation),
+            scale: Tween<double>(
+              begin: reverse ? 2.0 : 0.0,
+              end: 1.0,
+            ).animate(CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            )),
             alignment: Alignment.center,
             child: smartFade(child),
           );
@@ -491,7 +499,7 @@ Widget ezTransitionBuilder(
         default:
           return SlideTransition(
             position: Tween<Offset>(
-              begin: Offset(EzConfig.isLTR ? 1.0 : -1.0, 0.0),
+              begin: Offset((EzConfig.isLTR ? 1.0 : -1.0) * mod, 0.0),
               end: Offset.zero,
             ).animate(CurvedAnimation(
               parent: animation,
@@ -509,14 +517,14 @@ Widget ezTransitionBuilder(
             ? Transform(
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.0001)
-                  ..rotateY((1 - animation.value) * (pi / 2)),
+                  ..rotateY((1 - animation.value) * (pi / 2) * mod),
                 alignment: Alignment.centerLeft,
                 child: smartFade(child),
               )
             : Transform(
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.0001)
-                  ..rotateY((1 - animation.value) * -(pi / 2)),
+                  ..rotateY((1 - animation.value) * -(pi / 2) * mod),
                 alignment: Alignment.centerRight,
                 child: smartFade(child),
               ),
@@ -530,7 +538,7 @@ Widget ezTransitionBuilder(
         builder: (_, __) => Transform(
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.0001)
-            ..rotateX((1 - animation.value) * -(pi / 2)),
+            ..rotateX((1 - animation.value) * -(pi / 2) * mod),
           alignment: Alignment.topCenter,
           child: smartFade(child),
         ),
@@ -540,7 +548,13 @@ Widget ezTransitionBuilder(
     // Rotate
     case EzPageTransition.rotate:
       return RotationTransition(
-        turns: CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+        turns: Tween<double>(
+          begin: mod,
+          end: 0.0,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
         child: smartFade(child),
       );
 
@@ -548,7 +562,7 @@ Widget ezTransitionBuilder(
     case EzPageTransition.slideX:
       return SlideTransition(
         position: Tween<Offset>(
-          begin: Offset(EzConfig.isLTR ? 1.0 : -1.0, 0.0),
+          begin: Offset((EzConfig.isLTR ? 1.0 : -1.0) * mod, 0.0),
           end: Offset.zero,
         ).animate(CurvedAnimation(
           parent: animation,
@@ -561,7 +575,7 @@ Widget ezTransitionBuilder(
     case EzPageTransition.slideY:
       return SlideTransition(
         position: Tween<Offset>(
-          begin: const Offset(0.0, 1.0),
+          begin: Offset(0.0, mod),
           end: Offset.zero,
         ).animate(CurvedAnimation(
           parent: animation,
@@ -573,7 +587,13 @@ Widget ezTransitionBuilder(
     // Zoom
     case EzPageTransition.zoom:
       return ScaleTransition(
-        scale: CurveTween(curve: Curves.easeInOut).animate(animation),
+        scale: Tween<double>(
+          begin: reverse ? 2.0 : 0.0,
+          end: 1.0,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
         alignment: Alignment.center,
         child: smartFade(child),
       );
