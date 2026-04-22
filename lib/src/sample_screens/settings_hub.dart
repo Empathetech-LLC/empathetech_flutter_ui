@@ -57,39 +57,59 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
         ),
 
         // Sub-section nav
-        if (currSection.subSettings.isNotEmpty) ...<Widget>[
-          EzConfig.margin,
-          EzScrollView(
-            scrollDirection: Axis.horizontal,
-            reverseHands: true,
-            showScrollHint: true,
-            children: <Widget>[
-              // Quick/Advanced selector
-              SegmentedButton<EzSubSetting>(
-                segments: (currSection.subSettings)
-                    .map((EzSubSetting sub) => ButtonSegment<EzSubSetting>(
-                          value: sub,
-                          label: Text(sub.label),
-                        ))
-                    .toList(),
-                selected: <EzSubSetting>{currSubSec},
-                showSelectedIcon: false,
-                onSelectionChanged: (Set<EzSubSetting> selected) async {
-                  final EzSubSetting choice = selected.first;
-
-                  await EzConfig.setBool(choice.write.$1, choice.write.$2);
-                  setState(() => currSubSec = choice);
-                },
-              ),
-
-              // Update both toggle
-              EzConfig.rowMargin,
-              EzThemeCoin(doNothing, enabled: currSubSec.bothable),
-            ],
+        AnimatedSwitcher(
+          duration: ezAnimDuration(mod: 0.75),
+          switchInCurve: Curves.easeInOut,
+          switchOutCurve: Curves.easeInOut,
+          transitionBuilder: (Widget w, Animation<double> a) => SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.0, -1.0),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(parent: a, curve: Curves.easeInOut)),
+            child: FadeTransition(opacity: a, child: w),
           ),
-          EzDivider(height: EzConfig.spacing),
-          EzConfig.spacer,
-        ],
+          child: currSection.subSettings.isEmpty
+              ? const SizedBox.shrink()
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    EzConfig.margin,
+                    EzScrollView(
+                      scrollDirection: Axis.horizontal,
+                      reverseHands: true,
+                      showScrollHint: true,
+                      children: <Widget>[
+                        // Quick/Advanced selector
+                        SegmentedButton<EzSubSetting>(
+                          segments: (currSection.subSettings)
+                              .map((EzSubSetting sub) =>
+                                  ButtonSegment<EzSubSetting>(
+                                    value: sub,
+                                    label: Text(sub.label),
+                                  ))
+                              .toList(),
+                          selected: <EzSubSetting>{currSubSec},
+                          showSelectedIcon: false,
+                          onSelectionChanged:
+                              (Set<EzSubSetting> selected) async {
+                            final EzSubSetting choice = selected.first;
+
+                            await EzConfig.setBool(
+                                choice.write.$1, choice.write.$2);
+                            setState(() => currSubSec = choice);
+                          },
+                        ),
+
+                        // Update both toggle
+                        EzConfig.rowMargin,
+                        EzThemeCoin(doNothing, enabled: currSubSec.bothable),
+                      ],
+                    ),
+                    EzDivider(height: EzConfig.spacing),
+                    EzConfig.spacer,
+                  ],
+                ),
+        ),
 
         // Current section
         EzFauxCarousel(
