@@ -369,31 +369,15 @@ Widget ezTransitionsBuilder(
     // System
     case EzPageTransition.system:
       switch (EzConfig.platform) {
-        // Android
+        // Android -> Zoom
         case TargetPlatform.android:
           return ScaleTransition(
             scale: CurveTween(curve: Curves.easeInOut).animate(animation),
             alignment: Alignment.center,
-            child: child,
+            child: smartFade(child),
           );
 
-        // Apple
-        case TargetPlatform.iOS:
-        case TargetPlatform.macOS:
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: EzConfig.isLTR
-                  ? const Offset(1.0, 0.0)
-                  : const Offset(-1.0, 0.0),
-              end: Offset.zero,
-            ).animate(CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOut,
-            )),
-            child: child,
-          );
-
-        // Linux && Windows (web is auto-none)
+        // Other (web is auto-none) -> Horizontal slide
         default:
           return SlideTransition(
             position: Tween<Offset>(
@@ -405,7 +389,7 @@ Widget ezTransitionsBuilder(
               parent: animation,
               curve: Curves.easeInOut,
             )),
-            child: FadeTransition(opacity: animation, child: child),
+            child: smartFade(child),
           );
       }
 
@@ -454,27 +438,17 @@ Widget ezTransitionsBuilder(
 
     // Horizontal slide
     case EzPageTransition.slideX:
-      return EzConfig.isLTR
-          ? SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(1.0, 0.0),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeInOut,
-              )),
-              child: smartFade(child),
-            )
-          : SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(-1.0, 0.0),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeInOut,
-              )),
-              child: smartFade(child),
-            );
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin:
+              EzConfig.isLTR ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
+        child: smartFade(child),
+      );
 
     // Vertical slide
     case EzPageTransition.slideY:
