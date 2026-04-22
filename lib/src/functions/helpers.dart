@@ -549,8 +549,8 @@ Widget ezTransitionBuilder(
     case EzPageTransition.rotate:
       return RotationTransition(
         turns: Tween<double>(
-          begin: mod,
-          end: 0.0,
+          begin: 0.0,
+          end: mod,
         ).animate(CurvedAnimation(
           parent: animation,
           curve: Curves.easeInOut,
