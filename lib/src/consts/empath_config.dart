@@ -436,7 +436,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
 
   darkAnimationDurationKey: defaultAnimationDuration,
   // darkTransitionTypeKey: null (aka system),
-  darkTransitionFadeKey: false,
+  darkTransitionFadeKey: true,
 
   darkLineLinksKey: false,
   // backFab defined in mobile/desktop configs
@@ -459,7 +459,7 @@ final Map<String, Object> baseEmpathConfig = <String, Object>{
 
   lightAnimationDurationKey: defaultAnimationDuration,
   // lightTransitionTypeKey: null (aka system),
-  lightTransitionFadeKey: false,
+  lightTransitionFadeKey: true,
 
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': '',
