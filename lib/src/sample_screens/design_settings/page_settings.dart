@@ -48,7 +48,7 @@ class PageDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(children: <Widget>[
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       // Optional 'before' settings
       if (prepend != null) ...prepend!,
 
