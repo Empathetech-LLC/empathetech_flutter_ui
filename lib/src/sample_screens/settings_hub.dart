@@ -49,7 +49,7 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           showSelectedIcon: false,
           onSelectionChanged: (Set<EzSettingsSection> selected) async {
             final EzSettingsSection choice = selected.first;
-            delta = currSection.position - choice.position;
+            delta = choice.position - currSection.position;
 
             await EzConfig.setHubPos(choice.position);
             setState(() => currSection = choice);
@@ -96,9 +96,26 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           duration: ezAnimDuration(),
           switchInCurve: Curves.easeInOut,
           switchOutCurve: Curves.easeInOut,
-          transitionBuilder: (Widget w, Animation<double> a) =>
-              ezTransitionBuilder(context, a, w, reverse: delta < 0),
-          child: currSection.build(currSubSec),
+          transitionBuilder: (Widget w, Animation<double> a) {
+            final double sign =
+                (w.key == ValueKey<int>(currSection.position)) ? 1.0 : -1.0;
+            final double direction = (EzConfig.isLTR ? 1.0 : -1.0) * delta.sign;
+
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: Offset(direction * sign, 0.0),
+                end: Offset.zero,
+              ).animate(CurvedAnimation(
+                parent: a,
+                curve: Curves.easeInOut,
+              )),
+              child: FadeTransition(opacity: a, child: w),
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey<int>(currSection.position),
+            child: currSection.build(currSubSec),
+          ),
         ),
         EzConfig.separator
       ],
