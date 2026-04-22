@@ -127,85 +127,32 @@ class _EzColorSettingsState extends State<EzColorSettings> {
     final List<String> defaultList =
         EzConfig.isDark ? widget.darkStarterSet : widget.lightStarterSet;
 
-    return EzScrollView(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      EzConfig.margin,
-
-      // Mode selector(s)
-      EzScrollView(
-        scrollDirection: Axis.horizontal,
-        mainAxisSize: MainAxisSize.min,
-        reverseHands: true,
-        showScrollHint: true,
-        children: <Widget>[
-          // Quick/Advanced selector
-          SegmentedButton<EzSubSetting>(
-            segments: <ButtonSegment<EzSubSetting>>[
-              ButtonSegment<EzSubSetting>(
-                value: EzSubSetting.qckColor,
-                label: Text(EzConfig.l10n.gQuick),
-              ),
-              ButtonSegment<EzSubSetting>(
-                value: EzSubSetting.advColor,
-                label: Text(EzConfig.l10n.gAdvanced),
-              ),
-            ],
-            selected: <EzSubSetting>{currentTab},
-            showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSubSetting> selected) async {
-              switch (selected.first) {
-                case EzSubSetting.qckColor:
-                  currentTab = EzSubSetting.qckColor;
-                  await EzConfig.setBool(advancedColorsKey, false);
-                  break;
-                case EzSubSetting.advColor:
-                  currentTab = EzSubSetting.advColor;
-                  await EzConfig.setBool(advancedColorsKey, true);
-                  break;
-                default:
-                  // Inconceivable! But required for linter
-                  doNothing();
-              }
-              setState(() {});
-            },
-          ),
-
-          // Update both toggle
-          EzConfig.rowMargin,
-          EzThemeCoin(widget.onUpdate,
-              enabled: currentTab == EzSubSetting.qckColor),
-        ],
-      ),
-      EzDivider(height: EzConfig.spacing),
-      EzConfig.spacer,
-
-      // Core settings
-      (currentTab == EzSubSetting.qckColor)
-          ? QuickColorSettings(
-              onUpdate: widget.onUpdate,
-              quickHeader: widget.quickHeader,
-              quickFooter: widget.quickFooter,
-              resetSpacer: widget.resetSpacer,
-              appName: widget.appName,
-              androidPackage: widget.androidPackage,
-              resetExtraDark: widget.resetExtraDark,
-              resetExtraLight: widget.resetExtraLight,
-              resetSkip: widget.resetSkip,
-              saveSkip: widget.saveSkip,
-            )
-          : AdvancedColorSettings(
-              onUpdate: widget.onUpdate,
-              userColorsKey: userColorsKey,
-              defaultList: defaultList,
-              currList:
-                  EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
-              resetSpacer: widget.resetSpacer,
-              appName: widget.appName,
-              androidPackage: widget.androidPackage,
-              resetExtraDark: widget.resetExtraDark,
-              resetExtraLight: widget.resetExtraLight,
-              resetSkip: widget.resetSkip,
-              saveSkip: widget.saveSkip,
-            ),
-    ]);
+    return (currentTab == EzSubSetting.qckColor)
+        ? QuickColorSettings(
+            onUpdate: widget.onUpdate,
+            quickHeader: widget.quickHeader,
+            quickFooter: widget.quickFooter,
+            resetSpacer: widget.resetSpacer,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
+            resetExtraDark: widget.resetExtraDark,
+            resetExtraLight: widget.resetExtraLight,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
+          )
+        : AdvancedColorSettings(
+            onUpdate: widget.onUpdate,
+            userColorsKey: userColorsKey,
+            defaultList: defaultList,
+            currList:
+                EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
+            resetSpacer: widget.resetSpacer,
+            appName: widget.appName,
+            androidPackage: widget.androidPackage,
+            resetExtraDark: widget.resetExtraDark,
+            resetExtraLight: widget.resetExtraLight,
+            resetSkip: widget.resetSkip,
+            saveSkip: widget.saveSkip,
+          );
   }
 }
