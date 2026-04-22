@@ -47,23 +47,18 @@ class EzQuickConfig extends StatelessWidget {
         context: context,
         builder: (_) => EzScrollView(children: <Widget>[
           // Choices
-          Wrap(
-            alignment: WrapAlignment.center,
-            runAlignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: <Widget>[
-              // Important
-              wrapIt(EzBigButtonsConfig(cleanRebuild)),
-              wrapIt(EzHighVisibilityConfig(cleanRebuild)),
-              wrapIt(EzChalkboardConfig(cleanRebuild)), // segue
+          Wrap(children: <Widget>[
+            // Important
+            wrapIt(EzBigButtonsConfig(cleanRebuild)),
+            wrapIt(EzHighVisibilityConfig(cleanRebuild)),
+            wrapIt(EzChalkboardConfig(cleanRebuild)), // segue
 
-              // Fun
-              if (!simple) ...<Widget>[
-                wrapIt(EzNebulaConfig(cleanRebuild)),
-                wrapIt(EzWallHolesConfig(cleanRebuild)),
-              ],
+            // Fun
+            if (!simple) ...<Widget>[
+              wrapIt(EzNebulaConfig(cleanRebuild)),
+              wrapIt(EzWallHolesConfig(cleanRebuild)),
             ],
-          ),
+          ]),
           EzConfig.spacer,
         ]),
       ),

@@ -67,9 +67,6 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             builder: (BuildContext mContext) => EzScrollView(
               children: <Widget>[
                 Wrap(
-                  alignment: WrapAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: locales
                       .map(
                         (Locale locale) => Padding(

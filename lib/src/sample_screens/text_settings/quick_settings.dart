@@ -86,41 +86,36 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
 
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       // Required batch settings
-      Wrap(
-        alignment: WrapAlignment.center,
-        runAlignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: <Widget>[
-          // Font family
-          Padding(
-            padding: wrapPadding,
-            child: EzFontFamilyBatchSetting(
+      Wrap(children: <Widget>[
+        // Font family
+        Padding(
+          padding: wrapPadding,
+          child: EzFontFamilyBatchSetting(
+            displayProvider: widget.displayProvider,
+            headlineProvider: widget.headlineProvider,
+            titleProvider: widget.titleProvider,
+            bodyProvider: widget.bodyProvider,
+            labelProvider: widget.labelProvider,
+          ),
+        ),
+
+        // Font size
+        Padding(
+          padding: wrapPadding,
+          child: EzTextBackground(
+            EzFontDoubleBatchSetting(
               displayProvider: widget.displayProvider,
               headlineProvider: widget.headlineProvider,
               titleProvider: widget.titleProvider,
               bodyProvider: widget.bodyProvider,
               labelProvider: widget.labelProvider,
             ),
+            backgroundColor: backgroundColor,
+            buttonShape: true,
+            padding: EdgeInsets.zero,
           ),
-
-          // Font size
-          Padding(
-            padding: wrapPadding,
-            child: EzTextBackground(
-              EzFontDoubleBatchSetting(
-                displayProvider: widget.displayProvider,
-                headlineProvider: widget.headlineProvider,
-                titleProvider: widget.titleProvider,
-                bodyProvider: widget.bodyProvider,
-                labelProvider: widget.labelProvider,
-              ),
-              backgroundColor: backgroundColor,
-              buttonShape: true,
-              padding: EdgeInsets.zero,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ]),
 
       // Optional additional settings
       if (widget.moreQuickHeaderSettings != null)

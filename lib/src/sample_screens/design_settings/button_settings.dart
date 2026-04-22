@@ -305,39 +305,34 @@ class _ButtonOpacitySetting extends StatelessWidget {
                 return EzScrollView(
                   children: <Widget>[
                     // Preview
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      runAlignment: WrapAlignment.center,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: EzInsets.wrap(EzConfig.spacing),
-                          child: EzElevatedButton(
-                            text: EzConfig.l10n.dsPreview,
-                            onPressed: doNothing,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: buttonBackground,
-                              shadowColor: buttonShadow,
-                              side: EzConfig.borderSide(buttonOutline),
-                            ),
+                    Wrap(children: <Widget>[
+                      Padding(
+                        padding: EzInsets.wrap(EzConfig.spacing),
+                        child: EzElevatedButton(
+                          text: EzConfig.l10n.dsPreview,
+                          onPressed: doNothing,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: buttonBackground,
+                            shadowColor: buttonShadow,
+                            side: EzConfig.borderSide(buttonOutline),
                           ),
                         ),
-                        Padding(
-                          padding: EzInsets.wrap(EzConfig.spacing),
-                          child: Transform.scale(
-                            scale: ezIconRatio(),
-                            child: Switch(
-                              value: dummyBool,
-                              onChanged: (bool v) =>
-                                  setModal(() => dummyBool = v),
-                              activeTrackColor: trackColor,
-                              inactiveTrackColor: trackColor,
-                              trackOutlineColor: trackOutline,
-                            ),
+                      ),
+                      Padding(
+                        padding: EzInsets.wrap(EzConfig.spacing),
+                        child: Transform.scale(
+                          scale: ezIconRatio(),
+                          child: Switch(
+                            value: dummyBool,
+                            onChanged: (bool v) =>
+                                setModal(() => dummyBool = v),
+                            activeTrackColor: trackColor,
+                            inactiveTrackColor: trackColor,
+                            trackOutlineColor: trackOutline,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ]),
                     EzConfig.spacer,
 
                     // Background slider
