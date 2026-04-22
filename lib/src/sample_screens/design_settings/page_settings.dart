@@ -48,119 +48,122 @@ class PageDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      // Optional 'before' settings
-      if (prepend != null) ...prepend!,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        // Optional 'before' settings
+        if (prepend != null) ...prepend!,
 
-      // Margin
-      EzMarginSetting(
-        onUpdate: onUpdate,
-        min: minMargin,
-        max: maxMargin,
-        steps: 20,
-        decimals: 1,
-      ),
-      EzConfig.spacer,
-
-      // Spacing
-      EzSpacingSetting(
-        onUpdate: onUpdate,
-        min: minSpacing,
-        max: maxSpacing,
-        steps: 26,
-        decimals: 1,
-      ),
-
-      // Background image
-      if (includeBackgroundImage) ...<Widget>[
+        // Margin
+        EzMarginSetting(
+          onUpdate: onUpdate,
+          min: minMargin,
+          max: maxMargin,
+          steps: 20,
+          decimals: 1,
+        ),
         EzConfig.spacer,
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
-          startCentered: true,
-          child: EzConfig.isDark
-              ? EzImageSetting(
-                  onUpdate,
-                  configKey: darkBackgroundImageKey,
-                  credits: darkBackgroundCredits,
-                  label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                )
-              : EzImageSetting(
-                  onUpdate,
-                  configKey: lightBackgroundImageKey,
-                  credits: lightBackgroundCredits,
-                  label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
-                ),
+
+        // Spacing
+        EzSpacingSetting(
+          onUpdate: onUpdate,
+          min: minSpacing,
+          max: maxSpacing,
+          steps: 26,
+          decimals: 1,
+        ),
+
+        // Background image
+        if (includeBackgroundImage) ...<Widget>[
+          EzConfig.spacer,
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            startCentered: true,
+            child: EzConfig.isDark
+                ? EzImageSetting(
+                    onUpdate,
+                    configKey: darkBackgroundImageKey,
+                    credits: darkBackgroundCredits,
+                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
+                  )
+                : EzImageSetting(
+                    onUpdate,
+                    configKey: lightBackgroundImageKey,
+                    credits: lightBackgroundCredits,
+                    label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
+                  ),
+          ),
+        ],
+        EzConfig.separator,
+
+        // Page transition
+        if ((includePageTransitions == null)
+            ? !kIsWeb
+            : includePageTransitions!) ...<Widget>[
+          _PageTransitionSetting(onUpdate),
+          EzConfig.spacer,
+        ],
+
+        // Animation duration
+        _AnimDurSetting(onUpdate),
+        EzConfig.separator,
+
+        // Show scroll
+        EzSwitchPair(
+          valueKey: EzConfig.isDark ? darkShowScrollKey : lightShowScrollKey,
+          afterChanged: (bool? value) async {
+            if (value == null) return;
+
+            if (EzConfig.updateBoth) {
+              await EzConfig.setBool(
+                  EzConfig.isDark ? lightShowScrollKey : darkShowScrollKey,
+                  value);
+            }
+
+            await EzConfig.rebuildUI(onUpdate);
+          },
+          text: EzConfig.l10n.dsShowScroll,
+        ),
+
+        // After background
+        if (append != null) ...append!,
+
+        // Reset button
+        resetSpacer,
+        EzResetButton(
+          all: false,
+          onUpdate,
+          androidPackage: androidPackage,
+          appName: appName,
+          dynamicTitle: () => EzConfig.l10n.dsResetPage(ezThemeString(true)),
+          onConfirm: () async {
+            if (EzConfig.updateBoth || EzConfig.isDark) {
+              await EzConfig.removeKeys(<String>{
+                ...darkPageDesignKeys.keys.toSet(),
+                darkColorSchemeImageKey,
+              });
+
+              if (resetExtraDark != null) {
+                await EzConfig.removeKeys(resetExtraDark!);
+              }
+            }
+
+            if (EzConfig.updateBoth || !EzConfig.isDark) {
+              await EzConfig.removeKeys(<String>{
+                ...lightPageDesignKeys.keys.toSet(),
+                lightColorSchemeImageKey,
+              });
+
+              if (resetExtraLight != null) {
+                await EzConfig.removeKeys(resetExtraLight!);
+              }
+            }
+          },
+          resetSkip: resetSkip,
+          saveSkip: saveSkip,
         ),
       ],
-      EzConfig.separator,
-
-      // Page transition
-      if ((includePageTransitions == null)
-          ? !kIsWeb
-          : includePageTransitions!) ...<Widget>[
-        _PageTransitionSetting(onUpdate),
-        EzConfig.spacer,
-      ],
-
-      // Animation duration
-      _AnimDurSetting(onUpdate),
-      EzConfig.separator,
-
-      // Show scroll
-      EzSwitchPair(
-        valueKey: EzConfig.isDark ? darkShowScrollKey : lightShowScrollKey,
-        afterChanged: (bool? value) async {
-          if (value == null) return;
-
-          if (EzConfig.updateBoth) {
-            await EzConfig.setBool(
-                EzConfig.isDark ? lightShowScrollKey : darkShowScrollKey,
-                value);
-          }
-
-          await EzConfig.rebuildUI(onUpdate);
-        },
-        text: EzConfig.l10n.dsShowScroll,
-      ),
-
-      // After background
-      if (append != null) ...append!,
-
-      // Reset button
-      resetSpacer,
-      EzResetButton(
-        all: false,
-        onUpdate,
-        androidPackage: androidPackage,
-        appName: appName,
-        dynamicTitle: () => EzConfig.l10n.dsResetPage(ezThemeString(true)),
-        onConfirm: () async {
-          if (EzConfig.updateBoth || EzConfig.isDark) {
-            await EzConfig.removeKeys(<String>{
-              ...darkPageDesignKeys.keys.toSet(),
-              darkColorSchemeImageKey,
-            });
-
-            if (resetExtraDark != null) {
-              await EzConfig.removeKeys(resetExtraDark!);
-            }
-          }
-
-          if (EzConfig.updateBoth || !EzConfig.isDark) {
-            await EzConfig.removeKeys(<String>{
-              ...lightPageDesignKeys.keys.toSet(),
-              lightColorSchemeImageKey,
-            });
-
-            if (resetExtraLight != null) {
-              await EzConfig.removeKeys(resetExtraLight!);
-            }
-          }
-        },
-        resetSkip: resetSkip,
-        saveSkip: saveSkip,
-      ),
-    ]);
+    );
   }
 }
 
