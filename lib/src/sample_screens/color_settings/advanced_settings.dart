@@ -156,21 +156,12 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
         // Dynamic color settings
         EzSwapWidget(
           expanded: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: widthOf(context) * 0.75),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              runAlignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: dynamicColorSettings(widget.userColorsKey),
-            ),
+            constraints: BoxConstraints(maxWidth: widthOf(context) * 0.8),
+            child: Wrap(children: dynamicColorSettings(widget.userColorsKey)),
           ),
-          restricted: EzScrollView(
-            scrollDirection: Axis.horizontal,
-            startCentered: true,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: dynamicColorSettings(widget.userColorsKey),
-            ),
+          restricted: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: dynamicColorSettings(widget.userColorsKey),
           ),
         ),
         EzConfig.separator,
@@ -198,12 +189,7 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
                     ),
 
                     // Color options
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      runAlignment: WrapAlignment.center,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: getUntrackedColors(setModalState),
-                    ),
+                    Wrap(children: getUntrackedColors(setModalState)),
                     EzConfig.spacer,
                   ],
                 ),
