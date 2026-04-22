@@ -321,12 +321,12 @@ Future<(Locale, EFUILang)> ezStoredL10n() async {
 
 /// threeQs = [widthOf] context * 0.75
 /// min: threeQs, max: min(threeQs, [ScreenSize.small])
-BoxConstraints ezTextFieldConstraints(BuildContext context) {
-  final double threeQs = widthOf(context) * 0.75;
+BoxConstraints ezTextFieldConstraints(BuildContext bc, {double prop = 0.75}) {
+  final double chunk = widthOf(bc) * prop;
 
   return BoxConstraints(
-    minWidth: min(threeQs, ScreenSize.small.size),
-    maxWidth: min(threeQs, ScreenSize.small.size),
+    minWidth: min(chunk, ScreenSize.small.size),
+    maxWidth: min(chunk, ScreenSize.small.size),
   );
 }
 
