@@ -67,6 +67,7 @@ export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/dropdown_menu.dart';
 export 'src/widgets/helpers/elevated_button.dart';
 export 'src/widgets/helpers/fabulous.dart';
+export 'src/widgets/helpers/faux_carousel.dart';
 export 'src/widgets/helpers/icon_button.dart';
 export 'src/widgets/helpers/menu_button.dart';
 export 'src/widgets/helpers/radio.dart';
@@ -111,6 +112,20 @@ export 'src/widgets/screen_reader_support/rich_text.dart';
 
 // User customization //
 
+// Global
+export 'src/widgets/user_customization/global/dominant_hand_switch.dart';
+export 'src/widgets/user_customization/global/locale_setting.dart';
+export 'src/widgets/user_customization/global/random_button.dart';
+export 'src/widgets/user_customization/global/theme_mode_switch.dart';
+
+// Presets
+export 'src/widgets/user_customization/presets/big_buttons.dart';
+export 'src/widgets/user_customization/presets/chalkboard.dart';
+export 'src/widgets/user_customization/presets/high_visibility.dart';
+export 'src/widgets/user_customization/presets/nebula.dart';
+export 'src/widgets/user_customization/presets/quick_config.dart';
+export 'src/widgets/user_customization/presets/wall_holes.dart';
+
 // Color
 export 'src/widgets/user_customization/color/color_setting.dart';
 export 'src/widgets/user_customization/color/high_contrast_setting.dart';
@@ -122,14 +137,6 @@ export 'src/widgets/user_customization/design/margin.dart';
 export 'src/widgets/user_customization/design/padding.dart';
 export 'src/widgets/user_customization/design/shapes.dart';
 export 'src/widgets/user_customization/design/spacing.dart';
-
-// Presets
-export 'src/widgets/user_customization/presets/big_buttons.dart';
-export 'src/widgets/user_customization/presets/chalkboard.dart';
-export 'src/widgets/user_customization/presets/high_visibility.dart';
-export 'src/widgets/user_customization/presets/nebula.dart';
-export 'src/widgets/user_customization/presets/quick_config.dart';
-export 'src/widgets/user_customization/presets/wall_holes.dart';
 
 // Text
 export 'src/widgets/user_customization/text/bold_setting.dart';
@@ -143,10 +150,6 @@ export 'src/widgets/user_customization/text/providers.dart';
 export 'src/widgets/user_customization/text/type_enum.dart';
 export 'src/widgets/user_customization/text/underline_setting.dart';
 
-// Global
-export 'src/widgets/user_customization/dominant_hand_switch.dart';
-export 'src/widgets/user_customization/locale_setting.dart';
-export 'src/widgets/user_customization/random_button.dart';
+// Shared
 export 'src/widgets/user_customization/reset_button.dart';
 export 'src/widgets/user_customization/theme_coin.dart';
-export 'src/widgets/user_customization/theme_mode_switch.dart';

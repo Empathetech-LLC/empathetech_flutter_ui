@@ -46,6 +46,7 @@ enum EzSubSetting {
   // null
   blank(
     path: '',
+    isFirst: true,
     bothable: false,
     write: ('nullTab!Key', false),
   ),
@@ -53,23 +54,27 @@ enum EzSubSetting {
   // Color
   qckColor(
     path: _quick,
+    isFirst: true,
     bothable: true,
     write: (advancedColorsKey, false),
   ),
   advColor(
     path: _advanced,
-    bothable: true,
+    isFirst: false,
+    bothable: false,
     write: (advancedColorsKey, true),
   ),
 
   // Design
   butDesign(
     path: _button,
+    isFirst: true,
     bothable: true,
     write: (pageTabKey, false),
   ),
   pagDesign(
     path: _page,
+    isFirst: false,
     bothable: true,
     write: (pageTabKey, true),
   ),
@@ -77,22 +82,26 @@ enum EzSubSetting {
   // Text
   qckText(
     path: _quick,
+    isFirst: true,
     bothable: true,
     write: (advancedTextKey, false),
   ),
   advText(
     path: _advanced,
-    bothable: true,
+    isFirst: false,
+    bothable: false,
     write: (advancedTextKey, true),
   );
 
   final String path;
+  final bool isFirst;
   final bool bothable;
   final (String, bool) write;
 
   /// Custom enum for populating [EzSettingsSection]
   const EzSubSetting({
     required this.path,
+    required this.isFirst,
     required this.bothable,
     required this.write,
   });

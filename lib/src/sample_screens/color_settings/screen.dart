@@ -104,32 +104,36 @@ class EzColorSettings extends StatelessWidget {
     final List<String> defaultList =
         EzConfig.isDark ? darkStarterSet : lightStarterSet;
 
-    return (target == EzSubSetting.qckColor)
-        ? QuickColorSettings(
-            onUpdate: onUpdate,
-            quickHeader: quickHeader,
-            quickFooter: quickFooter,
-            resetSpacer: resetSpacer,
-            appName: appName,
-            androidPackage: androidPackage,
-            resetExtraDark: resetExtraDark,
-            resetExtraLight: resetExtraLight,
-            resetSkip: resetSkip,
-            saveSkip: saveSkip,
-          )
-        : AdvancedColorSettings(
-            onUpdate: onUpdate,
-            userColorsKey: userColorsKey,
-            defaultList: defaultList,
-            currList:
-                EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
-            resetSpacer: resetSpacer,
-            appName: appName,
-            androidPackage: androidPackage,
-            resetExtraDark: resetExtraDark,
-            resetExtraLight: resetExtraLight,
-            resetSkip: resetSkip,
-            saveSkip: saveSkip,
-          );
+    return EzFauxCarousel(
+      position: target.isFirst ? 0 : 1,
+      delta: target.isFirst ? -1 : 1,
+      child: (target == EzSubSetting.qckColor)
+          ? QuickColorSettings(
+              onUpdate: onUpdate,
+              quickHeader: quickHeader,
+              quickFooter: quickFooter,
+              resetSpacer: resetSpacer,
+              appName: appName,
+              androidPackage: androidPackage,
+              resetExtraDark: resetExtraDark,
+              resetExtraLight: resetExtraLight,
+              resetSkip: resetSkip,
+              saveSkip: saveSkip,
+            )
+          : AdvancedColorSettings(
+              onUpdate: onUpdate,
+              userColorsKey: userColorsKey,
+              defaultList: defaultList,
+              currList:
+                  EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
+              resetSpacer: resetSpacer,
+              appName: appName,
+              androidPackage: androidPackage,
+              resetExtraDark: resetExtraDark,
+              resetExtraLight: resetExtraLight,
+              resetSkip: resetSkip,
+              saveSkip: saveSkip,
+            ),
+    );
   }
 }

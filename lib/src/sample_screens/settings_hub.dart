@@ -92,30 +92,10 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
         ],
 
         // Current section
-        AnimatedSwitcher(
-          duration: ezAnimDuration(),
-          switchInCurve: Curves.easeInOut,
-          switchOutCurve: Curves.easeInOut,
-          transitionBuilder: (Widget w, Animation<double> a) {
-            final double sign =
-                (w.key == ValueKey<int>(currSection.position)) ? 1.0 : -1.0;
-            final double direction = (EzConfig.isLTR ? 1.0 : -1.0) * delta.sign;
-
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(direction * sign, 0.0),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: a,
-                curve: Curves.easeInOut,
-              )),
-              child: FadeTransition(opacity: a, child: w),
-            );
-          },
-          child: KeyedSubtree(
-            key: ValueKey<int>(currSection.position),
-            child: currSection.build(currSubSec),
-          ),
+        EzFauxCarousel(
+          position: currSection.position,
+          delta: delta,
+          child: currSection.build(currSubSec),
         ),
         EzConfig.separator
       ],
