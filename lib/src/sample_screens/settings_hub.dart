@@ -52,11 +52,15 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
             delta = choice.position - currSection.position;
 
             await EzConfig.setHubPos(choice.position);
-            setState(() => currSection = choice);
+
+            currSection = choice;
+            currSubSec = choice.fromStorage();
+
+            setState(() {});
           },
         ),
 
-        // Sub-section nav
+        // Sub-section nav (&& divider)
         AnimatedSwitcher(
           duration: ezAnimDuration(mod: 0.75),
           switchInCurve: Curves.easeInOut,
