@@ -100,8 +100,8 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
 
     return Tooltip(
       message: EzConfig.l10n.tsFontSize,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: EzRow(
+        reverseHands: false,
         children: <Widget>[
           // Minus icon
           atMin
@@ -310,8 +310,8 @@ class EzFontDoubleQuickSetting extends StatelessWidget {
 
     return Tooltip(
       message: EzConfig.l10n.tsFontSize,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: EzRow(
+        reverseHands: false,
         children: <Widget>[
           // Minus icon
           atMin

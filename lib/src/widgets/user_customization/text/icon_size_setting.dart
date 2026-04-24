@@ -48,8 +48,8 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
           ),
         ),
         EzTextBackground(
-          Row(
-            mainAxisSize: MainAxisSize.min,
+          EzRow(
+            reverseHands: false,
             children: <Widget>[
               // Minus
               (iconSize > minIconSize)

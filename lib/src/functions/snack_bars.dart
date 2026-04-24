@@ -85,8 +85,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar(
         ),
         widthOf(context),
       ),
-      content: Row(
-        mainAxisSize: MainAxisSize.min,
+      content: EzRow(
+        reverseHands: false,
         children: <Widget>[
           // Text
           Flexible(child: Text(message, textAlign: TextAlign.center)),

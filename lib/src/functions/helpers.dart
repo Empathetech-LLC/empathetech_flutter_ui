@@ -203,11 +203,11 @@ Future<dynamic> ezColorPicker(
           constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
           child: ColorPicker(
             color: startColor,
-            mainAxisSize: MainAxisSize.min,
             padding: EdgeInsets.zero,
             spacing: EzConfig.spacing / 2,
             runSpacing: EzConfig.spacing / 2,
             columnSpacing: EzConfig.spacing,
+            mainAxisSize: MainAxisSize.min,
             pickersEnabled: const <ColorPickerType, bool>{
               ColorPickerType.both: false,
               ColorPickerType.primary: false,

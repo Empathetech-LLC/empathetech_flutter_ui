@@ -672,8 +672,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                     padding: EdgeInsets.only(
                                       right: EzConfig.spacing,
                                     ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
+                                    child: EzRow(
+                                      reverseHands: false,
                                       children: <Widget>[
                                         EzIconButton(
                                           enabled: currSpeed > 0.25,

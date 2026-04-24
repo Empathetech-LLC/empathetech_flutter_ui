@@ -471,8 +471,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   // Title
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
+                  EzRow(
+                    reverseHands: false,
                     children: <Widget>[
                       Flexible(
                         child: EzText(
@@ -934,8 +934,8 @@ class _BasicField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // Title
-          Row(
-            mainAxisSize: MainAxisSize.min,
+          EzRow(
+            reverseHands: false,
             children: <Widget>[
               Flexible(
                 child: EzText(
