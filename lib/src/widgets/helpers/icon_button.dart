@@ -32,35 +32,11 @@ class EzIconButton extends StatelessWidget {
   /// Defaults to [EzConfig.iconSize]
   final double? iconSize;
 
-  /// [IconButton.visualDensity] passthrough
-  final VisualDensity? visualDensity;
-
   /// [IconButton.padding] passthrough
   final EdgeInsetsGeometry? padding;
 
-  /// [IconButton.alignment] passthrough
-  final AlignmentGeometry? alignment;
-
-  /// [IconButton.splashRadius] passthrough
-  final double? splashRadius;
-
   /// [IconButton.color] passthrough
   final Color? color;
-
-  /// [IconButton.focusColor] passthrough
-  final Color? focusColor;
-
-  /// [IconButton.hoverColor] passthrough
-  final Color? hoverColor;
-
-  /// [IconButton.highlightColor] passthrough
-  final Color? highlightColor;
-
-  /// [IconButton.splashColor] passthrough
-  final Color? splashColor;
-
-  /// [IconButton.disabledColor] passthrough
-  final Color? disabledColor;
 
   /// [IconButton.onPressed] passthrough
   final VoidCallback? onPressed;
@@ -68,20 +44,8 @@ class EzIconButton extends StatelessWidget {
   /// [IconButton.onLongPress] passthrough
   final VoidCallback? onLongPress;
 
-  /// [IconButton.mouseCursor] passthrough
-  final MouseCursor? mouseCursor;
-
-  /// [IconButton.focusNode] passthrough
-  final FocusNode? focusNode;
-
-  /// [IconButton.autofocus] passthrough
-  final bool autofocus;
-
   /// [IconButton.tooltip] passthrough
   final String? tooltip;
-
-  /// [IconButton.enableFeedback] passthrough
-  final bool? enableFeedback;
 
   /// [IconButton.constraints] passthrough
   final BoxConstraints? constraints;
@@ -98,12 +62,6 @@ class EzIconButton extends StatelessWidget {
   /// Overriding [style] makes [fauxDisabled] moot
   final bool fauxDisabled;
 
-  /// [IconButton.isSelected] passthrough
-  final bool? isSelected;
-
-  /// [IconButton.selectedIcon] passthrough
-  final Widget? selectedIcon;
-
   /// [IconButton.icon] passthrough
   final Widget icon;
 
@@ -111,29 +69,15 @@ class EzIconButton extends StatelessWidget {
   const EzIconButton({
     super.key,
     this.iconSize,
-    this.visualDensity,
     this.padding,
-    this.alignment,
-    this.splashRadius,
     this.color,
-    this.focusColor,
-    this.hoverColor,
-    this.highlightColor,
-    this.splashColor,
-    this.disabledColor,
     this.onPressed,
     this.onLongPress,
-    this.mouseCursor,
-    this.focusNode,
-    this.autofocus = false,
     this.tooltip,
-    this.enableFeedback,
     this.constraints,
     this.style,
     this.enabled = true,
     this.fauxDisabled = false,
-    this.isSelected,
-    this.selectedIcon,
     required this.icon,
   });
 
@@ -166,27 +110,13 @@ class EzIconButton extends StatelessWidget {
 
     return IconButton(
       iconSize: iSize,
-      visualDensity: visualDensity,
       padding: padding,
-      alignment: alignment,
-      splashRadius: splashRadius,
       color: color,
-      focusColor: focusColor,
-      hoverColor: hoverColor,
-      highlightColor: highlightColor,
-      splashColor: splashColor,
-      disabledColor: disabledColor,
       onPressed: enabled ? onPressed : doNothing,
       onLongPress: enabled ? onLongPress : doNothing,
-      mouseCursor: mouseCursor,
-      focusNode: focusNode,
-      autofocus: autofocus,
       tooltip: tooltip,
-      enableFeedback: enableFeedback,
       constraints: constraints,
       style: buttonStyle,
-      isSelected: isSelected,
-      selectedIcon: selectedIcon,
       icon: icon,
     );
   }
