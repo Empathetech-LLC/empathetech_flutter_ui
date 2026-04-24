@@ -107,6 +107,7 @@ class EzColorSettings extends StatelessWidget {
     return EzFauxCarousel(
       position: target.isFirst ? 0 : 1,
       delta: target.isFirst ? -1 : 1,
+      animMod: 0.667,
       child: (target == EzSubSetting.qckColor)
           ? QuickColorSettings(
               onUpdate: onUpdate,
