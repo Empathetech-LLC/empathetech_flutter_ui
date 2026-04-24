@@ -178,18 +178,14 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
       children: <Widget>[
         Flexible(
           child: widget.clickable
-              ? EzClickable(
-                  child: GestureDetector(
-                    onTap: () => onChanged(!value),
-                    child: EzText(
-                      widget.text,
-                      useSurface: widget.useSurface,
-                      backgroundColor: widget.backgroundColor,
-                      style: widget.style,
-                      textAlign: widget.textAlign,
-                      semanticsLabel: widget.semanticsLabel,
-                    ),
-                  ),
+              ? EzLink(
+                  widget.text,
+                  backgroundColor: widget.backgroundColor,
+                  style: widget.style,
+                  textAlign: widget.textAlign,
+                  hint: widget.semanticsLabel ?? '',
+                  onTap: () => onChanged(!value),
+                  textColor: EzConfig.colors.onSurface,
                 )
               : EzText(
                   widget.text,
