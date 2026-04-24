@@ -640,18 +640,15 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
             ),
           ),
           body: body,
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              updater,
-              if (fabs != null) ...fabs!,
-              if (config.layout.showBackFAB &&
-                  ezRootNav.currentState!.canPop()) ...<Widget>[
-                config.layout.spacer,
-                const EzBackFAB(),
-              ],
+          floatingActionButton: EzCol(children: <Widget>[
+            updater,
+            if (fabs != null) ...fabs!,
+            if (config.layout.showBackFAB &&
+                ezRootNav.currentState!.canPop()) ...<Widget>[
+              config.layout.spacer,
+              const EzBackFAB(),
             ],
-          ),
+          ]),
           floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
@@ -764,7 +761,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         EzScreen(
           Center(
-            child: Column(
+            child: EzCol(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(

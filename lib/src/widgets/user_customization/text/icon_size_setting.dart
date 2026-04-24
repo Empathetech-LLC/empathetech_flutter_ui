@@ -20,148 +20,141 @@ class _EzIconSizeSettingState extends State<EzIconSizeSetting> {
   double iconSize = EzConfig.iconSize;
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Tooltip(
-            message: EzConfig.l10n.gCenterReset,
-            child: GestureDetector(
-              onLongPress: () async {
-                if (EzConfig.updateBoth || EzConfig.isDark) {
-                  await EzConfig.remove(darkIconSizeKey);
-                }
-                if (EzConfig.updateBoth || !EzConfig.isDark) {
-                  await EzConfig.remove(lightIconSizeKey);
-                }
+  Widget build(BuildContext context) => EzCol(children: <Widget>[
+        Tooltip(
+          message: EzConfig.l10n.gCenterReset,
+          child: GestureDetector(
+            onLongPress: () async {
+              if (EzConfig.updateBoth || EzConfig.isDark) {
+                await EzConfig.remove(darkIconSizeKey);
+              }
+              if (EzConfig.updateBoth || !EzConfig.isDark) {
+                await EzConfig.remove(lightIconSizeKey);
+              }
 
-                setState(() => iconSize = defaultIconSize);
+              setState(() => iconSize = defaultIconSize);
 
-                if (widget.fullCheck && context.mounted) {
-                  EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
-                      ezTextRebuildCheck(context));
-                } else {
-                  EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
-                }
-              },
-              child: EzText(
-                EzConfig.l10n.tsIconSize,
-                style: EzConfig.styles.bodyLarge,
-              ),
+              if (widget.fullCheck && context.mounted) {
+                EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
+                    ezTextRebuildCheck(context));
+              } else {
+                EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+              }
+            },
+            child: EzText(
+              EzConfig.l10n.tsIconSize,
+              style: EzConfig.styles.bodyLarge,
             ),
           ),
-          EzTextBackground(
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                // Minus
-                (iconSize > minIconSize)
-                    ? EzIconButton(
-                        onPressed: () async {
-                          iconSize -= iconDelta;
-                          if (EzConfig.updateBoth || EzConfig.isDark) {
-                            await EzConfig.setDouble(darkIconSizeKey, iconSize);
-                          }
-                          if (EzConfig.updateBoth || !EzConfig.isDark) {
-                            await EzConfig.setDouble(
-                                lightIconSizeKey, iconSize);
-                          }
+        ),
+        EzTextBackground(
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Minus
+              (iconSize > minIconSize)
+                  ? EzIconButton(
+                      onPressed: () async {
+                        iconSize -= iconDelta;
+                        if (EzConfig.updateBoth || EzConfig.isDark) {
+                          await EzConfig.setDouble(darkIconSizeKey, iconSize);
+                        }
+                        if (EzConfig.updateBoth || !EzConfig.isDark) {
+                          await EzConfig.setDouble(lightIconSizeKey, iconSize);
+                        }
 
-                          setState(() {});
+                        setState(() {});
 
-                          if (widget.fullCheck && context.mounted) {
-                            EzConfig.pingRebuild(
-                                iconSize != EzConfig.iconSize ||
-                                    ezTextRebuildCheck(context));
-                          } else {
-                            EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
-                          }
-                        },
-                        tooltip:
-                            '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
-                        icon: const Icon(Icons.remove),
-                        iconSize: iconSize,
-                      )
-                    : EzIconButton(
-                        enabled: false,
-                        tooltip: EzConfig.l10n.gMinimum,
-                        icon: Icon(
-                          Icons.remove,
-                          color: EzConfig.colors.outline,
-                        ),
-                        iconSize: iconSize,
+                        if (widget.fullCheck && context.mounted) {
+                          EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
+                              ezTextRebuildCheck(context));
+                        } else {
+                          EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                        }
+                      },
+                      tooltip:
+                          '${EzConfig.l10n.gDecrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
+                      icon: const Icon(Icons.remove),
+                      iconSize: iconSize,
+                    )
+                  : EzIconButton(
+                      enabled: false,
+                      tooltip: EzConfig.l10n.gMinimum,
+                      icon: Icon(
+                        Icons.remove,
+                        color: EzConfig.colors.outline,
                       ),
-                EzConfig.rowMargin,
+                      iconSize: iconSize,
+                    ),
+              EzConfig.rowMargin,
 
-                // Preview
-                GestureDetector(
-                  onLongPress: () async {
-                    if (EzConfig.updateBoth || EzConfig.isDark) {
-                      await EzConfig.remove(darkIconSizeKey);
-                    }
-                    if (EzConfig.updateBoth || !EzConfig.isDark) {
-                      await EzConfig.remove(lightIconSizeKey);
-                    }
+              // Preview
+              GestureDetector(
+                onLongPress: () async {
+                  if (EzConfig.updateBoth || EzConfig.isDark) {
+                    await EzConfig.remove(darkIconSizeKey);
+                  }
+                  if (EzConfig.updateBoth || !EzConfig.isDark) {
+                    await EzConfig.remove(lightIconSizeKey);
+                  }
 
-                    setState(() => iconSize = defaultIconSize);
+                  setState(() => iconSize = defaultIconSize);
 
-                    if (widget.fullCheck && context.mounted) {
-                      EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
-                          ezTextRebuildCheck(context));
-                    } else {
-                      EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
-                    }
-                  },
-                  child: Icon(
-                    Icons.sync_alt,
-                    size: iconSize,
-                    color: EzConfig.colors.onSurface,
-                  ),
+                  if (widget.fullCheck && context.mounted) {
+                    EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
+                        ezTextRebuildCheck(context));
+                  } else {
+                    EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                  }
+                },
+                child: Icon(
+                  Icons.sync_alt,
+                  size: iconSize,
+                  color: EzConfig.colors.onSurface,
                 ),
-                EzConfig.rowMargin,
+              ),
+              EzConfig.rowMargin,
 
-                // Plus
-                (iconSize < maxIconSize)
-                    ? EzIconButton(
-                        onPressed: () async {
-                          iconSize += iconDelta;
-                          if (EzConfig.updateBoth || EzConfig.isDark) {
-                            await EzConfig.setDouble(darkIconSizeKey, iconSize);
-                          }
-                          if (EzConfig.updateBoth || !EzConfig.isDark) {
-                            await EzConfig.setDouble(
-                                lightIconSizeKey, iconSize);
-                          }
+              // Plus
+              (iconSize < maxIconSize)
+                  ? EzIconButton(
+                      onPressed: () async {
+                        iconSize += iconDelta;
+                        if (EzConfig.updateBoth || EzConfig.isDark) {
+                          await EzConfig.setDouble(darkIconSizeKey, iconSize);
+                        }
+                        if (EzConfig.updateBoth || !EzConfig.isDark) {
+                          await EzConfig.setDouble(lightIconSizeKey, iconSize);
+                        }
 
-                          setState(() {});
+                        setState(() {});
 
-                          if (widget.fullCheck && context.mounted) {
-                            EzConfig.pingRebuild(
-                                iconSize != EzConfig.iconSize ||
-                                    ezTextRebuildCheck(context));
-                          } else {
-                            EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
-                          }
-                        },
-                        tooltip:
-                            '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
-                        icon: const Icon(Icons.add),
-                        iconSize: iconSize,
-                      )
-                    : EzIconButton(
-                        enabled: false,
-                        tooltip: EzConfig.l10n.gMaximum,
-                        icon: Icon(
-                          Icons.add,
-                          color: EzConfig.colors.outline,
-                        ),
-                        iconSize: iconSize,
+                        if (widget.fullCheck && context.mounted) {
+                          EzConfig.pingRebuild(iconSize != EzConfig.iconSize ||
+                              ezTextRebuildCheck(context));
+                        } else {
+                          EzConfig.pingRebuild(iconSize != EzConfig.iconSize);
+                        }
+                      },
+                      tooltip:
+                          '${EzConfig.l10n.gIncrease} ${EzConfig.l10n.tsIconSize.toLowerCase()}',
+                      icon: const Icon(Icons.add),
+                      iconSize: iconSize,
+                    )
+                  : EzIconButton(
+                      enabled: false,
+                      tooltip: EzConfig.l10n.gMaximum,
+                      icon: Icon(
+                        Icons.add,
+                        color: EzConfig.colors.outline,
                       ),
-              ],
-            ),
-            useSurface: true,
-            buttonShape: true,
-            padding: EdgeInsets.zero,
+                      iconSize: iconSize,
+                    ),
+            ],
           ),
-        ],
-      );
+          useSurface: true,
+          buttonShape: true,
+          padding: EdgeInsets.zero,
+        ),
+      ]);
 }

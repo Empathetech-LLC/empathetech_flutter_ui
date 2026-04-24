@@ -41,16 +41,13 @@ class EzTranslationsPendingNotice extends StatelessWidget {
   Widget build(BuildContext context) =>
       (EzConfig.locale.languageCode == defaultLocale.languageCode)
           ? const SizedBox.shrink()
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                header,
-                Text(
-                  message ?? EzConfig.l10n.gMachineTranslated,
-                  style: style ?? EzConfig.styles.labelLarge,
-                  textAlign: textAlign,
-                ),
-                footer,
-              ],
-            );
+          : EzCol(children: <Widget>[
+              header,
+              Text(
+                message ?? EzConfig.l10n.gMachineTranslated,
+                style: style ?? EzConfig.styles.labelLarge,
+                textAlign: textAlign,
+              ),
+              footer,
+            ]);
 }

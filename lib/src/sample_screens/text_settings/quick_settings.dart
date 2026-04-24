@@ -84,7 +84,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
 
     // Return the build //
 
-    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+    return EzCol(children: <Widget>[
       // Required batch settings
       Wrap(children: <Widget>[
         // Font family

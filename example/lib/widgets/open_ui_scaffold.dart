@@ -96,18 +96,15 @@ class OpenUIScaffold extends StatelessWidget {
             ),
           ),
           body: body,
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              updater,
-              if (fabs != null) ...fabs!,
-              if (config.design.showBackFAB &&
-                  ezRootNav.currentState!.canPop()) ...<Widget>[
-                config.layout.spacer,
-                const EzBackFAB(),
-              ],
+          floatingActionButton: EzCol(children: <Widget>[
+            updater,
+            if (fabs != null) ...fabs!,
+            if (config.design.showBackFAB &&
+                ezRootNav.currentState!.canPop()) ...<Widget>[
+              config.layout.spacer,
+              const EzBackFAB(),
             ],
-          ),
+          ]),
           floatingActionButtonLocation: EzConfig.isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,

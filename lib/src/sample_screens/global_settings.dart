@@ -92,59 +92,56 @@ class _EzGlobalSettingsState extends State<EzGlobalSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
+    return EzCol(children: <Widget>[
+      EzConfig.spacer,
+
+      // Right/left
+      EzDominantHandSwitch(redraw),
+      EzConfig.spacer,
+
+      // Theme mode
+      EzThemeModeSwitch(redraw),
+
+      // Language
+      if (!widget.excludeLocaleSetting) ...<Widget>[
         EzConfig.spacer,
+        EzLocaleSetting(
+          redraw,
+          skip: widget.skipLocales ?? <Locale>{english},
+          inDistress: widget.inDistress,
+        ),
+      ],
 
-        // Right/left
-        EzDominantHandSwitch(redraw),
-        EzConfig.spacer,
+      // Additional settings
+      if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
-        // Theme mode
-        EzThemeModeSwitch(redraw),
+      // Quick config
+      if (widget.quickConfigSpacer != null) ...<Widget>[
+        widget.quickConfigSpacer!,
+        EzQuickConfig(redraw),
+      ],
 
-        // Language
-        if (!widget.excludeLocaleSetting) ...<Widget>[
-          EzConfig.spacer,
-          EzLocaleSetting(
-            redraw,
-            skip: widget.skipLocales ?? <Locale>{english},
-            inDistress: widget.inDistress,
-          ),
-        ],
-
-        // Additional settings
-        if (widget.additionalSettings != null) ...widget.additionalSettings!,
-
-        // Quick config
-        if (widget.quickConfigSpacer != null) ...<Widget>[
-          widget.quickConfigSpacer!,
-          EzQuickConfig(redraw),
-        ],
-
-        // Feeling lucky
-        if (widget.randomSpacer != null) ...<Widget>[
-          widget.randomSpacer!,
-          EzConfigRandomizer(
-            redraw,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-            saveSkip: widget.saveSkip,
-          ),
-        ],
-
-        // Reset button
-        widget.resetSpacer,
-        EzResetButton(
+      // Feeling lucky
+      if (widget.randomSpacer != null) ...<Widget>[
+        widget.randomSpacer!,
+        EzConfigRandomizer(
           redraw,
           appName: widget.appName,
           androidPackage: widget.androidPackage,
-          resetSkip: widget.resetSkip,
           saveSkip: widget.saveSkip,
-          dynamicTitle: widget.resetTitle,
         ),
       ],
-    );
+
+      // Reset button
+      widget.resetSpacer,
+      EzResetButton(
+        redraw,
+        appName: widget.appName,
+        androidPackage: widget.androidPackage,
+        resetSkip: widget.resetSkip,
+        saveSkip: widget.saveSkip,
+        dynamicTitle: widget.resetTitle,
+      ),
+    ]);
   }
 }

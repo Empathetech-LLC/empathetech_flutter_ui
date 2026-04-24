@@ -28,8 +28,7 @@ class SuccessHeader extends StatelessWidget {
             'Either message or richMessage must be provided, but not both.');
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
+  Widget build(BuildContext context) => EzCol(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Headline
@@ -77,8 +76,7 @@ class RunOption extends StatelessWidget {
   Widget build(BuildContext context) =>
       (!kIsWeb && EzConfig.platform == TargetPlatform.macOS)
           ? const SizedBox.shrink()
-          : Column(
-              mainAxisSize: MainAxisSize.min,
+          : EzCol(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 EzText(
