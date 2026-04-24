@@ -74,45 +74,41 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
           ),
           child: currSection.subSettings.isEmpty
               ? const SizedBox.shrink()
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    EzConfig.margin,
-                    EzScrollView(
-                      scrollDirection: Axis.horizontal,
-                      reverseHands: true,
-                      showScrollHint: true,
-                      children: <Widget>[
-                        // Quick/Advanced selector
-                        SegmentedButton<EzSubSetting>(
-                          segments: (currSection.subSettings)
-                              .map((EzSubSetting sub) =>
-                                  ButtonSegment<EzSubSetting>(
-                                    value: sub,
-                                    label: Text(sub.label),
-                                  ))
-                              .toList(),
-                          selected: <EzSubSetting>{currSubSec},
-                          showSelectedIcon: false,
-                          onSelectionChanged:
-                              (Set<EzSubSetting> selected) async {
-                            final EzSubSetting choice = selected.first;
+              : EzCol(children: <Widget>[
+                  EzConfig.margin,
+                  EzScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverseHands: true,
+                    showScrollHint: true,
+                    children: <Widget>[
+                      // Quick/Advanced selector
+                      SegmentedButton<EzSubSetting>(
+                        segments: (currSection.subSettings)
+                            .map((EzSubSetting sub) =>
+                                ButtonSegment<EzSubSetting>(
+                                  value: sub,
+                                  label: Text(sub.label),
+                                ))
+                            .toList(),
+                        selected: <EzSubSetting>{currSubSec},
+                        showSelectedIcon: false,
+                        onSelectionChanged: (Set<EzSubSetting> selected) async {
+                          final EzSubSetting choice = selected.first;
 
-                            await EzConfig.setBool(
-                                choice.write.$1, choice.write.$2);
-                            setState(() => currSubSec = choice);
-                          },
-                        ),
+                          await EzConfig.setBool(
+                              choice.write.$1, choice.write.$2);
+                          setState(() => currSubSec = choice);
+                        },
+                      ),
 
-                        // Update both toggle
-                        EzConfig.rowMargin,
-                        EzThemeCoin(doNothing, enabled: currSubSec.bothable),
-                      ],
-                    ),
-                    EzDivider(height: EzConfig.spacing),
-                    EzConfig.spacer,
-                  ],
-                ),
+                      // Update both toggle
+                      EzConfig.rowMargin,
+                      EzThemeCoin(doNothing, enabled: currSubSec.bothable),
+                    ],
+                  ),
+                  EzDivider(height: EzConfig.spacing),
+                  EzConfig.spacer,
+                ]),
         ),
 
         // Current section

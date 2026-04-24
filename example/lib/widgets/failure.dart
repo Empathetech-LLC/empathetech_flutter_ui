@@ -28,31 +28,28 @@ class FailureHeader extends StatelessWidget {
         );
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          // Headline
-          Flexible(
-            child: EzText(
-              EzConfig.l10n.gFailure,
-              style: EzConfig.styles.headlineLarge,
-              textAlign: TextAlign.center,
-            ),
+  Widget build(BuildContext context) => EzCol(children: <Widget>[
+        // Headline
+        Flexible(
+          child: EzText(
+            EzConfig.l10n.gFailure,
+            style: EzConfig.styles.headlineLarge,
+            textAlign: TextAlign.center,
           ),
-          EzConfig.spacer,
+        ),
+        EzConfig.spacer,
 
-          // Error message
-          message != null
-              ? Flexible(
-                  child: EzText(
-                    message!,
-                    style: ezSubTitleStyle(),
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              : richMessage!,
-        ],
-      );
+        // Error message
+        message != null
+            ? Flexible(
+                child: EzText(
+                  message!,
+                  style: ezSubTitleStyle(),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : richMessage!,
+      ]);
 }
 
 class DeleteOption extends StatelessWidget {
@@ -78,8 +75,7 @@ class DeleteOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
+  Widget build(BuildContext context) => EzCol(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Would you like to...
@@ -130,8 +126,7 @@ class LinkOption extends StatelessWidget {
   const LinkOption(this.style, {super.key});
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
+  Widget build(BuildContext context) => EzCol(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           EzText(l10n.rsWouldYou, style: style, textAlign: TextAlign.center),

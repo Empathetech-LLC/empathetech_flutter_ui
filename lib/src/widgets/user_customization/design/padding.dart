@@ -82,8 +82,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                     currValue.toStringAsFixed(widget.decimals),
                   ),
                   child: ExcludeSemantics(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                    child: EzCol(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // Title
