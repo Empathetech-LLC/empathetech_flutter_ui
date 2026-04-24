@@ -64,7 +64,6 @@ export 'src/widgets/helpers/alignment.dart';
 export 'src/widgets/helpers/back_action.dart';
 export 'src/widgets/helpers/checkbox.dart';
 export 'src/widgets/helpers/cli.dart';
-export 'src/widgets/helpers/clickable.dart';
 export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/dropdown_menu.dart';
 export 'src/widgets/helpers/elevated_button.dart';
