@@ -8,8 +8,6 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-// TODO: all local reset buttons should force their relevant/default styling (noticed in padding setting)
-
 class PageDesign extends StatelessWidget {
   final void Function() onUpdate;
   final List<Widget>? prepend;
