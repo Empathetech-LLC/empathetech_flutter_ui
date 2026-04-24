@@ -419,6 +419,10 @@ class EFUILangEs extends EFUILang {
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
+  String get ssResetAppearance =>
+      '¿Restablecer todos los ajustes de apariencia?';
+
+  @override
   String get ssResetBoth => 'Restablecer ambos modos de tema';
 
   @override

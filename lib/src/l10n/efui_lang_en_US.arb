@@ -160,6 +160,7 @@
   "ssLoadConfig": "Load config",
 
   "ssResetAll": "Reset all settings?",
+  "ssResetAppearance": "Reset all appearance settings?",
   "ssResetBoth": "Reset both theme modes",
 
 

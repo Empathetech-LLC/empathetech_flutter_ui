@@ -867,6 +867,12 @@ abstract class EFUILang {
   /// **'Reset all settings?'**
   String get ssResetAll;
 
+  /// No description provided for @ssResetAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all appearance settings?'**
+  String get ssResetAppearance;
+
   /// No description provided for @ssResetBoth.
   ///
   /// In en, this message translates to:

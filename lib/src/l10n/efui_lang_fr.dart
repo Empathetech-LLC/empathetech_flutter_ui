@@ -418,6 +418,10 @@ class EFUILangFr extends EFUILang {
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';
 
   @override
+  String get ssResetAppearance =>
+      'Réinitialiser tous les paramètres d\'apparence ?';
+
+  @override
   String get ssResetBoth => 'Réinitialiser les deux modes de thème';
 
   @override

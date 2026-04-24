@@ -160,6 +160,7 @@
   "ssLoadConfig": "Cargar configuración",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
+  "ssResetAppearance": "¿Restablecer todos los ajustes de apariencia?",
   "ssResetBoth": "Restablecer ambos modos de tema",
 
 

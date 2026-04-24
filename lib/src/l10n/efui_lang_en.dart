@@ -417,6 +417,9 @@ class EFUILangEn extends EFUILang {
   String get ssResetAll => 'Reset all settings?';
 
   @override
+  String get ssResetAppearance => 'Reset all appearance settings?';
+
+  @override
   String get ssResetBoth => 'Reset both theme modes';
 
   @override
@@ -1174,6 +1177,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssResetAll => 'Reset all settings?';
+
+  @override
+  String get ssResetAppearance => 'Reset all appearance settings?';
 
   @override
   String get ssResetBoth => 'Reset both theme modes';
