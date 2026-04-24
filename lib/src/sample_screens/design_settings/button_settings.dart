@@ -37,89 +37,86 @@ class ButtonDesign extends StatelessWidget {
   // Return the build //
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Optional 'before' settings
-        if (prepend != null) ...prepend!,
+    return EzCol(children: <Widget>[
+      // Optional 'before' settings
+      if (prepend != null) ...prepend!,
 
-        // Padding
-        EzPaddingSetting(
-          onUpdate: onUpdate,
-          min: minPadding,
-          max: maxPadding,
-          steps: 20,
-          decimals: 0,
-        ),
-        EzConfig.spacer,
+      // Padding
+      EzPaddingSetting(
+        onUpdate: onUpdate,
+        min: minPadding,
+        max: maxPadding,
+        steps: 20,
+        decimals: 0,
+      ),
+      EzConfig.spacer,
 
-        // Button style
-        _ButtonStyleSetting(onUpdate),
-        EzConfig.spacer,
+      // Button style
+      _ButtonStyleSetting(onUpdate),
+      EzConfig.spacer,
 
-        // Button opacity
-        _ButtonOpacitySetting(onUpdate),
-        EzConfig.separator,
+      // Button opacity
+      _ButtonOpacitySetting(onUpdate),
+      EzConfig.separator,
 
-        // Underline links
-        EzSwitchPair(
-          text: EzConfig.l10n.dsAlwaysUnderline,
-          clickable: true,
-          valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
-          afterChanged: (bool? changed) async {
-            if (changed == null) return;
-            await EzConfig.rebuildUI(onUpdate);
-          },
-        ),
-        EzConfig.spacer,
+      // Underline links
+      EzSwitchPair(
+        text: EzConfig.l10n.dsAlwaysUnderline,
+        clickable: true,
+        valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
+        afterChanged: (bool? changed) async {
+          if (changed == null) return;
+          await EzConfig.rebuildUI(onUpdate);
+        },
+      ),
+      EzConfig.spacer,
 
-        // Show back FAB
-        EzSwitchPair(
-          valueKey: EzConfig.isDark ? darkShowBackFABKey : lightShowBackFABKey,
-          afterChanged: (bool? value) async {
-            if (value == null) return;
+      // Show back FAB
+      EzSwitchPair(
+        valueKey: EzConfig.isDark ? darkShowBackFABKey : lightShowBackFABKey,
+        afterChanged: (bool? value) async {
+          if (value == null) return;
 
-            if (EzConfig.updateBoth) {
-              await EzConfig.setBool(
-                  EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey,
-                  value);
+          if (EzConfig.updateBoth) {
+            await EzConfig.setBool(
+                EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey,
+                value);
+          }
+
+          await EzConfig.rebuildUI(onUpdate);
+        },
+        text: EzConfig.l10n.dsShowBack,
+      ),
+
+      if (append != null) ...append!,
+
+      // Local reset all
+      resetSpacer,
+      EzResetButton(
+        all: false,
+        onUpdate,
+        androidPackage: androidPackage,
+        appName: appName,
+        dynamicTitle: () => EzConfig.l10n.dsResetButton(ezThemeString(true)),
+        onConfirm: () async {
+          if (EzConfig.updateBoth || EzConfig.isDark) {
+            await EzConfig.removeKeys(darkButtonDesignKeys.keys.toSet());
+            if (resetExtraDark != null) {
+              await EzConfig.removeKeys(resetExtraDark!);
             }
+          }
 
-            await EzConfig.rebuildUI(onUpdate);
-          },
-          text: EzConfig.l10n.dsShowBack,
-        ),
-
-        if (append != null) ...append!,
-
-        // Local reset all
-        resetSpacer,
-        EzResetButton(
-          all: false,
-          onUpdate,
-          androidPackage: androidPackage,
-          appName: appName,
-          dynamicTitle: () => EzConfig.l10n.dsResetButton(ezThemeString(true)),
-          onConfirm: () async {
-            if (EzConfig.updateBoth || EzConfig.isDark) {
-              await EzConfig.removeKeys(darkButtonDesignKeys.keys.toSet());
-              if (resetExtraDark != null) {
-                await EzConfig.removeKeys(resetExtraDark!);
-              }
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
+            await EzConfig.removeKeys(lightButtonDesignKeys.keys.toSet());
+            if (resetExtraLight != null) {
+              await EzConfig.removeKeys(resetExtraLight!);
             }
-
-            if (EzConfig.updateBoth || !EzConfig.isDark) {
-              await EzConfig.removeKeys(lightButtonDesignKeys.keys.toSet());
-              if (resetExtraLight != null) {
-                await EzConfig.removeKeys(resetExtraLight!);
-              }
-            }
-          },
-          resetSkip: resetSkip,
-          saveSkip: saveSkip,
-        ),
-      ],
-    );
+          }
+        },
+        resetSkip: resetSkip,
+        saveSkip: saveSkip,
+      ),
+    ]);
   }
 }
 
@@ -160,30 +157,27 @@ class _ButtonStyleSetting extends StatelessWidget {
                               vertical: EzConfig.spacing,
                               horizontal: EzConfig.spacing / 2,
                             ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                EzElevatedButton(
-                                  text: shape.name,
-                                  style: ElevatedButton.styleFrom(
-                                    side: currWidth == 0
-                                        ? BorderSide.none
-                                        : BorderSide(
-                                            color: EzConfig
-                                                .colors.primaryContainer,
-                                            width: currWidth,
-                                          ),
-                                    shape: shape.shape,
-                                  ),
-                                  onPressed: () =>
-                                      setModal(() => currShape = shape),
+                            child: EzCol(children: <Widget>[
+                              EzElevatedButton(
+                                text: shape.name,
+                                style: ElevatedButton.styleFrom(
+                                  side: currWidth == 0
+                                      ? BorderSide.none
+                                      : BorderSide(
+                                          color:
+                                              EzConfig.colors.primaryContainer,
+                                          width: currWidth,
+                                        ),
+                                  shape: shape.shape,
                                 ),
-                                EzConfig.margin,
-                                ExcludeSemantics(
-                                  child: EzRadio<EzButtonShape>(value: shape),
-                                ),
-                              ],
-                            ),
+                                onPressed: () =>
+                                    setModal(() => currShape = shape),
+                              ),
+                              EzConfig.margin,
+                              ExcludeSemantics(
+                                child: EzRadio<EzButtonShape>(value: shape),
+                              ),
+                            ]),
                           ),
                         )
                         .toList(),

@@ -81,8 +81,7 @@ class EzAlertDialog extends AlertDialog {
                     ? closedActions.reversed.toList()
                     : closedActions
                 : <Widget>[
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
+                    EzCol(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: closedActions,

@@ -506,7 +506,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     child: Container(
                       decoration:
                           BoxDecoration(color: widget.controlsBackground),
-                      child: Column(
+                      child: EzCol(
+                        mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -689,8 +690,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                         EzConfig.rowMargin,
                                         Tooltip(
                                           message: EzConfig.l10n.gPlaybackSpeed,
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
+                                          child: EzCol(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: <Widget>[

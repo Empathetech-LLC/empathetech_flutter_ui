@@ -671,59 +671,56 @@ class _ImageSettingState extends State<EzImageSetting> {
             .height +
         (EzConfig.marginVal * 0.25);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            selectedFit = fit;
-            setModal(() {});
-          },
-          child: Semantics(
-            hint: fit.name,
-            image: true,
-            button: true,
-            child: ExcludeSemantics(
-              child: Container(
-                width: width,
-                height: height,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: EzConfig.colors.onSurface,
-                    width: EzConfig.borderWidth,
+    return EzCol(children: <Widget>[
+      GestureDetector(
+        onTap: () {
+          selectedFit = fit;
+          setModal(() {});
+        },
+        child: Semantics(
+          hint: fit.name,
+          image: true,
+          button: true,
+          child: ExcludeSemantics(
+            child: Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: EzConfig.colors.onSurface,
+                  width: EzConfig.borderWidth,
+                ),
+                borderRadius: ezRoundEdge,
+              ),
+              child: EzCol(
+                children: <Widget>[
+                  Container(
+                    height: toolbarHeight,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: EzConfig.colors.surface,
+                      borderRadius: ezTextFieldRadius,
+                    ),
+                    child: Text(
+                      fit.name,
+                      style: EzConfig.styles.bodyLarge,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  borderRadius: ezRoundEdge,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: toolbarHeight,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: EzConfig.colors.surface,
-                        borderRadius: ezTextFieldRadius,
-                      ),
-                      child: Text(
-                        fit.name,
-                        style: EzConfig.styles.bodyLarge,
-                        textAlign: TextAlign.center,
-                      ),
+                  Expanded(
+                    child: Image(
+                      image: ezImageProvider(path),
+                      fit: fit,
                     ),
-                    Expanded(
-                      child: Image(
-                        image: ezImageProvider(path),
-                        fit: fit,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
-        ExcludeSemantics(child: EzRadio<BoxFit>(value: fit)),
-      ],
-    );
+      ),
+      ExcludeSemantics(child: EzRadio<BoxFit>(value: fit)),
+    ]);
   }
 
   // Return the build //

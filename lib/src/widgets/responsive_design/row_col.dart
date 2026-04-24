@@ -66,7 +66,7 @@ class EzRowCol extends StatelessWidget {
           textBaseline: textBaseline,
           children: children,
         ),
-        col = Column(
+        col = EzCol(
           mainAxisAlignment: mainAxisAlignment,
           mainAxisSize: mainAxisSize,
           crossAxisAlignment: crossAxisAlignment,

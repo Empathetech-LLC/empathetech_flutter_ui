@@ -55,47 +55,44 @@ class EzWarning extends StatelessWidget {
         child: Card(
           child: Container(
             padding: EdgeInsets.all(EzConfig.marginVal),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                // Title
-                EzScrollView(
-                  scrollDirection: Axis.horizontal,
-                  startCentered: true,
-                  children: <Widget>[
-                    // Thing1
-                    Icon(
-                      Icons.warning,
-                      color: alertColor,
-                      size: tStyle?.fontSize,
-                    ),
-                    EzConfig.rowMargin,
+            child: EzCol(children: <Widget>[
+              // Title
+              EzScrollView(
+                scrollDirection: Axis.horizontal,
+                startCentered: true,
+                children: <Widget>[
+                  // Thing1
+                  Icon(
+                    Icons.warning,
+                    color: alertColor,
+                    size: tStyle?.fontSize,
+                  ),
+                  EzConfig.rowMargin,
 
-                    Text(
-                      warning,
-                      style: tStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                    EzConfig.rowMargin,
+                  Text(
+                    warning,
+                    style: tStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                  EzConfig.rowMargin,
 
-                    // Thing 2
-                    Icon(
-                      Icons.warning,
-                      color: alertColor,
-                      size: tStyle?.fontSize,
-                    ),
-                  ],
-                ),
-                EzConfig.spacer,
+                  // Thing 2
+                  Icon(
+                    Icons.warning,
+                    color: alertColor,
+                    size: tStyle?.fontSize,
+                  ),
+                ],
+              ),
+              EzConfig.spacer,
 
-                // Body
-                Text(
-                  body,
-                  style: bodyStyle ?? EzConfig.styles.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+              // Body
+              Text(
+                body,
+                style: bodyStyle ?? EzConfig.styles.bodyLarge,
+                textAlign: TextAlign.center,
+              ),
+            ]),
           ),
         ),
       ),

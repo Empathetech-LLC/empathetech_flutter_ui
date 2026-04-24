@@ -180,22 +180,19 @@ class EzDivider extends StatelessWidget {
 
     return ConstrainedBox(
       constraints: constraints,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          EzSpacer(space: space / 2),
-          Divider(
-            height: EzConfig.marginVal,
-            thickness: thickness,
-            indent: indent,
-            endIndent: endIndent,
-            color: color,
-            radius: radius,
-          ),
-          title!,
-          EzSpacer(space: space / 2),
-        ],
-      ),
+      child: EzCol(children: <Widget>[
+        EzSpacer(space: space / 2),
+        Divider(
+          height: EzConfig.marginVal,
+          thickness: thickness,
+          indent: indent,
+          endIndent: endIndent,
+          color: color,
+          radius: radius,
+        ),
+        title!,
+        EzSpacer(space: space / 2),
+      ]),
     );
   }
 }

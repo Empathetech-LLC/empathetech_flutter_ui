@@ -101,162 +101,159 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   @override
   Widget build(BuildContext context) => Tooltip(
         message: widget.tooltip,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            EzScrollView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                // Minus
-                if (widget.plusMinus) ...<Widget>[
-                  (currValue > widget.min)
-                      ? EzIconButton(
-                          onPressed: () async {
-                            currValue -= widget.delta;
-                            controller.text = currValue.toString();
+        child: EzCol(children: <Widget>[
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              // Minus
+              if (widget.plusMinus) ...<Widget>[
+                (currValue > widget.min)
+                    ? EzIconButton(
+                        onPressed: () async {
+                          currValue -= widget.delta;
+                          controller.text = currValue.toString();
 
+                          await EzConfig.setDouble(
+                            widget.configKey,
+                            currValue,
+                          );
+                          if (widget.mirrorKey != null) {
                             await EzConfig.setDouble(
-                              widget.configKey,
+                              widget.mirrorKey!,
                               currValue,
                             );
-                            if (widget.mirrorKey != null) {
-                              await EzConfig.setDouble(
-                                widget.mirrorKey!,
-                                currValue,
-                              );
-                            }
+                          }
 
-                            widget.notifierCallback(currValue);
-                            if (context.mounted) {
-                              EzConfig.pingRebuild(ezTextRebuildCheck(context));
-                            }
+                          widget.notifierCallback(currValue);
+                          if (context.mounted) {
+                            EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                          }
 
-                            setState(() {});
-                          },
-                          tooltip:
-                              '${EzConfig.l10n.gDecrease} ${widget.tooltip.toLowerCase()}',
-                          icon: const Icon(Icons.remove),
-                        )
-                      : EzIconButton(
-                          enabled: false,
-                          tooltip: EzConfig.l10n.gMinimum,
-                          icon: Icon(
-                            Icons.remove,
-                            color: EzConfig.colors.outline,
-                          ),
+                          setState(() {});
+                        },
+                        tooltip:
+                            '${EzConfig.l10n.gDecrease} ${widget.tooltip.toLowerCase()}',
+                        icon: const Icon(Icons.remove),
+                      )
+                    : EzIconButton(
+                        enabled: false,
+                        tooltip: EzConfig.l10n.gMinimum,
+                        icon: Icon(
+                          Icons.remove,
+                          color: EzConfig.colors.outline,
                         ),
-                  EzConfig.rowMargin,
-                ],
-
-                // Text field
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: formFieldWidth,
-                    maxHeight: formFieldHeight,
-                  ),
-                  decoration: const BoxDecoration(borderRadius: ezRoundEdge),
-                  child: TextFormField(
-                    controller: controller,
-                    style: widget.style,
-                    textAlign: TextAlign.center,
-                    textAlignVertical: TextAlignVertical.top,
-                    maxLines: 1,
-                    keyboardType: TextInputType.number,
-                    autovalidateMode: AutovalidateMode.onUnfocus,
-                    validator: (String? value) {
-                      if (value == null) return null;
-                      final double? doubleVal = double.tryParse(value);
-
-                      if (doubleVal == null ||
-                          doubleVal < widget.min ||
-                          doubleVal > widget.max) {
-                        setState(() {
-                          formFieldWidth =
-                              (sizeLimit.width + EzConfig.padding) * 1.75;
-                          formFieldHeight =
-                              (sizeLimit.height + EzConfig.padding) * 1.75;
-                        });
-                        return '${widget.min}  <->  ${widget.max}';
-                      }
-
-                      setState(() {
-                        formFieldWidth = sizeLimit.width + EzConfig.padding;
-                        formFieldHeight = sizeLimit.height + EzConfig.padding;
-                      });
-                      return null;
-                    },
-                    onFieldSubmitted: (String stringVal) async {
-                      final double? doubleVal = double.tryParse(stringVal);
-
-                      if (doubleVal == null ||
-                          doubleVal < widget.min ||
-                          doubleVal > widget.max) {
-                        return;
-                      }
-                      currValue = doubleVal;
-
-                      await EzConfig.setDouble(widget.configKey, doubleVal);
-                      if (widget.mirrorKey != null) {
-                        await EzConfig.setDouble(widget.mirrorKey!, doubleVal);
-                      }
-
-                      widget.notifierCallback(doubleVal);
-                      if (context.mounted) {
-                        EzConfig.pingRebuild(ezTextRebuildCheck(context));
-                      }
-
-                      setState(() {});
-                    },
-                  ),
-                ),
-
-                if (widget.plusMinus) ...<Widget>[
-                  EzConfig.rowMargin,
-
-                  // Plus icon
-                  (currValue < widget.max)
-                      ? EzIconButton(
-                          onPressed: () async {
-                            currValue += widget.delta;
-                            controller.text = currValue.toString();
-
-                            await EzConfig.setDouble(
-                              widget.configKey,
-                              currValue,
-                            );
-                            if (widget.mirrorKey != null) {
-                              await EzConfig.setDouble(
-                                widget.mirrorKey!,
-                                currValue,
-                              );
-                            }
-
-                            widget.notifierCallback(currValue);
-                            if (context.mounted) {
-                              EzConfig.pingRebuild(ezTextRebuildCheck(context));
-                            }
-
-                            setState(() {});
-                          },
-                          tooltip:
-                              '${EzConfig.l10n.gIncrease} ${widget.tooltip.toLowerCase()}',
-                          icon: const Icon(Icons.add),
-                        )
-                      : EzIconButton(
-                          enabled: false,
-                          tooltip: EzConfig.l10n.gMaximum,
-                          icon: Icon(
-                            Icons.add,
-                            color: EzConfig.colors.outline,
-                          ),
-                        ),
-                ],
+                      ),
+                EzConfig.rowMargin,
               ],
-            ),
 
-            // Label icon
-            widget.icon,
-          ],
-        ),
+              // Text field
+              Container(
+                constraints: BoxConstraints(
+                  maxWidth: formFieldWidth,
+                  maxHeight: formFieldHeight,
+                ),
+                decoration: const BoxDecoration(borderRadius: ezRoundEdge),
+                child: TextFormField(
+                  controller: controller,
+                  style: widget.style,
+                  textAlign: TextAlign.center,
+                  textAlignVertical: TextAlignVertical.top,
+                  maxLines: 1,
+                  keyboardType: TextInputType.number,
+                  autovalidateMode: AutovalidateMode.onUnfocus,
+                  validator: (String? value) {
+                    if (value == null) return null;
+                    final double? doubleVal = double.tryParse(value);
+
+                    if (doubleVal == null ||
+                        doubleVal < widget.min ||
+                        doubleVal > widget.max) {
+                      setState(() {
+                        formFieldWidth =
+                            (sizeLimit.width + EzConfig.padding) * 1.75;
+                        formFieldHeight =
+                            (sizeLimit.height + EzConfig.padding) * 1.75;
+                      });
+                      return '${widget.min}  <->  ${widget.max}';
+                    }
+
+                    setState(() {
+                      formFieldWidth = sizeLimit.width + EzConfig.padding;
+                      formFieldHeight = sizeLimit.height + EzConfig.padding;
+                    });
+                    return null;
+                  },
+                  onFieldSubmitted: (String stringVal) async {
+                    final double? doubleVal = double.tryParse(stringVal);
+
+                    if (doubleVal == null ||
+                        doubleVal < widget.min ||
+                        doubleVal > widget.max) {
+                      return;
+                    }
+                    currValue = doubleVal;
+
+                    await EzConfig.setDouble(widget.configKey, doubleVal);
+                    if (widget.mirrorKey != null) {
+                      await EzConfig.setDouble(widget.mirrorKey!, doubleVal);
+                    }
+
+                    widget.notifierCallback(doubleVal);
+                    if (context.mounted) {
+                      EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                    }
+
+                    setState(() {});
+                  },
+                ),
+              ),
+
+              if (widget.plusMinus) ...<Widget>[
+                EzConfig.rowMargin,
+
+                // Plus icon
+                (currValue < widget.max)
+                    ? EzIconButton(
+                        onPressed: () async {
+                          currValue += widget.delta;
+                          controller.text = currValue.toString();
+
+                          await EzConfig.setDouble(
+                            widget.configKey,
+                            currValue,
+                          );
+                          if (widget.mirrorKey != null) {
+                            await EzConfig.setDouble(
+                              widget.mirrorKey!,
+                              currValue,
+                            );
+                          }
+
+                          widget.notifierCallback(currValue);
+                          if (context.mounted) {
+                            EzConfig.pingRebuild(ezTextRebuildCheck(context));
+                          }
+
+                          setState(() {});
+                        },
+                        tooltip:
+                            '${EzConfig.l10n.gIncrease} ${widget.tooltip.toLowerCase()}',
+                        icon: const Icon(Icons.add),
+                      )
+                    : EzIconButton(
+                        enabled: false,
+                        tooltip: EzConfig.l10n.gMaximum,
+                        icon: Icon(
+                          Icons.add,
+                          color: EzConfig.colors.outline,
+                        ),
+                      ),
+              ],
+            ],
+          ),
+
+          // Label icon
+          widget.icon,
+        ]),
       );
 }
