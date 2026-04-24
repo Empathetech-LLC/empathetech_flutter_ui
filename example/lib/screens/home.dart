@@ -210,8 +210,8 @@ class _HomeScreenState extends State<HomeScreen> {
             EzConfig.spacer,
 
             // Domain name
-            Row(
-              mainAxisSize: MainAxisSize.min,
+            EzRow(
+              reverseHands: false,
               children: <Widget>[
                 Flexible(
                   child: EzText(
@@ -225,8 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ConstrainedBox(
               constraints: ezTextFieldConstraints(context),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   if (!exampleDomain) ...<Widget>[
@@ -330,8 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Settings
             Visibility(
               visible: showAdvanced,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   if (isDesktop) EzConfig.spacer,
@@ -339,8 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Work path picker
                   Visibility(
                     visible: isDesktop,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                    child: EzCol(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         // Title
@@ -470,8 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Flutter path picker (Mac only)
             Visibility(
               visible: isMac,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   // Title
@@ -934,8 +930,7 @@ class _BasicField extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
+  Widget build(BuildContext context) => EzCol(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // Title
@@ -1031,8 +1026,7 @@ class _AdvancedSettingsField extends StatelessWidget {
             icon: const Icon(Icons.undo),
             label: l10n.csRestore(title),
           )
-        : Column(
-            mainAxisSize: MainAxisSize.min,
+        : EzCol(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // Title and show buttons
@@ -1070,8 +1064,7 @@ class _AdvancedSettingsField extends StatelessWidget {
               // Form field
               Visibility(
                 visible: visible,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                child: EzCol(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     EzConfig.margin,
@@ -1108,17 +1101,18 @@ class _LicensePicker extends StatelessWidget {
   static const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
   static const String chooseALicense = 'https://choosealicense.com/';
 
-  Widget radio({required String title, required String value}) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          EzTextButton(
-            text: title,
-            textAlign: TextAlign.center,
-            onPressed: () => onChanged(value),
-          ),
-          ExcludeSemantics(child: EzRadio<String>(value: value)),
-        ],
-      );
+  Widget radio({
+    required String title,
+    required String value,
+  }) =>
+      EzCol(children: <Widget>[
+        EzTextButton(
+          text: title,
+          textAlign: TextAlign.center,
+          onPressed: () => onChanged(value),
+        ),
+        ExcludeSemantics(child: EzRadio<String>(value: value)),
+      ]);
 
   @override
   Widget build(BuildContext context) {
@@ -1143,8 +1137,7 @@ class _LicensePicker extends StatelessWidget {
       ),
     );
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return EzCol(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // Title and show buttons
