@@ -61,5 +61,3 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
     );
   }
 }
-
-// TODO: check the order of things on rebuild - try to close and show loading circle ASAP
