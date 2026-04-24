@@ -43,6 +43,17 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
   // Buttons //
 
+  // Pointer
+  const WidgetStateProperty<MouseCursor?> enabledClicks = WidgetStateProperty<
+      MouseCursor?>.fromMap(<WidgetStatesConstraint, MouseCursor?>{
+    WidgetState.dragged: SystemMouseCursors.click,
+    WidgetState.focused: SystemMouseCursors.click,
+    WidgetState.hovered: SystemMouseCursors.click,
+    WidgetState.pressed: SystemMouseCursors.click,
+    WidgetState.scrolledUnder: SystemMouseCursors.click,
+    WidgetState.selected: SystemMouseCursors.click,
+  });
+
   // Shape/style
   final OutlinedBorder buttonShape = EBSConfig.lookup(
           EzConfig.get(isDark ? darkButtonShapeKey : lightButtonShapeKey))
@@ -328,15 +339,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       hoverColor: focusColor,
       extendedPadding: EdgeInsets.zero,
       shape: buttonShape,
-      mouseCursor: const WidgetStateProperty<
-          MouseCursor?>.fromMap(<WidgetStatesConstraint, MouseCursor?>{
-        WidgetState.dragged: SystemMouseCursors.click,
-        WidgetState.focused: SystemMouseCursors.click,
-        WidgetState.hovered: SystemMouseCursors.click,
-        WidgetState.pressed: SystemMouseCursors.click,
-        WidgetState.scrolledUnder: SystemMouseCursors.click,
-        WidgetState.selected: SystemMouseCursors.click,
-      }),
+      mouseCursor: enabledClicks,
       iconSize: iconSize,
       sizeConstraints: BoxConstraints(
         minWidth: (iconSize * 1.25) + padding,
@@ -424,8 +427,10 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     ),
 
     // Radio button
-    radioTheme:
-        RadioThemeData(overlayColor: WidgetStateProperty.all(focusColor)),
+    radioTheme: RadioThemeData(
+      overlayColor: WidgetStateProperty.all(focusColor),
+      mouseCursor: enabledClicks,
+    ),
 
     // Slider
     sliderTheme: SliderThemeData(
