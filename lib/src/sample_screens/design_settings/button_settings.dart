@@ -63,6 +63,10 @@ class ButtonDesign extends StatelessWidget {
       EzSwitchPair(
         text: EzConfig.l10n.dsAlwaysUnderline,
         clickable: true,
+        style: EzConfig.styles.bodyLarge?.copyWith(
+            decoration: EzConfig.lineLinks
+                ? TextDecoration.underline
+                : TextDecoration.none),
         valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
         afterChanged: (bool? changed) async {
           if (changed == null) return;
