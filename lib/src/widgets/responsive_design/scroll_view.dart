@@ -215,7 +215,7 @@ class _EzScrollViewState extends State<EzScrollView> {
       child: (widget.child != null)
           ? widget.child!
           : (widget.scrollDirection == Axis.vertical)
-              ? Column(
+              ? EzCol(
                   mainAxisSize: widget.mainAxisSize,
                   mainAxisAlignment: widget.mainAxisAlignment,
                   crossAxisAlignment: widget.crossAxisAlignment,

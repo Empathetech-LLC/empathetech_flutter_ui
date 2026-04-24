@@ -564,7 +564,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
 
     // Return the build //
 
-    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+    return EzCol(children: <Widget>[
       // Style selector
       EzScrollView(
         scrollDirection: Axis.horizontal,
