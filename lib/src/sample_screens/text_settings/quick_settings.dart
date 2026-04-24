@@ -86,7 +86,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
 
     return EzCol(children: <Widget>[
       // Required batch settings
-      Wrap(children: <Widget>[
+      EzWrap(children: <Widget>[
         // Font family
         Padding(
           padding: wrapPadding,

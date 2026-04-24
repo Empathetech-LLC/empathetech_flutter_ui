@@ -18,3 +18,19 @@ class EzCol extends Column {
     super.children,
   });
 }
+
+class EzWrap extends Wrap {
+  const EzWrap({
+    super.key,
+    super.direction,
+    super.alignment = WrapAlignment.center,
+    super.spacing,
+    super.runAlignment = WrapAlignment.center,
+    super.runSpacing,
+    super.crossAxisAlignment = WrapCrossAlignment.center,
+    super.textDirection,
+    super.verticalDirection,
+    super.clipBehavior,
+    super.children,
+  });
+}

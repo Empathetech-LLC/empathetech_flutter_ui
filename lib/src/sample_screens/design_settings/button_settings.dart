@@ -302,7 +302,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
                 return EzScrollView(
                   children: <Widget>[
                     // Preview
-                    Wrap(children: <Widget>[
+                    EzWrap(children: <Widget>[
                       Padding(
                         padding: EzInsets.wrap(EzConfig.spacing),
                         child: EzElevatedButton(

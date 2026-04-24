@@ -479,7 +479,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     // Return the options, with the conditional update theme switch
     return <Widget>[
-      Wrap(children: options),
+      EzWrap(children: options),
       if (widget.allowThemeUpdate == null)
         Padding(
           padding: EdgeInsets.symmetric(vertical: EzConfig.spacing / 2),

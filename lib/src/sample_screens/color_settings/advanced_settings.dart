@@ -155,7 +155,7 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
       EzSwapWidget(
         expanded: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: widthOf(context) * 0.8),
-          child: Wrap(children: dynamicColorSettings(widget.userColorsKey)),
+          child: EzWrap(children: dynamicColorSettings(widget.userColorsKey)),
         ),
         restricted: EzCol(children: dynamicColorSettings(widget.userColorsKey)),
       ),
@@ -183,7 +183,7 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
                   ),
 
                   // Color options
-                  Wrap(children: getUntrackedColors(setModalState)),
+                  EzWrap(children: getUntrackedColors(setModalState)),
                   EzConfig.spacer,
                 ],
               ),

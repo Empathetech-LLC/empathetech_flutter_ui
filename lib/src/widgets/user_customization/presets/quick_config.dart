@@ -47,7 +47,7 @@ class EzQuickConfig extends StatelessWidget {
         context: context,
         builder: (_) => EzScrollView(children: <Widget>[
           // Choices
-          Wrap(children: <Widget>[
+          EzWrap(children: <Widget>[
             // Important
             wrapIt(EzBigButtonsConfig(cleanRebuild)),
             wrapIt(EzHighVisibilityConfig(cleanRebuild)),

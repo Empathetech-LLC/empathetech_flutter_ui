@@ -66,7 +66,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             context: context,
             builder: (BuildContext mCon) => EzScrollView(
               children: <Widget>[
-                Wrap(
+                EzWrap(
                   children: locales
                       .map(
                         (Locale locale) => Padding(
