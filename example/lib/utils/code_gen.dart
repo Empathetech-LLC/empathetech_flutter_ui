@@ -805,7 +805,7 @@ class SettingsHubScreen extends StatelessWidget {
   /// Optionally override the starting sub-page to advanced (or equivalent)
   final bool? advancedPass;
 
-  SettingsHubScreen({this.target, this.advanced})
+  SettingsHubScreen({this.targetPass, this.advancedPass})
       : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
@@ -852,7 +852,7 @@ class SettingsHubScreen extends StatelessWidget {
                   ? EzSubSetting.advColor
                   : EzSubSetting.qckColor,
               build: (EzSubSetting subSec) => EzColorSettings(
-                advanced: subSec,
+                target: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
@@ -876,7 +876,7 @@ class SettingsHubScreen extends StatelessWidget {
                   ? EzSubSetting.pagDesign
                   : EzSubSetting.butDesign,
               build: (EzSubSetting subSec) => EzDesignSettings(
-                pageTab: subSec,
+                target: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
@@ -900,14 +900,14 @@ class SettingsHubScreen extends StatelessWidget {
                   ? EzSubSetting.advText
                   : EzSubSetting.qckText,
               build: (EzSubSetting subSec) => EzTextSettings(
-                advanced: subSec,
+                target: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
               ),
             ),
           ],
-          target: target,
+          target: targetPass,
         )),
         title: config.l10n.gSettings,
         showSettings: false,
