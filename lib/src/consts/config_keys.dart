@@ -511,8 +511,8 @@ const Map<String, Type> lightPageDesignKeys = <String, Type>{
 
 // Shared //
 
-/// pdTab
-const String pageTabKey = 'pdTab';
+/// pageTab
+const String pageTabKey = 'pageTab';
 
 /// [darkButtonDesignKeys], [darkPageDesignKeys]
 const Map<String, Type> darkDesignKeys = <String, Type>{
