@@ -643,7 +643,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
           floatingActionButton: EzCol(children: <Widget>[
             updater,
             if (fabs != null) ...fabs!,
-            if (config.layout.showBackFAB &&
+            if (config.design.showBackFAB &&
                 ezRootNav.currentState!.canPop()) ...<Widget>[
               config.layout.spacer,
               const EzBackFAB(),
@@ -799,11 +799,11 @@ import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SettingsHubScreen extends StatelessWidget {
-  /// [EzSettingsHub.target] passthrough
-  final int? target;
+  /// Optionally override the starting position
+  final int? targetPass;
 
-  /// [EzColorSettings.advanced] and/or [EzTextSettings.advanced] passthrough
-  final bool? advanced;
+  /// Optionally override the starting sub-page to advanced (or equivalent)
+  final bool? advancedPass;
 
   SettingsHubScreen({this.target, this.advanced})
       : super(key: ValueKey<int>(EzConfig.seed));
@@ -814,7 +814,8 @@ class SettingsHubScreen extends StatelessWidget {
       builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
         EzScreen(EzSettingsHub(
           pages: <EzSettingsSection>[
-            // Global
+            // Global //
+
             EzSettingsSection(
               position: 0,
               title: EzConfig.l10n.gGlobal,
@@ -826,13 +827,16 @@ class SettingsHubScreen extends StatelessWidget {
                     : Icons.computer,
                 semanticLabel: EzConfig.l10n.gGlobal,
               ),
-              build: const EzGlobalSettings(
+              subSettings: <EzSubSetting>[],
+              fromStorage: () => EzSubSetting.blank,
+              build: (_) => const EzGlobalSettings(
                 appName: appName,
                 androidPackage: androidPackage,
               ),
             ),
 
-            // Color
+            // Color //
+
             EzSettingsSection(
               position: 1,
               title: EzConfig.l10n.gColor,
@@ -840,15 +844,23 @@ class SettingsHubScreen extends StatelessWidget {
                 Icons.palette,
                 semanticLabel: EzConfig.l10n.gColor,
               ),
-              build: EzColorSettings(
-                advanced: advanced,
+              subSettings: <EzSubSetting>[
+                EzSubSetting.qckColor,
+                EzSubSetting.advColor,
+              ],
+              fromStorage: () => EzConfig.get(advancedColorsKey) == true
+                  ? EzSubSetting.advColor
+                  : EzSubSetting.qckColor,
+              build: (EzSubSetting subSec) => EzColorSettings(
+                advanced: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
               ),
             ),
 
-            // Design
+            // Design //
+
             EzSettingsSection(
               position: 2,
               title: EzConfig.l10n.gDesign,
@@ -856,15 +868,23 @@ class SettingsHubScreen extends StatelessWidget {
                 Icons.design_services,
                 semanticLabel: EzConfig.l10n.gDesign,
               ),
-              build: EzDesignSettings(
-                pageTab: advanced,
+              subSettings: <EzSubSetting>[
+                EzSubSetting.butDesign,
+                EzSubSetting.pagDesign,
+              ],
+              fromStorage: () => EzConfig.get(pageTabKey) == true
+                  ? EzSubSetting.pagDesign
+                  : EzSubSetting.butDesign,
+              build: (EzSubSetting subSec) => EzDesignSettings(
+                pageTab: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
               ),
             ),
 
-            // Text
+            // Text //
+
             EzSettingsSection(
               position: 3,
               title: EzConfig.l10n.gText,
@@ -872,8 +892,15 @@ class SettingsHubScreen extends StatelessWidget {
                 Icons.text_format,
                 semanticLabel: EzConfig.l10n.gText,
               ),
-              build: EzTextSettings(
-                advanced: advanced,
+              subSettings: <EzSubSetting>[
+                EzSubSetting.qckText,
+                EzSubSetting.advText,
+              ],
+              fromStorage: () => EzConfig.get(advancedTextKey) == true
+                  ? EzSubSetting.advText
+                  : EzSubSetting.qckText,
+              build: (EzSubSetting subSec) => EzTextSettings(
+                advanced: subSec,
                 onUpdate: doNothing,
                 appName: appName,
                 androidPackage: androidPackage,
