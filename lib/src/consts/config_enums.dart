@@ -7,14 +7,6 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-// Shared //
-
-/// enum String 'none'
-const String esNone = 'none';
-
-/// enum String 'system'
-const String esSystem = 'system';
-
 // Box Fit //
 
 /// Library for getting a [BoxFit] from its name
@@ -31,7 +23,7 @@ final Map<String?, BoxFit?> boxFitLookup = <String?, BoxFit?>{
   null: null,
 };
 
-// Button shapes //
+//* Button shapes *//
 
 enum EzButtonShape {
   pill,
@@ -42,6 +34,8 @@ enum EzButtonShape {
   gem,
   jewel,
 }
+
+// EzConfig values //
 
 /// enum String 'pill'
 const String esPill = 'pill';
@@ -63,6 +57,8 @@ const String esGem = 'gem';
 
 /// enum String 'jewel'
 const String esJewel = 'jewel';
+
+// enum Config //
 
 /// EzButtonShape config
 extension EBSConfig on EzButtonShape {
@@ -172,7 +168,7 @@ extension EBSConfig on EzButtonShape {
   }
 }
 
-// Page transitions //
+//* Page transitions *//
 
 enum EzPageTransition {
   none,
@@ -184,6 +180,8 @@ enum EzPageTransition {
   slideY,
   zoom,
 }
+
+// EzConfig values //
 
 /// enum String 'turnX'
 const String esTurnX = 'turnX';
@@ -202,6 +200,8 @@ const String esSlideY = 'slideY';
 
 /// enum String 'zoom'
 const String esZoom = 'zoom';
+
+// enum Config //
 
 /// EzPageTransition config
 extension EPTConfig on EzPageTransition {
@@ -324,3 +324,31 @@ extension EPTConfig on EzPageTransition {
     }
   }
 }
+
+//* Shared *//
+
+// EzConfig values //
+
+/// enum String 'none'
+const String esNone = 'none';
+
+/// enum String 'system'
+const String esSystem = 'system';
+
+const Set<String> ezEnumVals = <String>{
+  esNone,
+  esSystem,
+  esPill,
+  esRect,
+  esRoundRect,
+  esLeftGram,
+  esRightGram,
+  esGem,
+  esJewel,
+  esTurnX,
+  esTurnY,
+  esRotate,
+  esSlideX,
+  esSlideY,
+  esZoom,
+};
