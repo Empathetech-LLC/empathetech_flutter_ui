@@ -36,6 +36,10 @@ class EzImageSetting extends StatefulWidget {
   /// Note: if there is no default value for [configKey], the reset option will not appear
   final bool allowClear;
 
+  /// Optionally override the clear button label
+  /// Moot if [allowClear] is false
+  final String? clearLabel;
+
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on long press
   final String? credits;
@@ -64,6 +68,7 @@ class EzImageSetting extends StatefulWidget {
     this.style,
     this.allowSolidColor = false,
     this.allowClear = true,
+    this.clearLabel,
     this.credits,
     this.allowThemeUpdate,
     this.showEditor = true,
@@ -131,10 +136,9 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
     );
 
-    // Check for exit/cancel
-    if (newPath == null || newPath.isEmpty || newPath == noImageValue) {
-      return false;
-    }
+    // Check for quick cases
+    if (newPath == noImageValue) return currPath != noImageValue;
+    if (newPath == null || newPath.isEmpty) return false;
 
     // Check if a color was chosen
     final bool isInt = (int.tryParse(newPath) != null);
@@ -472,7 +476,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: const Icon(Icons.clear),
-          label: EzConfig.l10n.dsClearIt,
+          label: widget.clearLabel ?? EzConfig.l10n.dsClearIt,
         ),
       ));
     }
