@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 // TODO: get code gen up to date with everthing you've done
+// TODO: add constraint to subsetting length
 
 class SettingsHubScreen extends StatelessWidget {
   /// Optionally override the starting position
