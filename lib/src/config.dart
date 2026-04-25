@@ -287,9 +287,10 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// [setString] but with [FlutterSecureStorage]
-  static Future<bool> secSetString(String key, String value) async {
+  /// ([FlutterSecureStorage] can only [setString])
+  static Future<bool> secSet(String key, String value) async {
     if (_instance!._securePreferences == null) {
-      ezLog('Attempted to secSetString without a secure storage instance');
+      ezLog('Attempted to secSet without a secure storage instance');
       return false;
     }
 
@@ -297,7 +298,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       await _instance!._securePreferences!.write(key: key, value: value);
       return true;
     } catch (e) {
-      ezLog('Error in secSetString: [$key]...\n$e');
+      ezLog('Error in secSet: [$key]...\n$e');
       return false;
     }
   }

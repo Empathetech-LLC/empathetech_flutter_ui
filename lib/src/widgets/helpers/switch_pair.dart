@@ -161,7 +161,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
       }
 
       if (widget.secureKey) {
-        await EzConfig.secSetString(widget.valueKey!, choice.toString());
+        await EzConfig.secSet(widget.valueKey!, choice.toString());
       } else {
         await EzConfig.setBool(widget.valueKey!, choice);
       }
