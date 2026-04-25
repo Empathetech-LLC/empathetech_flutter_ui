@@ -33,7 +33,8 @@ class EzSettingsSection {
     required this.subSettings,
     required this.fromStorage,
     required this.build,
-  });
+  }) : assert(subSettings.length == 0 || subSettings.length == 2,
+            '0 or 2 sub settings.');
 }
 
 const String _quick = 'quick';
