@@ -386,23 +386,28 @@ class $classCaseAppName extends StatelessWidget {
         if (entry.value != null && !entry.key.contains('Image')) {
           // Handle specific cases //
 
-          if (entry.key == appLocaleKey) {
-            // Update to the default Locale
-            result +=
-                '${entry.key}Key: <String>${entry.value.toString().replaceAll('[', "['").replaceAll(']', "']")},';
-          } else if (entry.key == userDarkColorsKey ||
-              entry.key == userLightColorsKey) {
-            // Updates to which colors are default in the advanced color settings screen
-            final String colorList = entry.value.toString().replaceAll(
-                  ',',
-                  'Key,',
-                );
+          switch (entry.key) {
+            case appLocaleKey:
+              // Update to the default Locale
+              result +=
+                  '${entry.key}Key: <String>${entry.value.toString().replaceAll('[', "['").replaceAll(']', "']")},';
+              break;
 
-            result +=
-                '${entry.key}Key: <String>${colorList.replaceRange(colorList.length - 1, null, 'Key,]')},';
-          } else {
-            // Default case
-            result += '${entry.key}Key: ${entry.value},';
+            case userDarkColorsKey:
+            case userLightColorsKey:
+              // Updates to which colors are default in the advanced color settings screen
+              final String colorList =
+                  entry.value.toString().replaceAll(',', 'Key,');
+              result +=
+                  '${entry.key}Key: <String>${colorList.replaceRange(colorList.length - 1, null, 'Key,]')},';
+              break;
+
+            default:
+              final String val = entry.value.toString();
+
+              result +=
+                  '${entry.key}Key: ${ezEnumVals.contains(val) ? val.replaceRange(0, 1, 'es${val[0].toUpperCase()}') : val},';
+              break;
           }
         }
       }
