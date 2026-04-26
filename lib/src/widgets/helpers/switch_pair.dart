@@ -143,9 +143,21 @@ class EzSwitchPair extends StatefulWidget {
 class _EzSwitchPairState extends State<EzSwitchPair> {
   // Define the build data //
 
-  late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
+  late bool value = widget.value ?? false;
 
-  late final double ratio = widget.scale ?? ezIconRatio();
+  void setValue() async {
+    final bool newVal = widget.secureKey
+        ? int.tryParse(await EzConfig.secGet(widget.valueKey!)) ?? false
+        : EzConfig.get(widget.valueKey!);
+
+    if (newVal != value) setState(() => value = newVal);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.value == null) setValue();
+  }
 
   // Return the build //
 
@@ -197,7 +209,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
                 ),
         ),
         Transform.scale(
-          scale: max(1.0, ratio),
+          scale: max(1.0, widget.scale ?? ezIconRatio()),
           // Could be PlatformSwitch
           // Dev's opinion: Material switches are better
           child: Switch(
