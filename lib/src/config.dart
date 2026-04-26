@@ -188,8 +188,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// [FlutterSecureStorage] only stores Strings
   /// No null or error checking, assumes the proper instance was provided in [EzConfig.init]
-  static Future<String?> secGet(String key) =>
-      _instance!._securePreferences!.read(key: key);
+  /// Returns empty [String] on failure (not null)
+  static Future<String> secGet(String key) async =>
+      await _instance!._securePreferences!.read(key: key) ??
+      Future<String>.value('');
 
   /// Alias for [EzConfig.get] => [isLeftyKey]
   static bool get isLefty => get(isLeftyKey);
