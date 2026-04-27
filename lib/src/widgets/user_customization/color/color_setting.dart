@@ -8,6 +8,8 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// TODO: add zoom animation (half dur) to adding/removing from advanced (might be here, might be there)
+
 class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color] will be updated
   final String configKey;
@@ -145,8 +147,11 @@ class _ColorSettingState extends State<EzColorSetting> {
         context: context,
         builder: (BuildContext dCon) {
           final int? resetValue = EzConfig.getDefault(widget.configKey);
-          final String currColorLabel =
-              currColor.toARGB32().toRadixString(16).toUpperCase().substring(2);
+          final String currColorLabel = currColor
+              .toARGB32()
+              .toRadixString(16)
+              .toUpperCase()
+              .substring(2); // TODO: transparent no like (fix plz)
 
           return EzAlertDialog(
             title: Text(
