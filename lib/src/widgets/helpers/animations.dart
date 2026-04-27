@@ -17,6 +17,9 @@ class EzAnimSwitch extends AnimatedSwitcher {
   /// [[ezTransitionBuilder] passthrough
   final bool reverse;
 
+  /// Traditional [transitionBuilder]
+  final Widget Function(Widget, Animation<double>)? override;
+
   EzAnimSwitch({
     super.key,
     this.mod = 1.0,
@@ -26,11 +29,13 @@ class EzAnimSwitch extends AnimatedSwitcher {
     super.layoutBuilder,
     this.force,
     this.reverse = false,
+    this.override,
     super.child,
   }) : super(
           duration: ezAnimDuration(mod: mod),
-          transitionBuilder: (Widget w, Animation<double> a) =>
-              ezTransitionBuilder(a, w, force: force, reverse: reverse),
+          transitionBuilder: override ??
+              (Widget w, Animation<double> a) =>
+                  ezTransitionBuilder(a, w, force: force, reverse: reverse),
         );
 }
 
