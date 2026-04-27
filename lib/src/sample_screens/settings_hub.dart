@@ -61,17 +61,9 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
         ),
 
         // Sub-section nav (&& divider)
-        AnimatedSwitcher(
-          duration: ezAnimDuration(mod: 0.75),
-          switchInCurve: Curves.easeInOut,
-          switchOutCurve: Curves.easeInOut,
-          transitionBuilder: (Widget w, Animation<double> a) => SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0.0, -1.0),
-              end: Offset.zero,
-            ).animate(CurvedAnimation(parent: a, curve: Curves.easeInOut)),
-            child: FadeTransition(opacity: a, child: w),
-          ),
+        EzAnimSwitch(
+          mod: 0.75,
+          force: EzTransitionType.slideY,
           child: currSection.subSettings.isEmpty
               ? const SizedBox.shrink()
               : EzCol(children: <Widget>[
