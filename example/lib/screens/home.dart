@@ -228,12 +228,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  AnimatedSwitcher(
-                    duration: ezAnimDuration(mod: 0.5),
-                    switchInCurve: Curves.easeInOut,
-                    switchOutCurve: Curves.easeInOut,
-                    transitionBuilder: (Widget w, Animation<double> a) =>
-                        ezTransitionBuilder(a, w, force: EzTransitionType.zoom),
+                  EzAnimSwitch(
+                    mod: 0.5,
+                    force: EzTransitionType.zoom,
                     child: exampleDomain
                         ? const SizedBox.shrink()
                         : TextFormField(
@@ -246,12 +243,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const InputDecoration(hintText: 'com.example'),
                           ),
                   ),
-                  AnimatedSwitcher(
-                    duration: ezAnimDuration(mod: 0.5),
-                    switchInCurve: Curves.easeInOut,
-                    switchOutCurve: Curves.easeInOut,
-                    transitionBuilder: (Widget w, Animation<double> a) =>
-                        ezTransitionBuilder(a, w, force: EzTransitionType.zoom),
+                  EzAnimSwitch(
+                    mod: 0.5,
+                    force: EzTransitionType.zoom,
                     child: EzSwitchPair(
                       key: ValueKey<bool>(exampleDomain),
                       mainAxisSize: MainAxisSize.max,
