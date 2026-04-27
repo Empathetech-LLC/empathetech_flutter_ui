@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextEditingController flutterPathControl = TextEditingController();
 
   bool showAdvanced = false;
+  Offset lastClick = Offset.zero;
 
   late final TextEditingController workPathControl =
       TextEditingController(text: docsPath);
@@ -98,6 +99,14 @@ class _HomeScreenState extends State<HomeScreen> {
   bool canGen = true;
 
   // Define custom functions //
+
+  Widget advAnim(Widget w, Animation<double> a) => SlideTransition(
+        position: Tween<Offset>(begin: lastClick, end: Offset.zero)
+            .animate(CurvedAnimation(parent: a, curve: Curves.easeInOut)),
+        child: (EzConfig.fadedTransition)
+            ? FadeTransition(opacity: a, child: w)
+            : w,
+      );
 
   /// Validate the code gen file path (Desktop only)
   Future<bool> checkPath(TextEditingController controller) async {
@@ -317,19 +326,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       showAdvanced ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
                   button: true,
                   child: ExcludeSemantics(
-                    child: Tooltip(
-                      message: showAdvanced
+                    child: EzIconButton(
+                      icon: Icon(ezVisIcon(showAdvanced)),
+                      onPressed: () {
+                        lastClick = ezWya(context);
+                        setState(() => showAdvanced = !showAdvanced);
+                      },
+                      tooltip: showAdvanced
                           ? EzConfig.l10n.gClose
                           : EzConfig.l10n.gOpen,
-                      child: GestureDetector(
-                        onTap: () =>
-                            setState(() => showAdvanced = !showAdvanced),
-                        child: EzIcon(
-                          showAdvanced
-                              ? Icons.keyboard_arrow_down
-                              : Icons.keyboard_arrow_up,
-                        ),
-                      ),
                     ),
                   ),
                 ),
@@ -339,9 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Settings
             EzAnimSwitch(
               mod: 0.75,
-              force: EzTransitionType.slideY,
-              reverse: true,
-              // TODO figure out offset and audit curr animations (then you can resume visibility audit)
+              override: advAnim,
               child: showAdvanced
                   ? EzCol(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1023,7 +1026,7 @@ class _AdvancedSettingsField extends StatelessWidget {
         child: EzIconButton(
           onPressed: onHide,
           tooltip: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
-          icon: Icon(visible ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+          icon: Icon(ezVisIcon(visible)),
         ),
       ),
     );
@@ -1055,34 +1058,21 @@ class _AdvancedSettingsField extends StatelessWidget {
             children: <Widget>[
               // Title and show buttons
               EzScrollView(
+                reverseHands: true,
                 scrollDirection: Axis.horizontal,
-                children: EzConfig.isLefty
-                    ? <Widget>[
-                        hideButton,
-                        EzConfig.rowMargin,
-                        titleText,
-                        if (onRemove != null) ...<Widget>[
-                          EzConfig.rowMargin,
-                          removeButton,
-                        ],
-                        if (tip != null) ...<Widget>[
-                          EzConfig.rowMargin,
-                          tooltip,
-                        ],
-                      ]
-                    : <Widget>[
-                        titleText,
-                        EzConfig.rowMargin,
-                        hideButton,
-                        if (onRemove != null) ...<Widget>[
-                          EzConfig.rowMargin,
-                          removeButton,
-                        ],
-                        if (tip != null) ...<Widget>[
-                          EzConfig.rowMargin,
-                          tooltip,
-                        ],
-                      ],
+                children: <Widget>[
+                  titleText,
+                  EzConfig.rowMargin,
+                  hideButton,
+                  if (onRemove != null) ...<Widget>[
+                    EzConfig.rowMargin,
+                    removeButton,
+                  ],
+                  if (tip != null) ...<Widget>[
+                    EzConfig.rowMargin,
+                    tooltip,
+                  ],
+                ],
               ),
 
               // Form field
@@ -1147,7 +1137,7 @@ class _LicensePicker extends StatelessWidget {
         child: EzIconButton(
           onPressed: onHide,
           tooltip: visible ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
-          icon: Icon(visible ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+          icon: Icon(ezVisIcon(visible)),
         ),
       ),
     );
