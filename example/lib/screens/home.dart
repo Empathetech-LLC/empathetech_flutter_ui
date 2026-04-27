@@ -233,8 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     switchInCurve: Curves.easeInOut,
                     switchOutCurve: Curves.easeInOut,
                     transitionBuilder: (Widget w, Animation<double> a) =>
-                        ezTransitionBuilder(context, a, w,
-                            force: EzTransitionType.zoom),
+                        ezTransitionBuilder(a, w, force: EzTransitionType.zoom),
                     child: exampleDomain
                         ? const SizedBox.shrink()
                         : TextFormField(
@@ -252,8 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     switchInCurve: Curves.easeInOut,
                     switchOutCurve: Curves.easeInOut,
                     transitionBuilder: (Widget w, Animation<double> a) =>
-                        ezTransitionBuilder(context, a, w,
-                            force: EzTransitionType.zoom),
+                        ezTransitionBuilder(a, w, force: EzTransitionType.zoom),
                     child: EzSwitchPair(
                       key: ValueKey<bool>(exampleDomain),
                       mainAxisSize: MainAxisSize.max,

@@ -459,11 +459,10 @@ Widget ezTransitionsBuilder(
   Widget child, {
   EzTransitionType? force,
 }) =>
-    ezTransitionBuilder(context, animation, child, force: force);
+    ezTransitionBuilder(animation, child, force: force);
 
 /// Animator based on [EzConfig]
 Widget ezTransitionBuilder(
-  BuildContext context,
   Animation<double> animation,
   Widget child, {
   EzTransitionType? force,
