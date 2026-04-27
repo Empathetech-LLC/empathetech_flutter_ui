@@ -61,6 +61,7 @@ export 'src/sample_screens/settings_hub.dart';
 
 export 'src/widgets/helpers/alert_dialog.dart';
 export 'src/widgets/helpers/alignment.dart';
+export 'src/widgets/helpers/animations.dart';
 export 'src/widgets/helpers/back_action.dart';
 export 'src/widgets/helpers/checkbox.dart';
 export 'src/widgets/helpers/cli.dart';
@@ -68,7 +69,6 @@ export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/dropdown_menu.dart';
 export 'src/widgets/helpers/elevated_button.dart';
 export 'src/widgets/helpers/fabulous.dart';
-export 'src/widgets/helpers/faux_carousel.dart';
 export 'src/widgets/helpers/icon_button.dart';
 export 'src/widgets/helpers/menu_button.dart';
 export 'src/widgets/helpers/radio.dart';
