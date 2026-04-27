@@ -116,7 +116,7 @@ extension EBSConfig on EzButtonShape {
     }
   }
 
-  /// Defaults to [EzPageTransition.system]
+  /// Defaults to [EzTransitionType.system]
   static EzButtonShape lookup(String? value) {
     switch (value) {
       case esRect:
@@ -170,7 +170,7 @@ extension EBSConfig on EzButtonShape {
 
 //* Page transitions *//
 
-enum EzPageTransition {
+enum EzTransitionType {
   none,
   system,
   turnX,
@@ -203,123 +203,123 @@ const String esZoom = 'zoom';
 
 // enum Config //
 
-/// EzPageTransition config
-extension EPTConfig on EzPageTransition {
+/// EzTransitionType config
+extension ETTConfig on EzTransitionType {
   Icon get icon {
     switch (this) {
-      case EzPageTransition.none:
+      case EzTransitionType.none:
         return const Icon(Icons.cancel);
 
-      case EzPageTransition.system:
+      case EzTransitionType.system:
         return Icon(EzConfig.onMobile
             ? EzConfig.platform == TargetPlatform.iOS
                 ? Icons.phone_iphone
                 : Icons.phone_android
             : Icons.computer);
 
-      case EzPageTransition.turnX:
+      case EzTransitionType.turnX:
         return const Icon(Icons.flip);
 
-      case EzPageTransition.turnY:
+      case EzTransitionType.turnY:
         return const Icon(Icons.u_turn_left);
 
-      case EzPageTransition.rotate:
+      case EzTransitionType.rotate:
         return const Icon(Icons.rotate_90_degrees_cw);
 
-      case EzPageTransition.slideX:
+      case EzTransitionType.slideX:
         return Icon(EzConfig.isLTR
             ? Icons.keyboard_double_arrow_left
             : Icons.keyboard_double_arrow_right);
 
-      case EzPageTransition.slideY:
+      case EzTransitionType.slideY:
         return const Icon(Icons.keyboard_double_arrow_up);
 
-      case EzPageTransition.zoom:
+      case EzTransitionType.zoom:
         return const Icon(Icons.zoom_in);
     }
   }
 
   String get value {
     switch (this) {
-      case EzPageTransition.none:
+      case EzTransitionType.none:
         return esNone;
 
-      case EzPageTransition.system:
+      case EzTransitionType.system:
         return esSystem;
 
-      case EzPageTransition.turnX:
+      case EzTransitionType.turnX:
         return esTurnX;
 
-      case EzPageTransition.turnY:
+      case EzTransitionType.turnY:
         return esTurnY;
 
-      case EzPageTransition.rotate:
+      case EzTransitionType.rotate:
         return esRotate;
 
-      case EzPageTransition.slideX:
+      case EzTransitionType.slideX:
         return esSlideX;
 
-      case EzPageTransition.slideY:
+      case EzTransitionType.slideY:
         return esSlideY;
 
-      case EzPageTransition.zoom:
+      case EzTransitionType.zoom:
         return esZoom;
     }
   }
 
-  /// Defaults to [EzPageTransition.system]
-  static EzPageTransition lookup(String? value) {
+  /// Defaults to [EzTransitionType.system]
+  static EzTransitionType lookup(String? value) {
     switch (value) {
       case esNone:
-        return EzPageTransition.none;
+        return EzTransitionType.none;
 
       case esTurnX:
-        return EzPageTransition.turnX;
+        return EzTransitionType.turnX;
 
       case esTurnY:
-        return EzPageTransition.turnY;
+        return EzTransitionType.turnY;
 
       case esRotate:
-        return EzPageTransition.rotate;
+        return EzTransitionType.rotate;
 
       case esSlideX:
-        return EzPageTransition.slideX;
+        return EzTransitionType.slideX;
 
       case esSlideY:
-        return EzPageTransition.slideY;
+        return EzTransitionType.slideY;
 
       case esZoom:
-        return EzPageTransition.zoom;
+        return EzTransitionType.zoom;
 
       default:
-        return EzPageTransition.system;
+        return EzTransitionType.system;
     }
   }
 
   String get name {
     switch (this) {
-      case EzPageTransition.none:
+      case EzTransitionType.none:
         return EzConfig.l10n.dsNone;
 
-      case EzPageTransition.system:
+      case EzTransitionType.system:
         return EzConfig.l10n.dsSystem;
 
-      case EzPageTransition.turnX:
+      case EzTransitionType.turnX:
         return EzConfig.l10n.dsTurnX;
 
-      case EzPageTransition.turnY:
+      case EzTransitionType.turnY:
         return EzConfig.l10n.dsTurnY;
 
-      case EzPageTransition.rotate:
+      case EzTransitionType.rotate:
         return EzConfig.l10n.dsRotate;
 
-      case EzPageTransition.slideX:
+      case EzTransitionType.slideX:
         return EzConfig.l10n.dsSlideX;
 
-      case EzPageTransition.slideY:
+      case EzTransitionType.slideY:
         return EzConfig.l10n.dsSlideY;
 
-      case EzPageTransition.zoom:
+      case EzTransitionType.zoom:
         return EzConfig.l10n.dsZoom;
     }
   }

@@ -105,7 +105,7 @@ class EzWallHolesConfig extends StatelessWidget {
 
     await EzConfig.setInt(lightAnimationDurationKey, 600);
     await EzConfig.setString(
-        lightTransitionTypeKey, EzPageTransition.zoom.value);
+        lightTransitionTypeKey, EzTransitionType.zoom.value);
 
     await EzConfig.setString(lightBackgroundImageKey, wallHolesPath);
     await EzConfig.setString(

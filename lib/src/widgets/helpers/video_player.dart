@@ -696,7 +696,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                             children: <Widget>[
                                               Icon(
                                                 Icons.speed,
-                                                size: EzConfig.iconSize * 0.667,
+                                                size: EzConfig.iconSize * 0.8,
                                                 color: widget.textColor,
                                               ),
                                               Text(

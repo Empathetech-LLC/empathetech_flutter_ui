@@ -457,7 +457,7 @@ Widget ezTransitionsBuilder(
   Animation<double> animation,
   Animation<double> secondaryAnimation,
   Widget child, {
-  EzPageTransition? force,
+  EzTransitionType? force,
 }) =>
     ezTransitionBuilder(context, animation, child, force: force);
 
@@ -466,7 +466,7 @@ Widget ezTransitionBuilder(
   BuildContext context,
   Animation<double> animation,
   Widget child, {
-  EzPageTransition? force,
+  EzTransitionType? force,
   bool reverse = false,
 }) {
   // Check for no animation
@@ -479,7 +479,7 @@ Widget ezTransitionBuilder(
 
   switch (force ?? EzConfig.pageTransition) {
     // System
-    case EzPageTransition.system:
+    case EzTransitionType.system:
       switch (EzConfig.platform) {
         // Android -> Zoom
         case TargetPlatform.android:
@@ -510,7 +510,7 @@ Widget ezTransitionBuilder(
       }
 
     // Horizontal turn
-    case EzPageTransition.turnX:
+    case EzTransitionType.turnX:
       return AnimatedBuilder(
         animation: animation,
         builder: (_, __) => EzConfig.isLTR
@@ -532,7 +532,7 @@ Widget ezTransitionBuilder(
       );
 
     // Vertical turn
-    case EzPageTransition.turnY:
+    case EzTransitionType.turnY:
       return AnimatedBuilder(
         animation: animation,
         builder: (_, __) => Transform(
@@ -546,7 +546,7 @@ Widget ezTransitionBuilder(
       );
 
     // Rotate
-    case EzPageTransition.rotate:
+    case EzTransitionType.rotate:
       return RotationTransition(
         turns: Tween<double>(
           begin: 0.0,
@@ -559,7 +559,7 @@ Widget ezTransitionBuilder(
       );
 
     // Horizontal slide
-    case EzPageTransition.slideX:
+    case EzTransitionType.slideX:
       return SlideTransition(
         position: Tween<Offset>(
           begin: Offset((EzConfig.isLTR ? 1.0 : -1.0) * mod, 0.0),
@@ -572,7 +572,7 @@ Widget ezTransitionBuilder(
       );
 
     // Vertical slide
-    case EzPageTransition.slideY:
+    case EzTransitionType.slideY:
       return SlideTransition(
         position: Tween<Offset>(
           begin: Offset(0.0, mod),
@@ -585,7 +585,7 @@ Widget ezTransitionBuilder(
       );
 
     // Zoom
-    case EzPageTransition.zoom:
+    case EzTransitionType.zoom:
       return ScaleTransition(
         scale: Tween<double>(
           begin: reverse ? 2.0 : 0.0,
@@ -599,7 +599,7 @@ Widget ezTransitionBuilder(
       );
 
     // None
-    case EzPageTransition.none:
+    case EzTransitionType.none:
       return smartFade(child);
   }
 }

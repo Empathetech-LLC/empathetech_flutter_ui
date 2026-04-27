@@ -47,7 +47,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Default anim duration and page fade
       await EzConfig.setString(
-          darkTransitionTypeKey, EzPageTransition.none.value);
+          darkTransitionTypeKey, EzTransitionType.none.value);
 
       await EzConfig.setBool(darkShowScrollKey, false);
 
@@ -139,7 +139,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Default anim duration and page fade
       await EzConfig.setString(
-          lightTransitionTypeKey, EzPageTransition.none.value);
+          lightTransitionTypeKey, EzTransitionType.none.value);
 
       await EzConfig.setBool(lightShowScrollKey, false);
 

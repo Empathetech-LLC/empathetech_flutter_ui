@@ -122,7 +122,7 @@ class EzDesignSettings extends StatelessWidget {
     return EzFauxCarousel(
       position: target.isFirst ? 0 : 1,
       delta: target.isFirst ? -1 : 1,
-      animMod: 0.667,
+      animMod: 0.5,
       child: (target == EzSubSetting.butDesign)
           ? ButtonDesign(
               onUpdate: onUpdate,

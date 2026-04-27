@@ -515,8 +515,8 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setInt(darkAnimationDurationKey, random.nextInt(1000));
       await setString(
           darkTransitionTypeKey,
-          EzPageTransition
-              .values[random.nextInt(EzPageTransition.values.length)].value);
+          EzTransitionType
+              .values[random.nextInt(EzTransitionType.values.length)].value);
       await setBool(darkTransitionFadeKey, random.nextBool());
 
       await setBool(darkShowScrollKey, random.nextBool());
@@ -663,8 +663,8 @@ Must be one of [int, bool, double, String, List<String>]''');
       await setInt(lightAnimationDurationKey, random.nextInt(1000));
       await setString(
           lightTransitionTypeKey,
-          EzPageTransition
-              .values[random.nextInt(EzPageTransition.values.length)].value);
+          EzTransitionType
+              .values[random.nextInt(EzTransitionType.values.length)].value);
       await setBool(lightTransitionFadeKey, random.nextBool());
 
       await setBool(lightShowScrollKey, random.nextBool());
@@ -855,7 +855,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   static double get spacing => _provPoint.design.spacing;
 
   static int get animDur => _provPoint.design.animDur;
-  static EzPageTransition get pageTransition =>
+  static EzTransitionType get pageTransition =>
       _provPoint.design.pageTransition;
   static bool get fadedTransition => _provPoint.design.fadedTransition;
 

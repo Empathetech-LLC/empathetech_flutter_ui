@@ -351,10 +351,10 @@ class _PageTransitionSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return EzElevatedIconButton(
       onPressed: () async {
-        final EzPageTransition backupType = EzConfig.pageTransition;
+        final EzTransitionType backupType = EzConfig.pageTransition;
         final bool backupFade = EzConfig.fadedTransition;
 
-        EzPageTransition currType = backupType;
+        EzTransitionType currType = backupType;
         bool currFade = backupFade;
 
         await ezModal(
@@ -362,18 +362,18 @@ class _PageTransitionSetting extends StatelessWidget {
           builder: (_) => StatefulBuilder(
             builder: (_, StateSetter setModal) => EzCol(children: <Widget>[
               // Type choices
-              RadioGroup<EzPageTransition>(
+              RadioGroup<EzTransitionType>(
                 groupValue: currType,
-                onChanged: (EzPageTransition? choice) {
+                onChanged: (EzTransitionType? choice) {
                   if (choice != null) setModal(() => currType = choice);
                 },
                 child: EzScrollView(
                   scrollDirection: Axis.horizontal,
                   thumbVisibility: false,
                   showScrollHint: true,
-                  children: EzPageTransition.values
+                  children: EzTransitionType.values
                       .map(
-                        (EzPageTransition type) => Padding(
+                        (EzTransitionType type) => Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: EzConfig.spacing,
                             horizontal: EzConfig.spacing / 2,
@@ -396,7 +396,7 @@ class _PageTransitionSetting extends StatelessWidget {
                               ),
                             ),
                             ExcludeSemantics(
-                              child: EzRadio<EzPageTransition>(value: type),
+                              child: EzRadio<EzTransitionType>(value: type),
                             ),
                           ]),
                         ),
