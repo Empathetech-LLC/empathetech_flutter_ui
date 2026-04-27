@@ -14,6 +14,9 @@ class EzAnimSwitch extends AnimatedSwitcher {
   /// [ezTransitionBuilder] passthrough
   final EzTransitionType? force;
 
+  /// [[ezTransitionBuilder] passthrough
+  final bool reverse;
+
   EzAnimSwitch({
     super.key,
     this.mod = 1.0,
@@ -22,11 +25,12 @@ class EzAnimSwitch extends AnimatedSwitcher {
     super.switchOutCurve = Curves.easeInOut,
     super.layoutBuilder,
     this.force,
+    this.reverse = false,
     super.child,
   }) : super(
           duration: ezAnimDuration(mod: mod),
           transitionBuilder: (Widget w, Animation<double> a) =>
-              ezTransitionBuilder(a, w, force: force),
+              ezTransitionBuilder(a, w, force: force, reverse: reverse),
         );
 }
 
