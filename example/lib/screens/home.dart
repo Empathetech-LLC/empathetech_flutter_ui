@@ -247,20 +247,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const InputDecoration(hintText: 'com.example'),
                           ),
                   ),
-                  EzSwitchPair(
-                    key: ValueKey<bool>(exampleDomain),
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: (exampleDomain || EzConfig.isLefty)
-                        ? MainAxisAlignment.start
-                        : MainAxisAlignment.end,
-                    text: EzConfig.l10n.gNA,
-                    semanticsLabel: EzConfig.l10n.gNAHint,
-                    textAlign: TextAlign.start,
-                    value: exampleDomain,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => exampleDomain = value);
-                    },
+                  AnimatedSwitcher(
+                    duration: ezAnimDuration(mod: 0.5),
+                    switchInCurve: Curves.easeInOut,
+                    switchOutCurve: Curves.easeInOut,
+                    transitionBuilder: (Widget w, Animation<double> a) =>
+                        ezTransitionBuilder(context, a, w,
+                            force: EzTransitionType.zoom),
+                    child: EzSwitchPair(
+                      key: ValueKey<bool>(exampleDomain),
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: (exampleDomain || EzConfig.isLefty)
+                          ? MainAxisAlignment.start
+                          : MainAxisAlignment.end,
+                      text: EzConfig.l10n.gNA,
+                      semanticsLabel: EzConfig.l10n.gNAHint,
+                      textAlign: TextAlign.start,
+                      value: exampleDomain,
+                      onChanged: (bool? value) {
+                        if (value == null) return;
+                        setState(() => exampleDomain = value);
+                      },
+                    ),
                   ),
                 ],
               ),
