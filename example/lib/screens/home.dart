@@ -228,17 +228,25 @@ class _HomeScreenState extends State<HomeScreen> {
               child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  if (!exampleDomain) ...<Widget>[
-                    TextFormField(
-                      controller: domainController,
-                      textAlign: TextAlign.start,
-                      maxLines: 1,
-                      validator: (String? text) => validateDomain(text),
-                      autovalidateMode: AutovalidateMode.onUnfocus,
-                      decoration:
-                          const InputDecoration(hintText: 'com.example'),
-                    ),
-                  ],
+                  AnimatedSwitcher(
+                    duration: ezAnimDuration(mod: 0.5),
+                    switchInCurve: Curves.easeInOut,
+                    switchOutCurve: Curves.easeInOut,
+                    transitionBuilder: (Widget w, Animation<double> a) =>
+                        ezTransitionBuilder(context, a, w,
+                            force: EzTransitionType.zoom),
+                    child: exampleDomain
+                        ? const SizedBox.shrink()
+                        : TextFormField(
+                            controller: domainController,
+                            textAlign: TextAlign.start,
+                            maxLines: 1,
+                            validator: (String? text) => validateDomain(text),
+                            autovalidateMode: AutovalidateMode.onUnfocus,
+                            decoration:
+                                const InputDecoration(hintText: 'com.example'),
+                          ),
+                  ),
                   EzSwitchPair(
                     key: ValueKey<bool>(exampleDomain),
                     mainAxisSize: MainAxisSize.max,
