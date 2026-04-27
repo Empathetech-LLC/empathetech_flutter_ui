@@ -100,12 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Define custom functions //
 
-  Widget advAnim(Widget w, Animation<double> a) => SlideTransition(
+  Widget advAnim(Widget w, Animation<double> a, bool visible) =>
+      SlideTransition(
         position: Tween<Offset>(begin: lastClick, end: Offset.zero)
             .animate(CurvedAnimation(parent: a, curve: Curves.easeInOut)),
-        child: (EzConfig.fadedTransition)
-            ? FadeTransition(opacity: a, child: w)
-            : w,
+        child: visible ? w : const SizedBox.shrink(),
       );
 
   /// Validate the code gen file path (Desktop only)
@@ -237,20 +236,19 @@ class _HomeScreenState extends State<HomeScreen> {
               child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  EzAnimSwitch(
+                  EzAnimVis(
+                    visible: !exampleDomain,
                     mod: 0.5,
                     force: EzTransitionType.zoom,
-                    child: exampleDomain
-                        ? const SizedBox.shrink()
-                        : TextFormField(
-                            controller: domainController,
-                            textAlign: TextAlign.start,
-                            maxLines: 1,
-                            validator: (String? text) => validateDomain(text),
-                            autovalidateMode: AutovalidateMode.onUnfocus,
-                            decoration:
-                                const InputDecoration(hintText: 'com.example'),
-                          ),
+                    child: TextFormField(
+                      controller: domainController,
+                      textAlign: TextAlign.start,
+                      maxLines: 1,
+                      validator: (String? text) => validateDomain(text),
+                      autovalidateMode: AutovalidateMode.onUnfocus,
+                      decoration:
+                          const InputDecoration(hintText: 'com.example'),
+                    ),
                   ),
                   EzAnimSwitch(
                     mod: 0.5,
@@ -329,7 +327,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: EzIconButton(
                       icon: Icon(ezVisIcon(showAdvanced)),
                       onPressed: () {
-                        lastClick = ezWya(context);
+                        debugPrint('CAW!\n\n$lastClick');
+                        lastClick = ezWya(context); // TODO: fix
+                        debugPrint('\n$lastClick\n\nCAW!');
                         setState(() => showAdvanced = !showAdvanced);
                       },
                       tooltip: showAdvanced
@@ -344,246 +344,228 @@ class _HomeScreenState extends State<HomeScreen> {
             // Settings
             EzAnimSwitch(
               mod: 0.75,
-              override: advAnim,
-              child: showAdvanced
-                  ? EzCol(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              override: (Widget w, Animation<double> a) =>
+                  advAnim(w, a, showAdvanced),
+              child: EzCol(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  EzConfig.spacer,
+
+                  // Work path picker
+                  if (isDesktop) ...<Widget>[
+                    EzText(
+                      l10n.csOutputPath,
+                      style: EzConfig.styles.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    EzScrollView(
+                      scrollDirection: Axis.horizontal,
+                      reverseHands: true,
                       children: <Widget>[
-                        if (isDesktop) EzConfig.spacer,
-
-                        // Work path picker
-                        Visibility(
-                          visible: isDesktop,
-                          child: EzCol(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              // Title
-                              EzText(
-                                l10n.csOutputPath,
-                                style: EzConfig.styles.bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-
-                              // Picker
-                              EzScrollView(
-                                scrollDirection: Axis.horizontal,
-                                reverseHands: true,
-                                children: <Widget>[
-                                  // Text
-                                  ConstrainedBox(
-                                    constraints:
-                                        ezTextFieldConstraints(context),
-                                    child: TextFormField(
-                                      controller: workPathControl,
-                                      readOnly: !canGen,
-                                      textAlign: TextAlign.start,
-                                      maxLines: 1,
-                                      validator: (String? path) =>
-                                          (path == null || path.isEmpty)
-                                              ? l10n.csPathRequired
-                                              : null,
-                                      autovalidateMode:
-                                          AutovalidateMode.onUnfocus,
-                                    ),
-                                  ),
-                                  EzConfig.rowMargin,
-
-                                  // Browse
-                                  EzIconButton(
-                                    onPressed: () async {
-                                      final String? selectedDirectory =
-                                          await FilePicker.getDirectoryPath();
-
-                                      if (selectedDirectory == null) return;
-
-                                      setState(() {
-                                        workPathControl.text = selectedDirectory
-                                                .contains(homePath)
-                                            ? '$homePath${selectedDirectory.split(homePath)[1]}'
-                                            : selectedDirectory;
-                                      });
-                                    },
-                                    tooltip: l10n.csFileBrowser,
-                                    icon: const Icon(Icons.folder_open),
-                                  ),
-                                ],
-                              ),
-                            ],
+                        // Text field
+                        ConstrainedBox(
+                          constraints: ezTextFieldConstraints(context),
+                          child: TextFormField(
+                            controller: workPathControl,
+                            readOnly: !canGen,
+                            textAlign: TextAlign.start,
+                            maxLines: 1,
+                            validator: (String? path) =>
+                                (path == null || path.isEmpty)
+                                    ? l10n.csPathRequired
+                                    : null,
+                            autovalidateMode: AutovalidateMode.onUnfocus,
                           ),
                         ),
-                        EzConfig.spacer,
+                        EzConfig.rowMargin,
 
-                        // Copyright config
-                        _AdvancedSettingsField(
-                          title: l10n.csCopyright,
-                          tip: l10n.csCopyrightTip,
-                          controller: copyrightController,
-                          visible: showCopyright,
-                          onHide: () =>
-                              setState(() => showCopyright = !showCopyright),
-                          removed: removeCopyright,
-                          onRemove: () =>
-                              setState(() => removeCopyright = true),
-                          onRestore: () =>
-                              setState(() => removeCopyright = false),
-                        ),
-                        EzConfig.spacer,
+                        // Browse
+                        EzIconButton(
+                          onPressed: () async {
+                            final String? selectedDirectory =
+                                await FilePicker.getDirectoryPath();
 
-                        // LICENSE config
-                        _LicensePicker(
-                          visible: showLicense,
-                          onHide: () =>
-                              setState(() => showLicense = !showLicense),
-                          groupValue: license,
-                          onChanged: (String? picked) {
-                            if (picked != null) {
-                              setState(() => license = picked);
-                            }
+                            if (selectedDirectory == null) return;
+
+                            setState(() {
+                              workPathControl.text = selectedDirectory
+                                      .contains(homePath)
+                                  ? '$homePath${selectedDirectory.split(homePath)[1]}'
+                                  : selectedDirectory;
+                            });
                           },
-                        ),
-                        EzConfig.spacer,
-
-                        // l10n config
-                        _AdvancedSettingsField(
-                          title: 'l10n.yaml',
-                          tip: l10n.csL10nTip,
-                          controller: l10nController,
-                          visible: showL10n,
-                          onHide: () => setState(() => showL10n = !showL10n),
-                          removed: false,
-                          onRemove: null,
-                          onRestore: null,
-                        ),
-                        EzConfig.spacer,
-
-                        // Analysis options config
-                        _AdvancedSettingsField(
-                          title: 'analysis_options.yaml',
-                          tip: l10n.csLintTip,
-                          controller: analysisController,
-                          visible: showAnalysis,
-                          onHide: () =>
-                              setState(() => showAnalysis = !showAnalysis),
-                          removed: removeAnalysis,
-                          onRemove: () => setState(() => removeAnalysis = true),
-                          onRestore: () =>
-                              setState(() => removeAnalysis = false),
-                        ),
-                        EzConfig.spacer,
-
-                        // VS Code launch config
-                        _AdvancedSettingsField(
-                          title: '.vscode/launch.json',
-                          tip: l10n.csLaunchTip,
-                          controller: vscController,
-                          visible: showVSC,
-                          onHide: () => setState(() => showVSC = !showVSC),
-                          removed: removeVSC,
-                          onRemove: () => setState(() => removeVSC = true),
-                          onRestore: () => setState(() => removeVSC = false),
+                          tooltip: l10n.csFileBrowser,
+                          icon: const Icon(Icons.folder_open),
                         ),
                       ],
-                    )
-                  : const SizedBox.shrink(),
+                    ),
+                    EzConfig.spacer,
+                  ],
+
+                  // Copyright config
+                  _AdvancedSettingsField(
+                    title: l10n.csCopyright,
+                    tip: l10n.csCopyrightTip,
+                    controller: copyrightController,
+                    visible: showCopyright,
+                    animOvr: advAnim,
+                    onHide: () =>
+                        setState(() => showCopyright = !showCopyright),
+                    removed: removeCopyright,
+                    onRemove: () => setState(() => removeCopyright = true),
+                    onRestore: () => setState(() => removeCopyright = false),
+                  ),
+                  EzConfig.spacer,
+
+                  // LICENSE config
+                  _LicensePicker(
+                    visible: showLicense,
+                    animOvr: advAnim,
+                    onHide: () => setState(() => showLicense = !showLicense),
+                    groupValue: license,
+                    onChanged: (String? picked) {
+                      if (picked != null) {
+                        setState(() => license = picked);
+                      }
+                    },
+                  ),
+                  EzConfig.spacer,
+
+                  // l10n config
+                  _AdvancedSettingsField(
+                    title: 'l10n.yaml',
+                    tip: l10n.csL10nTip,
+                    controller: l10nController,
+                    visible: showL10n,
+                    animOvr: advAnim,
+                    onHide: () => setState(() => showL10n = !showL10n),
+                    removed: false,
+                    onRemove: null,
+                    onRestore: null,
+                  ),
+                  EzConfig.spacer,
+
+                  // Analysis options config
+                  _AdvancedSettingsField(
+                    title: 'analysis_options.yaml',
+                    tip: l10n.csLintTip,
+                    controller: analysisController,
+                    visible: showAnalysis,
+                    animOvr: advAnim,
+                    onHide: () => setState(() => showAnalysis = !showAnalysis),
+                    removed: removeAnalysis,
+                    onRemove: () => setState(() => removeAnalysis = true),
+                    onRestore: () => setState(() => removeAnalysis = false),
+                  ),
+                  EzConfig.spacer,
+
+                  // VS Code launch config
+                  _AdvancedSettingsField(
+                    title: '.vscode/launch.json',
+                    tip: l10n.csLaunchTip,
+                    controller: vscController,
+                    visible: showVSC,
+                    animOvr: advAnim,
+                    onHide: () => setState(() => showVSC = !showVSC),
+                    removed: removeVSC,
+                    onRemove: () => setState(() => removeVSC = true),
+                    onRestore: () => setState(() => removeVSC = false),
+                  ),
+                ],
+              ),
             ),
             EzDivider(
                 constraints: ezTextFieldConstraints(context, prop: 0.333)),
 
             // Flutter path picker (Mac only)
-            Visibility(
-              visible: isMac,
-              child: EzCol(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            if (isMac) ...<Widget>[
+              // Title
+              EzRow(
+                reverseHands: false,
                 children: <Widget>[
-                  // Title
-                  EzRow(
-                    reverseHands: false,
-                    children: <Widget>[
-                      Flexible(
-                        child: EzText(
-                          l10n.csFlutterPath,
-                          style: EzConfig.styles.titleLarge,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      EzToolTipper(message: l10n.csNoSpaces),
-                    ],
+                  Flexible(
+                    child: EzText(
+                      l10n.csFlutterPath,
+                      style: EzConfig.styles.titleLarge,
+                      textAlign: TextAlign.start,
+                    ),
                   ),
-
-                  // Picker
-                  EzScrollView(
-                    scrollDirection: Axis.horizontal,
-                    reverseHands: true,
-                    children: <Widget>[
-                      // Text box
-                      ConstrainedBox(
-                        constraints: ezTextFieldConstraints(context),
-                        child: TextFormField(
-                          controller: flutterPathControl,
-                          readOnly: !canGen,
-                          textAlign: TextAlign.start,
-                          maxLines: 1,
-                          validator: (String? path) =>
-                              (path == null || path.isEmpty)
-                                  ? l10n.csPathRequired
-                                  : null,
-                          autovalidateMode: AutovalidateMode.onUnfocus,
-                          decoration: InputDecoration(
-                              hintText: isWindows
-                                  ? 'example_path\\flutter\\bin'
-                                  : 'example_path/flutter/bin'),
-                        ),
-                      ),
-                      EzConfig.rowMargin,
-
-                      // Browse
-                      EzIconButton(
-                        onPressed: () async {
-                          final String? selectedDirectory =
-                              await FilePicker.getDirectoryPath(
-                                  dialogTitle: l10n.csFlutterPath);
-
-                          if (selectedDirectory == null) return;
-
-                          setState(() {
-                            flutterPathControl.text = selectedDirectory
-                                    .contains(homePath)
-                                ? '$homePath${selectedDirectory.split(homePath)[1]}'
-                                : selectedDirectory;
-                          });
-                        },
-                        tooltip: l10n.csFileBrowser,
-                        icon: const Icon(Icons.folder_open),
-                      ),
-                    ],
-                  ),
-                  EzConfig.margin,
-                  EzRichText(
-                    <InlineSpan>[
-                      EzPlainText(
-                        text: '${l10n.csNotInstalled} ',
-                        style: EzConfig.styles.bodyLarge,
-                      ),
-                      EzInlineLink(
-                        l10n.rsInstall,
-                        style: EzConfig.styles.bodyLarge,
-                        textAlign: TextAlign.start,
-                        url: Uri.parse(installFlutter),
-                        hint: l10n.rsInstallHint,
-                        tooltip: installFlutter,
-                      ),
-                      EzPlainText(
-                        text: '.',
-                        style: EzConfig.styles.bodyLarge,
-                      ),
-                    ],
-                  ),
-                  EzConfig.separator,
+                  EzToolTipper(message: l10n.csNoSpaces),
                 ],
               ),
-            ),
+
+              // Picker
+              EzScrollView(
+                scrollDirection: Axis.horizontal,
+                reverseHands: true,
+                children: <Widget>[
+                  // Text box
+                  ConstrainedBox(
+                    constraints: ezTextFieldConstraints(context),
+                    child: TextFormField(
+                      controller: flutterPathControl,
+                      readOnly: !canGen,
+                      textAlign: TextAlign.start,
+                      maxLines: 1,
+                      validator: (String? path) =>
+                          (path == null || path.isEmpty)
+                              ? l10n.csPathRequired
+                              : null,
+                      autovalidateMode: AutovalidateMode.onUnfocus,
+                      decoration: InputDecoration(
+                          hintText: isWindows
+                              ? 'example_path\\flutter\\bin'
+                              : 'example_path/flutter/bin'),
+                    ),
+                  ),
+                  EzConfig.rowMargin,
+
+                  // Browse
+                  EzIconButton(
+                    onPressed: () async {
+                      final String? selectedDirectory =
+                          await FilePicker.getDirectoryPath(
+                              dialogTitle: l10n.csFlutterPath);
+
+                      if (selectedDirectory == null) return;
+
+                      setState(() {
+                        flutterPathControl.text = selectedDirectory
+                                .contains(homePath)
+                            ? '$homePath${selectedDirectory.split(homePath)[1]}'
+                            : selectedDirectory;
+                      });
+                    },
+                    tooltip: l10n.csFileBrowser,
+                    icon: const Icon(Icons.folder_open),
+                  ),
+                ],
+              ),
+              EzConfig.margin,
+              EzRichText(
+                <InlineSpan>[
+                  EzPlainText(
+                    text: '${l10n.csNotInstalled} ',
+                    style: EzConfig.styles.bodyLarge,
+                  ),
+                  EzInlineLink(
+                    l10n.rsInstall,
+                    style: EzConfig.styles.bodyLarge,
+                    textAlign: TextAlign.start,
+                    url: Uri.parse(installFlutter),
+                    hint: l10n.rsInstallHint,
+                    tooltip: installFlutter,
+                  ),
+                  EzPlainText(
+                    text: '.',
+                    style: EzConfig.styles.bodyLarge,
+                  ),
+                ],
+              ),
+              EzConfig.separator,
+            ],
 
             // Make it so //
 
@@ -999,6 +981,7 @@ class _AdvancedSettingsField extends StatelessWidget {
   final dynamic tip;
   final TextEditingController controller;
   final bool visible;
+  final Widget Function(Widget, Animation<double>, bool) animOvr;
   final void Function() onHide;
   final bool removed;
   final void Function()? onRemove;
@@ -1009,6 +992,7 @@ class _AdvancedSettingsField extends StatelessWidget {
     this.tip,
     required this.controller,
     required this.visible,
+    required this.animOvr,
     required this.onHide,
     required this.removed,
     required this.onRemove,
@@ -1076,8 +1060,10 @@ class _AdvancedSettingsField extends StatelessWidget {
               ),
 
               // Form field
-              Visibility(
-                visible: visible,
+              EzAnimSwitch(
+                mod: 0.75,
+                override: (Widget w, Animation<double> a) =>
+                    animOvr(w, a, visible),
                 child: EzCol(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -1100,6 +1086,7 @@ class _AdvancedSettingsField extends StatelessWidget {
 
 class _LicensePicker extends StatelessWidget {
   final bool visible;
+  final Widget Function(Widget, Animation<double>, bool) animOvr;
   final void Function() onHide;
 
   final String groupValue;
@@ -1107,6 +1094,7 @@ class _LicensePicker extends StatelessWidget {
 
   const _LicensePicker({
     required this.visible,
+    required this.animOvr,
     required this.onHide,
     required this.groupValue,
     required this.onChanged,
@@ -1174,8 +1162,8 @@ class _LicensePicker extends StatelessWidget {
         ),
 
         // Options
-        Visibility(
-          visible: visible,
+        EzAnimSwitch(
+          override: (Widget w, Animation<double> a) => animOvr(w, a, visible),
           child: Padding(
             padding: EdgeInsets.only(top: EzConfig.marginVal),
             child: RadioGroup<String>(
