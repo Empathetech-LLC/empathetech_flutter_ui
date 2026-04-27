@@ -609,6 +609,17 @@ Duration ezReadingTime(String passage) {
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
+/// 'Smart' keyboard arrow
+IconData ezVisIcon(bool show) => show
+    ? Icons.keyboard_arrow_down
+    : EzConfig.isLefty
+        ? Icons.keyboard_arrow_right
+        : Icons.keyboard_arrow_left;
+
+/// Location of the owner of [context]
+Offset ezWya(BuildContext context) =>
+    (context.findRenderObject() as RenderBox).localToGlobal(Offset.zero);
+
 /// Returns the longest [String] in [list]
 String getLongest(List<String> list) =>
     list.reduce((String a, String b) => a.length > b.length ? a : b);
