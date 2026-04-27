@@ -64,6 +64,7 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
         EzAnimSwitch(
           mod: 0.75,
           force: EzTransitionType.slideY,
+          reverse: true,
           child: currSection.subSettings.isEmpty
               ? const SizedBox.shrink()
               : EzCol(children: <Widget>[
