@@ -39,6 +39,29 @@ class EzAnimSwitch extends AnimatedSwitcher {
         );
 }
 
+class EzAnimVis extends EzAnimSwitch {
+  final bool visible;
+
+  EzAnimVis({
+    super.key,
+    required this.visible,
+    super.mod,
+    super.reverseDuration,
+    super.switchInCurve = Curves.easeInOut,
+    super.switchOutCurve = Curves.easeInOut,
+    super.layoutBuilder,
+    super.force,
+    super.reverse = false,
+    super.child,
+  }) : super(
+            override: (Widget w, Animation<double> a) => ezTransitionBuilder(
+                  a,
+                  visible ? w : const SizedBox.shrink(),
+                  force: force,
+                  reverse: reverse,
+                ));
+}
+
 class EzFauxCarousel extends StatelessWidget {
   final int position;
   final int delta;
