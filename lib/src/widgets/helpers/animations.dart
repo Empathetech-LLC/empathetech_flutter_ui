@@ -7,6 +7,24 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+class EzAnimSwitch extends AnimatedSwitcher {
+  /// [ezTransitionBuilder] passthrough
+  final EzTransitionType? force;
+
+  EzAnimSwitch({
+    super.key,
+    required super.duration,
+    super.reverseDuration,
+    super.switchInCurve = Curves.easeInOut,
+    super.switchOutCurve = Curves.easeInOut,
+    super.layoutBuilder,
+    this.force,
+    super.child,
+  }) : super(
+            transitionBuilder: (Widget w, Animation<double> a) =>
+                ezTransitionBuilder(a, w, force: force));
+}
+
 class EzFauxCarousel extends StatelessWidget {
   final int position;
   final int delta;
