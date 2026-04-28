@@ -457,26 +457,35 @@ Widget ezTransitionsBuilder(
   Animation<double> animation,
   Animation<double> secondaryAnimation,
   Widget child, {
-  EzTransitionType? force,
+  EzTransitionType? forceType,
+  bool? forceFade,
+  bool reverse = false,
 }) =>
-    ezTransitionBuilder(animation, child, force: force);
+    ezTransitionBuilder(
+      animation,
+      child,
+      forceType: forceType,
+      forceFade: forceFade,
+      reverse: reverse,
+    );
 
 /// Animator based on [EzConfig]
 Widget ezTransitionBuilder(
   Animation<double> animation,
   Widget child, {
-  EzTransitionType? force,
+  EzTransitionType? forceType,
+  bool? forceFade,
   bool reverse = false,
 }) {
   // Check for no animation
   if (EzConfig.animDur < 1) return child;
 
-  Widget smartFade(Widget child) => (EzConfig.fadedTransition)
+  Widget smartFade(Widget child) => (forceFade ?? EzConfig.fadedTransition)
       ? FadeTransition(opacity: animation, child: child)
       : child;
   final double mod = reverse ? -1.0 : 1.0;
 
-  switch (force ?? EzConfig.pageTransition) {
+  switch (forceType ?? EzConfig.transitionType) {
     // System
     case EzTransitionType.system:
       switch (EzConfig.platform) {
