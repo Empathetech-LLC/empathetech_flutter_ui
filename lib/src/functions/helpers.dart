@@ -303,7 +303,8 @@ Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
 double ezIconRatio() => max(
     EzConfig.iconSize /
         EzConfig.getDefault(EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
-    EzConfig.padding / EzConfig.getDefault(EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+    EzConfig.padding /
+        EzConfig.getDefault(EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
 
 /// Recommended size for an image
 /// Starts with 160.0, chosen by visual inspection
@@ -573,6 +574,20 @@ Widget ezTransitionBuilder(
       return SlideTransition(
         position: Tween<Offset>(
           begin: Offset(0.0, mod),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        )),
+        child: smartFade(child),
+      );
+
+    // Vertical slide, from Offset of last tap
+    // For developers only (not in the design settings)
+    case EzTransitionType.tapSlideY:
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: Offset(0.0, -EzConfig.lastTap.dy),
           end: Offset.zero,
         ).animate(CurvedAnimation(
           parent: animation,
