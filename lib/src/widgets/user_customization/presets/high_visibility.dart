@@ -46,7 +46,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(darkSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
 
       // Default anim duration and page fade
-      await EzConfig.setString(darkTransitionTypeKey, EzTransitionType.none.value);
+      await EzConfig.setString(darkTransitionTypeKey, EzTransitionType.system.value);
+      await EzConfig.setBool(darkTransitionFadeKey, false);
 
       await EzConfig.setBool(darkShowScrollKey, false);
 
@@ -135,7 +136,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(lightSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
 
       // Default anim duration and page fade
-      await EzConfig.setString(lightTransitionTypeKey, EzTransitionType.none.value);
+      await EzConfig.setString(lightTransitionTypeKey, EzTransitionType.system.value);
+      await EzConfig.setBool(lightTransitionFadeKey, false);
 
       await EzConfig.setBool(lightShowScrollKey, false);
 
