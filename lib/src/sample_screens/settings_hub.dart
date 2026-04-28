@@ -64,7 +64,8 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
         EzAnimVis(
           visible: currSection.subSettings.isNotEmpty,
           mod: 0.75,
-          force: EzTransitionType.slideY,
+          forceType: EzTransitionType.slideY,
+          forceFade: true,
           reverse: true,
           child: EzCol(children: <Widget>[
             EzConfig.margin,
