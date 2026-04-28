@@ -11,14 +11,17 @@ class EzAnimSwitch extends AnimatedSwitcher {
   /// [ezAnimDuration] passthrough
   final double mod;
 
+  /// Traditional [transitionBuilder]
+  final Widget Function(Widget, Animation<double>)? override;
+
   /// [ezTransitionBuilder] passthrough
-  final EzTransitionType? force;
+  final EzTransitionType? forceType;
+
+  /// [ezTransitionBuilder] passthrough
+  final bool? forceFade;
 
   /// [[ezTransitionBuilder] passthrough
   final bool reverse;
-
-  /// Traditional [transitionBuilder]
-  final Widget Function(Widget, Animation<double>)? override;
 
   EzAnimSwitch({
     super.key,
@@ -27,19 +30,26 @@ class EzAnimSwitch extends AnimatedSwitcher {
     super.switchInCurve = Curves.easeInOut,
     super.switchOutCurve = Curves.easeInOut,
     super.layoutBuilder,
-    this.force,
+    this.forceType,
+    this.forceFade,
     this.reverse = false,
     this.override,
     super.child,
   }) : super(
           duration: ezAnimDuration(mod: mod),
           transitionBuilder: override ??
-              (Widget w, Animation<double> a) =>
-                  ezTransitionBuilder(a, w, force: force, reverse: reverse),
+              (Widget w, Animation<double> a) => ezTransitionBuilder(
+                    a,
+                    w,
+                    forceType: forceType,
+                    forceFade: forceFade,
+                    reverse: reverse,
+                  ),
         );
 }
 
 class EzAnimVis extends EzAnimSwitch {
+  /// When the [child] should be visible
   final bool visible;
 
   EzAnimVis({
@@ -50,15 +60,48 @@ class EzAnimVis extends EzAnimSwitch {
     super.switchInCurve = Curves.easeInOut,
     super.switchOutCurve = Curves.easeInOut,
     super.layoutBuilder,
-    super.force,
+    super.forceType,
+    super.forceFade,
     super.reverse = false,
     super.child,
   }) : super(
             override: (Widget w, Animation<double> a) => ezTransitionBuilder(
                   a,
                   visible ? w : const SizedBox.shrink(),
-                  force: force,
+                  forceType: forceType,
+                  forceFade: forceFade,
                   reverse: reverse,
+                ));
+}
+
+class EzAnimHide extends EzAnimSwitch {
+  ///[BuildContext.findRenderObject] -> [Size.height]
+  final double height;
+
+  ///[BuildContext.findRenderObject] -> [Size.width]
+  final double width;
+
+  /// When the [child] should be visible
+  final bool visible;
+
+  EzAnimHide({
+    super.key,
+    required this.visible,
+    required this.height,
+    required this.width,
+    super.mod,
+    super.reverseDuration,
+    super.switchInCurve = Curves.easeInOut,
+    super.switchOutCurve = Curves.easeInOut,
+    super.layoutBuilder,
+    super.child,
+  }) : super(
+            override: (Widget w, Animation<double> a) => ezTransitionBuilder(
+                  a,
+                  visible ? w : SizedBox(height: height, width: width),
+                  forceType: EzTransitionType.none,
+                  forceFade: true,
+                  reverse: false,
                 ));
 }
 
