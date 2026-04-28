@@ -105,7 +105,8 @@ class EzChalkboardConfig extends StatelessWidget {
 
     await EzConfig.setInt(darkAnimationDurationKey, 500);
 
-    await EzConfig.setString(darkTransitionTypeKey, EzTransitionType.slideY.value);
+    await EzConfig.setString(darkTransitionTypeKey, EzTransitionType.turnY.value);
+    await EzConfig.setBool(darkTransitionFadeKey, false);
 
     await EzConfig.setString(darkButtonShapeKey, EzButtonShape.rect.value);
 
