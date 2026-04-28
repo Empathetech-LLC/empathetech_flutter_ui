@@ -23,6 +23,7 @@ class EzAnimSwitch extends AnimatedSwitcher {
   /// [[ezTransitionBuilder] passthrough
   final bool reverse;
 
+  /// An [EzConfig] controlled [AnimatedSwitcher]
   EzAnimSwitch({
     super.key,
     this.mod = 1.0,
@@ -52,6 +53,7 @@ class EzAnimVis extends EzAnimSwitch {
   /// When the [child] should be visible
   final bool visible;
 
+  /// [EzAnimSwitch] where the second child is always [SizedBox.shrink]
   EzAnimVis({
     super.key,
     required this.visible,
@@ -75,20 +77,18 @@ class EzAnimVis extends EzAnimSwitch {
 }
 
 class EzAnimHide extends EzAnimSwitch {
-  ///[BuildContext.findRenderObject] -> [Size.height]
-  final double height;
-
-  ///[BuildContext.findRenderObject] -> [Size.width]
-  final double width;
+  ///[BuildContext.findRenderObject] -> [Size]
+  final Size size;
 
   /// When the [child] should be visible
   final bool visible;
 
+  /// Think [EzAnimVis] but it maintains the size of the widget
+  /// Always a static fade
   EzAnimHide({
     super.key,
     required this.visible,
-    required this.height,
-    required this.width,
+    required this.size,
     super.mod,
     super.reverseDuration,
     super.switchInCurve = Curves.easeInOut,
@@ -98,7 +98,9 @@ class EzAnimHide extends EzAnimSwitch {
   }) : super(
             override: (Widget w, Animation<double> a) => ezTransitionBuilder(
                   a,
-                  visible ? w : SizedBox(height: height, width: width),
+                  visible
+                      ? w
+                      : SizedBox(height: size.height, width: size.width),
                   forceType: EzTransitionType.none,
                   forceFade: true,
                   reverse: false,
