@@ -128,7 +128,8 @@ class EzSwitchPair extends StatefulWidget {
   })  : assert(
             (value == null) != (valueKey == null), 'Provide value OR valueKey, but not both'),
         assert((value == null) == (onChanged == null), 'Must pair value and onChanged'),
-        assert((valueKey == null) != (onChanged == null), 'Cannot use onChanged with valueKey'),
+        assert(
+            (valueKey == null) != (onChanged == null), 'Cannot use onChanged with valueKey'),
         assert(
             ((afterChanged == null) && (value == null) ||
                 ((afterChanged == null) != (value == null))),
@@ -190,12 +191,13 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
           child: widget.clickable
               ? EzLink(
                   widget.text,
+                  padding: EzInsets.wrap(EzConfig.marginVal),
                   backgroundColor: widget.backgroundColor,
+                  textColor: EzConfig.colors.onSurface,
                   style: widget.style,
                   textAlign: widget.textAlign,
-                  hint: widget.semanticsLabel ?? '',
+                  hint: widget.semanticsLabel ?? 'Flip switch', // TODO: l10n
                   onTap: () => onChanged(!value),
-                  textColor: EzConfig.colors.onSurface,
                 )
               : EzText(
                   widget.text,
