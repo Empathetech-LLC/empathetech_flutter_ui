@@ -100,7 +100,8 @@ class EzConfig {
       final Map<String, Type> typeMap = Map<String, Type>.from(allEZConfigKeys);
 
       // Include defaults
-      final Set<String> uniqueDefaults = defaults.keys.toSet().difference(typeMap.keys.toSet());
+      final Set<String> uniqueDefaults =
+          defaults.keys.toSet().difference(typeMap.keys.toSet());
 
       for (final String key in uniqueDefaults) {
         typeMap[key] = defaults[key].runtimeType;
@@ -218,7 +219,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool isPathAsset(String path) => _instance!._assetPaths.contains(path);
 
   /// Wether the [key] points to an [AssetImage] path
-  static bool isKeyAsset(String key) => _instance!._assetPaths.contains(_instance!._prefs[key]);
+  static bool isKeyAsset(String key) =>
+      _instance!._assetPaths.contains(_instance!._prefs[key]);
 
   //* Setters *//
 
@@ -789,85 +791,42 @@ Must be one of [int, bool, double, String, List<String>]''');
     return success;
   }
 
-  //* Provider aliases *//
+  //* Provider aliases (passthrough) *//
   // Getters //
 
-  // Internal
   static EzConfigProvider get _provPoint => _instance!._provider!;
 
-  // App data && global cache
+  /// Current [TargetPlatform]
   static TargetPlatform get platform => _provPoint.platform;
+
+  /// Whether the app is running on a mobile device
   static bool get onMobile => _provPoint.onMobile;
+
+  /// Track [redrawUI] and [rebuildUI] (randomized on each call)
   static int get seed => _provPoint.seed;
+
+  /// Toggleable bool for alerting the user to rebuild the UI
+  /// Some settings would be too expensive to rebuild on every change, so they update locally and [pingRebuild]
+  /// Example: [EzIconSizeSetting]
   static bool get needsRebuild => _provPoint.needsRebuild;
 
+  /// Current language for the app
   static Locale get locale => _provPoint.locale;
+
+  /// EFUI localizations for the [locale]
   static EFUILang get l10n => _provPoint.l10n;
+
+  /// Text direction for the [locale]
   static bool get isLTR => _provPoint.isLTR;
 
+  /// Current [ThemeMode]
   static ThemeMode get themeMode => _provPoint.themeMode;
+
+  /// Whether the current [themeMode] uses [Brightness.dark]
   static bool get isDark => _provPoint.isDark;
 
-  // Settings hub cache
-  static int get hubPos => get(hubPositionKey);
-  static bool get updateBoth => get(updateBothKey);
-
-  // Settings hub cache helpers
-  static Future<bool> setHubPos(int pos) => setInt(hubPositionKey, pos);
-
-  // Color cache
-  static ColorScheme get colors => _provPoint.theme.colorScheme;
-
-  static String get schemeImagePath => _provPoint.color.schemeImagePath;
-
-  // Design cache
-  static double get padding => _provPoint.design.padding;
-
-  static EzButtonShape get buttonShape => _provPoint.design.buttonShape;
-  static double get borderWidth => _provPoint.design.borderWidth;
-  static double get buttonOpacity => _provPoint.design.buttonOpacity;
-  static double get borderOpacity => _provPoint.design.borderOpacity;
-
-  static bool get lineLinks => _provPoint.design.lineLinks;
-  static bool get showBackFAB => _provPoint.design.showBackFAB;
-
-  static double get marginVal => _provPoint.design.margin;
-  static double get spacing => _provPoint.design.spacing;
-
-  static int get animDur => _provPoint.design.animDur;
-  static EzTransitionType get transitionType => _provPoint.design.transitionType;
-  static bool get fadedTransition => _provPoint.design.fadedTransition;
-
-  static String get backgroundImagePath => _provPoint.design.backgroundImagePath;
-  static BoxFit? get backgroundImageFit => _provPoint.design.backgroundImageFit;
-
-  static bool get showScroll => _provPoint.design.showScroll;
-
-  // Design cache helpers
-  static BorderSide borderSide(Color color) =>
-      borderWidth == 0 ? BorderSide.none : BorderSide(color: color, width: borderWidth);
-
-  static DecorationImage get backgroundImage => DecorationImage(
-        image: ezImageProvider(backgroundImagePath),
-        fit: EzConfig.backgroundImageFit,
-      );
-
-  // Layout (Widgets) cache
-  static EzMargin get margin => _provPoint.layout.margin;
-  static EzMargin get rowMargin => _provPoint.layout.rowMargin;
-  static EzSpacer get spacer => _provPoint.layout.spacer;
-  static EzSpacer get rowSpacer => _provPoint.layout.rowSpacer;
-  static EzSeparator get separator => _provPoint.layout.separator;
-  static EzDivider get divider => _provPoint.layout.divider;
-
-  static EzNewLine get startLine => _provPoint.layout.startLine;
-  static EzNewLine get centerLine => _provPoint.layout.centerLine;
-  static EzNewLine get endLine => _provPoint.layout.endLine;
-
-  // Text cache
-  static TextTheme get styles => _provPoint.theme.textTheme;
-  static double get textBackgroundOpacity => _provPoint.text.backgroundOpacity;
-  static double get iconSize => _provPoint.text.iconSize;
+  /// [Offset] of the last recorded tap
+  static Offset get lastTap => _provPoint.lastTap;
 
   // App (EFUI consumer) cache
   static EzAppCache? get appCache => _provPoint.appCache;
@@ -895,7 +854,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Then calls [redrawUI] with [onComplete]
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> rebuildUI(void Function() onComplete) => _provPoint.rebuildUI(onComplete);
+  static Future<void> rebuildUI(void Function() onComplete) =>
+      _provPoint.rebuildUI(onComplete);
 
   /// Randomizes the [seed] and notifies listeners
   /// Optionally calls [onComplete] after notifying
@@ -907,4 +867,81 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Used in [EzConfigurableApp], not normally called manually
   /// For that reason, there is no passthrough for [redrawUI]
   static Future<void> redrawTheme() => _provPoint.redrawTheme();
+
+  /// Records the [Offset] from [TapDownDetails.globalPosition]
+  static void tap(TapDownDetails details) => _provPoint.tap(details);
+
+  //* Provider aliases (custom) *//
+  // Hub //
+
+  // Storage values
+  static int get hubPos => get(hubPositionKey);
+  static bool get updateBoth => get(updateBothKey);
+
+  // Helpers
+  static Future<bool> setHubPos(int pos) => setInt(hubPositionKey, pos);
+
+  // Color //
+
+  // Cache values
+  static ColorScheme get colors => _provPoint.theme.colorScheme;
+  static String get schemeImagePath => _provPoint.color.schemeImagePath;
+
+  // Design //
+
+  // Design cache
+
+  static double get padding => _provPoint.design.padding;
+
+  static EzButtonShape get buttonShape => _provPoint.design.buttonShape;
+  static double get borderWidth => _provPoint.design.borderWidth;
+
+  static double get buttonOpacity => _provPoint.design.buttonOpacity;
+  static double get borderOpacity => _provPoint.design.borderOpacity;
+
+  static bool get lineLinks => _provPoint.design.lineLinks;
+  static bool get showBackFAB => _provPoint.design.showBackFAB;
+
+  static double get marginVal => _provPoint.design.margin;
+  static double get spacing => _provPoint.design.spacing;
+
+  static String get backgroundImagePath => _provPoint.design.backgroundImagePath;
+  static BoxFit? get backgroundImageFit => _provPoint.design.backgroundImageFit;
+
+  static EzTransitionType get transitionType => _provPoint.design.transitionType;
+  static bool get fadedTransition => _provPoint.design.fadedTransition;
+
+  static int get animDur => _provPoint.design.animDur;
+
+  static bool get showScroll => _provPoint.design.showScroll;
+
+  // Helpers
+  static BorderSide borderSide(Color color) =>
+      borderWidth == 0 ? BorderSide.none : BorderSide(color: color, width: borderWidth);
+
+  static DecorationImage get backgroundImage => DecorationImage(
+        image: ezImageProvider(backgroundImagePath),
+        fit: EzConfig.backgroundImageFit,
+      );
+
+  // Layout (Widgets) //
+
+  static EzMargin get margin => _provPoint.layout.margin;
+  static EzMargin get rowMargin => _provPoint.layout.rowMargin;
+
+  static EzSpacer get spacer => _provPoint.layout.spacer;
+  static EzSpacer get rowSpacer => _provPoint.layout.rowSpacer;
+
+  static EzSeparator get separator => _provPoint.layout.separator;
+  static EzDivider get divider => _provPoint.layout.divider;
+
+  static EzNewLine get startLine => _provPoint.layout.startLine;
+  static EzNewLine get centerLine => _provPoint.layout.centerLine;
+  static EzNewLine get endLine => _provPoint.layout.endLine;
+
+  // Text //
+
+  static TextTheme get styles => _provPoint.theme.textTheme;
+  static double get textBackgroundOpacity => _provPoint.text.backgroundOpacity;
+  static double get iconSize => _provPoint.text.iconSize;
 }
