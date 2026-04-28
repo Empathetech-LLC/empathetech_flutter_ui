@@ -855,8 +855,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   static double get spacing => _provPoint.design.spacing;
 
   static int get animDur => _provPoint.design.animDur;
-  static EzTransitionType get pageTransition =>
-      _provPoint.design.pageTransition;
+  static EzTransitionType get transitionType =>
+      _provPoint.design.transitionType;
   static bool get fadedTransition => _provPoint.design.fadedTransition;
 
   static String get backgroundImagePath =>
