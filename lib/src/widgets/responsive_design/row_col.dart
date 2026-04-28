@@ -25,9 +25,7 @@ class EzRowCol extends StatelessWidget {
     required this.row,
     required this.col,
   })  : assert(
-          row.runtimeType == Row ||
-              row.runtimeType == EzRow ||
-              row.runtimeType == EzScrollView,
+          row.runtimeType == Row || row.runtimeType == EzRow || row.runtimeType == EzScrollView,
           'row Widget can be a Row, EzRow, or EzScrollView',
         ),
         assert(

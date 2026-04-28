@@ -49,8 +49,7 @@ class EzConfigFAB extends StatelessWidget {
           return FloatingActionButton(
             heroTag: 'config_fab',
             tooltip: EzConfig.l10n.ssConfigTip,
-            onPressed: () =>
-                (controller.isOpen) ? controller.close() : controller.open(),
+            onPressed: () => (controller.isOpen) ? controller.close() : controller.open(),
             child: EzIcon(Icons.save),
           );
         },
@@ -149,26 +148,22 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
   void asyncInit() async {
     final bool isGPlay = await isGPlayInstall();
 
-    if (EzConfig.onMobile &&
-        (isGPlay || EzConfig.platform == TargetPlatform.iOS)) {
+    if (EzConfig.onMobile && (isGPlay || EzConfig.platform == TargetPlatform.iOS)) {
       return; // Don't show for store installs, they will auto-update
     }
 
-    final http.Response response =
-        await http.get(Uri.parse(widget.versionSource));
+    final http.Response response = await http.get(Uri.parse(widget.versionSource));
 
     if (response.statusCode != 200) return;
     // Skip on failure - otherwise no internet would return a false positive
 
     final String latestVersion = response.body;
     if (latestVersion != widget.appVersion) {
-      final List<int> latestDigits =
-          latestVersion.split('.').map(int.parse).toList();
+      final List<int> latestDigits = latestVersion.split('.').map(int.parse).toList();
 
       if (latestDigits.length != 3) return; // Ditto
 
-      final List<int> appDigits =
-          widget.appVersion.split('.').map(int.parse).toList();
+      final List<int> appDigits = widget.appVersion.split('.').map(int.parse).toList();
 
       for (int i = 0; i < latestDigits.length; i++) {
         if (latestDigits[i] > appDigits[i]) {
@@ -251,9 +246,8 @@ class EzRebuildFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         heroTag: 'rebuild_fab',
-        onPressed: () => justDraw
-            ? EzConfig.redrawUI(onComplete)
-            : EzConfig.rebuildUI(onComplete),
+        onPressed: () =>
+            justDraw ? EzConfig.redrawUI(onComplete) : EzConfig.rebuildUI(onComplete),
         tooltip: tooltip ?? EzConfig.l10n.gApplyChanges,
         backgroundColor: EzConfig.colors.secondary,
         foregroundColor: EzConfig.colors.onSecondary,

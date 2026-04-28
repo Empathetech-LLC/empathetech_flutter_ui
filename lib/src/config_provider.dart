@@ -91,8 +91,7 @@ class EzConfigProvider extends ChangeNotifier {
         transitionType: ETTConfig.lookup(EzConfig.get(darkTransitionTypeKey)),
         fadedTransition: EzConfig.get(darkTransitionFadeKey),
         backgroundImagePath: EzConfig.get(darkBackgroundImageKey),
-        backgroundImageFit:
-            boxFitLookup[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
+        backgroundImageFit: boxFitLookup[EzConfig.get(darkBackgroundImageKey + boxFitSuffix)],
         showScroll: EzConfig.get(darkShowScrollKey),
       );
       _layout = EzLayoutCache(
@@ -130,8 +129,7 @@ class EzConfigProvider extends ChangeNotifier {
         transitionType: ETTConfig.lookup(EzConfig.get(lightTransitionTypeKey)),
         fadedTransition: EzConfig.get(lightTransitionFadeKey),
         backgroundImagePath: EzConfig.get(lightBackgroundImageKey),
-        backgroundImageFit:
-            boxFitLookup[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
+        backgroundImageFit: boxFitLookup[EzConfig.get(lightBackgroundImageKey + boxFitSuffix)],
         showScroll: EzConfig.get(lightShowScrollKey),
       );
       _layout = EzLayoutCache(
@@ -255,8 +253,7 @@ class EzConfigProvider extends ChangeNotifier {
         _currTheme = _lightTheme;
         break;
       case ThemeMode.system:
-        if (WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-            Brightness.dark) {
+        if (WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark) {
           _isDark = true;
           _currTheme = _darkTheme;
         } else {
@@ -281,8 +278,7 @@ class EzConfigProvider extends ChangeNotifier {
         transitionsBuilder: (_, __, ___, Widget child) => child,
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
-        pageBuilder: (_, __, ___) =>
-            const Center(child: CircularProgressIndicator()),
+        pageBuilder: (_, __, ___) => const Center(child: CircularProgressIndicator()),
       ),
     ));
 
@@ -296,8 +292,7 @@ class EzConfigProvider extends ChangeNotifier {
         _isDark = false;
         break;
       case ThemeMode.system:
-        WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                Brightness.dark
+        WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark
             ? _isDark = true
             : _isDark = false;
         break;
@@ -330,8 +325,7 @@ class EzConfigProvider extends ChangeNotifier {
   /// For that reason, there is no passthrough for [redrawUI]
   Future<void> redrawTheme() async {
     final bool newIsDark =
-        (WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-            Brightness.dark);
+        (WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark);
 
     if (newIsDark != _isDark) {
       _isDark = newIsDark;

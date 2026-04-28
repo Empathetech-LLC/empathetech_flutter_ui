@@ -35,12 +35,9 @@ class EzRadio<T> extends StatelessWidget {
     final double ratio = scale ?? ezIconRatio();
 
     return Container(
-      padding: ratio > 1.1
-          ? padding ?? EzInsets.wrap(EzConfig.marginVal)
-          : EdgeInsets.zero,
+      padding: ratio > 1.1 ? padding ?? EzInsets.wrap(EzConfig.marginVal) : EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: EzConfig.colors.surface
-            .withValues(alpha: EzConfig.textBackgroundOpacity),
+        color: EzConfig.colors.surface.withValues(alpha: EzConfig.textBackgroundOpacity),
         shape: BoxShape.circle,
       ),
       child: Transform.scale(

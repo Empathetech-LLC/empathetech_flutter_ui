@@ -51,8 +51,7 @@ bool isMobile() => mobileCheck();
 double safeTop(BuildContext context) => MediaQuery.of(context).padding.top;
 
 /// [SafeArea] bottom padding
-double safeBottom(BuildContext context) =>
-    MediaQuery.of(context).padding.bottom;
+double safeBottom(BuildContext context) => MediaQuery.of(context).padding.bottom;
 
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
@@ -110,9 +109,7 @@ String ezThemeString(bool includeBoth) => ((includeBoth && EzConfig.updateBoth)
         ? (EzConfig.locale.languageCode == english.languageCode
             ? "${EzConfig.l10n.gBothThemes}'"
             : EzConfig.l10n.gBothThemes)
-        : (EzConfig.isDark
-            ? EzConfig.l10n.gDarkTheme
-            : EzConfig.l10n.gLightTheme))
+        : (EzConfig.isDark ? EzConfig.l10n.gDarkTheme : EzConfig.l10n.gLightTheme))
     .toLowerCase();
 
 /// More readable than...
@@ -152,18 +149,14 @@ Future<void> ezConfigLoader(BuildContext context) async {
       }
     }
   } catch (e) {
-    (context.mounted)
-        ? await ezLogAlert(context, message: e.toString())
-        : ezLog(e.toString());
+    (context.mounted) ? await ezLogAlert(context, message: e.toString()) : ezLog(e.toString());
     return;
   }
 
   if (context.mounted) {
     ezSnackBar(
       context,
-      message: kIsWeb
-          ? EzConfig.l10n.ssRestartReminderWeb
-          : EzConfig.l10n.ssRestartReminder,
+      message: kIsWeb ? EzConfig.l10n.ssRestartReminderWeb : EzConfig.l10n.ssRestartReminder,
     );
   }
 }
@@ -309,11 +302,8 @@ Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
 /// For Widgets that don't do it automatically, like [Radio] and [Checkbox]
 double ezIconRatio() => max(
     EzConfig.iconSize /
-        EzConfig.getDefault(
-            EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
-    EzConfig.padding /
-        EzConfig.getDefault(
-            EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+        EzConfig.getDefault(EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+    EzConfig.padding / EzConfig.getDefault(EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
 
 /// Recommended size for an image
 /// Starts with 160.0, chosen by visual inspection
@@ -406,9 +396,8 @@ Future<(Locale, EFUILang)> ezStoredL10n() async {
 
   final String languageCode = localeData[0];
   final String? countryCode = (localeData.length > 1) ? localeData[1] : null;
-  final Locale locale = (countryCode != null)
-      ? Locale(languageCode, countryCode)
-      : Locale(languageCode);
+  final Locale locale =
+      (countryCode != null) ? Locale(languageCode, countryCode) : Locale(languageCode);
 
   late final EFUILang el10n;
   try {

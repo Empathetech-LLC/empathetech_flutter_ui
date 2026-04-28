@@ -30,10 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
           EzConfig.platform == TargetPlatform.macOS ||
           EzConfig.platform == TargetPlatform.windows);
 
-  late final bool isMac =
-      isDesktop && EzConfig.platform == TargetPlatform.macOS;
-  late final bool isWindows =
-      isDesktop && EzConfig.platform == TargetPlatform.windows;
+  late final bool isMac = isDesktop && EzConfig.platform == TargetPlatform.macOS;
+  late final bool isWindows = isDesktop && EzConfig.platform == TargetPlatform.windows;
 
   late final String homePath = isDesktop
       ? isWindows
@@ -66,8 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showAdvanced = false;
   Offset lastClick = Offset.zero;
 
-  late final TextEditingController workPathControl =
-      TextEditingController(text: docsPath);
+  late final TextEditingController workPathControl = TextEditingController(text: docsPath);
 
   bool showCopyright = false;
   bool removeCopyright = false;
@@ -80,8 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool showL10n = false;
   // Default at the bottom of the Class
-  final TextEditingController l10nController =
-      TextEditingController(text: l10nDefault);
+  final TextEditingController l10nController = TextEditingController(text: l10nDefault);
 
   bool showAnalysis = false;
   bool removeAnalysis = false;
@@ -92,16 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showVSC = false;
   bool removeVSC = false;
   // Default at the bottom of the Class
-  late final TextEditingController vscController =
-      TextEditingController(text: vscDefault);
+  late final TextEditingController vscController = TextEditingController(text: vscDefault);
 
   /// Set to false to disable buttons
   bool canGen = true;
 
   // Define custom functions //
 
-  Widget advAnim(Widget w, Animation<double> a, bool visible) =>
-      SlideTransition(
+  Widget advAnim(Widget w, Animation<double> a, bool visible) => SlideTransition(
         position: Tween<Offset>(begin: lastClick, end: Offset.zero)
             .animate(CurvedAnimation(parent: a, curve: Curves.easeInOut)),
         child: visible ? w : const SizedBox.shrink(),
@@ -155,8 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
               tip: TextSpan(
                 children: <InlineSpan>[
                   EzPlainText(text: l10n.csNameTip),
-                  EzPlainText(
-                      text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
+                  EzPlainText(text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
                   EzPlainText(text: ezTitleToSnake(l10n.csNameTip)),
                 ],
                 style: EzConfig.styles.bodyLarge,
@@ -174,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     namePreview.replaceAll('_', '-'),
                   );
 
-                  copyrightController.text = copyrightController.text
-                      .replaceAll(previous, namePreview);
+                  copyrightController.text =
+                      copyrightController.text.replaceAll(previous, namePreview);
                 }),
                 onFailure: () => setState(() => validName = false),
               ),
@@ -210,9 +203,8 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               title: l10n.csDescription,
               controller: descriptionController,
-              validator: (String? value) => (value == null || value.isEmpty)
-                  ? EzConfig.l10n.gRequired
-                  : null,
+              validator: (String? value) =>
+                  (value == null || value.isEmpty) ? EzConfig.l10n.gRequired : null,
               hintText: l10n.csDescPreview,
             ),
             EzConfig.spacer,
@@ -246,8 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       maxLines: 1,
                       validator: (String? text) => validateDomain(text),
                       autovalidateMode: AutovalidateMode.onUnfocus,
-                      decoration:
-                          const InputDecoration(hintText: 'com.example'),
+                      decoration: const InputDecoration(hintText: 'com.example'),
                     ),
                   ),
                   EzAnimSwitch(
@@ -290,9 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () => context.goNamed(settingsHubPath),
                   hint: EzConfig.l10n.ssNavHint,
                 ),
-                EzPlainText(
-                    text: l10n
-                        .csSetColors(validName ? namePreview : l10n.csYourApp)),
+                EzPlainText(text: l10n.csSetColors(validName ? namePreview : l10n.csYourApp)),
                 EzInlineLink(
                   l10n.csHere,
                   style: ezSubTitleStyle(),
@@ -320,8 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 EzConfig.rowMargin,
                 Semantics(
-                  hint:
-                      showAdvanced ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                  hint: showAdvanced ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
                   button: true,
                   child: ExcludeSemantics(
                     child: EzIconButton(
@@ -332,9 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         debugPrint('\n$lastClick\n\nCAW!');
                         setState(() => showAdvanced = !showAdvanced);
                       },
-                      tooltip: showAdvanced
-                          ? EzConfig.l10n.gClose
-                          : EzConfig.l10n.gOpen,
+                      tooltip: showAdvanced ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
                     ),
                   ),
                 ),
@@ -344,8 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Settings
             EzAnimSwitch(
               mod: 0.75,
-              override: (Widget w, Animation<double> a) =>
-                  advAnim(w, a, showAdvanced),
+              override: (Widget w, Animation<double> a) => advAnim(w, a, showAdvanced),
               child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -373,9 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             textAlign: TextAlign.start,
                             maxLines: 1,
                             validator: (String? path) =>
-                                (path == null || path.isEmpty)
-                                    ? l10n.csPathRequired
-                                    : null,
+                                (path == null || path.isEmpty) ? l10n.csPathRequired : null,
                             autovalidateMode: AutovalidateMode.onUnfocus,
                           ),
                         ),
@@ -390,8 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             if (selectedDirectory == null) return;
 
                             setState(() {
-                              workPathControl.text = selectedDirectory
-                                      .contains(homePath)
+                              workPathControl.text = selectedDirectory.contains(homePath)
                                   ? '$homePath${selectedDirectory.split(homePath)[1]}'
                                   : selectedDirectory;
                             });
@@ -411,8 +393,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     controller: copyrightController,
                     visible: showCopyright,
                     animOvr: advAnim,
-                    onHide: () =>
-                        setState(() => showCopyright = !showCopyright),
+                    onHide: () => setState(() => showCopyright = !showCopyright),
                     removed: removeCopyright,
                     onRemove: () => setState(() => removeCopyright = true),
                     onRestore: () => setState(() => removeCopyright = false),
@@ -476,8 +457,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            EzDivider(
-                constraints: ezTextFieldConstraints(context, prop: 0.333)),
+            EzDivider(constraints: ezTextFieldConstraints(context, prop: 0.333)),
 
             // Flutter path picker (Mac only)
             if (isMac) ...<Widget>[
@@ -510,9 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlign: TextAlign.start,
                       maxLines: 1,
                       validator: (String? path) =>
-                          (path == null || path.isEmpty)
-                              ? l10n.csPathRequired
-                              : null,
+                          (path == null || path.isEmpty) ? l10n.csPathRequired : null,
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       decoration: InputDecoration(
                           hintText: isWindows
@@ -526,14 +504,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   EzIconButton(
                     onPressed: () async {
                       final String? selectedDirectory =
-                          await FilePicker.getDirectoryPath(
-                              dialogTitle: l10n.csFlutterPath);
+                          await FilePicker.getDirectoryPath(dialogTitle: l10n.csFlutterPath);
 
                       if (selectedDirectory == null) return;
 
                       setState(() {
-                        flutterPathControl.text = selectedDirectory
-                                .contains(homePath)
+                        flutterPathControl.text = selectedDirectory.contains(homePath)
                             ? '$homePath${selectedDirectory.split(homePath)[1]}'
                             : selectedDirectory;
                       });
@@ -578,8 +554,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () async {
                     if (validName &&
                         pubController.text.isNotEmpty &&
-                        (exampleDomain ||
-                            validateDomain(domainController.text) == null) &&
+                        (exampleDomain || validateDomain(domainController.text) == null) &&
                         descriptionController.text.isNotEmpty &&
                         (!isDesktop ||
                             ((!isMac || await checkPath(flutterPathControl)) &&
@@ -591,19 +566,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           appName: nameController.text,
                           publisherName: pubController.text,
                           appDescription: descriptionController.text,
-                          domainName: exampleDomain
-                              ? 'com.example'
-                              : domainController.text,
+                          domainName: exampleDomain ? 'com.example' : domainController.text,
                           appDefaults: Map<String, dynamic>.fromEntries(
                             allEZConfigKeys.keys.map(
-                              (String key) => MapEntry<String, dynamic>(
-                                  key, EzConfig.get(key)),
+                              (String key) =>
+                                  MapEntry<String, dynamic>(key, EzConfig.get(key)),
                             ),
                           ),
                           flutterPath: isMac ? flutterPathControl.text : null,
                           workPath: isDesktop ? workPathControl.text : null,
-                          copyright: (removeCopyright ||
-                                  copyrightController.text.isEmpty)
+                          copyright: (removeCopyright || copyrightController.text.isEmpty)
                               ? null
                               : copyrightController.text,
                           license: pickLicense(
@@ -614,22 +586,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             year: currentYear.toString(),
                           ),
                           l10nConfig: l10nController.text,
-                          analysisOptions: (removeAnalysis ||
-                                  analysisController.text.isEmpty)
+                          analysisOptions: (removeAnalysis || analysisController.text.isEmpty)
                               ? null
                               : analysisController.text,
-                          vsCodeConfig:
-                              (removeVSC || vscController.text.isEmpty)
-                                  ? null
-                                  : vscController.text,
+                          vsCodeConfig: (removeVSC || vscController.text.isEmpty)
+                              ? null
+                              : vscController.text,
                         ),
                       );
                     } else {
                       setState(() => canGen = false);
                       await ezSnackBar(
                         context,
-                        message:
-                            '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
+                        message: '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                       ).closed;
                       setState(() => canGen = true);
                     }
@@ -646,8 +615,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () async {
                       if (validName &&
                           pubController.text.isNotEmpty &&
-                          (exampleDomain ||
-                              validateDomain(domainController.text) == null) &&
+                          (exampleDomain || validateDomain(domainController.text) == null) &&
                           descriptionController.text.isNotEmpty &&
                           (!isMac || await checkPath(flutterPathControl)) &&
                           await checkPath(workPathControl) &&
@@ -658,19 +626,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             appName: nameController.text,
                             publisherName: pubController.text,
                             appDescription: descriptionController.text,
-                            domainName: exampleDomain
-                                ? 'com.example'
-                                : domainController.text,
+                            domainName: exampleDomain ? 'com.example' : domainController.text,
                             appDefaults: Map<String, dynamic>.fromEntries(
                               allEZConfigKeys.keys.map(
-                                (String key) => MapEntry<String, dynamic>(
-                                    key, EzConfig.get(key)),
+                                (String key) =>
+                                    MapEntry<String, dynamic>(key, EzConfig.get(key)),
                               ),
                             ),
                             flutterPath: isMac ? flutterPathControl.text : null,
                             workPath: workPathControl.text,
-                            copyright: (removeCopyright ||
-                                    copyrightController.text.isEmpty)
+                            copyright: (removeCopyright || copyrightController.text.isEmpty)
                                 ? null
                                 : copyrightController.text,
                             license: pickLicense(
@@ -681,22 +646,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               year: currentYear.toString(),
                             ),
                             l10nConfig: l10nController.text,
-                            analysisOptions: (removeAnalysis ||
-                                    analysisController.text.isEmpty)
-                                ? null
-                                : analysisController.text,
-                            vsCodeConfig:
-                                (removeVSC || vscController.text.isEmpty)
+                            analysisOptions:
+                                (removeAnalysis || analysisController.text.isEmpty)
                                     ? null
-                                    : vscController.text,
+                                    : analysisController.text,
+                            vsCodeConfig: (removeVSC || vscController.text.isEmpty)
+                                ? null
+                                : vscController.text,
                           ),
                         );
                       } else {
                         setState(() => canGen = false);
                         await ezSnackBar(
                           context,
-                          message:
-                              '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
+                          message: '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                         ).closed;
                         setState(() => canGen = true);
                       }
@@ -738,8 +701,7 @@ class _HomeScreenState extends State<HomeScreen> {
           flutterPathControl.text = config.flutterPath!;
         }
 
-        if (config.workPath != null &&
-            await Directory(config.workPath!).exists()) {
+        if (config.workPath != null && await Directory(config.workPath!).exists()) {
           workPathControl.text = config.workPath!;
         }
 
@@ -873,8 +835,7 @@ format: true
 suppress-warnings: false''';
 
   /// Recommended Empathetech lints
-  static const String analysisDefault =
-      '''include: package:flutter_lints/flutter.yaml
+  static const String analysisDefault = '''include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude: [lib/l10n/**]
@@ -1062,8 +1023,7 @@ class _AdvancedSettingsField extends StatelessWidget {
               // Form field
               EzAnimSwitch(
                 mod: 0.75,
-                override: (Widget w, Animation<double> a) =>
-                    animOvr(w, a, visible),
+                override: (Widget w, Animation<double> a) => animOvr(w, a, visible),
                 child: EzCol(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

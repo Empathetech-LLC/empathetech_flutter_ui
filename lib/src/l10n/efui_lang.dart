@@ -62,8 +62,7 @@ import 'efui_lang_fr.dart' deferred as efui_lang_fr;
 /// be consistent with the languages listed in the EFUILang.supportedLocales
 /// property.
 abstract class EFUILang {
-  EFUILang(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  EFUILang(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -1543,8 +1542,7 @@ class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'es', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_EFUILangDelegate old) => false;
@@ -1557,9 +1555,7 @@ Future<EFUILang> lookupEFUILang(Locale locale) {
       {
         switch (locale.countryCode) {
           case 'US':
-            return efui_lang_en
-                .loadLibrary()
-                .then((dynamic _) => efui_lang_en.EFUILangEnUs());
+            return efui_lang_en.loadLibrary().then((dynamic _) => efui_lang_en.EFUILangEnUs());
         }
         break;
       }
@@ -1568,17 +1564,11 @@ Future<EFUILang> lookupEFUILang(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return efui_lang_en
-          .loadLibrary()
-          .then((dynamic _) => efui_lang_en.EFUILangEn());
+      return efui_lang_en.loadLibrary().then((dynamic _) => efui_lang_en.EFUILangEn());
     case 'es':
-      return efui_lang_es
-          .loadLibrary()
-          .then((dynamic _) => efui_lang_es.EFUILangEs());
+      return efui_lang_es.loadLibrary().then((dynamic _) => efui_lang_es.EFUILangEs());
     case 'fr':
-      return efui_lang_fr
-          .loadLibrary()
-          .then((dynamic _) => efui_lang_fr.EFUILangFr());
+      return efui_lang_fr.loadLibrary().then((dynamic _) => efui_lang_fr.EFUILangFr());
   }
 
   throw FlutterError(

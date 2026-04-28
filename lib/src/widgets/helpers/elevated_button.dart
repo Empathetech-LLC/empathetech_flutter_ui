@@ -107,17 +107,12 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
       onPressed: widget.enabled ? widget.onPressed : doNothing,
       onLongPress: widget.enabled ? widget.onLongPress : doNothing,
       onHover: widget.onHover ??
-          (widget.underline
-              ? (bool isHovering) => addUnderline(isHovering)
-              : (_) {}),
+          (widget.underline ? (bool isHovering) => addUnderline(isHovering) : (_) {}),
       onFocusChange: widget.onFocusChange ??
-          (widget.underline
-              ? (bool isFocused) => addUnderline(isFocused)
-              : (_) {}),
+          (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       style: widget.enabled
           ? widget.style
-          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
-              ?.copyWith(
+          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)?.copyWith(
               overlayColor: WidgetStateProperty.all(EzConfig.colors.outline),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
             ),
@@ -239,17 +234,12 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
       onPressed: widget.enabled ? widget.onPressed : doNothing,
       onLongPress: widget.enabled ? widget.onLongPress : doNothing,
       onHover: widget.onHover ??
-          (widget.underline
-              ? (bool isHovering) => addUnderline(isHovering)
-              : (_) {}),
+          (widget.underline ? (bool isHovering) => addUnderline(isHovering) : (_) {}),
       onFocusChange: widget.onFocusChange ??
-          (widget.underline
-              ? (bool isFocused) => addUnderline(isFocused)
-              : (_) {}),
+          (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       style: widget.enabled
           ? widget.style
-          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
-              ?.copyWith(
+          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)?.copyWith(
               overlayColor: WidgetStateProperty.all(EzConfig.colors.outline),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
             ),

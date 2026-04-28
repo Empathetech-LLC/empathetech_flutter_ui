@@ -23,8 +23,7 @@ class EzSettingsHub extends StatefulWidget {
 }
 
 class _EzSettingsHubState extends State<EzSettingsHub> {
-  late EzSettingsSection currSection =
-      widget.pages[widget.target ?? EzConfig.hubPos];
+  late EzSettingsSection currSection = widget.pages[widget.target ?? EzConfig.hubPos];
   late EzSubSetting currSubSec = currSection.fromStorage();
   int delta = 0;
 

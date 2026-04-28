@@ -100,8 +100,7 @@ class EzConfig {
       final Map<String, Type> typeMap = Map<String, Type>.from(allEZConfigKeys);
 
       // Include defaults
-      final Set<String> uniqueDefaults =
-          defaults.keys.toSet().difference(typeMap.keys.toSet());
+      final Set<String> uniqueDefaults = defaults.keys.toSet().difference(typeMap.keys.toSet());
 
       for (final String key in uniqueDefaults) {
         typeMap[key] = defaults[key].runtimeType;
@@ -113,8 +112,7 @@ class EzConfig {
       final Map<String, dynamic> prefs = Map<String, dynamic>.from(defaults);
 
       // Find the keys that users have overwritten
-      final Set<String> overwritten =
-          preferences.keys.intersection(typeMap.keys.toSet());
+      final Set<String> overwritten = preferences.keys.intersection(typeMap.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
@@ -190,16 +188,14 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// No null or error checking, assumes the proper instance was provided in [EzConfig.init]
   /// Returns empty [String] on failure (not null)
   static Future<String> secGet(String key) async =>
-      await _instance!._securePreferences!.read(key: key) ??
-      Future<String>.value('');
+      await _instance!._securePreferences!.read(key: key) ?? Future<String>.value('');
 
   /// Alias for [EzConfig.get] => [isLeftyKey]
   static bool get isLefty => get(isLeftyKey);
 
   /// Get the [key]s EzConfig (nullable) [bool] value
   /// Uses the stored values from [SharedPreferencesAsync]
-  static Future<bool?> getBool(String key) =>
-      _instance!._preferences.getBool(key);
+  static Future<bool?> getBool(String key) => _instance!._preferences.getBool(key);
 
   /// Get the [key]s EzConfig (nullable) [int] value
   /// Uses the stored values from [SharedPreferencesAsync]
@@ -207,13 +203,11 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Get the [key]s EzConfig (nullable) [double] value
   /// Uses the stored values from [SharedPreferencesAsync]
-  static Future<double?> getDouble(String key) =>
-      _instance!._preferences.getDouble(key);
+  static Future<double?> getDouble(String key) => _instance!._preferences.getDouble(key);
 
   /// Get the [key]s EzConfig (nullable) [String] value
   /// Uses the stored values from [SharedPreferencesAsync]
-  static Future<String?> getString(String key) =>
-      _instance!._preferences.getString(key);
+  static Future<String?> getString(String key) => _instance!._preferences.getString(key);
 
   /// Get the [key]s EzConfig (nullable) [List] value
   /// Uses the stored values from [SharedPreferencesAsync]
@@ -224,8 +218,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool isPathAsset(String path) => _instance!._assetPaths.contains(path);
 
   /// Wether the [key] points to an [AssetImage] path
-  static bool isKeyAsset(String key) =>
-      _instance!._assetPaths.contains(_instance!._prefs[key]);
+  static bool isKeyAsset(String key) => _instance!._assetPaths.contains(_instance!._prefs[key]);
 
   //* Setters *//
 
@@ -325,8 +318,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     String? androidPackage,
     Set<String>? skip,
   }) async {
-    final Map<String, dynamic> config =
-        Map<String, dynamic>.from(_instance!._prefs);
+    final Map<String, dynamic> config = Map<String, dynamic>.from(_instance!._prefs);
     if (skip != null) {
       for (final String key in skip) {
         config.remove(key);
@@ -493,10 +485,8 @@ Must be one of [int, bool, double, String, List<String>]''');
         (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
       );
 
-      await setString(
-          darkButtonShapeKey,
-          EzButtonShape
-              .values[random.nextInt(EzButtonShape.values.length)].value);
+      await setString(darkButtonShapeKey,
+          EzButtonShape.values[random.nextInt(EzButtonShape.values.length)].value);
       await setDouble(darkBorderWidthKey, random.nextDouble() * 3);
       await setDouble(darkButtonOpacityKey, random.nextDouble());
       await setDouble(darkBorderOpacityKey, random.nextDouble());
@@ -513,10 +503,8 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
 
       await setInt(darkAnimationDurationKey, random.nextInt(1000));
-      await setString(
-          darkTransitionTypeKey,
-          EzTransitionType
-              .values[random.nextInt(EzTransitionType.values.length)].value);
+      await setString(darkTransitionTypeKey,
+          EzTransitionType.values[random.nextInt(EzTransitionType.values.length)].value);
       await setBool(darkTransitionFadeKey, random.nextBool());
 
       await setBool(darkShowScrollKey, random.nextBool());
@@ -525,12 +513,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       final List<String> styleOptions = googleStyles.keys.toList();
 
-      final String attentionStyle =
-          styleOptions[random.nextInt(styleOptions.length)];
+      final String attentionStyle = styleOptions[random.nextInt(styleOptions.length)];
       final double attentionScale = getScalar();
 
-      final String descriptionStyle =
-          styleOptions[random.nextInt(styleOptions.length)];
+      final String descriptionStyle = styleOptions[random.nextInt(styleOptions.length)];
       final double descriptionScale = getScalar();
 
       await setString(darkDisplayFontFamilyKey, attentionStyle);
@@ -641,10 +627,8 @@ Must be one of [int, bool, double, String, List<String>]''');
         (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
       );
 
-      await setString(
-          lightButtonShapeKey,
-          EzButtonShape
-              .values[random.nextInt(EzButtonShape.values.length)].value);
+      await setString(lightButtonShapeKey,
+          EzButtonShape.values[random.nextInt(EzButtonShape.values.length)].value);
       await setDouble(lightBorderWidthKey, random.nextDouble() * 3);
       await setDouble(lightButtonOpacityKey, random.nextDouble());
       await setDouble(lightBorderOpacityKey, random.nextDouble());
@@ -661,10 +645,8 @@ Must be one of [int, bool, double, String, List<String>]''');
       }
 
       await setInt(lightAnimationDurationKey, random.nextInt(1000));
-      await setString(
-          lightTransitionTypeKey,
-          EzTransitionType
-              .values[random.nextInt(EzTransitionType.values.length)].value);
+      await setString(lightTransitionTypeKey,
+          EzTransitionType.values[random.nextInt(EzTransitionType.values.length)].value);
       await setBool(lightTransitionFadeKey, random.nextBool());
 
       await setBool(lightShowScrollKey, random.nextBool());
@@ -673,12 +655,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       final List<String> styleOptions = googleStyles.keys.toList();
 
-      final String attentionStyle =
-          styleOptions[random.nextInt(styleOptions.length)];
+      final String attentionStyle = styleOptions[random.nextInt(styleOptions.length)];
       final double attentionScale = getScalar();
 
-      final String descriptionStyle =
-          styleOptions[random.nextInt(styleOptions.length)];
+      final String descriptionStyle = styleOptions[random.nextInt(styleOptions.length)];
       final double descriptionScale = getScalar();
 
       await setString(lightDisplayFontFamilyKey, attentionStyle);
@@ -855,20 +835,17 @@ Must be one of [int, bool, double, String, List<String>]''');
   static double get spacing => _provPoint.design.spacing;
 
   static int get animDur => _provPoint.design.animDur;
-  static EzTransitionType get transitionType =>
-      _provPoint.design.transitionType;
+  static EzTransitionType get transitionType => _provPoint.design.transitionType;
   static bool get fadedTransition => _provPoint.design.fadedTransition;
 
-  static String get backgroundImagePath =>
-      _provPoint.design.backgroundImagePath;
+  static String get backgroundImagePath => _provPoint.design.backgroundImagePath;
   static BoxFit? get backgroundImageFit => _provPoint.design.backgroundImageFit;
 
   static bool get showScroll => _provPoint.design.showScroll;
 
   // Design cache helpers
-  static BorderSide borderSide(Color color) => borderWidth == 0
-      ? BorderSide.none
-      : BorderSide(color: color, width: borderWidth);
+  static BorderSide borderSide(Color color) =>
+      borderWidth == 0 ? BorderSide.none : BorderSide(color: color, width: borderWidth);
 
   static DecorationImage get backgroundImage => DecorationImage(
         image: ezImageProvider(backgroundImagePath),
@@ -918,15 +895,13 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Then calls [redrawUI] with [onComplete]
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> rebuildUI(void Function() onComplete) =>
-      _provPoint.rebuildUI(onComplete);
+  static Future<void> rebuildUI(void Function() onComplete) => _provPoint.rebuildUI(onComplete);
 
   /// Randomizes the [seed] and notifies listeners
   /// Optionally calls [onComplete] after notifying
   /// If unsure, we recommend [onComplete] to be setState((){})
   /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> redrawUI(void Function() onComplete) =>
-      _provPoint.redrawUI(onComplete);
+  static Future<void> redrawUI(void Function() onComplete) => _provPoint.redrawUI(onComplete);
 
   /// Trigger [redrawUI] if/when the [ThemeMode] brightness changes
   /// Used in [EzConfigurableApp], not normally called manually

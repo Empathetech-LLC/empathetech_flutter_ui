@@ -96,8 +96,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar(
             EzSpacer(space: toastMargin, vertical: false),
             EzTextButton(
               text: undoMessage ?? EzConfig.l10n.gUndo,
-              textStyle: EzConfig.styles.bodyLarge
-                  ?.copyWith(color: EzConfig.colors.primary),
+              textStyle: EzConfig.styles.bodyLarge?.copyWith(color: EzConfig.colors.primary),
               onPressed: () async {
                 await undo();
                 if (context.mounted) {

@@ -32,14 +32,10 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Define the build data //
 
-  final List<DropdownMenuEntry<ThemeMode>> entries =
-      <DropdownMenuEntry<ThemeMode>>[
-    DropdownMenuEntry<ThemeMode>(
-        value: ThemeMode.system, label: EzConfig.l10n.gSystem),
-    DropdownMenuEntry<ThemeMode>(
-        value: ThemeMode.light, label: EzConfig.l10n.gLight),
-    DropdownMenuEntry<ThemeMode>(
-        value: ThemeMode.dark, label: EzConfig.l10n.gDark),
+  final List<DropdownMenuEntry<ThemeMode>> entries = <DropdownMenuEntry<ThemeMode>>[
+    DropdownMenuEntry<ThemeMode>(value: ThemeMode.system, label: EzConfig.l10n.gSystem),
+    DropdownMenuEntry<ThemeMode>(value: ThemeMode.light, label: EzConfig.l10n.gLight),
+    DropdownMenuEntry<ThemeMode>(value: ThemeMode.dark, label: EzConfig.l10n.gDark),
   ];
 
   // Return the build //
@@ -59,9 +55,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
           // Button
           EzDropdownMenu<ThemeMode>(
-            widthEntries: entries
-                .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
-                .toList(),
+            widthEntries:
+                entries.map((DropdownMenuEntry<ThemeMode> entry) => entry.label).toList(),
             dropdownMenuEntries: entries,
             enableSearch: false,
             initialSelection: EzConfig.themeMode,

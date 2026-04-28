@@ -14,8 +14,7 @@ const Widget updater = EzUpdaterFAB(
   appVersion: '3.1.1',
   versionSource:
       'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
-  gPlay:
-      'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+  gPlay: 'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
   appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
   github: 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
 );

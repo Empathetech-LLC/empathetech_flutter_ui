@@ -24,8 +24,7 @@ class LangEn extends Lang {
   String get csBecomes => 'becomes';
 
   @override
-  String get csInvalidName =>
-      'Lowercase letters, numbers, and underscores are allowed.';
+  String get csInvalidName => 'Lowercase letters, numbers, and underscores are allowed.';
 
   @override
   String get csYourApp => 'your app';
@@ -52,8 +51,7 @@ class LangEn extends Lang {
   String get csDomainTip => 'Backwards, it is';
 
   @override
-  String get csInvalidDomain =>
-      '\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
+  String get csInvalidDomain => '\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
 
   @override
   String get csInclude => 'Include';
@@ -213,8 +211,7 @@ class LangEn extends Lang {
   String get rsNextTime => 'Success, fingers crossed for next time!';
 
   @override
-  String get rsAnotherOne =>
-      'Another failure; you should probably take over...';
+  String get rsAnotherOne => 'Another failure; you should probably take over...';
 
   @override
   String get rsLeave => 'Leave it';
@@ -240,8 +237,7 @@ class LangEnUs extends LangEn {
   String get csBecomes => 'becomes';
 
   @override
-  String get csInvalidName =>
-      'Lowercase letters, numbers, and underscores are allowed.';
+  String get csInvalidName => 'Lowercase letters, numbers, and underscores are allowed.';
 
   @override
   String get csYourApp => 'your app';
@@ -268,8 +264,7 @@ class LangEnUs extends LangEn {
   String get csDomainTip => 'Backwards, it is';
 
   @override
-  String get csInvalidDomain =>
-      '\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
+  String get csInvalidDomain => '\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
 
   @override
   String get csInclude => 'Include';
@@ -429,8 +424,7 @@ class LangEnUs extends LangEn {
   String get rsNextTime => 'Success, fingers crossed for next time!';
 
   @override
-  String get rsAnotherOne =>
-      'Another failure; you should probably take over...';
+  String get rsAnotherOne => 'Another failure; you should probably take over...';
 
   @override
   String get rsLeave => 'Leave it';

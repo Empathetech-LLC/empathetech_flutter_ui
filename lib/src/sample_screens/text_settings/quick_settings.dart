@@ -61,8 +61,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
   // Gather the build data //
 
   late double backOpacity = EzConfig.textBackgroundOpacity;
-  late Color backgroundColor =
-      EzConfig.colors.surface.withValues(alpha: backOpacity);
+  late Color backgroundColor = EzConfig.colors.surface.withValues(alpha: backOpacity);
 
   // Define custom functions //
 
@@ -118,16 +117,13 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       ]),
 
       // Optional additional settings
-      if (widget.moreQuickHeaderSettings != null)
-        ...widget.moreQuickHeaderSettings!,
+      if (widget.moreQuickHeaderSettings != null) ...widget.moreQuickHeaderSettings!,
 
       widget.textBlockHeader,
       // Display preview
       EzTextBackground(
         Text(
-          EzConfig.l10n.tsDisplayP1 +
-              EzConfig.l10n.tsDisplayLink +
-              EzConfig.l10n.tsDisplayP2,
+          EzConfig.l10n.tsDisplayP1 + EzConfig.l10n.tsDisplayLink + EzConfig.l10n.tsDisplayP2,
           textAlign: TextAlign.center,
           style: widget.displayProvider.value,
         ),
@@ -165,9 +161,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       // Body preview
       EzTextBackground(
         Text(
-          EzConfig.l10n.tsBodyP1 +
-              EzConfig.l10n.tsBodyLink +
-              EzConfig.l10n.tsBodyP2,
+          EzConfig.l10n.tsBodyP1 + EzConfig.l10n.tsBodyLink + EzConfig.l10n.tsBodyP2,
           textAlign: TextAlign.center,
           style: widget.bodyProvider.value,
         ),
@@ -179,9 +173,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       // Label preview
       EzTextBackground(
         Text(
-          EzConfig.l10n.tsLabelP1 +
-              EzConfig.l10n.tsLabelLink +
-              EzConfig.l10n.tsLabelP2,
+          EzConfig.l10n.tsLabelP1 + EzConfig.l10n.tsLabelLink + EzConfig.l10n.tsLabelP2,
           textAlign: TextAlign.center,
           style: widget.labelProvider.value,
         ),
@@ -218,8 +210,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
             onChanged: (double value) {
               setState(() {
                 backOpacity = value;
-                backgroundColor =
-                    EzConfig.colors.surface.withValues(alpha: backOpacity);
+                backgroundColor = EzConfig.colors.surface.withValues(alpha: backOpacity);
               });
             },
             onChangeEnd: (double value) async {
@@ -231,14 +222,13 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
               }
 
               if (context.mounted) {
-                EzConfig.pingRebuild(ezTextRebuildCheck(context) ||
-                    (value != EzConfig.textBackgroundOpacity));
+                EzConfig.pingRebuild(
+                    ezTextRebuildCheck(context) || (value != EzConfig.textBackgroundOpacity));
               }
             },
 
             // Slider semantics
-            semanticFormatterCallback: (double value) =>
-                value.toStringAsFixed(2),
+            semanticFormatterCallback: (double value) => value.toStringAsFixed(2),
           ),
         ),
         EzConfig.spacer,
@@ -248,8 +238,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       const EzIconSizeSetting(),
 
       // Optional additional settings
-      if (widget.moreQuickFooterSettings != null)
-        ...widget.moreQuickFooterSettings!,
+      if (widget.moreQuickFooterSettings != null) ...widget.moreQuickFooterSettings!,
 
       // Reset all
       widget.resetSpacer,

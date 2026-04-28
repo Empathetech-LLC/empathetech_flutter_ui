@@ -54,9 +54,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
           // Button
           EzDropdownMenu<bool>(
-            widthEntries: entries
-                .map((DropdownMenuEntry<bool> entry) => entry.label)
-                .toList(),
+            widthEntries: entries.map((DropdownMenuEntry<bool> entry) => entry.label).toList(),
             dropdownMenuEntries: entries,
             enableSearch: false,
             initialSelection: EzConfig.isLefty,

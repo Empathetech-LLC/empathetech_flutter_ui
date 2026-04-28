@@ -122,9 +122,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.display:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}size_display'),
-          configKey: EzConfig.isDark
-              ? darkDisplayFontSizeKey
-              : lightDisplayFontSizeKey,
+          configKey: EzConfig.isDark ? darkDisplayFontSizeKey : lightDisplayFontSizeKey,
           initialValue: widget.displayProvider.value.fontSize!,
           min: minDisplay,
           max: maxDisplay,
@@ -137,9 +135,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.headline:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}size_headline'),
-          configKey: EzConfig.isDark
-              ? darkHeadlineFontSizeKey
-              : lightHeadlineFontSizeKey,
+          configKey: EzConfig.isDark ? darkHeadlineFontSizeKey : lightHeadlineFontSizeKey,
           initialValue: widget.headlineProvider.value.fontSize!,
           min: minHeadline,
           max: maxHeadline,
@@ -152,8 +148,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.title:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}size_title'),
-          configKey:
-              EzConfig.isDark ? darkTitleFontSizeKey : lightTitleFontSizeKey,
+          configKey: EzConfig.isDark ? darkTitleFontSizeKey : lightTitleFontSizeKey,
           initialValue: widget.titleProvider.value.fontSize!,
           min: minTitle,
           max: maxTitle,
@@ -166,8 +161,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.body:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}size_body'),
-          configKey:
-              EzConfig.isDark ? darkBodyFontSizeKey : lightBodyFontSizeKey,
+          configKey: EzConfig.isDark ? darkBodyFontSizeKey : lightBodyFontSizeKey,
           initialValue: widget.bodyProvider.value.fontSize!,
           min: minBody,
           max: maxBody,
@@ -180,8 +174,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.label:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}size_label'),
-          configKey:
-              EzConfig.isDark ? darkLabelFontSizeKey : lightLabelFontSizeKey,
+          configKey: EzConfig.isDark ? darkLabelFontSizeKey : lightLabelFontSizeKey,
           initialValue: widget.labelProvider.value.fontSize!,
           min: minLabel,
           max: maxLabel,
@@ -316,9 +309,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.display:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}letter_spacing_display'),
-          configKey: EzConfig.isDark
-              ? darkDisplayWordSpacingKey
-              : lightDisplayWordSpacingKey,
+          configKey: EzConfig.isDark ? darkDisplayWordSpacingKey : lightDisplayWordSpacingKey,
           initialValue: widget.displayProvider.value.letterSpacing!,
           min: minLetterSpacing,
           max: maxLetterSpacing,
@@ -330,9 +321,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.headline:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}letter_spacing_headline'),
-          configKey: EzConfig.isDark
-              ? darkHeadlineWordSpacingKey
-              : lightHeadlineWordSpacingKey,
+          configKey: EzConfig.isDark ? darkHeadlineWordSpacingKey : lightHeadlineWordSpacingKey,
           initialValue: widget.headlineProvider.value.letterSpacing!,
           min: minLetterSpacing,
           max: maxLetterSpacing,
@@ -344,9 +333,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.title:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}letter_spacing_title'),
-          configKey: EzConfig.isDark
-              ? darkTitleWordSpacingKey
-              : lightTitleWordSpacingKey,
+          configKey: EzConfig.isDark ? darkTitleWordSpacingKey : lightTitleWordSpacingKey,
           initialValue: widget.titleProvider.value.letterSpacing!,
           min: minLetterSpacing,
           max: maxLetterSpacing,
@@ -358,9 +345,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.body:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}letter_spacing_body'),
-          configKey: EzConfig.isDark
-              ? darkBodyWordSpacingKey
-              : lightBodyWordSpacingKey,
+          configKey: EzConfig.isDark ? darkBodyWordSpacingKey : lightBodyWordSpacingKey,
           initialValue: widget.bodyProvider.value.letterSpacing!,
           min: minLetterSpacing,
           max: maxLetterSpacing,
@@ -372,9 +357,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.label:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}letter_spacing_label'),
-          configKey: EzConfig.isDark
-              ? darkLabelWordSpacingKey
-              : lightLabelWordSpacingKey,
+          configKey: EzConfig.isDark ? darkLabelWordSpacingKey : lightLabelWordSpacingKey,
           initialValue: widget.labelProvider.value.letterSpacing!,
           min: minLetterSpacing,
           max: maxLetterSpacing,
@@ -401,9 +384,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.display:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}word_spacing_display'),
-          configKey: EzConfig.isDark
-              ? darkDisplayWordSpacingKey
-              : lightDisplayWordSpacingKey,
+          configKey: EzConfig.isDark ? darkDisplayWordSpacingKey : lightDisplayWordSpacingKey,
           initialValue: widget.displayProvider.value.wordSpacing!,
           min: minWordSpacing,
           max: maxWordSpacing,
@@ -415,9 +396,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.headline:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}word_spacing_headline'),
-          configKey: EzConfig.isDark
-              ? darkHeadlineWordSpacingKey
-              : lightHeadlineWordSpacingKey,
+          configKey: EzConfig.isDark ? darkHeadlineWordSpacingKey : lightHeadlineWordSpacingKey,
           initialValue: widget.headlineProvider.value.wordSpacing!,
           min: minWordSpacing,
           max: maxWordSpacing,
@@ -429,9 +408,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.title:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}word_spacing_title'),
-          configKey: EzConfig.isDark
-              ? darkTitleWordSpacingKey
-              : lightTitleWordSpacingKey,
+          configKey: EzConfig.isDark ? darkTitleWordSpacingKey : lightTitleWordSpacingKey,
           initialValue: widget.titleProvider.value.wordSpacing!,
           min: minWordSpacing,
           max: maxWordSpacing,
@@ -443,9 +420,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.body:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}word_spacing_body'),
-          configKey: EzConfig.isDark
-              ? darkBodyWordSpacingKey
-              : lightBodyWordSpacingKey,
+          configKey: EzConfig.isDark ? darkBodyWordSpacingKey : lightBodyWordSpacingKey,
           initialValue: widget.bodyProvider.value.wordSpacing!,
           min: minWordSpacing,
           max: maxWordSpacing,
@@ -457,9 +432,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.label:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}word_spacing_label'),
-          configKey: EzConfig.isDark
-              ? darkLabelWordSpacingKey
-              : lightLabelWordSpacingKey,
+          configKey: EzConfig.isDark ? darkLabelWordSpacingKey : lightLabelWordSpacingKey,
           initialValue: widget.labelProvider.value.wordSpacing!,
           min: minWordSpacing,
           max: maxWordSpacing,
@@ -486,9 +459,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.display:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}line_height_display'),
-          configKey: EzConfig.isDark
-              ? darkDisplayFontHeightKey
-              : lightDisplayFontHeightKey,
+          configKey: EzConfig.isDark ? darkDisplayFontHeightKey : lightDisplayFontHeightKey,
           initialValue: widget.displayProvider.value.height!,
           min: minFontHeight,
           max: maxFontHeight,
@@ -500,9 +471,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.headline:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}line_height_headline'),
-          configKey: EzConfig.isDark
-              ? darkHeadlineFontHeightKey
-              : lightHeadlineFontHeightKey,
+          configKey: EzConfig.isDark ? darkHeadlineFontHeightKey : lightHeadlineFontHeightKey,
           initialValue: widget.headlineProvider.value.height!,
           min: minFontHeight,
           max: maxFontHeight,
@@ -514,9 +483,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.title:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}line_height_title'),
-          configKey: EzConfig.isDark
-              ? darkTitleFontHeightKey
-              : lightTitleFontHeightKey,
+          configKey: EzConfig.isDark ? darkTitleFontHeightKey : lightTitleFontHeightKey,
           initialValue: widget.titleProvider.value.height!,
           min: minFontHeight,
           max: maxFontHeight,
@@ -528,8 +495,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.body:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}line_height_body'),
-          configKey:
-              EzConfig.isDark ? darkBodyFontHeightKey : lightBodyFontHeightKey,
+          configKey: EzConfig.isDark ? darkBodyFontHeightKey : lightBodyFontHeightKey,
           initialValue: widget.bodyProvider.value.height!,
           min: minFontHeight,
           max: maxFontHeight,
@@ -541,9 +507,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       case EzTextSettingType.label:
         return EzFontDoubleSetting(
           key: ValueKey<String>('${tS()}line_height_label'),
-          configKey: EzConfig.isDark
-              ? darkLabelFontHeightKey
-              : lightLabelFontHeightKey,
+          configKey: EzConfig.isDark ? darkLabelFontHeightKey : lightLabelFontHeightKey,
           initialValue: widget.labelProvider.value.height!,
           min: minFontHeight,
           max: maxFontHeight,
@@ -666,8 +630,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
               style: widget.displayProvider.value,
               textAlign: TextAlign.center,
               onTap: () => setState(() => editing = EzTextSettingType.display),
-              hint: EzConfig.l10n
-                  .tsLinkHint(EzConfig.l10n.tsDisplay.toLowerCase()),
+              hint: EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsDisplay.toLowerCase()),
             ),
             EzPlainText(text: EzConfig.l10n.tsDisplayP2),
           ],
@@ -691,8 +654,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
               style: widget.headlineProvider.value,
               textAlign: TextAlign.center,
               onTap: () => setState(() => editing = EzTextSettingType.headline),
-              hint: EzConfig.l10n
-                  .tsLinkHint(EzConfig.l10n.tsHeadline.toLowerCase()),
+              hint: EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsHeadline.toLowerCase()),
             ),
             EzPlainText(text: EzConfig.l10n.tsHeadlineP2),
           ],
@@ -716,8 +678,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
               style: widget.titleProvider.value,
               textAlign: TextAlign.center,
               onTap: () => setState(() => editing = EzTextSettingType.title),
-              hint:
-                  EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsTitle.toLowerCase()),
+              hint: EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsTitle.toLowerCase()),
             ),
           ],
           textBackground: false,
@@ -740,8 +701,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
               style: widget.bodyProvider.value,
               textAlign: TextAlign.center,
               onTap: () => setState(() => editing = EzTextSettingType.body),
-              hint:
-                  EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsBody.toLowerCase()),
+              hint: EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsBody.toLowerCase()),
             ),
             EzPlainText(text: EzConfig.l10n.tsBodyP2),
           ],
@@ -765,8 +725,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
               style: widget.labelProvider.value,
               textAlign: TextAlign.center,
               onTap: () => setState(() => editing = EzTextSettingType.label),
-              hint:
-                  EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsLabel.toLowerCase()),
+              hint: EzConfig.l10n.tsLinkHint(EzConfig.l10n.tsLabel.toLowerCase()),
             ),
             EzPlainText(text: EzConfig.l10n.tsLabelP2),
           ],

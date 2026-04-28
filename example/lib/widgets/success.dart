@@ -73,23 +73,22 @@ class RunOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) =>
-      (!kIsWeb && EzConfig.platform == TargetPlatform.macOS)
-          ? const SizedBox.shrink()
-          : EzCol(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                EzText(
-                  l10n.rsWouldYou,
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-                EzConfig.spacer,
-                EzElevatedIconButton(
-                  onPressed: emulate,
-                  icon: const Icon(Icons.play_arrow),
-                  label: l10n.rsRun,
-                ),
-              ],
-            );
+  Widget build(BuildContext context) => (!kIsWeb && EzConfig.platform == TargetPlatform.macOS)
+      ? const SizedBox.shrink()
+      : EzCol(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            EzText(
+              l10n.rsWouldYou,
+              style: style,
+              textAlign: TextAlign.center,
+            ),
+            EzConfig.spacer,
+            EzElevatedIconButton(
+              onPressed: emulate,
+              icon: const Icon(Icons.play_arrow),
+              label: l10n.rsRun,
+            ),
+          ],
+        );
 }

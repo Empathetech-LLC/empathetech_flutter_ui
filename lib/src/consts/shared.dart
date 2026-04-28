@@ -32,12 +32,10 @@ const Map<String, String> efuiAssetCredits = <String, String>{
 // For use //
 
 /// [AssetImage] for [nebulaPath]
-const AssetImage nebulaAsset =
-    AssetImage(nebulaPath, package: 'empathetech_flutter_ui');
+const AssetImage nebulaAsset = AssetImage(nebulaPath, package: 'empathetech_flutter_ui');
 
 /// [AssetImage] for [wallHolesPath]
-const AssetImage wallHolesAsset =
-    AssetImage(wallHolesPath, package: 'empathetech_flutter_ui');
+const AssetImage wallHolesAsset = AssetImage(wallHolesPath, package: 'empathetech_flutter_ui');
 
 /// [nebulaPath]
 const Map<String, AssetImage> efuiImageLookup = <String, AssetImage>{

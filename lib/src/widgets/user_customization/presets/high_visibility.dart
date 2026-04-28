@@ -46,8 +46,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(darkSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
 
       // Default anim duration and page fade
-      await EzConfig.setString(
-          darkTransitionTypeKey, EzTransitionType.none.value);
+      await EzConfig.setString(darkTransitionTypeKey, EzTransitionType.none.value);
 
       await EzConfig.setBool(darkShowScrollKey, false);
 
@@ -120,8 +119,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       // Color settings //
 
       await loadColorScheme(
-          monoChrome ? ezMonoChromeLight : ezHighContrastLight,
-          Brightness.light);
+          monoChrome ? ezMonoChromeLight : ezHighContrastLight, Brightness.light);
 
       // Design settings //
 
@@ -134,12 +132,10 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setBool(lightShowBackFABKey, false);
 
       // Default margin
-      await EzConfig.setDouble(
-          lightSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
+      await EzConfig.setDouble(lightSpacingKey, EzConfig.onMobile ? 27.5 : 33.0);
 
       // Default anim duration and page fade
-      await EzConfig.setString(
-          lightTransitionTypeKey, EzTransitionType.none.value);
+      await EzConfig.setString(lightTransitionTypeKey, EzTransitionType.none.value);
 
       await EzConfig.setBool(lightShowScrollKey, false);
 
@@ -156,8 +152,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
       await EzConfig.setDouble(lightDisplayWordSpacingKey, 1.25);
 
       // Headline
-      await EzConfig.setString(
-          lightHeadlineFontFamilyKey, atkinsonHyperlegible);
+      await EzConfig.setString(lightHeadlineFontFamilyKey, atkinsonHyperlegible);
       await EzConfig.setDouble(lightHeadlineFontSizeKey, 38);
       await EzConfig.setBool(lightHeadlineBoldedKey, false);
       await EzConfig.setBool(lightHeadlineItalicizedKey, false);
@@ -232,9 +227,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
               ),
               shape: EzButtonShape.pill.shape,
               textStyle: localBody,
-              padding: EdgeInsets.all(EzConfig.onMobile
-                  ? defaultMobilePadding
-                  : defaultDesktopPadding),
+              padding: EdgeInsets.all(
+                  EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
             )
           : ElevatedButton.styleFrom(
               backgroundColor: lightSurface,
@@ -247,9 +241,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
               ),
               shape: EzButtonShape.pill.shape,
               textStyle: localBody,
-              padding: EdgeInsets.all(EzConfig.onMobile
-                  ? defaultMobilePadding
-                  : defaultDesktopPadding),
+              padding: EdgeInsets.all(
+                  EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
             ),
       onPressed: () async {
         await onPressed();

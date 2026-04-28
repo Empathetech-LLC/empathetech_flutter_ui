@@ -87,9 +87,8 @@ class EzTutorial extends StatelessWidget {
                 onPressed: onAccept,
               )
             ],
-            actionsAlignment: EzConfig.isLefty
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.end,
+            actionsAlignment:
+                EzConfig.isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
             // General
             iconPadding: EdgeInsets.zero,

@@ -64,9 +64,7 @@ class ButtonDesign extends StatelessWidget {
         text: EzConfig.l10n.dsAlwaysUnderline,
         clickable: true,
         style: EzConfig.styles.bodyLarge?.copyWith(
-            decoration: EzConfig.lineLinks
-                ? TextDecoration.underline
-                : TextDecoration.none),
+            decoration: EzConfig.lineLinks ? TextDecoration.underline : TextDecoration.none),
         valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
         afterChanged: (bool? changed) async {
           if (changed == null) return;
@@ -83,8 +81,7 @@ class ButtonDesign extends StatelessWidget {
 
           if (EzConfig.updateBoth) {
             await EzConfig.setBool(
-                EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey,
-                value);
+                EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey, value);
           }
 
           await EzConfig.rebuildUI(onUpdate);
@@ -168,14 +165,12 @@ class _ButtonStyleSetting extends StatelessWidget {
                                   side: currWidth == 0
                                       ? BorderSide.none
                                       : BorderSide(
-                                          color:
-                                              EzConfig.colors.primaryContainer,
+                                          color: EzConfig.colors.primaryContainer,
                                           width: currWidth,
                                         ),
                                   shape: shape.shape,
                                 ),
-                                onPressed: () =>
-                                    setModal(() => currShape = shape),
+                                onPressed: () => setModal(() => currShape = shape),
                               ),
                               EzConfig.margin,
                               ExcludeSemantics(
@@ -205,8 +200,7 @@ class _ButtonStyleSetting extends StatelessWidget {
                     label: currWidth.toStringAsFixed(2),
 
                     // Slider functions
-                    onChanged: (double value) =>
-                        setModal(() => currWidth = value),
+                    onChanged: (double value) => setModal(() => currWidth = value),
                     onChangeEnd: (double value) async {
                       if (EzConfig.updateBoth || EzConfig.isDark) {
                         await EzConfig.setDouble(darkBorderWidthKey, value);
@@ -234,12 +228,9 @@ class _ButtonStyleSetting extends StatelessWidget {
 
                     setModal(() {
                       currShape = EBSConfig.lookup(EzConfig.getDefault(
-                          EzConfig.isDark
-                              ? darkButtonShapeKey
-                              : lightButtonShapeKey));
-                      currWidth = EzConfig.getDefault(EzConfig.isDark
-                          ? darkBorderWidthKey
-                          : lightBorderWidthKey);
+                          EzConfig.isDark ? darkButtonShapeKey : lightButtonShapeKey));
+                      currWidth = EzConfig.getDefault(
+                          EzConfig.isDark ? darkBorderWidthKey : lightBorderWidthKey);
                     });
                   },
                   icon: const Icon(Icons.refresh),
@@ -293,13 +284,13 @@ class _ButtonOpacitySetting extends StatelessWidget {
               builder: (_, StateSetter setModal) {
                 Color buttonBackground =
                     EzConfig.colors.surface.withValues(alpha: buttonOpacity);
-                Color buttonShadow = EzConfig.colors.shadow
-                    .withValues(alpha: buttonOpacity * shadowMod);
-                Color buttonOutline = EzConfig.colors.primaryContainer
-                    .withValues(alpha: borderOpacity);
+                Color buttonShadow =
+                    EzConfig.colors.shadow.withValues(alpha: buttonOpacity * shadowMod);
+                Color buttonOutline =
+                    EzConfig.colors.primaryContainer.withValues(alpha: borderOpacity);
 
-                Color trackColor = EzConfig.colors.surface
-                    .withValues(alpha: max(focusOpacity, buttonOpacity));
+                Color trackColor =
+                    EzConfig.colors.surface.withValues(alpha: max(focusOpacity, buttonOpacity));
                 WidgetStatePropertyAll<Color> trackOutline =
                     WidgetStatePropertyAll<Color>(buttonOutline);
 
@@ -325,8 +316,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
                           scale: ezIconRatio(),
                           child: Switch(
                             value: dummyBool,
-                            onChanged: (bool v) =>
-                                setModal(() => dummyBool = v),
+                            onChanged: (bool v) => setModal(() => dummyBool = v),
                             activeTrackColor: trackColor,
                             inactiveTrackColor: trackColor,
                             trackOutlineColor: trackOutline,
@@ -342,8 +332,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
                       style: EzConfig.styles.bodyLarge,
                     ),
                     ConstrainedBox(
-                      constraints:
-                          BoxConstraints(maxWidth: ScreenSize.small.size),
+                      constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                       child: Slider(
                         // Slider values
                         value: buttonOpacity,
@@ -353,8 +342,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
                         label: buttonOpacity.toStringAsFixed(2),
 
                         // Slider functions
-                        onChanged: (double value) =>
-                            setModal(() => buttonOpacity = value),
+                        onChanged: (double value) => setModal(() => buttonOpacity = value),
                         onChangeEnd: (double value) async {
                           if (EzConfig.updateBoth || EzConfig.isDark) {
                             await EzConfig.setDouble(
@@ -379,8 +367,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
                       style: EzConfig.styles.bodyLarge,
                     ),
                     ConstrainedBox(
-                      constraints:
-                          BoxConstraints(maxWidth: ScreenSize.small.size),
+                      constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                       child: Slider(
                         // Slider values
                         value: borderOpacity,
@@ -390,8 +377,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
                         label: borderOpacity.toStringAsFixed(2),
 
                         // Slider functions
-                        onChanged: (double value) =>
-                            setModal(() => borderOpacity = value),
+                        onChanged: (double value) => setModal(() => borderOpacity = value),
                         onChangeEnd: (double value) async {
                           if (EzConfig.updateBoth || EzConfig.isDark) {
                             await EzConfig.setDouble(
@@ -424,24 +410,21 @@ class _ButtonOpacitySetting extends StatelessWidget {
                         }
 
                         setModal(() {
-                          buttonOpacity = EzConfig.getDefault(EzConfig.isDark
-                              ? darkButtonOpacityKey
-                              : lightButtonOpacityKey);
-                          borderOpacity = EzConfig.getDefault(EzConfig.isDark
-                              ? darkBorderOpacityKey
-                              : lightBorderOpacityKey);
+                          buttonOpacity = EzConfig.getDefault(
+                              EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+                          borderOpacity = EzConfig.getDefault(
+                              EzConfig.isDark ? darkBorderOpacityKey : lightBorderOpacityKey);
 
-                          buttonBackground = EzConfig.colors.surface
-                              .withValues(alpha: buttonOpacity);
+                          buttonBackground =
+                              EzConfig.colors.surface.withValues(alpha: buttonOpacity);
                           buttonShadow = EzConfig.colors.shadow
                               .withValues(alpha: buttonOpacity * shadowMod);
-                          buttonOutline = EzConfig.colors.primaryContainer
-                              .withValues(alpha: borderOpacity);
+                          buttonOutline =
+                              EzConfig.colors.primaryContainer.withValues(alpha: borderOpacity);
 
-                          trackColor = EzConfig.colors.surface.withValues(
-                              alpha: max(focusOpacity, buttonOpacity));
-                          trackOutline =
-                              WidgetStatePropertyAll<Color>(buttonOutline);
+                          trackColor = EzConfig.colors.surface
+                              .withValues(alpha: max(focusOpacity, buttonOpacity));
+                          trackOutline = WidgetStatePropertyAll<Color>(buttonOutline);
                         });
                       },
                       icon: const Icon(Icons.refresh),

@@ -90,11 +90,9 @@ class _EzLinkState extends State<EzLink> {
 
     final Color textColor = widget.textColor ?? EzConfig.colors.primary;
 
-    TextStyle? textStyle =
-        (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
+    TextStyle? textStyle = (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
       color: textColor,
-      decoration:
-          EzConfig.lineLinks ? TextDecoration.underline : TextDecoration.none,
+      decoration: EzConfig.lineLinks ? TextDecoration.underline : TextDecoration.none,
       decorationColor: widget.decorationColor ?? textColor,
     );
 

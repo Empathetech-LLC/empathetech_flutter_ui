@@ -43,9 +43,7 @@ class EzCheckbox extends StatelessWidget {
     final double ratio = scale ?? ezIconRatio();
 
     return Padding(
-      padding: ratio > 1.1
-          ? padding ?? EzInsets.wrap(EzConfig.marginVal)
-          : EdgeInsets.zero,
+      padding: ratio > 1.1 ? padding ?? EzInsets.wrap(EzConfig.marginVal) : EdgeInsets.zero,
       child: Transform.scale(
         scale: max(1.0, ratio),
         child: Checkbox(

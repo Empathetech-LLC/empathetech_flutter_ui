@@ -101,8 +101,7 @@ class EzNebulaConfig extends StatelessWidget {
     await EzConfig.setDouble(darkBorderOpacityKey, 0.5);
 
     await EzConfig.setString(darkBackgroundImageKey, nebulaPath);
-    await EzConfig.setString(
-        '$darkBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
+    await EzConfig.setString('$darkBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
 
     // Text settings //
 
@@ -150,8 +149,8 @@ class EzNebulaConfig extends StatelessWidget {
           side: const BorderSide(color: empathSandDim, width: 1.0),
           shape: EzButtonShape.jewel.shape,
           textStyle: localBody,
-          padding: EdgeInsets.all(
-              EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
+          padding:
+              EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
         ),
         onPressed: () async {
           final bool confirmed = await onPressed(context);

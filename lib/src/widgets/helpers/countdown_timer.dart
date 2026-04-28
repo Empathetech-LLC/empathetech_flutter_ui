@@ -94,6 +94,5 @@ class _CountdownTimerPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_CountdownTimerPainter oldDelegate) =>
-      oldDelegate.progress != progress;
+  bool shouldRepaint(_CountdownTimerPainter oldDelegate) => oldDelegate.progress != progress;
 }

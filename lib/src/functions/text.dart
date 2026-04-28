@@ -64,8 +64,7 @@ Size ezTextSize(
 
 /// [SystemChrome.setApplicationSwitcherDescription] wrapper
 /// Sets the title of the tab on web and the title of the window on desktop
-void ezWindowNamer(String title) =>
-    SystemChrome.setApplicationSwitcherDescription(
+void ezWindowNamer(String title) => SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
         primaryColor: EzConfig.colors.primary.toARGB32(),
@@ -105,8 +104,7 @@ String ezCamelToSnake(String name) => name.replaceAllMapped(
     );
 
 /// camelCase -> ClassCase
-String ezCamelToClass(String name) =>
-    name.replaceRange(0, 1, name[0].toUpperCase());
+String ezCamelToClass(String name) => name.replaceRange(0, 1, name[0].toUpperCase());
 
 /// camelCase -> Title Case
 String ezCamelToTitle(String name) => name
@@ -124,13 +122,11 @@ String ezClassToSnake(String name) =>
         );
 
 /// ClassCase -> camelCase
-String ezClassToCamel(String name) =>
-    name.replaceRange(0, 1, name[0].toLowerCase());
+String ezClassToCamel(String name) => name.replaceRange(0, 1, name[0].toLowerCase());
 
 /// ClassCase -> Title Case
-String ezClassToTitle(String name) => name
-    .replaceAllMapped(RegExp(r'[A-Z]'), (Match match) => ' ${match.group(0)!}')
-    .trim();
+String ezClassToTitle(String name) =>
+    name.replaceAllMapped(RegExp(r'[A-Z]'), (Match match) => ' ${match.group(0)!}').trim();
 
 /// Title Case -> snake_case
 String ezTitleToSnake(String name) => name
@@ -150,12 +146,12 @@ String ezTitleToClass(String name) => name.replaceAll(RegExp(r'\s'), '');
 // Getters //
 
 /// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? ezSubHeadingStyle() => EzConfig.styles.headlineLarge
-    ?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
+TextStyle? ezSubHeadingStyle() =>
+    EzConfig.styles.headlineLarge?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
 
 /// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? ezSubTitleStyle() => EzConfig.styles.bodyLarge
-    ?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
+TextStyle? ezSubTitleStyle() =>
+    EzConfig.styles.bodyLarge?.copyWith(fontSize: EzConfig.styles.titleLarge?.fontSize);
 
 // Setters //
 
@@ -196,9 +192,8 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
   final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkDisplayFontSizeKey),
-          fontWeight: EzConfig.get(darkDisplayBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(darkDisplayBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(darkDisplayItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -213,9 +208,8 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
         )
       : TextStyle(
           fontSize: EzConfig.get(lightDisplayFontSizeKey),
-          fontWeight: EzConfig.get(lightDisplayBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(lightDisplayBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(lightDisplayItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -231,8 +225,7 @@ TextStyle ezDisplayStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(
-        useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
+    gFont: EzConfig.get(useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
   );
 }
 
@@ -278,8 +271,7 @@ TextStyle ezDefaultDisplayStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(
-        useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
+    gFont: EzConfig.getDefault(useDark ? darkDisplayFontFamilyKey : lightDisplayFontFamilyKey),
   );
 }
 
@@ -290,9 +282,8 @@ TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
   final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkHeadlineFontSizeKey),
-          fontWeight: EzConfig.get(darkHeadlineBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(darkHeadlineBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(darkHeadlineItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -325,8 +316,7 @@ TextStyle ezHeadlineStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(
-        useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
+    gFont: EzConfig.get(useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
   );
 }
 
@@ -372,8 +362,8 @@ TextStyle ezDefaultHeadlineStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(
-        useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
+    gFont:
+        EzConfig.getDefault(useDark ? darkHeadlineFontFamilyKey : lightHeadlineFontFamilyKey),
   );
 }
 
@@ -384,9 +374,8 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
   final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkTitleFontSizeKey),
-          fontWeight: EzConfig.get(darkTitleBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(darkTitleBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(darkTitleItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -401,9 +390,8 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
         )
       : TextStyle(
           fontSize: EzConfig.get(lightTitleFontSizeKey),
-          fontWeight: EzConfig.get(lightTitleBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(lightTitleBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(lightTitleItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -419,8 +407,7 @@ TextStyle ezTitleStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(
-        useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
+    gFont: EzConfig.get(useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
   );
 }
 
@@ -466,8 +453,7 @@ TextStyle ezDefaultTitleStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(
-        useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
+    gFont: EzConfig.getDefault(useDark ? darkTitleFontFamilyKey : lightTitleFontFamilyKey),
   );
 }
 
@@ -478,12 +464,10 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
   final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkBodyFontSizeKey),
-          fontWeight: EzConfig.get(darkBodyBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
-          fontStyle: EzConfig.get(darkBodyItalicizedKey) == true
-              ? FontStyle.italic
-              : FontStyle.normal,
+          fontWeight:
+              EzConfig.get(darkBodyBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
+          fontStyle:
+              EzConfig.get(darkBodyItalicizedKey) == true ? FontStyle.italic : FontStyle.normal,
           decoration: EzConfig.get(darkBodyUnderlinedKey) == true
               ? TextDecoration.underline
               : TextDecoration.none,
@@ -495,9 +479,8 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
         )
       : TextStyle(
           fontSize: EzConfig.get(lightBodyFontSizeKey),
-          fontWeight: EzConfig.get(lightBodyBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(lightBodyBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(lightBodyItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -513,8 +496,7 @@ TextStyle ezBodyStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont:
-        EzConfig.get(useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
+    gFont: EzConfig.get(useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
   );
 }
 
@@ -560,8 +542,7 @@ TextStyle ezDefaultBodyStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(
-        useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
+    gFont: EzConfig.getDefault(useDark ? darkBodyFontFamilyKey : lightBodyFontFamilyKey),
   );
 }
 
@@ -572,9 +553,8 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
   final TextStyle starter = useDark
       ? TextStyle(
           fontSize: EzConfig.get(darkLabelFontSizeKey),
-          fontWeight: EzConfig.get(darkLabelBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(darkLabelBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(darkLabelItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -589,9 +569,8 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
         )
       : TextStyle(
           fontSize: EzConfig.get(lightLabelFontSizeKey),
-          fontWeight: EzConfig.get(lightLabelBoldedKey) == true
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight:
+              EzConfig.get(lightLabelBoldedKey) == true ? FontWeight.bold : FontWeight.normal,
           fontStyle: EzConfig.get(lightLabelItalicizedKey) == true
               ? FontStyle.italic
               : FontStyle.normal,
@@ -607,8 +586,7 @@ TextStyle ezLabelStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.get(
-        useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
+    gFont: EzConfig.get(useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
   );
 }
 
@@ -654,7 +632,6 @@ TextStyle ezDefaultLabelStyle(Color? color, {bool? isDark}) {
 
   return fuseWithGFont(
     starter: starter,
-    gFont: EzConfig.getDefault(
-        useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
+    gFont: EzConfig.getDefault(useDark ? darkLabelFontFamilyKey : lightLabelFontFamilyKey),
   );
 }

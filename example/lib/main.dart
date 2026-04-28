@@ -98,8 +98,7 @@ class OpenUI extends StatelessWidget {
                 path: archiveScreenPath,
                 name: archiveScreenPath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state,
-                        ArchiveScreen((state.extra as EAGConfig))),
+                    ezPageBuilder(context, state, ArchiveScreen((state.extra as EAGConfig))),
               ),
 
               // Generate
@@ -107,8 +106,7 @@ class OpenUI extends StatelessWidget {
                 path: generateScreenPath,
                 name: generateScreenPath,
                 pageBuilder: (BuildContext context, GoRouterState state) =>
-                    ezPageBuilder(context, state,
-                        GenerateScreen((state.extra as EAGConfig))),
+                    ezPageBuilder(context, state, GenerateScreen((state.extra as EAGConfig))),
               ),
 
               // Settings

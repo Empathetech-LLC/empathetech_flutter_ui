@@ -103,8 +103,7 @@ class _EzMenuButtonState extends State<EzMenuButton> {
 
     final Color primary = EzConfig.colors.primary;
 
-    TextStyle? textStyle =
-        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
+    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
       decorationColor: widget.decorationColor ?? primary,
     );
 
@@ -120,14 +119,10 @@ class _EzMenuButtonState extends State<EzMenuButton> {
     return MenuItemButton(
       onPressed: widget.onPressed,
       onHover: widget.onHover ??
-          (widget.underline
-              ? (bool isHovering) => addUnderline(isHovering)
-              : (_) {}),
+          (widget.underline ? (bool isHovering) => addUnderline(isHovering) : (_) {}),
       requestFocusOnHover: widget.requestFocusOnHover,
       onFocusChange: widget.onFocusChange ??
-          (widget.underline
-              ? (bool isFocused) => addUnderline(isFocused)
-              : (_) {}),
+          (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       shortcut: widget.shortcut,
@@ -142,8 +137,7 @@ class _EzMenuButtonState extends State<EzMenuButton> {
       child: Text(
         widget.label,
         style: textStyle,
-        textAlign: widget.textAlign ??
-            (EzConfig.isLefty ? TextAlign.start : TextAlign.end),
+        textAlign: widget.textAlign ?? (EzConfig.isLefty ? TextAlign.start : TextAlign.end),
       ),
     );
   }

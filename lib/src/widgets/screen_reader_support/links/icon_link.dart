@@ -82,8 +82,7 @@ class _EzIconLinkState extends State<EzIconLink> {
 
     final Color textColor = widget.textColor ?? EzConfig.colors.onSurface;
 
-    TextStyle? textStyle =
-        (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
+    TextStyle? textStyle = (widget.style ?? EzConfig.styles.bodyLarge)?.copyWith(
       color: textColor,
       decoration: TextDecoration.none,
       decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
@@ -126,9 +125,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                   onHover: (bool isHovering) => underline(isHovering),
                   onFocusChange: (bool hasFocus) => underline(hasFocus),
                   icon: widget.icon,
-                  iconAlignment: EzConfig.isLefty
-                      ? IconAlignment.start
-                      : IconAlignment.end,
+                  iconAlignment: EzConfig.isLefty ? IconAlignment.start : IconAlignment.end,
                   label: text,
                 )
               : Link(
@@ -140,9 +137,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                     onHover: (bool isHovering) => underline(isHovering),
                     onFocusChange: (bool hasFocus) => underline(hasFocus),
                     icon: widget.icon,
-                    iconAlignment: EzConfig.isLefty
-                        ? IconAlignment.start
-                        : IconAlignment.end,
+                    iconAlignment: EzConfig.isLefty ? IconAlignment.start : IconAlignment.end,
                     label: text,
                   ),
                 ),

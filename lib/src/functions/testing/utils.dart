@@ -21,8 +21,7 @@ void ezLog(
 }
 
 /// Wait for a desired number of [seconds]
-Future<void> ezPause(int seconds) =>
-    Future<void>.delayed(Duration(seconds: seconds));
+Future<void> ezPause(int seconds) => Future<void>.delayed(Duration(seconds: seconds));
 
 /// For integration testing
 /// expect([finder], [matcher]) and ensure visibility
@@ -92,9 +91,8 @@ Future<void> ezTouchText(
   bool skipOffstage = false,
   bool warnIfMissed = false,
 }) async {
-  final Finder finder = find
-      .text(text, findRichText: findRichText, skipOffstage: skipOffstage)
-      .last;
+  final Finder finder =
+      find.text(text, findRichText: findRichText, skipOffstage: skipOffstage).last;
 
   await tester.ensureVisible(finder);
   await tester.tapAt(tester.getCenter(finder, warnIfMissed: warnIfMissed));
@@ -109,8 +107,7 @@ Future<void> ezTouchWidget(
   bool skipOffstage = false,
   bool warnIfMissed = false,
 }) async {
-  final Finder finder =
-      find.byType(widgetType, skipOffstage: skipOffstage).last;
+  final Finder finder = find.byType(widgetType, skipOffstage: skipOffstage).last;
 
   await tester.ensureVisible(finder);
   await tester.tapAt(tester.getCenter(finder, warnIfMissed: warnIfMissed));

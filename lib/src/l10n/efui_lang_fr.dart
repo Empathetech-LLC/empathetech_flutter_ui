@@ -156,8 +156,7 @@ class EFUILangFr extends EFUILang {
   String get gCenterReset => 'Maintenez le centre pour réinitialiser';
 
   @override
-  String get gLoadingAnim =>
-      'Chargement. Le logo empathique animé comme un sablier tournant.';
+  String get gLoadingAnim => 'Chargement. Le logo empathique animé comme un sablier tournant.';
 
   @override
   String get gPlay => 'Lecture';
@@ -202,12 +201,10 @@ class EFUILangFr extends EFUILang {
   String get gHardRefresh => 'Veuillez rafraîchir la page...\nCtrl + Shift + R';
 
   @override
-  String get gHardRefreshMac =>
-      'Veuillez rafraîchir la page...\nCommand + Shift + R';
+  String get gHardRefreshMac => 'Veuillez rafraîchir la page...\nCommand + Shift + R';
 
   @override
-  String get gHardRefreshMobile =>
-      'Veuillez actualiser la page dans le menu du navigateur.';
+  String get gHardRefreshMobile => 'Veuillez actualiser la page dans le menu du navigateur.';
 
   @override
   String get gEnterURL => 'Entrer l\'URL';
@@ -295,12 +292,10 @@ class EFUILangFr extends EFUILang {
   String get gSave => 'Enregistrez';
 
   @override
-  String get gSaveHint =>
-      'Activez pour enregistrer un fichier de configuration JSON.';
+  String get gSaveHint => 'Activez pour enregistrer un fichier de configuration JSON.';
 
   @override
-  String get gUndoWarn2 =>
-      ' votre configuration actuelle pour la restaurer manuellement.';
+  String get gUndoWarn2 => ' votre configuration actuelle pour la restaurer manuellement.';
 
   @override
   String get gValue => 'Valeur';
@@ -418,8 +413,7 @@ class EFUILangFr extends EFUILang {
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';
 
   @override
-  String get ssResetAppearance =>
-      'Réinitialiser tous les paramètres d\'apparence ?';
+  String get ssResetAppearance => 'Réinitialiser tous les paramètres d\'apparence ?';
 
   @override
   String get ssResetBoth => 'Réinitialiser les deux modes de thème';
@@ -456,8 +450,7 @@ class EFUILangFr extends EFUILang {
   String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
 
   @override
-  String get csFromImage =>
-      'Un schéma de couleurs sera généré à partir de l\'image.';
+  String get csFromImage => 'Un schéma de couleurs sera généré à partir de l\'image.';
 
   @override
   String get csColorScheme => 'schéma de couleurs';
@@ -619,8 +612,7 @@ class EFUILangFr extends EFUILang {
   String get dsCrop => 'Recadrer';
 
   @override
-  String get dsNoWeb =>
-      'L\'édition d\'images n\'est pas prise en charge sur le web';
+  String get dsNoWeb => 'L\'édition d\'images n\'est pas prise en charge sur le web';
 
   @override
   String get dsDrag => 'Glisser';

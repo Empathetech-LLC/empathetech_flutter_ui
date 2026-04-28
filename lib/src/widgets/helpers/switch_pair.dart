@@ -125,12 +125,10 @@ class EzSwitchPair extends StatefulWidget {
     this.scale,
     this.trackOutlineWidth,
     this.padding,
-  })  : assert((value == null) != (valueKey == null),
-            'Provide value OR valueKey, but not both'),
-        assert((value == null) == (onChanged == null),
-            'Must pair value and onChanged'),
-        assert((valueKey == null) != (onChanged == null),
-            'Cannot use onChanged with valueKey'),
+  })  : assert(
+            (value == null) != (valueKey == null), 'Provide value OR valueKey, but not both'),
+        assert((value == null) == (onChanged == null), 'Must pair value and onChanged'),
+        assert((valueKey == null) != (onChanged == null), 'Cannot use onChanged with valueKey'),
         assert(
             ((afterChanged == null) && (value == null) ||
                 ((afterChanged == null) != (value == null))),
@@ -215,8 +213,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
           child: Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor:
-                widget.fauxDisabled ? EzConfig.colors.outline : null,
+            activeThumbColor: widget.fauxDisabled ? EzConfig.colors.outline : null,
             inactiveThumbColor: EzConfig.colors.outline,
             trackOutlineColor: (!widget.enabled || widget.fauxDisabled)
                 ? WidgetStatePropertyAll<Color>(EzConfig.colors.outlineVariant)

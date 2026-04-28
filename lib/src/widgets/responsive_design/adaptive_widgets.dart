@@ -56,8 +56,7 @@ class EzScreenSize extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<EzScreenSize>();
 
   @override
-  bool updateShouldNotify(EzScreenSize oldWidget) =>
-      screenSize != oldWidget.screenSize;
+  bool updateShouldNotify(EzScreenSize oldWidget) => screenSize != oldWidget.screenSize;
 }
 
 // Parent Widget/Scaffold wrapper //

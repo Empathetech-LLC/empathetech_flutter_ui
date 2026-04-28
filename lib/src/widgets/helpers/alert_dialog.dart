@@ -23,8 +23,7 @@ class EzAlertDialog extends AlertDialog {
     super.actions,
     this.needsClose = true,
   }) : assert(
-          (content == null && contents == null) ||
-              ((content == null) != (contents == null)),
+          (content == null && contents == null) || ((content == null) != (contents == null)),
           'Either content or contents should be provided, but not both.',
         );
 
@@ -32,8 +31,8 @@ class EzAlertDialog extends AlertDialog {
   Widget build(BuildContext context) {
     // Define the content //
 
-    final Widget? dialogContent = content ??
-        ((contents == null) ? null : EzScrollView(children: contents!));
+    final Widget? dialogContent =
+        content ?? ((contents == null) ? null : EzScrollView(children: contents!));
 
     late final Widget closeAction = EzMaterialAction(
       text: EzConfig.l10n.gClose,

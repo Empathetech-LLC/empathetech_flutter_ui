@@ -133,11 +133,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     handleMobileHover();
   }
 
-  Future<void> skipForward(VideoPlayerValue value) => widget.controller
-      .seekTo(value.position + Duration(seconds: widget.skipTime));
+  Future<void> skipForward(VideoPlayerValue value) =>
+      widget.controller.seekTo(value.position + Duration(seconds: widget.skipTime));
 
-  Future<void> skipBackward(VideoPlayerValue value) => widget.controller
-      .seekTo(value.position - Duration(seconds: widget.skipTime));
+  Future<void> skipBackward(VideoPlayerValue value) =>
+      widget.controller.seekTo(value.position - Duration(seconds: widget.skipTime));
 
   void showVolumeLabel() {
     showVolume?.cancel();
@@ -185,8 +185,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     final double controlsHeight =
         (3 * EzConfig.marginVal + 2 * (EzConfig.iconSize + EzConfig.padding));
 
-    final TextStyle? labelStyle =
-        EzConfig.styles.labelLarge?.copyWith(color: widget.textColor);
+    final TextStyle? labelStyle = EzConfig.styles.labelLarge?.copyWith(color: widget.textColor);
 
     final SliderThemeData sliderTheme = SliderThemeData(
       activeTrackColor: EzConfig.colors.secondary,
@@ -293,14 +292,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           EzText(
                             '${(value.volume * 100).toStringAsFixed(0)}%',
                             style: switch (captionStyle) {
-                              4 => EzConfig.styles.displayLarge
-                                  ?.copyWith(color: widget.textColor),
+                              4 =>
+                                EzConfig.styles.displayLarge?.copyWith(color: widget.textColor),
                               3 => EzConfig.styles.headlineLarge
                                   ?.copyWith(color: widget.textColor),
-                              2 => EzConfig.styles.titleLarge
-                                  ?.copyWith(color: widget.textColor),
-                              1 => EzConfig.styles.bodyLarge
-                                  ?.copyWith(color: widget.textColor),
+                              2 =>
+                                EzConfig.styles.titleLarge?.copyWith(color: widget.textColor),
+                              1 => EzConfig.styles.bodyLarge?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
                             textAlign: TextAlign.center,
@@ -324,16 +322,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                         if (EzConfig.onMobile) {
                           mobileHover?.cancel();
 
-                          hovering
-                              ? setState(() => hovering = false)
-                              : handleMobileHover();
+                          hovering ? setState(() => hovering = false) : handleMobileHover();
                         } else {
                           value.isPlaying ? await pause() : await play(value);
                         }
                       },
                       onDoubleTapDown: (TapDownDetails tap) async {
-                        final RenderBox mySpace =
-                            context.findRenderObject() as RenderBox;
+                        final RenderBox mySpace = context.findRenderObject() as RenderBox;
 
                         (tap.localPosition.dx < mySpace.size.width / 2)
                             ? await skipBackward(value)
@@ -364,14 +359,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           child: EzText(
                             value.caption.text,
                             style: switch (captionStyle) {
-                              4 => EzConfig.styles.displayLarge
-                                  ?.copyWith(color: widget.textColor),
+                              4 =>
+                                EzConfig.styles.displayLarge?.copyWith(color: widget.textColor),
                               3 => EzConfig.styles.headlineLarge
                                   ?.copyWith(color: widget.textColor),
-                              2 => EzConfig.styles.titleLarge
-                                  ?.copyWith(color: widget.textColor),
-                              1 => EzConfig.styles.bodyLarge
-                                  ?.copyWith(color: widget.textColor),
+                              2 =>
+                                EzConfig.styles.titleLarge?.copyWith(color: widget.textColor),
+                              1 => EzConfig.styles.bodyLarge?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
                             textAlign: TextAlign.center,
@@ -390,12 +384,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   height: controlsHeight,
                   child: EzAnimVis(
                     mod: 0.75,
-                    visible:
-                        hovering || subMenuControl.isOpen || !value.isPlaying,
+                    visible: hovering || subMenuControl.isOpen || !value.isPlaying,
                     forceType: EzTransitionType.slideY, // TODO: fancy
                     child: Container(
-                      decoration:
-                          BoxDecoration(color: widget.controlsBackground),
+                      decoration: BoxDecoration(color: widget.controlsBackground),
                       child: EzCol(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -440,8 +432,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                                 // Play/pause
                                 Padding(
-                                  padding:
-                                      EdgeInsets.only(right: EzConfig.spacing),
+                                  padding: EdgeInsets.only(right: EzConfig.spacing),
                                   child: value.isPlaying
                                       ? EzIconButton(
                                           onPressed: pause,
@@ -477,8 +468,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                                   // Volume slider
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        right: EzConfig.spacing),
+                                    padding: EdgeInsets.only(right: EzConfig.spacing),
                                     child: SizedBox(
                                       height: EzConfig.iconSize,
                                       width: 100,
@@ -491,11 +481,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                               mobileHover?.cancel();
                                             }
                                           },
-                                          onChanged: (double value) => widget
-                                              .controller
-                                              .setVolume(value),
-                                          onChangeEnd: (_) =>
-                                              handleMobileHover(),
+                                          onChanged: (double value) =>
+                                              widget.controller.setVolume(value),
+                                          onChangeEnd: (_) => handleMobileHover(),
                                         ),
                                       ),
                                     ),
@@ -526,8 +514,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                         enabled: currSpeed > 0.25,
                                         onPressed: () async {
                                           setState(() => currSpeed -= 0.25);
-                                          await widget.controller
-                                              .setPlaybackSpeed(currSpeed);
+                                          await widget.controller.setPlaybackSpeed(currSpeed);
                                           handleMobileHover();
                                         },
                                         tooltip:
@@ -538,8 +525,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       Tooltip(
                                         message: EzConfig.l10n.gPlaybackSpeed,
                                         child: EzCol(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
                                             Icon(
                                               Icons.speed,
@@ -559,8 +545,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                         enabled: currSpeed < 2.0,
                                         onPressed: () async {
                                           setState(() => currSpeed += 0.25);
-                                          await widget.controller
-                                              .setPlaybackSpeed(currSpeed);
+                                          await widget.controller.setPlaybackSpeed(currSpeed);
                                           handleMobileHover();
                                         },
                                         tooltip:
@@ -574,15 +559,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 // Captions
                                 if (widget.hasCaptions)
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        right: EzConfig.spacing),
+                                    padding: EdgeInsets.only(right: EzConfig.spacing),
                                     child: MenuAnchor(
                                       controller: subMenuControl,
                                       builder: (_, __, ___) => EzIconButton(
                                         onPressed: () => subMenuControl.isOpen
                                             ? subMenuControl.close()
-                                            : setState(() =>
-                                                showCaptions = !showCaptions),
+                                            : setState(() => showCaptions = !showCaptions),
                                         onLongPress: () => subMenuControl.isOpen
                                             ? subMenuControl.close()
                                             : subMenuControl.open(),
@@ -596,40 +579,33 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       menuChildren: <Widget>[
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsDisplay,
-                                          textStyle:
-                                              EzConfig.styles.displayLarge,
+                                          textStyle: EzConfig.styles.displayLarge,
                                           textAlign: TextAlign.center,
-                                          onPressed: () =>
-                                              setState(() => captionStyle = 4),
+                                          onPressed: () => setState(() => captionStyle = 4),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsHeadline,
-                                          textStyle:
-                                              EzConfig.styles.headlineLarge,
+                                          textStyle: EzConfig.styles.headlineLarge,
                                           textAlign: TextAlign.center,
-                                          onPressed: () =>
-                                              setState(() => captionStyle = 3),
+                                          onPressed: () => setState(() => captionStyle = 3),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsTitle,
                                           textStyle: EzConfig.styles.titleLarge,
                                           textAlign: TextAlign.center,
-                                          onPressed: () =>
-                                              setState(() => captionStyle = 2),
+                                          onPressed: () => setState(() => captionStyle = 2),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsBody,
                                           textStyle: EzConfig.styles.bodyLarge,
                                           textAlign: TextAlign.center,
-                                          onPressed: () =>
-                                              setState(() => captionStyle = 1),
+                                          onPressed: () => setState(() => captionStyle = 1),
                                         ),
                                         EzMenuButton(
                                           label: EzConfig.l10n.tsLabel,
                                           textStyle: EzConfig.styles.labelLarge,
                                           textAlign: TextAlign.center,
-                                          onPressed: () =>
-                                              setState(() => captionStyle = 0),
+                                          onPressed: () => setState(() => captionStyle = 0),
                                         ),
                                       ],
                                     ),

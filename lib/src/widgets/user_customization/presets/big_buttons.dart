@@ -33,8 +33,7 @@ class EzBigButtonsConfig extends StatelessWidget {
 
       await EzConfig.setBool(darkShowBackFABKey, true);
 
-      await EzConfig.setString(
-          darkButtonShapeKey, EzButtonShape.roundRect.value);
+      await EzConfig.setString(darkButtonShapeKey, EzButtonShape.roundRect.value);
 
       await EzConfig.setBool(darkShowScrollKey, true);
 
@@ -59,8 +58,7 @@ class EzBigButtonsConfig extends StatelessWidget {
 
       await EzConfig.setBool(lightShowBackFABKey, true);
 
-      await EzConfig.setString(
-          lightButtonShapeKey, EzButtonShape.roundRect.value);
+      await EzConfig.setString(lightButtonShapeKey, EzButtonShape.roundRect.value);
 
       await EzConfig.setBool(lightShowScrollKey, true);
 

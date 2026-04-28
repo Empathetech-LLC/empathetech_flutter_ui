@@ -70,8 +70,7 @@ String _formatDayPeriod(TimeOfDay timeOfDay) {
 
 int _getDaysInMonth(int year, int month) {
   if (month == DateTime.february) {
-    final bool isLeapYear =
-        (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
+    final bool isLeapYear = (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
     return isLeapYear ? 29 : 28;
   }
 
@@ -290,8 +289,7 @@ class _CreoleMaterialLocalizationsDelegate
   bool isSupported(Locale locale) => locale.languageCode == 'ht';
 
   @override
-  Future<MaterialLocalizations> load(Locale locale) =>
-      CreoleMaterialLocalizations.load(locale);
+  Future<MaterialLocalizations> load(Locale locale) => CreoleMaterialLocalizations.load(locale);
 
   @override
   bool shouldReload(LocalizationsDelegate<MaterialLocalizations> old) => false;
@@ -717,12 +715,10 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
   // Functions //
 
   @override
-  String aboutListTileTitle(String applicationName) =>
-      'A pwopo $applicationName';
+  String aboutListTileTitle(String applicationName) => 'A pwopo $applicationName';
 
   @override
-  String dateRangeEndDateSemanticLabel(String formattedDate) =>
-      'Dat fen $formattedDate';
+  String dateRangeEndDateSemanticLabel(String formattedDate) => 'Dat fen $formattedDate';
 
   @override
   String dateRangeStartDateSemanticLabel(String formattedDate) =>
@@ -767,8 +763,7 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
         timeOfDayFormat(alwaysUse24HourFormat: alwaysUse24HourFormat);
     switch (format) {
       case TimeOfDayFormat.h_colon_mm_space_a:
-        return formatDecimal(
-            timeOfDay.hourOfPeriod == 0 ? 12 : timeOfDay.hourOfPeriod);
+        return formatDecimal(timeOfDay.hourOfPeriod == 0 ? 12 : timeOfDay.hourOfPeriod);
       case TimeOfDayFormat.HH_colon_mm:
         return timeOfDay.hour.toString();
       case TimeOfDayFormat.a_space_h_colon_mm:
@@ -819,8 +814,7 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
     final StringBuffer buffer = StringBuffer();
 
     buffer
-      ..write(
-          formatHour(timeOfDay, alwaysUse24HourFormat: alwaysUse24HourFormat))
+      ..write(formatHour(timeOfDay, alwaysUse24HourFormat: alwaysUse24HourFormat))
       ..write(':')
       ..write(formatMinute(timeOfDay));
 
@@ -889,8 +883,7 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
   }
 
   @override
-  String scrimOnTapHint(String modalRouteContentName) =>
-      'Fèmen $modalRouteContentName';
+  String scrimOnTapHint(String modalRouteContentName) => 'Fèmen $modalRouteContentName';
 
   @override
   String selectedRowCountTitle(int selectedRowCount) {
@@ -918,8 +911,7 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
 
 //* Widgets *//
 
-class CreoleWidgetsLocalizationsDelegate
-    extends LocalizationsDelegate<WidgetsLocalizations> {
+class CreoleWidgetsLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocalizations> {
   const CreoleWidgetsLocalizationsDelegate();
 
   @override

@@ -80,9 +80,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                               }
 
                               // Gather && set data
-                              final List<String> localeData = <String>[
-                                locale.languageCode
-                              ];
+                              final List<String> localeData = <String>[locale.languageCode];
                               if (locale.countryCode != null) {
                                 localeData.add(locale.countryCode!);
                               }
@@ -96,8 +94,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                             },
                             icon: ezFlag(
                               locale,
-                              inDistress: widget.inDistress
-                                  .contains(locale.countryCode),
+                              inDistress: widget.inDistress.contains(locale.countryCode),
                             ),
                             label: ezLocaleName(locale, mCon),
                             labelPadding: false,

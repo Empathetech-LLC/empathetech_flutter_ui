@@ -47,9 +47,7 @@ class QuickColorSettings extends StatelessWidget {
         child: ExcludeSemantics(
           child: EzImageSetting(
             onUpdate,
-            configKey: EzConfig.isDark
-                ? darkColorSchemeImageKey
-                : lightColorSchemeImageKey,
+            configKey: EzConfig.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey,
             label: EzConfig.l10n.csSchemeBase,
             allowThemeUpdate: true,
             showEditor: false,

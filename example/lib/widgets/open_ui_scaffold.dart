@@ -45,15 +45,13 @@ class OpenUIScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final double toolbarHeight =
-        ezToolbarHeight(context: context, title: appName);
+    final double toolbarHeight = ezToolbarHeight(context: context, title: appName);
 
     // Define custom widgets //
 
     final Widget options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
-        onPressed: () =>
-            (controller.isOpen) ? controller.close() : controller.open(),
+        onPressed: () => (controller.isOpen) ? controller.close() : controller.open(),
         tooltip: EzConfig.l10n.gOptions,
         icon: Icon(Icons.more_vert, semanticLabel: EzConfig.l10n.gOptions),
       ),
@@ -99,8 +97,7 @@ class OpenUIScaffold extends StatelessWidget {
           floatingActionButton: EzCol(children: <Widget>[
             updater,
             if (fabs != null) ...fabs!,
-            if (config.design.showBackFAB &&
-                ezRootNav.currentState!.canPop()) ...<Widget>[
+            if (config.design.showBackFAB && ezRootNav.currentState!.canPop()) ...<Widget>[
               config.layout.spacer,
               const EzBackFAB(),
             ],

@@ -74,8 +74,7 @@ class EzResetButton extends StatelessWidget {
           bool updateBoth = true;
 
           return StatefulBuilder(
-            builder: (BuildContext dCon, StateSetter setDialog) =>
-                EzAlertDialog(
+            builder: (BuildContext dCon, StateSetter setDialog) => EzAlertDialog(
               title: Text(
                 dynamicTitle?.call() ?? EzConfig.l10n.ssResetAll,
                 textAlign: TextAlign.center,

@@ -87,10 +87,10 @@ class EzIconButton extends StatelessWidget {
 
     late final Color buttonBackground =
         EzConfig.colors.surface.withValues(alpha: EzConfig.buttonOpacity);
-    late final Color enabledOutline = EzConfig.colors.primaryContainer
-        .withValues(alpha: EzConfig.borderOpacity);
-    late final Color disabledOutline = EzConfig.colors.outlineVariant
-        .withValues(alpha: EzConfig.borderOpacity);
+    late final Color enabledOutline =
+        EzConfig.colors.primaryContainer.withValues(alpha: EzConfig.borderOpacity);
+    late final Color disabledOutline =
+        EzConfig.colors.outlineVariant.withValues(alpha: EzConfig.borderOpacity);
 
     late final ButtonStyle buttonStyle = style ??
         ((enabled && !fauxDisabled)

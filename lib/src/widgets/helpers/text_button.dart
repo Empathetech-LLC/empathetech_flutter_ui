@@ -85,8 +85,7 @@ class _EzTextButtonState extends State<EzTextButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    TextStyle? textStyle =
-        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
+    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
       decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
@@ -103,13 +102,9 @@ class _EzTextButtonState extends State<EzTextButton> {
       onPressed: widget.onPressed,
       onLongPress: widget.onLongPress,
       onHover: widget.onHover ??
-          (widget.underline
-              ? (bool isHovering) => addUnderline(isHovering)
-              : (_) {}),
+          (widget.underline ? (bool isHovering) => addUnderline(isHovering) : (_) {}),
       onFocusChange: widget.onFocusChange ??
-          (widget.underline
-              ? (bool isFocused) => addUnderline(isFocused)
-              : (_) {}),
+          (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       style: widget.style,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
@@ -207,8 +202,7 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    TextStyle? textStyle =
-        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
+    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(
       decorationColor: widget.decorationColor ?? EzConfig.colors.primary,
     );
 
@@ -225,13 +219,9 @@ class _EzTextIconButtonState extends State<EzTextIconButton> {
       onPressed: widget.onPressed,
       onLongPress: widget.onLongPress,
       onHover: widget.onHover ??
-          (widget.underline
-              ? (bool isHovering) => addUnderline(isHovering)
-              : (_) {}),
+          (widget.underline ? (bool isHovering) => addUnderline(isHovering) : (_) {}),
       onFocusChange: widget.onFocusChange ??
-          (widget.underline
-              ? (bool isFocused) => addUnderline(isFocused)
-              : (_) {}),
+          (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       style: widget.style,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,

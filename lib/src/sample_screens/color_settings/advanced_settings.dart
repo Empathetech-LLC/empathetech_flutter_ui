@@ -94,8 +94,7 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
   /// Returns the color keys the user is NOT tracking
   List<Widget> getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = widget.currList.toSet();
-    final List<String> fullList =
-        EzConfig.isDark ? darkColorOrder : lightColorOrder;
+    final List<String> fullList = EzConfig.isDark ? darkColorOrder : lightColorOrder;
 
     return fullList
         .where((String element) => !currSet.contains(element))
@@ -135,9 +134,7 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
             child: CircleAvatar(
               backgroundColor: liveColor,
               radius: EzConfig.padding + EzConfig.marginVal,
-              child: liveColor == Colors.transparent
-                  ? EzIcon(Icons.visibility_off)
-                  : null,
+              child: liveColor == Colors.transparent ? EzIcon(Icons.visibility_off) : null,
             ),
           ),
           label: getColorName(configKey),

@@ -98,9 +98,7 @@ class EzAnimHide extends EzAnimSwitch {
   }) : super(
             override: (Widget w, Animation<double> a) => ezTransitionBuilder(
                   a,
-                  visible
-                      ? w
-                      : SizedBox(height: size.height, width: size.width),
+                  visible ? w : SizedBox(height: size.height, width: size.width),
                   forceType: EzTransitionType.none,
                   forceFade: true,
                   reverse: false,

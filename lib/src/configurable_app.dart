@@ -45,8 +45,7 @@ class EzConfigurableApp extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) =>
-      ChangeNotifierProvider<EzConfigProvider>(
+  Widget build(BuildContext context) => ChangeNotifierProvider<EzConfigProvider>(
         create: (_) => EzConfigProvider(
           locale: locale,
           el10n: el10n,

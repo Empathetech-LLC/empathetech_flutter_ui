@@ -99,10 +99,8 @@ class EzColorSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String userColorsKey =
-        EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
-    final List<String> defaultList =
-        EzConfig.isDark ? darkStarterSet : lightStarterSet;
+    final String userColorsKey = EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
+    final List<String> defaultList = EzConfig.isDark ? darkStarterSet : lightStarterSet;
 
     return EzFauxCarousel(
       position: target.isFirst ? 0 : 1,
@@ -125,8 +123,7 @@ class EzColorSettings extends StatelessWidget {
               onUpdate: onUpdate,
               userColorsKey: userColorsKey,
               defaultList: defaultList,
-              currList:
-                  EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
+              currList: EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
               resetSpacer: resetSpacer,
               appName: appName,
               androidPackage: androidPackage,

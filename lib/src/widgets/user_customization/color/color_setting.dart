@@ -53,8 +53,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return ezColorPicker(
       context,
       startColor: backup,
-      onColorChange: (Color chosenColor) =>
-          setState(() => currColor = chosenColor),
+      onColorChange: (Color chosenColor) => setState(() => currColor = chosenColor),
       onConfirm: () async {
         await EzConfig.setInt(widget.configKey, currColor.toARGB32());
         await EzConfig.rebuildUI(widget.onUpdate);
@@ -155,8 +154,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
           return EzAlertDialog(
             title: Text(
-              EzConfig.l10n
-                  .gResetValue(getColorName(widget.configKey).toLowerCase()),
+              EzConfig.l10n.gResetValue(getColorName(widget.configKey).toLowerCase()),
               textAlign: TextAlign.center,
             ),
             contents: <Widget>[
@@ -166,8 +164,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               // Copy-able value
               EzTextIconButton(
-                onPressed: () =>
-                    Clipboard.setData(ClipboardData(text: currColorLabel)),
+                onPressed: () => Clipboard.setData(ClipboardData(text: currColorLabel)),
                 icon: const Icon(Icons.copy),
                 label: currColorLabel,
               ),
