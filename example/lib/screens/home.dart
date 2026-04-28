@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   EzAnimVis(
                     visible: !exampleDomain,
-                    mod: 0.5,
+                    mod: 0.75,
                     forceType: EzTransitionType.zoom,
                     child: TextFormField(
                       controller: domainController,
@@ -242,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   EzAnimSwitch(
-                    mod: 0.5,
+                    mod: 0.75,
                     forceType: EzTransitionType.zoom,
                     child: EzSwitchPair(
                       key: ValueKey<bool>(exampleDomain),
