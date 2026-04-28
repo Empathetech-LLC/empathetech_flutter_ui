@@ -99,17 +99,19 @@ class EzWallHolesConfig extends StatelessWidget {
 
     await EzConfig.setString(lightButtonShapeKey, EzButtonShape.rect.value);
     await EzConfig.setDouble(lightBorderWidthKey, 2.0);
+
     await EzConfig.setDouble(lightBorderOpacityKey, 1.0);
 
+    await EzConfig.setBool(lightLineLinksKey, true);
     await EzConfig.setBool(lightShowBackFABKey, true);
 
-    await EzConfig.setInt(lightAnimationDurationKey, 600);
-    await EzConfig.setString(
-        lightTransitionTypeKey, EzTransitionType.zoom.value);
-
     await EzConfig.setString(lightBackgroundImageKey, wallHolesPath);
-    await EzConfig.setString(
-        '$lightBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
+    await EzConfig.setString('$lightBackgroundImageKey$boxFitSuffix', BoxFit.cover.name);
+
+    await EzConfig.setString(lightTransitionTypeKey, EzTransitionType.zoom.value);
+    await EzConfig.setBool(lightTransitionFadeKey, false);
+
+    await EzConfig.setInt(lightAnimationDurationKey, 500);
 
     await EzConfig.setBool(lightShowScrollKey, true);
 
@@ -132,8 +134,8 @@ class EzWallHolesConfig extends StatelessWidget {
         side: const BorderSide(color: Colors.black, width: 2.0),
         shape: EzButtonShape.rect.shape,
         textStyle: localBody,
-        padding: EdgeInsets.all(
-            EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
+        padding:
+            EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
