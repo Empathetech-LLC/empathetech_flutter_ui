@@ -413,11 +413,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
           ),
           EzConfig.margin,
 
-          // Readout
+          // Readout TODO: fancy
           EzAnimSwitch(
             mod: 0.75,
-            // override: (Widget w, Animation<double> a) =>
-            //     blarg(w, a, showReadout),
             child: Container(
               constraints: BoxConstraints(
                 minWidth: widthOf(context) * 0.667,
