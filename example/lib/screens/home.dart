@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     visible: !exampleDomain,
                     mod: 0.75,
                     forceType: EzTransitionType.zoom,
-                    child: TextFormField(
+                    kid: TextFormField(
                       controller: domainController,
                       textAlign: TextAlign.start,
                       maxLines: 1,
@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
             EzAnimVis(
               visible: showAdvanced,
               mod: 3,
-              child: EzCol(
+              kid: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   EzConfig.spacer,
@@ -1005,7 +1005,7 @@ class _AdvancedSettingsField extends StatelessWidget {
               EzAnimVis(
                 visible: visible,
                 mod: 3,
-                child: EzCol(
+                kid: EzCol(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     EzConfig.margin,
@@ -1103,7 +1103,7 @@ class _LicensePicker extends StatelessWidget {
         // Options
         EzAnimVis(
           visible: visible,
-          child: Padding(
+          kid: Padding(
             padding: EdgeInsets.only(top: EzConfig.marginVal),
             child: RadioGroup<String>(
               groupValue: groupValue,
