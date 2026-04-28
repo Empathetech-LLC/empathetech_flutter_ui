@@ -48,9 +48,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   late final String workDir = widget.config.workPath!;
 
-  late final String projDir = isWindows
-      ? '$workDir\\${widget.config.appName}'
-      : '$workDir/${widget.config.appName}';
+  late final String projDir =
+      isWindows ? '$workDir\\${widget.config.appName}' : '$workDir/${widget.config.appName}';
 
   late final String flutterPath = widget.config.flutterPath == null
       ? ''
@@ -75,8 +74,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         dir: workDir,
         onSuccess: () => rmUnused(l10n),
         onFailure: (String message) {
-          if (message.contains('not permitted') &&
-              EzConfig.platform == TargetPlatform.macOS) {
+          if (message.contains('not permitted') && EzConfig.platform == TargetPlatform.macOS) {
             setState(() {
               showDelete = false;
               richFailureMessage = EzRichText(
@@ -112,8 +110,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// Runs immediately after a successful [genStuff]
   Future<void> rmUnused(Lang l10n) async {
-    const String files =
-        'analysis_options.yaml pubspec.lock pubspec.yaml README.md';
+    const String files = 'analysis_options.yaml pubspec.lock pubspec.yaml README.md';
     const String dirs = 'lib test';
 
     // Files
@@ -209,8 +206,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       final File macOSDebugEntitlements =
           File('$projDir/macos/Runner/DebugProfile.entitlements');
-      final File macOSReleaseEntitlements =
-          File('$projDir/macos/Runner/Release.entitlements');
+      final File macOSReleaseEntitlements = File('$projDir/macos/Runner/Release.entitlements');
 
       final XmlDocument debugDoc =
           XmlDocument.parse(await macOSDebugEntitlements.readAsString());
@@ -223,28 +219,24 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       if (debugDoc.findAllElements(networkClientKey).isEmpty) {
         // Add the entitlement
-        final XmlElement dictionary =
-            debugDoc.rootElement.findElements('dict').first;
+        final XmlElement dictionary = debugDoc.rootElement.findElements('dict').first;
 
         dictionary.children.add(XmlElement(XmlName(networkClientKey)));
         dictionary.children.add(XmlElement(XmlName('true')));
 
         // Save the modified file
-        await macOSDebugEntitlements
-            .writeAsString(debugDoc.toXmlString(pretty: true));
+        await macOSDebugEntitlements.writeAsString(debugDoc.toXmlString(pretty: true));
       }
 
       if (releaseDoc.findAllElements(networkClientKey).isEmpty) {
         // Add the entitlement
-        final XmlElement dictionary =
-            releaseDoc.rootElement.findElements('dict').first;
+        final XmlElement dictionary = releaseDoc.rootElement.findElements('dict').first;
 
         dictionary.children.add(XmlElement(XmlName(networkClientKey)));
         dictionary.children.add(XmlElement(XmlName('true')));
 
         // Save the modified file
-        await macOSReleaseEntitlements
-            .writeAsString(releaseDoc.toXmlString(pretty: true));
+        await macOSReleaseEntitlements.writeAsString(releaseDoc.toXmlString(pretty: true));
       }
 
       // Make sure packages are in order //
@@ -343,8 +335,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     await ezCmd(
                       '${flutterPath}flutter run -d ${device()}',
                       dir: projDir,
-                      onSuccess: () =>
-                          setState(() => genState = GeneratorState.successful),
+                      onSuccess: () => setState(() => genState = GeneratorState.successful),
                       onFailure: onFailure,
                       readout: readout,
                     );
@@ -425,8 +416,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
           // Readout
           EzAnimSwitch(
             mod: 0.75,
-            override: (Widget w, Animation<double> a) =>
-                blarg(w, a, showReadout),
+            // override: (Widget w, Animation<double> a) =>
+            //     blarg(w, a, showReadout),
             child: Container(
               constraints: BoxConstraints(
                 minWidth: widthOf(context) * 0.667,
