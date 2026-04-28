@@ -351,7 +351,7 @@ class _PageTransitionSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return EzElevatedIconButton(
       onPressed: () async {
-        final EzTransitionType backupType = EzConfig.pageTransition;
+        final EzTransitionType backupType = EzConfig.transitionType;
         final bool backupFade = EzConfig.fadedTransition;
 
         EzTransitionType currType = backupType;
