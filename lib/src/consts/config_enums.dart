@@ -178,6 +178,7 @@ enum EzTransitionType {
   rotate,
   slideX,
   slideY,
+  tapSlideY,
   zoom,
 }
 
@@ -197,6 +198,9 @@ const String esSlideX = 'slideX';
 
 /// enum String 'slideY'
 const String esSlideY = 'slideY';
+
+/// enum String 'tapSlideY'
+const String esTapSlideY = 'tapSlideY';
 
 /// enum String 'zoom'
 const String esZoom = 'zoom';
@@ -234,6 +238,9 @@ extension ETTConfig on EzTransitionType {
       case EzTransitionType.slideY:
         return const Icon(Icons.keyboard_double_arrow_up);
 
+      case EzTransitionType.tapSlideY:
+        return const Icon(Icons.touch_app);
+
       case EzTransitionType.zoom:
         return const Icon(Icons.zoom_in);
     }
@@ -262,6 +269,9 @@ extension ETTConfig on EzTransitionType {
       case EzTransitionType.slideY:
         return esSlideY;
 
+      case EzTransitionType.tapSlideY:
+        return esTapSlideY;
+
       case EzTransitionType.zoom:
         return esZoom;
     }
@@ -287,6 +297,9 @@ extension ETTConfig on EzTransitionType {
 
       case esSlideY:
         return EzTransitionType.slideY;
+
+      case esTapSlideY:
+        return EzTransitionType.tapSlideY;
 
       case esZoom:
         return EzTransitionType.zoom;
@@ -318,6 +331,9 @@ extension ETTConfig on EzTransitionType {
 
       case EzTransitionType.slideY:
         return EzConfig.l10n.dsSlideY;
+
+      case EzTransitionType.tapSlideY:
+        return 'Tap slide'; // TODO: l10n
 
       case EzTransitionType.zoom:
         return EzConfig.l10n.dsZoom;

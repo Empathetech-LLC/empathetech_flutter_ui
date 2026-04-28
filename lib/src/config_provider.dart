@@ -35,6 +35,8 @@ class EzConfigProvider extends ChangeNotifier {
   late ThemeData _darkTheme;
   late ThemeData _lightTheme;
 
+  Offset _lastTap;
+
   EzConfigProvider({
     required Locale locale,
     required EFUILang el10n,
@@ -48,7 +50,8 @@ class EzConfigProvider extends ChangeNotifier {
         _l10n = el10n,
         _ltr = !rtlLanguageCodes.contains(locale.languageCode),
         _isDark = isDark,
-        _appCache = appCache {
+        _appCache = appCache,
+        _lastTap = Offset.zero {
     _buildThemeMode();
     _buildThemeData();
     _appCache.init(isDark);
@@ -155,6 +158,12 @@ class EzConfigProvider extends ChangeNotifier {
 
   // Get //
 
+  /// Current [TargetPlatform]
+  TargetPlatform get platform => _platform;
+
+  /// Whether the app is running on a mobile device
+  bool get onMobile => _onMobile;
+
   /// Track [redrawUI] and [rebuildUI] (randomized on each call)
   int get seed => _seed;
 
@@ -162,12 +171,6 @@ class EzConfigProvider extends ChangeNotifier {
   /// Some settings would be too expensive to rebuild on every change, so they update locally and [pingRebuild]
   /// Example: [EzIconSizeSetting]
   bool get needsRebuild => _needsRebuild;
-
-  /// Current [TargetPlatform]
-  TargetPlatform get platform => _platform;
-
-  /// Whether the app is running on a mobile device
-  bool get onMobile => _onMobile;
 
   /// Current language for the app
   Locale get locale => _locale;
@@ -183,6 +186,9 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Whether the current [themeMode] uses [Brightness.dark]
   bool get isDark => _isDark;
+
+  /// [Offset] of the last recorded tap
+  Offset get lastTap => _lastTap;
 
   /// Cache of frequently used color config values
   EzColorCache get color => _color;
@@ -333,7 +339,12 @@ class EzConfigProvider extends ChangeNotifier {
       await redrawUI(doNothing);
     }
   }
+
+  /// Records the [Offset] from [TapDownDetails.globalPosition]
+  void tap(TapDownDetails details) => _lastTap = details.globalPosition;
 }
+
+// Build //
 
 class EzColorCache {
   final String schemeImagePath;
