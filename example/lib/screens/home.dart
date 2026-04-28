@@ -62,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextEditingController flutterPathControl = TextEditingController();
 
   bool showAdvanced = false;
-  Offset lastClick = Offset.zero;
 
   late final TextEditingController workPathControl = TextEditingController(text: docsPath);
 
@@ -94,12 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool canGen = true;
 
   // Define custom functions //
-
-  Widget advAnim(Widget w, Animation<double> a, bool visible) => SlideTransition(
-        position: Tween<Offset>(begin: lastClick, end: Offset.zero)
-            .animate(CurvedAnimation(parent: a, curve: Curves.easeInOut)),
-        child: visible ? w : const SizedBox.shrink(),
-      );
 
   /// Validate the code gen file path (Desktop only)
   Future<bool> checkPath(TextEditingController controller) async {
@@ -314,12 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ExcludeSemantics(
                     child: EzIconButton(
                       icon: Icon(ezVisIcon(showAdvanced)),
-                      onPressed: () {
-                        debugPrint('CAW!\n\n$lastClick');
-                        lastClick = ezWya(context); // TODO: fix
-                        debugPrint('\n$lastClick\n\nCAW!');
-                        setState(() => showAdvanced = !showAdvanced);
-                      },
+                      onPressed: () => setState(() => showAdvanced = !showAdvanced),
                       tooltip: showAdvanced ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
                     ),
                   ),
@@ -328,9 +316,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // Settings
-            EzAnimSwitch(
-              mod: 0.75,
-              override: (Widget w, Animation<double> a) => advAnim(w, a, showAdvanced),
+            EzAnimVis(
+              visible: showAdvanced,
+              mod: 3,
               child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -392,7 +380,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     tip: l10n.csCopyrightTip,
                     controller: copyrightController,
                     visible: showCopyright,
-                    animOvr: advAnim,
                     onHide: () => setState(() => showCopyright = !showCopyright),
                     removed: removeCopyright,
                     onRemove: () => setState(() => removeCopyright = true),
@@ -403,7 +390,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   // LICENSE config
                   _LicensePicker(
                     visible: showLicense,
-                    animOvr: advAnim,
                     onHide: () => setState(() => showLicense = !showLicense),
                     groupValue: license,
                     onChanged: (String? picked) {
@@ -420,7 +406,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     tip: l10n.csL10nTip,
                     controller: l10nController,
                     visible: showL10n,
-                    animOvr: advAnim,
                     onHide: () => setState(() => showL10n = !showL10n),
                     removed: false,
                     onRemove: null,
@@ -434,7 +419,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     tip: l10n.csLintTip,
                     controller: analysisController,
                     visible: showAnalysis,
-                    animOvr: advAnim,
                     onHide: () => setState(() => showAnalysis = !showAnalysis),
                     removed: removeAnalysis,
                     onRemove: () => setState(() => removeAnalysis = true),
@@ -448,7 +432,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     tip: l10n.csLaunchTip,
                     controller: vscController,
                     visible: showVSC,
-                    animOvr: advAnim,
                     onHide: () => setState(() => showVSC = !showVSC),
                     removed: removeVSC,
                     onRemove: () => setState(() => removeVSC = true),
@@ -942,7 +925,6 @@ class _AdvancedSettingsField extends StatelessWidget {
   final dynamic tip;
   final TextEditingController controller;
   final bool visible;
-  final Widget Function(Widget, Animation<double>, bool) animOvr;
   final void Function() onHide;
   final bool removed;
   final void Function()? onRemove;
@@ -953,7 +935,6 @@ class _AdvancedSettingsField extends StatelessWidget {
     this.tip,
     required this.controller,
     required this.visible,
-    required this.animOvr,
     required this.onHide,
     required this.removed,
     required this.onRemove,
@@ -1021,9 +1002,9 @@ class _AdvancedSettingsField extends StatelessWidget {
               ),
 
               // Form field
-              EzAnimSwitch(
-                mod: 0.75,
-                override: (Widget w, Animation<double> a) => animOvr(w, a, visible),
+              EzAnimVis(
+                visible: visible,
+                mod: 3,
                 child: EzCol(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -1046,7 +1027,6 @@ class _AdvancedSettingsField extends StatelessWidget {
 
 class _LicensePicker extends StatelessWidget {
   final bool visible;
-  final Widget Function(Widget, Animation<double>, bool) animOvr;
   final void Function() onHide;
 
   final String groupValue;
@@ -1054,7 +1034,6 @@ class _LicensePicker extends StatelessWidget {
 
   const _LicensePicker({
     required this.visible,
-    required this.animOvr,
     required this.onHide,
     required this.groupValue,
     required this.onChanged,
@@ -1122,8 +1101,8 @@ class _LicensePicker extends StatelessWidget {
         ),
 
         // Options
-        EzAnimSwitch(
-          override: (Widget w, Animation<double> a) => animOvr(w, a, visible),
+        EzAnimVis(
+          visible: visible,
           child: Padding(
             padding: EdgeInsets.only(top: EzConfig.marginVal),
             child: RadioGroup<String>(
