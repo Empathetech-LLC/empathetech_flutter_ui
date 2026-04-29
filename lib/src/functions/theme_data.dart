@@ -27,9 +27,10 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final double margin = isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
   final double spacing = isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
 
-  final int animDuration = Brightness.dark == brightness
+  final int animDuration = isDark
       ? EzConfig.get(darkAnimationDurationKey)
       : EzConfig.get(lightAnimationDurationKey);
+  final int threeQAnim = (animDuration * 0.75).toInt();
 
   // Text
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface, isDark: isDark);
@@ -289,8 +290,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             expansionAnimationStyle: AnimationStyle(
               curve: Curves.easeInOut,
               reverseCurve: Curves.easeInOut,
-              duration: Duration(milliseconds: animDuration),
-              reverseDuration: Duration(milliseconds: animDuration),
+              duration: Duration(milliseconds: threeQAnim),
+              reverseDuration: Duration(milliseconds: threeQAnim),
             ),
           )
         : ExpansionTileThemeData(
@@ -304,8 +305,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             expansionAnimationStyle: AnimationStyle(
               curve: Curves.easeInOut,
               reverseCurve: Curves.easeInOut,
-              duration: Duration(milliseconds: animDuration),
-              reverseDuration: Duration(milliseconds: animDuration),
+              duration: Duration(milliseconds: threeQAnim),
+              reverseDuration: Duration(milliseconds: threeQAnim),
             ),
           ),
 
