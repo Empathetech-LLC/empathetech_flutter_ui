@@ -7,10 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzSpacingSetting extends StatefulWidget {
-  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
-  final void Function() onUpdate;
-
+class EzSpacingSetting extends StatelessWidget {
   /// Smallest value that can be set
   final double min;
 
@@ -32,7 +29,6 @@ class EzSpacingSetting extends StatefulWidget {
   /// An easy to use spacing setting
   const EzSpacingSetting({
     super.key,
-    required this.onUpdate,
     required this.min,
     required this.max,
     required this.steps,
@@ -40,18 +36,6 @@ class EzSpacingSetting extends StatefulWidget {
     this.titleStyle,
     this.bodyStyle,
   });
-
-  @override
-  State<EzSpacingSetting> createState() => _EzSpacingSettingState();
-}
-
-class _EzSpacingSettingState extends State<EzSpacingSetting> {
-  // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +63,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
                     EzConfig.l10n.dsSpacing,
-                    currValue.toStringAsFixed(widget.decimals),
+                    currValue.toStringAsFixed(decimals),
                   ),
                   child: ExcludeSemantics(
                     child: EzCol(
@@ -88,8 +72,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                         // Title
                         Text(
                           EzConfig.l10n.dsSpacing,
-                          style:
-                              widget.titleStyle ?? EzConfig.styles.titleLarge,
+                          style: titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
                         EzSpacer(space: currValue),
@@ -118,7 +101,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                               style: ElevatedButton.styleFrom(
                                 shape: const CircleBorder(),
                               ),
-                              text: currValue.toStringAsFixed(widget.decimals),
+                              text: currValue.toStringAsFixed(decimals),
                             ),
                           ],
                         ),
@@ -134,13 +117,12 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                   child: Slider(
                     // Slider values
                     value: currValue,
-                    min: widget.min,
-                    max: widget.max,
-                    divisions: widget.steps,
+                    min: min,
+                    max: max,
+                    divisions: steps,
 
                     // Slider functions
-                    onChanged: (double value) =>
-                        setModal(() => currValue = value),
+                    onChanged: (double value) => setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
 
@@ -153,8 +135,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                     },
 
                     // Slider semantics
-                    semanticFormatterCallback: (double value) =>
-                        value.toStringAsFixed(widget.decimals),
+                    semanticFormatterCallback: (double value) => value.toStringAsFixed(decimals),
                   ),
                 ),
                 EzConfig.spacer,
@@ -164,14 +145,12 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
                   onPressed: () async {
                     await EzConfig.remove(configKey);
                     if (EzConfig.updateBoth) {
-                      await EzConfig.remove(
-                          EzConfig.isDark ? lightSpacingKey : darkSpacingKey);
+                      await EzConfig.remove(EzConfig.isDark ? lightSpacingKey : darkSpacingKey);
                     }
                     setModal(() => currValue = defaultValue);
                   },
                   icon: const Icon(Icons.refresh),
-                  label:
-                      '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
+                  label: '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(decimals)}',
                 ),
                 EzConfig.separator,
               ],
@@ -179,9 +158,7 @@ class _EzSpacingSettingState extends State<EzSpacingSetting> {
           ),
         );
 
-        if (currValue != backup) {
-          await EzConfig.rebuildUI(redraw);
-        }
+        if (currValue != backup) await EzConfig.rebuildUI();
       },
       icon: const Icon(Icons.space_bar),
       label: EzConfig.l10n.dsSpacing,

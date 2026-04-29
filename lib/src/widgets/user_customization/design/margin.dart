@@ -7,10 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzMarginSetting extends StatefulWidget {
-  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
-  final void Function() onUpdate;
-
+class EzMarginSetting extends StatelessWidget {
   /// Smallest value that can be set
   final double min;
 
@@ -26,24 +23,11 @@ class EzMarginSetting extends StatefulWidget {
   /// An ez to use margin setting
   const EzMarginSetting({
     super.key,
-    required this.onUpdate,
     required this.min,
     required this.max,
     required this.steps,
     required this.decimals,
   });
-
-  @override
-  State<EzMarginSetting> createState() => _EzMarginSettingState();
-}
-
-class _EzMarginSettingState extends State<EzMarginSetting> {
-  // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +47,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
         await ezModal(
           context: context,
           builder: (_) => StatefulBuilder(
-            builder: (BuildContext modalContext, StateSetter setModal) =>
-                EzScrollView(
+            builder: (BuildContext modalContext, StateSetter setModal) => EzScrollView(
               children: <Widget>[
                 // Preview
                 Semantics(
@@ -72,7 +55,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
                     EzConfig.l10n.dsMargin,
-                    currValue.toStringAsFixed(widget.decimals),
+                    currValue.toStringAsFixed(decimals),
                   ),
                   child: ExcludeSemantics(
                     child: EzCol(
@@ -89,7 +72,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                         EzConfig.spacer,
                         EzTextBackground(
                           Text(
-                            currValue.toStringAsFixed(widget.decimals),
+                            currValue.toStringAsFixed(decimals),
                             style: EzConfig.styles.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
@@ -102,10 +85,9 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: EzConfig.colors.surface,
-                              image:
-                                  (EzConfig.backgroundImagePath == noImageValue)
-                                      ? null
-                                      : EzConfig.backgroundImage,
+                              image: (EzConfig.backgroundImagePath == noImageValue)
+                                  ? null
+                                  : EzConfig.backgroundImage,
                             ),
                             margin: EdgeInsets.all(currValue * 0.25),
                           ),
@@ -122,25 +104,22 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                   child: Slider(
                     // Slider values
                     value: currValue,
-                    min: widget.min,
-                    max: widget.max,
-                    divisions: widget.steps,
+                    min: min,
+                    max: max,
+                    divisions: steps,
 
                     // Slider functions
-                    onChanged: (double value) =>
-                        setModal(() => currValue = value),
+                    onChanged: (double value) => setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
                       if (EzConfig.updateBoth) {
                         await EzConfig.setDouble(
-                            EzConfig.isDark ? lightMarginKey : darkMarginKey,
-                            value);
+                            EzConfig.isDark ? lightMarginKey : darkMarginKey, value);
                       }
                     },
 
                     // Slider semantics
-                    semanticFormatterCallback: (double value) =>
-                        value.toStringAsFixed(widget.decimals),
+                    semanticFormatterCallback: (double value) => value.toStringAsFixed(decimals),
                   ),
                 ),
                 EzConfig.spacer,
@@ -150,14 +129,12 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
                   onPressed: () async {
                     await EzConfig.remove(configKey);
                     if (EzConfig.updateBoth) {
-                      await EzConfig.remove(
-                          EzConfig.isDark ? lightMarginKey : darkMarginKey);
+                      await EzConfig.remove(EzConfig.isDark ? lightMarginKey : darkMarginKey);
                     }
                     setModal(() => currValue = defaultValue);
                   },
                   icon: const Icon(Icons.refresh),
-                  label:
-                      '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
+                  label: '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(decimals)}',
                 ),
                 EzConfig.separator,
               ],
@@ -165,9 +142,7 @@ class _EzMarginSettingState extends State<EzMarginSetting> {
           ),
         );
 
-        if (currValue != backup) {
-          await EzConfig.rebuildUI(redraw);
-        }
+        if (currValue != backup) await EzConfig.rebuildUI();
       },
       icon: const Icon(Icons.margin),
       label: EzConfig.l10n.dsMargin,

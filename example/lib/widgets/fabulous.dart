@@ -23,15 +23,8 @@ class ResetFAB extends StatelessWidget {
   /// Function to execute with 'Builder values' and 'Both' options
   final void Function() clearForms;
 
-  /// [EzConfig.reset] passthrough
-  final void Function() onComplete;
-
   /// Opens an [EzAlertDialog] for resetting the form fields, app settings, both, or none
-  const ResetFAB({
-    super.key,
-    required this.clearForms,
-    required this.onComplete,
-  });
+  const ResetFAB({super.key, required this.clearForms});
 
   @override
   Widget build(BuildContext context) => Tooltip(
@@ -65,7 +58,7 @@ class ResetFAB extends StatelessWidget {
                     EzMaterialAction(
                       onPressed: () async {
                         await EzConfig.reset(forceBoth: true);
-                        await EzConfig.rebuildUI(onComplete);
+                        await EzConfig.rebuildUI();
                       },
                       text: l10n.csResetApp,
                       isDestructiveAction: true,
@@ -76,7 +69,7 @@ class ResetFAB extends StatelessWidget {
                       onPressed: () async {
                         clearForms();
                         await EzConfig.reset(forceBoth: true);
-                        await EzConfig.rebuildUI(onComplete);
+                        await EzConfig.rebuildUI();
                       },
                       text: l10n.csResetBoth,
                       isDestructiveAction: true,

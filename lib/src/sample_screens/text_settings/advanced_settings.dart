@@ -16,7 +16,6 @@ class AdvancedTextSettings extends StatefulWidget {
   final EzLabelStyleProvider labelProvider;
 
   // Settings config
-  final void Function() onUpdate;
   final bool showSpacing;
   final Widget resetSpacer;
   final Set<String>? extraDark;
@@ -33,7 +32,6 @@ class AdvancedTextSettings extends StatefulWidget {
     required this.titleProvider,
     required this.bodyProvider,
     required this.labelProvider,
-    required this.onUpdate,
     required this.showSpacing,
     required this.resetSpacer,
     required this.extraDark,
@@ -54,11 +52,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
   late EzTextSettingType editing = EzTextSettingType.display;
 
   // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
 
   /// [ThemeMode] string
   String tS() => EzConfig.isDark ? 'dark_' : 'light_';
@@ -742,7 +735,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       widget.resetSpacer,
       EzResetButton(
         all: false,
-        redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
         dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(false)),

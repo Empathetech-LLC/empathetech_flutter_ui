@@ -7,10 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzDominantHandSwitch extends StatefulWidget {
-  /// [EzConfig.redrawUI] passthrough
-  final void Function() onComplete;
-
+class EzDominantHandSwitch extends StatelessWidget {
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
@@ -18,24 +15,11 @@ class EzDominantHandSwitch extends StatefulWidget {
   final Color? backgroundColor;
 
   /// Standardized tool for updating [EzConfig]s [isLeftyKey]
-  const EzDominantHandSwitch(
-    this.onComplete, {
+  const EzDominantHandSwitch({
     super.key,
     this.labelStyle,
     this.backgroundColor,
   });
-
-  @override
-  State<EzDominantHandSwitch> createState() => _HandSwitchState();
-}
-
-class _HandSwitchState extends State<EzDominantHandSwitch> {
-  // Define the build data //
-
-  late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
-    DropdownMenuEntry<bool>(value: false, label: EzConfig.l10n.gRight),
-    DropdownMenuEntry<bool>(value: true, label: EzConfig.l10n.gLeft),
-  ];
 
   // Return the build //
 
@@ -47,21 +31,24 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
           // Label
           EzText(
             EzConfig.l10n.ssDominantHand,
-            style: widget.labelStyle,
+            style: labelStyle,
             textAlign: TextAlign.center,
           ),
           EzConfig.margin,
 
           // Button
           EzDropdownMenu<bool>(
-            widthEntries: entries.map((DropdownMenuEntry<bool> entry) => entry.label).toList(),
-            dropdownMenuEntries: entries,
+            widthEntries: <String>[EzConfig.l10n.gRight],
+            dropdownMenuEntries: <DropdownMenuEntry<bool>>[
+              DropdownMenuEntry<bool>(value: false, label: EzConfig.l10n.gRight),
+              DropdownMenuEntry<bool>(value: true, label: EzConfig.l10n.gLeft),
+            ],
             enableSearch: false,
             initialSelection: EzConfig.isLefty,
             onSelected: (bool? makeLeft) async {
               if (makeLeft == null || makeLeft == EzConfig.isLefty) return;
               await EzConfig.setBool(isLeftyKey, makeLeft);
-              await EzConfig.redrawUI(widget.onComplete);
+              await EzConfig.redrawUI();
             },
           ),
         ],
