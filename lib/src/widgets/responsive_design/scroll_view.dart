@@ -15,18 +15,6 @@ class EzScrollView extends StatefulWidget {
   /// [Scrollbar.thumbVisibility] passthrough
   final bool? thumbVisibility;
 
-  /// [Scrollbar.thickness] passthrough
-  final double? thickness;
-
-  /// [Scrollbar.radius] passthrough
-  final Radius? radius;
-
-  /// [Scrollbar.notificationPredicate] passthrough
-  final ScrollNotificationPredicate? notificationPredicate;
-
-  /// [Scrollbar.scrollbarOrientation] passthrough
-  final ScrollbarOrientation? scrollbarOrientation;
-
   /// If true, when there is scrollable content, a halo of [ColorScheme.secondary] will be shown
   final bool showScrollHint;
 
@@ -37,12 +25,6 @@ class EzScrollView extends StatefulWidget {
   /// Is passed to the [SingleChildScrollView]s [EzRow]
   final bool reverseHands;
 
-  /// [SingleChildScrollView.reverse] passthrough
-  final bool reverse;
-
-  /// [SingleChildScrollView.padding] passthrough
-  final EdgeInsetsGeometry? padding;
-
   /// [SingleChildScrollView.primary] passthrough
   final bool? primary;
 
@@ -52,14 +34,8 @@ class EzScrollView extends StatefulWidget {
   /// [SingleChildScrollView.child] passthrough
   final Widget? child;
 
-  /// [SingleChildScrollView.clipBehavior] passthrough
-  final Clip clipBehavior;
-
   /// [SingleChildScrollView.dragStartBehavior] passthrough
   final DragStartBehavior dragStartBehavior;
-
-  /// [SingleChildScrollView.restorationId] passthrough
-  final String? restorationId;
 
   /// [SingleChildScrollView.keyboardDismissBehavior] passthrough
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
@@ -99,23 +75,15 @@ class EzScrollView extends StatefulWidget {
     // Scrollbar
     this.controller,
     this.thumbVisibility,
-    this.thickness,
-    this.radius,
-    this.notificationPredicate,
-    this.scrollbarOrientation,
     this.showScrollHint = false,
 
     // SingleChildScrollView
     this.scrollDirection = Axis.vertical,
     this.reverseHands = false,
-    this.reverse = false,
-    this.padding,
     this.primary,
     this.physics = const BouncingScrollPhysics(),
     this.child,
-    this.clipBehavior = Clip.hardEdge,
     this.dragStartBehavior = DragStartBehavior.start,
-    this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
 
     // EzRow/Column parameters
@@ -203,14 +171,10 @@ class _EzScrollViewState extends State<EzScrollView> {
 
     Widget core = SingleChildScrollView(
       scrollDirection: widget.scrollDirection,
-      reverse: widget.reverse,
-      padding: widget.padding,
       primary: widget.primary,
       physics: widget.physics,
       controller: controller,
       dragStartBehavior: widget.dragStartBehavior,
-      clipBehavior: widget.clipBehavior,
-      restorationId: widget.restorationId,
       keyboardDismissBehavior: widget.keyboardDismissBehavior,
       child: (widget.child != null)
           ? widget.child!
@@ -240,10 +204,6 @@ class _EzScrollViewState extends State<EzScrollView> {
       core = Scrollbar(
         controller: controller,
         thumbVisibility: true,
-        thickness: widget.thickness,
-        radius: widget.radius,
-        notificationPredicate: widget.notificationPredicate,
-        scrollbarOrientation: widget.scrollbarOrientation,
         child: core,
       );
     }
