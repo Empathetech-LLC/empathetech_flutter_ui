@@ -825,9 +825,6 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Whether the current [themeMode] uses [Brightness.dark]
   static bool get isDark => _provPoint.isDark;
 
-  /// [Offset] of the last recorded tap
-  static Offset get lastTap => _provPoint.lastTap;
-
   // App (EFUI consumer) cache
   static EzAppCache? get appCache => _provPoint.appCache;
 
@@ -867,9 +864,6 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Used in [EzConfigurableApp], not normally called manually
   /// For that reason, there is no passthrough for [redrawUI]
   static Future<void> redrawTheme() => _provPoint.redrawTheme();
-
-  /// Records the [Offset] from [TapDownDetails.globalPosition]
-  static void tap(TapDownDetails details) => _provPoint.tap(details);
 
   //* Provider aliases (custom) *//
   // Hub //

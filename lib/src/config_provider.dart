@@ -35,8 +35,6 @@ class EzConfigProvider extends ChangeNotifier {
   late ThemeData _darkTheme;
   late ThemeData _lightTheme;
 
-  Offset _lastTap;
-
   EzConfigProvider({
     required Locale locale,
     required EFUILang el10n,
@@ -50,8 +48,7 @@ class EzConfigProvider extends ChangeNotifier {
         _l10n = el10n,
         _ltr = !rtlLanguageCodes.contains(locale.languageCode),
         _isDark = isDark,
-        _appCache = appCache,
-        _lastTap = Offset.zero {
+        _appCache = appCache {
     _buildThemeMode();
     _buildThemeData();
     _appCache.init(isDark);
@@ -186,9 +183,6 @@ class EzConfigProvider extends ChangeNotifier {
 
   /// Whether the current [themeMode] uses [Brightness.dark]
   bool get isDark => _isDark;
-
-  /// [Offset] of the last recorded tap
-  Offset get lastTap => _lastTap;
 
   /// Cache of frequently used color config values
   EzColorCache get color => _color;
@@ -339,9 +333,6 @@ class EzConfigProvider extends ChangeNotifier {
       await redrawUI(doNothing);
     }
   }
-
-  /// Records the [Offset] from [TapDownDetails.globalPosition]
-  void tap(TapDownDetails details) => _lastTap = details.globalPosition;
 }
 
 // Build //

@@ -582,20 +582,6 @@ Widget ezTransitionBuilder(
         child: smartFade(child),
       );
 
-    // Vertical slide, from Offset of last tap
-    // For developers only (not in the design settings)
-    case EzTransitionType.tapSlideY:
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: Offset(0.0, -EzConfig.lastTap.dy),
-          end: Offset.zero,
-        ).animate(CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeInOut,
-        )),
-        child: smartFade(child),
-      );
-
     // Zoom
     case EzTransitionType.zoom:
       return ScaleTransition(
