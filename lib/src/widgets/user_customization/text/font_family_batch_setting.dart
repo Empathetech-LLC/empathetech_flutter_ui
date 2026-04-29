@@ -39,8 +39,7 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
   });
 
   @override
-  State<EzFontFamilyBatchSetting> createState() =>
-      _FontFamilyBatchSettingState();
+  State<EzFontFamilyBatchSetting> createState() => _FontFamilyBatchSettingState();
 }
 
 class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
@@ -52,8 +51,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
         : ezClassToCamel(ezFirstWord(widget.displayProvider.value.fontFamily!)),
     darkHeadlineFontFamilyKey: widget.headlineProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(
-            ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(widget.headlineProvider.value.fontFamily!)),
     darkTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
         ? null
         : ezClassToCamel(ezFirstWord(widget.titleProvider.value.fontFamily!)),
@@ -70,8 +68,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
         : ezClassToCamel(ezFirstWord(widget.displayProvider.value.fontFamily!)),
     lightHeadlineFontFamilyKey: widget.headlineProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(
-            ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(widget.headlineProvider.value.fontFamily!)),
     lightTitleFontFamilyKey: widget.titleProvider.value.fontFamily == null
         ? null
         : ezClassToCamel(ezFirstWord(widget.titleProvider.value.fontFamily!)),
@@ -92,10 +89,8 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   void initState() {
     super.initState();
 
-    final Map<String, String?> currFonts =
-        EzConfig.isDark ? darkFonts : lightFonts;
-    isUniform = currFonts.values
-        .every((String? font) => font == currFonts.values.first);
+    final Map<String, String?> currFonts = EzConfig.isDark ? darkFonts : lightFonts;
+    isUniform = currFonts.values.every((String? font) => font == currFonts.values.first);
     if (isUniform) currFont = currFonts.values.first;
   }
 
@@ -105,11 +100,10 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   Widget build(BuildContext context) => Tooltip(
         message: EzConfig.l10n.tsFontFamily,
         child: EzDropdownMenu<String>(
-          widthEntries: <String>[fingerPaint],
+          widthEntry: fingerPaint,
           textStyle: widget.bodyProvider.value,
           dropdownMenuEntries: googleStyles.entries
-              .map((MapEntry<String, TextStyle> entry) =>
-                  DropdownMenuEntry<String>(
+              .map((MapEntry<String, TextStyle> entry) => DropdownMenuEntry<String>(
                     value: entry.key,
                     label: ezCamelToTitle(entry.key),
                     style: TextButton.styleFrom(textStyle: entry.value),

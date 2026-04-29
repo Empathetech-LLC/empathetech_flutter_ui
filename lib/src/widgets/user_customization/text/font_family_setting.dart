@@ -40,14 +40,13 @@ class _FontSettingState extends State<EzFontSetting> {
   Widget build(BuildContext context) => Tooltip(
         message: EzConfig.l10n.tsFontFamily,
         child: EzDropdownMenu<String>(
-          widthEntries: <String>[fingerPaint],
+          widthEntry: fingerPaint,
           textStyle: fuseWithGFont(
             starter: widget.baseStyle,
             gFont: currFont ?? EzConfig.get(widget.type.fontKey),
           ),
           dropdownMenuEntries: googleStyles.entries
-              .map((MapEntry<String, TextStyle> entry) =>
-                  DropdownMenuEntry<String>(
+              .map((MapEntry<String, TextStyle> entry) => DropdownMenuEntry<String>(
                     value: entry.key,
                     label: ezCamelToTitle(entry.key),
                     style: TextButton.styleFrom(textStyle: entry.value),
@@ -63,12 +62,11 @@ class _FontSettingState extends State<EzFontSetting> {
             if (EzConfig.updateBoth) {
               await EzConfig.setString(widget.type.fontMirror, font);
             }
-
             widget.notifierCallback(font);
+
             if (context.mounted) {
               EzConfig.pingRebuild(ezTextRebuildCheck(context));
             }
-
             setState(() {});
           },
         ),
