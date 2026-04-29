@@ -3,10 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/export.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class SuccessHeader extends StatelessWidget {
@@ -53,42 +50,4 @@ class SuccessHeader extends StatelessWidget {
                 ),
         ],
       );
-}
-
-class RunOption extends StatelessWidget {
-  /// The Flutter project directory
-  final String projDir;
-
-  /// [TextStyle] for 'would you like to...'
-  final TextStyle? style;
-
-  /// [EzElevatedIconButton.onPressed] passthrough for the play button
-  final void Function() emulate;
-
-  const RunOption({
-    super.key,
-    required this.projDir,
-    required this.style,
-    required this.emulate,
-  });
-
-  @override
-  Widget build(BuildContext context) => (!kIsWeb && EzConfig.platform == TargetPlatform.macOS)
-      ? const SizedBox.shrink()
-      : EzCol(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            EzText(
-              l10n.rsWouldYou,
-              style: style,
-              textAlign: TextAlign.center,
-            ),
-            EzConfig.spacer,
-            EzElevatedIconButton(
-              onPressed: emulate,
-              icon: const Icon(Icons.play_arrow),
-              label: l10n.rsRun,
-            ),
-          ],
-        );
 }
