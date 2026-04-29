@@ -7,10 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzPaddingSetting extends StatefulWidget {
-  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
-  final void Function() onUpdate;
-
+class EzPaddingSetting extends StatelessWidget {
   /// Smallest value that can be set
   final double min;
 
@@ -32,7 +29,6 @@ class EzPaddingSetting extends StatefulWidget {
   /// An ez to use padding setting
   const EzPaddingSetting({
     super.key,
-    required this.onUpdate,
     required this.min,
     required this.max,
     required this.steps,
@@ -40,18 +36,6 @@ class EzPaddingSetting extends StatefulWidget {
     this.titleStyle,
     this.bodyStyle,
   });
-
-  @override
-  State<EzPaddingSetting> createState() => _EzPaddingSettingState();
-}
-
-class _EzPaddingSettingState extends State<EzPaddingSetting> {
-  // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +63,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                   readOnly: true,
                   label: EzConfig.l10n.gSetToValue(
                     EzConfig.l10n.dsPadding,
-                    currValue.toStringAsFixed(widget.decimals),
+                    currValue.toStringAsFixed(decimals),
                   ),
                   child: ExcludeSemantics(
                     child: EzCol(
@@ -88,8 +72,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                         // Title
                         Text(
                           EzConfig.l10n.dsPadding,
-                          style:
-                              widget.titleStyle ?? EzConfig.styles.titleLarge,
+                          style: titleStyle ?? EzConfig.styles.titleLarge,
                           textAlign: TextAlign.center,
                         ),
 
@@ -113,7 +96,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                                 padding: EdgeInsets.all(currValue),
                                 shape: const CircleBorder(),
                               ),
-                              text: currValue.toStringAsFixed(widget.decimals),
+                              text: currValue.toStringAsFixed(decimals),
                             ),
                           ],
                         ),
@@ -129,25 +112,22 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                   child: Slider(
                     // Slider values
                     value: currValue,
-                    min: widget.min,
-                    max: widget.max,
-                    divisions: widget.steps,
+                    min: min,
+                    max: max,
+                    divisions: steps,
 
                     // Slider functions
-                    onChanged: (double value) =>
-                        setModal(() => currValue = value),
+                    onChanged: (double value) => setModal(() => currValue = value),
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(configKey, value);
                       if (EzConfig.updateBoth) {
                         await EzConfig.setDouble(
-                            EzConfig.isDark ? lightPaddingKey : darkPaddingKey,
-                            value);
+                            EzConfig.isDark ? lightPaddingKey : darkPaddingKey, value);
                       }
                     },
 
                     // Slider semantics
-                    semanticFormatterCallback: (double value) =>
-                        value.toStringAsFixed(widget.decimals),
+                    semanticFormatterCallback: (double value) => value.toStringAsFixed(decimals),
                   ),
                 ),
                 EzConfig.spacer,
@@ -157,14 +137,12 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
                   onPressed: () async {
                     await EzConfig.remove(configKey);
                     if (EzConfig.updateBoth) {
-                      await EzConfig.remove(
-                          EzConfig.isDark ? lightPaddingKey : darkPaddingKey);
+                      await EzConfig.remove(EzConfig.isDark ? lightPaddingKey : darkPaddingKey);
                     }
                     setModal(() => currValue = defaultValue);
                   },
                   icon: const Icon(Icons.refresh),
-                  label:
-                      '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
+                  label: '${EzConfig.l10n.gResetTo} ${defaultValue.toStringAsFixed(decimals)}',
                 ),
                 EzConfig.separator,
               ],
@@ -172,9 +150,7 @@ class _EzPaddingSettingState extends State<EzPaddingSetting> {
           ),
         );
 
-        if (currValue != backup) {
-          await EzConfig.rebuildUI(redraw);
-        }
+        if (currValue != backup) await EzConfig.rebuildUI();
       },
       icon: const Icon(Icons.padding),
       label: EzConfig.l10n.dsPadding,

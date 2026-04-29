@@ -9,9 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
-  /// [EzConfig.randomize] passthrough
-  final void Function() onComplete;
-
   /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.ssRandom]
   final String? label;
@@ -34,8 +31,7 @@ class EzConfigRandomizer extends StatelessWidget {
   final Set<String>? saveSkip;
 
   /// [EzElevatedIconButton] for randomizing [EzConfig]
-  const EzConfigRandomizer(
-    this.onComplete, {
+  const EzConfigRandomizer({
     super.key,
     this.label,
     this.dialogTitle,
@@ -69,7 +65,7 @@ class EzConfigRandomizer extends StatelessWidget {
               context: context,
               onConfirm: () async {
                 await EzConfig.randomize();
-                await EzConfig.rebuildUI(onComplete);
+                await EzConfig.rebuildUI();
               },
               confirmIsDestructive: true,
               onDeny: () => Navigator.of(dCon).pop(),

@@ -14,11 +14,7 @@ class SettingsHubScreen extends StatelessWidget {
   /// Optionally override the starting position
   final int? targetPass;
 
-  /// Optionally override the starting sub-page to advanced (or equivalent)
-  final bool? advancedPass;
-
-  SettingsHubScreen({this.targetPass, this.advancedPass})
-      : super(key: ValueKey<int>(EzConfig.seed));
+  SettingsHubScreen({this.targetPass}) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => Consumer<EzConfigProvider>(
@@ -64,7 +60,6 @@ class SettingsHubScreen extends StatelessWidget {
                     : EzSubSetting.qckColor,
                 build: (EzSubSetting subSec) => EzColorSettings(
                   target: subSec,
-                  onUpdate: doNothing,
                   appName: appName,
                   androidPackage: androidPackage,
                 ),
@@ -88,7 +83,6 @@ class SettingsHubScreen extends StatelessWidget {
                     : EzSubSetting.butDesign,
                 build: (EzSubSetting subSec) => EzDesignSettings(
                   target: subSec,
-                  onUpdate: doNothing,
                   appName: appName,
                   androidPackage: androidPackage,
                 ),
@@ -112,7 +106,6 @@ class SettingsHubScreen extends StatelessWidget {
                     : EzSubSetting.qckText,
                 build: (EzSubSetting subSec) => EzTextSettings(
                   target: subSec,
-                  onUpdate: doNothing,
                   appName: appName,
                   androidPackage: androidPackage,
                 ),
@@ -126,7 +119,7 @@ class SettingsHubScreen extends StatelessWidget {
             // Rebuild (conditional)
             if (config.needsRebuild) ...<Widget>[
               config.layout.spacer,
-              const EzRebuildFAB(doNothing),
+              const EzRebuildFAB(),
             ],
 
             // Save/upload config

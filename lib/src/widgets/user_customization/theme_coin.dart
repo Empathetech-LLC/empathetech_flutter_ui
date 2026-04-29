@@ -9,13 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EzThemeCoin extends StatefulWidget {
-  /// [EzConfig.rebuildThemeMode] passthrough
-  final void Function() onComplete;
-
   final bool enabled;
 
   /// [EzIconButton] for toggling [EzConfig.updateBoth]
-  const EzThemeCoin(this.onComplete, {super.key, this.enabled = true});
+  const EzThemeCoin({super.key, this.enabled = true});
 
   @override
   State<EzThemeCoin> createState() => _EzThemeCoinState();
@@ -29,9 +26,7 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
     final String editing = EzConfig.l10n.gEditing +
         (both
             ? EzConfig.l10n.gBothThemes
-            : (EzConfig.isDark
-                ? EzConfig.l10n.gDarkTheme
-                : EzConfig.l10n.gLightTheme));
+            : (EzConfig.isDark ? EzConfig.l10n.gDarkTheme : EzConfig.l10n.gLightTheme));
     final String reverse = both
         ? (EzConfig.isDark
             ? '${EzConfig.l10n.gThe} ${EzConfig.l10n.gDarkTheme.toLowerCase()}'
@@ -53,7 +48,7 @@ class _EzThemeCoinState extends State<EzThemeCoin> {
           },
           onLongPress: () async {
             await EzConfig.setBool(isDarkThemeKey, !EzConfig.isDark);
-            await EzConfig.rebuildThemeMode(widget.onComplete);
+            await EzConfig.rebuildThemeMode();
           },
           tooltip: editing,
         ),

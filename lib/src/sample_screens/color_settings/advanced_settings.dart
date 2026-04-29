@@ -8,7 +8,6 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class AdvancedColorSettings extends StatefulWidget {
-  final void Function() onUpdate;
   final String userColorsKey;
   final List<String> currList;
   final List<String> defaultList;
@@ -22,7 +21,6 @@ class AdvancedColorSettings extends StatefulWidget {
 
   const AdvancedColorSettings({
     super.key,
-    required this.onUpdate,
     required this.userColorsKey,
     required this.currList,
     required this.defaultList,
@@ -40,13 +38,6 @@ class AdvancedColorSettings extends StatefulWidget {
 }
 
 class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
-  // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
-
   // Define custom Widgets //
 
   /// Returns the color keys the user is tracking
@@ -61,11 +52,7 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
         toReturn.add(
           Padding(
             padding: wrapPadding,
-            child: (EzColorSetting(
-              key: ValueKey<String>(key),
-              configKey: key,
-              onUpdate: redraw,
-            )),
+            child: (EzColorSetting(key: ValueKey<String>(key), configKey: key)),
           ),
         );
       } else {
@@ -76,7 +63,6 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
             child: (EzColorSetting(
               key: ValueKey<String>(key),
               configKey: key,
-              onUpdate: redraw,
               onRemove: () async {
                 widget.currList.remove(key);
                 await EzConfig.setStringList(userColorsKey, widget.currList);
@@ -201,7 +187,6 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
         widget.resetSpacer,
         EzResetButton(
           all: false,
-          widget.onUpdate,
           androidPackage: widget.androidPackage,
           appName: widget.appName,
           dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(false)),

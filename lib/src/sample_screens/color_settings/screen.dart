@@ -13,9 +13,6 @@ class EzColorSettings extends StatelessWidget {
   /// Current sub-page
   final EzSubSetting target;
 
-  /// [EzConfig.rebuildUI]/[EzConfig.redrawUI] passthrough
-  final void Function() onUpdate;
-
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
@@ -51,19 +48,22 @@ class EzColorSettings extends StatelessWidget {
   /// BYO leading spacer, trailing is [resetSpacer]
   final List<Widget>? quickFooter;
 
+  final String _userColorsKey;
+
   /// Initial set of [Brightness.dark] configKeys to display in the advanced settings
   final List<String> darkStarterSet;
 
   /// Initial set of [Brightness.light] configKeys to display in the advanced settings
   final List<String> lightStarterSet;
 
+  final List<String> _defaultList;
+
   /// Empathetech color settings
   /// Recommended to use as a [Scaffold.body]
-  const EzColorSettings({
+  EzColorSettings({
     // Shared
     super.key,
     required this.target,
-    required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
     required this.appName,
     this.androidPackage,
@@ -95,43 +95,37 @@ class EzColorSettings extends StatelessWidget {
       lightSurfaceContainerKey,
       lightSurfaceTintKey,
     ],
-  });
+  })  : _userColorsKey = EzConfig.isDark ? userDarkColorsKey : userLightColorsKey,
+        _defaultList = EzConfig.isDark ? darkStarterSet : lightStarterSet;
 
   @override
-  Widget build(BuildContext context) {
-    final String userColorsKey = EzConfig.isDark ? userDarkColorsKey : userLightColorsKey;
-    final List<String> defaultList = EzConfig.isDark ? darkStarterSet : lightStarterSet;
-
-    return EzFauxCarousel(
-      position: target.isFirst ? 0 : 1,
-      delta: target.isFirst ? -1 : 1,
-      animMod: 0.5,
-      child: (target == EzSubSetting.qckColor)
-          ? QuickColorSettings(
-              onUpdate: onUpdate,
-              quickHeader: quickHeader,
-              quickFooter: quickFooter,
-              resetSpacer: resetSpacer,
-              appName: appName,
-              androidPackage: androidPackage,
-              resetExtraDark: resetExtraDark,
-              resetExtraLight: resetExtraLight,
-              resetSkip: resetSkip,
-              saveSkip: saveSkip,
-            )
-          : AdvancedColorSettings(
-              onUpdate: onUpdate,
-              userColorsKey: userColorsKey,
-              defaultList: defaultList,
-              currList: EzConfig.get(userColorsKey) ?? List<String>.from(defaultList),
-              resetSpacer: resetSpacer,
-              appName: appName,
-              androidPackage: androidPackage,
-              resetExtraDark: resetExtraDark,
-              resetExtraLight: resetExtraLight,
-              resetSkip: resetSkip,
-              saveSkip: saveSkip,
-            ),
-    );
-  }
+  Widget build(BuildContext context) => EzFauxCarousel(
+        position: target.isFirst ? 0 : 1,
+        delta: target.isFirst ? -1 : 1,
+        animMod: 0.5,
+        child: (target == EzSubSetting.qckColor)
+            ? QuickColorSettings(
+                quickHeader: quickHeader,
+                quickFooter: quickFooter,
+                resetSpacer: resetSpacer,
+                appName: appName,
+                androidPackage: androidPackage,
+                resetExtraDark: resetExtraDark,
+                resetExtraLight: resetExtraLight,
+                resetSkip: resetSkip,
+                saveSkip: saveSkip,
+              )
+            : AdvancedColorSettings(
+                userColorsKey: _userColorsKey,
+                defaultList: _defaultList,
+                currList: EzConfig.get(_userColorsKey) ?? List<String>.from(_defaultList),
+                resetSpacer: resetSpacer,
+                appName: appName,
+                androidPackage: androidPackage,
+                resetExtraDark: resetExtraDark,
+                resetExtraLight: resetExtraLight,
+                resetSkip: resetSkip,
+                saveSkip: saveSkip,
+              ),
+      );
 }
