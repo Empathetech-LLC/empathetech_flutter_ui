@@ -146,81 +146,79 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return EzCol(children: <Widget>[
-      // Dynamic color settings
-      EzSwapWidget(
-        expanded: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: widthOf(context) * 0.8),
-          child: EzWrap(children: dynamicColorSettings(widget.userColorsKey)),
+  Widget build(BuildContext context) => EzCol(children: <Widget>[
+        // Dynamic color settings
+        EzSwapWidget(
+          expanded: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: widthOf(context) * 0.8),
+            child: EzWrap(children: dynamicColorSettings(widget.userColorsKey)),
+          ),
+          restricted: EzCol(children: dynamicColorSettings(widget.userColorsKey)),
         ),
-        restricted: EzCol(children: dynamicColorSettings(widget.userColorsKey)),
-      ),
-      EzConfig.separator,
+        EzConfig.separator,
 
-      // Add a color button
-      EzTextIconButton(
-        onPressed: () async {
-          // Show modal
-          await ezModal(
-            context: context,
-            builder: (_) => StatefulBuilder(
-              builder: (_, StateSetter setModalState) => EzScrollView(
-                children: <Widget>[
-                  // Tutorial link
-                  EzLink(
-                    EzConfig.l10n.gHowThisWorks,
-                    style: EzConfig.styles.labelLarge!,
-                    textAlign: TextAlign.center,
-                    padding: EdgeInsets.all(EzConfig.marginVal),
-                    buttonShape: true,
-                    url: Uri.parse('https://m3.material.io/styles/color/roles'),
-                    hint: EzConfig.l10n.gHowThisWorksHint,
-                    tooltip: 'https://m3.material.io/styles/color/roles',
-                  ),
+        // Add a color button
+        EzTextIconButton(
+          onPressed: () async {
+            // Show modal
+            await ezModal(
+              context: context,
+              builder: (_) => StatefulBuilder(
+                builder: (_, StateSetter setModalState) => EzScrollView(
+                  children: <Widget>[
+                    // Tutorial link
+                    EzLink(
+                      EzConfig.l10n.gHowThisWorks,
+                      style: EzConfig.styles.labelLarge!,
+                      textAlign: TextAlign.center,
+                      padding: EdgeInsets.all(EzConfig.marginVal),
+                      buttonShape: true,
+                      url: Uri.parse('https://m3.material.io/styles/color/roles'),
+                      hint: EzConfig.l10n.gHowThisWorksHint,
+                      tooltip: 'https://m3.material.io/styles/color/roles',
+                    ),
 
-                  // Color options
-                  EzWrap(children: getUntrackedColors(setModalState)),
-                  EzConfig.spacer,
-                ],
+                    // Color options
+                    EzWrap(children: getUntrackedColors(setModalState)),
+                    EzConfig.spacer,
+                  ],
+                ),
               ),
-            ),
-          );
+            );
 
-          // Save changes
-          await EzConfig.setStringList(widget.userColorsKey, widget.currList);
-        },
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.all(EzConfig.marginVal),
-          shape: EzConfig.buttonShape.shape,
+            // Save changes
+            await EzConfig.setStringList(widget.userColorsKey, widget.currList);
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(EzConfig.marginVal),
+            shape: EzConfig.buttonShape.shape,
+          ),
+          icon: const Icon(Icons.add_circle_outline),
+          label: EzConfig.l10n.csAddColor,
         ),
-        icon: const Icon(Icons.add_circle_outline),
-        label: EzConfig.l10n.csAddColor,
-      ),
 
-      // Local reset
-      widget.resetSpacer,
-      EzResetButton(
-        all: false,
-        widget.onUpdate,
-        androidPackage: widget.androidPackage,
-        appName: widget.appName,
-        dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(false)),
-        resetSkip: widget.resetSkip,
-        onConfirm: () async {
-          if (EzConfig.isDark) {
-            await EzConfig.removeKeys(darkColorKeys.keys.toSet());
-            if (widget.resetExtraDark != null) {
-              await EzConfig.removeKeys(widget.resetExtraDark!);
+        // Local reset
+        widget.resetSpacer,
+        EzResetButton(
+          all: false,
+          widget.onUpdate,
+          androidPackage: widget.androidPackage,
+          appName: widget.appName,
+          dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(false)),
+          resetSkip: widget.resetSkip,
+          onConfirm: () async {
+            if (EzConfig.isDark) {
+              await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+              if (widget.resetExtraDark != null) {
+                await EzConfig.removeKeys(widget.resetExtraDark!);
+              }
+            } else {
+              await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+              if (widget.resetExtraLight != null) {
+                await EzConfig.removeKeys(widget.resetExtraLight!);
+              }
             }
-          } else {
-            await EzConfig.removeKeys(lightColorKeys.keys.toSet());
-            if (widget.resetExtraLight != null) {
-              await EzConfig.removeKeys(widget.resetExtraLight!);
-            }
-          }
-        },
-      ),
-    ]);
-  }
+          },
+        ),
+      ]);
 }

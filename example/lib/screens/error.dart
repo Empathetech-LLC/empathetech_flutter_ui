@@ -30,27 +30,25 @@ class _ErrorScreenState extends State<ErrorScreen> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return OpenUIScaffold(EzScreen(Center(
-      child: EzScrollView(children: <Widget>[
-        Text(
-          EzConfig.l10n.g404Wonder,
-          style: EzConfig.styles.headlineLarge,
-          textAlign: TextAlign.center,
-        ),
-        EzConfig.separator,
-        Text(
-          EzConfig.l10n.g404,
-          style: ezSubTitleStyle(),
-          textAlign: TextAlign.center,
-        ),
-        EzConfig.separator,
-        Text(
-          EzConfig.l10n.g404Note,
-          style: EzConfig.styles.labelLarge,
-          textAlign: TextAlign.center,
-        ),
-      ]),
-    )));
-  }
+  Widget build(BuildContext context) => OpenUIScaffold(EzScreen(Center(
+        child: EzScrollView(children: <Widget>[
+          Text(
+            EzConfig.l10n.g404Wonder,
+            style: EzConfig.styles.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
+          EzConfig.separator,
+          Text(
+            EzConfig.l10n.g404,
+            style: ezSubTitleStyle(),
+            textAlign: TextAlign.center,
+          ),
+          EzConfig.separator,
+          Text(
+            EzConfig.l10n.g404Note,
+            style: EzConfig.styles.labelLarge,
+            textAlign: TextAlign.center,
+          ),
+        ]),
+      )));
 }

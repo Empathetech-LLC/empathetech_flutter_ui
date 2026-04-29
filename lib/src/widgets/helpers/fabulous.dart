@@ -188,37 +188,35 @@ class _EzUpdaterState extends State<EzUpdaterFAB> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: !isLatest,
-      child: widget.isWeb // Trinary required, if/else breaks iOS web links
-          ? FloatingActionButton(
-              heroTag: 'updater_fab',
-              onPressed: () => showDialog(
-                context: context,
-                builder: (_) => EzAlertDialog(
-                  title: Text(
-                    EzConfig.l10n.gUpdates,
-                    textAlign: TextAlign.center,
+  Widget build(BuildContext context) => Visibility(
+        visible: !isLatest,
+        child: widget.isWeb // Trinary required, if/else breaks iOS web links
+            ? FloatingActionButton(
+                heroTag: 'updater_fab',
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (_) => EzAlertDialog(
+                    title: Text(
+                      EzConfig.l10n.gUpdates,
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Text(hardRefresh(), textAlign: TextAlign.center),
                   ),
-                  content: Text(hardRefresh(), textAlign: TextAlign.center),
                 ),
+                tooltip: EzConfig.l10n.gUpdates,
+                backgroundColor: EzConfig.colors.secondary,
+                foregroundColor: EzConfig.colors.onSecondary,
+                child: EzIcon(Icons.update),
+              )
+            : FloatingActionButton(
+                heroTag: 'updater_fab',
+                onPressed: () => launchUrl(Uri.parse(url ?? widget.github!)),
+                tooltip: EzConfig.l10n.gUpdates,
+                backgroundColor: EzConfig.colors.secondary,
+                foregroundColor: EzConfig.colors.onSecondary,
+                child: EzIcon(Icons.update),
               ),
-              tooltip: EzConfig.l10n.gUpdates,
-              backgroundColor: EzConfig.colors.secondary,
-              foregroundColor: EzConfig.colors.onSecondary,
-              child: EzIcon(Icons.update),
-            )
-          : FloatingActionButton(
-              heroTag: 'updater_fab',
-              onPressed: () => launchUrl(Uri.parse(url ?? widget.github!)),
-              tooltip: EzConfig.l10n.gUpdates,
-              backgroundColor: EzConfig.colors.secondary,
-              foregroundColor: EzConfig.colors.onSecondary,
-              child: EzIcon(Icons.update),
-            ),
-    );
-  }
+      );
 }
 
 class EzRebuildFAB extends StatelessWidget {
