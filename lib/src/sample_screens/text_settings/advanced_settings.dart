@@ -20,8 +20,6 @@ class AdvancedTextSettings extends StatefulWidget {
   final Widget resetSpacer;
   final Set<String>? extraDark;
   final Set<String>? extraLight;
-  final String appName;
-  final String? androidPackage;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
 
@@ -36,8 +34,6 @@ class AdvancedTextSettings extends StatefulWidget {
     required this.resetSpacer,
     required this.extraDark,
     required this.extraLight,
-    required this.appName,
-    required this.androidPackage,
     required this.resetSkip,
     required this.saveSkip,
   });
@@ -735,8 +731,6 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
       widget.resetSpacer,
       EzResetButton(
         all: false,
-        androidPackage: widget.androidPackage,
-        appName: widget.appName,
         dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(false)),
         onConfirm: () async {
           if (EzConfig.isDark) {

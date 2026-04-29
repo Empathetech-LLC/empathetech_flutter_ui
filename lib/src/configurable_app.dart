@@ -26,9 +26,6 @@ class EzConfigurableApp extends StatelessWidget {
   /// Sets [EzConfigProvider.appCache]
   final EzAppCache appCache;
 
-  /// App name (window title, etc.)
-  final String appName;
-
   /// Router/page config
   final RouterConfig<Object>? routerConfig;
 
@@ -40,7 +37,6 @@ class EzConfigurableApp extends StatelessWidget {
     required this.locale,
     required this.el10n,
     required this.appCache,
-    required this.appName,
     this.routerConfig,
   });
 
@@ -55,7 +51,6 @@ class EzConfigurableApp extends StatelessWidget {
         child: _DevXLayer(
           localizationsDelegates: localizationsDelegates,
           supportedLocales: supportedLocales,
-          appName: appName,
           routerConfig: routerConfig,
         ),
       );
@@ -68,9 +63,6 @@ class _DevXLayer extends StatelessWidget {
   /// Languages/locales the app supports
   final Iterable<Locale> supportedLocales;
 
-  /// App name (window title, etc.)
-  final String appName;
-
   /// Router/page config
   final RouterConfig<Object>? routerConfig;
 
@@ -78,7 +70,6 @@ class _DevXLayer extends StatelessWidget {
   const _DevXLayer({
     required this.localizationsDelegates,
     required this.supportedLocales,
-    required this.appName,
     required this.routerConfig,
   });
 
@@ -89,7 +80,6 @@ class _DevXLayer extends StatelessWidget {
     return _AppDrawer(
       localizationsDelegates: localizationsDelegates,
       supportedLocales: supportedLocales,
-      appName: appName,
       routerConfig: routerConfig,
     );
   }
@@ -98,13 +88,11 @@ class _DevXLayer extends StatelessWidget {
 class _AppDrawer extends StatefulWidget {
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
   final Iterable<Locale> supportedLocales;
-  final String appName;
   final RouterConfig<Object>? routerConfig;
 
   const _AppDrawer({
     required this.localizationsDelegates,
     required this.supportedLocales,
-    required this.appName,
     required this.routerConfig,
   });
 
@@ -136,7 +124,7 @@ class _AppDrawerState extends State<_AppDrawer> with WidgetsBindingObserver {
           localizationsDelegates: widget.localizationsDelegates,
           supportedLocales: widget.supportedLocales,
           locale: config.locale,
-          title: widget.appName,
+          title: EzConfig.appName,
           themeMode: config.themeMode,
           darkTheme: config.darkTheme,
           theme: config.lightTheme,

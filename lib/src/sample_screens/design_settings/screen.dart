@@ -68,12 +68,6 @@ class EzDesignSettings extends StatelessWidget {
   /// [lightPageDesignKeys] by default
   final Set<String>? resetExtraLightPage;
 
-  /// [EzResetButton.appName] passthrough
-  final String appName;
-
-  /// [EzResetButton.androidPackage] passthrough
-  final String? androidPackage;
-
   /// [EzResetButton.resetSkip] passthrough
   final Set<String>? resetSkipButton;
 
@@ -105,8 +99,6 @@ class EzDesignSettings extends StatelessWidget {
     this.resetExtraLightButton,
     this.resetExtraDarkPage,
     this.resetExtraLightPage,
-    required this.appName,
-    this.androidPackage,
     this.resetSkipButton,
     this.saveSkipButton,
     this.resetSkipPage,
@@ -125,8 +117,6 @@ class EzDesignSettings extends StatelessWidget {
                 resetSpacer: resetSpacerButton,
                 resetExtraDark: resetExtraDarkButton,
                 resetExtraLight: resetExtraLightButton,
-                appName: appName,
-                androidPackage: androidPackage,
                 resetSkip: resetSkipButton,
                 saveSkip: saveSkipButton,
               )
@@ -140,8 +130,6 @@ class EzDesignSettings extends StatelessWidget {
                 resetSpacer: resetSpacerPage,
                 resetExtraDark: resetExtraDarkPage,
                 resetExtraLight: resetExtraLightPage,
-                appName: appName,
-                androidPackage: androidPackage,
                 resetSkip: resetSkipPage,
                 saveSkip: saveSkipPage,
               ),

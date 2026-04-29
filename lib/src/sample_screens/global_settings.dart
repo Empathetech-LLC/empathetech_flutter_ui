@@ -23,12 +23,6 @@ class EzGlobalSettings extends StatelessWidget {
   final List<Widget>? additionalSettings;
 
   /// [EzConfig.saveConfig] passthrough
-  final String appName;
-
-  /// [EzConfig.saveConfig] passthrough
-  final String? androidPackage;
-
-  /// [EzConfig.saveConfig] passthrough
   final Set<String>? saveSkip;
 
   /// Spacer before the [EzQuickConfig]
@@ -62,8 +56,6 @@ class EzGlobalSettings extends StatelessWidget {
     this.skipLocales,
     this.inDistress = const <String>{'US'},
     this.additionalSettings,
-    required this.appName,
-    this.androidPackage,
     this.saveSkip,
     this.quickConfigSpacer = const EzSeparator(),
     this.randomSpacer = const EzSpacer(),
@@ -105,18 +97,12 @@ class EzGlobalSettings extends StatelessWidget {
         // Feeling lucky
         if (randomSpacer != null) ...<Widget>[
           randomSpacer!,
-          EzConfigRandomizer(
-            appName: appName,
-            androidPackage: androidPackage,
-            saveSkip: saveSkip,
-          ),
+          EzConfigRandomizer(saveSkip: saveSkip),
         ],
 
         // Reset button
         resetSpacer,
         EzResetButton(
-          appName: appName,
-          androidPackage: androidPackage,
           resetSkip: resetSkip,
           saveSkip: saveSkip,
           dynamicTitle: resetTitle,

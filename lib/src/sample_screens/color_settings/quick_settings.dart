@@ -11,8 +11,6 @@ class QuickColorSettings extends StatelessWidget {
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
   final Widget resetSpacer;
-  final String appName;
-  final String? androidPackage;
   final Set<String>? resetExtraDark;
   final Set<String>? resetExtraLight;
   final Set<String>? resetSkip;
@@ -23,8 +21,6 @@ class QuickColorSettings extends StatelessWidget {
     required this.quickHeader,
     required this.quickFooter,
     required this.resetSpacer,
-    required this.appName,
-    required this.androidPackage,
     required this.resetExtraDark,
     required this.resetExtraLight,
     required this.resetSkip,
@@ -67,8 +63,6 @@ class QuickColorSettings extends StatelessWidget {
         resetSpacer,
         EzResetButton(
           all: false,
-          androidPackage: androidPackage,
-          appName: appName,
           dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(true)),
           resetSkip: resetSkip,
           onConfirm: () async {
