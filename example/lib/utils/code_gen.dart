@@ -330,8 +330,7 @@ class $classCaseAppName extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzConfigurableApp(
+  Widget build(BuildContext context) => EzConfigurableApp(
       localizationsDelegates: <LocalizationsDelegate<dynamic>>{
         const LocaleNamesLocalizationsDelegate(),
         ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
@@ -365,7 +364,6 @@ class $classCaseAppName extends StatelessWidget {
         ],
       ),
     );
-  }
 }
 """);
 
@@ -695,8 +693,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return ${classCaseAppName}Scaffold(EzScreen(Center(
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(EzScreen(Center(
       child: EzScrollView(children: <Widget>[
         Text(
           EzConfig.l10n.g404Wonder,
@@ -717,7 +714,6 @@ class _ErrorScreenState extends State<ErrorScreen> {
         ),            
       ]),
     )));
-  }
 }
 """);
 
