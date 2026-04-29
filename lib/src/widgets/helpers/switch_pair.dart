@@ -144,6 +144,29 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
 
   late bool value = widget.value ?? false;
 
+  // Define custom functions //
+
+  void onChanged(bool? choice) async {
+    if (!widget.enabled) return;
+    if (widget.onChanged != null) return widget.onChanged!.call(choice);
+    if (choice == null) return;
+
+    if (widget.canChange != null) {
+      if (!await widget.canChange!(choice)) return;
+    }
+
+    if (widget.secureKey) {
+      await EzConfig.secSet(widget.valueKey!, choice.toString());
+    } else {
+      await EzConfig.setBool(widget.valueKey!, choice);
+    }
+    setState(() => value = choice);
+
+    widget.afterChanged?.call(choice);
+  }
+
+  // Init //
+
   void setValue() async {
     final bool newVal = widget.secureKey
         ? int.tryParse(await EzConfig.secGet(widget.valueKey!)) ?? false
@@ -161,72 +184,51 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    void onChanged(bool? choice) async {
-      if (!widget.enabled) return;
-      if (widget.onChanged != null) return widget.onChanged!.call(choice);
-      if (choice == null) return;
-
-      if (widget.canChange != null) {
-        if (!await widget.canChange!(choice)) return;
-      }
-
-      if (widget.secureKey) {
-        await EzConfig.secSet(widget.valueKey!, choice.toString());
-      } else {
-        await EzConfig.setBool(widget.valueKey!, choice);
-      }
-      setState(() => value = choice);
-
-      widget.afterChanged?.call(choice);
-    }
-
-    return EzRow(
-      reverseHands: widget.reverseHands,
-      mainAxisSize: widget.mainAxisSize,
-      mainAxisAlignment: widget.mainAxisAlignment,
-      crossAxisAlignment: widget.crossAxisAlignment,
-      children: <Widget>[
-        Flexible(
-          child: widget.clickable
-              ? EzLink(
-                  widget.text,
-                  padding: EzInsets.wrap(EzConfig.marginVal),
-                  backgroundColor: widget.backgroundColor,
-                  textColor: EzConfig.colors.onSurface,
-                  style: widget.style,
-                  textAlign: widget.textAlign,
-                  hint: widget.semanticsLabel ?? 'Flip switch', // TODO: l10n
-                  onTap: () => onChanged(!value),
-                )
-              : EzText(
-                  widget.text,
-                  useSurface: widget.useSurface,
-                  backgroundColor: widget.backgroundColor,
-                  style: widget.style,
-                  textAlign: widget.textAlign,
-                  semanticsLabel: widget.semanticsLabel,
-                ),
-        ),
-        Transform.scale(
-          scale: max(1.0, widget.scale ?? ezIconRatio()),
-          // Could be PlatformSwitch
-          // Dev's opinion: Material switches are better
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeThumbColor: widget.fauxDisabled ? EzConfig.colors.outline : null,
-            inactiveThumbColor: EzConfig.colors.outline,
-            trackOutlineColor: (!widget.enabled || widget.fauxDisabled)
-                ? WidgetStatePropertyAll<Color>(EzConfig.colors.outlineVariant)
-                : null,
-            trackOutlineWidth: widget.trackOutlineWidth,
-            padding: EzConfig.isLefty
-                ? EdgeInsets.only(right: EzConfig.marginVal)
-                : EdgeInsets.only(left: EzConfig.marginVal),
+  Widget build(BuildContext context) => EzRow(
+        reverseHands: widget.reverseHands,
+        mainAxisSize: widget.mainAxisSize,
+        mainAxisAlignment: widget.mainAxisAlignment,
+        crossAxisAlignment: widget.crossAxisAlignment,
+        children: <Widget>[
+          Flexible(
+            child: widget.clickable
+                ? EzLink(
+                    widget.text,
+                    padding: EzInsets.wrap(EzConfig.marginVal),
+                    backgroundColor: widget.backgroundColor,
+                    textColor: EzConfig.colors.onSurface,
+                    style: widget.style,
+                    textAlign: widget.textAlign,
+                    hint: widget.semanticsLabel ?? 'Flip switch', // TODO: l10n
+                    onTap: () => onChanged(!value),
+                  )
+                : EzText(
+                    widget.text,
+                    useSurface: widget.useSurface,
+                    backgroundColor: widget.backgroundColor,
+                    style: widget.style,
+                    textAlign: widget.textAlign,
+                    semanticsLabel: widget.semanticsLabel,
+                  ),
           ),
-        ),
-      ],
-    );
-  }
+          Transform.scale(
+            scale: max(1.0, widget.scale ?? ezIconRatio()),
+            // Could be PlatformSwitch
+            // Dev's opinion: Material switches are better
+            child: Switch(
+              value: value,
+              onChanged: onChanged,
+              activeThumbColor: widget.fauxDisabled ? EzConfig.colors.outline : null,
+              inactiveThumbColor: EzConfig.colors.outline,
+              trackOutlineColor: (!widget.enabled || widget.fauxDisabled)
+                  ? WidgetStatePropertyAll<Color>(EzConfig.colors.outlineVariant)
+                  : null,
+              trackOutlineWidth: widget.trackOutlineWidth,
+              padding: EzConfig.isLefty
+                  ? EdgeInsets.only(right: EzConfig.marginVal)
+                  : EdgeInsets.only(left: EzConfig.marginVal),
+            ),
+          ),
+        ],
+      );
 }
