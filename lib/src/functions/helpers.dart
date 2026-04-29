@@ -249,13 +249,10 @@ Future<dynamic> ezColorPicker(
     );
 
 /// Returns an appropriate width for a [DropdownMenu]
-double ezDropdownWidth({
-  required BuildContext context,
-  required List<String> entries,
-}) =>
+double ezDropdownWidth(BuildContext context, String entry) =>
     2 * EzConfig.marginVal +
     ezTextSize(
-      getLongest(entries),
+      entry,
       context: context,
       style: EzConfig.styles.bodyLarge,
     ).width +
@@ -301,10 +298,8 @@ Future<void> ezFullscreenToggle(bool isFull) => toggleFullscreen(isFull);
 /// Scale Widgets based on IconSize
 /// For Widgets that don't do it automatically, like [Radio] and [Checkbox]
 double ezIconRatio() => max(
-    EzConfig.iconSize /
-        EzConfig.getDefault(EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
-    EzConfig.padding /
-        EzConfig.getDefault(EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
+    EzConfig.iconSize / EzConfig.getDefault(EzConfig.isDark ? darkIconSizeKey : lightIconSizeKey),
+    EzConfig.padding / EzConfig.getDefault(EzConfig.isDark ? darkPaddingKey : lightPaddingKey));
 
 /// Recommended size for an image
 /// Starts with 160.0, chosen by visual inspection
@@ -356,8 +351,7 @@ Page<dynamic> ezPageBuilder(
   BuildContext context,
   GoRouterState state,
   Widget child, {
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionsBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionsBuilder,
 }) {
   Widget swipeBackWrap(Widget child) {
     switch (EzConfig.platform) {
