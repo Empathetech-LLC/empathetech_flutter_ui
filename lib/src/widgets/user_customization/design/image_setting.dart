@@ -322,7 +322,6 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
             ),
             actions: ezActionPair(
-              context: context,
               confirmMsg: EzConfig.l10n.gApply,
               onConfirm: () async {
                 closeKeyboard(dCon);

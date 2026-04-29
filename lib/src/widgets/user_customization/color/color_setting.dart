@@ -155,7 +155,6 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
             ],
             actions: ezActionPair(
-              context: context,
               onConfirm: () async {
                 // Remove the user's configKey and reset the current state
                 await EzConfig.remove(widget.configKey);

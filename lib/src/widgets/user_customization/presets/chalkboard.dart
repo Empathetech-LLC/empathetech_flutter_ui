@@ -25,7 +25,6 @@ class EzChalkboardConfig extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           actions: ezActionPair(
-            context: context,
             onConfirm: () => Navigator.of(dCon).pop(true),
             confirmIsDestructive: true,
             onDeny: () => Navigator.of(dCon).pop(false),

@@ -87,7 +87,6 @@ class EzResetButton extends StatelessWidget {
                         : null)
                     : null,
                 actions: ezActionPair(
-                  context: context,
                   onConfirm: () async {
                     if (onConfirm == null) {
                       await EzConfig.reset(

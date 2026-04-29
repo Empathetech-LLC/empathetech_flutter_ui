@@ -157,7 +157,6 @@ class EzMaterialAction extends StatelessWidget {
 
 /// Pairs with [EzAlertDialog]
 List<EzMaterialAction> ezActionPair({
-  required BuildContext context,
   String? confirmMsg,
   required void Function() onConfirm,
   bool confirmIsDefault = false,
