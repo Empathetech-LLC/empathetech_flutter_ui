@@ -248,9 +248,8 @@ class _HomeScreenState extends State<HomeScreen> {
               EzRichText(
                 <InlineSpan>[
                   EzPlainText(
-                    text: l10n.csGenApp(isDesktop
-                        ? (validName ? namePreview : l10n.csTheApp)
-                        : l10n.csTheConfig),
+                    text: l10n.csGenApp(
+                        isDesktop ? (validName ? namePreview : l10n.csTheApp) : l10n.csTheConfig),
                   ),
                   EzInlineLink(
                     EzConfig.l10n.gSettings.toLowerCase(),
@@ -259,8 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () => context.goNamed(settingsHubPath),
                     hint: EzConfig.l10n.ssNavHint,
                   ),
-                  EzPlainText(
-                      text: l10n.csSetColors(validName ? namePreview : l10n.csYourApp)),
+                  EzPlainText(text: l10n.csSetColors(validName ? namePreview : l10n.csYourApp)),
                   EzInlineLink(
                     l10n.csHere,
                     style: ezSubTitleStyle(),
@@ -277,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // Advanced settings //
 
               ExpansionTile(
-                // TODO: check semantics
+                // TODO: post-audit(s): check semantics
                 backgroundColor: EzConfig.colors.surfaceContainer,
                 collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
                 controller: advancedEC,
@@ -300,12 +298,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ExcludeSemantics(
                         child: EzIconButton(
                           icon: Icon(ezVisIcon(advancedEC.isExpanded)),
-                          onPressed: () => advancedEC.isExpanded
-                              ? advancedEC.collapse()
-                              : advancedEC.expand(),
-                          tooltip: advancedEC.isExpanded
-                              ? EzConfig.l10n.gClose
-                              : EzConfig.l10n.gOpen,
+                          onPressed: () =>
+                              advancedEC.isExpanded ? advancedEC.collapse() : advancedEC.expand(),
+                          tooltip:
+                              advancedEC.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
                         ),
                       ),
                     ),
@@ -345,9 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Browse
                         EzIconButton(
                           onPressed: () async {
-                            final String? selectedDirectory =
-                                await FilePicker.getDirectoryPath();
-
+                            final String? selectedDirectory = await FilePicker.getDirectoryPath();
                             if (selectedDirectory == null) return;
 
                             setState(() {
@@ -529,8 +523,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             domainName: exampleDomain ? 'com.example' : domainTC.text,
                             appDefaults: Map<String, dynamic>.fromEntries(
                               allEZConfigKeys.keys.map(
-                                (String key) =>
-                                    MapEntry<String, dynamic>(key, EzConfig.get(key)),
+                                (String key) => MapEntry<String, dynamic>(key, EzConfig.get(key)),
                               ),
                             ),
                             flutterPath: isMac ? flutterPathTC.text : null,
@@ -583,8 +576,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               domainName: exampleDomain ? 'com.example' : domainTC.text,
                               appDefaults: Map<String, dynamic>.fromEntries(
                                 allEZConfigKeys.keys.map(
-                                  (String key) =>
-                                      MapEntry<String, dynamic>(key, EzConfig.get(key)),
+                                  (String key) => MapEntry<String, dynamic>(key, EzConfig.get(key)),
                                 ),
                               ),
                               flutterPath: isMac ? flutterPathTC.text : null,
@@ -716,7 +708,6 @@ class _HomeScreenState extends State<HomeScreen> {
               launchEC.collapse();
               launchTC.text = vscDefault;
             }),
-            onComplete: () => setState(() {}),
           ),
         ],
       );

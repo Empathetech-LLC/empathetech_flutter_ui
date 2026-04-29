@@ -220,9 +220,7 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   /// Set the apps [Locale] from storage and load corresponding localizations
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  Future<void> rebuildLocale(void Function() onComplete) async {
+  Future<void> rebuildLocale() async {
     final (Locale, EFUILang) result = await ezStoredL10n();
     _locale = result.$1;
     _l10n = result.$2;
@@ -230,17 +228,15 @@ class EzConfigProvider extends ChangeNotifier {
     final bool newLTR = !rtlLanguageCodes.contains(_locale.languageCode);
 
     if (newLTR == _ltr) {
-      await redrawUI(onComplete);
+      await redrawUI();
     } else {
       _ltr = newLTR;
-      await rebuildUI(onComplete);
+      await rebuildUI();
     }
   }
 
-  /// Reconfigure [ThemeMode] et al. from storage and [redrawUI] with [onComplete]
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  Future<void> rebuildThemeMode(void Function() onComplete) async {
+  /// Reconfigure [ThemeMode] et al. from storage and [redrawUI]
+  Future<void> rebuildThemeMode() async {
     final ThemeMode newMode = _buildThemeMode();
 
     switch (newMode) {
@@ -263,14 +259,11 @@ class EzConfigProvider extends ChangeNotifier {
         break;
     }
 
-    await redrawUI(onComplete);
+    await redrawUI();
   }
 
   /// Rebuilds the apps [ThemeMode], [ThemeData], and updates the config caches
-  /// Then calls [redrawUI] with [onComplete]
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  Future<void> rebuildUI(void Function() onComplete) async {
+  Future<void> rebuildUI() async {
     unawaited(ezRootNav.currentState!.push(
       // Open progress layer
       PageRouteBuilder<Widget>(
@@ -300,7 +293,7 @@ class EzConfigProvider extends ChangeNotifier {
     _buildThemeData();
 
     _needsRebuild = false;
-    await redrawUI(onComplete);
+    await redrawUI();
 
     // Close progress layer
     ezRootNav.currentState!.pop();
@@ -308,16 +301,12 @@ class EzConfigProvider extends ChangeNotifier {
   }
 
   /// Randomizes the [seed] and notifies listeners
-  /// Optionally calls [onComplete] after notifying
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  Future<void> redrawUI(void Function() onComplete) async {
+  Future<void> redrawUI() async {
     _seed = Random().nextInt(rMax);
     await _appCache.rebuild();
 
     ezCloseAll();
     notifyListeners();
-    onComplete.call();
   }
 
   /// Trigger [redrawUI] if/when the [ThemeMode] brightness changes
@@ -330,7 +319,7 @@ class EzConfigProvider extends ChangeNotifier {
     if (newIsDark != _isDark) {
       _isDark = newIsDark;
       _currTheme = newIsDark ? _darkTheme : _lightTheme;
-      await redrawUI(doNothing);
+      await redrawUI();
     }
   }
 }

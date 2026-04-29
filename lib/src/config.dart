@@ -100,8 +100,7 @@ class EzConfig {
       final Map<String, Type> typeMap = Map<String, Type>.from(allEZConfigKeys);
 
       // Include defaults
-      final Set<String> uniqueDefaults =
-          defaults.keys.toSet().difference(typeMap.keys.toSet());
+      final Set<String> uniqueDefaults = defaults.keys.toSet().difference(typeMap.keys.toSet());
 
       for (final String key in uniqueDefaults) {
         typeMap[key] = defaults[key].runtimeType;
@@ -219,8 +218,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   static bool isPathAsset(String path) => _instance!._assetPaths.contains(path);
 
   /// Wether the [key] points to an [AssetImage] path
-  static bool isKeyAsset(String key) =>
-      _instance!._assetPaths.contains(_instance!._prefs[key]);
+  static bool isKeyAsset(String key) => _instance!._assetPaths.contains(_instance!._prefs[key]);
 
   //* Setters *//
 
@@ -334,9 +332,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         mimeType: MimeType.json,
       );
     } catch (e) {
-      (context.mounted)
-          ? await ezLogAlert(context, message: e.toString())
-          : ezLog(e.toString());
+      (context.mounted) ? await ezLogAlert(context, message: e.toString()) : ezLog(e.toString());
       return;
     }
 
@@ -838,29 +834,16 @@ Must be one of [int, bool, double, String, List<String>]''');
   static void pingRebuild(bool status) => _provPoint.pingRebuild(status);
 
   /// Set the apps [Locale] from storage and load corresponding localizations
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> rebuildLocale(void Function() onComplete) =>
-      _provPoint.rebuildLocale(onComplete);
+  static Future<void> rebuildLocale() => _provPoint.rebuildLocale();
 
-  /// Reconfigure [ThemeMode] et al. from storage and [redrawUI] with [onComplete]
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> rebuildThemeMode(void Function() onComplete) =>
-      _provPoint.rebuildThemeMode(onComplete);
+  /// Reconfigure [ThemeMode] et al. from storage and [redrawUI]
+  static Future<void> rebuildThemeMode() => _provPoint.rebuildThemeMode();
 
   /// Rebuilds the apps [ThemeMode], [ThemeData], and updates the config caches
-  /// Then calls [redrawUI] with [onComplete]
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> rebuildUI(void Function() onComplete) =>
-      _provPoint.rebuildUI(onComplete);
+  static Future<void> rebuildUI() => _provPoint.rebuildUI();
 
   /// Randomizes the [seed] and notifies listeners
-  /// Optionally calls [onComplete] after notifying
-  /// If unsure, we recommend [onComplete] to be setState((){})
-  /// Or [doNothing] for [StatelessWidget]s
-  static Future<void> redrawUI(void Function() onComplete) => _provPoint.redrawUI(onComplete);
+  static Future<void> redrawUI() => _provPoint.redrawUI();
 
   /// Trigger [redrawUI] if/when the [ThemeMode] brightness changes
   /// Used in [EzConfigurableApp], not normally called manually

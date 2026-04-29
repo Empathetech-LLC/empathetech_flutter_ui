@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzGlobalSettings extends StatefulWidget {
+class EzGlobalSettings extends StatelessWidget {
   /// Optionally remove the locale setting
   final bool excludeLocaleSetting;
 
@@ -74,72 +74,52 @@ class EzGlobalSettings extends StatefulWidget {
   });
 
   @override
-  State<EzGlobalSettings> createState() => _EzGlobalSettingsState();
-}
-
-class _EzGlobalSettingsState extends State<EzGlobalSettings> {
-  // Set the page title //
-
-  @override
-  void initState() {
-    super.initState();
-    ezWindowNamer(EzConfig.l10n.gSettings);
-  }
-
-  // Return the build //
-
-  void redraw() => setState(() {});
-
-  @override
   Widget build(BuildContext context) => EzCol(children: <Widget>[
         EzConfig.spacer,
 
         // Right/left
-        EzDominantHandSwitch(redraw),
+        const EzDominantHandSwitch(),
         EzConfig.spacer,
 
         // Theme mode
-        EzThemeModeSwitch(redraw),
+        const EzThemeModeSwitch(),
 
         // Language
-        if (!widget.excludeLocaleSetting) ...<Widget>[
+        if (!excludeLocaleSetting) ...<Widget>[
           EzConfig.spacer,
           EzLocaleSetting(
-            redraw,
-            skip: widget.skipLocales ?? <Locale>{english},
-            inDistress: widget.inDistress,
+            skip: skipLocales ?? <Locale>{english},
+            inDistress: inDistress,
           ),
         ],
 
         // Additional settings
-        if (widget.additionalSettings != null) ...widget.additionalSettings!,
+        if (additionalSettings != null) ...additionalSettings!,
 
         // Quick config
-        if (widget.quickConfigSpacer != null) ...<Widget>[
-          widget.quickConfigSpacer!,
-          EzQuickConfig(redraw),
+        if (quickConfigSpacer != null) ...<Widget>[
+          quickConfigSpacer!,
+          const EzQuickConfig(),
         ],
 
         // Feeling lucky
-        if (widget.randomSpacer != null) ...<Widget>[
-          widget.randomSpacer!,
+        if (randomSpacer != null) ...<Widget>[
+          randomSpacer!,
           EzConfigRandomizer(
-            redraw,
-            appName: widget.appName,
-            androidPackage: widget.androidPackage,
-            saveSkip: widget.saveSkip,
+            appName: appName,
+            androidPackage: androidPackage,
+            saveSkip: saveSkip,
           ),
         ],
 
         // Reset button
-        widget.resetSpacer,
+        resetSpacer,
         EzResetButton(
-          redraw,
-          appName: widget.appName,
-          androidPackage: widget.androidPackage,
-          resetSkip: widget.resetSkip,
-          saveSkip: widget.saveSkip,
-          dynamicTitle: widget.resetTitle,
+          appName: appName,
+          androidPackage: androidPackage,
+          resetSkip: resetSkip,
+          saveSkip: saveSkip,
+          dynamicTitle: resetTitle,
         ),
       ]);
 }
