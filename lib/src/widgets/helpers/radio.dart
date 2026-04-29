@@ -9,10 +9,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzRadio<T> extends StatelessWidget {
-  /// Defaults to max([EzConfig.iconSize] / [EzConfig.getDefault], 1.0)
-  final double? scale;
-
-  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [ezIconRatio] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Radio.value] passthrough
@@ -21,29 +18,26 @@ class EzRadio<T> extends StatelessWidget {
   /// [Radio.toggleable] passthrough
   final bool toggleable;
 
+  final double _scale;
+
   /// [Radio] with custom styling and scaling
-  const EzRadio({
+  EzRadio({
     super.key,
-    this.scale,
     this.padding,
     required this.value,
     this.toggleable = false,
-  });
+  }) : _scale = ezIconRatio();
 
   @override
-  Widget build(BuildContext context) {
-    final double ratio = scale ?? ezIconRatio();
-
-    return Container(
-      padding: ratio > 1.1 ? padding ?? EzInsets.wrap(EzConfig.marginVal) : EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color: EzConfig.colors.surface.withValues(alpha: EzConfig.textBackgroundOpacity),
-        shape: BoxShape.circle,
-      ),
-      child: Transform.scale(
-        scale: max(1.0, ratio),
-        child: Radio<T>(value: value, toggleable: toggleable),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Container(
+        padding: _scale > 1.1 ? padding ?? EzInsets.wrap(EzConfig.marginVal) : EdgeInsets.zero,
+        decoration: BoxDecoration(
+          color: EzConfig.colors.surface.withValues(alpha: EzConfig.textBackgroundOpacity),
+          shape: BoxShape.circle,
+        ),
+        child: Transform.scale(
+          scale: max(1.0, _scale),
+          child: Radio<T>(value: value, toggleable: toggleable),
+        ),
+      );
 }
