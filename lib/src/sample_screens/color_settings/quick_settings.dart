@@ -8,7 +8,6 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class QuickColorSettings extends StatelessWidget {
-  final void Function() onUpdate;
   final List<Widget>? quickHeader;
   final List<Widget>? quickFooter;
   final Widget resetSpacer;
@@ -21,7 +20,6 @@ class QuickColorSettings extends StatelessWidget {
 
   const QuickColorSettings({
     super.key,
-    required this.onUpdate,
     required this.quickHeader,
     required this.quickFooter,
     required this.resetSpacer,
@@ -45,7 +43,6 @@ class QuickColorSettings extends StatelessWidget {
           hint: EzConfig.l10n.csFromImage,
           child: ExcludeSemantics(
             child: EzImageSetting(
-              onUpdate,
               configKey: EzConfig.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey,
               label: EzConfig.l10n.csSchemeBase,
               allowThemeUpdate: true,
@@ -57,11 +54,11 @@ class QuickColorSettings extends StatelessWidget {
         EzConfig.separator,
 
         // High contrast
-        EzHighContrastColorsSetting(onUpdate),
+        const EzHighContrastColorsSetting(),
         EzConfig.spacer,
 
         // MonoChrome
-        EzMonoChromeColorsSetting(onUpdate),
+        const EzMonoChromeColorsSetting(),
 
         // Additional settings
         if (quickFooter != null) ...quickFooter!,
@@ -70,7 +67,6 @@ class QuickColorSettings extends StatelessWidget {
         resetSpacer,
         EzResetButton(
           all: false,
-          onUpdate,
           androidPackage: androidPackage,
           appName: appName,
           dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(true)),

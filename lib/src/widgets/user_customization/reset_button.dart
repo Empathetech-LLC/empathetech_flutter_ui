@@ -21,9 +21,6 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [ezRichUndoWarning]
   final Widget? dialogContent;
 
-  /// [EzConfig.rebuildUI] passthrough
-  final void Function() onComplete;
-
   /// [ezRichUndoWarning] passthrough
   final String appName;
 
@@ -47,8 +44,7 @@ class EzResetButton extends StatelessWidget {
   final void Function()? onDeny;
 
   /// [EzElevatedIconButton] for clearing user settings
-  const EzResetButton(
-    this.onComplete, {
+  const EzResetButton({
     super.key,
     this.all = true,
     required this.appName,
@@ -123,7 +119,7 @@ class EzResetButton extends StatelessWidget {
                       await onConfirm!.call();
                     }
 
-                    await EzConfig.rebuildUI(onComplete);
+                    await EzConfig.rebuildUI();
                   },
                   confirmIsDestructive: true,
                   onDeny: () {

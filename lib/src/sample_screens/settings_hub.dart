@@ -93,7 +93,7 @@ class _EzSettingsHubState extends State<EzSettingsHub> {
 
                         // Update both toggle
                         EzConfig.rowMargin,
-                        EzThemeCoin(doNothing, enabled: currSubSec.bothable),
+                        EzThemeCoin(enabled: currSubSec.bothable),
                       ],
                     ),
                     EzDivider(height: EzConfig.spacing),

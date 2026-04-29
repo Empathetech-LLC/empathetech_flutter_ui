@@ -14,9 +14,6 @@ class EzTextSettings extends StatelessWidget {
   /// Current sub-page
   final EzSubSetting target;
 
-  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
-  final void Function() onUpdate;
-
   /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
 
@@ -71,7 +68,6 @@ class EzTextSettings extends StatelessWidget {
     // Shared
     super.key,
     required this.target,
-    required this.onUpdate,
     this.resetSpacer = const EzSeparator(),
     this.androidPackage,
     required this.appName,
@@ -115,7 +111,6 @@ class EzTextSettings extends StatelessWidget {
         child: _TextSettings(
           // Shared
           target: target,
-          onUpdate: onUpdate,
 
           resetSpacer: resetSpacer,
           androidPackage: androidPackage,
@@ -140,7 +135,6 @@ class EzTextSettings extends StatelessWidget {
 
 class _TextSettings extends StatelessWidget {
   final EzSubSetting target;
-  final void Function() onUpdate;
   final Widget resetSpacer;
   final String appName;
   final String? androidPackage;
@@ -157,7 +151,6 @@ class _TextSettings extends StatelessWidget {
 
   const _TextSettings({
     required this.target,
-    required this.onUpdate,
     required this.resetSpacer,
     required this.androidPackage,
     required this.appName,
@@ -185,7 +178,6 @@ class _TextSettings extends StatelessWidget {
                 titleProvider: Provider.of<EzTitleStyleProvider>(context),
                 bodyProvider: Provider.of<EzBodyStyleProvider>(context),
                 labelProvider: Provider.of<EzLabelStyleProvider>(context),
-                onUpdate: onUpdate,
                 moreQuickHeaderSettings: moreQuickHeaderSettings,
                 textBlockHeader: textBlockHeader,
                 textBlockFooter: textBlockFooter,
@@ -205,7 +197,6 @@ class _TextSettings extends StatelessWidget {
                 titleProvider: Provider.of<EzTitleStyleProvider>(context),
                 bodyProvider: Provider.of<EzBodyStyleProvider>(context),
                 labelProvider: Provider.of<EzLabelStyleProvider>(context),
-                onUpdate: onUpdate,
                 showSpacing: showSpacing,
                 resetSpacer: resetSpacer,
                 extraDark: extraDark,
