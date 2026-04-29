@@ -63,20 +63,19 @@ class EzTextBackground extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final Color color = _color(EzConfig.textBackgroundOpacity);
-
-    return Container(
-      padding: padding ?? EzInsets.wrap(EzConfig.marginVal),
-      decoration: buttonShape
-          ? ShapeDecoration(color: color, shape: EzConfig.buttonShape.shape)
-          : BoxDecoration(
-              color: color,
-              borderRadius: borderRadius ?? ezRoundEdge,
-            ),
-      child: text,
-    );
-  }
+  Widget build(BuildContext context) => Container(
+        padding: padding ?? EzInsets.wrap(EzConfig.marginVal),
+        decoration: buttonShape
+            ? ShapeDecoration(
+                color: _color(EzConfig.textBackgroundOpacity),
+                shape: EzConfig.buttonShape.shape,
+              )
+            : BoxDecoration(
+                color: _color(EzConfig.textBackgroundOpacity),
+                borderRadius: borderRadius ?? ezRoundEdge,
+              ),
+        child: text,
+      );
 }
 
 class EzText extends StatelessWidget {

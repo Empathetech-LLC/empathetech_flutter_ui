@@ -62,87 +62,85 @@ class EzResetButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzElevatedIconButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: EzConfig.colors.surface
-            .withValues(alpha: max(EzConfig.buttonOpacity, focusOpacity)),
-      ),
-      onPressed: () => showDialog(
-        context: context,
-        builder: (_) {
-          bool updateBoth = true;
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor:
+              EzConfig.colors.surface.withValues(alpha: max(EzConfig.buttonOpacity, focusOpacity)),
+        ),
+        onPressed: () => showDialog(
+          context: context,
+          builder: (_) {
+            bool updateBoth = true;
 
-          return StatefulBuilder(
-            builder: (BuildContext dCon, StateSetter setDialog) => EzAlertDialog(
-              title: Text(
-                dynamicTitle?.call() ?? EzConfig.l10n.ssResetAll,
-                textAlign: TextAlign.center,
-              ),
-              content: (dialogContent == null)
-                  ? (all
-                      ? null
-                      : ezRichUndoWarning(
-                          context,
-                          standalone: false,
-                          appName: appName,
-                          androidPackage: androidPackage,
-                        ))
-                  : dialogContent,
-              contents: (dialogContent == null)
-                  ? (all
-                      ? <Widget>[
-                          ezRichUndoWarning(
+            return StatefulBuilder(
+              builder: (BuildContext dCon, StateSetter setDialog) => EzAlertDialog(
+                title: Text(
+                  dynamicTitle?.call() ?? EzConfig.l10n.ssResetAll,
+                  textAlign: TextAlign.center,
+                ),
+                content: (dialogContent == null)
+                    ? (all
+                        ? null
+                        : ezRichUndoWarning(
                             context,
                             standalone: false,
                             appName: appName,
                             androidPackage: androidPackage,
-                          ),
-                          EzConfig.margin,
-                          EzSwitchPair(
-                            key: ValueKey<bool>(updateBoth),
-                            text: EzConfig.l10n.ssResetBoth,
-                            value: updateBoth,
-                            onChanged: (bool? choice) {
-                              if (choice == null) return;
-                              setDialog(() => updateBoth = choice);
-                            },
-                          ),
-                        ]
-                      : null)
-                  : null,
-              actions: ezActionPair(
-                context: context,
-                onConfirm: () async {
-                  if (onConfirm == null) {
-                    await EzConfig.reset(
-                      skip: resetSkip,
-                      forceOne: !updateBoth,
-                      forceBoth: updateBoth,
-                    );
-                  } else {
-                    await onConfirm!.call();
-                  }
+                          ))
+                    : dialogContent,
+                contents: (dialogContent == null)
+                    ? (all
+                        ? <Widget>[
+                            ezRichUndoWarning(
+                              context,
+                              standalone: false,
+                              appName: appName,
+                              androidPackage: androidPackage,
+                            ),
+                            EzConfig.margin,
+                            EzSwitchPair(
+                              key: ValueKey<bool>(updateBoth),
+                              text: EzConfig.l10n.ssResetBoth,
+                              value: updateBoth,
+                              onChanged: (bool? choice) {
+                                if (choice == null) return;
+                                setDialog(() => updateBoth = choice);
+                              },
+                            ),
+                          ]
+                        : null)
+                    : null,
+                actions: ezActionPair(
+                  context: context,
+                  onConfirm: () async {
+                    if (onConfirm == null) {
+                      await EzConfig.reset(
+                        skip: resetSkip,
+                        forceOne: !updateBoth,
+                        forceBoth: updateBoth,
+                      );
+                    } else {
+                      await onConfirm!.call();
+                    }
 
-                  await EzConfig.rebuildUI(onComplete);
-                },
-                confirmIsDestructive: true,
-                onDeny: () {
-                  if (onDeny == null) {
-                    doNothing();
-                  } else {
-                    onDeny!.call();
-                  }
-                  if (dCon.mounted) Navigator.of(dCon).pop();
-                },
+                    await EzConfig.rebuildUI(onComplete);
+                  },
+                  confirmIsDestructive: true,
+                  onDeny: () {
+                    if (onDeny == null) {
+                      doNothing();
+                    } else {
+                      onDeny!.call();
+                    }
+                    if (dCon.mounted) Navigator.of(dCon).pop();
+                  },
+                ),
+                needsClose: false,
               ),
-              needsClose: false,
-            ),
-          );
-        },
-      ),
-      icon: const Icon(Icons.refresh),
-      label: all ? EzConfig.l10n.gResetAll : EzConfig.l10n.gReset,
-    );
-  }
+            );
+          },
+        ),
+        icon: const Icon(Icons.refresh),
+        label: all ? EzConfig.l10n.gResetAll : EzConfig.l10n.gReset,
+      );
 }
