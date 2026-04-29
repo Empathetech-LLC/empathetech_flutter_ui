@@ -9,25 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class ErrorScreen extends StatefulWidget {
+class ErrorScreen extends StatelessWidget {
   final GoException? error;
 
   ErrorScreen(this.error) : super(key: ValueKey<int>(EzConfig.seed));
-
-  @override
-  State<ErrorScreen> createState() => _ErrorScreenState();
-}
-
-class _ErrorScreenState extends State<ErrorScreen> {
-  // Set the page title //
-
-  @override
-  void initState() {
-    super.initState();
-    ezWindowNamer(ez404());
-  }
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(EzScreen(Center(
