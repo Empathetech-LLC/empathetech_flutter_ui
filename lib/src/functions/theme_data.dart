@@ -283,17 +283,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             collapsedBackgroundColor: colorScheme.surfaceContainer,
             iconColor: colorScheme.primary,
             collapsedIconColor: colorScheme.primary,
-            tilePadding: EdgeInsets.only(
-              left: margin,
-              right: spacing,
-              top: margin,
-              bottom: margin,
-            ),
-            childrenPadding: EdgeInsets.only(
-              left: margin * 2,
-              right: spacing,
-              bottom: margin,
-            ),
+            tilePadding: EdgeInsets.symmetric(vertical: margin),
+            childrenPadding: EdgeInsets.only(left: margin * 2),
             expandedAlignment: Alignment.centerLeft,
             expansionAnimationStyle: AnimationStyle(
               curve: Curves.easeInOut,
@@ -307,17 +298,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
             collapsedBackgroundColor: colorScheme.surfaceContainer,
             iconColor: colorScheme.primary,
             collapsedIconColor: colorScheme.primary,
-            tilePadding: EdgeInsets.only(
-              left: spacing,
-              right: margin,
-              top: margin,
-              bottom: margin,
-            ),
-            childrenPadding: EdgeInsets.only(
-              left: spacing,
-              right: margin * 2,
-              bottom: margin,
-            ),
+            tilePadding: EdgeInsets.symmetric(vertical: margin),
+            childrenPadding: EdgeInsets.only(left: margin * 2),
             expandedAlignment: Alignment.centerRight,
             expansionAnimationStyle: AnimationStyle(
               curve: Curves.easeInOut,
