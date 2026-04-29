@@ -22,6 +22,8 @@ void main() async {
   await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
 
   EzConfig.init(
+    appName: appName,
+    androidPackage: androidPackage,
     assetPaths: <String>{},
     defaults: isMobile() ? empathMobileConfig : empathDesktopConfig,
     localeFallback: americanEnglish,
@@ -79,7 +81,6 @@ class OpenUI extends StatelessWidget {
         locale: storedLocale,
         el10n: storedEFUILang,
         appCache: OpenUICache(storedLocale, storedLang),
-        appName: appName,
         routerConfig: GoRouter(
           navigatorKey: ezRootNav,
           initialLocation: homePath,
@@ -104,8 +105,8 @@ class OpenUI extends StatelessWidget {
                 GoRoute(
                   path: generateScreenPath,
                   name: generateScreenPath,
-                  pageBuilder: (BuildContext context, GoRouterState state) => ezPageBuilder(
-                      context, state, GenerateScreen((state.extra as EAGConfig))),
+                  pageBuilder: (BuildContext context, GoRouterState state) =>
+                      ezPageBuilder(context, state, GenerateScreen((state.extra as EAGConfig))),
                 ),
 
                 // Settings
