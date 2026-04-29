@@ -9,7 +9,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class ButtonDesign extends StatelessWidget {
-  final void Function() onUpdate;
   final List<Widget>? prepend;
   final List<Widget>? append;
   final Widget resetSpacer;
@@ -22,7 +21,6 @@ class ButtonDesign extends StatelessWidget {
 
   const ButtonDesign({
     super.key,
-    required this.onUpdate,
     required this.prepend,
     required this.append,
     this.resetSpacer = const EzSeparator(),
@@ -41,8 +39,7 @@ class ButtonDesign extends StatelessWidget {
         if (prepend != null) ...prepend!,
 
         // Padding
-        EzPaddingSetting(
-          onUpdate: onUpdate,
+        const EzPaddingSetting(
           min: minPadding,
           max: maxPadding,
           steps: 20,
@@ -51,11 +48,11 @@ class ButtonDesign extends StatelessWidget {
         EzConfig.spacer,
 
         // Button style
-        _ButtonStyleSetting(onUpdate),
+        const _ButtonStyleSetting(),
         EzConfig.spacer,
 
         // Button opacity
-        _ButtonOpacitySetting(onUpdate),
+        const _ButtonOpacitySetting(),
         EzConfig.separator,
 
         // Underline links
@@ -67,7 +64,7 @@ class ButtonDesign extends StatelessWidget {
           valueKey: EzConfig.isDark ? darkLineLinksKey : lightLineLinksKey,
           afterChanged: (bool? changed) async {
             if (changed == null) return;
-            await EzConfig.rebuildUI(onUpdate);
+            await EzConfig.rebuildUI();
           },
         ),
         EzConfig.spacer,
@@ -83,7 +80,7 @@ class ButtonDesign extends StatelessWidget {
                   EzConfig.isDark ? lightShowBackFABKey : darkShowBackFABKey, value);
             }
 
-            await EzConfig.rebuildUI(onUpdate);
+            await EzConfig.rebuildUI();
           },
           text: EzConfig.l10n.dsShowBack,
         ),
@@ -94,7 +91,6 @@ class ButtonDesign extends StatelessWidget {
         resetSpacer,
         EzResetButton(
           all: false,
-          onUpdate,
           androidPackage: androidPackage,
           appName: appName,
           dynamicTitle: () => EzConfig.l10n.dsResetButton(ezThemeString(true)),
@@ -120,9 +116,7 @@ class ButtonDesign extends StatelessWidget {
 }
 
 class _ButtonStyleSetting extends StatelessWidget {
-  final void Function() onUpdate;
-
-  const _ButtonStyleSetting(this.onUpdate);
+  const _ButtonStyleSetting();
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
@@ -248,7 +242,7 @@ class _ButtonStyleSetting extends StatelessWidget {
               await EzConfig.setString(lightButtonShapeKey, currShape.value);
             }
 
-            await EzConfig.rebuildUI(onUpdate);
+            await EzConfig.rebuildUI();
           }
         },
         label: EzConfig.l10n.dsStyle,
@@ -257,9 +251,7 @@ class _ButtonStyleSetting extends StatelessWidget {
 }
 
 class _ButtonOpacitySetting extends StatelessWidget {
-  final void Function() onUpdate;
-
-  const _ButtonOpacitySetting(this.onUpdate);
+  const _ButtonOpacitySetting();
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
@@ -277,15 +269,14 @@ class _ButtonOpacitySetting extends StatelessWidget {
 
               return StatefulBuilder(
                 builder: (_, StateSetter setModal) {
-                  Color buttonBackground =
-                      EzConfig.colors.surface.withValues(alpha: buttonOpacity);
+                  Color buttonBackground = EzConfig.colors.surface.withValues(alpha: buttonOpacity);
                   Color buttonShadow =
                       EzConfig.colors.shadow.withValues(alpha: buttonOpacity * shadowMod);
                   Color buttonOutline =
                       EzConfig.colors.primaryContainer.withValues(alpha: borderOpacity);
 
-                  Color trackColor = EzConfig.colors.surface
-                      .withValues(alpha: max(focusOpacity, buttonOpacity));
+                  Color trackColor =
+                      EzConfig.colors.surface.withValues(alpha: max(focusOpacity, buttonOpacity));
                   WidgetStatePropertyAll<Color> trackOutline =
                       WidgetStatePropertyAll<Color>(buttonOutline);
 
@@ -405,19 +396,17 @@ class _ButtonOpacitySetting extends StatelessWidget {
                           }
 
                           setModal(() {
-                            buttonOpacity = EzConfig.getDefault(EzConfig.isDark
-                                ? darkButtonOpacityKey
-                                : lightButtonOpacityKey);
-                            borderOpacity = EzConfig.getDefault(EzConfig.isDark
-                                ? darkBorderOpacityKey
-                                : lightBorderOpacityKey);
+                            buttonOpacity = EzConfig.getDefault(
+                                EzConfig.isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+                            borderOpacity = EzConfig.getDefault(
+                                EzConfig.isDark ? darkBorderOpacityKey : lightBorderOpacityKey);
 
                             buttonBackground =
                                 EzConfig.colors.surface.withValues(alpha: buttonOpacity);
-                            buttonShadow = EzConfig.colors.shadow
-                                .withValues(alpha: buttonOpacity * shadowMod);
-                            buttonOutline = EzConfig.colors.primaryContainer
-                                .withValues(alpha: borderOpacity);
+                            buttonShadow =
+                                EzConfig.colors.shadow.withValues(alpha: buttonOpacity * shadowMod);
+                            buttonOutline =
+                                EzConfig.colors.primaryContainer.withValues(alpha: borderOpacity);
 
                             trackColor = EzConfig.colors.surface
                                 .withValues(alpha: max(focusOpacity, buttonOpacity));
@@ -436,7 +425,7 @@ class _ButtonOpacitySetting extends StatelessWidget {
           );
 
           if (buttonOpacity != buttonBackup || borderOpacity != borderBackup) {
-            await EzConfig.rebuildUI(onUpdate);
+            await EzConfig.rebuildUI();
           }
         },
         label: EzConfig.l10n.dsOpacity,

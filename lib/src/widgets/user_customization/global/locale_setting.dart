@@ -8,9 +8,6 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzLocaleSetting extends StatefulWidget {
-  /// [EzConfig.rebuildLocale] passthrough
-  final void Function() onComplete;
-
   /// Override [EFUILang.supportedLocales] default
   final List<Locale>? locales;
 
@@ -23,8 +20,7 @@ class EzLocaleSetting extends StatefulWidget {
 
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
-  const EzLocaleSetting(
-    this.onComplete, {
+  const EzLocaleSetting({
     super.key,
     this.locales,
     this.skip,
@@ -89,7 +85,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                                 );
 
                                 // Refresh the UI
-                                await EzConfig.rebuildLocale(widget.onComplete);
+                                await EzConfig.rebuildLocale();
                               },
                               icon: ezFlag(
                                 locale,
