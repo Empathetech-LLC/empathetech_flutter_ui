@@ -12,8 +12,6 @@ class AdvancedColorSettings extends StatefulWidget {
   final List<String> currList;
   final List<String> defaultList;
   final Widget resetSpacer;
-  final String appName;
-  final String? androidPackage;
   final Set<String>? resetExtraDark;
   final Set<String>? resetExtraLight;
   final Set<String>? resetSkip;
@@ -25,8 +23,6 @@ class AdvancedColorSettings extends StatefulWidget {
     required this.currList,
     required this.defaultList,
     required this.resetSpacer,
-    required this.appName,
-    required this.androidPackage,
     required this.resetExtraDark,
     required this.resetExtraLight,
     required this.resetSkip,
@@ -187,8 +183,6 @@ class _AdvancedColorSettingsState extends State<AdvancedColorSettings> {
         widget.resetSpacer,
         EzResetButton(
           all: false,
-          androidPackage: widget.androidPackage,
-          appName: widget.appName,
           dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(false)),
           resetSkip: widget.resetSkip,
           onConfirm: () async {

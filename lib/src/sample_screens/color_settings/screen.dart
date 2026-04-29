@@ -16,12 +16,6 @@ class EzColorSettings extends StatelessWidget {
   /// Spacer above the [EzResetButton], on both sub-screens
   final Widget resetSpacer;
 
-  /// [EzResetButton.appName] passthrough
-  final String appName;
-
-  /// [EzResetButton.androidPackage] passthrough
-  final String? androidPackage;
-
   /// Additional [EzConfig] keys for the local [EzResetButton]
   /// [darkColorKeys] are included by default
   final Set<String>? resetExtraDark;
@@ -65,8 +59,6 @@ class EzColorSettings extends StatelessWidget {
     super.key,
     required this.target,
     this.resetSpacer = const EzSeparator(),
-    required this.appName,
-    this.androidPackage,
     this.resetExtraDark,
     this.resetExtraLight,
     this.resetSkip,
@@ -108,8 +100,6 @@ class EzColorSettings extends StatelessWidget {
                 quickHeader: quickHeader,
                 quickFooter: quickFooter,
                 resetSpacer: resetSpacer,
-                appName: appName,
-                androidPackage: androidPackage,
                 resetExtraDark: resetExtraDark,
                 resetExtraLight: resetExtraLight,
                 resetSkip: resetSkip,
@@ -120,8 +110,6 @@ class EzColorSettings extends StatelessWidget {
                 defaultList: _defaultList,
                 currList: EzConfig.get(_userColorsKey) ?? List<String>.from(_defaultList),
                 resetSpacer: resetSpacer,
-                appName: appName,
-                androidPackage: androidPackage,
                 resetExtraDark: resetExtraDark,
                 resetExtraLight: resetExtraLight,
                 resetSkip: resetSkip,

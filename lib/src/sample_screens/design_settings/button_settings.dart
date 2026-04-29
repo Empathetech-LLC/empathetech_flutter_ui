@@ -14,8 +14,6 @@ class ButtonDesign extends StatelessWidget {
   final Widget resetSpacer;
   final Set<String>? resetExtraDark;
   final Set<String>? resetExtraLight;
-  final String appName;
-  final String? androidPackage;
   final Set<String>? resetSkip;
   final Set<String>? saveSkip;
 
@@ -26,8 +24,6 @@ class ButtonDesign extends StatelessWidget {
     this.resetSpacer = const EzSeparator(),
     required this.resetExtraDark,
     required this.resetExtraLight,
-    required this.appName,
-    required this.androidPackage,
     required this.resetSkip,
     required this.saveSkip,
   });
@@ -91,8 +87,6 @@ class ButtonDesign extends StatelessWidget {
         resetSpacer,
         EzResetButton(
           all: false,
-          androidPackage: androidPackage,
-          appName: appName,
           dynamicTitle: () => EzConfig.l10n.dsResetButton(ezThemeString(true)),
           onConfirm: () async {
             if (EzConfig.updateBoth || EzConfig.isDark) {
