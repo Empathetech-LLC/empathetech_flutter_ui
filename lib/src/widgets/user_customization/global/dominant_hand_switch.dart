@@ -38,7 +38,7 @@ class EzDominantHandSwitch extends StatelessWidget {
 
           // Button
           EzDropdownMenu<bool>(
-            widthEntries: <String>[EzConfig.l10n.gRight],
+            widthEntry: EzConfig.l10n.gRight,
             dropdownMenuEntries: <DropdownMenuEntry<bool>>[
               DropdownMenuEntry<bool>(value: false, label: EzConfig.l10n.gRight),
               DropdownMenuEntry<bool>(value: true, label: EzConfig.l10n.gLeft),

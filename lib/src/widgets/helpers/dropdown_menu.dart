@@ -12,11 +12,8 @@ class EzDropdownMenu<T> extends StatelessWidget {
   /// [DropdownMenu.enabled] passthrough
   final bool enabled;
 
-  /// [DropdownMenu.width] passthrough
-  final double? width;
-
-  /// Will set [width] to [ezDropdownWidth] of [widthEntries]
-  final List<String>? widthEntries;
+  /// [ezDropdownWidth] passthrough
+  final String widthEntry;
 
   /// [DropdownMenu.menuHeight] passthrough
   final double? menuHeight;
@@ -101,8 +98,6 @@ class EzDropdownMenu<T> extends StatelessWidget {
     super.key,
     this.focusNode,
     this.enabled = true,
-    this.width,
-    this.widthEntries,
     this.menuHeight,
     this.leadingIcon,
     this.trailingIcon,
@@ -127,6 +122,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
     this.searchCallback,
     this.alignmentOffset,
     required this.dropdownMenuEntries,
+    required this.widthEntry,
     this.inputFormatters,
   });
 
@@ -147,10 +143,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
         ),
         child: DropdownMenu<T>(
           enabled: enabled,
-          width: width ??
-              (widthEntries == null
-                  ? null
-                  : ezDropdownWidth(context: context, entries: widthEntries!)),
+          width: ezDropdownWidth(context, widthEntry),
           menuHeight: menuHeight,
           leadingIcon: leadingIcon,
           trailingIcon: trailingIcon ??
