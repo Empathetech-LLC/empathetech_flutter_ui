@@ -800,8 +800,7 @@ class SettingsHubScreen extends StatelessWidget {
       : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<EzConfigProvider>(
+  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
       builder: (_, EzConfigProvider config, __) => ${classCaseAppName}Scaffold(
         EzScreen(EzSettingsHub(
           pages: <EzSettingsSection>[
@@ -919,7 +918,6 @@ class SettingsHubScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 }
 """);
 

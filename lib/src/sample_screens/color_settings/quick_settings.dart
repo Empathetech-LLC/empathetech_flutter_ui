@@ -34,73 +34,71 @@ class QuickColorSettings extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzCol(children: <Widget>[
-      if (quickHeader != null) ...quickHeader!,
+  Widget build(BuildContext context) => EzCol(children: <Widget>[
+        if (quickHeader != null) ...quickHeader!,
 
-      // From image
-      Semantics(
-        label: EzConfig.l10n.csSchemeBase.replaceAll('\n', ' '),
-        value: EzConfig.l10n.gOptional,
-        button: true,
-        hint: EzConfig.l10n.csFromImage,
-        child: ExcludeSemantics(
-          child: EzImageSetting(
-            onUpdate,
-            configKey: EzConfig.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey,
-            label: EzConfig.l10n.csSchemeBase,
-            allowThemeUpdate: true,
-            showEditor: false,
-            showFitOption: false,
+        // From image
+        Semantics(
+          label: EzConfig.l10n.csSchemeBase.replaceAll('\n', ' '),
+          value: EzConfig.l10n.gOptional,
+          button: true,
+          hint: EzConfig.l10n.csFromImage,
+          child: ExcludeSemantics(
+            child: EzImageSetting(
+              onUpdate,
+              configKey: EzConfig.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey,
+              label: EzConfig.l10n.csSchemeBase,
+              allowThemeUpdate: true,
+              showEditor: false,
+              showFitOption: false,
+            ),
           ),
         ),
-      ),
-      EzConfig.separator,
+        EzConfig.separator,
 
-      // High contrast
-      EzHighContrastColorsSetting(onUpdate),
-      EzConfig.spacer,
+        // High contrast
+        EzHighContrastColorsSetting(onUpdate),
+        EzConfig.spacer,
 
-      // MonoChrome
-      EzMonoChromeColorsSetting(onUpdate),
+        // MonoChrome
+        EzMonoChromeColorsSetting(onUpdate),
 
-      // Additional settings
-      if (quickFooter != null) ...quickFooter!,
+        // Additional settings
+        if (quickFooter != null) ...quickFooter!,
 
-      // Local reset
-      resetSpacer,
-      EzResetButton(
-        all: false,
-        onUpdate,
-        androidPackage: androidPackage,
-        appName: appName,
-        dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(true)),
-        resetSkip: resetSkip,
-        onConfirm: () async {
-          if (EzConfig.updateBoth) {
-            await EzConfig.removeKeys(allColorKeys.keys.toSet());
-            if (resetExtraDark != null) {
-              await EzConfig.removeKeys(resetExtraDark!);
-            }
-            if (resetExtraLight != null) {
-              await EzConfig.removeKeys(resetExtraLight!);
-            }
-          } else {
-            if (EzConfig.isDark) {
-              await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+        // Local reset
+        resetSpacer,
+        EzResetButton(
+          all: false,
+          onUpdate,
+          androidPackage: androidPackage,
+          appName: appName,
+          dynamicTitle: () => EzConfig.l10n.csReset(ezThemeString(true)),
+          resetSkip: resetSkip,
+          onConfirm: () async {
+            if (EzConfig.updateBoth) {
+              await EzConfig.removeKeys(allColorKeys.keys.toSet());
               if (resetExtraDark != null) {
                 await EzConfig.removeKeys(resetExtraDark!);
               }
-            } else {
-              await EzConfig.removeKeys(lightColorKeys.keys.toSet());
               if (resetExtraLight != null) {
                 await EzConfig.removeKeys(resetExtraLight!);
               }
+            } else {
+              if (EzConfig.isDark) {
+                await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+                if (resetExtraDark != null) {
+                  await EzConfig.removeKeys(resetExtraDark!);
+                }
+              } else {
+                await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+                if (resetExtraLight != null) {
+                  await EzConfig.removeKeys(resetExtraLight!);
+                }
+              }
             }
-          }
-        },
-      ),
-      EzConfig.separator,
-    ]);
-  }
+          },
+        ),
+        EzConfig.separator,
+      ]);
 }

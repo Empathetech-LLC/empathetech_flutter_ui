@@ -118,40 +118,38 @@ class EzDesignSettings extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzFauxCarousel(
-      position: target.isFirst ? 0 : 1,
-      delta: target.isFirst ? -1 : 1,
-      animMod: 0.5,
-      child: (target == EzSubSetting.butDesign)
-          ? ButtonDesign(
-              onUpdate: onUpdate,
-              prepend: prependButton,
-              append: appendButton,
-              resetSpacer: resetSpacerButton,
-              resetExtraDark: resetExtraDarkButton,
-              resetExtraLight: resetExtraLightButton,
-              appName: appName,
-              androidPackage: androidPackage,
-              resetSkip: resetSkipButton,
-              saveSkip: saveSkipButton,
-            )
-          : PageDesign(
-              onUpdate: onUpdate,
-              prepend: prependPage,
-              includePageTransitions: includePageTransitions,
-              includeBackgroundImage: includeBackgroundImage,
-              darkBackgroundCredits: darkBackgroundCredits,
-              lightBackgroundCredits: lightBackgroundCredits,
-              append: appendPage,
-              resetSpacer: resetSpacerPage,
-              resetExtraDark: resetExtraDarkPage,
-              resetExtraLight: resetExtraLightPage,
-              appName: appName,
-              androidPackage: androidPackage,
-              resetSkip: resetSkipPage,
-              saveSkip: saveSkipPage,
-            ),
-    );
-  }
+  Widget build(BuildContext context) => EzFauxCarousel(
+        position: target.isFirst ? 0 : 1,
+        delta: target.isFirst ? -1 : 1,
+        animMod: 0.5,
+        child: (target == EzSubSetting.butDesign)
+            ? ButtonDesign(
+                onUpdate: onUpdate,
+                prepend: prependButton,
+                append: appendButton,
+                resetSpacer: resetSpacerButton,
+                resetExtraDark: resetExtraDarkButton,
+                resetExtraLight: resetExtraLightButton,
+                appName: appName,
+                androidPackage: androidPackage,
+                resetSkip: resetSkipButton,
+                saveSkip: saveSkipButton,
+              )
+            : PageDesign(
+                onUpdate: onUpdate,
+                prepend: prependPage,
+                includePageTransitions: includePageTransitions,
+                includeBackgroundImage: includeBackgroundImage,
+                darkBackgroundCredits: darkBackgroundCredits,
+                lightBackgroundCredits: lightBackgroundCredits,
+                append: appendPage,
+                resetSpacer: resetSpacerPage,
+                resetExtraDark: resetExtraDarkPage,
+                resetExtraLight: resetExtraLightPage,
+                appName: appName,
+                androidPackage: androidPackage,
+                resetSkip: resetSkipPage,
+                saveSkip: saveSkipPage,
+              ),
+      );
 }

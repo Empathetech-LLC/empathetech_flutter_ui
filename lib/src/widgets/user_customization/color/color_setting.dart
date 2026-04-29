@@ -79,9 +79,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
     // Find the recommended contrast color for the background
     final int? backgroundColorValue = EzConfig.get(backgroundKey);
-    final Color backgroundColor = (backgroundColorValue == null)
-        ? getLiveColor(backgroundKey)
-        : Color(backgroundColorValue);
+    final Color backgroundColor =
+        (backgroundColorValue == null) ? getLiveColor(backgroundKey) : Color(backgroundColorValue);
 
     final int recommended = getTextColor(backgroundColor).toARGB32();
 
@@ -144,11 +143,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         context: context,
         builder: (BuildContext dCon) {
           final int? resetValue = EzConfig.getDefault(widget.configKey);
-          final String currColorLabel = currColor
-              .toARGB32()
-              .toRadixString(16)
-              .toUpperCase()
-              .substring(2); // TODO: transparent no like (fix plz)
+          final String currColorLabel = currColor.toARGB32().toRadixString(16).toUpperCase();
 
           return EzAlertDialog(
             title: Text(
@@ -187,9 +182,9 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   /// Opens an [EzAlertDialog] with the all optional actions
   /// Currently: remove from list and reset to default
-  Future<dynamic> options() => (widget.onRemove == null)
-      ? reset()
-      : showDialog(
+  Future<dynamic> options() async => (widget.onRemove == null)
+      ? await reset()
+      : await showDialog(
           context: context,
           builder: (BuildContext dCon) => EzAlertDialog(
             title: Text(EzConfig.l10n.gOptions, textAlign: TextAlign.center),
@@ -207,7 +202,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               // Reset to default
               EzElevatedIconButton(
-                onPressed: () => reset(),
+                onPressed: reset,
                 icon: const Icon(Icons.refresh),
                 label: EzConfig.l10n.gReset,
               ),
@@ -231,8 +226,8 @@ class _ColorSettingState extends State<EzColorSetting> {
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(EzConfig.padding * 0.75),
           ),
-          onPressed: () => changeColor(),
-          onLongPress: () => options(),
+          onPressed: changeColor,
+          onLongPress: options,
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,

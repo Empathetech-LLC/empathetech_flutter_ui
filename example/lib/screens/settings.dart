@@ -21,124 +21,122 @@ class SettingsHubScreen extends StatelessWidget {
       : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<EzConfigProvider>(
-      builder: (_, EzConfigProvider config, __) => OpenUIScaffold(
-        EzScreen(EzSettingsHub(
-          pages: <EzSettingsSection>[
-            // Global //
+  Widget build(BuildContext context) => Consumer<EzConfigProvider>(
+        builder: (_, EzConfigProvider config, __) => OpenUIScaffold(
+          EzScreen(EzSettingsHub(
+            pages: <EzSettingsSection>[
+              // Global //
 
-            EzSettingsSection(
-              position: 0,
-              title: EzConfig.l10n.gGlobal,
-              icon: Icon(
-                config.onMobile
-                    ? config.platform == TargetPlatform.iOS
-                        ? Icons.phone_iphone
-                        : Icons.phone_android
-                    : Icons.computer,
-                semanticLabel: EzConfig.l10n.gGlobal,
+              EzSettingsSection(
+                position: 0,
+                title: EzConfig.l10n.gGlobal,
+                icon: Icon(
+                  config.onMobile
+                      ? config.platform == TargetPlatform.iOS
+                          ? Icons.phone_iphone
+                          : Icons.phone_android
+                      : Icons.computer,
+                  semanticLabel: EzConfig.l10n.gGlobal,
+                ),
+                subSettings: <EzSubSetting>[],
+                fromStorage: () => EzSubSetting.blank,
+                build: (_) => const EzGlobalSettings(
+                  appName: appName,
+                  androidPackage: androidPackage,
+                ),
               ),
-              subSettings: <EzSubSetting>[],
-              fromStorage: () => EzSubSetting.blank,
-              build: (_) => const EzGlobalSettings(
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
-            ),
 
-            // Color //
+              // Color //
 
-            EzSettingsSection(
-              position: 1,
-              title: EzConfig.l10n.gColor,
-              icon: Icon(
-                Icons.palette,
-                semanticLabel: EzConfig.l10n.gColor,
+              EzSettingsSection(
+                position: 1,
+                title: EzConfig.l10n.gColor,
+                icon: Icon(
+                  Icons.palette,
+                  semanticLabel: EzConfig.l10n.gColor,
+                ),
+                subSettings: <EzSubSetting>[
+                  EzSubSetting.qckColor,
+                  EzSubSetting.advColor,
+                ],
+                fromStorage: () => EzConfig.get(advancedColorsKey) == true
+                    ? EzSubSetting.advColor
+                    : EzSubSetting.qckColor,
+                build: (EzSubSetting subSec) => EzColorSettings(
+                  target: subSec,
+                  onUpdate: doNothing,
+                  appName: appName,
+                  androidPackage: androidPackage,
+                ),
               ),
-              subSettings: <EzSubSetting>[
-                EzSubSetting.qckColor,
-                EzSubSetting.advColor,
-              ],
-              fromStorage: () => EzConfig.get(advancedColorsKey) == true
-                  ? EzSubSetting.advColor
-                  : EzSubSetting.qckColor,
-              build: (EzSubSetting subSec) => EzColorSettings(
-                target: subSec,
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
-            ),
 
-            // Design //
+              // Design //
 
-            EzSettingsSection(
-              position: 2,
-              title: EzConfig.l10n.gDesign,
-              icon: Icon(
-                Icons.design_services,
-                semanticLabel: EzConfig.l10n.gDesign,
+              EzSettingsSection(
+                position: 2,
+                title: EzConfig.l10n.gDesign,
+                icon: Icon(
+                  Icons.design_services,
+                  semanticLabel: EzConfig.l10n.gDesign,
+                ),
+                subSettings: <EzSubSetting>[
+                  EzSubSetting.butDesign,
+                  EzSubSetting.pagDesign,
+                ],
+                fromStorage: () => EzConfig.get(pageTabKey) == true
+                    ? EzSubSetting.pagDesign
+                    : EzSubSetting.butDesign,
+                build: (EzSubSetting subSec) => EzDesignSettings(
+                  target: subSec,
+                  onUpdate: doNothing,
+                  appName: appName,
+                  androidPackage: androidPackage,
+                ),
               ),
-              subSettings: <EzSubSetting>[
-                EzSubSetting.butDesign,
-                EzSubSetting.pagDesign,
-              ],
-              fromStorage: () => EzConfig.get(pageTabKey) == true
-                  ? EzSubSetting.pagDesign
-                  : EzSubSetting.butDesign,
-              build: (EzSubSetting subSec) => EzDesignSettings(
-                target: subSec,
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
-            ),
 
-            // Text //
+              // Text //
 
-            EzSettingsSection(
-              position: 3,
-              title: EzConfig.l10n.gText,
-              icon: Icon(
-                Icons.text_format,
-                semanticLabel: EzConfig.l10n.gText,
+              EzSettingsSection(
+                position: 3,
+                title: EzConfig.l10n.gText,
+                icon: Icon(
+                  Icons.text_format,
+                  semanticLabel: EzConfig.l10n.gText,
+                ),
+                subSettings: <EzSubSetting>[
+                  EzSubSetting.qckText,
+                  EzSubSetting.advText,
+                ],
+                fromStorage: () => EzConfig.get(advancedTextKey) == true
+                    ? EzSubSetting.advText
+                    : EzSubSetting.qckText,
+                build: (EzSubSetting subSec) => EzTextSettings(
+                  target: subSec,
+                  onUpdate: doNothing,
+                  appName: appName,
+                  androidPackage: androidPackage,
+                ),
               ),
-              subSettings: <EzSubSetting>[
-                EzSubSetting.qckText,
-                EzSubSetting.advText,
-              ],
-              fromStorage: () => EzConfig.get(advancedTextKey) == true
-                  ? EzSubSetting.advText
-                  : EzSubSetting.qckText,
-              build: (EzSubSetting subSec) => EzTextSettings(
-                target: subSec,
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
-            ),
-          ],
-          target: targetPass,
-        )),
-        title: config.l10n.gSettings,
-        showSettings: false,
-        fabs: <Widget>[
-          // Rebuild (conditional)
-          if (config.needsRebuild) ...<Widget>[
+            ],
+            target: targetPass,
+          )),
+          title: config.l10n.gSettings,
+          showSettings: false,
+          fabs: <Widget>[
+            // Rebuild (conditional)
+            if (config.needsRebuild) ...<Widget>[
+              config.layout.spacer,
+              const EzRebuildFAB(doNothing),
+            ],
+
+            // Save/upload config
             config.layout.spacer,
-            const EzRebuildFAB(doNothing),
+            EzConfigFAB(
+              context,
+              appName: appName,
+              androidPackage: androidPackage,
+            ),
           ],
-
-          // Save/upload config
-          config.layout.spacer,
-          EzConfigFAB(
-            context,
-            appName: appName,
-            androidPackage: androidPackage,
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }

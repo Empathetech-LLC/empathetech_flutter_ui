@@ -55,66 +55,64 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   late final List<Locale> locales;
 
   @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      label: EzConfig.l10n.ssLanguage,
-      button: true,
-      hint: EzConfig.l10n.ssLangHint,
-      child: ExcludeSemantics(
-        child: EzElevatedIconButton(
-          onPressed: () => ezModal(
-            context: context,
-            builder: (BuildContext mCon) => EzScrollView(
-              children: <Widget>[
-                EzWrap(
-                  children: locales
-                      .map(
-                        (Locale locale) => Padding(
-                          padding: EzInsets.wrap(EzConfig.spacing),
-                          child: EzElevatedIconButton(
-                            onPressed: () async {
-                              // Check for no change
-                              if (locale == EzConfig.locale) {
-                                Navigator.of(mCon).pop();
-                                return;
-                              }
+  Widget build(BuildContext context) => Semantics(
+        label: EzConfig.l10n.ssLanguage,
+        button: true,
+        hint: EzConfig.l10n.ssLangHint,
+        child: ExcludeSemantics(
+          child: EzElevatedIconButton(
+            onPressed: () => ezModal(
+              context: context,
+              builder: (BuildContext mCon) => EzScrollView(
+                children: <Widget>[
+                  EzWrap(
+                    children: locales
+                        .map(
+                          (Locale locale) => Padding(
+                            padding: EzInsets.wrap(EzConfig.spacing),
+                            child: EzElevatedIconButton(
+                              onPressed: () async {
+                                // Check for no change
+                                if (locale == EzConfig.locale) {
+                                  Navigator.of(mCon).pop();
+                                  return;
+                                }
 
-                              // Gather && set data
-                              final List<String> localeData = <String>[locale.languageCode];
-                              if (locale.countryCode != null) {
-                                localeData.add(locale.countryCode!);
-                              }
-                              await EzConfig.setStringList(
-                                appLocaleKey,
-                                localeData,
-                              );
+                                // Gather && set data
+                                final List<String> localeData = <String>[locale.languageCode];
+                                if (locale.countryCode != null) {
+                                  localeData.add(locale.countryCode!);
+                                }
+                                await EzConfig.setStringList(
+                                  appLocaleKey,
+                                  localeData,
+                                );
 
-                              // Refresh the UI
-                              await EzConfig.rebuildLocale(widget.onComplete);
-                            },
-                            icon: ezFlag(
-                              locale,
-                              inDistress: widget.inDistress.contains(locale.countryCode),
+                                // Refresh the UI
+                                await EzConfig.rebuildLocale(widget.onComplete);
+                              },
+                              icon: ezFlag(
+                                locale,
+                                inDistress: widget.inDistress.contains(locale.countryCode),
+                              ),
+                              label: ezLocaleName(locale, mCon),
+                              labelPadding: false,
                             ),
-                            label: ezLocaleName(locale, mCon),
-                            labelPadding: false,
                           ),
-                        ),
-                      )
-                      .toList(),
-                ),
-                EzConfig.spacer,
-              ],
+                        )
+                        .toList(),
+                  ),
+                  EzConfig.spacer,
+                ],
+              ),
             ),
+            icon: ezFlag(
+              EzConfig.locale,
+              inDistress: widget.inDistress.contains(EzConfig.locale.countryCode),
+            ),
+            label: EzConfig.l10n.ssLanguage,
+            labelPadding: false,
           ),
-          icon: ezFlag(
-            EzConfig.locale,
-            inDistress: widget.inDistress.contains(EzConfig.locale.countryCode),
-          ),
-          label: EzConfig.l10n.ssLanguage,
-          labelPadding: false,
         ),
-      ),
-    );
-  }
+      );
 }
