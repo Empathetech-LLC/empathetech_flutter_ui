@@ -352,7 +352,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             child: header(l10n),
           ),
           Container(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             constraints: BoxConstraints(
               minWidth: widthOf(context) * 0.667,
               maxWidth: widthOf(context) * 0.667,
@@ -361,7 +361,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             child: ExpansionTile(
               controller: ec,
               onExpansionChanged: (_) => setState(() {}),
-              expandedAlignment: Alignment.center,
+              expandedAlignment: Alignment.topCenter,
               expandedCrossAxisAlignment: CrossAxisAlignment.center,
               backgroundColor: EzConfig.colors.surfaceContainer,
               collapsedBackgroundColor: EzConfig.colors.surfaceContainer,

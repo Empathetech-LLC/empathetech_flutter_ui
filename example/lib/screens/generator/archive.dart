@@ -52,8 +52,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
     savedConfig.endsWith('.json')
         ? setState(() => genState = GeneratorState.successful)
         : setState(() {
-            failureMessage =
-                '${EzConfig.l10n.ssWrongConfigExt} .json...\n\n$savedConfig';
+            failureMessage = '${EzConfig.l10n.ssWrongConfigExt} .json...\n\n$savedConfig';
             genState = GeneratorState.failed;
           });
   }
@@ -112,7 +111,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        EzScreen(header(), alignment: Alignment.center),
+        EzScreen(header(), alignment: Alignment.topCenter),
         title: l10n.asPageTitle,
         running: genState == GeneratorState.running,
       );
