@@ -124,11 +124,7 @@ class SettingsHubScreen extends StatelessWidget {
 
             // Save/upload config
             config.layout.spacer,
-            EzConfigFAB(
-              context,
-              appName: appName,
-              androidPackage: androidPackage,
-            ),
+            const EzConfigFAB(),
           ],
         ),
       );

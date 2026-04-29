@@ -27,12 +27,7 @@ Widget ezRichUndoWarning(
       // Save link
       EzInlineLink(
         EzConfig.l10n.gSave,
-        onTap: () => EzConfig.saveConfig(
-          context,
-          appName: appName,
-          androidPackage: androidPackage,
-          skip: skip,
-        ),
+        onTap: () => EzConfig.saveConfig(context, skip: skip),
         hint: EzConfig.l10n.gSaveHint,
         style: EzConfig.styles.bodyLarge,
         textAlign: TextAlign.center,
