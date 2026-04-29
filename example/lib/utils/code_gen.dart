@@ -18,10 +18,6 @@ const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
 
 //* Sub-string getters *//
 
-/// Copyright notice for the top of code files
-String genCopyright(EAGConfig config) =>
-    config.copyright ?? '/* ${config.appName} */';
-
 /// Returns the .arb file directory
 String getArbDir(EAGConfig config) {
   for (final String line in config.l10nConfig.split('\n')) {
@@ -47,12 +43,10 @@ String l10nClassName(EAGConfig config) {
 }
 
 /// [l10nClassName].localizationsDelegates
-String l10nDelegates(EAGConfig config) =>
-    '${l10nClassName(config)}.localizationsDelegates';
+String l10nDelegates(EAGConfig config) => '${l10nClassName(config)}.localizationsDelegates';
 
 /// \n...[l10nDelegates],\n
-String l10nDelegateHandler(EAGConfig config) =>
-    '\n          ...${l10nDelegates(config)},';
+String l10nDelegateHandler(EAGConfig config) => '\n          ...${l10nDelegates(config)},';
 
 //* Code generation *//
 
@@ -263,7 +257,7 @@ Future<void> genLib({
   final String classCaseAppName = ezSnakeToClass(config.appName);
   final String titleCaseAppName = ezSnakeToTitle(config.appName);
 
-  final String copyright = genCopyright(config);
+  final String copyright = config.copyright;
   final String l10nClass = l10nClassName(config);
 
   // Create directories //
@@ -381,8 +375,7 @@ class $classCaseAppName extends StatelessWidget {
     String configString() {
       String result = '{';
 
-      for (final MapEntry<String, dynamic> entry
-          in config.appDefaults.entries) {
+      for (final MapEntry<String, dynamic> entry in config.appDefaults.entries) {
         if (entry.value != null && !entry.key.contains('Image')) {
           // Handle specific cases //
 
@@ -396,8 +389,7 @@ class $classCaseAppName extends StatelessWidget {
             case userDarkColorsKey:
             case userLightColorsKey:
               // Updates to which colors are default in the advanced color settings screen
-              final String colorList =
-                  entry.value.toString().replaceAll(',', 'Key,');
+              final String colorList = entry.value.toString().replaceAll(',', 'Key,');
               result +=
                   '${entry.key}Key: <String>${colorList.replaceRange(colorList.length - 1, null, 'Key,]')},';
               break;
@@ -431,8 +423,7 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
 """);
 
     // ${APP}_cache.dart
-    await File('$dir/lib/utils/${config.appName}_cache.dart')
-        .writeAsString("""$copyright
+    await File('$dir/lib/utils/${config.appName}_cache.dart').writeAsString("""$copyright
 
 import './export.dart';
 
@@ -564,8 +555,7 @@ class EFUICredits extends StatelessWidget {
 """);
 
     // scaffold file
-    await File('$dir/lib/widgets/${config.appName}_scaffold.dart')
-        .writeAsString("""$copyright
+    await File('$dir/lib/widgets/${config.appName}_scaffold.dart').writeAsString("""$copyright
 
 import '../utils/export.dart';
 import './export.dart';
@@ -1024,14 +1014,12 @@ Future<void> genAnalysis({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  if (config.analysisOptions == null) return;
-
   try {
-    await File('$dir/analysis_options.yaml')
-        .writeAsString(config.analysisOptions!);
+    await File('$dir/analysis_options.yaml').writeAsString(config.analysisOptions);
   } catch (e) {
     onFailure(e.toString());
   }
+
   ezLog(
     'Analysis options (lint rules) successfully generated',
     buffer: readout,
@@ -1047,8 +1035,6 @@ Future<void> genVSCode({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  if (config.vsCodeConfig == null) return;
-
   // Make dir
   await ezCmd(
     'mkdir .vscode',
@@ -1060,10 +1046,11 @@ Future<void> genVSCode({
 
   // Make file
   try {
-    await File('$dir/.vscode/launch.json').writeAsString(config.vsCodeConfig!);
+    await File('$dir/.vscode/launch.json').writeAsString(config.vsCodeConfig);
   } catch (e) {
     onFailure(e.toString());
   }
+
   ezLog('VS Code launch config successfully generated', buffer: readout);
   onSuccess();
 }
