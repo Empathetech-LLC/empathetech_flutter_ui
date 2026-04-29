@@ -651,6 +651,12 @@ abstract class EFUILang {
   /// **'Activate to save a JSON config file.'**
   String get gSaveHint;
 
+  /// No description provided for @gSwitchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Flip switch'**
+  String get gSwitchHint;
+
   /// No description provided for @gUndoWarn2.
   ///
   /// In en, this message translates to:

@@ -112,6 +112,7 @@
   "gUndoWarn1": "Cannot be undone automatically.\n",
   "gSave": "Save",
   "gSaveHint": "Activate to save a JSON config file.",
+  "gSwitchHint": "Flip switch",
   "gUndoWarn2": " your current config to restore it manually.",
   "gValue": "Value",
 

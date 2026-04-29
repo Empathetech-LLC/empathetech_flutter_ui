@@ -112,6 +112,7 @@
   "gUndoWarn1": "Impossible d'annuler automatiquement.\n",
   "gSave": "Enregistrez",
   "gSaveHint": "Activez pour enregistrer un fichier de configuration JSON.",
+  "gSwitchHint": "Actionner l'interrupteur",
   "gUndoWarn2": " votre configuration actuelle pour la restaurer manuellement.",
   "gValue": "Valeur",
 

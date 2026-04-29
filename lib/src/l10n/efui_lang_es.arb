@@ -112,6 +112,7 @@
   "gUndoWarn1": "No se puede deshacer automáticamente.\n",
   "gSave": "Guarde",
   "gSaveHint": "Activar para guardar un archivo de configuración JSON.",
+  "gSwitchHint": "Accionar el interruptor",
   "gUndoWarn2": " su configuración actual para restaurarla manualmente.",
   "gValue": "Valor",
 

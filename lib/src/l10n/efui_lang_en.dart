@@ -299,6 +299,9 @@ class EFUILangEn extends EFUILang {
   String get gSaveHint => 'Activate to save a JSON config file.';
 
   @override
+  String get gSwitchHint => 'Flip switch';
+
+  @override
   String get gUndoWarn2 => ' your current config to restore it manually.';
 
   @override
@@ -1059,6 +1062,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gSaveHint => 'Activate to save a JSON config file.';
+
+  @override
+  String get gSwitchHint => 'Flip switch';
 
   @override
   String get gUndoWarn2 => ' your current config to restore it manually.';

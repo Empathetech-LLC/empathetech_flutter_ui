@@ -300,6 +300,9 @@ class EFUILangEs extends EFUILang {
       'Activar para guardar un archivo de configuración JSON.';
 
   @override
+  String get gSwitchHint => 'Accionar el interruptor';
+
+  @override
   String get gUndoWarn2 =>
       ' su configuración actual para restaurarla manualmente.';
 
