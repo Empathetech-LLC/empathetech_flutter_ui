@@ -413,9 +413,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              advancedEC.isExpanded
-                  ? EzConfig.spacer
-                  : EzDivider(constraints: ezTextFieldConstraints(context, prop: 0.333)),
+              ...advancedEC.isExpanded
+                  ? <Widget>[EzConfig.separator]
+                  : <Widget>[
+                      EzDivider(constraints: ezTextFieldConstraints(context, prop: 0.333)),
+                      EzConfig.margin,
+                    ],
 
               // Flutter path picker (Mac only)
               if (isMac) ...<Widget>[
