@@ -7,10 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzThemeModeSwitch extends StatefulWidget {
-  /// [EzConfig.rebuildThemeMode] passthrough
-  final void Function() onComplete;
-
+class EzThemeModeSwitch extends StatelessWidget {
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
@@ -18,27 +15,11 @@ class EzThemeModeSwitch extends StatefulWidget {
   final Color? backgroundColor;
 
   /// Standardized tool for changing the [ThemeMode]
-  const EzThemeModeSwitch(
-    this.onComplete, {
+  const EzThemeModeSwitch({
     super.key,
     this.labelStyle,
     this.backgroundColor,
   });
-
-  @override
-  State<EzThemeModeSwitch> createState() => _ThemeModeSwitchState();
-}
-
-class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  // Define the build data //
-
-  final List<DropdownMenuEntry<ThemeMode>> entries = <DropdownMenuEntry<ThemeMode>>[
-    DropdownMenuEntry<ThemeMode>(value: ThemeMode.system, label: EzConfig.l10n.gSystem),
-    DropdownMenuEntry<ThemeMode>(value: ThemeMode.light, label: EzConfig.l10n.gLight),
-    DropdownMenuEntry<ThemeMode>(value: ThemeMode.dark, label: EzConfig.l10n.gDark),
-  ];
-
-  // Return the build //
 
   @override
   Widget build(BuildContext context) => EzScrollView(
@@ -48,16 +29,19 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           // Label
           EzText(
             EzConfig.l10n.ssThemeMode,
-            style: widget.labelStyle,
+            style: labelStyle,
             textAlign: TextAlign.center,
           ),
           EzConfig.margin,
 
           // Button
           EzDropdownMenu<ThemeMode>(
-            widthEntries:
-                entries.map((DropdownMenuEntry<ThemeMode> entry) => entry.label).toList(),
-            dropdownMenuEntries: entries,
+            widthEntry: EzConfig.l10n.gSystem,
+            dropdownMenuEntries: <DropdownMenuEntry<ThemeMode>>[
+              DropdownMenuEntry<ThemeMode>(value: ThemeMode.system, label: EzConfig.l10n.gSystem),
+              DropdownMenuEntry<ThemeMode>(value: ThemeMode.light, label: EzConfig.l10n.gLight),
+              DropdownMenuEntry<ThemeMode>(value: ThemeMode.dark, label: EzConfig.l10n.gDark),
+            ],
             enableSearch: false,
             initialSelection: EzConfig.themeMode,
             onSelected: (ThemeMode? choice) async {
@@ -74,7 +58,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
                   await EzConfig.remove(isDarkThemeKey);
                   break;
               }
-              await EzConfig.rebuildThemeMode(widget.onComplete);
+              await EzConfig.rebuildThemeMode();
             },
           ),
         ],
