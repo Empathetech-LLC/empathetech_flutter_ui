@@ -8,14 +8,10 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzHighVisibilityConfig extends StatelessWidget {
-  /// Only runs if you're using the rendered [Widget]
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function() onComplete;
-
   /// Resets the current config and applies the [ezHighContrastLight] | [ezHighContrastDark] color scheme
   /// With text theme built with [atkinsonHyperlegible] and is slightly larger than the default
   /// Spacing is also increased, but not as much as [EzBigButtonsConfig]
-  const EzHighVisibilityConfig(this.onComplete, {super.key});
+  const EzHighVisibilityConfig({super.key});
 
   static Future<void> onPressed({bool monoChrome = false}) async {
     if (EzConfig.updateBoth || EzConfig.isDark) {
@@ -29,8 +25,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Color settings //
 
-      await loadColorScheme(
-          monoChrome ? ezMonoChromeDark : ezHighContrastDark, Brightness.dark);
+      await loadColorScheme(monoChrome ? ezMonoChromeDark : ezHighContrastDark, Brightness.dark);
 
       // Design settings //
 
@@ -119,8 +114,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
 
       // Color settings //
 
-      await loadColorScheme(
-          monoChrome ? ezMonoChromeLight : ezHighContrastLight, Brightness.light);
+      await loadColorScheme(monoChrome ? ezMonoChromeLight : ezHighContrastLight, Brightness.light);
 
       // Design settings //
 
@@ -229,8 +223,8 @@ class EzHighVisibilityConfig extends StatelessWidget {
               ),
               shape: EzButtonShape.pill.shape,
               textStyle: localBody,
-              padding: EdgeInsets.all(
-                  EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
+              padding:
+                  EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
             )
           : ElevatedButton.styleFrom(
               backgroundColor: lightSurface,
@@ -243,12 +237,12 @@ class EzHighVisibilityConfig extends StatelessWidget {
               ),
               shape: EzButtonShape.pill.shape,
               textStyle: localBody,
-              padding: EdgeInsets.all(
-                  EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
+              padding:
+                  EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
             ),
       onPressed: () async {
         await onPressed();
-        await onComplete();
+        await EzConfig.rebuildUI();
       },
       text: EzConfig.l10n.ssHighVisibility,
       textStyle: localBody,

@@ -21,49 +21,37 @@ class TryTip extends StatelessWidget {
 }
 
 class EzQuickConfig extends StatelessWidget {
-  /// [EzConfigProvider.rebuildUI] passthrough
-  final void Function() onComplete;
-
   /// When true, just includes...
   /// [EzBigButtonsConfig], [EzHighVisibilityConfig], [EzChalkboardConfig]
   final bool simple;
 
   /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
-  const EzQuickConfig(this.onComplete, {super.key, this.simple = false});
+  const EzQuickConfig({super.key, this.simple = false});
 
-  // Define custom functions //
-
-  Widget wrapIt(Widget child) =>
-      Padding(padding: EzInsets.wrap(EzConfig.spacing), child: child);
-
-  Future<void> cleanRebuild() => EzConfig.rebuildUI(onComplete);
-
-  // Return the build //
+  Widget wrapIt(Widget child) => Padding(padding: EzInsets.wrap(EzConfig.spacing), child: child);
 
   @override
-  Widget build(BuildContext context) {
-    return EzElevatedIconButton(
-      onPressed: () => ezModal(
-        context: context,
-        builder: (_) => EzScrollView(children: <Widget>[
-          // Choices
-          EzWrap(children: <Widget>[
-            // Important
-            wrapIt(EzBigButtonsConfig(cleanRebuild)),
-            wrapIt(EzHighVisibilityConfig(cleanRebuild)),
-            wrapIt(EzChalkboardConfig(cleanRebuild)), // segue
+  Widget build(BuildContext context) => EzElevatedIconButton(
+        onPressed: () => ezModal(
+          context: context,
+          builder: (_) => EzScrollView(children: <Widget>[
+            // Choices
+            EzWrap(children: <Widget>[
+              // Important
+              wrapIt(const EzBigButtonsConfig()),
+              wrapIt(const EzHighVisibilityConfig()),
+              wrapIt(const EzChalkboardConfig()), // segue
 
-            // Fun
-            if (!simple) ...<Widget>[
-              wrapIt(EzNebulaConfig(cleanRebuild)),
-              wrapIt(EzWallHolesConfig(cleanRebuild)),
-            ],
+              // Fun
+              if (!simple) ...<Widget>[
+                wrapIt(const EzNebulaConfig()),
+                wrapIt(const EzWallHolesConfig()),
+              ],
+            ]),
+            EzConfig.spacer,
           ]),
-          EzConfig.spacer,
-        ]),
-      ),
-      icon: const Icon(Icons.edit),
-      label: EzConfig.l10n.ssLoadPreset,
-    );
-  }
+        ),
+        icon: const Icon(Icons.edit),
+        label: EzConfig.l10n.ssLoadPreset,
+      );
 }

@@ -8,14 +8,10 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzChalkboardConfig extends StatelessWidget {
-  /// Only runs if you're using the rendered [Widget]
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function() onComplete;
-
   /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
   /// Sets a [ColorScheme] similar to [ezHighContrastDark], but with a [chalkboardGreen] surface and [empathSand] accents
   /// Has mostly default design settings, but a [fingerPaint] based [TextTheme]
-  const EzChalkboardConfig(this.onComplete, {super.key});
+  const EzChalkboardConfig({super.key});
 
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not dark, show a warning dialog
@@ -175,7 +171,7 @@ class EzChalkboardConfig extends StatelessWidget {
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
-        if (confirmed) await onComplete();
+        if (confirmed) await EzConfig.rebuildUI();
       },
       text: EzConfig.l10n.ssChalkboard,
       textStyle: localBody,

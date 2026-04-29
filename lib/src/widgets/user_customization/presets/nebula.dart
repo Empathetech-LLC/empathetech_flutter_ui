@@ -8,12 +8,8 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzNebulaConfig extends StatelessWidget {
-  /// Only runs if you're using the rendered [Widget]
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function() onComplete;
-
   /// Dark theme only config, will set [ThemeMode.dark]
-  const EzNebulaConfig(this.onComplete, {super.key});
+  const EzNebulaConfig({super.key});
 
   /// When true, skips the "This is a dark theme only..." dialog
   static Future<bool> onPressed(BuildContext context) async {
@@ -149,12 +145,11 @@ class EzNebulaConfig extends StatelessWidget {
           side: const BorderSide(color: empathSandDim, width: 1.0),
           shape: EzButtonShape.jewel.shape,
           textStyle: localBody,
-          padding:
-              EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
+          padding: EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
         ),
         onPressed: () async {
           final bool confirmed = await onPressed(context);
-          if (confirmed) await onComplete();
+          if (confirmed) await EzConfig.rebuildUI();
         },
         text: EzConfig.l10n.ssNebula,
         textStyle: localBody,

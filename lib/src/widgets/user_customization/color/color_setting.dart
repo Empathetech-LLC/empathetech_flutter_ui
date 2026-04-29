@@ -12,9 +12,6 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color] will be updated
   final String configKey;
 
-  /// [EzConfig.rebuildUI] passthrough
-  final void Function() onUpdate;
-
   /// Optional callback for when the [configKey] is removed, if it is part of a dynamic set/list
   /// If null, the remove button will not be shown
   /// DO NOT include a pop() for the dialog, this is included automatically
@@ -23,12 +20,7 @@ class EzColorSetting extends StatefulWidget {
   /// Creates a tool for [configKey] ColorScheme values via [EzConfig]
   /// When [configKey] is a text color (has [textColorPrefix]), the base color will be used to generate a recommendation via [getTextColor]
   /// [EzColorSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
-  const EzColorSetting({
-    super.key,
-    required this.configKey,
-    required this.onUpdate,
-    this.onRemove,
-  });
+  const EzColorSetting({super.key, required this.configKey, this.onRemove});
 
   @override
   State<EzColorSetting> createState() => _ColorSettingState();
@@ -54,7 +46,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       onColorChange: (Color chosenColor) => setState(() => currColor = chosenColor),
       onConfirm: () async {
         await EzConfig.setInt(widget.configKey, currColor.toARGB32());
-        await EzConfig.rebuildUI(widget.onUpdate);
+        await EzConfig.rebuildUI();
       },
       onDeny: () => setState(() => currColor = backup),
     );
@@ -119,7 +111,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               // Update the user's configKey
               await EzConfig.setInt(widget.configKey, recommended);
               setState(() => currColor = Color(recommended));
-              await EzConfig.rebuildUI(widget.onUpdate);
+              await EzConfig.rebuildUI();
             },
             isDefaultAction: true,
           ),
@@ -170,7 +162,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 if (resetValue != null) {
                   setState(() => currColor = Color(resetValue));
                 }
-                await EzConfig.rebuildUI(widget.onUpdate);
+                await EzConfig.rebuildUI();
               },
               confirmIsDestructive: true,
               onDeny: () => Navigator.of(dCon).pop(),

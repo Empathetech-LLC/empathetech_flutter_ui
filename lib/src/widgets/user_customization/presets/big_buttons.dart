@@ -8,13 +8,9 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzBigButtonsConfig extends StatelessWidget {
-  /// Only runs if you're using the rendered [Widget]
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function() onComplete;
-
   /// Doesn't replace, only modifies: larger touch points from default
   /// Slight bump to all layout values, for easier tapping
-  const EzBigButtonsConfig(this.onComplete, {super.key});
+  const EzBigButtonsConfig({super.key});
 
   static Future<void> onPressed() async {
     // Don't reset //
@@ -78,7 +74,7 @@ class EzBigButtonsConfig extends StatelessWidget {
         ),
         onPressed: () async {
           await onPressed();
-          await onComplete();
+          await EzConfig.rebuildUI();
         },
         text: EzConfig.l10n.ssBigButtons,
       );

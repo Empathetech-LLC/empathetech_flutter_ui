@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class PageDesign extends StatelessWidget {
-  final void Function() onUpdate;
   final List<Widget>? prepend;
   final bool? includePageTransitions;
   final bool includeBackgroundImage;
@@ -26,7 +25,6 @@ class PageDesign extends StatelessWidget {
 
   const PageDesign({
     super.key,
-    required this.onUpdate,
     required this.prepend,
     required this.includePageTransitions,
     this.includeBackgroundImage = true,
@@ -50,8 +48,7 @@ class PageDesign extends StatelessWidget {
         if (prepend != null) ...prepend!,
 
         // Margin
-        EzMarginSetting(
-          onUpdate: onUpdate,
+        const EzMarginSetting(
           min: minMargin,
           max: maxMargin,
           steps: 20,
@@ -60,8 +57,7 @@ class PageDesign extends StatelessWidget {
         EzConfig.spacer,
 
         // Spacing
-        EzSpacingSetting(
-          onUpdate: onUpdate,
+        const EzSpacingSetting(
           min: minSpacing,
           max: maxSpacing,
           steps: 26,
@@ -76,13 +72,11 @@ class PageDesign extends StatelessWidget {
             startCentered: true,
             child: EzConfig.isDark
                 ? EzImageSetting(
-                    onUpdate,
                     configKey: darkBackgroundImageKey,
                     credits: darkBackgroundCredits,
                     label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
                   )
                 : EzImageSetting(
-                    onUpdate,
                     configKey: lightBackgroundImageKey,
                     credits: lightBackgroundCredits,
                     label: EzConfig.l10n.dsBackgroundImg.replaceAll(' ', '\n'),
@@ -93,12 +87,12 @@ class PageDesign extends StatelessWidget {
 
         // Page transition
         if ((includePageTransitions == null) ? !kIsWeb : includePageTransitions!) ...<Widget>[
-          _PageTransitionSetting(onUpdate),
+          const _PageTransitionSetting(),
           EzConfig.spacer,
         ],
 
         // Animation duration
-        _AnimDurSetting(onUpdate),
+        const _AnimDurSetting(),
         EzConfig.separator,
 
         // Show scroll
@@ -112,7 +106,7 @@ class PageDesign extends StatelessWidget {
                   EzConfig.isDark ? lightShowScrollKey : darkShowScrollKey, value);
             }
 
-            await EzConfig.rebuildUI(onUpdate);
+            await EzConfig.rebuildUI();
           },
           text: EzConfig.l10n.dsShowScroll,
         ),
@@ -124,7 +118,6 @@ class PageDesign extends StatelessWidget {
         resetSpacer,
         EzResetButton(
           all: false,
-          onUpdate,
           androidPackage: androidPackage,
           appName: appName,
           dynamicTitle: () => EzConfig.l10n.dsResetPage(ezThemeString(true)),
@@ -158,9 +151,7 @@ class PageDesign extends StatelessWidget {
 }
 
 class _AnimDurSetting extends StatelessWidget {
-  final void Function() onUpdate;
-
-  const _AnimDurSetting(this.onUpdate);
+  const _AnimDurSetting();
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
@@ -228,8 +219,7 @@ class _AnimDurSetting extends StatelessWidget {
                       if (EzConfig.updateBoth || !EzConfig.isDark) {
                         await EzConfig.remove(lightAnimationDurationKey);
                         setModal(() => animDuration =
-                            (EzConfig.getDefault(lightAnimationDurationKey) as int)
-                                .toDouble());
+                            (EzConfig.getDefault(lightAnimationDurationKey) as int).toDouble());
                       }
                     },
                     icon: const Icon(Icons.refresh),
@@ -241,7 +231,7 @@ class _AnimDurSetting extends StatelessWidget {
             ),
           );
 
-          if (animDuration != backup) await EzConfig.rebuildUI(onUpdate);
+          if (animDuration != backup) await EzConfig.rebuildUI();
         },
         label: EzConfig.l10n.dsAnimDuration,
         icon: const Icon(Icons.timer_outlined),
@@ -258,8 +248,7 @@ class _AnimationPreview extends StatefulWidget {
   State<_AnimationPreview> createState() => _AnimationPreviewState();
 }
 
-class _AnimationPreviewState extends State<_AnimationPreview>
-    with SingleTickerProviderStateMixin {
+class _AnimationPreviewState extends State<_AnimationPreview> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
 
@@ -312,9 +301,8 @@ class _AnimationPreviewState extends State<_AnimationPreview>
           },
           child: Center(
             child: EzIconButton(
-              onPressed: () => _controller.isAnimating
-                  ? _controller.stop()
-                  : _controller.forward(from: 0.0),
+              onPressed: () =>
+                  _controller.isAnimating ? _controller.stop() : _controller.forward(from: 0.0),
               icon: Icon(
                 Icons.play_arrow,
                 semanticLabel: EzConfig.l10n.dsPlay,
@@ -333,9 +321,7 @@ class _AnimationPreviewState extends State<_AnimationPreview>
 }
 
 class _PageTransitionSetting extends StatelessWidget {
-  final void Function() onUpdate;
-
-  const _PageTransitionSetting(this.onUpdate);
+  const _PageTransitionSetting();
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
@@ -417,7 +403,7 @@ class _PageTransitionSetting extends StatelessWidget {
               await EzConfig.setBool(lightTransitionFadeKey, currFade);
             }
 
-            await EzConfig.rebuildUI(onUpdate);
+            await EzConfig.rebuildUI();
           }
         },
         icon: const Icon(Icons.slideshow),

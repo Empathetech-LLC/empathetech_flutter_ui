@@ -8,12 +8,8 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzWallHolesConfig extends StatelessWidget {
-  /// Only runs if you're using the rendered [Widget]
-  /// Calling [onPressed] does not trigger [onComplete]
-  final Future<void> Function() onComplete;
-
   /// !Not Windows
-  const EzWallHolesConfig(this.onComplete, {super.key});
+  const EzWallHolesConfig({super.key});
 
   static Future<bool> onPressed(BuildContext context) async {
     // If the current theme is not light, show a warning dialog
@@ -134,12 +130,11 @@ class EzWallHolesConfig extends StatelessWidget {
         side: const BorderSide(color: Colors.black, width: 2.0),
         shape: EzButtonShape.rect.shape,
         textStyle: localBody,
-        padding:
-            EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
+        padding: EdgeInsets.all(EzConfig.onMobile ? defaultMobilePadding : defaultDesktopPadding),
       ),
       onPressed: () async {
         final bool confirmed = await onPressed(context);
-        if (confirmed) await onComplete();
+        if (confirmed) await EzConfig.rebuildUI();
       },
       text: EzConfig.l10n.ssWallHoles,
       textStyle: localBody,

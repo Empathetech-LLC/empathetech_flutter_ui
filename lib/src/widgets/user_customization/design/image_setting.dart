@@ -4,8 +4,7 @@
  */
 
 import '../../../../empathetech_flutter_ui.dart';
-import './image_editor_io.dart'
-    if (dart.library.html) './image_editor_web.dart';
+import './image_editor_io.dart' if (dart.library.html) './image_editor_web.dart';
 
 import 'dart:io';
 import 'dart:async';
@@ -14,9 +13,6 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EzImageSetting extends StatefulWidget {
-  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
-  final void Function() onComplete;
-
   /// [EzConfig] key whose value is being updated
   final String configKey;
 
@@ -60,8 +56,7 @@ class EzImageSetting extends StatefulWidget {
   final bool showFitOption;
 
   /// [EzElevatedIconButton] for updating the image at [configKey]'s path
-  const EzImageSetting(
-    this.onComplete, {
+  const EzImageSetting({
     super.key,
     required this.configKey,
     required this.label,
@@ -119,9 +114,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Validate a URL
   String? validateUrl(String? value) =>
-      (value == null || value.isEmpty || !ezUrlCheck(value))
-          ? EzConfig.l10n.gValidURL
-          : null;
+      (value == null || value.isEmpty || !ezUrlCheck(value)) ? EzConfig.l10n.gValidURL : null;
 
   /// First-layer [ElevatedButton.onPressed]
   /// Opens an options modal and updates the state accordingly
@@ -144,11 +137,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     final bool isInt = (int.tryParse(newPath) != null);
 
     // Edit image (when applicable)
-    if (!isInt &&
-        fromLocal &&
-        widget.showEditor &&
-        !kIsWeb &&
-        !EzConfig.isPathAsset(newPath)) {
+    if (!isInt && fromLocal && widget.showEditor && !kIsWeb && !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
         final Future<dynamic> Function(String path) toDo = await showDialog(
           context: context,
@@ -157,8 +146,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             actions: <EzMaterialAction>[
               EzMaterialAction(
                 text: EzConfig.l10n.gYes,
-                onPressed: () =>
-                    Navigator.of(dCon).pop((_) => Future<dynamic>.value(true)),
+                onPressed: () => Navigator.of(dCon).pop((_) => Future<dynamic>.value(true)),
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.dsCrop,
@@ -166,8 +154,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               EzMaterialAction(
                 text: EzConfig.l10n.gCancel,
-                onPressed: () =>
-                    Navigator.of(dCon).pop((_) => Future<dynamic>.value(null)),
+                onPressed: () => Navigator.of(dCon).pop((_) => Future<dynamic>.value(null)),
               ),
             ],
             needsClose: false,
@@ -218,8 +205,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.50);
         }
 
-        final String result =
-            await loadImageColorScheme(newPath, Brightness.dark);
+        final String result = await loadImageColorScheme(newPath, Brightness.dark);
 
         if (result == success) {
           await EzConfig.setString(darkColorSchemeImageKey, newPath);
@@ -244,8 +230,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.50);
         }
 
-        final String result =
-            await loadImageColorScheme(newPath, Brightness.light);
+        final String result = await loadImageColorScheme(newPath, Brightness.light);
 
         if (result == success) {
           await EzConfig.setString(lightColorSchemeImageKey, newPath);
@@ -349,8 +334,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 // Verify that the image is accessible
                 try {
                   final Completer<void> completer = Completer<void>();
-                  final ImageStream stream =
-                      NetworkImage(url).resolve(const ImageConfiguration());
+                  final ImageStream stream = NetworkImage(url).resolve(const ImageConfiguration());
 
                   late ImageStreamListener listener;
                   listener = ImageStreamListener(
@@ -375,8 +359,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Navigator.of(mCon).pop(null);
                   }
 
-                  final String errorMsg =
-                      '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}';
+                  final String errorMsg = '${e.toString()}\n\n${EzConfig.l10n.dsImgPermission}';
                   (mounted)
                       ? await ezLogAlert(
                           context,
@@ -414,11 +397,8 @@ class _ImageSettingState extends State<EzImageSetting> {
         padding: wrapPadding,
         child: EzElevatedIconButton(
           onPressed: () async {
-            final int? pathARGB =
-                (currPath == null) ? null : int.tryParse(currPath!);
-            Color currColor = pathARGB == null
-                ? EzConfig.colors.surfaceContainer
-                : Color(pathARGB);
+            final int? pathARGB = (currPath == null) ? null : int.tryParse(currPath!);
+            Color currColor = pathARGB == null ? EzConfig.colors.surfaceContainer : Color(pathARGB);
 
             await ezColorPicker(
               context,
@@ -617,9 +597,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               EzConfig.spacer,
               EzRow(
-                mainAxisAlignment: EzConfig.isLefty
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.end,
+                mainAxisAlignment:
+                    EzConfig.isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
                 children: <Widget>[
                   EzConfig.rowSpacer,
                   EzTextButton(
@@ -642,9 +621,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                         Navigator.of(fitContext).pop(true);
                       }
                     },
-                    text: selectedFit == null
-                        ? EzConfig.l10n.gSkip
-                        : EzConfig.l10n.gApply,
+                    text: selectedFit == null ? EzConfig.l10n.gSkip : EzConfig.l10n.gApply,
                     textStyle: EzConfig.styles.bodyLarge?.copyWith(
                       color: EzConfig.colors.primary,
                     ),
@@ -670,10 +647,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     required BuildContext modalContext,
     required StateSetter setModal,
   }) {
-    final double toolbarHeight = ezTextSize(fit.name,
-                style: EzConfig.styles.bodyLarge, context: modalContext)
-            .height +
-        (EzConfig.marginVal * 0.25);
+    final double toolbarHeight =
+        ezTextSize(fit.name, style: EzConfig.styles.bodyLarge, context: modalContext).height +
+            (EzConfig.marginVal * 0.25);
 
     return EzCol(children: <Widget>[
       GestureDetector(
@@ -740,8 +716,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: widget.style ??
-              ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(EzConfig.padding * 0.75)),
+              ElevatedButton.styleFrom(padding: EdgeInsets.all(EzConfig.padding * 0.75)),
           onPressed: () async {
             if (inProgress) return;
 
@@ -751,7 +726,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             });
             final bool changed = await activateSetting();
 
-            if (changed) await EzConfig.rebuildUI(widget.onComplete);
+            if (changed) await EzConfig.rebuildUI();
             setState(() => inProgress = false);
           },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
@@ -765,14 +740,11 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
             child: CircleAvatar(
               radius: EzConfig.iconSize + EzConfig.padding,
-              foregroundImage: (inProgress ||
-                      currPath == null ||
-                      currPath == noImageValue ||
-                      pathARGB != null)
-                  ? null
-                  : ezImageProvider(currPath!),
-              backgroundColor:
-                  (pathARGB != null) ? Color(pathARGB) : Colors.transparent,
+              foregroundImage:
+                  (inProgress || currPath == null || currPath == noImageValue || pathARGB != null)
+                      ? null
+                      : ezImageProvider(currPath!),
+              backgroundColor: (pathARGB != null) ? Color(pathARGB) : Colors.transparent,
               foregroundColor: EzConfig.colors.onSurface,
               child: inProgress
                   ? const CircularProgressIndicator()
