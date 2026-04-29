@@ -14,9 +14,6 @@ class EzDesignSettings extends StatelessWidget {
   /// Current sub-page
   final EzSubSetting target;
 
-  /// [EzConfig.redrawUI]/[EzConfig.rebuildUI] passthrough
-  final void Function() onUpdate;
-
   /// Optional additional settings at the top of the button design tab
   /// BYO tailing spacer(s)
   final List<Widget>? prependButton;
@@ -94,7 +91,6 @@ class EzDesignSettings extends StatelessWidget {
   const EzDesignSettings({
     super.key,
     required this.target,
-    required this.onUpdate,
     this.prependButton,
     this.prependPage,
     this.includePageTransitions,
@@ -124,7 +120,6 @@ class EzDesignSettings extends StatelessWidget {
         animMod: 0.5,
         child: (target == EzSubSetting.butDesign)
             ? ButtonDesign(
-                onUpdate: onUpdate,
                 prepend: prependButton,
                 append: appendButton,
                 resetSpacer: resetSpacerButton,
@@ -136,7 +131,6 @@ class EzDesignSettings extends StatelessWidget {
                 saveSkip: saveSkipButton,
               )
             : PageDesign(
-                onUpdate: onUpdate,
                 prepend: prependPage,
                 includePageTransitions: includePageTransitions,
                 includeBackgroundImage: includeBackgroundImage,

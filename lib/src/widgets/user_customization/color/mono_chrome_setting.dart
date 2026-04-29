@@ -88,9 +88,6 @@ const ColorScheme ezMonoChromeLight = ColorScheme.highContrastLight(
 );
 
 class EzMonoChromeColorsSetting extends StatelessWidget {
-  /// [EzConfig.rebuildUI] passthrough
-  final void Function() onComplete;
-
   /// [ThemeData.colorScheme] for [Brightness.dark]
   final ColorScheme dark;
 
@@ -99,8 +96,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
 
   /// Easily store a custom mono chrome [ColorScheme] to [EzConfig]
   /// [ezHighContrastDark] and [ezHighContrastLight] by default
-  const EzMonoChromeColorsSetting(
-    this.onComplete, {
+  const EzMonoChromeColorsSetting({
     super.key,
     this.dark = ezMonoChromeDark,
     this.light = ezMonoChromeLight,
@@ -115,10 +111,8 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                 iconColor: Colors.white,
                 shadowColor: Colors.transparent,
                 overlayColor: Colors.white,
-                side: EzConfig.borderSide(
-                    darkOutline.withValues(alpha: EzConfig.borderOpacity)),
-                textStyle:
-                    EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
+                side: EzConfig.borderSide(darkOutline.withValues(alpha: EzConfig.borderOpacity)),
+                textStyle: EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
               )
             : ElevatedButton.styleFrom(
                 backgroundColor: lightSurface,
@@ -126,10 +120,8 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
                 iconColor: Colors.black,
                 shadowColor: Colors.transparent,
                 overlayColor: Colors.black,
-                side: EzConfig.borderSide(
-                    lightOutline.withValues(alpha: EzConfig.borderOpacity)),
-                textStyle:
-                    EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
+                side: EzConfig.borderSide(lightOutline.withValues(alpha: EzConfig.borderOpacity)),
+                textStyle: EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
               ),
         onPressed: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {
@@ -139,7 +131,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
             await loadColorScheme(light, Brightness.light);
           }
 
-          await EzConfig.rebuildUI(onComplete);
+          await EzConfig.rebuildUI();
         },
         icon: const Icon(Icons.contrast),
         label: EzConfig.l10n.csMonoChrome,

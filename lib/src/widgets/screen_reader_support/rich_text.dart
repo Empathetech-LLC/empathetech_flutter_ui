@@ -95,30 +95,28 @@ class EzRichText extends StatelessWidget {
     return label.toString();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final Text text = Text.rich(
-      TextSpan(children: children, semanticsLabel: null),
-      style: style,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      locale: locale,
-      softWrap: softWrap,
-      overflow: overflow,
-      textScaler: textScaler,
-      maxLines: maxLines,
-      strutStyle: strutStyle,
-      semanticsLabel: null,
-      textWidthBasis: textWidthBasis,
-      textHeightBehavior: textHeightBehavior,
-      selectionColor: selectionColor,
-    );
+  Text _text() => Text.rich(
+        TextSpan(children: children, semanticsLabel: null),
+        style: style,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaler: textScaler,
+        maxLines: maxLines,
+        strutStyle: strutStyle,
+        semanticsLabel: null,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+        selectionColor: selectionColor,
+      );
 
-    return Semantics(
-      label: _semanticsLabel(),
-      container: true,
-      explicitChildNodes: true,
-      child: textBackground ? EzTextBackground(text) : text,
-    );
-  }
+  @override
+  Widget build(BuildContext context) => Semantics(
+        label: _semanticsLabel(),
+        container: true,
+        explicitChildNodes: true,
+        child: textBackground ? EzTextBackground(_text()) : _text(),
+      );
 }

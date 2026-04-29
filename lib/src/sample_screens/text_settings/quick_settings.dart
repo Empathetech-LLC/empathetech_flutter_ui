@@ -16,8 +16,6 @@ class QuickTextSettings extends StatefulWidget {
   final EzLabelStyleProvider labelProvider;
 
   // Settings config
-  final void Function() onUpdate;
-
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockHeader;
   final Widget textBlockFooter;
@@ -38,7 +36,6 @@ class QuickTextSettings extends StatefulWidget {
     required this.titleProvider,
     required this.bodyProvider,
     required this.labelProvider,
-    required this.onUpdate,
     required this.moreQuickHeaderSettings,
     required this.textBlockHeader,
     required this.textBlockFooter,
@@ -62,13 +59,6 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
 
   late double backOpacity = EzConfig.textBackgroundOpacity;
   late Color backgroundColor = EzConfig.colors.surface.withValues(alpha: backOpacity);
-
-  // Define custom functions //
-
-  void redraw() {
-    widget.onUpdate();
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +125,7 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       // Headline preview
       EzTextBackground(
         Text(
-          EzConfig.l10n.tsHeadlineP1 +
-              EzConfig.l10n.tsHeadlineLink +
-              EzConfig.l10n.tsHeadlineP2,
+          EzConfig.l10n.tsHeadlineP1 + EzConfig.l10n.tsHeadlineLink + EzConfig.l10n.tsHeadlineP2,
           textAlign: TextAlign.center,
           style: widget.headlineProvider.value,
         ),
@@ -244,7 +232,6 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       widget.resetSpacer,
       EzResetButton(
         all: false,
-        redraw,
         androidPackage: widget.androidPackage,
         appName: widget.appName,
         dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(true)),

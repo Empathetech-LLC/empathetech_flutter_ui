@@ -47,30 +47,29 @@ class EzLinkWidget extends StatelessWidget {
             'Either onTap or url should be provided, but not both.');
 
   @override
-  Widget build(BuildContext context) {
-    final Color focusColor = EzConfig.colors.primary.withValues(alpha: focusOpacity);
-
-    return Tooltip(
-      message: tooltip,
-      excludeFromSemantics: true,
-      child: Semantics(
-        label: label,
-        link: true,
-        image: isImage,
-        hint: hint,
-        child: ExcludeSemantics(
-          child: onTap != null
-              ? InkWell(focusColor: focusColor, onTap: onTap, child: child)
-              : Link(
-                  uri: url,
-                  builder: (_, FollowLink? followLink) => InkWell(
-                    focusColor: focusColor,
-                    onTap: followLink,
-                    child: child,
+  Widget build(BuildContext context) => Tooltip(
+        message: tooltip,
+        excludeFromSemantics: true,
+        child: Semantics(
+          label: label,
+          link: true,
+          image: isImage,
+          hint: hint,
+          child: ExcludeSemantics(
+            child: onTap != null
+                ? InkWell(
+                    focusColor: EzConfig.colors.primary.withValues(alpha: focusOpacity),
+                    onTap: onTap,
+                    child: child)
+                : Link(
+                    uri: url,
+                    builder: (_, FollowLink? followLink) => InkWell(
+                      focusColor: EzConfig.colors.primary.withValues(alpha: focusOpacity),
+                      onTap: followLink,
+                      child: child,
+                    ),
                   ),
-                ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

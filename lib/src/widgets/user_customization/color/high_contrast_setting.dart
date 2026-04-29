@@ -120,9 +120,6 @@ const ColorScheme ezHighContrastLight = ColorScheme(
 );
 
 class EzHighContrastColorsSetting extends StatelessWidget {
-  /// [EzConfig.rebuildUI] passthrough
-  final void Function() onComplete;
-
   /// [ThemeData.colorScheme] for [Brightness.dark]
   final ColorScheme dark;
 
@@ -131,8 +128,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
 
   /// Easily store a custom mono chrome [ColorScheme] to [EzConfig]
   /// [ezHighContrastDark] and [ezHighContrastLight] by default
-  const EzHighContrastColorsSetting(
-    this.onComplete, {
+  const EzHighContrastColorsSetting({
     super.key,
     this.dark = ezHighContrastDark,
     this.light = ezHighContrastLight,
@@ -147,8 +143,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
                 iconColor: hceGreen,
                 shadowColor: Colors.transparent,
                 overlayColor: hceGreen,
-                side:
-                    EzConfig.borderSide(Colors.white.withValues(alpha: EzConfig.borderOpacity)),
+                side: EzConfig.borderSide(Colors.white.withValues(alpha: EzConfig.borderOpacity)),
                 textStyle: EzConfig.styles.bodyLarge?.copyWith(color: Colors.white),
               )
             : ElevatedButton.styleFrom(
@@ -157,8 +152,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
                 iconColor: hcePurple,
                 shadowColor: Colors.transparent,
                 overlayColor: hcePurple,
-                side:
-                    EzConfig.borderSide(Colors.black.withValues(alpha: EzConfig.borderOpacity)),
+                side: EzConfig.borderSide(Colors.black.withValues(alpha: EzConfig.borderOpacity)),
                 textStyle: EzConfig.styles.bodyLarge?.copyWith(color: Colors.black),
               ),
         onPressed: () async {
@@ -169,7 +163,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
             await loadColorScheme(light, Brightness.light);
           }
 
-          await EzConfig.rebuildUI(onComplete);
+          await EzConfig.rebuildUI();
         },
         icon: const Icon(Icons.contrast),
         label: EzConfig.l10n.csHighContrast,
