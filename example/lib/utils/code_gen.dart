@@ -526,18 +526,16 @@ class SettingsButton extends StatelessWidget {
 }
 
 class EFUICredits extends StatelessWidget {
+  final String _label;
+
   /// [EzMenuButton] for opening Open UI's product page
   /// Honor system: keep a version of this in your app
   /// Remove iff appropriate contributions have been made to Empathetech LLC
   /// https://www.empathetech.net/#/contribute
-  const EFUICredits({super.key});
+  EFUICredits({super.key}) : _label = EzConfig.isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
 
   @override
-  Widget build(BuildContext context) {
-    final String label =
-        EzConfig.isLefty ? EzConfig.l10n.gMadeBy : EzConfig.l10n.gCreator;
-
-    return Tooltip(
+  Widget build(BuildContext context) => Tooltip(
       message: EzConfig.l10n.gOpenEmpathetech,
       excludeFromSemantics: true,
       child: EzMenuLink(
@@ -548,7 +546,6 @@ class EFUICredits extends StatelessWidget {
             '\${EzConfig.isLefty ? '\${EzConfig.l10n.gSettings} \$label' : '\$label \${EzConfig.l10n.gSettings}'}. \${EzConfig.l10n.gOpenEmpathetech}',
       ),
     );
-  }
 }
 """);
 
@@ -793,11 +790,9 @@ class SettingsHubScreen extends StatelessWidget {
   /// Optionally override the starting position
   final int? targetPass;
 
-  /// Optionally override the starting sub-page to advanced (or equivalent)
-  final bool? advancedPass;
 
-  SettingsHubScreen({this.targetPass, this.advancedPass})
-      : super(key: ValueKey<int>(EzConfig.seed));
+
+  SettingsHubScreen({this.targetPass}) : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => Consumer<EzConfigProvider>(
