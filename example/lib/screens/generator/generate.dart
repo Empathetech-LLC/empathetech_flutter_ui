@@ -176,23 +176,19 @@ class _GenerateScreenState extends State<GenerateScreen> {
       readout: readout,
     );
 
-    if (widget.config.analysisOptions != null) {
-      await genAnalysis(
-        config: widget.config,
-        dir: projDir,
-        onFailure: onFailure,
-        readout: readout,
-      );
-    }
+    await genAnalysis(
+      config: widget.config,
+      dir: projDir,
+      onFailure: onFailure,
+      readout: readout,
+    );
 
-    if (widget.config.vsCodeConfig != null) {
-      await genVSCode(
-        config: widget.config,
-        dir: projDir,
-        onFailure: onFailure,
-        readout: readout,
-      );
-    }
+    await genVSCode(
+      config: widget.config,
+      dir: projDir,
+      onFailure: onFailure,
+      readout: readout,
+    );
 
     await runStuff(l10n);
   }
