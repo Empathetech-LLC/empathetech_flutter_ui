@@ -9,7 +9,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
-  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [ezIconRatio] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Checkbox.value] passthrough
@@ -19,7 +19,7 @@ class EzCheckbox extends StatelessWidget {
   final ValueChanged<bool?>? onChanged;
 
   /// Defaults to [ezIconRatio]
-  final double? scale;
+  final double _scale;
 
   /// [Checkbox.isError] passthrough
   final bool isError;
@@ -28,33 +28,28 @@ class EzCheckbox extends StatelessWidget {
   final String? semanticLabel;
 
   /// [Checkbox] with custom styling and scaling
-  const EzCheckbox({
+  EzCheckbox({
     super.key,
     this.padding,
     this.value,
     this.onChanged,
-    this.scale,
     this.isError = false,
     this.semanticLabel,
-  });
+  }) : _scale = ezIconRatio();
 
   @override
-  Widget build(BuildContext context) {
-    final double ratio = scale ?? ezIconRatio();
-
-    return Padding(
-      padding: ratio > 1.1 ? padding ?? EzInsets.wrap(EzConfig.marginVal) : EdgeInsets.zero,
-      child: Transform.scale(
-        scale: max(1.0, ratio),
-        child: Checkbox(
-          value: value,
-          onChanged: onChanged,
-          isError: isError,
-          semanticLabel: semanticLabel,
+  Widget build(BuildContext context) => Padding(
+        padding: _scale > 1.1 ? padding ?? EzInsets.wrap(EzConfig.marginVal) : EdgeInsets.zero,
+        child: Transform.scale(
+          scale: max(1.0, _scale),
+          child: Checkbox(
+            value: value,
+            onChanged: onChanged,
+            isError: isError,
+            semanticLabel: semanticLabel,
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class EzCheckboxPair extends StatelessWidget {
@@ -91,9 +86,6 @@ class EzCheckboxPair extends StatelessWidget {
   /// [EzText.backgroundColor] passthrough
   final Color? backgroundColor;
 
-  /// Defaults to [ezIconRatio]
-  final double? scale;
-
   /// Defaults to [EdgeInsets.all] with [EzConfig.marginVal] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
@@ -129,7 +121,6 @@ class EzCheckboxPair extends StatelessWidget {
     this.padding,
     this.value,
     this.onChanged,
-    this.scale,
     this.isError = false,
     this.semanticLabel,
   });
@@ -152,7 +143,6 @@ class EzCheckboxPair extends StatelessWidget {
             ),
           ),
           EzCheckbox(
-            scale: scale,
             padding: padding,
             value: value,
             onChanged: onChanged,
