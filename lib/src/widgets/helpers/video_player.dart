@@ -185,8 +185,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     final double controlsHeight =
         (3 * EzConfig.marginVal + 2 * (EzConfig.iconSize + EzConfig.padding));
 
-    final TextStyle? labelStyle =
-        EzConfig.styles.labelLarge?.copyWith(color: widget.textColor);
+    final TextStyle? labelStyle = EzConfig.styles.labelLarge?.copyWith(color: widget.textColor);
 
     final SliderThemeData sliderTheme = SliderThemeData(
       activeTrackColor: EzConfig.colors.secondary,
@@ -284,7 +283,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: EzAnimVis(
                     mod: 0.5,
                     visible: showVolume?.isActive == true,
-                    forceType: EzTransitionType.zoom,
+                    forceType: EzTransitionType.none,
+                    forceFade: true,
                     kid: ExcludeSemantics(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -293,14 +293,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           EzText(
                             '${(value.volume * 100).toStringAsFixed(0)}%',
                             style: switch (captionStyle) {
-                              4 => EzConfig.styles.displayLarge
-                                  ?.copyWith(color: widget.textColor),
-                              3 => EzConfig.styles.headlineLarge
-                                  ?.copyWith(color: widget.textColor),
-                              2 =>
-                                EzConfig.styles.titleLarge?.copyWith(color: widget.textColor),
-                              1 =>
-                                EzConfig.styles.bodyLarge?.copyWith(color: widget.textColor),
+                              4 => EzConfig.styles.displayLarge?.copyWith(color: widget.textColor),
+                              3 => EzConfig.styles.headlineLarge?.copyWith(color: widget.textColor),
+                              2 => EzConfig.styles.titleLarge?.copyWith(color: widget.textColor),
+                              1 => EzConfig.styles.bodyLarge?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
                             textAlign: TextAlign.center,
@@ -350,9 +346,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   Positioned(
                     left: 0,
                     right: 0,
-                    bottom: (hovering || subMenuControl.isOpen)
-                        ? controlsHeight
-                        : EzConfig.marginVal,
+                    bottom:
+                        (hovering || subMenuControl.isOpen) ? controlsHeight : EzConfig.marginVal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -361,14 +356,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           child: EzText(
                             value.caption.text,
                             style: switch (captionStyle) {
-                              4 => EzConfig.styles.displayLarge
-                                  ?.copyWith(color: widget.textColor),
-                              3 => EzConfig.styles.headlineLarge
-                                  ?.copyWith(color: widget.textColor),
-                              2 =>
-                                EzConfig.styles.titleLarge?.copyWith(color: widget.textColor),
-                              1 =>
-                                EzConfig.styles.bodyLarge?.copyWith(color: widget.textColor),
+                              4 => EzConfig.styles.displayLarge?.copyWith(color: widget.textColor),
+                              3 => EzConfig.styles.headlineLarge?.copyWith(color: widget.textColor),
+                              2 => EzConfig.styles.titleLarge?.copyWith(color: widget.textColor),
+                              1 => EzConfig.styles.bodyLarge?.copyWith(color: widget.textColor),
                               _ => labelStyle,
                             },
                             textAlign: TextAlign.center,
@@ -411,8 +402,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                     mobileHover?.cancel();
                                   }
                                 },
-                                onChanged: (double value) =>
-                                    widget.controller.seekTo(findP(value)),
+                                onChanged: (double value) => widget.controller.seekTo(findP(value)),
                                 onChangeEnd: (_) async {
                                   await play(value);
                                   handleMobileHover();
@@ -448,9 +438,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                           onPressed: () => play(value),
                                           tooltip: EzConfig.l10n.gPlay,
                                           color: EzConfig.colors.primary,
-                                          icon: Icon(value.isCompleted
-                                              ? Icons.replay
-                                              : Icons.play_arrow),
+                                          icon: Icon(
+                                              value.isCompleted ? Icons.replay : Icons.play_arrow),
                                         ),
                                 ),
 

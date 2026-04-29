@@ -210,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       visible: !exampleDomain,
                       mod: 0.5,
                       forceType: EzTransitionType.zoom,
+                      forceFade: true,
                       kid: TextFormField(
                         controller: domainTC,
                         textAlign: TextAlign.start,
@@ -222,6 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     EzAnimSwitch(
                       mod: 0.5,
                       forceType: EzTransitionType.zoom,
+                      forceFade: false,
                       child: EzSwitchPair(
                         key: ValueKey<bool>(exampleDomain),
                         mainAxisSize: MainAxisSize.max,
