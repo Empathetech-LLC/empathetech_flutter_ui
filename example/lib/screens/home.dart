@@ -14,6 +14,8 @@ import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+// TODO: get scroll to disappear with time?
+
 class HomeScreen extends StatefulWidget {
   HomeScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
@@ -278,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               ExpansionTile(
                 // TODO: check semantics
+                // TODO: update padding. definitely here, maybe everywhere
                 backgroundColor: EzConfig.colors.surfaceContainer,
                 collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
                 controller: advancedEC,
