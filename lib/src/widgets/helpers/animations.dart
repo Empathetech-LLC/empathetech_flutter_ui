@@ -120,30 +120,28 @@ class EzFauxCarousel extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: ezAnimDuration(mod: animMod),
-      switchInCurve: Curves.easeInOut,
-      switchOutCurve: Curves.easeInOut,
-      transitionBuilder: (Widget w, Animation<double> a) {
-        final double sign = (w.key == ValueKey<int>(position)) ? 1.0 : -1.0;
-        final double direction = (EzConfig.isLTR ? 1.0 : -1.0) * delta.sign;
+  Widget build(BuildContext context) => AnimatedSwitcher(
+        duration: ezAnimDuration(mod: animMod),
+        switchInCurve: Curves.easeInOut,
+        switchOutCurve: Curves.easeInOut,
+        transitionBuilder: (Widget w, Animation<double> a) {
+          final double sign = (w.key == ValueKey<int>(position)) ? 1.0 : -1.0;
+          final double direction = (EzConfig.isLTR ? 1.0 : -1.0) * delta.sign;
 
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: Offset(direction * sign, 0.0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: a,
-            curve: Curves.easeInOut,
-          )),
-          child: FadeTransition(opacity: a, child: w),
-        );
-      },
-      child: KeyedSubtree(
-        key: ValueKey<int>(position),
-        child: child,
-      ),
-    );
-  }
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: Offset(direction * sign, 0.0),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(
+              parent: a,
+              curve: Curves.easeInOut,
+            )),
+            child: FadeTransition(opacity: a, child: w),
+          );
+        },
+        child: KeyedSubtree(
+          key: ValueKey<int>(position),
+          child: child,
+        ),
+      );
 }

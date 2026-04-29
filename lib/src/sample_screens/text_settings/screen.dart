@@ -174,48 +174,46 @@ class _TextSettings extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return EzFauxCarousel(
-      position: target.isFirst ? 0 : 1,
-      delta: target.isFirst ? -1 : 1,
-      animMod: 0.5,
-      child: (target == EzSubSetting.qckText)
-          ? QuickTextSettings(
-              displayProvider: Provider.of<EzDisplayStyleProvider>(context),
-              headlineProvider: Provider.of<EzHeadlineStyleProvider>(context),
-              titleProvider: Provider.of<EzTitleStyleProvider>(context),
-              bodyProvider: Provider.of<EzBodyStyleProvider>(context),
-              labelProvider: Provider.of<EzLabelStyleProvider>(context),
-              onUpdate: onUpdate,
-              moreQuickHeaderSettings: moreQuickHeaderSettings,
-              textBlockHeader: textBlockHeader,
-              textBlockFooter: textBlockFooter,
-              showOpacity: showOpacity,
-              moreQuickFooterSettings: moreQuickFooterSettings,
-              resetSpacer: resetSpacer,
-              extraDark: extraDark,
-              extraLight: extraLight,
-              appName: appName,
-              androidPackage: androidPackage,
-              resetSkip: resetSkip,
-              saveSkip: saveSkip,
-            )
-          : AdvancedTextSettings(
-              displayProvider: Provider.of<EzDisplayStyleProvider>(context),
-              headlineProvider: Provider.of<EzHeadlineStyleProvider>(context),
-              titleProvider: Provider.of<EzTitleStyleProvider>(context),
-              bodyProvider: Provider.of<EzBodyStyleProvider>(context),
-              labelProvider: Provider.of<EzLabelStyleProvider>(context),
-              onUpdate: onUpdate,
-              showSpacing: showSpacing,
-              resetSpacer: resetSpacer,
-              extraDark: extraDark,
-              extraLight: extraLight,
-              appName: appName,
-              androidPackage: androidPackage,
-              resetSkip: resetSkip,
-              saveSkip: saveSkip,
-            ),
-    );
-  }
+  Widget build(BuildContext context) => EzFauxCarousel(
+        position: target.isFirst ? 0 : 1,
+        delta: target.isFirst ? -1 : 1,
+        animMod: 0.5,
+        child: (target == EzSubSetting.qckText)
+            ? QuickTextSettings(
+                displayProvider: Provider.of<EzDisplayStyleProvider>(context),
+                headlineProvider: Provider.of<EzHeadlineStyleProvider>(context),
+                titleProvider: Provider.of<EzTitleStyleProvider>(context),
+                bodyProvider: Provider.of<EzBodyStyleProvider>(context),
+                labelProvider: Provider.of<EzLabelStyleProvider>(context),
+                onUpdate: onUpdate,
+                moreQuickHeaderSettings: moreQuickHeaderSettings,
+                textBlockHeader: textBlockHeader,
+                textBlockFooter: textBlockFooter,
+                showOpacity: showOpacity,
+                moreQuickFooterSettings: moreQuickFooterSettings,
+                resetSpacer: resetSpacer,
+                extraDark: extraDark,
+                extraLight: extraLight,
+                appName: appName,
+                androidPackage: androidPackage,
+                resetSkip: resetSkip,
+                saveSkip: saveSkip,
+              )
+            : AdvancedTextSettings(
+                displayProvider: Provider.of<EzDisplayStyleProvider>(context),
+                headlineProvider: Provider.of<EzHeadlineStyleProvider>(context),
+                titleProvider: Provider.of<EzTitleStyleProvider>(context),
+                bodyProvider: Provider.of<EzBodyStyleProvider>(context),
+                labelProvider: Provider.of<EzLabelStyleProvider>(context),
+                onUpdate: onUpdate,
+                showSpacing: showSpacing,
+                resetSpacer: resetSpacer,
+                extraDark: extraDark,
+                extraLight: extraLight,
+                appName: appName,
+                androidPackage: androidPackage,
+                resetSkip: resetSkip,
+                saveSkip: saveSkip,
+              ),
+      );
 }

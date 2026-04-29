@@ -131,62 +131,60 @@ class EzDropdownMenu<T> extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return IconButtonTheme(
-      data: IconButtonThemeData(
-        style: IconButton.styleFrom(
-          backgroundColor: EzConfig.colors.surface.withValues(alpha: EzConfig.buttonOpacity),
-          foregroundColor: EzConfig.colors.primary,
-          disabledForegroundColor: EzConfig.colors.outline,
-          overlayColor: EzConfig.colors.primary,
-          side: null,
-          shape: EzConfig.buttonShape.shape,
-          iconSize: EzConfig.iconSize,
-          alignment: Alignment.center,
-          padding: EzInsets.wrap(EzConfig.padding),
+  Widget build(BuildContext context) => IconButtonTheme(
+        data: IconButtonThemeData(
+          style: IconButton.styleFrom(
+            backgroundColor: EzConfig.colors.surface.withValues(alpha: EzConfig.buttonOpacity),
+            foregroundColor: EzConfig.colors.primary,
+            disabledForegroundColor: EzConfig.colors.outline,
+            overlayColor: EzConfig.colors.primary,
+            side: null,
+            shape: EzConfig.buttonShape.shape,
+            iconSize: EzConfig.iconSize,
+            alignment: Alignment.center,
+            padding: EzInsets.wrap(EzConfig.padding),
+          ),
         ),
-      ),
-      child: DropdownMenu<T>(
-        enabled: enabled,
-        width: width ??
-            (widthEntries == null
-                ? null
-                : ezDropdownWidth(context: context, entries: widthEntries!)),
-        menuHeight: menuHeight,
-        leadingIcon: leadingIcon,
-        trailingIcon: trailingIcon ??
-            Icon(
-              Icons.arrow_drop_down,
-              size: EzConfig.iconSize,
-            ),
-        label: label,
-        hintText: hintText,
-        helperText: helperText,
-        errorText: errorText,
-        selectedTrailingIcon: selectedTrailingIcon ??
-            Icon(
-              Icons.arrow_drop_up,
-              size: EzConfig.iconSize,
-            ),
-        enableFilter: enableFilter,
-        enableSearch: enableSearch,
-        keyboardType: keyboardType,
-        textStyle: textStyle,
-        textAlign: textAlign,
-        inputDecorationTheme: inputDecorationTheme,
-        menuStyle: menuStyle,
-        controller: controller,
-        initialSelection: initialSelection,
-        onSelected: onSelected,
-        focusNode: focusNode,
-        requestFocusOnTap: requestFocusOnTap,
-        expandedInsets: expandedInsets,
-        filterCallback: filterCallback,
-        searchCallback: searchCallback,
-        alignmentOffset: alignmentOffset,
-        dropdownMenuEntries: dropdownMenuEntries,
-        inputFormatters: inputFormatters,
-      ),
-    );
-  }
+        child: DropdownMenu<T>(
+          enabled: enabled,
+          width: width ??
+              (widthEntries == null
+                  ? null
+                  : ezDropdownWidth(context: context, entries: widthEntries!)),
+          menuHeight: menuHeight,
+          leadingIcon: leadingIcon,
+          trailingIcon: trailingIcon ??
+              Icon(
+                Icons.arrow_drop_down,
+                size: EzConfig.iconSize,
+              ),
+          label: label,
+          hintText: hintText,
+          helperText: helperText,
+          errorText: errorText,
+          selectedTrailingIcon: selectedTrailingIcon ??
+              Icon(
+                Icons.arrow_drop_up,
+                size: EzConfig.iconSize,
+              ),
+          enableFilter: enableFilter,
+          enableSearch: enableSearch,
+          keyboardType: keyboardType,
+          textStyle: textStyle,
+          textAlign: textAlign,
+          inputDecorationTheme: inputDecorationTheme,
+          menuStyle: menuStyle,
+          controller: controller,
+          initialSelection: initialSelection,
+          onSelected: onSelected,
+          focusNode: focusNode,
+          requestFocusOnTap: requestFocusOnTap,
+          expandedInsets: expandedInsets,
+          filterCallback: filterCallback,
+          searchCallback: searchCallback,
+          alignmentOffset: alignmentOffset,
+          dropdownMenuEntries: dropdownMenuEntries,
+          inputFormatters: inputFormatters,
+        ),
+      );
 }
