@@ -32,9 +32,6 @@ class EzIconButton extends StatelessWidget {
   /// Defaults to [EzConfig.iconSize]
   final double? iconSize;
 
-  /// [IconButton.padding] passthrough
-  final EdgeInsetsGeometry? padding;
-
   /// [IconButton.color] passthrough
   final Color? color;
 
@@ -46,9 +43,6 @@ class EzIconButton extends StatelessWidget {
 
   /// [IconButton.tooltip] passthrough
   final String? tooltip;
-
-  /// [IconButton.constraints] passthrough
-  final BoxConstraints? constraints;
 
   /// [IconButton.style] passthrough
   final ButtonStyle? style;
@@ -69,12 +63,10 @@ class EzIconButton extends StatelessWidget {
   const EzIconButton({
     super.key,
     this.iconSize,
-    this.padding,
     this.color,
     this.onPressed,
     this.onLongPress,
     this.tooltip,
-    this.constraints,
     this.style,
     this.enabled = true,
     this.fauxDisabled = false,
@@ -110,12 +102,10 @@ class EzIconButton extends StatelessWidget {
 
     return IconButton(
       iconSize: iSize,
-      padding: padding,
       color: color,
       onPressed: enabled ? onPressed : doNothing,
       onLongPress: enabled ? onLongPress : doNothing,
       tooltip: tooltip,
-      constraints: constraints,
       style: buttonStyle,
       icon: icon,
     );
