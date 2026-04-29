@@ -534,7 +534,7 @@ class _AdvancedTextSettingsState extends State<AdvancedTextSettings> {
           ),
           EzConfig.margin,
           EzDropdownMenu<EzTextSettingType>(
-            widthEntries: <String>[EzConfig.l10n.tsHeadline],
+            widthEntry: EzConfig.l10n.tsHeadline,
             textStyle: widget.labelProvider.value,
             dropdownMenuEntries: <DropdownMenuEntry<EzTextSettingType>>[
               DropdownMenuEntry<EzTextSettingType>(
