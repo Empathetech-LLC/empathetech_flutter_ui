@@ -58,7 +58,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
           : '${widget.config.flutterPath}/';
 
   ValueNotifier<String> readout = ValueNotifier<String>('');
-  bool showReadout = false;
+  final ExpansibleController ec = ExpansibleController();
 
   // Define custom functions //
 
@@ -200,12 +200,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
     try {
       // Update entitlements //
 
-      final File macOSDebugEntitlements =
-          File('$projDir/macos/Runner/DebugProfile.entitlements');
+      final File macOSDebugEntitlements = File('$projDir/macos/Runner/DebugProfile.entitlements');
       final File macOSReleaseEntitlements = File('$projDir/macos/Runner/Release.entitlements');
 
-      final XmlDocument debugDoc =
-          XmlDocument.parse(await macOSDebugEntitlements.readAsString());
+      final XmlDocument debugDoc = XmlDocument.parse(await macOSDebugEntitlements.readAsString());
       final XmlDocument releaseDoc =
           XmlDocument.parse(await macOSReleaseEntitlements.readAsString());
 
@@ -301,72 +299,35 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget header(Lang l10n) {
     switch (genState) {
       case GeneratorState.running:
-        return SizedBox(
-          height: (heightOf(context) / 3),
-          width: double.infinity,
-          child: EmpathyLoading(semantics: EzConfig.l10n.gLoadingAnim),
-        );
+        return EmpathyLoading(semantics: EzConfig.l10n.gLoadingAnim);
       case GeneratorState.successful:
-        return SizedBox(
-          height: heightOf(context) / 3,
-          width: double.infinity,
-          child: Center(
-            child: EzScrollView(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SuccessHeader(
-                  message:
-                      '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
-                ),
-                EzConfig.separator,
-                RunOption(
-                  projDir: projDir,
-                  style: ezSubTitleStyle(),
-                  emulate: () async {
-                    if (genState == GeneratorState.running) return;
-
-                    setState(() => genState = GeneratorState.running);
-                    ezSnackBar(context, message: l10n.gsFirstRun);
-
-                    await ezCmd(
-                      '${flutterPath}flutter run -d ${device()}',
-                      dir: projDir,
-                      onSuccess: () => setState(() => genState = GeneratorState.successful),
-                      onFailure: onFailure,
-                      readout: readout,
-                    );
-                  },
-                ),
-              ],
-            ),
+        return Center(
+          child: SuccessHeader(
+            message: '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
           ),
         );
       case GeneratorState.failed:
-        return SizedBox(
-          height: heightOf(context) / 3,
-          width: double.infinity,
-          child: Center(
-            child: EzScrollView(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FailureHeader(
-                  message: failureMessage,
-                  richMessage: richFailureMessage,
+        return Center(
+          child: EzScrollView(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FailureHeader(
+                message: failureMessage,
+                richMessage: richFailureMessage,
+              ),
+              if (showDelete == true) ...<Widget>[
+                EzConfig.spacer,
+                DeleteOption(
+                  appName: widget.config.appName,
+                  dir: workDir,
+                  style: ezSubTitleStyle(),
                 ),
-                if (showDelete == true) ...<Widget>[
-                  EzConfig.spacer,
-                  DeleteOption(
-                    appName: widget.config.appName,
-                    dir: workDir,
-                    style: ezSubTitleStyle(),
-                  ),
-                ],
-                if (showDelete == null) ...<Widget>[
-                  EzConfig.spacer,
-                  LinkOption(ezSubTitleStyle()),
-                ],
               ],
-            ),
+              if (showDelete == null) ...<Widget>[
+                EzConfig.spacer,
+                LinkOption(ezSubTitleStyle()),
+              ],
+            ],
           ),
         );
     }
@@ -385,55 +346,57 @@ class _GenerateScreenState extends State<GenerateScreen> {
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
         EzScreen(EzScrollView(children: <Widget>[
-          header(l10n),
-          EzConfig.divider,
-
-          // Console output //
-
-          // Toggle
-          EzRow(
-            children: <Widget>[
-              EzText(
-                l10n.gsConsole,
-                style: EzConfig.styles.titleLarge,
-                textAlign: TextAlign.center,
-              ),
-              EzConfig.rowMargin,
-              EzIconButton(
-                onPressed: () => setState(() => showReadout = !showReadout),
-                icon: Icon(
-                  showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                ),
-              ),
-            ],
+          SizedBox(
+            height: heightOf(context) / 3,
+            width: double.infinity,
+            child: header(l10n),
           ),
-          EzConfig.margin,
-
-          // Readout TODO: fancy
-          EzAnimSwitch(
-            mod: 0.75,
-            child: Container(
-              constraints: BoxConstraints(
-                minWidth: widthOf(context) * 0.667,
-                maxWidth: widthOf(context) * 0.667,
-                maxHeight: heightOf(context) / 2,
+          Container(
+            alignment: Alignment.center,
+            constraints: BoxConstraints(
+              minWidth: widthOf(context) * 0.667,
+              maxWidth: widthOf(context) * 0.667,
+              maxHeight: heightOf(context) / 2,
+            ),
+            child: ExpansionTile(
+              controller: ec,
+              onExpansionChanged: (_) => setState(() {}),
+              expandedAlignment: Alignment.center,
+              expandedCrossAxisAlignment: CrossAxisAlignment.center,
+              backgroundColor: EzConfig.colors.surfaceContainer,
+              collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
+              showTrailingIcon: false,
+              title: EzRow(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Flexible(
+                    child: EzText(
+                      l10n.gsConsole,
+                      style: EzConfig.styles.titleLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  EzConfig.rowMargin,
+                  EzIconButton(
+                    icon: Icon(
+                      ezVisIcon(ec.isExpanded),
+                      semanticLabel: ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                    ),
+                    onPressed: () => ec.isExpanded ? ec.collapse() : ec.expand(),
+                    tooltip: ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                  ),
+                ],
               ),
-              padding: EdgeInsets.all(EzConfig.marginVal),
-              decoration: BoxDecoration(
-                color: EzConfig.colors.surfaceDim,
-                borderRadius: ezRoundEdge,
-              ),
-              child: ValueListenableBuilder<String>(
-                valueListenable: readout,
-                builder: (_, String value, __) => EzScrollView(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  child: Text(
+              children: <Widget>[
+                ValueListenableBuilder<String>(
+                  valueListenable: readout,
+                  builder: (_, String value, __) => Text(
                     value,
                     style: EzConfig.styles.bodyLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
-              ),
+              ],
             ),
           ),
           EzConfig.separator,
