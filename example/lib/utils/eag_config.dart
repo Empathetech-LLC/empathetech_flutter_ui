@@ -28,14 +28,14 @@ class EAGConfig {
 
   final Map<String, dynamic> appDefaults;
 
-  final String? flutterPath;
   final String? workPath;
-
-  final String? copyright;
+  final String copyright;
   final String license;
   final String l10nConfig;
-  final String? analysisOptions;
-  final String? vsCodeConfig;
+  final String analysisOptions;
+  final String vsCodeConfig;
+
+  final String? flutterPath;
 
   EAGConfig({
     required this.appName,
@@ -43,13 +43,13 @@ class EAGConfig {
     required this.appDescription,
     required this.domainName,
     required this.appDefaults,
-    this.flutterPath,
     this.workPath,
-    this.copyright,
+    required this.copyright,
     required this.license,
     required this.l10nConfig,
-    this.analysisOptions,
-    this.vsCodeConfig,
+    required this.analysisOptions,
+    required this.vsCodeConfig,
+    this.flutterPath,
   });
 
   factory EAGConfig.fromJson(dynamic json) {
@@ -59,13 +59,13 @@ class EAGConfig {
       appDescription: json[appDescriptionKey] as String,
       domainName: json[domainNameKey] as String,
       appDefaults: json[appDefaultsKey] as Map<String, dynamic>,
-      flutterPath: json[flutterPathKey] as String?,
       workPath: json[workPathKey] as String?,
-      copyright: json[copyrightKey] as String?,
+      copyright: json[copyrightKey] as String,
       license: json[licenseKey] as String,
       l10nConfig: json[l10nConfigKey] as String,
-      analysisOptions: json[analysisOptionsKey] as String?,
-      vsCodeConfig: json[vsCodeConfigKey] as String?,
+      analysisOptions: json[analysisOptionsKey] as String,
+      vsCodeConfig: json[vsCodeConfigKey] as String,
+      flutterPath: json[flutterPathKey] as String?,
     );
   }
 
@@ -76,13 +76,13 @@ class EAGConfig {
       appDescriptionKey: appDescription,
       domainNameKey: domainName,
       appDefaultsKey: appDefaults,
-      flutterPathKey: flutterPath,
       workPathKey: workPath,
       copyrightKey: copyright,
       licenseKey: license,
       l10nConfigKey: l10nConfig,
       analysisOptionsKey: analysisOptions,
       vsCodeConfigKey: vsCodeConfig,
+      flutterPathKey: flutterPath,
     };
   }
 
@@ -94,13 +94,13 @@ class EAGConfig {
   $appDescriptionKey: $appDescription,
   $domainNameKey: $domainName,
   $appDefaultsKey: ${appDefaults.toString()}
-  $flutterPathKey: $flutterPath,
   $workPathKey: $workPath,
   $copyrightKey: $copyright,
   $licenseKey: $license,
   $l10nConfigKey: $l10nConfig,
   $analysisOptionsKey: $analysisOptions,
   $vsCodeConfigKey: $vsCodeConfig,
+  $flutterPathKey: $flutterPath,
 }''';
   }
 }
