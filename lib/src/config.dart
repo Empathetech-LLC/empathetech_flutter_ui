@@ -355,12 +355,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
 
     if (context.mounted) {
-      ezSnackBar(
-        context,
-        message: EzConfig.l10n.ssConfigSaved(
-          archivePath(appName: appName, androidPackage: androidPackage),
-        ),
-      );
+      ezSnackBar(context, message: EzConfig.l10n.ssConfigSaved(archivePath()));
     }
   }
 

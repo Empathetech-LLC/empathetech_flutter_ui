@@ -25,12 +25,12 @@ import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 // Platform checks //
 
 /// Where to find saved files on the current [TargetPlatform]
-String archivePath({required String? androidPackage, required String appName}) {
+String archivePath() {
   switch (EzConfig.platform) {
     case TargetPlatform.android:
-      return 'Root > Android > Data > ${androidPackage ?? 'com.example.app'} > files';
+      return 'Root > Android > Data > ${EzConfig.androidPackage ?? 'com.example.app'} > files';
     case TargetPlatform.iOS:
-      return 'Files > Browse > $appName';
+      return 'Files > Browse > ${EzConfig.appName}';
     default:
       return 'Downloads';
   }

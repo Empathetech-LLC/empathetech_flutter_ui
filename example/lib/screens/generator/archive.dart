@@ -70,13 +70,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
           child: SuccessHeader(
             richMessage: EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                  // Open UI info, open is the one saving a file
-                  text: EzConfig.l10n.ssConfigSaved(archivePath(
-                    appName: thisAppName,
-                    androidPackage: thisPackageName,
-                  )),
-                ),
+                EzPlainText(text: EzConfig.l10n.ssConfigSaved(archivePath())),
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
