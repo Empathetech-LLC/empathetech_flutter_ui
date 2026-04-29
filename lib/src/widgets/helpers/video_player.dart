@@ -386,9 +386,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   bottom: 0,
                   height: controlsHeight,
                   child: EzAnimVis(
-                    mod: 0.75,
+                    mod: 0.5,
                     visible: hovering || subMenuControl.isOpen || !value.isPlaying,
-                    forceType: EzTransitionType.slideY, // TODO: fancy
+                    forceType: EzTransitionType.none,
+                    forceFade: true,
                     kid: Container(
                       decoration: BoxDecoration(color: widget.controlsBackground),
                       child: EzCol(
