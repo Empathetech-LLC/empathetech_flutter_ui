@@ -17,6 +17,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // EFUI won't work at all (immediate runtime failure) if EzConfig isn't properly initialized, so they're moot
 
 class EzConfig {
+  /// Name of app
+  final String _appName;
+
+  /// Android package path (optional)
+  final String? _androidPackage;
+
   /// [AssetImage] paths for the app
   final Set<String> _assetPaths;
 
@@ -57,6 +63,8 @@ class EzConfig {
   /// Private/internal constructor
   EzConfig._({
     // External (factory parameters)
+    required String appName,
+    required String? androidPackage,
     required Set<String> assetPaths,
     required Locale localeFallback,
     required EFUILang l10nFallback,
@@ -68,7 +76,9 @@ class EzConfig {
     // Internal (built by factory)
     required Map<String, dynamic> prefs,
     required Map<String, Type> typeMap,
-  })  : _assetPaths = assetPaths,
+  })  : _appName = appName,
+        _androidPackage = androidPackage,
+        _assetPaths = assetPaths,
         _localeFallback = localeFallback,
         _l10nFallback = l10nFallback,
         _preferences = preferences,
@@ -78,13 +88,18 @@ class EzConfig {
         _prefs = prefs,
         _typeMap = typeMap;
 
+  /// [appName] => provide the name of the app
+  /// [androidPackage] => provide the Android package String, when relevant
   /// [assetPaths] => provide the [AssetImage] paths for this app
-  /// [defaults] => provide your brand colors, text styles, design settings, etc.
   /// [localeFallback] => provide a fallback [Locale] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [l10nFallback] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [preferences] => provide a [SharedPreferencesWithCache] instance
-  /// [provider] => Set by [EzConfigurableApp], recommended to leave null unless you are not using [EzConfigurableApp]
+  /// [securePreferences] => optionally provide a [FlutterSecureStorage] instance
+  /// [defaults] => provide your brand colors, text styles, design settings, etc.
+  /// [neverReset] => provide the set of keys that should never be reset by any [EzConfig] functions
   factory EzConfig.init({
+    required String appName,
+    required String? androidPackage,
     required Set<String> assetPaths,
     required Locale localeFallback,
     required EFUILang l10nFallback,
@@ -152,6 +167,8 @@ Must be one of [int, bool, double, String, List<String>]''');
       // Build the EzConfig instance //
 
       _instance = EzConfig._(
+        appName: appName,
+        androidPackage: androidPackage,
         assetPaths: <String>{...assetPaths, ...efuiAssetPaths},
         localeFallback: localeFallback,
         l10nFallback: l10nFallback,
@@ -170,6 +187,12 @@ Must be one of [int, bool, double, String, List<String>]''');
   //* Config getters *//
 
   // Core //
+
+  /// Name of the app
+  static String get appName => _instance!._appName;
+
+  /// Android package String, if relevant
+  static String? get androidPackage => _instance!._androidPackage;
 
   /// Default/fallback for unsupported [Locale]s
   static Locale get localeFallback => _instance!._localeFallback;
@@ -312,12 +335,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Save the current [EzConfig] to local storage
-  static Future<void> saveConfig(
-    BuildContext context, {
-    required String appName,
-    String? androidPackage,
-    Set<String>? skip,
-  }) async {
+  static Future<void> saveConfig(BuildContext context, {Set<String>? skip}) async {
     final Map<String, dynamic> config = Map<String, dynamic>.from(_instance!._prefs);
     if (skip != null) {
       for (final String key in skip) {
