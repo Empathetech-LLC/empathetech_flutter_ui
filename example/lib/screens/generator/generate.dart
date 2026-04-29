@@ -356,7 +356,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
             constraints: BoxConstraints(
               minWidth: widthOf(context) * 0.667,
               maxWidth: widthOf(context) * 0.667,
-              maxHeight: heightOf(context) / 2,
             ),
             child: ExpansionTile(
               controller: ec,
