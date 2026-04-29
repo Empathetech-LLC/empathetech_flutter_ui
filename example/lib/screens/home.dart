@@ -278,7 +278,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               ExpansionTile(
                 // TODO: check semantics
-                // TODO: update padding. definitely here, maybe everywhere
                 backgroundColor: EzConfig.colors.surfaceContainer,
                 collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
                 controller: advancedEC,
