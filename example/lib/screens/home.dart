@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // Advanced settings //
 
               ExpansionTile(
-                // TODO: post-audit(s): check semantics (for all of em)
+                // TODO: check semantics (for all of em)
                 backgroundColor: EzConfig.colors.surfaceContainer,
                 collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
                 controller: advancedEC,

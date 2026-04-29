@@ -665,13 +665,10 @@ export '${config.appName}_scaffold.dart';
 import '../widgets/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ErrorScreen extends StatelessWidget {
-  final GoException? error;
-
-  ErrorScreen(this.error) : super(key: ValueKey<int>(EzConfig.seed));
+  ErrorScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(EzScreen(Center(
