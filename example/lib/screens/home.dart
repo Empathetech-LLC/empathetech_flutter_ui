@@ -14,8 +14,6 @@ import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-// TODO: get scroll to disappear with time?
-
 class HomeScreen extends StatefulWidget {
   HomeScreen() : super(key: ValueKey<int>(EzConfig.seed));
 
@@ -210,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     EzAnimVis(
                       visible: !exampleDomain,
-                      mod: 0.75,
+                      mod: 0.5,
                       forceType: EzTransitionType.zoom,
                       kid: TextFormField(
                         controller: domainTC,
@@ -222,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     EzAnimSwitch(
-                      mod: 0.75,
+                      mod: 0.5,
                       forceType: EzTransitionType.zoom,
                       child: EzSwitchPair(
                         key: ValueKey<bool>(exampleDomain),
@@ -284,6 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: EzConfig.colors.surfaceContainer,
                 collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
                 controller: advancedEC,
+                onExpansionChanged: (_) => setState(() {}),
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 showTrailingIcon: false,
                 title: EzRow(
@@ -302,12 +301,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ExcludeSemantics(
                         child: EzIconButton(
                           icon: Icon(ezVisIcon(advancedEC.isExpanded)),
-                          onPressed: () {
-                            advancedEC.isExpanded
-                                ? advancedEC.collapse()
-                                : advancedEC.expand();
-                            setState(() {});
-                          },
+                          onPressed: () => advancedEC.isExpanded
+                              ? advancedEC.collapse()
+                              : advancedEC.expand(),
                           tooltip: advancedEC.isExpanded
                               ? EzConfig.l10n.gClose
                               : EzConfig.l10n.gOpen,
@@ -898,54 +894,63 @@ class _AdvancedSettingsField extends StatefulWidget {
 
 class _AdvancedSettingsFieldState extends State<_AdvancedSettingsField> {
   @override
-  Widget build(BuildContext context) => ExpansionTile(
-        backgroundColor: EzConfig.colors.surfaceContainer,
-        collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
-        controller: widget.ec,
-        expandedCrossAxisAlignment: CrossAxisAlignment.start,
-        showTrailingIcon: false,
-        title: EzRow(
-          children: <Widget>[
-            Flexible(
-              child: EzText(
-                widget.title,
-                textAlign: TextAlign.start,
-              ),
-            ),
-            EzConfig.rowMargin,
-            Semantics(
-              label: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
-              button: true,
-              child: ExcludeSemantics(
-                child: EzIconButton(
-                  onPressed: () {
-                    widget.ec.isExpanded ? widget.ec.collapse() : widget.ec.expand();
-                    setState(() {});
-                  },
-                  tooltip: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
-                  icon: Icon(ezVisIcon(widget.ec.isExpanded)),
+  Widget build(BuildContext context) => Theme(
+        data: EzConfig.theme.copyWith(
+          dividerColor: EzConfig.colors.surfaceContainer,
+          dividerTheme: DividerThemeData(
+            color: EzConfig.colors.surfaceContainer,
+            space: 0,
+            thickness: 0,
+          ),
+        ),
+        child: ExpansionTile(
+          backgroundColor: EzConfig.colors.surfaceContainer,
+          collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
+          controller: widget.ec,
+          onExpansionChanged: (_) => setState(() {}),
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          showTrailingIcon: false,
+          title: EzRow(
+            children: <Widget>[
+              Flexible(
+                child: EzText(
+                  widget.title,
+                  textAlign: TextAlign.start,
                 ),
               ),
-            ),
-            if (widget.tip != null) ...<Widget>[
               EzConfig.rowMargin,
-              widget.tip.runtimeType == String
-                  ? EzToolTipper(message: widget.tip)
-                  : EzToolTipper(richMessage: widget.tip),
+              Semantics(
+                label: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                button: true,
+                child: ExcludeSemantics(
+                  child: EzIconButton(
+                    onPressed: () =>
+                        widget.ec.isExpanded ? widget.ec.collapse() : widget.ec.expand(),
+                    tooltip: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                    icon: Icon(ezVisIcon(widget.ec.isExpanded)),
+                  ),
+                ),
+              ),
+              if (widget.tip != null) ...<Widget>[
+                EzConfig.rowMargin,
+                widget.tip.runtimeType == String
+                    ? EzToolTipper(message: widget.tip)
+                    : EzToolTipper(richMessage: widget.tip),
+              ],
             ],
+          ),
+          children: <Widget>[
+            EzConfig.margin,
+            ConstrainedBox(
+              constraints: ezTextFieldConstraints(context),
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: widget.tc,
+              ),
+            ),
           ],
         ),
-        children: <Widget>[
-          EzConfig.margin,
-          ConstrainedBox(
-            constraints: ezTextFieldConstraints(context),
-            child: TextFormField(
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: widget.tc,
-            ),
-          ),
-        ],
       );
 }
 
@@ -979,71 +984,80 @@ class _LicensePickerState extends State<_LicensePicker> {
       ]);
 
   @override
-  Widget build(BuildContext context) => ExpansionTile(
-        backgroundColor: EzConfig.colors.surfaceContainer,
-        collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
-        controller: widget.ec,
-        expandedCrossAxisAlignment: CrossAxisAlignment.start,
-        showTrailingIcon: false,
-        title: EzRow(
-          children: <Widget>[
-            const Flexible(child: EzText('LICENSE', textAlign: TextAlign.start)),
-            EzConfig.rowMargin,
-            Semantics(
-              label: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
-              button: true,
-              child: ExcludeSemantics(
-                child: EzIconButton(
-                  onPressed: () {
-                    widget.ec.isExpanded ? widget.ec.collapse() : widget.ec.expand();
-                    setState(() {});
-                  },
-                  tooltip: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
-                  icon: Icon(ezVisIcon(widget.ec.isExpanded)),
+  Widget build(BuildContext context) => Theme(
+        data: EzConfig.theme.copyWith(
+          dividerColor: EzConfig.colors.surfaceContainer,
+          dividerTheme: DividerThemeData(
+            color: EzConfig.colors.surfaceContainer,
+            space: 0,
+            thickness: 0,
+          ),
+        ),
+        child: ExpansionTile(
+          backgroundColor: EzConfig.colors.surfaceContainer,
+          collapsedBackgroundColor: EzConfig.colors.surfaceContainer,
+          controller: widget.ec,
+          onExpansionChanged: (_) => setState(() {}),
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          showTrailingIcon: false,
+          title: EzRow(
+            children: <Widget>[
+              const Flexible(child: EzText('LICENSE', textAlign: TextAlign.start)),
+              EzConfig.rowMargin,
+              Semantics(
+                label: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                button: true,
+                child: ExcludeSemantics(
+                  child: EzIconButton(
+                    onPressed: () =>
+                        widget.ec.isExpanded ? widget.ec.collapse() : widget.ec.expand(),
+                    tooltip: widget.ec.isExpanded ? EzConfig.l10n.gClose : EzConfig.l10n.gOpen,
+                    icon: Icon(ezVisIcon(widget.ec.isExpanded)),
+                  ),
                 ),
               ),
-            ),
-            EzConfig.rowMargin,
-            EzToolTipper(
-              richMessage: EzInlineLink(
-                'https://choosealicense.com/',
-                textAlign: TextAlign.center,
-                url: Uri.parse('https://choosealicense.com/'),
-                hint: l10n.csLicenseDocs,
+              EzConfig.rowMargin,
+              EzToolTipper(
+                richMessage: EzInlineLink(
+                  'https://choosealicense.com/',
+                  textAlign: TextAlign.center,
+                  url: Uri.parse('https://choosealicense.com/'),
+                  hint: l10n.csLicenseDocs,
+                ),
+              ),
+            ],
+          ),
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: EzConfig.marginVal),
+              child: RadioGroup<String>(
+                groupValue: widget.groupValue,
+                onChanged: widget.onChanged,
+                child: EzScrollView(
+                  scrollDirection: Axis.horizontal,
+                  thumbVisibility: false,
+                  showScrollHint: true,
+                  children: <Widget>[
+                    EzConfig.rowMargin,
+                    radio(title: 'GNU GPLv3', value: gnuKey),
+                    EzConfig.rowSpacer,
+                    radio(title: 'MIT', value: mitKey),
+                    EzConfig.rowSpacer,
+                    radio(title: 'ISC', value: iscKey),
+                    EzConfig.rowSpacer,
+                    radio(title: 'Apache 2.0', value: apacheKey),
+                    EzConfig.rowSpacer,
+                    radio(title: 'Mozilla 2.0', value: mozillaKey),
+                    EzConfig.rowSpacer,
+                    radio(title: 'Unlicense', value: unlicenseKey),
+                    EzConfig.rowSpacer,
+                    radio(title: 'DWTFYW', value: dwtfywKey),
+                    EzConfig.rowMargin,
+                  ],
+                ),
               ),
             ),
           ],
         ),
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: EzConfig.marginVal),
-            child: RadioGroup<String>(
-              groupValue: widget.groupValue,
-              onChanged: widget.onChanged,
-              child: EzScrollView(
-                scrollDirection: Axis.horizontal,
-                thumbVisibility: false,
-                showScrollHint: true,
-                children: <Widget>[
-                  EzConfig.rowMargin,
-                  radio(title: 'GNU GPLv3', value: gnuKey),
-                  EzConfig.rowSpacer,
-                  radio(title: 'MIT', value: mitKey),
-                  EzConfig.rowSpacer,
-                  radio(title: 'ISC', value: iscKey),
-                  EzConfig.rowSpacer,
-                  radio(title: 'Apache 2.0', value: apacheKey),
-                  EzConfig.rowSpacer,
-                  radio(title: 'Mozilla 2.0', value: mozillaKey),
-                  EzConfig.rowSpacer,
-                  radio(title: 'Unlicense', value: unlicenseKey),
-                  EzConfig.rowSpacer,
-                  radio(title: 'DWTFYW', value: dwtfywKey),
-                  EzConfig.rowMargin,
-                ],
-              ),
-            ),
-          ),
-        ],
       );
 }
