@@ -339,7 +339,6 @@ class $classCaseAppName extends StatelessWidget {
       locale: storedLocale,
       el10n: storedEFUILang,
       appCache: ${classCaseAppName}Cache(storedLocale, storedLang),
-      appName: appName,
       routerConfig: GoRouter(
         navigatorKey: ezRootNav,
         initialLocation: homePath,
@@ -799,10 +798,7 @@ class SettingsHubScreen extends StatelessWidget {
               ),
               subSettings: <EzSubSetting>[],
               fromStorage: () => EzSubSetting.blank,
-              build: (_) => const EzGlobalSettings(
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
+              build: (_) => const EzGlobalSettings(),
             ),
 
             // Color //
@@ -821,12 +817,7 @@ class SettingsHubScreen extends StatelessWidget {
               fromStorage: () => EzConfig.get(advancedColorsKey) == true
                   ? EzSubSetting.advColor
                   : EzSubSetting.qckColor,
-              build: (EzSubSetting subSec) => EzColorSettings(
-                target: subSec,
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
+              build: (EzSubSetting subSec) => EzColorSettings(target: subSec),
             ),
 
             // Design //
@@ -845,12 +836,7 @@ class SettingsHubScreen extends StatelessWidget {
               fromStorage: () => EzConfig.get(pageTabKey) == true
                   ? EzSubSetting.pagDesign
                   : EzSubSetting.butDesign,
-              build: (EzSubSetting subSec) => EzDesignSettings(
-                target: subSec,
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
+              build: (EzSubSetting subSec) => EzDesignSettings(target: subSec),
             ),
 
             // Text //
@@ -869,12 +855,7 @@ class SettingsHubScreen extends StatelessWidget {
               fromStorage: () => EzConfig.get(advancedTextKey) == true
                   ? EzSubSetting.advText
                   : EzSubSetting.qckText,
-              build: (EzSubSetting subSec) => EzTextSettings(
-                target: subSec,
-                onUpdate: doNothing,
-                appName: appName,
-                androidPackage: androidPackage,
-              ),
+              build: (EzSubSetting subSec) => EzTextSettings(target: subSec),
             ),
           ],
           target: targetPass,
@@ -890,11 +871,7 @@ class SettingsHubScreen extends StatelessWidget {
 
           // Save/upload config
           config.layout.spacer,
-          EzConfigFAB(
-            context,
-            appName: appName,
-            androidPackage: androidPackage,
-          ),
+          const EzConfigFAB(),
         ],
       ),
     );

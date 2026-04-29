@@ -22,8 +22,6 @@ class QuickTextSettings extends StatefulWidget {
   final bool showOpacity;
   final List<Widget>? moreQuickFooterSettings;
   final Widget resetSpacer;
-  final String appName;
-  final String? androidPackage;
   final Set<String>? extraDark;
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
@@ -42,8 +40,6 @@ class QuickTextSettings extends StatefulWidget {
     required this.showOpacity,
     required this.moreQuickFooterSettings,
     required this.resetSpacer,
-    required this.appName,
-    required this.androidPackage,
     required this.extraDark,
     required this.extraLight,
     required this.resetSkip,
@@ -232,8 +228,6 @@ class _QuickTextSettingsState extends State<QuickTextSettings> {
       widget.resetSpacer,
       EzResetButton(
         all: false,
-        androidPackage: widget.androidPackage,
-        appName: widget.appName,
         dynamicTitle: () => EzConfig.l10n.tsReset(ezThemeString(true)),
         onConfirm: () async {
           if (EzConfig.updateBoth || EzConfig.isDark) {

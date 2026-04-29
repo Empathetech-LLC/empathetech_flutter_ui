@@ -22,12 +22,6 @@ class EzConfigRandomizer extends StatelessWidget {
   final Widget? dialogContent;
 
   /// [ezRichUndoWarning] passthrough
-  final String? appName;
-
-  /// [ezRichUndoWarning] passthrough
-  final String? androidPackage;
-
-  /// [ezRichUndoWarning] passthrough
   final Set<String>? saveSkip;
 
   /// [EzElevatedIconButton] for randomizing [EzConfig]
@@ -36,11 +30,8 @@ class EzConfigRandomizer extends StatelessWidget {
     this.label,
     this.dialogTitle,
     this.dialogContent,
-    this.appName,
-    this.androidPackage,
     this.saveSkip,
-  }) : assert((appName == null) != (dialogContent == null),
-            'Must provide dialogContent or appName. androidPackage is optional, but only pairs/is useful with appName.');
+  });
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
@@ -54,13 +45,7 @@ class EzConfigRandomizer extends StatelessWidget {
                       : EzConfig.l10n.gLight.toLowerCase()),
               textAlign: TextAlign.center,
             ),
-            content: dialogContent ??
-                ezRichUndoWarning(
-                  context,
-                  appName: appName!,
-                  androidPackage: androidPackage,
-                  skip: saveSkip,
-                ),
+            content: dialogContent ?? ezRichUndoWarning(context, skip: saveSkip),
             actions: ezActionPair(
               context: context,
               onConfirm: () async {

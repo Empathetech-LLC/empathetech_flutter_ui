@@ -6,14 +6,10 @@
 // App config //
 
 /// Open UI
-const String appName = 'Open UI';
+const String thisAppName = 'Open UI';
 
 /// net.empathetech.open_ui
-const String androidPackage = 'net.empathetech.open_ui';
-
-// App generator //
-
-enum GeneratorState { running, successful, failed }
+const String thisPackageName = 'net.empathetech.open_ui';
 
 // App form //
 
@@ -23,3 +19,7 @@ final RegExp domainPattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
 
 /// https://docs.flutter.dev/get-started/install
 const String installFlutter = 'https://docs.flutter.dev/get-started/install';
+
+// App generator //
+
+enum GeneratorState { running, successful, failed }

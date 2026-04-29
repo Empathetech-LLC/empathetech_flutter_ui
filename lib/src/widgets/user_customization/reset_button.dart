@@ -21,12 +21,6 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [ezRichUndoWarning]
   final Widget? dialogContent;
 
-  /// [ezRichUndoWarning] passthrough
-  final String appName;
-
-  /// [ezRichUndoWarning] passthrough
-  final String? androidPackage;
-
   /// [EzConfig.reset] skip passthrough
   /// Moot if [onConfirm] is provided
   final Set<String>? resetSkip;
@@ -47,8 +41,6 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton({
     super.key,
     this.all = true,
-    required this.appName,
-    this.androidPackage,
     this.saveSkip,
     this.dialogContent,
     this.dynamicTitle,
@@ -75,24 +67,12 @@ class EzResetButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 content: (dialogContent == null)
-                    ? (all
-                        ? null
-                        : ezRichUndoWarning(
-                            context,
-                            standalone: false,
-                            appName: appName,
-                            androidPackage: androidPackage,
-                          ))
+                    ? (all ? null : ezRichUndoWarning(context, standalone: false))
                     : dialogContent,
                 contents: (dialogContent == null)
                     ? (all
                         ? <Widget>[
-                            ezRichUndoWarning(
-                              context,
-                              standalone: false,
-                              appName: appName,
-                              androidPackage: androidPackage,
-                            ),
+                            ezRichUndoWarning(context, standalone: false),
                             EzConfig.margin,
                             EzSwitchPair(
                               key: ValueKey<bool>(updateBoth),

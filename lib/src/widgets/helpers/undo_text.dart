@@ -12,8 +12,6 @@ import 'package:flutter/material.dart';
 Widget ezRichUndoWarning(
   BuildContext context, {
   bool standalone = true,
-  required String appName,
-  String? androidPackage,
   Set<String>? skip,
 }) {
   final EzRichText text = EzRichText(

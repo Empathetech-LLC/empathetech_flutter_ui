@@ -22,8 +22,8 @@ void main() async {
   await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
 
   EzConfig.init(
-    appName: appName,
-    androidPackage: androidPackage,
+    appName: thisAppName,
+    androidPackage: thisPackageName,
     assetPaths: <String>{},
     defaults: isMobile() ? empathMobileConfig : empathDesktopConfig,
     localeFallback: americanEnglish,

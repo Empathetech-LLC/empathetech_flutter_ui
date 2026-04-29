@@ -34,7 +34,7 @@ class OpenUIScaffold extends StatelessWidget {
   const OpenUIScaffold(
     this.body, {
     super.key,
-    this.title = appName,
+    this.title = thisAppName,
     this.running = false,
     this.showSettings = true,
     this.onUpload,
@@ -45,7 +45,7 @@ class OpenUIScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the contextual theme data //
 
-    final double toolbarHeight = ezToolbarHeight(context: context, title: appName);
+    final double toolbarHeight = ezToolbarHeight(context: context, title: title);
 
     // Define custom widgets //
 

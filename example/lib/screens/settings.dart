@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -36,10 +35,7 @@ class SettingsHubScreen extends StatelessWidget {
                 ),
                 subSettings: <EzSubSetting>[],
                 fromStorage: () => EzSubSetting.blank,
-                build: (_) => const EzGlobalSettings(
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
+                build: (_) => const EzGlobalSettings(),
               ),
 
               // Color //
@@ -58,11 +54,7 @@ class SettingsHubScreen extends StatelessWidget {
                 fromStorage: () => EzConfig.get(advancedColorsKey) == true
                     ? EzSubSetting.advColor
                     : EzSubSetting.qckColor,
-                build: (EzSubSetting subSec) => EzColorSettings(
-                  target: subSec,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
+                build: (EzSubSetting subSec) => EzColorSettings(target: subSec),
               ),
 
               // Design //
@@ -81,11 +73,7 @@ class SettingsHubScreen extends StatelessWidget {
                 fromStorage: () => EzConfig.get(pageTabKey) == true
                     ? EzSubSetting.pagDesign
                     : EzSubSetting.butDesign,
-                build: (EzSubSetting subSec) => EzDesignSettings(
-                  target: subSec,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
+                build: (EzSubSetting subSec) => EzDesignSettings(target: subSec),
               ),
 
               // Text //
@@ -104,11 +92,7 @@ class SettingsHubScreen extends StatelessWidget {
                 fromStorage: () => EzConfig.get(advancedTextKey) == true
                     ? EzSubSetting.advText
                     : EzSubSetting.qckText,
-                build: (EzSubSetting subSec) => EzTextSettings(
-                  target: subSec,
-                  appName: appName,
-                  androidPackage: androidPackage,
-                ),
+                build: (EzSubSetting subSec) => EzTextSettings(target: subSec),
               ),
             ],
             target: targetPass,

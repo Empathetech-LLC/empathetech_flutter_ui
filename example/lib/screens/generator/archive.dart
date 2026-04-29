@@ -73,14 +73,14 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                 EzPlainText(
                   // Open UI info, open is the one saving a file
                   text: EzConfig.l10n.ssConfigSaved(archivePath(
-                    appName: appName,
-                    androidPackage: androidPackage,
+                    appName: thisAppName,
+                    androidPackage: thisPackageName,
                   )),
                 ),
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
-                    appName,
+                    thisAppName,
                     style: ezSubTitleStyle(),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),

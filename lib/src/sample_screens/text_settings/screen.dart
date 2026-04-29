@@ -17,12 +17,6 @@ class EzTextSettings extends StatelessWidget {
   /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
 
-  /// [EzResetButton.appName] passthrough
-  final String appName;
-
-  /// [EzResetButton.androidPackage] passthrough
-  final String? androidPackage;
-
   /// Optional additional reset keys for the dark theme
   /// [allTextKeys] and [darkOnSurfaceKey] are included by default
   final Set<String>? resetExtraDark;
@@ -69,8 +63,6 @@ class EzTextSettings extends StatelessWidget {
     super.key,
     required this.target,
     this.resetSpacer = const EzSeparator(),
-    this.androidPackage,
-    required this.appName,
     this.resetExtraDark,
     this.resetExtraLight,
     this.resetSkip,
@@ -113,8 +105,6 @@ class EzTextSettings extends StatelessWidget {
           target: target,
 
           resetSpacer: resetSpacer,
-          androidPackage: androidPackage,
-          appName: appName,
           extraDark: resetExtraDark,
           extraLight: resetExtraLight,
           resetSkip: resetSkip,
@@ -136,8 +126,6 @@ class EzTextSettings extends StatelessWidget {
 class _TextSettings extends StatelessWidget {
   final EzSubSetting target;
   final Widget resetSpacer;
-  final String appName;
-  final String? androidPackage;
   final Set<String>? extraDark;
   final Set<String>? extraLight;
   final Set<String>? resetSkip;
@@ -152,8 +140,6 @@ class _TextSettings extends StatelessWidget {
   const _TextSettings({
     required this.target,
     required this.resetSpacer,
-    required this.androidPackage,
-    required this.appName,
     required this.extraDark,
     required this.extraLight,
     required this.resetSkip,
@@ -186,8 +172,6 @@ class _TextSettings extends StatelessWidget {
                 resetSpacer: resetSpacer,
                 extraDark: extraDark,
                 extraLight: extraLight,
-                appName: appName,
-                androidPackage: androidPackage,
                 resetSkip: resetSkip,
                 saveSkip: saveSkip,
               )
@@ -201,8 +185,6 @@ class _TextSettings extends StatelessWidget {
                 resetSpacer: resetSpacer,
                 extraDark: extraDark,
                 extraLight: extraLight,
-                appName: appName,
-                androidPackage: androidPackage,
                 resetSkip: resetSkip,
                 saveSkip: saveSkip,
               ),
