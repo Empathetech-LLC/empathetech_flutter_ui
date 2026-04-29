@@ -828,6 +828,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   // App (EFUI consumer) cache
   static EzAppCache? get appCache => _provPoint.appCache;
 
+  static ThemeData get theme => _provPoint.theme;
+
   // Setters //
 
   /// Set [needsRebuild] to [status]
