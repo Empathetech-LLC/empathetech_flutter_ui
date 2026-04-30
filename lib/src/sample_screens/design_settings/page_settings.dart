@@ -184,17 +184,11 @@ class _AnimDurSetting extends StatelessWidget {
                       onChanged: (double value) => setModal(() => animDuration = value),
                       onChangeEnd: (double value) async {
                         if (EzConfig.updateBoth || EzConfig.isDark) {
-                          await EzConfig.setInt(
-                            darkAnimationDurationKey,
-                            value.toInt(),
-                          );
+                          await EzConfig.setInt(darkAnimationDurationKey, value.toInt());
                         }
 
                         if (EzConfig.updateBoth || !EzConfig.isDark) {
-                          await EzConfig.setInt(
-                            lightAnimationDurationKey,
-                            value.toInt(),
-                          );
+                          await EzConfig.setInt(lightAnimationDurationKey, value.toInt());
                         }
                       },
                     ),
@@ -386,19 +380,29 @@ class _PageTransitionSetting extends StatelessWidget {
             ),
           );
 
-          if (currType != backupType || currFade != backupFade) {
+          bool needsRebuild = false;
+
+          if (currType != backupType) {
             if (EzConfig.updateBoth || EzConfig.isDark) {
               await EzConfig.setString(darkTransitionTypeKey, currType.value);
-              await EzConfig.setBool(darkTransitionFadeKey, currFade);
             }
-
             if (EzConfig.updateBoth || !EzConfig.isDark) {
               await EzConfig.setString(lightTransitionTypeKey, currType.value);
+            }
+            needsRebuild = true;
+          }
+
+          if (currFade != backupFade) {
+            if (EzConfig.updateBoth || EzConfig.isDark) {
+              await EzConfig.setBool(darkTransitionFadeKey, currFade);
+            }
+            if (EzConfig.updateBoth || !EzConfig.isDark) {
               await EzConfig.setBool(lightTransitionFadeKey, currFade);
             }
-
-            await EzConfig.rebuildUI();
+            needsRebuild = true;
           }
+
+          if (needsRebuild) await EzConfig.rebuildUI();
         },
         icon: const Icon(Icons.slideshow),
         label: EzConfig.l10n.dsPageTransition,

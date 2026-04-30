@@ -227,17 +227,29 @@ class _ButtonStyleSetting extends StatelessWidget {
             ),
           );
 
-          if (currShape != shapeBackup || currWidth != widthBackup) {
+          bool needsRebuild = true;
+
+          if (currShape != shapeBackup) {
             if (EzConfig.updateBoth || EzConfig.isDark) {
               await EzConfig.setString(darkButtonShapeKey, currShape.value);
             }
-
             if (EzConfig.updateBoth || !EzConfig.isDark) {
               await EzConfig.setString(lightButtonShapeKey, currShape.value);
             }
-
-            await EzConfig.rebuildUI();
+            needsRebuild = true;
           }
+
+          if (currWidth != widthBackup) {
+            if (EzConfig.updateBoth || EzConfig.isDark) {
+              await EzConfig.setDouble(darkBorderWidthKey, currWidth);
+            }
+            if (EzConfig.updateBoth || !EzConfig.isDark) {
+              await EzConfig.setDouble(lightBorderWidthKey, currWidth);
+            }
+            needsRebuild = true;
+          }
+
+          if (needsRebuild) await EzConfig.rebuildUI();
         },
         label: EzConfig.l10n.dsStyle,
         icon: const Icon(Icons.edit),
@@ -325,16 +337,10 @@ class _ButtonOpacitySetting extends StatelessWidget {
                           onChanged: (double value) => setModal(() => buttonOpacity = value),
                           onChangeEnd: (double value) async {
                             if (EzConfig.updateBoth || EzConfig.isDark) {
-                              await EzConfig.setDouble(
-                                darkButtonOpacityKey,
-                                value,
-                              );
+                              await EzConfig.setDouble(darkButtonOpacityKey, value);
                             }
                             if (EzConfig.updateBoth || !EzConfig.isDark) {
-                              await EzConfig.setDouble(
-                                lightButtonOpacityKey,
-                                value,
-                              );
+                              await EzConfig.setDouble(lightButtonOpacityKey, value);
                             }
                           },
                         ),
@@ -360,17 +366,11 @@ class _ButtonOpacitySetting extends StatelessWidget {
                           onChanged: (double value) => setModal(() => borderOpacity = value),
                           onChangeEnd: (double value) async {
                             if (EzConfig.updateBoth || EzConfig.isDark) {
-                              await EzConfig.setDouble(
-                                darkBorderOpacityKey,
-                                value,
-                              );
+                              await EzConfig.setDouble(darkBorderOpacityKey, value);
                             }
 
                             if (EzConfig.updateBoth || !EzConfig.isDark) {
-                              await EzConfig.setDouble(
-                                lightBorderOpacityKey,
-                                value,
-                              );
+                              await EzConfig.setDouble(lightBorderOpacityKey, value);
                             }
                           },
                         ),

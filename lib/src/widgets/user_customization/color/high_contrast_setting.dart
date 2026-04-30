@@ -159,7 +159,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
           if (EzConfig.updateBoth || EzConfig.isDark) {
             await loadColorScheme(dark, Brightness.dark);
           }
-          if ((EzConfig.updateBoth || !EzConfig.isDark)) {
+          if (EzConfig.updateBoth || !EzConfig.isDark) {
             await loadColorScheme(light, Brightness.light);
           }
 
