@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 class ButtonDesign extends StatelessWidget {
   final List<Widget>? prepend;
   final List<Widget>? append;
+  final String? styleLabel;
   final Widget resetSpacer;
   final Set<String>? resetExtraDark;
   final Set<String>? resetExtraLight;
@@ -21,6 +22,7 @@ class ButtonDesign extends StatelessWidget {
     super.key,
     required this.prepend,
     required this.append,
+    this.styleLabel,
     this.resetSpacer = const EzSeparator(),
     required this.resetExtraDark,
     required this.resetExtraLight,
@@ -43,12 +45,12 @@ class ButtonDesign extends StatelessWidget {
         ),
         EzConfig.spacer,
 
-        // Button style
-        const _ButtonStyleSetting(),
-        EzConfig.spacer,
-
         // Button opacity
         const _ButtonOpacitySetting(),
+        EzConfig.spacer,
+
+        // Button style
+        _ButtonStyleSetting(styleLabel),
         EzConfig.separator,
 
         // Underline links
@@ -110,7 +112,9 @@ class ButtonDesign extends StatelessWidget {
 }
 
 class _ButtonStyleSetting extends StatelessWidget {
-  const _ButtonStyleSetting();
+  final String? label;
+
+  const _ButtonStyleSetting(this.label);
 
   @override
   Widget build(BuildContext context) => EzElevatedIconButton(
@@ -251,7 +255,7 @@ class _ButtonStyleSetting extends StatelessWidget {
 
           if (needsRebuild) await EzConfig.rebuildUI();
         },
-        label: EzConfig.l10n.dsStyle,
+        label: label ?? EzConfig.l10n.dsStyle,
         icon: const Icon(Icons.edit),
       );
 }
