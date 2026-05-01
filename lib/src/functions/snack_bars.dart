@@ -33,6 +33,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar(
           message: message,
           showCloseIcon: showCloseIcon ?? true,
           showUndo: undo != null,
+          undoMsg: undoMessage,
         ),
         widthOf(context),
       ),
@@ -74,16 +75,26 @@ double _snackWidth({
   required String message,
   required bool showCloseIcon,
   required bool showUndo,
+  String? undoMsg,
 }) =>
     // Text width
-    ezTextSize(
-      message,
-      context: context,
-      style: EzConfig.theme.snackBarTheme.contentTextStyle,
-    ).width +
-    // Countdown width
-    (EzConfig.iconSize + EzConfig.padding) +
+    (EzConfig.marginVal +
+        ezTextSize(
+          message,
+          context: context,
+          style: EzConfig.theme.snackBarTheme.contentTextStyle,
+        ).width) +
+    // Undo width
+    (showUndo
+        ? (EzConfig.marginVal +
+            ezTextSize(
+              undoMsg ?? EzConfig.l10n.gUndo,
+              context: context,
+              style: EzConfig.styles.bodyLarge,
+            ).width)
+        : 0) +
+    // Timer width
+    (EzConfig.marginVal + EzConfig.iconSize + EzConfig.padding) +
     // Close width
-    (showCloseIcon ? (EzConfig.iconSize + EzConfig.spacing) : 0) +
-    // Margin(s) width
-    (EzConfig.marginVal * 3);
+    ((showCloseIcon ? (EzConfig.iconSize + (EzConfig.padding / 2) + EzConfig.spacing) : 0) +
+        EzConfig.marginVal);
