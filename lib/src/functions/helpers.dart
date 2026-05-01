@@ -427,7 +427,7 @@ double ezToolbarHeight({
       ezTextSize(
         title,
         context: context,
-        style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
+        style: style ?? EzConfig.theme.appBarTheme.titleTextStyle,
       ).height,
       includeIconButton
           ? max(EzConfig.iconSize + EzConfig.padding, kMinInteractiveDimension)

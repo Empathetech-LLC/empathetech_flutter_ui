@@ -89,8 +89,8 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
     final Color decorationColor = widget.decorationColor ??
         (widget.enabled ? EzConfig.colors.primary : EzConfig.colors.outline);
 
-    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)
-        ?.copyWith(decorationColor: decorationColor);
+    TextStyle? textStyle =
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(decorationColor: decorationColor);
 
     // Define custom functions //
 
@@ -112,7 +112,7 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
           (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       style: widget.enabled
           ? widget.style
-          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)?.copyWith(
+          : (widget.style ?? EzConfig.theme.elevatedButtonTheme.style)?.copyWith(
               overlayColor: WidgetStateProperty.all(EzConfig.colors.outline),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
             ),
@@ -216,8 +216,8 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
     final Color decorationColor = widget.decorationColor ??
         (widget.enabled ? EzConfig.colors.primary : EzConfig.colors.outline);
 
-    TextStyle? textStyle = (widget.textStyle ?? EzConfig.styles.bodyLarge)
-        ?.copyWith(decorationColor: decorationColor);
+    TextStyle? textStyle =
+        (widget.textStyle ?? EzConfig.styles.bodyLarge)?.copyWith(decorationColor: decorationColor);
 
     // Define custom functions //
 
@@ -239,7 +239,7 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
           (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {}),
       style: widget.enabled
           ? widget.style
-          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)?.copyWith(
+          : (widget.style ?? EzConfig.theme.elevatedButtonTheme.style)?.copyWith(
               overlayColor: WidgetStateProperty.all(EzConfig.colors.outline),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
             ),
