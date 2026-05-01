@@ -160,11 +160,8 @@ class _AnimDurSetting extends StatelessWidget {
                 children: <Widget>[
                   // Preview
                   SizedBox(
-                    height: EzConfig.iconSize * 3,
-                    child: _AnimationPreview(
-                      duration: animDuration.toInt(),
-                      iconSize: EzConfig.iconSize,
-                    ),
+                    height: EzConfig.iconSize + (EzConfig.padding * 2),
+                    child: _AnimationPreview(animDuration.toInt()),
                   ),
                   EzConfig.spacer,
 
@@ -228,9 +225,8 @@ class _AnimDurSetting extends StatelessWidget {
 
 class _AnimationPreview extends StatefulWidget {
   final int duration;
-  final double iconSize;
 
-  const _AnimationPreview({required this.duration, required this.iconSize});
+  const _AnimationPreview(this.duration);
 
   @override
   State<_AnimationPreview> createState() => _AnimationPreviewState();
@@ -295,7 +291,6 @@ class _AnimationPreviewState extends State<_AnimationPreview> with SingleTickerP
                 Icons.play_arrow,
                 semanticLabel: EzConfig.l10n.dsPlay,
               ),
-              iconSize: widget.iconSize,
             ),
           ),
         ),
