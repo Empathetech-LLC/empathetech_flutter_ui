@@ -27,16 +27,14 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final double margin = isDark ? EzConfig.get(darkMarginKey) : EzConfig.get(lightMarginKey);
   final double spacing = isDark ? EzConfig.get(darkSpacingKey) : EzConfig.get(lightSpacingKey);
 
-  final int animDuration = isDark
-      ? EzConfig.get(darkAnimationDurationKey)
-      : EzConfig.get(lightAnimationDurationKey);
+  final int animDuration =
+      isDark ? EzConfig.get(darkAnimationDurationKey) : EzConfig.get(lightAnimationDurationKey);
   final int threeQAnim = (animDuration * 0.75).toInt();
 
   // Text
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface, isDark: isDark);
 
-  final double iconSize =
-      isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
+  final double iconSize = isDark ? EzConfig.get(darkIconSizeKey) : EzConfig.get(lightIconSizeKey);
 
   // Buttons //
 
@@ -60,8 +58,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       borderWidth == 0 ? BorderSide.none : BorderSide(color: color, width: borderWidth);
 
   // Core opacity
-  final double buttonOpacity =
-      EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+  final double buttonOpacity = EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
 
   final Color buttonBackground = colorScheme.surface.withValues(alpha: buttonOpacity);
   final Color primaryButtonBackground = colorScheme.primary.withValues(alpha: buttonOpacity);
@@ -71,22 +68,19 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
   final double crucialButtonOpacity = max(buttonOpacity, focusOpacity);
 
-  final Color crucialButtonBackground =
-      colorScheme.surface.withValues(alpha: crucialButtonOpacity);
+  final Color crucialButtonBackground = colorScheme.surface.withValues(alpha: crucialButtonOpacity);
   final Color crucialPrimaryButtonBackground =
       colorScheme.primary.withValues(alpha: crucialButtonOpacity);
 
   // Border opacity
-  final double borderOpacity =
-      EzConfig.get(isDark ? darkBorderOpacityKey : lightBorderOpacityKey);
+  final double borderOpacity = EzConfig.get(isDark ? darkBorderOpacityKey : lightBorderOpacityKey);
 
   final Color buttonBorder = colorScheme.primaryContainer.withValues(alpha: borderOpacity);
   final Color disabledBorder = colorScheme.outlineVariant.withValues(alpha: borderOpacity);
 
   final double crucialBorderOpacity = max(borderOpacity, focusOpacity);
 
-  final Color crucialBorder =
-      colorScheme.primaryContainer.withValues(alpha: crucialBorderOpacity);
+  final Color crucialBorder = colorScheme.primaryContainer.withValues(alpha: crucialBorderOpacity);
   final Color crucialDisabledBorder =
       colorScheme.outlineVariant.withValues(alpha: crucialBorderOpacity);
 
@@ -108,8 +102,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
   final double textBackgroundOpacity =
       EzConfig.get(isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey);
 
-  final Color textBackgroundColor =
-      colorScheme.surface.withValues(alpha: textBackgroundOpacity);
+  final Color textBackgroundColor = colorScheme.surface.withValues(alpha: textBackgroundOpacity);
 
   final double crucialTextBackgroundOpacity = max(textBackgroundOpacity, focusOpacity);
 
@@ -137,8 +130,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
 
     // Transitions //
 
-    pageTransitionsTheme:
-        animDuration > minAnimationDuration ? EzTransitions() : EzNoTransitions(),
+    pageTransitionsTheme: animDuration > minAnimationDuration ? EzTransitions() : EzNoTransitions(),
 
     // Typography //
 
@@ -185,9 +177,8 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
     // Checkbox
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.resolveWith(
-        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
-            ? colorScheme.primary
-            : colorScheme.surface,
+        (Set<WidgetState> states) =>
+            (states.contains(WidgetState.selected)) ? colorScheme.primary : colorScheme.surface,
       ),
       checkColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) =>
@@ -361,8 +352,7 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       enabledBorder: UnderlineInputBorder(borderSide: buildBorder(crucialBorder)),
       errorBorder: UnderlineInputBorder(borderSide: buildBorder(colorScheme.error)),
       focusedBorder: UnderlineInputBorder(
-          borderSide:
-              buildBorder(colorScheme.secondary.withValues(alpha: crucialBorderOpacity))),
+          borderSide: buildBorder(colorScheme.secondary.withValues(alpha: crucialBorderOpacity))),
       focusedErrorBorder: UnderlineInputBorder(borderSide: buildBorder(colorScheme.error)),
     ),
 
@@ -438,14 +428,14 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       shape: buttonShape.copyWith(side: buildBorder(colorScheme.secondary)),
       contentTextStyle: textTheme.bodyLarge,
       insetPadding: EdgeInsets.all(margin),
+      dismissDirection: DismissDirection.down,
     ),
 
     // Switch
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith(
-        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
-            ? colorScheme.primary
-            : colorScheme.outline,
+        (Set<WidgetState> states) =>
+            (states.contains(WidgetState.selected)) ? colorScheme.primary : colorScheme.outline,
       ),
       trackColor: WidgetStateProperty.all(crucialButtonBackground),
       trackOutlineColor: WidgetStateProperty.all(buttonBorder),
