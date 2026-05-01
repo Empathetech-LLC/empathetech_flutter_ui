@@ -22,6 +22,9 @@ class EzDesignSettings extends StatelessWidget {
   /// BYO tailing spacer(s)
   final List<Widget>? prependPage;
 
+  /// Optionally re-label the button style button
+  final String? styleLabel;
+
   /// Whether to include the page transition setting
   /// null (default) will become a [kIsWeb] check
   final bool? includePageTransitions;
@@ -85,22 +88,27 @@ class EzDesignSettings extends StatelessWidget {
   const EzDesignSettings({
     super.key,
     required this.target,
+
+    // Button
     this.prependButton,
+    this.appendButton,
+    this.styleLabel,
+    this.resetSpacerButton = const EzSeparator(),
+    this.resetExtraDarkButton,
+    this.resetExtraLightButton,
+    this.resetSkipButton,
+    this.saveSkipButton,
+
+    // Page
     this.prependPage,
+    this.appendPage,
     this.includePageTransitions,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.appendButton,
-    this.appendPage,
-    this.resetSpacerButton = const EzSeparator(),
     this.resetSpacerPage = const EzSeparator(),
-    this.resetExtraDarkButton,
-    this.resetExtraLightButton,
     this.resetExtraDarkPage,
     this.resetExtraLightPage,
-    this.resetSkipButton,
-    this.saveSkipButton,
     this.resetSkipPage,
     this.saveSkipPage,
   });
@@ -114,6 +122,7 @@ class EzDesignSettings extends StatelessWidget {
             ? ButtonDesign(
                 prepend: prependButton,
                 append: appendButton,
+                styleLabel: styleLabel,
                 resetSpacer: resetSpacerButton,
                 resetExtraDark: resetExtraDarkButton,
                 resetExtraLight: resetExtraLightButton,
