@@ -311,10 +311,10 @@ ThemeData ezThemeData(Brightness brightness, bool ltr) {
       mouseCursor: enabledClicks,
       iconSize: iconSize,
       sizeConstraints: BoxConstraints(
-        minWidth: (iconSize * 1.2) + padding,
-        maxWidth: (iconSize * 1.2) + padding,
-        minHeight: (iconSize * 1.2) + padding,
-        maxHeight: (iconSize * 1.2) + padding,
+        minWidth: iconSize + (padding * 1.1),
+        maxWidth: iconSize + (padding * 1.1),
+        minHeight: iconSize + (padding * 1.1),
+        maxHeight: iconSize + (padding * 1.1),
       ),
     ),
 
